@@ -1,0 +1,5 @@
+<chats>
+	<chat contactName="Ivan Ivanov" lastMsg="[photo]" timestamp="21:44" pic="asset:///images/1.jpg" />
+	<chat contactName="Boris Petrov" lastMsg="We need to talk, pal... Where's the money??" timestamp="Sun" pic="asset:///images/2.jpg" />
+	<chat contactName="Sveta Smirnova" lastMsg="Oh gosh! I'm pregnant!!!" timestamp="Fri" pic="asset:///images/3.jpg" />
+</chats>

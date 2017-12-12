@@ -1,0 +1,6 @@
+arm/*
+arm-p/*
+
+assets/.assets.index
+
+*.qm

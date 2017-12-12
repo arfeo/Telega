@@ -1,0 +1,17 @@
+<contacts>
+	<letter name="A">
+		<contact contactName="Pavel Abrikosov" pic="asset:///images/1.jpg" />
+	</letter>
+	<letter name="I">
+		<contact contactName="Ivan Ivanov" pic="asset:///images/2.jpg" />
+		<contact contactName="Oleg Ignatov" pic="asset:///images/3.jpg" />
+	</letter>
+	<letter name="P">
+		<contact contactName="Viktor Pavlov" pic="asset:///images/1.jpg" />
+		<contact contactName="Boris Petrov" pic="asset:///images/2.jpg" />
+		<contact contactName="Alena Pushkina" pic="asset:///images/3.jpg" />
+	</letter>
+	<letter name="S">
+		<contact contactName="Sveta Smirnova" pic="asset:///images/1.jpg" />
+	</letter>
+</contacts>
