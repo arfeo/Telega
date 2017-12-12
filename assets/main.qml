@@ -20,8 +20,9 @@ import bb.cascades.pickers 1.0
 
 TabbedPane {
     id: mainTab
+    objectName: "mainTab"
     
-    property string loggedIn: _telega.getAppSettings("global/loggedIn", "false")
+    property string loggedIn: _telega.checkLogin()
     property bool loggedOut: false
     property string currentPage: ""
     property string currentChat: ""
@@ -242,7 +243,6 @@ TabbedPane {
         switch(n) {
             
             case "start":
-                _telega.setAppSettings("global/loggedIn", "false")
                 mainTab.loggedIn = "false"
                 mainTab.add(startMessagingTab)
                 mainTab.remove(chatsListTab)
@@ -253,7 +253,6 @@ TabbedPane {
                 break
             
             case "main":
-                _telega.setAppSettings("global/loggedIn", "true")
                 mainTab.loggedIn = "true"
                 mainTab.remove(startMessagingTab)
                 mainTab.add(chatsListTab)
