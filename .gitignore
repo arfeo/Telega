@@ -4,3 +4,7 @@ arm-p/*
 assets/.assets.index
 
 *.qm
+
+.settings/com.rim.tad.tools.qml.core.prefs
+
+config.pri
