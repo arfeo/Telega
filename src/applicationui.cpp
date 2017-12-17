@@ -84,10 +84,6 @@ ApplicationUI::ApplicationUI() :
     // Set initial properties
     root->setProperty("loggedIn", loggedIn ? "true" : "false");
 
-    /*QObject *mainTab = root->findChild<QObject*>("mainTab");
-    if (mainTab)
-        mainTab->setProperty("loggedIn", n ? "true" : "true");*/
-
     // Set created root object as the application scene
     Application::instance()->setScene(root);
 
