@@ -18,16 +18,11 @@
 #include "engine/loadcontacts.hpp"
 #include "engine/database.hpp"
 #include <bb/cascades/Application>
+#include <QDateTime>
+#include <QDate>
 #include <bb/cascades/QmlDocument>
 #include <bb/cascades/AbstractPane>
 #include <bb/cascades/LocaleHandler>
-#include <QDateTime>
-#include <QDate>
-#include <QSettings>
-#include <QDebug>
-#include <QFile>
-#include <QtCore/QByteArray>
-#include <QtDeclarative/qdeclarativedebug.h>
 #include <bb/cascades/resources/localehandler.h>
 #include <bb/cascades/resources/qmldocument.h>
 #include <bb/system/SystemToast.hpp>
@@ -43,7 +38,12 @@
 #include <bb/cascades/GroupDataModel>
 #include <bb/cascades/Menu>
 #include <bb/system/Clipboard>
+#include <QDebug>
+#include <QFile>
 #include <qdir.h>
+#include <QtCore/QByteArray>
+
+#include <QtDeclarative/qdeclarativedebug.h>
 #include <unistd.h>
 #include "engine/dumper.h"
 #include "engine/core/constants.h"
@@ -53,20 +53,22 @@ using namespace bb::cascades;
 using namespace bb::system;
 
 ApplicationUI::ApplicationUI() :
-        QObject()
+        QObject(), m_translator(new QTranslator(this)), m_localeHandler(new LocaleHandler(this)), m_invokeManager(
+                new InvokeManager(this)), db(new Database(this))
 {
 
-    m_pTranslator = new QTranslator(this);
-    m_pLocaleHandler = new LocaleHandler(this);
-    m_pInvokeManager = new InvokeManager(this);
-    db = new Database(this);
-
-    // Initial load
-    connect(m_pLocaleHandler, SIGNAL(systemLanguageChanged()), this, SLOT(onSystemLanguageChanged()));
+    // prepare the localization
+    if (!QObject::connect(m_localeHandler, SIGNAL(systemLanguageChanged()), this,
+            SLOT(onSystemLanguageChanged()))) {
+        qWarning() << "Recovering from a failed connect()";
+    }
+    onSystemLanguageChanged();
+    connect(m_localeHandler, SIGNAL(systemLanguageChanged()), SLOT(onSystemLanguageChanged()));
+//    connect(udp, SIGNAL(receivedData(QString)), this, SLOT(sendping()));
     connect(&mDcProvider, SIGNAL(authTransferCompleted()), this, SLOT(onauthTransferCompleted()));
     connect(&mDcProvider, SIGNAL(dcProviderReady()), this, SIGNAL(onDcProviderReady()));
+//     Set created root object as the application scene
     db->initDatabase();
-    onSystemLanguageChanged();
     loggedIn = init();
 
     // Create scene document from main.qml asset, the parent is set
@@ -89,14 +91,26 @@ ApplicationUI::ApplicationUI() :
 
 }
 
+ApplicationUI::~ApplicationUI()
+{
+    if (m_translator)
+        delete m_translator;
+    if (m_localeHandler)
+        delete m_localeHandler;
+    if (m_invokeManager)
+        delete m_invokeManager;
+    if (db)
+        delete db;
+}
+
 void ApplicationUI::onSystemLanguageChanged()
 {
-    QCoreApplication::instance()->removeTranslator(m_pTranslator);
+    QCoreApplication::instance()->removeTranslator(m_translator);
     // Initiate, load and install the application translation files.
     QString locale_string = QLocale().name();
     QString file_name = QString("Telega_%1").arg(locale_string);
-    if (m_pTranslator->load(file_name, "app/native/qm")) {
-        QCoreApplication::instance()->installTranslator(m_pTranslator);
+    if (m_translator->load(file_name, "app/native/qm")) {
+        QCoreApplication::instance()->installTranslator(m_translator);
     }
 }
 
@@ -141,28 +155,30 @@ QString ApplicationUI::checkLogin() {
 
 bool ApplicationUI::init()
 {
-
+    bool result;
     s = Settings::getInstance();
     s->loadSettings();
     mDcProvider.initialize();
     QList<DC *> dcsList = mDcProvider.getDcs();
     connect(&mDcProvider, SIGNAL(dcProviderReady()), this, SLOT(keyloaded()));
-    Q_FOREACH (DC *dc, dcsList) {
-        // changeServer(s->workingDcNum()-1 );
-    }
+    //Q_FOREACH (DC *dc, dcsList) {
+    //    changeServer(s->workingDcNum()-1 );
+    //}
 
     switch (dcsList.value(Settings::getInstance()->workingDcNum() - 1)->state()) {
         case DC::userSignedIn:
             qDebug() << "loggedIn: true";
             mDcProvider.transferAuth();
-            return true;
+            result = true;
             break;
         default:
             qDebug() << "loggedIn: false";
             db->executeQuery("delete from messagesTab");
-            return false;
+            result = false;
             break;
     }
+
+    return result;
 
 }
 
