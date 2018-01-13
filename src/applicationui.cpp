@@ -86,9 +86,6 @@ ApplicationUI::ApplicationUI() :
     // Create root object for the UI
     AbstractPane *root = qml->createRootObject<AbstractPane>();
 
-    // Set initial properties
-    root->setProperty("loggedIn", loggedIn ? "true" : "false");
-
     // Set created root object as the application scene
     Application::instance()->setScene(root);
 
@@ -188,6 +185,7 @@ void ApplicationUI::onAuthSignInError(qint64 msgid, qint32 errcode, QString errt
 {
     Q_EMIT showerror(errtext);
 }
+
 void ApplicationUI::changeServer(qint16 number)
 {
 
