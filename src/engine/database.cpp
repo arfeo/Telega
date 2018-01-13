@@ -25,7 +25,7 @@ using namespace bb::data;
 
 //class bb::cascades::GroupDataModel;
 Database::Database(QObject *parent) :
-        QObject(parent), DB_PATH("./data/Telegram.db"),state(0)
+        QObject(parent), DB_PATH("./data/Telega.db"),state(0)
 {
     sqlda = new SqlDataAccess(DB_PATH);
     qDebug() << "this is the DB"<<DB_PATH;
