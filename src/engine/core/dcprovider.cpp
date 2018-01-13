@@ -23,12 +23,17 @@
 #include "session.h"
 #include "tlvalues.h"
 
-DcProvider::DcProvider() : mApi(0), mPendingDcs(0), mPendingTransferSessions(0), mWorkingDcSession(0) {
+DcProvider::DcProvider() :
+        mApi(0),
+        mPendingDcs(0),
+        mPendingTransferSessions(0),
+        mWorkingDcSession(0)
+{
+    // ..
 }
 
 DcProvider::~DcProvider() {
    clean();
-
 }
 
 void DcProvider::clean() {
@@ -88,11 +93,11 @@ void DcProvider::initialize() {
 
     // 1.- Get the settings dcs, fullfill m_dcs map and current dc num
     Settings *s = Settings::getInstance();
-//    qDebug() << "dc list getting warning up";
+    qDebug() << "dc list getting warning up";
     QList<DC *> dcsList = s->dcsList();
-//    qDebug() << "dc list is getting poluted" << s->workingDcNum();
+    qDebug() << "dc list is getting poluted" << s->workingDcNum();
     Q_FOREACH (DC *dc, dcsList) {
-//        qDebug()<< "DC list status of servers" << dc->state();
+        qDebug()<< "DC list status of servers" << dc->state();
         mDcs.insert(dc->id(), dc);
     }
     qDebug() << "Active DC" << s->workingDcNum();
@@ -100,7 +105,7 @@ void DcProvider::initialize() {
 // If this is the initial configuration, if will be executed
 //    s->setWorkingDcNum(1);
     if ( dcsList.count() == 0 ) {
-//         qDebug() << "If dcId == 1, it's the default one, so call default host and port";
+         qDebug() << "If dcId == 1, it's the default one, so call default host and port";
         if (!mDcs.value(1, 0)) {
             mDcs[1] = new DC(1);
         }
@@ -119,7 +124,7 @@ void DcProvider::initialize() {
         }
     }
     else {
-//        qDebug() << "In any other case, the host and port have been retrieved from auth file settings and the DC object is already created";
+        qDebug() << "In any other case, the host and port have been retrieved from auth file settings and the DC object is already created";
         if (mDcs[s->workingDcNum()]->state() < DC::authKeyCreated) {
             DCAuth *dcAuth = new DCAuth(mDcs[s->workingDcNum()]);
             mDcAuths.insert(s->workingDcNum(), dcAuth);
@@ -134,7 +139,7 @@ void DcProvider::initialize() {
 }
 
 void DcProvider::onDcReady(DC *dc) {
-//    qDebug() << "DC" << dc->id() << "with auth key state"<< dc->state();
+    qDebug() << "DC" << dc->id() << "with auth key state"<< dc->state();
     DCAuth *dcAuth = mDcAuths.value(dc->id());
     if (dcAuth) {
         if (dcAuth->state() != QAbstractSocket::UnconnectedState) {

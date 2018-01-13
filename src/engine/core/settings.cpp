@@ -31,9 +31,10 @@
 
 
 
-Settings::Settings():m_pubKey(0)
+Settings::Settings() :
+        m_pubKey(0)
 {
-
+    // ..
 }
 
 Settings::~Settings() {

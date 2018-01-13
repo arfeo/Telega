@@ -31,10 +31,15 @@
 #include <cmath>
 
 
-DCAuth::DCAuth(DC *dc, QObject *parent) : Connection(dc->host(), dc->port(), parent) , m_dc(dc) {
+DCAuth::DCAuth(DC *dc, QObject *parent) :
+        Connection(dc->host(), dc->port(), parent),
+        m_dc(dc)
+{
+    // ..
 }
 
 DCAuth::~DCAuth() {
+    // ..
 }
 
 DC *DCAuth::dc() {
@@ -44,21 +49,21 @@ DC *DCAuth::dc() {
 void DCAuth::createAuthKey() {
     if (m_dc) {
         if (0 < DC::authKeyCreated) {
-//            qDebug () << "calling to host";
+            qDebug () << "calling to host";
             connectToServer();
         } else {
             // in this case, the key is already created, so dc is ready
             Q_EMIT dcReady(m_dc);
         }
     } else {
-//        qCWarning(TG_AUTH_DCAUTH) << "Error! provided DC for creating auth key is null";
+        qDebug() << "Error! provided DC for creating auth key is null";
     }
 }
 
 void DCAuth::processConnected() {
     // depending on the state init shared key creatug()ion or set the DC as ready
-//    qDebug()<<"connection state"<<m_dc->state();
-//    qDebug() << DC::authKeyCreated<<DC::init << DC::userSignedIn;
+    qDebug() << "Connection state: " << m_dc->state();
+    qDebug() << DC::authKeyCreated<<DC::init << DC::userSignedIn;
     switch (m_dc->state()) {
     case DC::init:
         sendReqPQPacket();
@@ -73,8 +78,6 @@ void DCAuth::processConnected() {
     }
 }
 
-
-
 void DCAuth::processResPQAnswer(const InboundPkt &inboundPkt) {
     qDebug() << "Responce for PQ request";
     qDebug() << "Processing PQ";
@@ -82,7 +85,7 @@ void DCAuth::processResPQAnswer(const InboundPkt &inboundPkt) {
     const char* buffer = inboundPkt.buffer();
     qint32 i;
 
-//    // qCDebug(TG_AUTH_DCAUTH) << "processResPQAnswer(), len=" << len;
+    qDebug() << "processResPQAnswer(), len=" << len;
 
     mAsserter.check(len >= 76);
     mAsserter.check(!*(qint64 *) buffer);
@@ -102,7 +105,7 @@ void DCAuth::processResPQAnswer(const InboundPkt &inboundPkt) {
     while (((quint64)from) & 3) ++from;
 
     uint p1 = 0, p2 = 0;
-    // qCDebug(TG_AUTH_DCAUTH) << what << "received";
+    qDebug() << what << "received";
 
     qint32 it = 0;
     quint64 g = 0;
@@ -130,7 +133,7 @@ void DCAuth::processResPQAnswer(const InboundPkt &inboundPkt) {
             x = c;
             quint64 z = x < y ? what + x - y : x - y;
             g = Utils::gcd (z, what);
-//            qDebug() << z << what;
+            qDebug() << z << what;
             if (g != 1) {
                 break;
             }

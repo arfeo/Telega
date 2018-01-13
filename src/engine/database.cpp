@@ -25,11 +25,14 @@ using namespace bb::data;
 
 //class bb::cascades::GroupDataModel;
 Database::Database(QObject *parent) :
-        QObject(parent), DB_PATH("./data/Telega.db"),state(0)
+        QObject(parent),
+        DB_PATH("./data/Telega.db"),
+        state(0)
 {
     sqlda = new SqlDataAccess(DB_PATH);
-    qDebug() << "this is the DB"<<DB_PATH;
+    qDebug() << "this is the DB" << DB_PATH;
 }
+
 bool Database::initDatabase()
 { //call this method with the name of the database with
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
@@ -38,7 +41,7 @@ bool Database::initDatabase()
     qDebug() << db.open();
     bool ok = db.open();
     if (ok) {
-        qDebug() << "Telegram database  created" << db.open();
+        qDebug() << "Telega database created" << db.open();
         QString contactsTable =
                 "create table if not exists contacts(id varchar primary key unique,phone varchar,type varchar,lastname varchar,firstname varchar,latitude number,longitude number,expiry date,latestmessage varchar,messagemode varchar,messagetime number,wasonline number,location varchar,favourite boolean,photoid varchar,username varchar,messageread boolean,init boolean)";
         QString messageTable =

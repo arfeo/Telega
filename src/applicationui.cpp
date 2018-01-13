@@ -53,8 +53,11 @@ using namespace bb::cascades;
 using namespace bb::system;
 
 ApplicationUI::ApplicationUI() :
-        QObject(), m_translator(new QTranslator(this)), m_localeHandler(new LocaleHandler(this)), m_invokeManager(
-                new InvokeManager(this)), db(new Database(this))
+        QObject(),
+        m_translator(new QTranslator(this)),
+        m_localeHandler(new LocaleHandler(this)),
+        m_invokeManager(new InvokeManager(this)),
+        db(new Database(this))
 {
 
     // prepare the localization
@@ -136,7 +139,6 @@ void ApplicationUI::setAppSettings(const QString &objectName, const QString &opt
     QSettings settings;
 
     settings.setValue(objectName, optionValue);
-
     settings.sync();
 }
 
