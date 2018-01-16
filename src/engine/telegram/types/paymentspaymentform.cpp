@@ -47,7 +47,7 @@ PaymentsPaymentForm::PaymentsPaymentForm(const Null &null) :
 }
 
 PaymentsPaymentForm::~PaymentsPaymentForm() {
-    
+
 }
 
 void PaymentsPaymentForm::setBotId(qint32 botId) {
@@ -228,7 +228,7 @@ bool PaymentsPaymentForm::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -264,7 +264,7 @@ bool PaymentsPaymentForm::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -292,7 +292,7 @@ QMap<QString, QVariant> PaymentsPaymentForm::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -307,53 +307,53 @@ PaymentsPaymentForm PaymentsPaymentForm::fromMap(const QMap<QString, QVariant> &
             _canSaveCredentials_var.convert( QVariant::nameToType("bool") );
             result.setCanSaveCredentials( _canSaveCredentials_var.value<bool>() );
         }
-        
+
         QVariant _passwordMissing_var = map.value("passwordMissing");
         if( !_passwordMissing_var.isNull() ) {
             _passwordMissing_var.convert( QVariant::nameToType("bool") );
             result.setPasswordMissing( _passwordMissing_var.value<bool>() );
         }
-        
+
         QVariant _botId_var = map.value("botId");
         if( !_botId_var.isNull() ) {
             _botId_var.convert( QVariant::nameToType("qint32") );
             result.setBotId( _botId_var.value<qint32>() );
         }
-        
+
         QVariant _invoice_var = map.value("invoice");
         if( !_invoice_var.isNull() )
             result.setInvoice( Invoice::fromMap(_invoice_var.toMap()) );
-        
+
         QVariant _providerId_var = map.value("providerId");
         if( !_providerId_var.isNull() ) {
             _providerId_var.convert( QVariant::nameToType("qint32") );
             result.setProviderId( _providerId_var.value<qint32>() );
         }
-        
+
         QVariant _url_var = map.value("url");
         if( !_url_var.isNull() ) {
             _url_var.convert( QVariant::nameToType("QString") );
             result.setUrl( _url_var.value<QString>() );
         }
-        
+
         QVariant _nativeProvider_var = map.value("nativeProvider");
         if( !_nativeProvider_var.isNull() ) {
             _nativeProvider_var.convert( QVariant::nameToType("QString") );
             result.setNativeProvider( _nativeProvider_var.value<QString>() );
         }
-        
+
         QVariant _nativeParams_var = map.value("nativeParams");
         if( !_nativeParams_var.isNull() )
             result.setNativeParams( DataJSON::fromMap(_nativeParams_var.toMap()) );
-        
+
         QVariant _savedInfo_var = map.value("savedInfo");
         if( !_savedInfo_var.isNull() )
             result.setSavedInfo( PaymentRequestedInfo::fromMap(_savedInfo_var.toMap()) );
-        
+
         QVariant _savedCredentials_var = map.value("savedCredentials");
         if( !_savedCredentials_var.isNull() )
             result.setSavedCredentials( PaymentSavedCredentials::fromMap(_savedCredentials_var.toMap()) );
-        
+
         QList<QVariant> map_users = map["users"].toList();
         QList<User> _users;
         for(const QVariant &var: map_users)
@@ -436,7 +436,7 @@ QDataStream &operator>>(QDataStream &stream, PaymentsPaymentForm &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const PaymentsPaymentForm &item) {
+/*QDebug operator<<(QDebug debug,  const PaymentsPaymentForm &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.PaymentsPaymentForm(";
@@ -458,4 +458,4 @@ QDebug operator<<(QDebug debug,  const PaymentsPaymentForm &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

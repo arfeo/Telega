@@ -10,7 +10,7 @@ DecryptedMessageMediaObject::DecryptedMessageMediaObject(const DecryptedMessageM
     m_core(core)
 {
     m_thumbPhotoSize = new PhotoSizeObject(m_core.thumbPhotoSize(), this);
-    connect(m_thumbPhotoSize.data(), &PhotoSizeObject::coreChanged, this, &DecryptedMessageMediaObject::coreThumbPhotoSizeChanged);
+    connect(m_thumbPhotoSize.data(), SIGNAL(coreChanged()), this, SLOT(coreThumbPhotoSizeChanged()));
 }
 
 DecryptedMessageMediaObject::DecryptedMessageMediaObject(QObject *parent) :
@@ -19,7 +19,7 @@ DecryptedMessageMediaObject::DecryptedMessageMediaObject(QObject *parent) :
     m_core()
 {
     m_thumbPhotoSize = new PhotoSizeObject(m_core.thumbPhotoSize(), this);
-    connect(m_thumbPhotoSize.data(), &PhotoSizeObject::coreChanged, this, &DecryptedMessageMediaObject::coreThumbPhotoSizeChanged);
+    connect(m_thumbPhotoSize.data(), SIGNAL(coreChanged()), this, SLOT(coreThumbPhotoSizeChanged()));
 }
 
 DecryptedMessageMediaObject::~DecryptedMessageMediaObject() {
@@ -219,7 +219,7 @@ void DecryptedMessageMediaObject::setThumbPhotoSize(PhotoSizeObject* thumbPhotoS
     if(m_thumbPhotoSize) {
         m_thumbPhotoSize->setParent(this);
         m_core.setThumbPhotoSize(m_thumbPhotoSize->core());
-        connect(m_thumbPhotoSize.data(), &PhotoSizeObject::coreChanged, this, &DecryptedMessageMediaObject::coreThumbPhotoSizeChanged);
+        connect(m_thumbPhotoSize.data(), SIGNAL(coreChanged()), this, SLOT(coreThumbPhotoSizeChanged()));
     }
     Q_EMIT thumbPhotoSizeChanged();
     Q_EMIT coreChanged();

@@ -39,7 +39,7 @@ ChannelAdminRights::ChannelAdminRights(const Null &null) :
 }
 
 ChannelAdminRights::~ChannelAdminRights() {
-    
+
 }
 
 void ChannelAdminRights::setAddAdmins(bool addAdmins) {
@@ -161,7 +161,7 @@ bool ChannelAdminRights::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -176,7 +176,7 @@ bool ChannelAdminRights::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -199,7 +199,7 @@ QMap<QString, QVariant> ChannelAdminRights::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -214,55 +214,55 @@ ChannelAdminRights ChannelAdminRights::fromMap(const QMap<QString, QVariant> &ma
             _changeInfo_var.convert( QVariant::nameToType("bool") );
             result.setChangeInfo( _changeInfo_var.value<bool>() );
         }
-        
+
         QVariant _postMessages_var = map.value("postMessages");
         if( !_postMessages_var.isNull() ) {
             _postMessages_var.convert( QVariant::nameToType("bool") );
             result.setPostMessages( _postMessages_var.value<bool>() );
         }
-        
+
         QVariant _editMessages_var = map.value("editMessages");
         if( !_editMessages_var.isNull() ) {
             _editMessages_var.convert( QVariant::nameToType("bool") );
             result.setEditMessages( _editMessages_var.value<bool>() );
         }
-        
+
         QVariant _deleteMessages_var = map.value("deleteMessages");
         if( !_deleteMessages_var.isNull() ) {
             _deleteMessages_var.convert( QVariant::nameToType("bool") );
             result.setDeleteMessages( _deleteMessages_var.value<bool>() );
         }
-        
+
         QVariant _banUsers_var = map.value("banUsers");
         if( !_banUsers_var.isNull() ) {
             _banUsers_var.convert( QVariant::nameToType("bool") );
             result.setBanUsers( _banUsers_var.value<bool>() );
         }
-        
+
         QVariant _inviteUsers_var = map.value("inviteUsers");
         if( !_inviteUsers_var.isNull() ) {
             _inviteUsers_var.convert( QVariant::nameToType("bool") );
             result.setInviteUsers( _inviteUsers_var.value<bool>() );
         }
-        
+
         QVariant _inviteLink_var = map.value("inviteLink");
         if( !_inviteLink_var.isNull() ) {
             _inviteLink_var.convert( QVariant::nameToType("bool") );
             result.setInviteLink( _inviteLink_var.value<bool>() );
         }
-        
+
         QVariant _pinMessages_var = map.value("pinMessages");
         if( !_pinMessages_var.isNull() ) {
             _pinMessages_var.convert( QVariant::nameToType("bool") );
             result.setPinMessages( _pinMessages_var.value<bool>() );
         }
-        
+
         QVariant _addAdmins_var = map.value("addAdmins");
         if( !_addAdmins_var.isNull() ) {
             _addAdmins_var.convert( QVariant::nameToType("bool") );
             result.setAddAdmins( _addAdmins_var.value<bool>() );
         }
-        
+
         return result;
     }
     return result;
@@ -304,7 +304,7 @@ QDataStream &operator>>(QDataStream &stream, ChannelAdminRights &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const ChannelAdminRights &item) {
+/*QDebug operator<<(QDebug debug,  const ChannelAdminRights &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.ChannelAdminRights(";
@@ -317,4 +317,4 @@ QDebug operator<<(QDebug debug,  const ChannelAdminRights &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

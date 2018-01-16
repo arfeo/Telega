@@ -39,7 +39,7 @@ InputStickerSetItem::InputStickerSetItem(const Null &null) :
 }
 
 InputStickerSetItem::~InputStickerSetItem() {
-    
+
 }
 
 void InputStickerSetItem::setDocument(const InputDocument &document) {
@@ -117,7 +117,7 @@ bool InputStickerSetItem::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -137,7 +137,7 @@ bool InputStickerSetItem::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -154,7 +154,7 @@ QMap<QString, QVariant> InputStickerSetItem::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -167,17 +167,17 @@ InputStickerSetItem InputStickerSetItem::fromMap(const QMap<QString, QVariant> &
         QVariant _document_var = map.value("document");
         if( !_document_var.isNull() )
             result.setDocument( InputDocument::fromMap(_document_var.toMap()) );
-        
+
         QVariant _emoji_var = map.value("emoji");
         if( !_emoji_var.isNull() ) {
             _emoji_var.convert( QVariant::nameToType("QString") );
             result.setEmoji( _emoji_var.value<QString>() );
         }
-        
+
         QVariant _maskCoords_var = map.value("maskCoords");
         if( !_maskCoords_var.isNull() )
             result.setMaskCoords( MaskCoords::fromMap(_maskCoords_var.toMap()) );
-        
+
         return result;
     }
     return result;
@@ -231,7 +231,7 @@ QDataStream &operator>>(QDataStream &stream, InputStickerSetItem &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const InputStickerSetItem &item) {
+/*QDebug operator<<(QDebug debug,  const InputStickerSetItem &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.InputStickerSetItem(";
@@ -247,4 +247,4 @@ QDebug operator<<(QDebug debug,  const InputStickerSetItem &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

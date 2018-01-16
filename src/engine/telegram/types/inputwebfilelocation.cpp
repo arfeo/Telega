@@ -39,7 +39,7 @@ InputWebFileLocation::InputWebFileLocation(const Null &null) :
 }
 
 InputWebFileLocation::~InputWebFileLocation() {
-    
+
 }
 
 void InputWebFileLocation::setAccessHash(qint64 accessHash) {
@@ -91,7 +91,7 @@ bool InputWebFileLocation::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -107,7 +107,7 @@ bool InputWebFileLocation::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -123,7 +123,7 @@ QMap<QString, QVariant> InputWebFileLocation::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -138,13 +138,13 @@ InputWebFileLocation InputWebFileLocation::fromMap(const QMap<QString, QVariant>
             _url_var.convert( QVariant::nameToType("QString") );
             result.setUrl( _url_var.value<QString>() );
         }
-        
+
         QVariant _accessHash_var = map.value("accessHash");
         if( !_accessHash_var.isNull() ) {
             _accessHash_var.convert( QVariant::nameToType("qint64") );
             result.setAccessHash( _accessHash_var.value<qint64>() );
         }
-        
+
         return result;
     }
     return result;
@@ -190,7 +190,7 @@ QDataStream &operator>>(QDataStream &stream, InputWebFileLocation &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const InputWebFileLocation &item) {
+/*QDebug operator<<(QDebug debug,  const InputWebFileLocation &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.InputWebFileLocation(";
@@ -204,4 +204,4 @@ QDebug operator<<(QDebug debug,  const InputWebFileLocation &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

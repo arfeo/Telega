@@ -35,7 +35,7 @@ DataJSON::DataJSON(const Null &null) :
 }
 
 DataJSON::~DataJSON() {
-    
+
 }
 
 void DataJSON::setData(const QString &data) {
@@ -76,7 +76,7 @@ bool DataJSON::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -91,7 +91,7 @@ bool DataJSON::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -106,7 +106,7 @@ QMap<QString, QVariant> DataJSON::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -121,7 +121,7 @@ DataJSON DataJSON::fromMap(const QMap<QString, QVariant> &map) {
             _data_var.convert( QVariant::nameToType("QString") );
             result.setData( _data_var.value<QString>() );
         }
-        
+
         return result;
     }
     return result;
@@ -163,7 +163,7 @@ QDataStream &operator>>(QDataStream &stream, DataJSON &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const DataJSON &item) {
+/*QDebug operator<<(QDebug debug,  const DataJSON &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.DataJSON(";
@@ -176,4 +176,4 @@ QDebug operator<<(QDebug debug,  const DataJSON &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

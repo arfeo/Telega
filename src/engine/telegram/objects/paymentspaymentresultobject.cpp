@@ -10,7 +10,7 @@ PaymentsPaymentResultObject::PaymentsPaymentResultObject(const PaymentsPaymentRe
     m_core(core)
 {
     m_updates = new UpdatesTypeObject(m_core.updates(), this);
-    connect(m_updates.data(), &UpdatesTypeObject::coreChanged, this, &PaymentsPaymentResultObject::coreUpdatesChanged);
+    connect(m_updates.data(), SIGNAL(coreChanged()), this, SLOT(coreUpdatesChanged()));
 }
 
 PaymentsPaymentResultObject::PaymentsPaymentResultObject(QObject *parent) :
@@ -19,7 +19,7 @@ PaymentsPaymentResultObject::PaymentsPaymentResultObject(QObject *parent) :
     m_core()
 {
     m_updates = new UpdatesTypeObject(m_core.updates(), this);
-    connect(m_updates.data(), &UpdatesTypeObject::coreChanged, this, &PaymentsPaymentResultObject::coreUpdatesChanged);
+    connect(m_updates.data(), SIGNAL(coreChanged()), this, SLOT(coreUpdatesChanged()));
 }
 
 PaymentsPaymentResultObject::~PaymentsPaymentResultObject() {
@@ -32,7 +32,7 @@ void PaymentsPaymentResultObject::setUpdates(UpdatesTypeObject* updates) {
     if(m_updates) {
         m_updates->setParent(this);
         m_core.setUpdates(m_updates->core());
-        connect(m_updates.data(), &UpdatesTypeObject::coreChanged, this, &PaymentsPaymentResultObject::coreUpdatesChanged);
+        connect(m_updates.data(), SIGNAL(coreChanged()), this, SLOT(coreUpdatesChanged()));
     }
     Q_EMIT updatesChanged();
     Q_EMIT coreChanged();

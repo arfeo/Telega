@@ -47,7 +47,7 @@ SecretChatMessage::SecretChatMessage(const Null &null) :
 }
 
 SecretChatMessage::~SecretChatMessage() {
-    
+
 }
 
 void SecretChatMessage::setAttachment(const EncryptedFile &attachment) {
@@ -132,7 +132,7 @@ bool SecretChatMessage::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -151,7 +151,7 @@ bool SecretChatMessage::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -170,7 +170,7 @@ QMap<QString, QVariant> SecretChatMessage::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -185,27 +185,27 @@ SecretChatMessage SecretChatMessage::fromMap(const QMap<QString, QVariant> &map)
             _chatId_var.convert( QVariant::nameToType("qint32") );
             result.setChatId( _chatId_var.value<qint32>() );
         }
-        
+
         QVariant _ttl_var = map.value("ttl");
         if( !_ttl_var.isNull() ) {
             _ttl_var.convert( QVariant::nameToType("qint32") );
             result.setTtl( _ttl_var.value<qint32>() );
         }
-        
+
         QVariant _date_var = map.value("date");
         if( !_date_var.isNull() ) {
             _date_var.convert( QVariant::nameToType("qint32") );
             result.setDate( _date_var.value<qint32>() );
         }
-        
+
         QVariant _decryptedMessage_var = map.value("decryptedMessage");
         if( !_decryptedMessage_var.isNull() )
             result.setDecryptedMessage( DecryptedMessage::fromMap(_decryptedMessage_var.toMap()) );
-        
+
         QVariant _attachment_var = map.value("attachment");
         if( !_attachment_var.isNull() )
             result.setAttachment( EncryptedFile::fromMap(_attachment_var.toMap()) );
-        
+
         return result;
     }
     return result;
@@ -263,7 +263,7 @@ QDataStream &operator>>(QDataStream &stream, SecretChatMessage &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const SecretChatMessage &item) {
+/*QDebug operator<<(QDebug debug,  const SecretChatMessage &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.SecretChatMessage(";
@@ -280,4 +280,4 @@ QDebug operator<<(QDebug debug,  const SecretChatMessage &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

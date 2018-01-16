@@ -39,7 +39,7 @@ BotInfo::BotInfo(const Null &null) :
 }
 
 BotInfo::~BotInfo() {
-    
+
 }
 
 void BotInfo::setCommands(const QList<BotCommand> &commands) {
@@ -109,7 +109,7 @@ bool BotInfo::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -130,7 +130,7 @@ bool BotInfo::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -150,7 +150,7 @@ QMap<QString, QVariant> BotInfo::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -165,13 +165,13 @@ BotInfo BotInfo::fromMap(const QMap<QString, QVariant> &map) {
             _userId_var.convert( QVariant::nameToType("qint32") );
             result.setUserId( _userId_var.value<qint32>() );
         }
-        
+
         QVariant _description_var = map.value("description");
         if( !_description_var.isNull() ) {
             _description_var.convert( QVariant::nameToType("QString") );
             result.setDescription( _description_var.value<QString>() );
         }
-        
+
         QList<QVariant> map_commands = map["commands"].toList();
         QList<BotCommand> _commands;
         for(const QVariant &var: map_commands)
@@ -226,7 +226,7 @@ QDataStream &operator>>(QDataStream &stream, BotInfo &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const BotInfo &item) {
+/*QDebug operator<<(QDebug debug,  const BotInfo &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.BotInfo(";
@@ -241,4 +241,4 @@ QDebug operator<<(QDebug debug,  const BotInfo &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

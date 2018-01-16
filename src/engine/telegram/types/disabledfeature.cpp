@@ -35,7 +35,7 @@ DisabledFeature::DisabledFeature(const Null &null) :
 }
 
 DisabledFeature::~DisabledFeature() {
-    
+
 }
 
 void DisabledFeature::setDescription(const QString &description) {
@@ -87,7 +87,7 @@ bool DisabledFeature::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -103,7 +103,7 @@ bool DisabledFeature::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -119,7 +119,7 @@ QMap<QString, QVariant> DisabledFeature::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -134,13 +134,13 @@ DisabledFeature DisabledFeature::fromMap(const QMap<QString, QVariant> &map) {
             _feature_var.convert( QVariant::nameToType("QString") );
             result.setFeature( _feature_var.value<QString>() );
         }
-        
+
         QVariant _description_var = map.value("description");
         if( !_description_var.isNull() ) {
             _description_var.convert( QVariant::nameToType("QString") );
             result.setDescription( _description_var.value<QString>() );
         }
-        
+
         return result;
     }
     return result;
@@ -186,7 +186,7 @@ QDataStream &operator>>(QDataStream &stream, DisabledFeature &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const DisabledFeature &item) {
+/*QDebug operator<<(QDebug debug,  const DisabledFeature &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.DisabledFeature(";
@@ -200,4 +200,4 @@ QDebug operator<<(QDebug debug,  const DisabledFeature &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

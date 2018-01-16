@@ -39,7 +39,7 @@ PaymentRequestedInfo::PaymentRequestedInfo(const Null &null) :
 }
 
 PaymentRequestedInfo::~PaymentRequestedInfo() {
-    
+
 }
 
 void PaymentRequestedInfo::setEmail(const QString &email) {
@@ -140,7 +140,7 @@ bool PaymentRequestedInfo::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -167,7 +167,7 @@ bool PaymentRequestedInfo::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -185,7 +185,7 @@ QMap<QString, QVariant> PaymentRequestedInfo::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -200,23 +200,23 @@ PaymentRequestedInfo PaymentRequestedInfo::fromMap(const QMap<QString, QVariant>
             _name_var.convert( QVariant::nameToType("QString") );
             result.setName( _name_var.value<QString>() );
         }
-        
+
         QVariant _phone_var = map.value("phone");
         if( !_phone_var.isNull() ) {
             _phone_var.convert( QVariant::nameToType("QString") );
             result.setPhone( _phone_var.value<QString>() );
         }
-        
+
         QVariant _email_var = map.value("email");
         if( !_email_var.isNull() ) {
             _email_var.convert( QVariant::nameToType("QString") );
             result.setEmail( _email_var.value<QString>() );
         }
-        
+
         QVariant _shippingAddress_var = map.value("shippingAddress");
         if( !_shippingAddress_var.isNull() )
             result.setShippingAddress( PostAddress::fromMap(_shippingAddress_var.toMap()) );
-        
+
         return result;
     }
     return result;
@@ -274,7 +274,7 @@ QDataStream &operator>>(QDataStream &stream, PaymentRequestedInfo &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const PaymentRequestedInfo &item) {
+/*QDebug operator<<(QDebug debug,  const PaymentRequestedInfo &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.PaymentRequestedInfo(";
@@ -291,4 +291,4 @@ QDebug operator<<(QDebug debug,  const PaymentRequestedInfo &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

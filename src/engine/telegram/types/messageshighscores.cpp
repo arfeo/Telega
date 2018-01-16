@@ -35,7 +35,7 @@ MessagesHighScores::MessagesHighScores(const Null &null) :
 }
 
 MessagesHighScores::~MessagesHighScores() {
-    
+
 }
 
 void MessagesHighScores::setScores(const QList<HighScore> &scores) {
@@ -101,7 +101,7 @@ bool MessagesHighScores::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -125,7 +125,7 @@ bool MessagesHighScores::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -147,7 +147,7 @@ QMap<QString, QVariant> MessagesHighScores::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -212,7 +212,7 @@ QDataStream &operator>>(QDataStream &stream, MessagesHighScores &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const MessagesHighScores &item) {
+/*QDebug operator<<(QDebug debug,  const MessagesHighScores &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.MessagesHighScores(";
@@ -226,4 +226,4 @@ QDebug operator<<(QDebug debug,  const MessagesHighScores &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

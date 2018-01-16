@@ -11,9 +11,9 @@ AuthSentCodeObject::AuthSentCodeObject(const AuthSentCode &core, QObject *parent
     m_core(core)
 {
     m_nextType = new AuthCodeTypeObject(m_core.nextType(), this);
-    connect(m_nextType.data(), &AuthCodeTypeObject::coreChanged, this, &AuthSentCodeObject::coreNextTypeChanged);
+    connect(m_nextType.data(), SIGNAL(coreChanged()), this, SLOT(coreNextTypeChanged()));
     m_type = new AuthSentCodeTypeObject(m_core.type(), this);
-    connect(m_type.data(), &AuthSentCodeTypeObject::coreChanged, this, &AuthSentCodeObject::coreTypeChanged);
+    connect(m_type.data(), SIGNAL(coreChanged()), this, SLOT(coreTypeChanged()));
 }
 
 AuthSentCodeObject::AuthSentCodeObject(QObject *parent) :
@@ -23,9 +23,9 @@ AuthSentCodeObject::AuthSentCodeObject(QObject *parent) :
     m_core()
 {
     m_nextType = new AuthCodeTypeObject(m_core.nextType(), this);
-    connect(m_nextType.data(), &AuthCodeTypeObject::coreChanged, this, &AuthSentCodeObject::coreNextTypeChanged);
+    connect(m_nextType.data(), SIGNAL(coreChanged()), this, SLOT(coreNextTypeChanged()));
     m_type = new AuthSentCodeTypeObject(m_core.type(), this);
-    connect(m_type.data(), &AuthSentCodeTypeObject::coreChanged, this, &AuthSentCodeObject::coreTypeChanged);
+    connect(m_type.data(), SIGNAL(coreChanged()), this, SLOT(coreTypeChanged()));
 }
 
 AuthSentCodeObject::~AuthSentCodeObject() {
@@ -49,7 +49,7 @@ void AuthSentCodeObject::setNextType(AuthCodeTypeObject* nextType) {
     if(m_nextType) {
         m_nextType->setParent(this);
         m_core.setNextType(m_nextType->core());
-        connect(m_nextType.data(), &AuthCodeTypeObject::coreChanged, this, &AuthSentCodeObject::coreNextTypeChanged);
+        connect(m_nextType.data(), SIGNAL(coreChanged()), this, SLOT(coreNextTypeChanged()));
     }
     Q_EMIT nextTypeChanged();
     Q_EMIT coreChanged();
@@ -99,7 +99,7 @@ void AuthSentCodeObject::setType(AuthSentCodeTypeObject* type) {
     if(m_type) {
         m_type->setParent(this);
         m_core.setType(m_type->core());
-        connect(m_type.data(), &AuthSentCodeTypeObject::coreChanged, this, &AuthSentCodeObject::coreTypeChanged);
+        connect(m_type.data(), SIGNAL(coreChanged()), this, SLOT(coreTypeChanged()));
     }
     Q_EMIT typeChanged();
     Q_EMIT coreChanged();

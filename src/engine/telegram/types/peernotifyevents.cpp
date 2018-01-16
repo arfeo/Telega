@@ -35,7 +35,7 @@ PeerNotifyEvents::PeerNotifyEvents(const Null &null) :
 }
 
 PeerNotifyEvents::~PeerNotifyEvents() {
-    
+
 }
 
 bool PeerNotifyEvents::operator ==(const PeerNotifyEvents &b) const {
@@ -65,13 +65,13 @@ bool PeerNotifyEvents::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typePeerNotifyEventsAll: {
         m_classType = static_cast<PeerNotifyEventsClassType>(x);
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -85,12 +85,12 @@ bool PeerNotifyEvents::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typePeerNotifyEventsAll: {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -104,13 +104,13 @@ QMap<QString, QVariant> PeerNotifyEvents::toMap() const {
         return result;
     }
         break;
-    
+
     case typePeerNotifyEventsAll: {
         result["classType"] = "PeerNotifyEvents::typePeerNotifyEventsAll";
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -144,10 +144,10 @@ QDataStream &operator<<(QDataStream &stream, const PeerNotifyEvents &item) {
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case PeerNotifyEvents::typePeerNotifyEventsEmpty:
-        
+
         break;
     case PeerNotifyEvents::typePeerNotifyEventsAll:
-        
+
         break;
     }
     return stream;
@@ -159,18 +159,18 @@ QDataStream &operator>>(QDataStream &stream, PeerNotifyEvents &item) {
     item.setClassType(static_cast<PeerNotifyEvents::PeerNotifyEventsClassType>(type));
     switch(type) {
     case PeerNotifyEvents::typePeerNotifyEventsEmpty: {
-        
+
     }
         break;
     case PeerNotifyEvents::typePeerNotifyEventsAll: {
-        
+
     }
         break;
     }
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const PeerNotifyEvents &item) {
+/*QDebug operator<<(QDebug debug,  const PeerNotifyEvents &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.PeerNotifyEvents(";
@@ -185,4 +185,4 @@ QDebug operator<<(QDebug debug,  const PeerNotifyEvents &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

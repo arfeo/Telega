@@ -39,7 +39,7 @@ MessagesAllStickers::MessagesAllStickers(const Null &null) :
 }
 
 MessagesAllStickers::~MessagesAllStickers() {
-    
+
 }
 
 void MessagesAllStickers::setHash(qint32 hash) {
@@ -89,7 +89,7 @@ bool MessagesAllStickers::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeMessagesAllStickers: {
         m_hash = in->fetchInt();
         if(in->fetchInt() != (qint32)CoreTypes::typeVector) return false;
@@ -104,7 +104,7 @@ bool MessagesAllStickers::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -118,7 +118,7 @@ bool MessagesAllStickers::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeMessagesAllStickers: {
         out->appendInt(m_hash);
         out->appendInt(CoreTypes::typeVector);
@@ -129,7 +129,7 @@ bool MessagesAllStickers::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -143,7 +143,7 @@ QMap<QString, QVariant> MessagesAllStickers::toMap() const {
         return result;
     }
         break;
-    
+
     case typeMessagesAllStickers: {
         result["classType"] = "MessagesAllStickers::typeMessagesAllStickers";
         if( hash() ) result["hash"] = QString::number(hash());
@@ -154,7 +154,7 @@ QMap<QString, QVariant> MessagesAllStickers::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -173,7 +173,7 @@ MessagesAllStickers MessagesAllStickers::fromMap(const QMap<QString, QVariant> &
             _hash_var.convert( QVariant::nameToType("qint32") );
             result.setHash( _hash_var.value<qint32>() );
         }
-        
+
         QList<QVariant> map_sets = map["sets"].toList();
         QList<StickerSet> _sets;
         for(const QVariant &var: map_sets)
@@ -199,7 +199,7 @@ QDataStream &operator<<(QDataStream &stream, const MessagesAllStickers &item) {
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case MessagesAllStickers::typeMessagesAllStickersNotModified:
-        
+
         break;
     case MessagesAllStickers::typeMessagesAllStickers:
         stream << item.hash();
@@ -215,7 +215,7 @@ QDataStream &operator>>(QDataStream &stream, MessagesAllStickers &item) {
     item.setClassType(static_cast<MessagesAllStickers::MessagesAllStickersClassType>(type));
     switch(type) {
     case MessagesAllStickers::typeMessagesAllStickersNotModified: {
-        
+
     }
         break;
     case MessagesAllStickers::typeMessagesAllStickers: {
@@ -231,7 +231,7 @@ QDataStream &operator>>(QDataStream &stream, MessagesAllStickers &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const MessagesAllStickers &item) {
+/*QDebug operator<<(QDebug debug,  const MessagesAllStickers &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.MessagesAllStickers(";
@@ -248,4 +248,4 @@ QDebug operator<<(QDebug debug,  const MessagesAllStickers &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

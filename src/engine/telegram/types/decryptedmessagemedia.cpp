@@ -87,7 +87,7 @@ DecryptedMessageMedia::DecryptedMessageMedia(const Null &null) :
 }
 
 DecryptedMessageMedia::~DecryptedMessageMedia() {
-    
+
 }
 
 void DecryptedMessageMedia::setAccessHash(qint64 accessHash) {
@@ -347,7 +347,7 @@ bool DecryptedMessageMedia::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageMediaPhotoSecret8: {
         m_thumbBytes = in->fetchBytes();
         m_thumbW = in->fetchInt();
@@ -361,7 +361,7 @@ bool DecryptedMessageMedia::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageMediaVideoSecret8: {
         m_thumbBytes = in->fetchBytes();
         m_thumbW = in->fetchInt();
@@ -376,7 +376,7 @@ bool DecryptedMessageMedia::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageMediaGeoPointSecret8: {
         m_lat = in->fetchDouble();
         m_longValue = in->fetchDouble();
@@ -384,7 +384,7 @@ bool DecryptedMessageMedia::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageMediaContactSecret8: {
         m_phoneNumber = in->fetchQString();
         m_firstName = in->fetchQString();
@@ -394,7 +394,7 @@ bool DecryptedMessageMedia::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageMediaDocumentSecret8: {
         m_thumbBytes = in->fetchBytes();
         m_thumbW = in->fetchInt();
@@ -408,7 +408,7 @@ bool DecryptedMessageMedia::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageMediaAudioSecret8: {
         m_duration = in->fetchInt();
         m_size = in->fetchInt();
@@ -418,7 +418,7 @@ bool DecryptedMessageMedia::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageMediaVideoSecret17: {
         m_thumbBytes = in->fetchBytes();
         m_thumbW = in->fetchInt();
@@ -434,7 +434,7 @@ bool DecryptedMessageMedia::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageMediaAudioSecret17: {
         m_duration = in->fetchInt();
         m_mimeType = in->fetchQString();
@@ -445,7 +445,7 @@ bool DecryptedMessageMedia::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageMediaExternalDocumentSecret23: {
         m_id = in->fetchLong();
         m_accessHash = in->fetchLong();
@@ -466,7 +466,7 @@ bool DecryptedMessageMedia::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -480,7 +480,7 @@ bool DecryptedMessageMedia::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageMediaPhotoSecret8: {
         out->appendBytes(m_thumbBytes);
         out->appendInt(m_thumbW);
@@ -493,7 +493,7 @@ bool DecryptedMessageMedia::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageMediaVideoSecret8: {
         out->appendBytes(m_thumbBytes);
         out->appendInt(m_thumbW);
@@ -507,14 +507,14 @@ bool DecryptedMessageMedia::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageMediaGeoPointSecret8: {
         out->appendDouble(m_lat);
         out->appendDouble(m_longValue);
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageMediaContactSecret8: {
         out->appendQString(m_phoneNumber);
         out->appendQString(m_firstName);
@@ -523,7 +523,7 @@ bool DecryptedMessageMedia::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageMediaDocumentSecret8: {
         out->appendBytes(m_thumbBytes);
         out->appendInt(m_thumbW);
@@ -536,7 +536,7 @@ bool DecryptedMessageMedia::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageMediaAudioSecret8: {
         out->appendInt(m_duration);
         out->appendInt(m_size);
@@ -545,7 +545,7 @@ bool DecryptedMessageMedia::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageMediaVideoSecret17: {
         out->appendBytes(m_thumbBytes);
         out->appendInt(m_thumbW);
@@ -560,7 +560,7 @@ bool DecryptedMessageMedia::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageMediaAudioSecret17: {
         out->appendInt(m_duration);
         out->appendQString(m_mimeType);
@@ -570,7 +570,7 @@ bool DecryptedMessageMedia::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageMediaExternalDocumentSecret23: {
         out->appendLong(m_id);
         out->appendLong(m_accessHash);
@@ -587,7 +587,7 @@ bool DecryptedMessageMedia::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -601,7 +601,7 @@ QMap<QString, QVariant> DecryptedMessageMedia::toMap() const {
         return result;
     }
         break;
-    
+
     case typeDecryptedMessageMediaPhotoSecret8: {
         result["classType"] = "DecryptedMessageMedia::typeDecryptedMessageMediaPhotoSecret8";
         if( !m_thumbBytes.isEmpty() ) result["thumbBytes"] = QVariant::fromValue<QByteArray>(m_thumbBytes);
@@ -615,7 +615,7 @@ QMap<QString, QVariant> DecryptedMessageMedia::toMap() const {
         return result;
     }
         break;
-    
+
     case typeDecryptedMessageMediaVideoSecret8: {
         result["classType"] = "DecryptedMessageMedia::typeDecryptedMessageMediaVideoSecret8";
         if( !m_thumbBytes.isEmpty() ) result["thumbBytes"] = QVariant::fromValue<QByteArray>(m_thumbBytes);
@@ -630,7 +630,7 @@ QMap<QString, QVariant> DecryptedMessageMedia::toMap() const {
         return result;
     }
         break;
-    
+
     case typeDecryptedMessageMediaGeoPointSecret8: {
         result["classType"] = "DecryptedMessageMedia::typeDecryptedMessageMediaGeoPointSecret8";
         if( lat() ) result["lat"] = QString::number(lat());
@@ -638,7 +638,7 @@ QMap<QString, QVariant> DecryptedMessageMedia::toMap() const {
         return result;
     }
         break;
-    
+
     case typeDecryptedMessageMediaContactSecret8: {
         result["classType"] = "DecryptedMessageMedia::typeDecryptedMessageMediaContactSecret8";
         if( !m_phoneNumber.isEmpty() ) result["phoneNumber"] = QVariant::fromValue<QString>(m_phoneNumber);
@@ -648,7 +648,7 @@ QMap<QString, QVariant> DecryptedMessageMedia::toMap() const {
         return result;
     }
         break;
-    
+
     case typeDecryptedMessageMediaDocumentSecret8: {
         result["classType"] = "DecryptedMessageMedia::typeDecryptedMessageMediaDocumentSecret8";
         if( !m_thumbBytes.isEmpty() ) result["thumbBytes"] = QVariant::fromValue<QByteArray>(m_thumbBytes);
@@ -662,7 +662,7 @@ QMap<QString, QVariant> DecryptedMessageMedia::toMap() const {
         return result;
     }
         break;
-    
+
     case typeDecryptedMessageMediaAudioSecret8: {
         result["classType"] = "DecryptedMessageMedia::typeDecryptedMessageMediaAudioSecret8";
         if( duration() ) result["duration"] = QString::number(duration());
@@ -672,7 +672,7 @@ QMap<QString, QVariant> DecryptedMessageMedia::toMap() const {
         return result;
     }
         break;
-    
+
     case typeDecryptedMessageMediaVideoSecret17: {
         result["classType"] = "DecryptedMessageMedia::typeDecryptedMessageMediaVideoSecret17";
         if( !m_thumbBytes.isEmpty() ) result["thumbBytes"] = QVariant::fromValue<QByteArray>(m_thumbBytes);
@@ -688,7 +688,7 @@ QMap<QString, QVariant> DecryptedMessageMedia::toMap() const {
         return result;
     }
         break;
-    
+
     case typeDecryptedMessageMediaAudioSecret17: {
         result["classType"] = "DecryptedMessageMedia::typeDecryptedMessageMediaAudioSecret17";
         if( duration() ) result["duration"] = QString::number(duration());
@@ -699,7 +699,7 @@ QMap<QString, QVariant> DecryptedMessageMedia::toMap() const {
         return result;
     }
         break;
-    
+
     case typeDecryptedMessageMediaExternalDocumentSecret23: {
         result["classType"] = "DecryptedMessageMedia::typeDecryptedMessageMediaExternalDocumentSecret23";
         if( id() ) result["id"] = QString::number(id());
@@ -716,7 +716,7 @@ QMap<QString, QVariant> DecryptedMessageMedia::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -735,49 +735,49 @@ DecryptedMessageMedia DecryptedMessageMedia::fromMap(const QMap<QString, QVarian
             _thumbBytes_var.convert( QVariant::nameToType("QByteArray") );
             result.setThumbBytes( _thumbBytes_var.value<QByteArray>() );
         }
-        
+
         QVariant _thumbW_var = map.value("thumbW");
         if( !_thumbW_var.isNull() ) {
             _thumbW_var.convert( QVariant::nameToType("qint32") );
             result.setThumbW( _thumbW_var.value<qint32>() );
         }
-        
+
         QVariant _thumbH_var = map.value("thumbH");
         if( !_thumbH_var.isNull() ) {
             _thumbH_var.convert( QVariant::nameToType("qint32") );
             result.setThumbH( _thumbH_var.value<qint32>() );
         }
-        
+
         QVariant _w_var = map.value("w");
         if( !_w_var.isNull() ) {
             _w_var.convert( QVariant::nameToType("qint32") );
             result.setW( _w_var.value<qint32>() );
         }
-        
+
         QVariant _h_var = map.value("h");
         if( !_h_var.isNull() ) {
             _h_var.convert( QVariant::nameToType("qint32") );
             result.setH( _h_var.value<qint32>() );
         }
-        
+
         QVariant _size_var = map.value("size");
         if( !_size_var.isNull() ) {
             _size_var.convert( QVariant::nameToType("qint32") );
             result.setSize( _size_var.value<qint32>() );
         }
-        
+
         QVariant _key_var = map.value("key");
         if( !_key_var.isNull() ) {
             _key_var.convert( QVariant::nameToType("QByteArray") );
             result.setKey( _key_var.value<QByteArray>() );
         }
-        
+
         QVariant _iv_var = map.value("iv");
         if( !_iv_var.isNull() ) {
             _iv_var.convert( QVariant::nameToType("QByteArray") );
             result.setIv( _iv_var.value<QByteArray>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "DecryptedMessageMedia::typeDecryptedMessageMediaVideoSecret8") {
@@ -787,55 +787,55 @@ DecryptedMessageMedia DecryptedMessageMedia::fromMap(const QMap<QString, QVarian
             _thumbBytes_var.convert( QVariant::nameToType("QByteArray") );
             result.setThumbBytes( _thumbBytes_var.value<QByteArray>() );
         }
-        
+
         QVariant _thumbW_var = map.value("thumbW");
         if( !_thumbW_var.isNull() ) {
             _thumbW_var.convert( QVariant::nameToType("qint32") );
             result.setThumbW( _thumbW_var.value<qint32>() );
         }
-        
+
         QVariant _thumbH_var = map.value("thumbH");
         if( !_thumbH_var.isNull() ) {
             _thumbH_var.convert( QVariant::nameToType("qint32") );
             result.setThumbH( _thumbH_var.value<qint32>() );
         }
-        
+
         QVariant _duration_var = map.value("duration");
         if( !_duration_var.isNull() ) {
             _duration_var.convert( QVariant::nameToType("qint32") );
             result.setDuration( _duration_var.value<qint32>() );
         }
-        
+
         QVariant _w_var = map.value("w");
         if( !_w_var.isNull() ) {
             _w_var.convert( QVariant::nameToType("qint32") );
             result.setW( _w_var.value<qint32>() );
         }
-        
+
         QVariant _h_var = map.value("h");
         if( !_h_var.isNull() ) {
             _h_var.convert( QVariant::nameToType("qint32") );
             result.setH( _h_var.value<qint32>() );
         }
-        
+
         QVariant _size_var = map.value("size");
         if( !_size_var.isNull() ) {
             _size_var.convert( QVariant::nameToType("qint32") );
             result.setSize( _size_var.value<qint32>() );
         }
-        
+
         QVariant _key_var = map.value("key");
         if( !_key_var.isNull() ) {
             _key_var.convert( QVariant::nameToType("QByteArray") );
             result.setKey( _key_var.value<QByteArray>() );
         }
-        
+
         QVariant _iv_var = map.value("iv");
         if( !_iv_var.isNull() ) {
             _iv_var.convert( QVariant::nameToType("QByteArray") );
             result.setIv( _iv_var.value<QByteArray>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "DecryptedMessageMedia::typeDecryptedMessageMediaGeoPointSecret8") {
@@ -845,13 +845,13 @@ DecryptedMessageMedia DecryptedMessageMedia::fromMap(const QMap<QString, QVarian
             _lat_var.convert( QVariant::nameToType("qreal") );
             result.setLat( _lat_var.value<qreal>() );
         }
-        
+
         QVariant _longValue_var = map.value("longValue");
         if( !_longValue_var.isNull() ) {
             _longValue_var.convert( QVariant::nameToType("qreal") );
             result.setLongValue( _longValue_var.value<qreal>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "DecryptedMessageMedia::typeDecryptedMessageMediaContactSecret8") {
@@ -861,25 +861,25 @@ DecryptedMessageMedia DecryptedMessageMedia::fromMap(const QMap<QString, QVarian
             _phoneNumber_var.convert( QVariant::nameToType("QString") );
             result.setPhoneNumber( _phoneNumber_var.value<QString>() );
         }
-        
+
         QVariant _firstName_var = map.value("firstName");
         if( !_firstName_var.isNull() ) {
             _firstName_var.convert( QVariant::nameToType("QString") );
             result.setFirstName( _firstName_var.value<QString>() );
         }
-        
+
         QVariant _lastName_var = map.value("lastName");
         if( !_lastName_var.isNull() ) {
             _lastName_var.convert( QVariant::nameToType("QString") );
             result.setLastName( _lastName_var.value<QString>() );
         }
-        
+
         QVariant _userId_var = map.value("userId");
         if( !_userId_var.isNull() ) {
             _userId_var.convert( QVariant::nameToType("qint32") );
             result.setUserId( _userId_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "DecryptedMessageMedia::typeDecryptedMessageMediaDocumentSecret8") {
@@ -889,49 +889,49 @@ DecryptedMessageMedia DecryptedMessageMedia::fromMap(const QMap<QString, QVarian
             _thumbBytes_var.convert( QVariant::nameToType("QByteArray") );
             result.setThumbBytes( _thumbBytes_var.value<QByteArray>() );
         }
-        
+
         QVariant _thumbW_var = map.value("thumbW");
         if( !_thumbW_var.isNull() ) {
             _thumbW_var.convert( QVariant::nameToType("qint32") );
             result.setThumbW( _thumbW_var.value<qint32>() );
         }
-        
+
         QVariant _thumbH_var = map.value("thumbH");
         if( !_thumbH_var.isNull() ) {
             _thumbH_var.convert( QVariant::nameToType("qint32") );
             result.setThumbH( _thumbH_var.value<qint32>() );
         }
-        
+
         QVariant _fileName_var = map.value("fileName");
         if( !_fileName_var.isNull() ) {
             _fileName_var.convert( QVariant::nameToType("QString") );
             result.setFileName( _fileName_var.value<QString>() );
         }
-        
+
         QVariant _mimeType_var = map.value("mimeType");
         if( !_mimeType_var.isNull() ) {
             _mimeType_var.convert( QVariant::nameToType("QString") );
             result.setMimeType( _mimeType_var.value<QString>() );
         }
-        
+
         QVariant _size_var = map.value("size");
         if( !_size_var.isNull() ) {
             _size_var.convert( QVariant::nameToType("qint32") );
             result.setSize( _size_var.value<qint32>() );
         }
-        
+
         QVariant _key_var = map.value("key");
         if( !_key_var.isNull() ) {
             _key_var.convert( QVariant::nameToType("QByteArray") );
             result.setKey( _key_var.value<QByteArray>() );
         }
-        
+
         QVariant _iv_var = map.value("iv");
         if( !_iv_var.isNull() ) {
             _iv_var.convert( QVariant::nameToType("QByteArray") );
             result.setIv( _iv_var.value<QByteArray>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "DecryptedMessageMedia::typeDecryptedMessageMediaAudioSecret8") {
@@ -941,25 +941,25 @@ DecryptedMessageMedia DecryptedMessageMedia::fromMap(const QMap<QString, QVarian
             _duration_var.convert( QVariant::nameToType("qint32") );
             result.setDuration( _duration_var.value<qint32>() );
         }
-        
+
         QVariant _size_var = map.value("size");
         if( !_size_var.isNull() ) {
             _size_var.convert( QVariant::nameToType("qint32") );
             result.setSize( _size_var.value<qint32>() );
         }
-        
+
         QVariant _key_var = map.value("key");
         if( !_key_var.isNull() ) {
             _key_var.convert( QVariant::nameToType("QByteArray") );
             result.setKey( _key_var.value<QByteArray>() );
         }
-        
+
         QVariant _iv_var = map.value("iv");
         if( !_iv_var.isNull() ) {
             _iv_var.convert( QVariant::nameToType("QByteArray") );
             result.setIv( _iv_var.value<QByteArray>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "DecryptedMessageMedia::typeDecryptedMessageMediaVideoSecret17") {
@@ -969,61 +969,61 @@ DecryptedMessageMedia DecryptedMessageMedia::fromMap(const QMap<QString, QVarian
             _thumbBytes_var.convert( QVariant::nameToType("QByteArray") );
             result.setThumbBytes( _thumbBytes_var.value<QByteArray>() );
         }
-        
+
         QVariant _thumbW_var = map.value("thumbW");
         if( !_thumbW_var.isNull() ) {
             _thumbW_var.convert( QVariant::nameToType("qint32") );
             result.setThumbW( _thumbW_var.value<qint32>() );
         }
-        
+
         QVariant _thumbH_var = map.value("thumbH");
         if( !_thumbH_var.isNull() ) {
             _thumbH_var.convert( QVariant::nameToType("qint32") );
             result.setThumbH( _thumbH_var.value<qint32>() );
         }
-        
+
         QVariant _duration_var = map.value("duration");
         if( !_duration_var.isNull() ) {
             _duration_var.convert( QVariant::nameToType("qint32") );
             result.setDuration( _duration_var.value<qint32>() );
         }
-        
+
         QVariant _mimeType_var = map.value("mimeType");
         if( !_mimeType_var.isNull() ) {
             _mimeType_var.convert( QVariant::nameToType("QString") );
             result.setMimeType( _mimeType_var.value<QString>() );
         }
-        
+
         QVariant _w_var = map.value("w");
         if( !_w_var.isNull() ) {
             _w_var.convert( QVariant::nameToType("qint32") );
             result.setW( _w_var.value<qint32>() );
         }
-        
+
         QVariant _h_var = map.value("h");
         if( !_h_var.isNull() ) {
             _h_var.convert( QVariant::nameToType("qint32") );
             result.setH( _h_var.value<qint32>() );
         }
-        
+
         QVariant _size_var = map.value("size");
         if( !_size_var.isNull() ) {
             _size_var.convert( QVariant::nameToType("qint32") );
             result.setSize( _size_var.value<qint32>() );
         }
-        
+
         QVariant _key_var = map.value("key");
         if( !_key_var.isNull() ) {
             _key_var.convert( QVariant::nameToType("QByteArray") );
             result.setKey( _key_var.value<QByteArray>() );
         }
-        
+
         QVariant _iv_var = map.value("iv");
         if( !_iv_var.isNull() ) {
             _iv_var.convert( QVariant::nameToType("QByteArray") );
             result.setIv( _iv_var.value<QByteArray>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "DecryptedMessageMedia::typeDecryptedMessageMediaAudioSecret17") {
@@ -1033,31 +1033,31 @@ DecryptedMessageMedia DecryptedMessageMedia::fromMap(const QMap<QString, QVarian
             _duration_var.convert( QVariant::nameToType("qint32") );
             result.setDuration( _duration_var.value<qint32>() );
         }
-        
+
         QVariant _mimeType_var = map.value("mimeType");
         if( !_mimeType_var.isNull() ) {
             _mimeType_var.convert( QVariant::nameToType("QString") );
             result.setMimeType( _mimeType_var.value<QString>() );
         }
-        
+
         QVariant _size_var = map.value("size");
         if( !_size_var.isNull() ) {
             _size_var.convert( QVariant::nameToType("qint32") );
             result.setSize( _size_var.value<qint32>() );
         }
-        
+
         QVariant _key_var = map.value("key");
         if( !_key_var.isNull() ) {
             _key_var.convert( QVariant::nameToType("QByteArray") );
             result.setKey( _key_var.value<QByteArray>() );
         }
-        
+
         QVariant _iv_var = map.value("iv");
         if( !_iv_var.isNull() ) {
             _iv_var.convert( QVariant::nameToType("QByteArray") );
             result.setIv( _iv_var.value<QByteArray>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "DecryptedMessageMedia::typeDecryptedMessageMediaExternalDocumentSecret23") {
@@ -1067,41 +1067,41 @@ DecryptedMessageMedia DecryptedMessageMedia::fromMap(const QMap<QString, QVarian
             _id_var.convert( QVariant::nameToType("qint64") );
             result.setId( _id_var.value<qint64>() );
         }
-        
+
         QVariant _accessHash_var = map.value("accessHash");
         if( !_accessHash_var.isNull() ) {
             _accessHash_var.convert( QVariant::nameToType("qint64") );
             result.setAccessHash( _accessHash_var.value<qint64>() );
         }
-        
+
         QVariant _date_var = map.value("date");
         if( !_date_var.isNull() ) {
             _date_var.convert( QVariant::nameToType("qint32") );
             result.setDate( _date_var.value<qint32>() );
         }
-        
+
         QVariant _mimeType_var = map.value("mimeType");
         if( !_mimeType_var.isNull() ) {
             _mimeType_var.convert( QVariant::nameToType("QString") );
             result.setMimeType( _mimeType_var.value<QString>() );
         }
-        
+
         QVariant _size_var = map.value("size");
         if( !_size_var.isNull() ) {
             _size_var.convert( QVariant::nameToType("qint32") );
             result.setSize( _size_var.value<qint32>() );
         }
-        
+
         QVariant _thumbPhotoSize_var = map.value("thumbPhotoSize");
         if( !_thumbPhotoSize_var.isNull() )
             result.setThumbPhotoSize( PhotoSize::fromMap(_thumbPhotoSize_var.toMap()) );
-        
+
         QVariant _dcId_var = map.value("dcId");
         if( !_dcId_var.isNull() ) {
             _dcId_var.convert( QVariant::nameToType("qint32") );
             result.setDcId( _dcId_var.value<qint32>() );
         }
-        
+
         QList<QVariant> map_attributes = map["attributes"].toList();
         QList<DocumentAttribute> _attributes;
         for(const QVariant &var: map_attributes)
@@ -1127,7 +1127,7 @@ QDataStream &operator<<(QDataStream &stream, const DecryptedMessageMedia &item) 
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case DecryptedMessageMedia::typeDecryptedMessageMediaEmptySecret8:
-        
+
         break;
     case DecryptedMessageMedia::typeDecryptedMessageMediaPhotoSecret8:
         stream << item.thumbBytes();
@@ -1215,7 +1215,7 @@ QDataStream &operator>>(QDataStream &stream, DecryptedMessageMedia &item) {
     item.setClassType(static_cast<DecryptedMessageMedia::DecryptedMessageMediaClassType>(type));
     switch(type) {
     case DecryptedMessageMedia::typeDecryptedMessageMediaEmptySecret8: {
-        
+
     }
         break;
     case DecryptedMessageMedia::typeDecryptedMessageMediaPhotoSecret8: {
@@ -1423,7 +1423,7 @@ QDataStream &operator>>(QDataStream &stream, DecryptedMessageMedia &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const DecryptedMessageMedia &item) {
+/*QDebug operator<<(QDebug debug,  const DecryptedMessageMedia &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.DecryptedMessageMedia(";
@@ -1520,4 +1520,4 @@ QDebug operator<<(QDebug debug,  const DecryptedMessageMedia &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

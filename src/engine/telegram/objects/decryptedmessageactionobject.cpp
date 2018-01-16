@@ -10,7 +10,7 @@ DecryptedMessageActionObject::DecryptedMessageActionObject(const DecryptedMessag
     m_core(core)
 {
     m_action = new SendMessageActionObject(m_core.action(), this);
-    connect(m_action.data(), &SendMessageActionObject::coreChanged, this, &DecryptedMessageActionObject::coreActionChanged);
+    connect(m_action.data(), SIGNAL(coreChanged()), this, SLOT(coreActionChanged()));
 }
 
 DecryptedMessageActionObject::DecryptedMessageActionObject(QObject *parent) :
@@ -19,7 +19,7 @@ DecryptedMessageActionObject::DecryptedMessageActionObject(QObject *parent) :
     m_core()
 {
     m_action = new SendMessageActionObject(m_core.action(), this);
-    connect(m_action.data(), &SendMessageActionObject::coreChanged, this, &DecryptedMessageActionObject::coreActionChanged);
+    connect(m_action.data(), SIGNAL(coreChanged()), this, SLOT(coreActionChanged()));
 }
 
 DecryptedMessageActionObject::~DecryptedMessageActionObject() {
@@ -32,7 +32,7 @@ void DecryptedMessageActionObject::setAction(SendMessageActionObject* action) {
     if(m_action) {
         m_action->setParent(this);
         m_core.setAction(m_action->core());
-        connect(m_action.data(), &SendMessageActionObject::coreChanged, this, &DecryptedMessageActionObject::coreActionChanged);
+        connect(m_action.data(), SIGNAL(coreChanged()), this, SLOT(coreActionChanged()));
     }
     Q_EMIT actionChanged();
     Q_EMIT coreChanged();

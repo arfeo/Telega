@@ -75,7 +75,7 @@ PhoneCall::PhoneCall(const Null &null) :
 }
 
 PhoneCall::~PhoneCall() {
-    
+
 }
 
 void PhoneCall::setAccessHash(qint64 accessHash) {
@@ -300,7 +300,7 @@ bool PhoneCall::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typePhoneCallWaiting: {
         m_flags = in->fetchInt();
         m_id = in->fetchLong();
@@ -316,7 +316,7 @@ bool PhoneCall::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typePhoneCallRequested: {
         m_id = in->fetchLong();
         m_accessHash = in->fetchLong();
@@ -329,7 +329,7 @@ bool PhoneCall::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typePhoneCallAccepted: {
         m_id = in->fetchLong();
         m_accessHash = in->fetchLong();
@@ -342,7 +342,7 @@ bool PhoneCall::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typePhoneCall: {
         m_id = in->fetchLong();
         m_accessHash = in->fetchLong();
@@ -366,7 +366,7 @@ bool PhoneCall::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typePhoneCallDiscarded: {
         m_flags = in->fetchInt();
         m_id = in->fetchLong();
@@ -380,7 +380,7 @@ bool PhoneCall::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -395,7 +395,7 @@ bool PhoneCall::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typePhoneCallWaiting: {
         out->appendInt(m_flags);
         out->appendLong(m_id);
@@ -410,7 +410,7 @@ bool PhoneCall::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typePhoneCallRequested: {
         out->appendLong(m_id);
         out->appendLong(m_accessHash);
@@ -422,7 +422,7 @@ bool PhoneCall::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typePhoneCallAccepted: {
         out->appendLong(m_id);
         out->appendLong(m_accessHash);
@@ -434,7 +434,7 @@ bool PhoneCall::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typePhoneCall: {
         out->appendLong(m_id);
         out->appendLong(m_accessHash);
@@ -454,7 +454,7 @@ bool PhoneCall::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typePhoneCallDiscarded: {
         out->appendInt(m_flags);
         out->appendLong(m_id);
@@ -467,7 +467,7 @@ bool PhoneCall::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -482,7 +482,7 @@ QMap<QString, QVariant> PhoneCall::toMap() const {
         return result;
     }
         break;
-    
+
     case typePhoneCallWaiting: {
         result["classType"] = "PhoneCall::typePhoneCallWaiting";
         if( id() ) result["id"] = QString::number(id());
@@ -495,7 +495,7 @@ QMap<QString, QVariant> PhoneCall::toMap() const {
         return result;
     }
         break;
-    
+
     case typePhoneCallRequested: {
         result["classType"] = "PhoneCall::typePhoneCallRequested";
         if( id() ) result["id"] = QString::number(id());
@@ -508,7 +508,7 @@ QMap<QString, QVariant> PhoneCall::toMap() const {
         return result;
     }
         break;
-    
+
     case typePhoneCallAccepted: {
         result["classType"] = "PhoneCall::typePhoneCallAccepted";
         if( id() ) result["id"] = QString::number(id());
@@ -521,7 +521,7 @@ QMap<QString, QVariant> PhoneCall::toMap() const {
         return result;
     }
         break;
-    
+
     case typePhoneCall: {
         result["classType"] = "PhoneCall::typePhoneCall";
         if( id() ) result["id"] = QString::number(id());
@@ -541,7 +541,7 @@ QMap<QString, QVariant> PhoneCall::toMap() const {
         return result;
     }
         break;
-    
+
     case typePhoneCallDiscarded: {
         result["classType"] = "PhoneCall::typePhoneCallDiscarded";
         if( needRating() ) result["needRating"] = QString::number(needRating());
@@ -552,7 +552,7 @@ QMap<QString, QVariant> PhoneCall::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -567,7 +567,7 @@ PhoneCall PhoneCall::fromMap(const QMap<QString, QVariant> &map) {
             _id_var.convert( QVariant::nameToType("qint64") );
             result.setId( _id_var.value<qint64>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "PhoneCall::typePhoneCallWaiting") {
@@ -577,41 +577,41 @@ PhoneCall PhoneCall::fromMap(const QMap<QString, QVariant> &map) {
             _id_var.convert( QVariant::nameToType("qint64") );
             result.setId( _id_var.value<qint64>() );
         }
-        
+
         QVariant _accessHash_var = map.value("accessHash");
         if( !_accessHash_var.isNull() ) {
             _accessHash_var.convert( QVariant::nameToType("qint64") );
             result.setAccessHash( _accessHash_var.value<qint64>() );
         }
-        
+
         QVariant _date_var = map.value("date");
         if( !_date_var.isNull() ) {
             _date_var.convert( QVariant::nameToType("qint32") );
             result.setDate( _date_var.value<qint32>() );
         }
-        
+
         QVariant _adminId_var = map.value("adminId");
         if( !_adminId_var.isNull() ) {
             _adminId_var.convert( QVariant::nameToType("qint32") );
             result.setAdminId( _adminId_var.value<qint32>() );
         }
-        
+
         QVariant _participantId_var = map.value("participantId");
         if( !_participantId_var.isNull() ) {
             _participantId_var.convert( QVariant::nameToType("qint32") );
             result.setParticipantId( _participantId_var.value<qint32>() );
         }
-        
+
         QVariant _protocol_var = map.value("protocol");
         if( !_protocol_var.isNull() )
             result.setProtocol( PhoneCallProtocol::fromMap(_protocol_var.toMap()) );
-        
+
         QVariant _receiveDate_var = map.value("receiveDate");
         if( !_receiveDate_var.isNull() ) {
             _receiveDate_var.convert( QVariant::nameToType("qint32") );
             result.setReceiveDate( _receiveDate_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "PhoneCall::typePhoneCallRequested") {
@@ -621,41 +621,41 @@ PhoneCall PhoneCall::fromMap(const QMap<QString, QVariant> &map) {
             _id_var.convert( QVariant::nameToType("qint64") );
             result.setId( _id_var.value<qint64>() );
         }
-        
+
         QVariant _accessHash_var = map.value("accessHash");
         if( !_accessHash_var.isNull() ) {
             _accessHash_var.convert( QVariant::nameToType("qint64") );
             result.setAccessHash( _accessHash_var.value<qint64>() );
         }
-        
+
         QVariant _date_var = map.value("date");
         if( !_date_var.isNull() ) {
             _date_var.convert( QVariant::nameToType("qint32") );
             result.setDate( _date_var.value<qint32>() );
         }
-        
+
         QVariant _adminId_var = map.value("adminId");
         if( !_adminId_var.isNull() ) {
             _adminId_var.convert( QVariant::nameToType("qint32") );
             result.setAdminId( _adminId_var.value<qint32>() );
         }
-        
+
         QVariant _participantId_var = map.value("participantId");
         if( !_participantId_var.isNull() ) {
             _participantId_var.convert( QVariant::nameToType("qint32") );
             result.setParticipantId( _participantId_var.value<qint32>() );
         }
-        
+
         QVariant _gAHash_var = map.value("gAHash");
         if( !_gAHash_var.isNull() ) {
             _gAHash_var.convert( QVariant::nameToType("QByteArray") );
             result.setGAHash( _gAHash_var.value<QByteArray>() );
         }
-        
+
         QVariant _protocol_var = map.value("protocol");
         if( !_protocol_var.isNull() )
             result.setProtocol( PhoneCallProtocol::fromMap(_protocol_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "PhoneCall::typePhoneCallAccepted") {
@@ -665,41 +665,41 @@ PhoneCall PhoneCall::fromMap(const QMap<QString, QVariant> &map) {
             _id_var.convert( QVariant::nameToType("qint64") );
             result.setId( _id_var.value<qint64>() );
         }
-        
+
         QVariant _accessHash_var = map.value("accessHash");
         if( !_accessHash_var.isNull() ) {
             _accessHash_var.convert( QVariant::nameToType("qint64") );
             result.setAccessHash( _accessHash_var.value<qint64>() );
         }
-        
+
         QVariant _date_var = map.value("date");
         if( !_date_var.isNull() ) {
             _date_var.convert( QVariant::nameToType("qint32") );
             result.setDate( _date_var.value<qint32>() );
         }
-        
+
         QVariant _adminId_var = map.value("adminId");
         if( !_adminId_var.isNull() ) {
             _adminId_var.convert( QVariant::nameToType("qint32") );
             result.setAdminId( _adminId_var.value<qint32>() );
         }
-        
+
         QVariant _participantId_var = map.value("participantId");
         if( !_participantId_var.isNull() ) {
             _participantId_var.convert( QVariant::nameToType("qint32") );
             result.setParticipantId( _participantId_var.value<qint32>() );
         }
-        
+
         QVariant _gB_var = map.value("gB");
         if( !_gB_var.isNull() ) {
             _gB_var.convert( QVariant::nameToType("QByteArray") );
             result.setGB( _gB_var.value<QByteArray>() );
         }
-        
+
         QVariant _protocol_var = map.value("protocol");
         if( !_protocol_var.isNull() )
             result.setProtocol( PhoneCallProtocol::fromMap(_protocol_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "PhoneCall::typePhoneCall") {
@@ -709,51 +709,51 @@ PhoneCall PhoneCall::fromMap(const QMap<QString, QVariant> &map) {
             _id_var.convert( QVariant::nameToType("qint64") );
             result.setId( _id_var.value<qint64>() );
         }
-        
+
         QVariant _accessHash_var = map.value("accessHash");
         if( !_accessHash_var.isNull() ) {
             _accessHash_var.convert( QVariant::nameToType("qint64") );
             result.setAccessHash( _accessHash_var.value<qint64>() );
         }
-        
+
         QVariant _date_var = map.value("date");
         if( !_date_var.isNull() ) {
             _date_var.convert( QVariant::nameToType("qint32") );
             result.setDate( _date_var.value<qint32>() );
         }
-        
+
         QVariant _adminId_var = map.value("adminId");
         if( !_adminId_var.isNull() ) {
             _adminId_var.convert( QVariant::nameToType("qint32") );
             result.setAdminId( _adminId_var.value<qint32>() );
         }
-        
+
         QVariant _participantId_var = map.value("participantId");
         if( !_participantId_var.isNull() ) {
             _participantId_var.convert( QVariant::nameToType("qint32") );
             result.setParticipantId( _participantId_var.value<qint32>() );
         }
-        
+
         QVariant _gAOrB_var = map.value("gAOrB");
         if( !_gAOrB_var.isNull() ) {
             _gAOrB_var.convert( QVariant::nameToType("QByteArray") );
             result.setGAOrB( _gAOrB_var.value<QByteArray>() );
         }
-        
+
         QVariant _keyFingerprint_var = map.value("keyFingerprint");
         if( !_keyFingerprint_var.isNull() ) {
             _keyFingerprint_var.convert( QVariant::nameToType("qint64") );
             result.setKeyFingerprint( _keyFingerprint_var.value<qint64>() );
         }
-        
+
         QVariant _protocol_var = map.value("protocol");
         if( !_protocol_var.isNull() )
             result.setProtocol( PhoneCallProtocol::fromMap(_protocol_var.toMap()) );
-        
+
         QVariant _connection_var = map.value("connection");
         if( !_connection_var.isNull() )
             result.setConnection( PhoneConnection::fromMap(_connection_var.toMap()) );
-        
+
         QList<QVariant> map_alternativeConnections = map["alternativeConnections"].toList();
         QList<PhoneConnection> _alternativeConnections;
         for(const QVariant &var: map_alternativeConnections)
@@ -764,7 +764,7 @@ PhoneCall PhoneCall::fromMap(const QMap<QString, QVariant> &map) {
             _startDate_var.convert( QVariant::nameToType("qint32") );
             result.setStartDate( _startDate_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "PhoneCall::typePhoneCallDiscarded") {
@@ -774,29 +774,29 @@ PhoneCall PhoneCall::fromMap(const QMap<QString, QVariant> &map) {
             _needRating_var.convert( QVariant::nameToType("bool") );
             result.setNeedRating( _needRating_var.value<bool>() );
         }
-        
+
         QVariant _needDebug_var = map.value("needDebug");
         if( !_needDebug_var.isNull() ) {
             _needDebug_var.convert( QVariant::nameToType("bool") );
             result.setNeedDebug( _needDebug_var.value<bool>() );
         }
-        
+
         QVariant _id_var = map.value("id");
         if( !_id_var.isNull() ) {
             _id_var.convert( QVariant::nameToType("qint64") );
             result.setId( _id_var.value<qint64>() );
         }
-        
+
         QVariant _reason_var = map.value("reason");
         if( !_reason_var.isNull() )
             result.setReason( PhoneCallDiscardReason::fromMap(_reason_var.toMap()) );
-        
+
         QVariant _duration_var = map.value("duration");
         if( !_duration_var.isNull() ) {
             _duration_var.convert( QVariant::nameToType("qint32") );
             result.setDuration( _duration_var.value<qint32>() );
         }
-        
+
         return result;
     }
     return result;
@@ -1011,7 +1011,7 @@ QDataStream &operator>>(QDataStream &stream, PhoneCall &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const PhoneCall &item) {
+/*QDebug operator<<(QDebug debug,  const PhoneCall &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.PhoneCall(";
@@ -1076,4 +1076,4 @@ QDebug operator<<(QDebug debug,  const PhoneCall &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

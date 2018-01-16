@@ -15,17 +15,17 @@ MessageMediaObject::MessageMediaObject(const MessageMedia &core, QObject *parent
     m_core(core)
 {
     m_document = new DocumentObject(m_core.document(), this);
-    connect(m_document.data(), &DocumentObject::coreChanged, this, &MessageMediaObject::coreDocumentChanged);
+    connect(m_document.data(), SIGNAL(coreChanged()), this, SLOT(coreDocumentChanged()));
     m_game = new GameObject(m_core.game(), this);
-    connect(m_game.data(), &GameObject::coreChanged, this, &MessageMediaObject::coreGameChanged);
+    connect(m_game.data(), SIGNAL(coreChanged()), this, SLOT(coreGameChanged()));
     m_geo = new GeoPointObject(m_core.geo(), this);
-    connect(m_geo.data(), &GeoPointObject::coreChanged, this, &MessageMediaObject::coreGeoChanged);
+    connect(m_geo.data(), SIGNAL(coreChanged()), this, SLOT(coreGeoChanged()));
     m_photo = new PhotoObject(m_core.photo(), this);
-    connect(m_photo.data(), &PhotoObject::coreChanged, this, &MessageMediaObject::corePhotoChanged);
+    connect(m_photo.data(), SIGNAL(coreChanged()), this, SLOT(corePhotoChanged()));
     m_photoWebDocument = new WebDocumentObject(m_core.photoWebDocument(), this);
-    connect(m_photoWebDocument.data(), &WebDocumentObject::coreChanged, this, &MessageMediaObject::corePhotoWebDocumentChanged);
+    connect(m_photoWebDocument.data(), SIGNAL(coreChanged()), this, SLOT(corePhotoWebDocumentChanged()));
     m_webpage = new WebPageObject(m_core.webpage(), this);
-    connect(m_webpage.data(), &WebPageObject::coreChanged, this, &MessageMediaObject::coreWebpageChanged);
+    connect(m_webpage.data(), SIGNAL(coreChanged()), this, SLOT(coreWebpageChanged()));
 }
 
 MessageMediaObject::MessageMediaObject(QObject *parent) :
@@ -39,17 +39,17 @@ MessageMediaObject::MessageMediaObject(QObject *parent) :
     m_core()
 {
     m_document = new DocumentObject(m_core.document(), this);
-    connect(m_document.data(), &DocumentObject::coreChanged, this, &MessageMediaObject::coreDocumentChanged);
+    connect(m_document.data(), SIGNAL(coreChanged()), this, SLOT(coreDocumentChanged()));
     m_game = new GameObject(m_core.game(), this);
-    connect(m_game.data(), &GameObject::coreChanged, this, &MessageMediaObject::coreGameChanged);
+    connect(m_game.data(), SIGNAL(coreChanged()), this, SLOT(coreGameChanged()));
     m_geo = new GeoPointObject(m_core.geo(), this);
-    connect(m_geo.data(), &GeoPointObject::coreChanged, this, &MessageMediaObject::coreGeoChanged);
+    connect(m_geo.data(), SIGNAL(coreChanged()), this, SLOT(coreGeoChanged()));
     m_photo = new PhotoObject(m_core.photo(), this);
-    connect(m_photo.data(), &PhotoObject::coreChanged, this, &MessageMediaObject::corePhotoChanged);
+    connect(m_photo.data(), SIGNAL(coreChanged()), this, SLOT(corePhotoChanged()));
     m_photoWebDocument = new WebDocumentObject(m_core.photoWebDocument(), this);
-    connect(m_photoWebDocument.data(), &WebDocumentObject::coreChanged, this, &MessageMediaObject::corePhotoWebDocumentChanged);
+    connect(m_photoWebDocument.data(), SIGNAL(coreChanged()), this, SLOT(corePhotoWebDocumentChanged()));
     m_webpage = new WebPageObject(m_core.webpage(), this);
-    connect(m_webpage.data(), &WebPageObject::coreChanged, this, &MessageMediaObject::coreWebpageChanged);
+    connect(m_webpage.data(), SIGNAL(coreChanged()), this, SLOT(coreWebpageChanged()));
 }
 
 MessageMediaObject::~MessageMediaObject() {
@@ -106,7 +106,7 @@ void MessageMediaObject::setDocument(DocumentObject* document) {
     if(m_document) {
         m_document->setParent(this);
         m_core.setDocument(m_document->core());
-        connect(m_document.data(), &DocumentObject::coreChanged, this, &MessageMediaObject::coreDocumentChanged);
+        connect(m_document.data(), SIGNAL(coreChanged()), this, SLOT(coreDocumentChanged()));
     }
     Q_EMIT documentChanged();
     Q_EMIT coreChanged();
@@ -145,7 +145,7 @@ void MessageMediaObject::setGame(GameObject* game) {
     if(m_game) {
         m_game->setParent(this);
         m_core.setGame(m_game->core());
-        connect(m_game.data(), &GameObject::coreChanged, this, &MessageMediaObject::coreGameChanged);
+        connect(m_game.data(), SIGNAL(coreChanged()), this, SLOT(coreGameChanged()));
     }
     Q_EMIT gameChanged();
     Q_EMIT coreChanged();
@@ -162,7 +162,7 @@ void MessageMediaObject::setGeo(GeoPointObject* geo) {
     if(m_geo) {
         m_geo->setParent(this);
         m_core.setGeo(m_geo->core());
-        connect(m_geo.data(), &GeoPointObject::coreChanged, this, &MessageMediaObject::coreGeoChanged);
+        connect(m_geo.data(), SIGNAL(coreChanged()), this, SLOT(coreGeoChanged()));
     }
     Q_EMIT geoChanged();
     Q_EMIT coreChanged();
@@ -201,7 +201,7 @@ void MessageMediaObject::setPhoto(PhotoObject* photo) {
     if(m_photo) {
         m_photo->setParent(this);
         m_core.setPhoto(m_photo->core());
-        connect(m_photo.data(), &PhotoObject::coreChanged, this, &MessageMediaObject::corePhotoChanged);
+        connect(m_photo.data(), SIGNAL(coreChanged()), this, SLOT(corePhotoChanged()));
     }
     Q_EMIT photoChanged();
     Q_EMIT coreChanged();
@@ -218,7 +218,7 @@ void MessageMediaObject::setPhotoWebDocument(WebDocumentObject* photoWebDocument
     if(m_photoWebDocument) {
         m_photoWebDocument->setParent(this);
         m_core.setPhotoWebDocument(m_photoWebDocument->core());
-        connect(m_photoWebDocument.data(), &WebDocumentObject::coreChanged, this, &MessageMediaObject::corePhotoWebDocumentChanged);
+        connect(m_photoWebDocument.data(), SIGNAL(coreChanged()), this, SLOT(corePhotoWebDocumentChanged()));
     }
     Q_EMIT photoWebDocumentChanged();
     Q_EMIT coreChanged();
@@ -334,7 +334,7 @@ void MessageMediaObject::setWebpage(WebPageObject* webpage) {
     if(m_webpage) {
         m_webpage->setParent(this);
         m_core.setWebpage(m_webpage->core());
-        connect(m_webpage.data(), &WebPageObject::coreChanged, this, &MessageMediaObject::coreWebpageChanged);
+        connect(m_webpage.data(), SIGNAL(coreChanged()), this, SLOT(coreWebpageChanged()));
     }
     Q_EMIT webpageChanged();
     Q_EMIT coreChanged();

@@ -35,7 +35,7 @@ AuthCodeType::AuthCodeType(const Null &null) :
 }
 
 AuthCodeType::~AuthCodeType() {
-    
+
 }
 
 bool AuthCodeType::operator ==(const AuthCodeType &b) const {
@@ -65,19 +65,19 @@ bool AuthCodeType::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeAuthCodeTypeCall: {
         m_classType = static_cast<AuthCodeTypeClassType>(x);
         return true;
     }
         break;
-    
+
     case typeAuthCodeTypeFlashCall: {
         m_classType = static_cast<AuthCodeTypeClassType>(x);
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -91,17 +91,17 @@ bool AuthCodeType::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeAuthCodeTypeCall: {
         return true;
     }
         break;
-    
+
     case typeAuthCodeTypeFlashCall: {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -115,19 +115,19 @@ QMap<QString, QVariant> AuthCodeType::toMap() const {
         return result;
     }
         break;
-    
+
     case typeAuthCodeTypeCall: {
         result["classType"] = "AuthCodeType::typeAuthCodeTypeCall";
         return result;
     }
         break;
-    
+
     case typeAuthCodeTypeFlashCall: {
         result["classType"] = "AuthCodeType::typeAuthCodeTypeFlashCall";
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -165,13 +165,13 @@ QDataStream &operator<<(QDataStream &stream, const AuthCodeType &item) {
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case AuthCodeType::typeAuthCodeTypeSms:
-        
+
         break;
     case AuthCodeType::typeAuthCodeTypeCall:
-        
+
         break;
     case AuthCodeType::typeAuthCodeTypeFlashCall:
-        
+
         break;
     }
     return stream;
@@ -183,22 +183,22 @@ QDataStream &operator>>(QDataStream &stream, AuthCodeType &item) {
     item.setClassType(static_cast<AuthCodeType::AuthCodeTypeClassType>(type));
     switch(type) {
     case AuthCodeType::typeAuthCodeTypeSms: {
-        
+
     }
         break;
     case AuthCodeType::typeAuthCodeTypeCall: {
-        
+
     }
         break;
     case AuthCodeType::typeAuthCodeTypeFlashCall: {
-        
+
     }
         break;
     }
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const AuthCodeType &item) {
+/*QDebug operator<<(QDebug debug,  const AuthCodeType &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.AuthCodeType(";
@@ -216,4 +216,4 @@ QDebug operator<<(QDebug debug,  const AuthCodeType &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

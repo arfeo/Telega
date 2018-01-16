@@ -75,7 +75,7 @@ MessageAction::MessageAction(const Null &null) :
 }
 
 MessageAction::~MessageAction() {
-    
+
 }
 
 void MessageAction::setCallId(qint64 callId) {
@@ -303,7 +303,7 @@ bool MessageAction::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeMessageActionChatCreate: {
         m_title = in->fetchQString();
         if(in->fetchInt() != (qint32)CoreTypes::typeVector) return false;
@@ -318,27 +318,27 @@ bool MessageAction::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeMessageActionChatEditTitle: {
         m_title = in->fetchQString();
         m_classType = static_cast<MessageActionClassType>(x);
         return true;
     }
         break;
-    
+
     case typeMessageActionChatEditPhoto: {
         m_photo.fetch(in);
         m_classType = static_cast<MessageActionClassType>(x);
         return true;
     }
         break;
-    
+
     case typeMessageActionChatDeletePhoto: {
         m_classType = static_cast<MessageActionClassType>(x);
         return true;
     }
         break;
-    
+
     case typeMessageActionChatAddUser: {
         if(in->fetchInt() != (qint32)CoreTypes::typeVector) return false;
         qint32 m_users_length = in->fetchInt();
@@ -352,35 +352,35 @@ bool MessageAction::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeMessageActionChatDeleteUser: {
         m_userId = in->fetchInt();
         m_classType = static_cast<MessageActionClassType>(x);
         return true;
     }
         break;
-    
+
     case typeMessageActionChatJoinedByLink: {
         m_inviterId = in->fetchInt();
         m_classType = static_cast<MessageActionClassType>(x);
         return true;
     }
         break;
-    
+
     case typeMessageActionChannelCreate: {
         m_title = in->fetchQString();
         m_classType = static_cast<MessageActionClassType>(x);
         return true;
     }
         break;
-    
+
     case typeMessageActionChatMigrateTo: {
         m_channelId = in->fetchInt();
         m_classType = static_cast<MessageActionClassType>(x);
         return true;
     }
         break;
-    
+
     case typeMessageActionChannelMigrateFrom: {
         m_title = in->fetchQString();
         m_chatId = in->fetchInt();
@@ -388,19 +388,19 @@ bool MessageAction::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeMessageActionPinMessage: {
         m_classType = static_cast<MessageActionClassType>(x);
         return true;
     }
         break;
-    
+
     case typeMessageActionHistoryClear: {
         m_classType = static_cast<MessageActionClassType>(x);
         return true;
     }
         break;
-    
+
     case typeMessageActionGameScore: {
         m_gameId = in->fetchLong();
         m_score = in->fetchInt();
@@ -408,7 +408,7 @@ bool MessageAction::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeMessageActionPaymentSentMe: {
         m_flags = in->fetchInt();
         m_currency = in->fetchQString();
@@ -425,7 +425,7 @@ bool MessageAction::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeMessageActionPaymentSent: {
         m_currency = in->fetchQString();
         m_totalAmount = in->fetchLong();
@@ -433,7 +433,7 @@ bool MessageAction::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeMessageActionPhoneCall: {
         m_flags = in->fetchInt();
         m_callId = in->fetchLong();
@@ -447,7 +447,7 @@ bool MessageAction::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -461,7 +461,7 @@ bool MessageAction::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeMessageActionChatCreate: {
         out->appendQString(m_title);
         out->appendInt(CoreTypes::typeVector);
@@ -472,24 +472,24 @@ bool MessageAction::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeMessageActionChatEditTitle: {
         out->appendQString(m_title);
         return true;
     }
         break;
-    
+
     case typeMessageActionChatEditPhoto: {
         m_photo.push(out);
         return true;
     }
         break;
-    
+
     case typeMessageActionChatDeletePhoto: {
         return true;
     }
         break;
-    
+
     case typeMessageActionChatAddUser: {
         out->appendInt(CoreTypes::typeVector);
         out->appendInt(m_users.count());
@@ -499,55 +499,55 @@ bool MessageAction::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeMessageActionChatDeleteUser: {
         out->appendInt(m_userId);
         return true;
     }
         break;
-    
+
     case typeMessageActionChatJoinedByLink: {
         out->appendInt(m_inviterId);
         return true;
     }
         break;
-    
+
     case typeMessageActionChannelCreate: {
         out->appendQString(m_title);
         return true;
     }
         break;
-    
+
     case typeMessageActionChatMigrateTo: {
         out->appendInt(m_channelId);
         return true;
     }
         break;
-    
+
     case typeMessageActionChannelMigrateFrom: {
         out->appendQString(m_title);
         out->appendInt(m_chatId);
         return true;
     }
         break;
-    
+
     case typeMessageActionPinMessage: {
         return true;
     }
         break;
-    
+
     case typeMessageActionHistoryClear: {
         return true;
     }
         break;
-    
+
     case typeMessageActionGameScore: {
         out->appendLong(m_gameId);
         out->appendInt(m_score);
         return true;
     }
         break;
-    
+
     case typeMessageActionPaymentSentMe: {
         out->appendInt(m_flags);
         out->appendQString(m_currency);
@@ -563,14 +563,14 @@ bool MessageAction::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeMessageActionPaymentSent: {
         out->appendQString(m_currency);
         out->appendLong(m_totalAmount);
         return true;
     }
         break;
-    
+
     case typeMessageActionPhoneCall: {
         out->appendInt(m_flags);
         out->appendLong(m_callId);
@@ -583,7 +583,7 @@ bool MessageAction::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -597,7 +597,7 @@ QMap<QString, QVariant> MessageAction::toMap() const {
         return result;
     }
         break;
-    
+
     case typeMessageActionChatCreate: {
         result["classType"] = "MessageAction::typeMessageActionChatCreate";
         if( !m_title.isEmpty() ) result["title"] = QVariant::fromValue<QString>(m_title);
@@ -608,27 +608,27 @@ QMap<QString, QVariant> MessageAction::toMap() const {
         return result;
     }
         break;
-    
+
     case typeMessageActionChatEditTitle: {
         result["classType"] = "MessageAction::typeMessageActionChatEditTitle";
         if( !m_title.isEmpty() ) result["title"] = QVariant::fromValue<QString>(m_title);
         return result;
     }
         break;
-    
+
     case typeMessageActionChatEditPhoto: {
         result["classType"] = "MessageAction::typeMessageActionChatEditPhoto";
         if( !m_photo.isNull() ) result["photo"] = m_photo.toMap();
         return result;
     }
         break;
-    
+
     case typeMessageActionChatDeletePhoto: {
         result["classType"] = "MessageAction::typeMessageActionChatDeletePhoto";
         return result;
     }
         break;
-    
+
     case typeMessageActionChatAddUser: {
         result["classType"] = "MessageAction::typeMessageActionChatAddUser";
         QList<QVariant> _users;
@@ -638,35 +638,35 @@ QMap<QString, QVariant> MessageAction::toMap() const {
         return result;
     }
         break;
-    
+
     case typeMessageActionChatDeleteUser: {
         result["classType"] = "MessageAction::typeMessageActionChatDeleteUser";
         if( userId() ) result["userId"] = QString::number(userId());
         return result;
     }
         break;
-    
+
     case typeMessageActionChatJoinedByLink: {
         result["classType"] = "MessageAction::typeMessageActionChatJoinedByLink";
         if( inviterId() ) result["inviterId"] = QString::number(inviterId());
         return result;
     }
         break;
-    
+
     case typeMessageActionChannelCreate: {
         result["classType"] = "MessageAction::typeMessageActionChannelCreate";
         if( !m_title.isEmpty() ) result["title"] = QVariant::fromValue<QString>(m_title);
         return result;
     }
         break;
-    
+
     case typeMessageActionChatMigrateTo: {
         result["classType"] = "MessageAction::typeMessageActionChatMigrateTo";
         if( channelId() ) result["channelId"] = QString::number(channelId());
         return result;
     }
         break;
-    
+
     case typeMessageActionChannelMigrateFrom: {
         result["classType"] = "MessageAction::typeMessageActionChannelMigrateFrom";
         if( !m_title.isEmpty() ) result["title"] = QVariant::fromValue<QString>(m_title);
@@ -674,19 +674,19 @@ QMap<QString, QVariant> MessageAction::toMap() const {
         return result;
     }
         break;
-    
+
     case typeMessageActionPinMessage: {
         result["classType"] = "MessageAction::typeMessageActionPinMessage";
         return result;
     }
         break;
-    
+
     case typeMessageActionHistoryClear: {
         result["classType"] = "MessageAction::typeMessageActionHistoryClear";
         return result;
     }
         break;
-    
+
     case typeMessageActionGameScore: {
         result["classType"] = "MessageAction::typeMessageActionGameScore";
         if( gameId() ) result["gameId"] = QString::number(gameId());
@@ -694,7 +694,7 @@ QMap<QString, QVariant> MessageAction::toMap() const {
         return result;
     }
         break;
-    
+
     case typeMessageActionPaymentSentMe: {
         result["classType"] = "MessageAction::typeMessageActionPaymentSentMe";
         if( !m_currency.isEmpty() ) result["currency"] = QVariant::fromValue<QString>(m_currency);
@@ -706,7 +706,7 @@ QMap<QString, QVariant> MessageAction::toMap() const {
         return result;
     }
         break;
-    
+
     case typeMessageActionPaymentSent: {
         result["classType"] = "MessageAction::typeMessageActionPaymentSent";
         if( !m_currency.isEmpty() ) result["currency"] = QVariant::fromValue<QString>(m_currency);
@@ -714,7 +714,7 @@ QMap<QString, QVariant> MessageAction::toMap() const {
         return result;
     }
         break;
-    
+
     case typeMessageActionPhoneCall: {
         result["classType"] = "MessageAction::typeMessageActionPhoneCall";
         if( callId() ) result["callId"] = QString::number(callId());
@@ -723,7 +723,7 @@ QMap<QString, QVariant> MessageAction::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -742,7 +742,7 @@ MessageAction MessageAction::fromMap(const QMap<QString, QVariant> &map) {
             _title_var.convert( QVariant::nameToType("QString") );
             result.setTitle( _title_var.value<QString>() );
         }
-        
+
         QList<QVariant> map_users = map["users"].toList();
         QList<qint32> _users;
         for(const QVariant &var: map_users)
@@ -757,7 +757,7 @@ MessageAction MessageAction::fromMap(const QMap<QString, QVariant> &map) {
             _title_var.convert( QVariant::nameToType("QString") );
             result.setTitle( _title_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "MessageAction::typeMessageActionChatEditPhoto") {
@@ -765,7 +765,7 @@ MessageAction MessageAction::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _photo_var = map.value("photo");
         if( !_photo_var.isNull() )
             result.setPhoto( Photo::fromMap(_photo_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "MessageAction::typeMessageActionChatDeletePhoto") {
@@ -788,7 +788,7 @@ MessageAction MessageAction::fromMap(const QMap<QString, QVariant> &map) {
             _userId_var.convert( QVariant::nameToType("qint32") );
             result.setUserId( _userId_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "MessageAction::typeMessageActionChatJoinedByLink") {
@@ -798,7 +798,7 @@ MessageAction MessageAction::fromMap(const QMap<QString, QVariant> &map) {
             _inviterId_var.convert( QVariant::nameToType("qint32") );
             result.setInviterId( _inviterId_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "MessageAction::typeMessageActionChannelCreate") {
@@ -808,7 +808,7 @@ MessageAction MessageAction::fromMap(const QMap<QString, QVariant> &map) {
             _title_var.convert( QVariant::nameToType("QString") );
             result.setTitle( _title_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "MessageAction::typeMessageActionChatMigrateTo") {
@@ -818,7 +818,7 @@ MessageAction MessageAction::fromMap(const QMap<QString, QVariant> &map) {
             _channelId_var.convert( QVariant::nameToType("qint32") );
             result.setChannelId( _channelId_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "MessageAction::typeMessageActionChannelMigrateFrom") {
@@ -828,13 +828,13 @@ MessageAction MessageAction::fromMap(const QMap<QString, QVariant> &map) {
             _title_var.convert( QVariant::nameToType("QString") );
             result.setTitle( _title_var.value<QString>() );
         }
-        
+
         QVariant _chatId_var = map.value("chatId");
         if( !_chatId_var.isNull() ) {
             _chatId_var.convert( QVariant::nameToType("qint32") );
             result.setChatId( _chatId_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "MessageAction::typeMessageActionPinMessage") {
@@ -852,13 +852,13 @@ MessageAction MessageAction::fromMap(const QMap<QString, QVariant> &map) {
             _gameId_var.convert( QVariant::nameToType("qint64") );
             result.setGameId( _gameId_var.value<qint64>() );
         }
-        
+
         QVariant _score_var = map.value("score");
         if( !_score_var.isNull() ) {
             _score_var.convert( QVariant::nameToType("qint32") );
             result.setScore( _score_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "MessageAction::typeMessageActionPaymentSentMe") {
@@ -868,33 +868,33 @@ MessageAction MessageAction::fromMap(const QMap<QString, QVariant> &map) {
             _currency_var.convert( QVariant::nameToType("QString") );
             result.setCurrency( _currency_var.value<QString>() );
         }
-        
+
         QVariant _totalAmount_var = map.value("totalAmount");
         if( !_totalAmount_var.isNull() ) {
             _totalAmount_var.convert( QVariant::nameToType("qint64") );
             result.setTotalAmount( _totalAmount_var.value<qint64>() );
         }
-        
+
         QVariant _payload_var = map.value("payload");
         if( !_payload_var.isNull() ) {
             _payload_var.convert( QVariant::nameToType("QByteArray") );
             result.setPayload( _payload_var.value<QByteArray>() );
         }
-        
+
         QVariant _info_var = map.value("info");
         if( !_info_var.isNull() )
             result.setInfo( PaymentRequestedInfo::fromMap(_info_var.toMap()) );
-        
+
         QVariant _shippingOptionId_var = map.value("shippingOptionId");
         if( !_shippingOptionId_var.isNull() ) {
             _shippingOptionId_var.convert( QVariant::nameToType("QString") );
             result.setShippingOptionId( _shippingOptionId_var.value<QString>() );
         }
-        
+
         QVariant _charge_var = map.value("charge");
         if( !_charge_var.isNull() )
             result.setCharge( PaymentCharge::fromMap(_charge_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "MessageAction::typeMessageActionPaymentSent") {
@@ -904,13 +904,13 @@ MessageAction MessageAction::fromMap(const QMap<QString, QVariant> &map) {
             _currency_var.convert( QVariant::nameToType("QString") );
             result.setCurrency( _currency_var.value<QString>() );
         }
-        
+
         QVariant _totalAmount_var = map.value("totalAmount");
         if( !_totalAmount_var.isNull() ) {
             _totalAmount_var.convert( QVariant::nameToType("qint64") );
             result.setTotalAmount( _totalAmount_var.value<qint64>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "MessageAction::typeMessageActionPhoneCall") {
@@ -920,17 +920,17 @@ MessageAction MessageAction::fromMap(const QMap<QString, QVariant> &map) {
             _callId_var.convert( QVariant::nameToType("qint64") );
             result.setCallId( _callId_var.value<qint64>() );
         }
-        
+
         QVariant _reason_var = map.value("reason");
         if( !_reason_var.isNull() )
             result.setReason( PhoneCallDiscardReason::fromMap(_reason_var.toMap()) );
-        
+
         QVariant _duration_var = map.value("duration");
         if( !_duration_var.isNull() ) {
             _duration_var.convert( QVariant::nameToType("qint32") );
             result.setDuration( _duration_var.value<qint32>() );
         }
-        
+
         return result;
     }
     return result;
@@ -951,7 +951,7 @@ QDataStream &operator<<(QDataStream &stream, const MessageAction &item) {
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case MessageAction::typeMessageActionEmpty:
-        
+
         break;
     case MessageAction::typeMessageActionChatCreate:
         stream << item.title();
@@ -964,7 +964,7 @@ QDataStream &operator<<(QDataStream &stream, const MessageAction &item) {
         stream << item.photo();
         break;
     case MessageAction::typeMessageActionChatDeletePhoto:
-        
+
         break;
     case MessageAction::typeMessageActionChatAddUser:
         stream << item.users();
@@ -986,10 +986,10 @@ QDataStream &operator<<(QDataStream &stream, const MessageAction &item) {
         stream << item.chatId();
         break;
     case MessageAction::typeMessageActionPinMessage:
-        
+
         break;
     case MessageAction::typeMessageActionHistoryClear:
-        
+
         break;
     case MessageAction::typeMessageActionGameScore:
         stream << item.gameId();
@@ -1024,7 +1024,7 @@ QDataStream &operator>>(QDataStream &stream, MessageAction &item) {
     item.setClassType(static_cast<MessageAction::MessageActionClassType>(type));
     switch(type) {
     case MessageAction::typeMessageActionEmpty: {
-        
+
     }
         break;
     case MessageAction::typeMessageActionChatCreate: {
@@ -1049,7 +1049,7 @@ QDataStream &operator>>(QDataStream &stream, MessageAction &item) {
     }
         break;
     case MessageAction::typeMessageActionChatDeletePhoto: {
-        
+
     }
         break;
     case MessageAction::typeMessageActionChatAddUser: {
@@ -1092,11 +1092,11 @@ QDataStream &operator>>(QDataStream &stream, MessageAction &item) {
     }
         break;
     case MessageAction::typeMessageActionPinMessage: {
-        
+
     }
         break;
     case MessageAction::typeMessageActionHistoryClear: {
-        
+
     }
         break;
     case MessageAction::typeMessageActionGameScore: {
@@ -1160,7 +1160,7 @@ QDataStream &operator>>(QDataStream &stream, MessageAction &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const MessageAction &item) {
+/*QDebug operator<<(QDebug debug,  const MessageAction &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.MessageAction(";
@@ -1246,4 +1246,4 @@ QDebug operator<<(QDebug debug,  const MessageAction &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

@@ -11,9 +11,9 @@ UpdatesDifferenceObject::UpdatesDifferenceObject(const UpdatesDifference &core, 
     m_core(core)
 {
     m_intermediateState = new UpdatesStateObject(m_core.intermediateState(), this);
-    connect(m_intermediateState.data(), &UpdatesStateObject::coreChanged, this, &UpdatesDifferenceObject::coreIntermediateStateChanged);
+    connect(m_intermediateState.data(), SIGNAL(coreChanged()), this, SLOT(coreIntermediateStateChanged()));
     m_state = new UpdatesStateObject(m_core.state(), this);
-    connect(m_state.data(), &UpdatesStateObject::coreChanged, this, &UpdatesDifferenceObject::coreStateChanged);
+    connect(m_state.data(), SIGNAL(coreChanged()), this, SLOT(coreStateChanged()));
 }
 
 UpdatesDifferenceObject::UpdatesDifferenceObject(QObject *parent) :
@@ -23,9 +23,9 @@ UpdatesDifferenceObject::UpdatesDifferenceObject(QObject *parent) :
     m_core()
 {
     m_intermediateState = new UpdatesStateObject(m_core.intermediateState(), this);
-    connect(m_intermediateState.data(), &UpdatesStateObject::coreChanged, this, &UpdatesDifferenceObject::coreIntermediateStateChanged);
+    connect(m_intermediateState.data(), SIGNAL(coreChanged()), this, SLOT(coreIntermediateStateChanged()));
     m_state = new UpdatesStateObject(m_core.state(), this);
-    connect(m_state.data(), &UpdatesStateObject::coreChanged, this, &UpdatesDifferenceObject::coreStateChanged);
+    connect(m_state.data(), SIGNAL(coreChanged()), this, SLOT(coreStateChanged()));
 }
 
 UpdatesDifferenceObject::~UpdatesDifferenceObject() {
@@ -60,7 +60,7 @@ void UpdatesDifferenceObject::setIntermediateState(UpdatesStateObject* intermedi
     if(m_intermediateState) {
         m_intermediateState->setParent(this);
         m_core.setIntermediateState(m_intermediateState->core());
-        connect(m_intermediateState.data(), &UpdatesStateObject::coreChanged, this, &UpdatesDifferenceObject::coreIntermediateStateChanged);
+        connect(m_intermediateState.data(), SIGNAL(coreChanged()), this, SLOT(coreIntermediateStateChanged()));
     }
     Q_EMIT intermediateStateChanged();
     Q_EMIT coreChanged();
@@ -132,7 +132,7 @@ void UpdatesDifferenceObject::setState(UpdatesStateObject* state) {
     if(m_state) {
         m_state->setParent(this);
         m_core.setState(m_state->core());
-        connect(m_state.data(), &UpdatesStateObject::coreChanged, this, &UpdatesDifferenceObject::coreStateChanged);
+        connect(m_state.data(), SIGNAL(coreChanged()), this, SLOT(coreStateChanged()));
     }
     Q_EMIT stateChanged();
     Q_EMIT coreChanged();

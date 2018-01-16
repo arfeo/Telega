@@ -43,7 +43,7 @@ MessageRange::MessageRange(const Null &null) :
 }
 
 MessageRange::~MessageRange() {
-    
+
 }
 
 void MessageRange::setMaxId(qint32 maxId) {
@@ -95,7 +95,7 @@ bool MessageRange::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -111,7 +111,7 @@ bool MessageRange::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -127,7 +127,7 @@ QMap<QString, QVariant> MessageRange::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -142,13 +142,13 @@ MessageRange MessageRange::fromMap(const QMap<QString, QVariant> &map) {
             _minId_var.convert( QVariant::nameToType("qint32") );
             result.setMinId( _minId_var.value<qint32>() );
         }
-        
+
         QVariant _maxId_var = map.value("maxId");
         if( !_maxId_var.isNull() ) {
             _maxId_var.convert( QVariant::nameToType("qint32") );
             result.setMaxId( _maxId_var.value<qint32>() );
         }
-        
+
         return result;
     }
     return result;
@@ -194,7 +194,7 @@ QDataStream &operator>>(QDataStream &stream, MessageRange &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const MessageRange &item) {
+/*QDebug operator<<(QDebug debug,  const MessageRange &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.MessageRange(";
@@ -208,4 +208,4 @@ QDebug operator<<(QDebug debug,  const MessageRange &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

@@ -47,7 +47,7 @@ MessagesMessages::MessagesMessages(const Null &null) :
 }
 
 MessagesMessages::~MessagesMessages() {
-    
+
 }
 
 void MessagesMessages::setChats(const QList<Chat> &chats) {
@@ -161,7 +161,7 @@ bool MessagesMessages::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeMessagesMessagesSlice: {
         m_count = in->fetchInt();
         if(in->fetchInt() != (qint32)CoreTypes::typeVector) return false;
@@ -192,7 +192,7 @@ bool MessagesMessages::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeMessagesChannelMessages: {
         m_flags = in->fetchInt();
         m_pts = in->fetchInt();
@@ -225,7 +225,7 @@ bool MessagesMessages::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -254,7 +254,7 @@ bool MessagesMessages::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeMessagesMessagesSlice: {
         out->appendInt(m_count);
         out->appendInt(CoreTypes::typeVector);
@@ -275,7 +275,7 @@ bool MessagesMessages::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeMessagesChannelMessages: {
         out->appendInt(m_flags);
         out->appendInt(m_pts);
@@ -298,7 +298,7 @@ bool MessagesMessages::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -324,7 +324,7 @@ QMap<QString, QVariant> MessagesMessages::toMap() const {
         return result;
     }
         break;
-    
+
     case typeMessagesMessagesSlice: {
         result["classType"] = "MessagesMessages::typeMessagesMessagesSlice";
         if( count() ) result["count"] = QString::number(count());
@@ -343,7 +343,7 @@ QMap<QString, QVariant> MessagesMessages::toMap() const {
         return result;
     }
         break;
-    
+
     case typeMessagesChannelMessages: {
         result["classType"] = "MessagesMessages::typeMessagesChannelMessages";
         if( pts() ) result["pts"] = QString::number(pts());
@@ -363,7 +363,7 @@ QMap<QString, QVariant> MessagesMessages::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -397,7 +397,7 @@ MessagesMessages MessagesMessages::fromMap(const QMap<QString, QVariant> &map) {
             _count_var.convert( QVariant::nameToType("qint32") );
             result.setCount( _count_var.value<qint32>() );
         }
-        
+
         QList<QVariant> map_messages = map["messages"].toList();
         QList<Message> _messages;
         for(const QVariant &var: map_messages)
@@ -422,13 +422,13 @@ MessagesMessages MessagesMessages::fromMap(const QMap<QString, QVariant> &map) {
             _pts_var.convert( QVariant::nameToType("qint32") );
             result.setPts( _pts_var.value<qint32>() );
         }
-        
+
         QVariant _count_var = map.value("count");
         if( !_count_var.isNull() ) {
             _count_var.convert( QVariant::nameToType("qint32") );
             result.setCount( _count_var.value<qint32>() );
         }
-        
+
         QList<QVariant> map_messages = map["messages"].toList();
         QList<Message> _messages;
         for(const QVariant &var: map_messages)
@@ -543,7 +543,7 @@ QDataStream &operator>>(QDataStream &stream, MessagesMessages &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const MessagesMessages &item) {
+/*QDebug operator<<(QDebug debug,  const MessagesMessages &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.MessagesMessages(";
@@ -574,4 +574,4 @@ QDebug operator<<(QDebug debug,  const MessagesMessages &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

@@ -43,7 +43,7 @@ AuthSentCode::AuthSentCode(const Null &null) :
 }
 
 AuthSentCode::~AuthSentCode() {
-    
+
 }
 
 void AuthSentCode::setFlags(qint32 flags) {
@@ -145,7 +145,7 @@ bool AuthSentCode::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -168,7 +168,7 @@ bool AuthSentCode::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -187,7 +187,7 @@ QMap<QString, QVariant> AuthSentCode::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -202,27 +202,27 @@ AuthSentCode AuthSentCode::fromMap(const QMap<QString, QVariant> &map) {
             _phoneRegistered_var.convert( QVariant::nameToType("bool") );
             result.setPhoneRegistered( _phoneRegistered_var.value<bool>() );
         }
-        
+
         QVariant _type_var = map.value("type");
         if( !_type_var.isNull() )
             result.setType( AuthSentCodeType::fromMap(_type_var.toMap()) );
-        
+
         QVariant _phoneCodeHash_var = map.value("phoneCodeHash");
         if( !_phoneCodeHash_var.isNull() ) {
             _phoneCodeHash_var.convert( QVariant::nameToType("QString") );
             result.setPhoneCodeHash( _phoneCodeHash_var.value<QString>() );
         }
-        
+
         QVariant _nextType_var = map.value("nextType");
         if( !_nextType_var.isNull() )
             result.setNextType( AuthCodeType::fromMap(_nextType_var.toMap()) );
-        
+
         QVariant _timeout_var = map.value("timeout");
         if( !_timeout_var.isNull() ) {
             _timeout_var.convert( QVariant::nameToType("qint32") );
             result.setTimeout( _timeout_var.value<qint32>() );
         }
-        
+
         return result;
     }
     return result;
@@ -280,7 +280,7 @@ QDataStream &operator>>(QDataStream &stream, AuthSentCode &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const AuthSentCode &item) {
+/*QDebug operator<<(QDebug debug,  const AuthSentCode &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.AuthSentCode(";
@@ -297,4 +297,4 @@ QDebug operator<<(QDebug debug,  const AuthSentCode &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

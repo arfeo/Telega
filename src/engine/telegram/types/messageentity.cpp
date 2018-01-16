@@ -47,7 +47,7 @@ MessageEntity::MessageEntity(const Null &null) :
 }
 
 MessageEntity::~MessageEntity() {
-    
+
 }
 
 void MessageEntity::setLanguage(const QString &language) {
@@ -139,7 +139,7 @@ bool MessageEntity::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeMessageEntityMention: {
         m_offset = in->fetchInt();
         m_length = in->fetchInt();
@@ -147,7 +147,7 @@ bool MessageEntity::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeMessageEntityHashtag: {
         m_offset = in->fetchInt();
         m_length = in->fetchInt();
@@ -155,7 +155,7 @@ bool MessageEntity::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeMessageEntityBotCommand: {
         m_offset = in->fetchInt();
         m_length = in->fetchInt();
@@ -163,7 +163,7 @@ bool MessageEntity::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeMessageEntityUrl: {
         m_offset = in->fetchInt();
         m_length = in->fetchInt();
@@ -171,7 +171,7 @@ bool MessageEntity::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeMessageEntityEmail: {
         m_offset = in->fetchInt();
         m_length = in->fetchInt();
@@ -179,7 +179,7 @@ bool MessageEntity::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeMessageEntityBold: {
         m_offset = in->fetchInt();
         m_length = in->fetchInt();
@@ -187,7 +187,7 @@ bool MessageEntity::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeMessageEntityItalic: {
         m_offset = in->fetchInt();
         m_length = in->fetchInt();
@@ -195,7 +195,7 @@ bool MessageEntity::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeMessageEntityCode: {
         m_offset = in->fetchInt();
         m_length = in->fetchInt();
@@ -203,7 +203,7 @@ bool MessageEntity::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeMessageEntityPre: {
         m_offset = in->fetchInt();
         m_length = in->fetchInt();
@@ -212,7 +212,7 @@ bool MessageEntity::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeMessageEntityTextUrl: {
         m_offset = in->fetchInt();
         m_length = in->fetchInt();
@@ -221,7 +221,7 @@ bool MessageEntity::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeMessageEntityMentionName: {
         m_offset = in->fetchInt();
         m_length = in->fetchInt();
@@ -230,7 +230,7 @@ bool MessageEntity::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputMessageEntityMentionName: {
         m_offset = in->fetchInt();
         m_length = in->fetchInt();
@@ -239,7 +239,7 @@ bool MessageEntity::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -255,63 +255,63 @@ bool MessageEntity::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeMessageEntityMention: {
         out->appendInt(m_offset);
         out->appendInt(m_length);
         return true;
     }
         break;
-    
+
     case typeMessageEntityHashtag: {
         out->appendInt(m_offset);
         out->appendInt(m_length);
         return true;
     }
         break;
-    
+
     case typeMessageEntityBotCommand: {
         out->appendInt(m_offset);
         out->appendInt(m_length);
         return true;
     }
         break;
-    
+
     case typeMessageEntityUrl: {
         out->appendInt(m_offset);
         out->appendInt(m_length);
         return true;
     }
         break;
-    
+
     case typeMessageEntityEmail: {
         out->appendInt(m_offset);
         out->appendInt(m_length);
         return true;
     }
         break;
-    
+
     case typeMessageEntityBold: {
         out->appendInt(m_offset);
         out->appendInt(m_length);
         return true;
     }
         break;
-    
+
     case typeMessageEntityItalic: {
         out->appendInt(m_offset);
         out->appendInt(m_length);
         return true;
     }
         break;
-    
+
     case typeMessageEntityCode: {
         out->appendInt(m_offset);
         out->appendInt(m_length);
         return true;
     }
         break;
-    
+
     case typeMessageEntityPre: {
         out->appendInt(m_offset);
         out->appendInt(m_length);
@@ -319,7 +319,7 @@ bool MessageEntity::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeMessageEntityTextUrl: {
         out->appendInt(m_offset);
         out->appendInt(m_length);
@@ -327,7 +327,7 @@ bool MessageEntity::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeMessageEntityMentionName: {
         out->appendInt(m_offset);
         out->appendInt(m_length);
@@ -335,7 +335,7 @@ bool MessageEntity::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeInputMessageEntityMentionName: {
         out->appendInt(m_offset);
         out->appendInt(m_length);
@@ -343,7 +343,7 @@ bool MessageEntity::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -359,7 +359,7 @@ QMap<QString, QVariant> MessageEntity::toMap() const {
         return result;
     }
         break;
-    
+
     case typeMessageEntityMention: {
         result["classType"] = "MessageEntity::typeMessageEntityMention";
         if( offset() ) result["offset"] = QString::number(offset());
@@ -367,7 +367,7 @@ QMap<QString, QVariant> MessageEntity::toMap() const {
         return result;
     }
         break;
-    
+
     case typeMessageEntityHashtag: {
         result["classType"] = "MessageEntity::typeMessageEntityHashtag";
         if( offset() ) result["offset"] = QString::number(offset());
@@ -375,7 +375,7 @@ QMap<QString, QVariant> MessageEntity::toMap() const {
         return result;
     }
         break;
-    
+
     case typeMessageEntityBotCommand: {
         result["classType"] = "MessageEntity::typeMessageEntityBotCommand";
         if( offset() ) result["offset"] = QString::number(offset());
@@ -383,7 +383,7 @@ QMap<QString, QVariant> MessageEntity::toMap() const {
         return result;
     }
         break;
-    
+
     case typeMessageEntityUrl: {
         result["classType"] = "MessageEntity::typeMessageEntityUrl";
         if( offset() ) result["offset"] = QString::number(offset());
@@ -391,7 +391,7 @@ QMap<QString, QVariant> MessageEntity::toMap() const {
         return result;
     }
         break;
-    
+
     case typeMessageEntityEmail: {
         result["classType"] = "MessageEntity::typeMessageEntityEmail";
         if( offset() ) result["offset"] = QString::number(offset());
@@ -399,7 +399,7 @@ QMap<QString, QVariant> MessageEntity::toMap() const {
         return result;
     }
         break;
-    
+
     case typeMessageEntityBold: {
         result["classType"] = "MessageEntity::typeMessageEntityBold";
         if( offset() ) result["offset"] = QString::number(offset());
@@ -407,7 +407,7 @@ QMap<QString, QVariant> MessageEntity::toMap() const {
         return result;
     }
         break;
-    
+
     case typeMessageEntityItalic: {
         result["classType"] = "MessageEntity::typeMessageEntityItalic";
         if( offset() ) result["offset"] = QString::number(offset());
@@ -415,7 +415,7 @@ QMap<QString, QVariant> MessageEntity::toMap() const {
         return result;
     }
         break;
-    
+
     case typeMessageEntityCode: {
         result["classType"] = "MessageEntity::typeMessageEntityCode";
         if( offset() ) result["offset"] = QString::number(offset());
@@ -423,7 +423,7 @@ QMap<QString, QVariant> MessageEntity::toMap() const {
         return result;
     }
         break;
-    
+
     case typeMessageEntityPre: {
         result["classType"] = "MessageEntity::typeMessageEntityPre";
         if( offset() ) result["offset"] = QString::number(offset());
@@ -432,7 +432,7 @@ QMap<QString, QVariant> MessageEntity::toMap() const {
         return result;
     }
         break;
-    
+
     case typeMessageEntityTextUrl: {
         result["classType"] = "MessageEntity::typeMessageEntityTextUrl";
         if( offset() ) result["offset"] = QString::number(offset());
@@ -441,7 +441,7 @@ QMap<QString, QVariant> MessageEntity::toMap() const {
         return result;
     }
         break;
-    
+
     case typeMessageEntityMentionName: {
         result["classType"] = "MessageEntity::typeMessageEntityMentionName";
         if( offset() ) result["offset"] = QString::number(offset());
@@ -450,7 +450,7 @@ QMap<QString, QVariant> MessageEntity::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputMessageEntityMentionName: {
         result["classType"] = "MessageEntity::typeInputMessageEntityMentionName";
         if( offset() ) result["offset"] = QString::number(offset());
@@ -459,7 +459,7 @@ QMap<QString, QVariant> MessageEntity::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -474,13 +474,13 @@ MessageEntity MessageEntity::fromMap(const QMap<QString, QVariant> &map) {
             _offset_var.convert( QVariant::nameToType("qint32") );
             result.setOffset( _offset_var.value<qint32>() );
         }
-        
+
         QVariant _length_var = map.value("length");
         if( !_length_var.isNull() ) {
             _length_var.convert( QVariant::nameToType("qint32") );
             result.setLength( _length_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "MessageEntity::typeMessageEntityMention") {
@@ -490,13 +490,13 @@ MessageEntity MessageEntity::fromMap(const QMap<QString, QVariant> &map) {
             _offset_var.convert( QVariant::nameToType("qint32") );
             result.setOffset( _offset_var.value<qint32>() );
         }
-        
+
         QVariant _length_var = map.value("length");
         if( !_length_var.isNull() ) {
             _length_var.convert( QVariant::nameToType("qint32") );
             result.setLength( _length_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "MessageEntity::typeMessageEntityHashtag") {
@@ -506,13 +506,13 @@ MessageEntity MessageEntity::fromMap(const QMap<QString, QVariant> &map) {
             _offset_var.convert( QVariant::nameToType("qint32") );
             result.setOffset( _offset_var.value<qint32>() );
         }
-        
+
         QVariant _length_var = map.value("length");
         if( !_length_var.isNull() ) {
             _length_var.convert( QVariant::nameToType("qint32") );
             result.setLength( _length_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "MessageEntity::typeMessageEntityBotCommand") {
@@ -522,13 +522,13 @@ MessageEntity MessageEntity::fromMap(const QMap<QString, QVariant> &map) {
             _offset_var.convert( QVariant::nameToType("qint32") );
             result.setOffset( _offset_var.value<qint32>() );
         }
-        
+
         QVariant _length_var = map.value("length");
         if( !_length_var.isNull() ) {
             _length_var.convert( QVariant::nameToType("qint32") );
             result.setLength( _length_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "MessageEntity::typeMessageEntityUrl") {
@@ -538,13 +538,13 @@ MessageEntity MessageEntity::fromMap(const QMap<QString, QVariant> &map) {
             _offset_var.convert( QVariant::nameToType("qint32") );
             result.setOffset( _offset_var.value<qint32>() );
         }
-        
+
         QVariant _length_var = map.value("length");
         if( !_length_var.isNull() ) {
             _length_var.convert( QVariant::nameToType("qint32") );
             result.setLength( _length_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "MessageEntity::typeMessageEntityEmail") {
@@ -554,13 +554,13 @@ MessageEntity MessageEntity::fromMap(const QMap<QString, QVariant> &map) {
             _offset_var.convert( QVariant::nameToType("qint32") );
             result.setOffset( _offset_var.value<qint32>() );
         }
-        
+
         QVariant _length_var = map.value("length");
         if( !_length_var.isNull() ) {
             _length_var.convert( QVariant::nameToType("qint32") );
             result.setLength( _length_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "MessageEntity::typeMessageEntityBold") {
@@ -570,13 +570,13 @@ MessageEntity MessageEntity::fromMap(const QMap<QString, QVariant> &map) {
             _offset_var.convert( QVariant::nameToType("qint32") );
             result.setOffset( _offset_var.value<qint32>() );
         }
-        
+
         QVariant _length_var = map.value("length");
         if( !_length_var.isNull() ) {
             _length_var.convert( QVariant::nameToType("qint32") );
             result.setLength( _length_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "MessageEntity::typeMessageEntityItalic") {
@@ -586,13 +586,13 @@ MessageEntity MessageEntity::fromMap(const QMap<QString, QVariant> &map) {
             _offset_var.convert( QVariant::nameToType("qint32") );
             result.setOffset( _offset_var.value<qint32>() );
         }
-        
+
         QVariant _length_var = map.value("length");
         if( !_length_var.isNull() ) {
             _length_var.convert( QVariant::nameToType("qint32") );
             result.setLength( _length_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "MessageEntity::typeMessageEntityCode") {
@@ -602,13 +602,13 @@ MessageEntity MessageEntity::fromMap(const QMap<QString, QVariant> &map) {
             _offset_var.convert( QVariant::nameToType("qint32") );
             result.setOffset( _offset_var.value<qint32>() );
         }
-        
+
         QVariant _length_var = map.value("length");
         if( !_length_var.isNull() ) {
             _length_var.convert( QVariant::nameToType("qint32") );
             result.setLength( _length_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "MessageEntity::typeMessageEntityPre") {
@@ -618,19 +618,19 @@ MessageEntity MessageEntity::fromMap(const QMap<QString, QVariant> &map) {
             _offset_var.convert( QVariant::nameToType("qint32") );
             result.setOffset( _offset_var.value<qint32>() );
         }
-        
+
         QVariant _length_var = map.value("length");
         if( !_length_var.isNull() ) {
             _length_var.convert( QVariant::nameToType("qint32") );
             result.setLength( _length_var.value<qint32>() );
         }
-        
+
         QVariant _language_var = map.value("language");
         if( !_language_var.isNull() ) {
             _language_var.convert( QVariant::nameToType("QString") );
             result.setLanguage( _language_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "MessageEntity::typeMessageEntityTextUrl") {
@@ -640,19 +640,19 @@ MessageEntity MessageEntity::fromMap(const QMap<QString, QVariant> &map) {
             _offset_var.convert( QVariant::nameToType("qint32") );
             result.setOffset( _offset_var.value<qint32>() );
         }
-        
+
         QVariant _length_var = map.value("length");
         if( !_length_var.isNull() ) {
             _length_var.convert( QVariant::nameToType("qint32") );
             result.setLength( _length_var.value<qint32>() );
         }
-        
+
         QVariant _url_var = map.value("url");
         if( !_url_var.isNull() ) {
             _url_var.convert( QVariant::nameToType("QString") );
             result.setUrl( _url_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "MessageEntity::typeMessageEntityMentionName") {
@@ -662,19 +662,19 @@ MessageEntity MessageEntity::fromMap(const QMap<QString, QVariant> &map) {
             _offset_var.convert( QVariant::nameToType("qint32") );
             result.setOffset( _offset_var.value<qint32>() );
         }
-        
+
         QVariant _length_var = map.value("length");
         if( !_length_var.isNull() ) {
             _length_var.convert( QVariant::nameToType("qint32") );
             result.setLength( _length_var.value<qint32>() );
         }
-        
+
         QVariant _userIdInt_var = map.value("userIdInt");
         if( !_userIdInt_var.isNull() ) {
             _userIdInt_var.convert( QVariant::nameToType("qint32") );
             result.setUserIdInt( _userIdInt_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "MessageEntity::typeInputMessageEntityMentionName") {
@@ -684,17 +684,17 @@ MessageEntity MessageEntity::fromMap(const QMap<QString, QVariant> &map) {
             _offset_var.convert( QVariant::nameToType("qint32") );
             result.setOffset( _offset_var.value<qint32>() );
         }
-        
+
         QVariant _length_var = map.value("length");
         if( !_length_var.isNull() ) {
             _length_var.convert( QVariant::nameToType("qint32") );
             result.setLength( _length_var.value<qint32>() );
         }
-        
+
         QVariant _userIdInputUser_var = map.value("userIdInputUser");
         if( !_userIdInputUser_var.isNull() )
             result.setUserIdInputUser( InputUser::fromMap(_userIdInputUser_var.toMap()) );
-        
+
         return result;
     }
     return result;
@@ -912,7 +912,7 @@ QDataStream &operator>>(QDataStream &stream, MessageEntity &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const MessageEntity &item) {
+/*QDebug operator<<(QDebug debug,  const MessageEntity &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.MessageEntity(";
@@ -990,4 +990,4 @@ QDebug operator<<(QDebug debug,  const MessageEntity &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

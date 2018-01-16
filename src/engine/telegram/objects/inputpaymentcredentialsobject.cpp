@@ -10,7 +10,7 @@ InputPaymentCredentialsObject::InputPaymentCredentialsObject(const InputPaymentC
     m_core(core)
 {
     m_data = new DataJSONObject(m_core.data(), this);
-    connect(m_data.data(), &DataJSONObject::coreChanged, this, &InputPaymentCredentialsObject::coreDataChanged);
+    connect(m_data.data(), SIGNAL(coreChanged()), this, SLOT(coreDataChanged()));
 }
 
 InputPaymentCredentialsObject::InputPaymentCredentialsObject(QObject *parent) :
@@ -19,7 +19,7 @@ InputPaymentCredentialsObject::InputPaymentCredentialsObject(QObject *parent) :
     m_core()
 {
     m_data = new DataJSONObject(m_core.data(), this);
-    connect(m_data.data(), &DataJSONObject::coreChanged, this, &InputPaymentCredentialsObject::coreDataChanged);
+    connect(m_data.data(), SIGNAL(coreChanged()), this, SLOT(coreDataChanged()));
 }
 
 InputPaymentCredentialsObject::~InputPaymentCredentialsObject() {
@@ -32,7 +32,7 @@ void InputPaymentCredentialsObject::setData(DataJSONObject* data) {
     if(m_data) {
         m_data->setParent(this);
         m_core.setData(m_data->core());
-        connect(m_data.data(), &DataJSONObject::coreChanged, this, &InputPaymentCredentialsObject::coreDataChanged);
+        connect(m_data.data(), SIGNAL(coreChanged()), this, SLOT(coreDataChanged()));
     }
     Q_EMIT dataChanged();
     Q_EMIT coreChanged();

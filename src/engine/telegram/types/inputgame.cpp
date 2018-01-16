@@ -43,7 +43,7 @@ InputGame::InputGame(const Null &null) :
 }
 
 InputGame::~InputGame() {
-    
+
 }
 
 void InputGame::setAccessHash(qint64 accessHash) {
@@ -115,7 +115,7 @@ bool InputGame::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputGameShortName: {
         m_botId.fetch(in);
         m_shortName = in->fetchQString();
@@ -123,7 +123,7 @@ bool InputGame::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -139,14 +139,14 @@ bool InputGame::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeInputGameShortName: {
         m_botId.push(out);
         out->appendQString(m_shortName);
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -162,7 +162,7 @@ QMap<QString, QVariant> InputGame::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputGameShortName: {
         result["classType"] = "InputGame::typeInputGameShortName";
         if( !m_botId.isNull() ) result["botId"] = m_botId.toMap();
@@ -170,7 +170,7 @@ QMap<QString, QVariant> InputGame::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -185,13 +185,13 @@ InputGame InputGame::fromMap(const QMap<QString, QVariant> &map) {
             _id_var.convert( QVariant::nameToType("qint64") );
             result.setId( _id_var.value<qint64>() );
         }
-        
+
         QVariant _accessHash_var = map.value("accessHash");
         if( !_accessHash_var.isNull() ) {
             _accessHash_var.convert( QVariant::nameToType("qint64") );
             result.setAccessHash( _accessHash_var.value<qint64>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "InputGame::typeInputGameShortName") {
@@ -199,13 +199,13 @@ InputGame InputGame::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _botId_var = map.value("botId");
         if( !_botId_var.isNull() )
             result.setBotId( InputUser::fromMap(_botId_var.toMap()) );
-        
+
         QVariant _shortName_var = map.value("shortName");
         if( !_shortName_var.isNull() ) {
             _shortName_var.convert( QVariant::nameToType("QString") );
             result.setShortName( _shortName_var.value<QString>() );
         }
-        
+
         return result;
     }
     return result;
@@ -264,7 +264,7 @@ QDataStream &operator>>(QDataStream &stream, InputGame &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const InputGame &item) {
+/*QDebug operator<<(QDebug debug,  const InputGame &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.InputGame(";
@@ -283,4 +283,4 @@ QDebug operator<<(QDebug debug,  const InputGame &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

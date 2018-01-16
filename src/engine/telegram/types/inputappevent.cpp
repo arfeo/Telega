@@ -43,7 +43,7 @@ InputAppEvent::InputAppEvent(const Null &null) :
 }
 
 InputAppEvent::~InputAppEvent() {
-    
+
 }
 
 void InputAppEvent::setData(const QString &data) {
@@ -117,7 +117,7 @@ bool InputAppEvent::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -135,7 +135,7 @@ bool InputAppEvent::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -153,7 +153,7 @@ QMap<QString, QVariant> InputAppEvent::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -168,25 +168,25 @@ InputAppEvent InputAppEvent::fromMap(const QMap<QString, QVariant> &map) {
             _time_var.convert( QVariant::nameToType("qreal") );
             result.setTime( _time_var.value<qreal>() );
         }
-        
+
         QVariant _type_var = map.value("type");
         if( !_type_var.isNull() ) {
             _type_var.convert( QVariant::nameToType("QString") );
             result.setType( _type_var.value<QString>() );
         }
-        
+
         QVariant _peer_var = map.value("peer");
         if( !_peer_var.isNull() ) {
             _peer_var.convert( QVariant::nameToType("qint64") );
             result.setPeer( _peer_var.value<qint64>() );
         }
-        
+
         QVariant _data_var = map.value("data");
         if( !_data_var.isNull() ) {
             _data_var.convert( QVariant::nameToType("QString") );
             result.setData( _data_var.value<QString>() );
         }
-        
+
         return result;
     }
     return result;
@@ -240,7 +240,7 @@ QDataStream &operator>>(QDataStream &stream, InputAppEvent &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const InputAppEvent &item) {
+/*QDebug operator<<(QDebug debug,  const InputAppEvent &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.InputAppEvent(";
@@ -256,4 +256,4 @@ QDebug operator<<(QDebug debug,  const InputAppEvent &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

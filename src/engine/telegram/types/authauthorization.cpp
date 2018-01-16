@@ -43,7 +43,7 @@ AuthAuthorization::AuthAuthorization(const Null &null) :
 }
 
 AuthAuthorization::~AuthAuthorization() {
-    
+
 }
 
 void AuthAuthorization::setFlags(qint32 flags) {
@@ -110,7 +110,7 @@ bool AuthAuthorization::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -129,7 +129,7 @@ bool AuthAuthorization::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -145,7 +145,7 @@ QMap<QString, QVariant> AuthAuthorization::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -160,11 +160,11 @@ AuthAuthorization AuthAuthorization::fromMap(const QMap<QString, QVariant> &map)
             _tmpSessions_var.convert( QVariant::nameToType("qint32") );
             result.setTmpSessions( _tmpSessions_var.value<qint32>() );
         }
-        
+
         QVariant _user_var = map.value("user");
         if( !_user_var.isNull() )
             result.setUser( User::fromMap(_user_var.toMap()) );
-        
+
         return result;
     }
     return result;
@@ -214,6 +214,7 @@ QDataStream &operator>>(QDataStream &stream, AuthAuthorization &item) {
     return stream;
 }
 
+/*
 QDebug operator<<(QDebug debug,  const AuthAuthorization &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
@@ -229,4 +230,4 @@ QDebug operator<<(QDebug debug,  const AuthAuthorization &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

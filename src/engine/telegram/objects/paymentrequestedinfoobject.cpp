@@ -10,7 +10,7 @@ PaymentRequestedInfoObject::PaymentRequestedInfoObject(const PaymentRequestedInf
     m_core(core)
 {
     m_shippingAddress = new PostAddressObject(m_core.shippingAddress(), this);
-    connect(m_shippingAddress.data(), &PostAddressObject::coreChanged, this, &PaymentRequestedInfoObject::coreShippingAddressChanged);
+    connect(m_shippingAddress.data(), SIGNAL(coreChanged()), this, SLOT(coreShippingAddressChanged()));
 }
 
 PaymentRequestedInfoObject::PaymentRequestedInfoObject(QObject *parent) :
@@ -19,7 +19,7 @@ PaymentRequestedInfoObject::PaymentRequestedInfoObject(QObject *parent) :
     m_core()
 {
     m_shippingAddress = new PostAddressObject(m_core.shippingAddress(), this);
-    connect(m_shippingAddress.data(), &PostAddressObject::coreChanged, this, &PaymentRequestedInfoObject::coreShippingAddressChanged);
+    connect(m_shippingAddress.data(), SIGNAL(coreChanged()), this, SLOT(coreShippingAddressChanged()));
 }
 
 PaymentRequestedInfoObject::~PaymentRequestedInfoObject() {
@@ -76,7 +76,7 @@ void PaymentRequestedInfoObject::setShippingAddress(PostAddressObject* shippingA
     if(m_shippingAddress) {
         m_shippingAddress->setParent(this);
         m_core.setShippingAddress(m_shippingAddress->core());
-        connect(m_shippingAddress.data(), &PostAddressObject::coreChanged, this, &PaymentRequestedInfoObject::coreShippingAddressChanged);
+        connect(m_shippingAddress.data(), SIGNAL(coreChanged()), this, SLOT(coreShippingAddressChanged()));
     }
     Q_EMIT shippingAddressChanged();
     Q_EMIT coreChanged();

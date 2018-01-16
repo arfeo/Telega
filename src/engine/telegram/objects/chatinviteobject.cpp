@@ -11,9 +11,9 @@ ChatInviteObject::ChatInviteObject(const ChatInvite &core, QObject *parent) :
     m_core(core)
 {
     m_chat = new ChatObject(m_core.chat(), this);
-    connect(m_chat.data(), &ChatObject::coreChanged, this, &ChatInviteObject::coreChatChanged);
+    connect(m_chat.data(), SIGNAL(coreChanged()), this, SLOT(coreChatChanged()));
     m_photo = new ChatPhotoObject(m_core.photo(), this);
-    connect(m_photo.data(), &ChatPhotoObject::coreChanged, this, &ChatInviteObject::corePhotoChanged);
+    connect(m_photo.data(), SIGNAL(coreChanged()), this, SLOT(corePhotoChanged()));
 }
 
 ChatInviteObject::ChatInviteObject(QObject *parent) :
@@ -23,9 +23,9 @@ ChatInviteObject::ChatInviteObject(QObject *parent) :
     m_core()
 {
     m_chat = new ChatObject(m_core.chat(), this);
-    connect(m_chat.data(), &ChatObject::coreChanged, this, &ChatInviteObject::coreChatChanged);
+    connect(m_chat.data(), SIGNAL(coreChanged()), this, SLOT(coreChatChanged()));
     m_photo = new ChatPhotoObject(m_core.photo(), this);
-    connect(m_photo.data(), &ChatPhotoObject::coreChanged, this, &ChatInviteObject::corePhotoChanged);
+    connect(m_photo.data(), SIGNAL(coreChanged()), this, SLOT(corePhotoChanged()));
 }
 
 ChatInviteObject::~ChatInviteObject() {
@@ -60,7 +60,7 @@ void ChatInviteObject::setChat(ChatObject* chat) {
     if(m_chat) {
         m_chat->setParent(this);
         m_core.setChat(m_chat->core());
-        connect(m_chat.data(), &ChatObject::coreChanged, this, &ChatInviteObject::coreChatChanged);
+        connect(m_chat.data(), SIGNAL(coreChanged()), this, SLOT(coreChatChanged()));
     }
     Q_EMIT chatChanged();
     Q_EMIT coreChanged();
@@ -121,7 +121,7 @@ void ChatInviteObject::setPhoto(ChatPhotoObject* photo) {
     if(m_photo) {
         m_photo->setParent(this);
         m_core.setPhoto(m_photo->core());
-        connect(m_photo.data(), &ChatPhotoObject::coreChanged, this, &ChatInviteObject::corePhotoChanged);
+        connect(m_photo.data(), SIGNAL(coreChanged()), this, SLOT(corePhotoChanged()));
     }
     Q_EMIT photoChanged();
     Q_EMIT coreChanged();

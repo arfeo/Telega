@@ -39,7 +39,7 @@ AuthExportedAuthorization::AuthExportedAuthorization(const Null &null) :
 }
 
 AuthExportedAuthorization::~AuthExportedAuthorization() {
-    
+
 }
 
 void AuthExportedAuthorization::setBytes(const QByteArray &bytes) {
@@ -91,7 +91,7 @@ bool AuthExportedAuthorization::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -107,7 +107,7 @@ bool AuthExportedAuthorization::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -123,7 +123,7 @@ QMap<QString, QVariant> AuthExportedAuthorization::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -138,13 +138,13 @@ AuthExportedAuthorization AuthExportedAuthorization::fromMap(const QMap<QString,
             _id_var.convert( QVariant::nameToType("qint32") );
             result.setId( _id_var.value<qint32>() );
         }
-        
+
         QVariant _bytes_var = map.value("bytes");
         if( !_bytes_var.isNull() ) {
             _bytes_var.convert( QVariant::nameToType("QByteArray") );
             result.setBytes( _bytes_var.value<QByteArray>() );
         }
-        
+
         return result;
     }
     return result;
@@ -190,7 +190,7 @@ QDataStream &operator>>(QDataStream &stream, AuthExportedAuthorization &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const AuthExportedAuthorization &item) {
+/*QDebug operator<<(QDebug debug,  const AuthExportedAuthorization &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.AuthExportedAuthorization(";
@@ -204,4 +204,4 @@ QDebug operator<<(QDebug debug,  const AuthExportedAuthorization &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

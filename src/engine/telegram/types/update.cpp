@@ -135,7 +135,7 @@ Update::Update(const Null &null) :
 }
 
 Update::~Update() {
-    
+
 }
 
 void Update::setAction(const SendMessageAction &action) {
@@ -901,7 +901,7 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateMessageID: {
         m_idInt = in->fetchInt();
         m_randomId = in->fetchLong();
@@ -909,7 +909,7 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateDeleteMessages: {
         if(in->fetchInt() != (qint32)CoreTypes::typeVector) return false;
         qint32 m_messages_length = in->fetchInt();
@@ -925,7 +925,7 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateUserTyping: {
         m_userId = in->fetchInt();
         m_action.fetch(in);
@@ -933,7 +933,7 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateChatUserTyping: {
         m_chatId = in->fetchInt();
         m_userId = in->fetchInt();
@@ -942,14 +942,14 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateChatParticipants: {
         m_participants.fetch(in);
         m_classType = static_cast<UpdateClassType>(x);
         return true;
     }
         break;
-    
+
     case typeUpdateUserStatus: {
         m_userId = in->fetchInt();
         m_status.fetch(in);
@@ -957,7 +957,7 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateUserName: {
         m_userId = in->fetchInt();
         m_firstName = in->fetchQString();
@@ -967,7 +967,7 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateUserPhoto: {
         m_userId = in->fetchInt();
         m_date = in->fetchInt();
@@ -977,7 +977,7 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateContactRegistered: {
         m_userId = in->fetchInt();
         m_date = in->fetchInt();
@@ -985,7 +985,7 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateContactLink: {
         m_userId = in->fetchInt();
         m_myLink.fetch(in);
@@ -994,7 +994,7 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateNewEncryptedMessage: {
         m_messageEncrypted.fetch(in);
         m_qts = in->fetchInt();
@@ -1002,14 +1002,14 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateEncryptedChatTyping: {
         m_chatId = in->fetchInt();
         m_classType = static_cast<UpdateClassType>(x);
         return true;
     }
         break;
-    
+
     case typeUpdateEncryption: {
         m_chat.fetch(in);
         m_date = in->fetchInt();
@@ -1017,7 +1017,7 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateEncryptedMessagesRead: {
         m_chatId = in->fetchInt();
         m_maxDate = in->fetchInt();
@@ -1026,7 +1026,7 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateChatParticipantAdd: {
         m_chatId = in->fetchInt();
         m_userId = in->fetchInt();
@@ -1037,7 +1037,7 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateChatParticipantDelete: {
         m_chatId = in->fetchInt();
         m_userId = in->fetchInt();
@@ -1046,7 +1046,7 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateDcOptions: {
         if(in->fetchInt() != (qint32)CoreTypes::typeVector) return false;
         qint32 m_dcOptions_length = in->fetchInt();
@@ -1060,7 +1060,7 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateUserBlocked: {
         m_userId = in->fetchInt();
         m_blocked = in->fetchBool();
@@ -1068,7 +1068,7 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateNotifySettings: {
         m_peerNotify.fetch(in);
         m_notifySettings.fetch(in);
@@ -1076,7 +1076,7 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateServiceNotification: {
         m_flags = in->fetchInt();
         if(m_flags & 1<<1) {
@@ -1097,7 +1097,7 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdatePrivacy: {
         m_key.fetch(in);
         if(in->fetchInt() != (qint32)CoreTypes::typeVector) return false;
@@ -1112,7 +1112,7 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateUserPhone: {
         m_userId = in->fetchInt();
         m_phone = in->fetchQString();
@@ -1120,7 +1120,7 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateReadHistoryInbox: {
         m_peer.fetch(in);
         m_maxId = in->fetchInt();
@@ -1130,7 +1130,7 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateReadHistoryOutbox: {
         m_peer.fetch(in);
         m_maxId = in->fetchInt();
@@ -1140,7 +1140,7 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateWebPage: {
         m_webpage.fetch(in);
         m_pts = in->fetchInt();
@@ -1149,7 +1149,7 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateReadMessagesContents: {
         if(in->fetchInt() != (qint32)CoreTypes::typeVector) return false;
         qint32 m_messages_length = in->fetchInt();
@@ -1165,7 +1165,7 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateChannelTooLong: {
         m_flags = in->fetchInt();
         m_channelId = in->fetchInt();
@@ -1176,14 +1176,14 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateChannel: {
         m_channelId = in->fetchInt();
         m_classType = static_cast<UpdateClassType>(x);
         return true;
     }
         break;
-    
+
     case typeUpdateNewChannelMessage: {
         m_message.fetch(in);
         m_pts = in->fetchInt();
@@ -1192,7 +1192,7 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateReadChannelInbox: {
         m_channelId = in->fetchInt();
         m_maxId = in->fetchInt();
@@ -1200,7 +1200,7 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateDeleteChannelMessages: {
         m_channelId = in->fetchInt();
         if(in->fetchInt() != (qint32)CoreTypes::typeVector) return false;
@@ -1217,7 +1217,7 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateChannelMessageViews: {
         m_channelId = in->fetchInt();
         m_idInt = in->fetchInt();
@@ -1226,7 +1226,7 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateChatAdmins: {
         m_chatId = in->fetchInt();
         m_enabled = in->fetchBool();
@@ -1235,7 +1235,7 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateChatParticipantAdmin: {
         m_chatId = in->fetchInt();
         m_userId = in->fetchInt();
@@ -1245,14 +1245,14 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateNewStickerSet: {
         m_stickerset.fetch(in);
         m_classType = static_cast<UpdateClassType>(x);
         return true;
     }
         break;
-    
+
     case typeUpdateStickerSetsOrder: {
         m_flags = in->fetchInt();
         if(in->fetchInt() != (qint32)CoreTypes::typeVector) return false;
@@ -1267,19 +1267,19 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateStickerSets: {
         m_classType = static_cast<UpdateClassType>(x);
         return true;
     }
         break;
-    
+
     case typeUpdateSavedGifs: {
         m_classType = static_cast<UpdateClassType>(x);
         return true;
     }
         break;
-    
+
     case typeUpdateBotInlineQuery: {
         m_flags = in->fetchInt();
         m_queryId = in->fetchLong();
@@ -1293,7 +1293,7 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateBotInlineSend: {
         m_flags = in->fetchInt();
         m_userId = in->fetchInt();
@@ -1309,7 +1309,7 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateEditChannelMessage: {
         m_message.fetch(in);
         m_pts = in->fetchInt();
@@ -1318,7 +1318,7 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateChannelPinnedMessage: {
         m_channelId = in->fetchInt();
         m_idInt = in->fetchInt();
@@ -1326,7 +1326,7 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateBotCallbackQuery: {
         m_flags = in->fetchInt();
         m_queryId = in->fetchLong();
@@ -1344,7 +1344,7 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateEditMessage: {
         m_message.fetch(in);
         m_pts = in->fetchInt();
@@ -1353,7 +1353,7 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateInlineBotCallbackQuery: {
         m_flags = in->fetchInt();
         m_queryId = in->fetchLong();
@@ -1370,7 +1370,7 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateReadChannelOutbox: {
         m_channelId = in->fetchInt();
         m_maxId = in->fetchInt();
@@ -1378,7 +1378,7 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateDraftMessage: {
         m_peer.fetch(in);
         m_draft.fetch(in);
@@ -1386,31 +1386,31 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateReadFeaturedStickers: {
         m_classType = static_cast<UpdateClassType>(x);
         return true;
     }
         break;
-    
+
     case typeUpdateRecentStickers: {
         m_classType = static_cast<UpdateClassType>(x);
         return true;
     }
         break;
-    
+
     case typeUpdateConfig: {
         m_classType = static_cast<UpdateClassType>(x);
         return true;
     }
         break;
-    
+
     case typeUpdatePtsChanged: {
         m_classType = static_cast<UpdateClassType>(x);
         return true;
     }
         break;
-    
+
     case typeUpdateChannelWebPage: {
         m_channelId = in->fetchInt();
         m_webpage.fetch(in);
@@ -1420,7 +1420,7 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateDialogPinned: {
         m_flags = in->fetchInt();
         m_peer.fetch(in);
@@ -1428,7 +1428,7 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdatePinnedDialogs: {
         m_flags = in->fetchInt();
         if(m_flags & 1<<0) {
@@ -1447,14 +1447,14 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateBotWebhookJSON: {
         m_dataJSON.fetch(in);
         m_classType = static_cast<UpdateClassType>(x);
         return true;
     }
         break;
-    
+
     case typeUpdateBotWebhookJSONQuery: {
         m_queryId = in->fetchLong();
         m_dataJSON.fetch(in);
@@ -1463,7 +1463,7 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateBotShippingQuery: {
         m_queryId = in->fetchLong();
         m_userId = in->fetchInt();
@@ -1473,7 +1473,7 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdateBotPrecheckoutQuery: {
         m_flags = in->fetchInt();
         m_queryId = in->fetchLong();
@@ -1491,27 +1491,27 @@ bool Update::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdatePhoneCall: {
         m_phoneCall.fetch(in);
         m_classType = static_cast<UpdateClassType>(x);
         return true;
     }
         break;
-    
+
     case typeUpdateLangPackTooLong: {
         m_classType = static_cast<UpdateClassType>(x);
         return true;
     }
         break;
-    
+
     case typeUpdateLangPack: {
         m_difference.fetch(in);
         m_classType = static_cast<UpdateClassType>(x);
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -1528,14 +1528,14 @@ bool Update::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUpdateMessageID: {
         out->appendInt(m_idInt);
         out->appendLong(m_randomId);
         return true;
     }
         break;
-    
+
     case typeUpdateDeleteMessages: {
         out->appendInt(CoreTypes::typeVector);
         out->appendInt(m_messages.count());
@@ -1547,14 +1547,14 @@ bool Update::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUpdateUserTyping: {
         out->appendInt(m_userId);
         m_action.push(out);
         return true;
     }
         break;
-    
+
     case typeUpdateChatUserTyping: {
         out->appendInt(m_chatId);
         out->appendInt(m_userId);
@@ -1562,20 +1562,20 @@ bool Update::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUpdateChatParticipants: {
         m_participants.push(out);
         return true;
     }
         break;
-    
+
     case typeUpdateUserStatus: {
         out->appendInt(m_userId);
         m_status.push(out);
         return true;
     }
         break;
-    
+
     case typeUpdateUserName: {
         out->appendInt(m_userId);
         out->appendQString(m_firstName);
@@ -1584,7 +1584,7 @@ bool Update::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUpdateUserPhoto: {
         out->appendInt(m_userId);
         out->appendInt(m_date);
@@ -1593,14 +1593,14 @@ bool Update::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUpdateContactRegistered: {
         out->appendInt(m_userId);
         out->appendInt(m_date);
         return true;
     }
         break;
-    
+
     case typeUpdateContactLink: {
         out->appendInt(m_userId);
         m_myLink.push(out);
@@ -1608,27 +1608,27 @@ bool Update::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUpdateNewEncryptedMessage: {
         m_messageEncrypted.push(out);
         out->appendInt(m_qts);
         return true;
     }
         break;
-    
+
     case typeUpdateEncryptedChatTyping: {
         out->appendInt(m_chatId);
         return true;
     }
         break;
-    
+
     case typeUpdateEncryption: {
         m_chat.push(out);
         out->appendInt(m_date);
         return true;
     }
         break;
-    
+
     case typeUpdateEncryptedMessagesRead: {
         out->appendInt(m_chatId);
         out->appendInt(m_maxDate);
@@ -1636,7 +1636,7 @@ bool Update::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUpdateChatParticipantAdd: {
         out->appendInt(m_chatId);
         out->appendInt(m_userId);
@@ -1646,7 +1646,7 @@ bool Update::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUpdateChatParticipantDelete: {
         out->appendInt(m_chatId);
         out->appendInt(m_userId);
@@ -1654,7 +1654,7 @@ bool Update::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUpdateDcOptions: {
         out->appendInt(CoreTypes::typeVector);
         out->appendInt(m_dcOptions.count());
@@ -1664,21 +1664,21 @@ bool Update::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUpdateUserBlocked: {
         out->appendInt(m_userId);
         out->appendBool(m_blocked);
         return true;
     }
         break;
-    
+
     case typeUpdateNotifySettings: {
         m_peerNotify.push(out);
         m_notifySettings.push(out);
         return true;
     }
         break;
-    
+
     case typeUpdateServiceNotification: {
         out->appendInt(m_flags);
         if(m_flags & 1<<1) {
@@ -1695,7 +1695,7 @@ bool Update::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUpdatePrivacy: {
         m_key.push(out);
         out->appendInt(CoreTypes::typeVector);
@@ -1706,14 +1706,14 @@ bool Update::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUpdateUserPhone: {
         out->appendInt(m_userId);
         out->appendQString(m_phone);
         return true;
     }
         break;
-    
+
     case typeUpdateReadHistoryInbox: {
         m_peer.push(out);
         out->appendInt(m_maxId);
@@ -1722,7 +1722,7 @@ bool Update::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUpdateReadHistoryOutbox: {
         m_peer.push(out);
         out->appendInt(m_maxId);
@@ -1731,7 +1731,7 @@ bool Update::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUpdateWebPage: {
         m_webpage.push(out);
         out->appendInt(m_pts);
@@ -1739,7 +1739,7 @@ bool Update::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUpdateReadMessagesContents: {
         out->appendInt(CoreTypes::typeVector);
         out->appendInt(m_messages.count());
@@ -1751,7 +1751,7 @@ bool Update::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUpdateChannelTooLong: {
         out->appendInt(m_flags);
         out->appendInt(m_channelId);
@@ -1761,13 +1761,13 @@ bool Update::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUpdateChannel: {
         out->appendInt(m_channelId);
         return true;
     }
         break;
-    
+
     case typeUpdateNewChannelMessage: {
         m_message.push(out);
         out->appendInt(m_pts);
@@ -1775,14 +1775,14 @@ bool Update::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUpdateReadChannelInbox: {
         out->appendInt(m_channelId);
         out->appendInt(m_maxId);
         return true;
     }
         break;
-    
+
     case typeUpdateDeleteChannelMessages: {
         out->appendInt(m_channelId);
         out->appendInt(CoreTypes::typeVector);
@@ -1795,7 +1795,7 @@ bool Update::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUpdateChannelMessageViews: {
         out->appendInt(m_channelId);
         out->appendInt(m_idInt);
@@ -1803,7 +1803,7 @@ bool Update::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUpdateChatAdmins: {
         out->appendInt(m_chatId);
         out->appendBool(m_enabled);
@@ -1811,7 +1811,7 @@ bool Update::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUpdateChatParticipantAdmin: {
         out->appendInt(m_chatId);
         out->appendInt(m_userId);
@@ -1820,13 +1820,13 @@ bool Update::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUpdateNewStickerSet: {
         m_stickerset.push(out);
         return true;
     }
         break;
-    
+
     case typeUpdateStickerSetsOrder: {
         out->appendInt(m_flags);
         out->appendInt(CoreTypes::typeVector);
@@ -1837,17 +1837,17 @@ bool Update::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUpdateStickerSets: {
         return true;
     }
         break;
-    
+
     case typeUpdateSavedGifs: {
         return true;
     }
         break;
-    
+
     case typeUpdateBotInlineQuery: {
         out->appendInt(m_flags);
         out->appendLong(m_queryId);
@@ -1860,7 +1860,7 @@ bool Update::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUpdateBotInlineSend: {
         out->appendInt(m_flags);
         out->appendInt(m_userId);
@@ -1875,7 +1875,7 @@ bool Update::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUpdateEditChannelMessage: {
         m_message.push(out);
         out->appendInt(m_pts);
@@ -1883,14 +1883,14 @@ bool Update::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUpdateChannelPinnedMessage: {
         out->appendInt(m_channelId);
         out->appendInt(m_idInt);
         return true;
     }
         break;
-    
+
     case typeUpdateBotCallbackQuery: {
         out->appendInt(m_flags);
         out->appendLong(m_queryId);
@@ -1907,7 +1907,7 @@ bool Update::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUpdateEditMessage: {
         m_message.push(out);
         out->appendInt(m_pts);
@@ -1915,7 +1915,7 @@ bool Update::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUpdateInlineBotCallbackQuery: {
         out->appendInt(m_flags);
         out->appendLong(m_queryId);
@@ -1931,41 +1931,41 @@ bool Update::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUpdateReadChannelOutbox: {
         out->appendInt(m_channelId);
         out->appendInt(m_maxId);
         return true;
     }
         break;
-    
+
     case typeUpdateDraftMessage: {
         m_peer.push(out);
         m_draft.push(out);
         return true;
     }
         break;
-    
+
     case typeUpdateReadFeaturedStickers: {
         return true;
     }
         break;
-    
+
     case typeUpdateRecentStickers: {
         return true;
     }
         break;
-    
+
     case typeUpdateConfig: {
         return true;
     }
         break;
-    
+
     case typeUpdatePtsChanged: {
         return true;
     }
         break;
-    
+
     case typeUpdateChannelWebPage: {
         out->appendInt(m_channelId);
         m_webpage.push(out);
@@ -1974,14 +1974,14 @@ bool Update::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUpdateDialogPinned: {
         out->appendInt(m_flags);
         m_peer.push(out);
         return true;
     }
         break;
-    
+
     case typeUpdatePinnedDialogs: {
         out->appendInt(m_flags);
         if(m_flags & 1<<0) {
@@ -1994,13 +1994,13 @@ bool Update::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUpdateBotWebhookJSON: {
         m_dataJSON.push(out);
         return true;
     }
         break;
-    
+
     case typeUpdateBotWebhookJSONQuery: {
         out->appendLong(m_queryId);
         m_dataJSON.push(out);
@@ -2008,7 +2008,7 @@ bool Update::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUpdateBotShippingQuery: {
         out->appendLong(m_queryId);
         out->appendInt(m_userId);
@@ -2017,7 +2017,7 @@ bool Update::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUpdateBotPrecheckoutQuery: {
         out->appendInt(m_flags);
         out->appendLong(m_queryId);
@@ -2034,24 +2034,24 @@ bool Update::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUpdatePhoneCall: {
         m_phoneCall.push(out);
         return true;
     }
         break;
-    
+
     case typeUpdateLangPackTooLong: {
         return true;
     }
         break;
-    
+
     case typeUpdateLangPack: {
         m_difference.push(out);
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -2068,7 +2068,7 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateMessageID: {
         result["classType"] = "Update::typeUpdateMessageID";
         if( idInt() ) result["idInt"] = QString::number(idInt());
@@ -2076,7 +2076,7 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateDeleteMessages: {
         result["classType"] = "Update::typeUpdateDeleteMessages";
         QList<QVariant> _messages;
@@ -2088,7 +2088,7 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateUserTyping: {
         result["classType"] = "Update::typeUpdateUserTyping";
         if( userId() ) result["userId"] = QString::number(userId());
@@ -2096,7 +2096,7 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateChatUserTyping: {
         result["classType"] = "Update::typeUpdateChatUserTyping";
         if( chatId() ) result["chatId"] = QString::number(chatId());
@@ -2105,14 +2105,14 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateChatParticipants: {
         result["classType"] = "Update::typeUpdateChatParticipants";
         if( !m_participants.isNull() ) result["participants"] = m_participants.toMap();
         return result;
     }
         break;
-    
+
     case typeUpdateUserStatus: {
         result["classType"] = "Update::typeUpdateUserStatus";
         if( userId() ) result["userId"] = QString::number(userId());
@@ -2120,7 +2120,7 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateUserName: {
         result["classType"] = "Update::typeUpdateUserName";
         if( userId() ) result["userId"] = QString::number(userId());
@@ -2130,7 +2130,7 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateUserPhoto: {
         result["classType"] = "Update::typeUpdateUserPhoto";
         if( userId() ) result["userId"] = QString::number(userId());
@@ -2140,7 +2140,7 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateContactRegistered: {
         result["classType"] = "Update::typeUpdateContactRegistered";
         if( userId() ) result["userId"] = QString::number(userId());
@@ -2148,7 +2148,7 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateContactLink: {
         result["classType"] = "Update::typeUpdateContactLink";
         if( userId() ) result["userId"] = QString::number(userId());
@@ -2157,7 +2157,7 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateNewEncryptedMessage: {
         result["classType"] = "Update::typeUpdateNewEncryptedMessage";
         if( !m_messageEncrypted.isNull() ) result["messageEncrypted"] = m_messageEncrypted.toMap();
@@ -2165,14 +2165,14 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateEncryptedChatTyping: {
         result["classType"] = "Update::typeUpdateEncryptedChatTyping";
         if( chatId() ) result["chatId"] = QString::number(chatId());
         return result;
     }
         break;
-    
+
     case typeUpdateEncryption: {
         result["classType"] = "Update::typeUpdateEncryption";
         if( !m_chat.isNull() ) result["chat"] = m_chat.toMap();
@@ -2180,7 +2180,7 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateEncryptedMessagesRead: {
         result["classType"] = "Update::typeUpdateEncryptedMessagesRead";
         if( chatId() ) result["chatId"] = QString::number(chatId());
@@ -2189,7 +2189,7 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateChatParticipantAdd: {
         result["classType"] = "Update::typeUpdateChatParticipantAdd";
         if( chatId() ) result["chatId"] = QString::number(chatId());
@@ -2200,7 +2200,7 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateChatParticipantDelete: {
         result["classType"] = "Update::typeUpdateChatParticipantDelete";
         if( chatId() ) result["chatId"] = QString::number(chatId());
@@ -2209,7 +2209,7 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateDcOptions: {
         result["classType"] = "Update::typeUpdateDcOptions";
         QList<QVariant> _dcOptions;
@@ -2219,7 +2219,7 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateUserBlocked: {
         result["classType"] = "Update::typeUpdateUserBlocked";
         if( userId() ) result["userId"] = QString::number(userId());
@@ -2227,7 +2227,7 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateNotifySettings: {
         result["classType"] = "Update::typeUpdateNotifySettings";
         if( !m_peerNotify.isNull() ) result["peerNotify"] = m_peerNotify.toMap();
@@ -2235,7 +2235,7 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateServiceNotification: {
         result["classType"] = "Update::typeUpdateServiceNotification";
         if( popup() ) result["popup"] = QString::number(popup());
@@ -2250,7 +2250,7 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdatePrivacy: {
         result["classType"] = "Update::typeUpdatePrivacy";
         if( !m_key.isNull() ) result["key"] = m_key.toMap();
@@ -2261,7 +2261,7 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateUserPhone: {
         result["classType"] = "Update::typeUpdateUserPhone";
         if( userId() ) result["userId"] = QString::number(userId());
@@ -2269,7 +2269,7 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateReadHistoryInbox: {
         result["classType"] = "Update::typeUpdateReadHistoryInbox";
         if( !m_peer.isNull() ) result["peer"] = m_peer.toMap();
@@ -2279,7 +2279,7 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateReadHistoryOutbox: {
         result["classType"] = "Update::typeUpdateReadHistoryOutbox";
         if( !m_peer.isNull() ) result["peer"] = m_peer.toMap();
@@ -2289,7 +2289,7 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateWebPage: {
         result["classType"] = "Update::typeUpdateWebPage";
         if( !m_webpage.isNull() ) result["webpage"] = m_webpage.toMap();
@@ -2298,7 +2298,7 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateReadMessagesContents: {
         result["classType"] = "Update::typeUpdateReadMessagesContents";
         QList<QVariant> _messages;
@@ -2310,7 +2310,7 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateChannelTooLong: {
         result["classType"] = "Update::typeUpdateChannelTooLong";
         if( channelId() ) result["channelId"] = QString::number(channelId());
@@ -2318,14 +2318,14 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateChannel: {
         result["classType"] = "Update::typeUpdateChannel";
         if( channelId() ) result["channelId"] = QString::number(channelId());
         return result;
     }
         break;
-    
+
     case typeUpdateNewChannelMessage: {
         result["classType"] = "Update::typeUpdateNewChannelMessage";
         if( !m_message.isNull() ) result["message"] = m_message.toMap();
@@ -2334,7 +2334,7 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateReadChannelInbox: {
         result["classType"] = "Update::typeUpdateReadChannelInbox";
         if( channelId() ) result["channelId"] = QString::number(channelId());
@@ -2342,7 +2342,7 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateDeleteChannelMessages: {
         result["classType"] = "Update::typeUpdateDeleteChannelMessages";
         if( channelId() ) result["channelId"] = QString::number(channelId());
@@ -2355,7 +2355,7 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateChannelMessageViews: {
         result["classType"] = "Update::typeUpdateChannelMessageViews";
         if( channelId() ) result["channelId"] = QString::number(channelId());
@@ -2364,7 +2364,7 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateChatAdmins: {
         result["classType"] = "Update::typeUpdateChatAdmins";
         if( chatId() ) result["chatId"] = QString::number(chatId());
@@ -2373,7 +2373,7 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateChatParticipantAdmin: {
         result["classType"] = "Update::typeUpdateChatParticipantAdmin";
         if( chatId() ) result["chatId"] = QString::number(chatId());
@@ -2383,14 +2383,14 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateNewStickerSet: {
         result["classType"] = "Update::typeUpdateNewStickerSet";
         if( !m_stickerset.isNull() ) result["stickerset"] = m_stickerset.toMap();
         return result;
     }
         break;
-    
+
     case typeUpdateStickerSetsOrder: {
         result["classType"] = "Update::typeUpdateStickerSetsOrder";
         if( masks() ) result["masks"] = QString::number(masks());
@@ -2401,19 +2401,19 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateStickerSets: {
         result["classType"] = "Update::typeUpdateStickerSets";
         return result;
     }
         break;
-    
+
     case typeUpdateSavedGifs: {
         result["classType"] = "Update::typeUpdateSavedGifs";
         return result;
     }
         break;
-    
+
     case typeUpdateBotInlineQuery: {
         result["classType"] = "Update::typeUpdateBotInlineQuery";
         if( queryId() ) result["queryId"] = QString::number(queryId());
@@ -2424,7 +2424,7 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateBotInlineSend: {
         result["classType"] = "Update::typeUpdateBotInlineSend";
         if( userId() ) result["userId"] = QString::number(userId());
@@ -2435,7 +2435,7 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateEditChannelMessage: {
         result["classType"] = "Update::typeUpdateEditChannelMessage";
         if( !m_message.isNull() ) result["message"] = m_message.toMap();
@@ -2444,7 +2444,7 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateChannelPinnedMessage: {
         result["classType"] = "Update::typeUpdateChannelPinnedMessage";
         if( channelId() ) result["channelId"] = QString::number(channelId());
@@ -2452,7 +2452,7 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateBotCallbackQuery: {
         result["classType"] = "Update::typeUpdateBotCallbackQuery";
         if( queryId() ) result["queryId"] = QString::number(queryId());
@@ -2465,7 +2465,7 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateEditMessage: {
         result["classType"] = "Update::typeUpdateEditMessage";
         if( !m_message.isNull() ) result["message"] = m_message.toMap();
@@ -2474,7 +2474,7 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateInlineBotCallbackQuery: {
         result["classType"] = "Update::typeUpdateInlineBotCallbackQuery";
         if( queryId() ) result["queryId"] = QString::number(queryId());
@@ -2486,7 +2486,7 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateReadChannelOutbox: {
         result["classType"] = "Update::typeUpdateReadChannelOutbox";
         if( channelId() ) result["channelId"] = QString::number(channelId());
@@ -2494,7 +2494,7 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateDraftMessage: {
         result["classType"] = "Update::typeUpdateDraftMessage";
         if( !m_peer.isNull() ) result["peer"] = m_peer.toMap();
@@ -2502,31 +2502,31 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateReadFeaturedStickers: {
         result["classType"] = "Update::typeUpdateReadFeaturedStickers";
         return result;
     }
         break;
-    
+
     case typeUpdateRecentStickers: {
         result["classType"] = "Update::typeUpdateRecentStickers";
         return result;
     }
         break;
-    
+
     case typeUpdateConfig: {
         result["classType"] = "Update::typeUpdateConfig";
         return result;
     }
         break;
-    
+
     case typeUpdatePtsChanged: {
         result["classType"] = "Update::typeUpdatePtsChanged";
         return result;
     }
         break;
-    
+
     case typeUpdateChannelWebPage: {
         result["classType"] = "Update::typeUpdateChannelWebPage";
         if( channelId() ) result["channelId"] = QString::number(channelId());
@@ -2536,7 +2536,7 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateDialogPinned: {
         result["classType"] = "Update::typeUpdateDialogPinned";
         if( pinned() ) result["pinned"] = QString::number(pinned());
@@ -2544,7 +2544,7 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdatePinnedDialogs: {
         result["classType"] = "Update::typeUpdatePinnedDialogs";
         QList<QVariant> _orderVectorPeer;
@@ -2554,14 +2554,14 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateBotWebhookJSON: {
         result["classType"] = "Update::typeUpdateBotWebhookJSON";
         if( !m_dataJSON.isNull() ) result["dataJSON"] = m_dataJSON.toMap();
         return result;
     }
         break;
-    
+
     case typeUpdateBotWebhookJSONQuery: {
         result["classType"] = "Update::typeUpdateBotWebhookJSONQuery";
         if( queryId() ) result["queryId"] = QString::number(queryId());
@@ -2570,7 +2570,7 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateBotShippingQuery: {
         result["classType"] = "Update::typeUpdateBotShippingQuery";
         if( queryId() ) result["queryId"] = QString::number(queryId());
@@ -2580,7 +2580,7 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdateBotPrecheckoutQuery: {
         result["classType"] = "Update::typeUpdateBotPrecheckoutQuery";
         if( queryId() ) result["queryId"] = QString::number(queryId());
@@ -2593,27 +2593,27 @@ QMap<QString, QVariant> Update::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdatePhoneCall: {
         result["classType"] = "Update::typeUpdatePhoneCall";
         if( !m_phoneCall.isNull() ) result["phoneCall"] = m_phoneCall.toMap();
         return result;
     }
         break;
-    
+
     case typeUpdateLangPackTooLong: {
         result["classType"] = "Update::typeUpdateLangPackTooLong";
         return result;
     }
         break;
-    
+
     case typeUpdateLangPack: {
         result["classType"] = "Update::typeUpdateLangPack";
         if( !m_difference.isNull() ) result["difference"] = m_difference.toMap();
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -2626,19 +2626,19 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _message_var = map.value("message");
         if( !_message_var.isNull() )
             result.setMessage( Message::fromMap(_message_var.toMap()) );
-        
+
         QVariant _pts_var = map.value("pts");
         if( !_pts_var.isNull() ) {
             _pts_var.convert( QVariant::nameToType("qint32") );
             result.setPts( _pts_var.value<qint32>() );
         }
-        
+
         QVariant _ptsCount_var = map.value("ptsCount");
         if( !_ptsCount_var.isNull() ) {
             _ptsCount_var.convert( QVariant::nameToType("qint32") );
             result.setPtsCount( _ptsCount_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateMessageID") {
@@ -2648,13 +2648,13 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
             _idInt_var.convert( QVariant::nameToType("qint32") );
             result.setIdInt( _idInt_var.value<qint32>() );
         }
-        
+
         QVariant _randomId_var = map.value("randomId");
         if( !_randomId_var.isNull() ) {
             _randomId_var.convert( QVariant::nameToType("qint64") );
             result.setRandomId( _randomId_var.value<qint64>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateDeleteMessages") {
@@ -2669,13 +2669,13 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
             _pts_var.convert( QVariant::nameToType("qint32") );
             result.setPts( _pts_var.value<qint32>() );
         }
-        
+
         QVariant _ptsCount_var = map.value("ptsCount");
         if( !_ptsCount_var.isNull() ) {
             _ptsCount_var.convert( QVariant::nameToType("qint32") );
             result.setPtsCount( _ptsCount_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateUserTyping") {
@@ -2685,11 +2685,11 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
             _userId_var.convert( QVariant::nameToType("qint32") );
             result.setUserId( _userId_var.value<qint32>() );
         }
-        
+
         QVariant _action_var = map.value("action");
         if( !_action_var.isNull() )
             result.setAction( SendMessageAction::fromMap(_action_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateChatUserTyping") {
@@ -2699,17 +2699,17 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
             _chatId_var.convert( QVariant::nameToType("qint32") );
             result.setChatId( _chatId_var.value<qint32>() );
         }
-        
+
         QVariant _userId_var = map.value("userId");
         if( !_userId_var.isNull() ) {
             _userId_var.convert( QVariant::nameToType("qint32") );
             result.setUserId( _userId_var.value<qint32>() );
         }
-        
+
         QVariant _action_var = map.value("action");
         if( !_action_var.isNull() )
             result.setAction( SendMessageAction::fromMap(_action_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateChatParticipants") {
@@ -2717,7 +2717,7 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _participants_var = map.value("participants");
         if( !_participants_var.isNull() )
             result.setParticipants( ChatParticipants::fromMap(_participants_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateUserStatus") {
@@ -2727,11 +2727,11 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
             _userId_var.convert( QVariant::nameToType("qint32") );
             result.setUserId( _userId_var.value<qint32>() );
         }
-        
+
         QVariant _status_var = map.value("status");
         if( !_status_var.isNull() )
             result.setStatus( UserStatus::fromMap(_status_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateUserName") {
@@ -2741,25 +2741,25 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
             _userId_var.convert( QVariant::nameToType("qint32") );
             result.setUserId( _userId_var.value<qint32>() );
         }
-        
+
         QVariant _firstName_var = map.value("firstName");
         if( !_firstName_var.isNull() ) {
             _firstName_var.convert( QVariant::nameToType("QString") );
             result.setFirstName( _firstName_var.value<QString>() );
         }
-        
+
         QVariant _lastName_var = map.value("lastName");
         if( !_lastName_var.isNull() ) {
             _lastName_var.convert( QVariant::nameToType("QString") );
             result.setLastName( _lastName_var.value<QString>() );
         }
-        
+
         QVariant _username_var = map.value("username");
         if( !_username_var.isNull() ) {
             _username_var.convert( QVariant::nameToType("QString") );
             result.setUsername( _username_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateUserPhoto") {
@@ -2769,23 +2769,23 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
             _userId_var.convert( QVariant::nameToType("qint32") );
             result.setUserId( _userId_var.value<qint32>() );
         }
-        
+
         QVariant _date_var = map.value("date");
         if( !_date_var.isNull() ) {
             _date_var.convert( QVariant::nameToType("qint32") );
             result.setDate( _date_var.value<qint32>() );
         }
-        
+
         QVariant _photo_var = map.value("photo");
         if( !_photo_var.isNull() )
             result.setPhoto( UserProfilePhoto::fromMap(_photo_var.toMap()) );
-        
+
         QVariant _previous_var = map.value("previous");
         if( !_previous_var.isNull() ) {
             _previous_var.convert( QVariant::nameToType("bool") );
             result.setPrevious( _previous_var.value<bool>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateContactRegistered") {
@@ -2795,13 +2795,13 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
             _userId_var.convert( QVariant::nameToType("qint32") );
             result.setUserId( _userId_var.value<qint32>() );
         }
-        
+
         QVariant _date_var = map.value("date");
         if( !_date_var.isNull() ) {
             _date_var.convert( QVariant::nameToType("qint32") );
             result.setDate( _date_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateContactLink") {
@@ -2811,15 +2811,15 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
             _userId_var.convert( QVariant::nameToType("qint32") );
             result.setUserId( _userId_var.value<qint32>() );
         }
-        
+
         QVariant _myLink_var = map.value("myLink");
         if( !_myLink_var.isNull() )
             result.setMyLink( ContactLink::fromMap(_myLink_var.toMap()) );
-        
+
         QVariant _foreignLink_var = map.value("foreignLink");
         if( !_foreignLink_var.isNull() )
             result.setForeignLink( ContactLink::fromMap(_foreignLink_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateNewEncryptedMessage") {
@@ -2827,13 +2827,13 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _messageEncrypted_var = map.value("messageEncrypted");
         if( !_messageEncrypted_var.isNull() )
             result.setMessageEncrypted( EncryptedMessage::fromMap(_messageEncrypted_var.toMap()) );
-        
+
         QVariant _qts_var = map.value("qts");
         if( !_qts_var.isNull() ) {
             _qts_var.convert( QVariant::nameToType("qint32") );
             result.setQts( _qts_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateEncryptedChatTyping") {
@@ -2843,7 +2843,7 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
             _chatId_var.convert( QVariant::nameToType("qint32") );
             result.setChatId( _chatId_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateEncryption") {
@@ -2851,13 +2851,13 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _chat_var = map.value("chat");
         if( !_chat_var.isNull() )
             result.setChat( EncryptedChat::fromMap(_chat_var.toMap()) );
-        
+
         QVariant _date_var = map.value("date");
         if( !_date_var.isNull() ) {
             _date_var.convert( QVariant::nameToType("qint32") );
             result.setDate( _date_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateEncryptedMessagesRead") {
@@ -2867,19 +2867,19 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
             _chatId_var.convert( QVariant::nameToType("qint32") );
             result.setChatId( _chatId_var.value<qint32>() );
         }
-        
+
         QVariant _maxDate_var = map.value("maxDate");
         if( !_maxDate_var.isNull() ) {
             _maxDate_var.convert( QVariant::nameToType("qint32") );
             result.setMaxDate( _maxDate_var.value<qint32>() );
         }
-        
+
         QVariant _date_var = map.value("date");
         if( !_date_var.isNull() ) {
             _date_var.convert( QVariant::nameToType("qint32") );
             result.setDate( _date_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateChatParticipantAdd") {
@@ -2889,31 +2889,31 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
             _chatId_var.convert( QVariant::nameToType("qint32") );
             result.setChatId( _chatId_var.value<qint32>() );
         }
-        
+
         QVariant _userId_var = map.value("userId");
         if( !_userId_var.isNull() ) {
             _userId_var.convert( QVariant::nameToType("qint32") );
             result.setUserId( _userId_var.value<qint32>() );
         }
-        
+
         QVariant _inviterId_var = map.value("inviterId");
         if( !_inviterId_var.isNull() ) {
             _inviterId_var.convert( QVariant::nameToType("qint32") );
             result.setInviterId( _inviterId_var.value<qint32>() );
         }
-        
+
         QVariant _date_var = map.value("date");
         if( !_date_var.isNull() ) {
             _date_var.convert( QVariant::nameToType("qint32") );
             result.setDate( _date_var.value<qint32>() );
         }
-        
+
         QVariant _version_var = map.value("version");
         if( !_version_var.isNull() ) {
             _version_var.convert( QVariant::nameToType("qint32") );
             result.setVersion( _version_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateChatParticipantDelete") {
@@ -2923,19 +2923,19 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
             _chatId_var.convert( QVariant::nameToType("qint32") );
             result.setChatId( _chatId_var.value<qint32>() );
         }
-        
+
         QVariant _userId_var = map.value("userId");
         if( !_userId_var.isNull() ) {
             _userId_var.convert( QVariant::nameToType("qint32") );
             result.setUserId( _userId_var.value<qint32>() );
         }
-        
+
         QVariant _version_var = map.value("version");
         if( !_version_var.isNull() ) {
             _version_var.convert( QVariant::nameToType("qint32") );
             result.setVersion( _version_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateDcOptions") {
@@ -2954,13 +2954,13 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
             _userId_var.convert( QVariant::nameToType("qint32") );
             result.setUserId( _userId_var.value<qint32>() );
         }
-        
+
         QVariant _blocked_var = map.value("blocked");
         if( !_blocked_var.isNull() ) {
             _blocked_var.convert( QVariant::nameToType("bool") );
             result.setBlocked( _blocked_var.value<bool>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateNotifySettings") {
@@ -2968,11 +2968,11 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _peerNotify_var = map.value("peerNotify");
         if( !_peerNotify_var.isNull() )
             result.setPeerNotify( NotifyPeer::fromMap(_peerNotify_var.toMap()) );
-        
+
         QVariant _notifySettings_var = map.value("notifySettings");
         if( !_notifySettings_var.isNull() )
             result.setNotifySettings( PeerNotifySettings::fromMap(_notifySettings_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateServiceNotification") {
@@ -2982,29 +2982,29 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
             _popup_var.convert( QVariant::nameToType("bool") );
             result.setPopup( _popup_var.value<bool>() );
         }
-        
+
         QVariant _inboxDate_var = map.value("inboxDate");
         if( !_inboxDate_var.isNull() ) {
             _inboxDate_var.convert( QVariant::nameToType("qint32") );
             result.setInboxDate( _inboxDate_var.value<qint32>() );
         }
-        
+
         QVariant _type_var = map.value("type");
         if( !_type_var.isNull() ) {
             _type_var.convert( QVariant::nameToType("QString") );
             result.setType( _type_var.value<QString>() );
         }
-        
+
         QVariant _messageString_var = map.value("messageString");
         if( !_messageString_var.isNull() ) {
             _messageString_var.convert( QVariant::nameToType("QString") );
             result.setMessageString( _messageString_var.value<QString>() );
         }
-        
+
         QVariant _media_var = map.value("media");
         if( !_media_var.isNull() )
             result.setMedia( MessageMedia::fromMap(_media_var.toMap()) );
-        
+
         QList<QVariant> map_entities = map["entities"].toList();
         QList<MessageEntity> _entities;
         for(const QVariant &var: map_entities)
@@ -3017,7 +3017,7 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _key_var = map.value("key");
         if( !_key_var.isNull() )
             result.setKey( PrivacyKey::fromMap(_key_var.toMap()) );
-        
+
         QList<QVariant> map_rules = map["rules"].toList();
         QList<PrivacyRule> _rules;
         for(const QVariant &var: map_rules)
@@ -3032,13 +3032,13 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
             _userId_var.convert( QVariant::nameToType("qint32") );
             result.setUserId( _userId_var.value<qint32>() );
         }
-        
+
         QVariant _phone_var = map.value("phone");
         if( !_phone_var.isNull() ) {
             _phone_var.convert( QVariant::nameToType("QString") );
             result.setPhone( _phone_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateReadHistoryInbox") {
@@ -3046,25 +3046,25 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _peer_var = map.value("peer");
         if( !_peer_var.isNull() )
             result.setPeer( Peer::fromMap(_peer_var.toMap()) );
-        
+
         QVariant _maxId_var = map.value("maxId");
         if( !_maxId_var.isNull() ) {
             _maxId_var.convert( QVariant::nameToType("qint32") );
             result.setMaxId( _maxId_var.value<qint32>() );
         }
-        
+
         QVariant _pts_var = map.value("pts");
         if( !_pts_var.isNull() ) {
             _pts_var.convert( QVariant::nameToType("qint32") );
             result.setPts( _pts_var.value<qint32>() );
         }
-        
+
         QVariant _ptsCount_var = map.value("ptsCount");
         if( !_ptsCount_var.isNull() ) {
             _ptsCount_var.convert( QVariant::nameToType("qint32") );
             result.setPtsCount( _ptsCount_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateReadHistoryOutbox") {
@@ -3072,25 +3072,25 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _peer_var = map.value("peer");
         if( !_peer_var.isNull() )
             result.setPeer( Peer::fromMap(_peer_var.toMap()) );
-        
+
         QVariant _maxId_var = map.value("maxId");
         if( !_maxId_var.isNull() ) {
             _maxId_var.convert( QVariant::nameToType("qint32") );
             result.setMaxId( _maxId_var.value<qint32>() );
         }
-        
+
         QVariant _pts_var = map.value("pts");
         if( !_pts_var.isNull() ) {
             _pts_var.convert( QVariant::nameToType("qint32") );
             result.setPts( _pts_var.value<qint32>() );
         }
-        
+
         QVariant _ptsCount_var = map.value("ptsCount");
         if( !_ptsCount_var.isNull() ) {
             _ptsCount_var.convert( QVariant::nameToType("qint32") );
             result.setPtsCount( _ptsCount_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateWebPage") {
@@ -3098,19 +3098,19 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _webpage_var = map.value("webpage");
         if( !_webpage_var.isNull() )
             result.setWebpage( WebPage::fromMap(_webpage_var.toMap()) );
-        
+
         QVariant _pts_var = map.value("pts");
         if( !_pts_var.isNull() ) {
             _pts_var.convert( QVariant::nameToType("qint32") );
             result.setPts( _pts_var.value<qint32>() );
         }
-        
+
         QVariant _ptsCount_var = map.value("ptsCount");
         if( !_ptsCount_var.isNull() ) {
             _ptsCount_var.convert( QVariant::nameToType("qint32") );
             result.setPtsCount( _ptsCount_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateReadMessagesContents") {
@@ -3125,13 +3125,13 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
             _pts_var.convert( QVariant::nameToType("qint32") );
             result.setPts( _pts_var.value<qint32>() );
         }
-        
+
         QVariant _ptsCount_var = map.value("ptsCount");
         if( !_ptsCount_var.isNull() ) {
             _ptsCount_var.convert( QVariant::nameToType("qint32") );
             result.setPtsCount( _ptsCount_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateChannelTooLong") {
@@ -3141,13 +3141,13 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
             _channelId_var.convert( QVariant::nameToType("qint32") );
             result.setChannelId( _channelId_var.value<qint32>() );
         }
-        
+
         QVariant _pts_var = map.value("pts");
         if( !_pts_var.isNull() ) {
             _pts_var.convert( QVariant::nameToType("qint32") );
             result.setPts( _pts_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateChannel") {
@@ -3157,7 +3157,7 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
             _channelId_var.convert( QVariant::nameToType("qint32") );
             result.setChannelId( _channelId_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateNewChannelMessage") {
@@ -3165,19 +3165,19 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _message_var = map.value("message");
         if( !_message_var.isNull() )
             result.setMessage( Message::fromMap(_message_var.toMap()) );
-        
+
         QVariant _pts_var = map.value("pts");
         if( !_pts_var.isNull() ) {
             _pts_var.convert( QVariant::nameToType("qint32") );
             result.setPts( _pts_var.value<qint32>() );
         }
-        
+
         QVariant _ptsCount_var = map.value("ptsCount");
         if( !_ptsCount_var.isNull() ) {
             _ptsCount_var.convert( QVariant::nameToType("qint32") );
             result.setPtsCount( _ptsCount_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateReadChannelInbox") {
@@ -3187,13 +3187,13 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
             _channelId_var.convert( QVariant::nameToType("qint32") );
             result.setChannelId( _channelId_var.value<qint32>() );
         }
-        
+
         QVariant _maxId_var = map.value("maxId");
         if( !_maxId_var.isNull() ) {
             _maxId_var.convert( QVariant::nameToType("qint32") );
             result.setMaxId( _maxId_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateDeleteChannelMessages") {
@@ -3203,7 +3203,7 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
             _channelId_var.convert( QVariant::nameToType("qint32") );
             result.setChannelId( _channelId_var.value<qint32>() );
         }
-        
+
         QList<QVariant> map_messages = map["messages"].toList();
         QList<qint32> _messages;
         for(const QVariant &var: map_messages)
@@ -3214,13 +3214,13 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
             _pts_var.convert( QVariant::nameToType("qint32") );
             result.setPts( _pts_var.value<qint32>() );
         }
-        
+
         QVariant _ptsCount_var = map.value("ptsCount");
         if( !_ptsCount_var.isNull() ) {
             _ptsCount_var.convert( QVariant::nameToType("qint32") );
             result.setPtsCount( _ptsCount_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateChannelMessageViews") {
@@ -3230,19 +3230,19 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
             _channelId_var.convert( QVariant::nameToType("qint32") );
             result.setChannelId( _channelId_var.value<qint32>() );
         }
-        
+
         QVariant _idInt_var = map.value("idInt");
         if( !_idInt_var.isNull() ) {
             _idInt_var.convert( QVariant::nameToType("qint32") );
             result.setIdInt( _idInt_var.value<qint32>() );
         }
-        
+
         QVariant _views_var = map.value("views");
         if( !_views_var.isNull() ) {
             _views_var.convert( QVariant::nameToType("qint32") );
             result.setViews( _views_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateChatAdmins") {
@@ -3252,19 +3252,19 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
             _chatId_var.convert( QVariant::nameToType("qint32") );
             result.setChatId( _chatId_var.value<qint32>() );
         }
-        
+
         QVariant _enabled_var = map.value("enabled");
         if( !_enabled_var.isNull() ) {
             _enabled_var.convert( QVariant::nameToType("bool") );
             result.setEnabled( _enabled_var.value<bool>() );
         }
-        
+
         QVariant _version_var = map.value("version");
         if( !_version_var.isNull() ) {
             _version_var.convert( QVariant::nameToType("qint32") );
             result.setVersion( _version_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateChatParticipantAdmin") {
@@ -3274,25 +3274,25 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
             _chatId_var.convert( QVariant::nameToType("qint32") );
             result.setChatId( _chatId_var.value<qint32>() );
         }
-        
+
         QVariant _userId_var = map.value("userId");
         if( !_userId_var.isNull() ) {
             _userId_var.convert( QVariant::nameToType("qint32") );
             result.setUserId( _userId_var.value<qint32>() );
         }
-        
+
         QVariant _isAdmin_var = map.value("isAdmin");
         if( !_isAdmin_var.isNull() ) {
             _isAdmin_var.convert( QVariant::nameToType("bool") );
             result.setIsAdmin( _isAdmin_var.value<bool>() );
         }
-        
+
         QVariant _version_var = map.value("version");
         if( !_version_var.isNull() ) {
             _version_var.convert( QVariant::nameToType("qint32") );
             result.setVersion( _version_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateNewStickerSet") {
@@ -3300,7 +3300,7 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _stickerset_var = map.value("stickerset");
         if( !_stickerset_var.isNull() )
             result.setStickerset( MessagesStickerSet::fromMap(_stickerset_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateStickerSetsOrder") {
@@ -3310,7 +3310,7 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
             _masks_var.convert( QVariant::nameToType("bool") );
             result.setMasks( _masks_var.value<bool>() );
         }
-        
+
         QList<QVariant> map_orderVectorlong = map["orderVectorlong"].toList();
         QList<qint64> _orderVectorlong;
         for(const QVariant &var: map_orderVectorlong)
@@ -3333,29 +3333,29 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
             _queryId_var.convert( QVariant::nameToType("qint64") );
             result.setQueryId( _queryId_var.value<qint64>() );
         }
-        
+
         QVariant _userId_var = map.value("userId");
         if( !_userId_var.isNull() ) {
             _userId_var.convert( QVariant::nameToType("qint32") );
             result.setUserId( _userId_var.value<qint32>() );
         }
-        
+
         QVariant _query_var = map.value("query");
         if( !_query_var.isNull() ) {
             _query_var.convert( QVariant::nameToType("QString") );
             result.setQuery( _query_var.value<QString>() );
         }
-        
+
         QVariant _geo_var = map.value("geo");
         if( !_geo_var.isNull() )
             result.setGeo( GeoPoint::fromMap(_geo_var.toMap()) );
-        
+
         QVariant _offset_var = map.value("offset");
         if( !_offset_var.isNull() ) {
             _offset_var.convert( QVariant::nameToType("QString") );
             result.setOffset( _offset_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateBotInlineSend") {
@@ -3365,27 +3365,27 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
             _userId_var.convert( QVariant::nameToType("qint32") );
             result.setUserId( _userId_var.value<qint32>() );
         }
-        
+
         QVariant _query_var = map.value("query");
         if( !_query_var.isNull() ) {
             _query_var.convert( QVariant::nameToType("QString") );
             result.setQuery( _query_var.value<QString>() );
         }
-        
+
         QVariant _geo_var = map.value("geo");
         if( !_geo_var.isNull() )
             result.setGeo( GeoPoint::fromMap(_geo_var.toMap()) );
-        
+
         QVariant _idString_var = map.value("idString");
         if( !_idString_var.isNull() ) {
             _idString_var.convert( QVariant::nameToType("QString") );
             result.setIdString( _idString_var.value<QString>() );
         }
-        
+
         QVariant _msgIdInputBotInlineMessageID_var = map.value("msgIdInputBotInlineMessageID");
         if( !_msgIdInputBotInlineMessageID_var.isNull() )
             result.setMsgIdInputBotInlineMessageID( InputBotInlineMessageID::fromMap(_msgIdInputBotInlineMessageID_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateEditChannelMessage") {
@@ -3393,19 +3393,19 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _message_var = map.value("message");
         if( !_message_var.isNull() )
             result.setMessage( Message::fromMap(_message_var.toMap()) );
-        
+
         QVariant _pts_var = map.value("pts");
         if( !_pts_var.isNull() ) {
             _pts_var.convert( QVariant::nameToType("qint32") );
             result.setPts( _pts_var.value<qint32>() );
         }
-        
+
         QVariant _ptsCount_var = map.value("ptsCount");
         if( !_ptsCount_var.isNull() ) {
             _ptsCount_var.convert( QVariant::nameToType("qint32") );
             result.setPtsCount( _ptsCount_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateChannelPinnedMessage") {
@@ -3415,13 +3415,13 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
             _channelId_var.convert( QVariant::nameToType("qint32") );
             result.setChannelId( _channelId_var.value<qint32>() );
         }
-        
+
         QVariant _idInt_var = map.value("idInt");
         if( !_idInt_var.isNull() ) {
             _idInt_var.convert( QVariant::nameToType("qint32") );
             result.setIdInt( _idInt_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateBotCallbackQuery") {
@@ -3431,41 +3431,41 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
             _queryId_var.convert( QVariant::nameToType("qint64") );
             result.setQueryId( _queryId_var.value<qint64>() );
         }
-        
+
         QVariant _userId_var = map.value("userId");
         if( !_userId_var.isNull() ) {
             _userId_var.convert( QVariant::nameToType("qint32") );
             result.setUserId( _userId_var.value<qint32>() );
         }
-        
+
         QVariant _peer_var = map.value("peer");
         if( !_peer_var.isNull() )
             result.setPeer( Peer::fromMap(_peer_var.toMap()) );
-        
+
         QVariant _msgIdInt_var = map.value("msgIdInt");
         if( !_msgIdInt_var.isNull() ) {
             _msgIdInt_var.convert( QVariant::nameToType("qint32") );
             result.setMsgIdInt( _msgIdInt_var.value<qint32>() );
         }
-        
+
         QVariant _chatInstance_var = map.value("chatInstance");
         if( !_chatInstance_var.isNull() ) {
             _chatInstance_var.convert( QVariant::nameToType("qint64") );
             result.setChatInstance( _chatInstance_var.value<qint64>() );
         }
-        
+
         QVariant _dataBytes_var = map.value("dataBytes");
         if( !_dataBytes_var.isNull() ) {
             _dataBytes_var.convert( QVariant::nameToType("QByteArray") );
             result.setDataBytes( _dataBytes_var.value<QByteArray>() );
         }
-        
+
         QVariant _gameShortName_var = map.value("gameShortName");
         if( !_gameShortName_var.isNull() ) {
             _gameShortName_var.convert( QVariant::nameToType("QString") );
             result.setGameShortName( _gameShortName_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateEditMessage") {
@@ -3473,19 +3473,19 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _message_var = map.value("message");
         if( !_message_var.isNull() )
             result.setMessage( Message::fromMap(_message_var.toMap()) );
-        
+
         QVariant _pts_var = map.value("pts");
         if( !_pts_var.isNull() ) {
             _pts_var.convert( QVariant::nameToType("qint32") );
             result.setPts( _pts_var.value<qint32>() );
         }
-        
+
         QVariant _ptsCount_var = map.value("ptsCount");
         if( !_ptsCount_var.isNull() ) {
             _ptsCount_var.convert( QVariant::nameToType("qint32") );
             result.setPtsCount( _ptsCount_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateInlineBotCallbackQuery") {
@@ -3495,35 +3495,35 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
             _queryId_var.convert( QVariant::nameToType("qint64") );
             result.setQueryId( _queryId_var.value<qint64>() );
         }
-        
+
         QVariant _userId_var = map.value("userId");
         if( !_userId_var.isNull() ) {
             _userId_var.convert( QVariant::nameToType("qint32") );
             result.setUserId( _userId_var.value<qint32>() );
         }
-        
+
         QVariant _msgIdInputBotInlineMessageID_var = map.value("msgIdInputBotInlineMessageID");
         if( !_msgIdInputBotInlineMessageID_var.isNull() )
             result.setMsgIdInputBotInlineMessageID( InputBotInlineMessageID::fromMap(_msgIdInputBotInlineMessageID_var.toMap()) );
-        
+
         QVariant _chatInstance_var = map.value("chatInstance");
         if( !_chatInstance_var.isNull() ) {
             _chatInstance_var.convert( QVariant::nameToType("qint64") );
             result.setChatInstance( _chatInstance_var.value<qint64>() );
         }
-        
+
         QVariant _dataBytes_var = map.value("dataBytes");
         if( !_dataBytes_var.isNull() ) {
             _dataBytes_var.convert( QVariant::nameToType("QByteArray") );
             result.setDataBytes( _dataBytes_var.value<QByteArray>() );
         }
-        
+
         QVariant _gameShortName_var = map.value("gameShortName");
         if( !_gameShortName_var.isNull() ) {
             _gameShortName_var.convert( QVariant::nameToType("QString") );
             result.setGameShortName( _gameShortName_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateReadChannelOutbox") {
@@ -3533,13 +3533,13 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
             _channelId_var.convert( QVariant::nameToType("qint32") );
             result.setChannelId( _channelId_var.value<qint32>() );
         }
-        
+
         QVariant _maxId_var = map.value("maxId");
         if( !_maxId_var.isNull() ) {
             _maxId_var.convert( QVariant::nameToType("qint32") );
             result.setMaxId( _maxId_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateDraftMessage") {
@@ -3547,11 +3547,11 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _peer_var = map.value("peer");
         if( !_peer_var.isNull() )
             result.setPeer( Peer::fromMap(_peer_var.toMap()) );
-        
+
         QVariant _draft_var = map.value("draft");
         if( !_draft_var.isNull() )
             result.setDraft( DraftMessage::fromMap(_draft_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateReadFeaturedStickers") {
@@ -3577,23 +3577,23 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
             _channelId_var.convert( QVariant::nameToType("qint32") );
             result.setChannelId( _channelId_var.value<qint32>() );
         }
-        
+
         QVariant _webpage_var = map.value("webpage");
         if( !_webpage_var.isNull() )
             result.setWebpage( WebPage::fromMap(_webpage_var.toMap()) );
-        
+
         QVariant _pts_var = map.value("pts");
         if( !_pts_var.isNull() ) {
             _pts_var.convert( QVariant::nameToType("qint32") );
             result.setPts( _pts_var.value<qint32>() );
         }
-        
+
         QVariant _ptsCount_var = map.value("ptsCount");
         if( !_ptsCount_var.isNull() ) {
             _ptsCount_var.convert( QVariant::nameToType("qint32") );
             result.setPtsCount( _ptsCount_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateDialogPinned") {
@@ -3603,11 +3603,11 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
             _pinned_var.convert( QVariant::nameToType("bool") );
             result.setPinned( _pinned_var.value<bool>() );
         }
-        
+
         QVariant _peer_var = map.value("peer");
         if( !_peer_var.isNull() )
             result.setPeer( Peer::fromMap(_peer_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdatePinnedDialogs") {
@@ -3624,7 +3624,7 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _dataJSON_var = map.value("dataJSON");
         if( !_dataJSON_var.isNull() )
             result.setDataJSON( DataJSON::fromMap(_dataJSON_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateBotWebhookJSONQuery") {
@@ -3634,17 +3634,17 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
             _queryId_var.convert( QVariant::nameToType("qint64") );
             result.setQueryId( _queryId_var.value<qint64>() );
         }
-        
+
         QVariant _dataJSON_var = map.value("dataJSON");
         if( !_dataJSON_var.isNull() )
             result.setDataJSON( DataJSON::fromMap(_dataJSON_var.toMap()) );
-        
+
         QVariant _timeout_var = map.value("timeout");
         if( !_timeout_var.isNull() ) {
             _timeout_var.convert( QVariant::nameToType("qint32") );
             result.setTimeout( _timeout_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateBotShippingQuery") {
@@ -3654,23 +3654,23 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
             _queryId_var.convert( QVariant::nameToType("qint64") );
             result.setQueryId( _queryId_var.value<qint64>() );
         }
-        
+
         QVariant _userId_var = map.value("userId");
         if( !_userId_var.isNull() ) {
             _userId_var.convert( QVariant::nameToType("qint32") );
             result.setUserId( _userId_var.value<qint32>() );
         }
-        
+
         QVariant _payload_var = map.value("payload");
         if( !_payload_var.isNull() ) {
             _payload_var.convert( QVariant::nameToType("QByteArray") );
             result.setPayload( _payload_var.value<QByteArray>() );
         }
-        
+
         QVariant _shippingAddress_var = map.value("shippingAddress");
         if( !_shippingAddress_var.isNull() )
             result.setShippingAddress( PostAddress::fromMap(_shippingAddress_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateBotPrecheckoutQuery") {
@@ -3680,41 +3680,41 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
             _queryId_var.convert( QVariant::nameToType("qint64") );
             result.setQueryId( _queryId_var.value<qint64>() );
         }
-        
+
         QVariant _userId_var = map.value("userId");
         if( !_userId_var.isNull() ) {
             _userId_var.convert( QVariant::nameToType("qint32") );
             result.setUserId( _userId_var.value<qint32>() );
         }
-        
+
         QVariant _payload_var = map.value("payload");
         if( !_payload_var.isNull() ) {
             _payload_var.convert( QVariant::nameToType("QByteArray") );
             result.setPayload( _payload_var.value<QByteArray>() );
         }
-        
+
         QVariant _info_var = map.value("info");
         if( !_info_var.isNull() )
             result.setInfo( PaymentRequestedInfo::fromMap(_info_var.toMap()) );
-        
+
         QVariant _shippingOptionId_var = map.value("shippingOptionId");
         if( !_shippingOptionId_var.isNull() ) {
             _shippingOptionId_var.convert( QVariant::nameToType("QString") );
             result.setShippingOptionId( _shippingOptionId_var.value<QString>() );
         }
-        
+
         QVariant _currency_var = map.value("currency");
         if( !_currency_var.isNull() ) {
             _currency_var.convert( QVariant::nameToType("QString") );
             result.setCurrency( _currency_var.value<QString>() );
         }
-        
+
         QVariant _totalAmount_var = map.value("totalAmount");
         if( !_totalAmount_var.isNull() ) {
             _totalAmount_var.convert( QVariant::nameToType("qint64") );
             result.setTotalAmount( _totalAmount_var.value<qint64>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdatePhoneCall") {
@@ -3722,7 +3722,7 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _phoneCall_var = map.value("phoneCall");
         if( !_phoneCall_var.isNull() )
             result.setPhoneCall( PhoneCall::fromMap(_phoneCall_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Update::typeUpdateLangPackTooLong") {
@@ -3734,7 +3734,7 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _difference_var = map.value("difference");
         if( !_difference_var.isNull() )
             result.setDifference( LangPackDifference::fromMap(_difference_var.toMap()) );
-        
+
         return result;
     }
     return result;
@@ -3929,10 +3929,10 @@ QDataStream &operator<<(QDataStream &stream, const Update &item) {
         stream << item.orderVectorlong();
         break;
     case Update::typeUpdateStickerSets:
-        
+
         break;
     case Update::typeUpdateSavedGifs:
-        
+
         break;
     case Update::typeUpdateBotInlineQuery:
         stream << item.flags();
@@ -3992,16 +3992,16 @@ QDataStream &operator<<(QDataStream &stream, const Update &item) {
         stream << item.draft();
         break;
     case Update::typeUpdateReadFeaturedStickers:
-        
+
         break;
     case Update::typeUpdateRecentStickers:
-        
+
         break;
     case Update::typeUpdateConfig:
-        
+
         break;
     case Update::typeUpdatePtsChanged:
-        
+
         break;
     case Update::typeUpdateChannelWebPage:
         stream << item.channelId();
@@ -4045,7 +4045,7 @@ QDataStream &operator<<(QDataStream &stream, const Update &item) {
         stream << item.phoneCall();
         break;
     case Update::typeUpdateLangPackTooLong:
-        
+
         break;
     case Update::typeUpdateLangPack:
         stream << item.difference();
@@ -4471,11 +4471,11 @@ QDataStream &operator>>(QDataStream &stream, Update &item) {
     }
         break;
     case Update::typeUpdateStickerSets: {
-        
+
     }
         break;
     case Update::typeUpdateSavedGifs: {
-        
+
     }
         break;
     case Update::typeUpdateBotInlineQuery: {
@@ -4623,19 +4623,19 @@ QDataStream &operator>>(QDataStream &stream, Update &item) {
     }
         break;
     case Update::typeUpdateReadFeaturedStickers: {
-        
+
     }
         break;
     case Update::typeUpdateRecentStickers: {
-        
+
     }
         break;
     case Update::typeUpdateConfig: {
-        
+
     }
         break;
     case Update::typeUpdatePtsChanged: {
-        
+
     }
         break;
     case Update::typeUpdateChannelWebPage: {
@@ -4738,7 +4738,7 @@ QDataStream &operator>>(QDataStream &stream, Update &item) {
     }
         break;
     case Update::typeUpdateLangPackTooLong: {
-        
+
     }
         break;
     case Update::typeUpdateLangPack: {
@@ -4751,7 +4751,7 @@ QDataStream &operator>>(QDataStream &stream, Update &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const Update &item) {
+/*QDebug operator<<(QDebug debug,  const Update &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.Update(";
@@ -5111,4 +5111,4 @@ QDebug operator<<(QDebug debug,  const Update &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

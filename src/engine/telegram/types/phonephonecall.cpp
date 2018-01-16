@@ -35,7 +35,7 @@ PhonePhoneCall::PhonePhoneCall(const Null &null) :
 }
 
 PhonePhoneCall::~PhonePhoneCall() {
-    
+
 }
 
 void PhonePhoneCall::setPhoneCall(const PhoneCall &phoneCall) {
@@ -94,7 +94,7 @@ bool PhonePhoneCall::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -114,7 +114,7 @@ bool PhonePhoneCall::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -133,7 +133,7 @@ QMap<QString, QVariant> PhonePhoneCall::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -146,7 +146,7 @@ PhonePhoneCall PhonePhoneCall::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _phoneCall_var = map.value("phoneCall");
         if( !_phoneCall_var.isNull() )
             result.setPhoneCall( PhoneCall::fromMap(_phoneCall_var.toMap()) );
-        
+
         QList<QVariant> map_users = map["users"].toList();
         QList<User> _users;
         for(const QVariant &var: map_users)
@@ -197,7 +197,7 @@ QDataStream &operator>>(QDataStream &stream, PhonePhoneCall &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const PhonePhoneCall &item) {
+/*QDebug operator<<(QDebug debug,  const PhonePhoneCall &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.PhonePhoneCall(";
@@ -211,4 +211,4 @@ QDebug operator<<(QDebug debug,  const PhonePhoneCall &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

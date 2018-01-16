@@ -10,7 +10,7 @@ MessagesBotResultsObject::MessagesBotResultsObject(const MessagesBotResults &cor
     m_core(core)
 {
     m_switchPm = new InlineBotSwitchPMObject(m_core.switchPm(), this);
-    connect(m_switchPm.data(), &InlineBotSwitchPMObject::coreChanged, this, &MessagesBotResultsObject::coreSwitchPmChanged);
+    connect(m_switchPm.data(), SIGNAL(coreChanged()), this, SLOT(coreSwitchPmChanged()));
 }
 
 MessagesBotResultsObject::MessagesBotResultsObject(QObject *parent) :
@@ -19,7 +19,7 @@ MessagesBotResultsObject::MessagesBotResultsObject(QObject *parent) :
     m_core()
 {
     m_switchPm = new InlineBotSwitchPMObject(m_core.switchPm(), this);
-    connect(m_switchPm.data(), &InlineBotSwitchPMObject::coreChanged, this, &MessagesBotResultsObject::coreSwitchPmChanged);
+    connect(m_switchPm.data(), SIGNAL(coreChanged()), this, SLOT(coreSwitchPmChanged()));
 }
 
 MessagesBotResultsObject::~MessagesBotResultsObject() {
@@ -98,7 +98,7 @@ void MessagesBotResultsObject::setSwitchPm(InlineBotSwitchPMObject* switchPm) {
     if(m_switchPm) {
         m_switchPm->setParent(this);
         m_core.setSwitchPm(m_switchPm->core());
-        connect(m_switchPm.data(), &InlineBotSwitchPMObject::coreChanged, this, &MessagesBotResultsObject::coreSwitchPmChanged);
+        connect(m_switchPm.data(), SIGNAL(coreChanged()), this, SLOT(coreSwitchPmChanged()));
     }
     Q_EMIT switchPmChanged();
     Q_EMIT coreChanged();

@@ -10,7 +10,7 @@ TopPeerCategoryPeersObject::TopPeerCategoryPeersObject(const TopPeerCategoryPeer
     m_core(core)
 {
     m_category = new TopPeerCategoryObject(m_core.category(), this);
-    connect(m_category.data(), &TopPeerCategoryObject::coreChanged, this, &TopPeerCategoryPeersObject::coreCategoryChanged);
+    connect(m_category.data(), SIGNAL(coreChanged()), this, SLOT(coreCategoryChanged()));
 }
 
 TopPeerCategoryPeersObject::TopPeerCategoryPeersObject(QObject *parent) :
@@ -19,7 +19,7 @@ TopPeerCategoryPeersObject::TopPeerCategoryPeersObject(QObject *parent) :
     m_core()
 {
     m_category = new TopPeerCategoryObject(m_core.category(), this);
-    connect(m_category.data(), &TopPeerCategoryObject::coreChanged, this, &TopPeerCategoryPeersObject::coreCategoryChanged);
+    connect(m_category.data(), SIGNAL(coreChanged()), this, SLOT(coreCategoryChanged()));
 }
 
 TopPeerCategoryPeersObject::~TopPeerCategoryPeersObject() {
@@ -32,7 +32,7 @@ void TopPeerCategoryPeersObject::setCategory(TopPeerCategoryObject* category) {
     if(m_category) {
         m_category->setParent(this);
         m_core.setCategory(m_category->core());
-        connect(m_category.data(), &TopPeerCategoryObject::coreChanged, this, &TopPeerCategoryPeersObject::coreCategoryChanged);
+        connect(m_category.data(), SIGNAL(coreChanged()), this, SLOT(coreCategoryChanged()));
     }
     Q_EMIT categoryChanged();
     Q_EMIT coreChanged();

@@ -59,7 +59,7 @@ DecryptedMessageAction::DecryptedMessageAction(const Null &null) :
 }
 
 DecryptedMessageAction::~DecryptedMessageAction() {
-    
+
 }
 
 void DecryptedMessageAction::setAction(const SendMessageAction &action) {
@@ -190,7 +190,7 @@ bool DecryptedMessageAction::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageActionReadMessagesSecret8: {
         if(in->fetchInt() != (qint32)CoreTypes::typeVector) return false;
         qint32 m_randomIds_length = in->fetchInt();
@@ -204,7 +204,7 @@ bool DecryptedMessageAction::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageActionDeleteMessagesSecret8: {
         if(in->fetchInt() != (qint32)CoreTypes::typeVector) return false;
         qint32 m_randomIds_length = in->fetchInt();
@@ -218,7 +218,7 @@ bool DecryptedMessageAction::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageActionScreenshotMessagesSecret8: {
         if(in->fetchInt() != (qint32)CoreTypes::typeVector) return false;
         qint32 m_randomIds_length = in->fetchInt();
@@ -232,13 +232,13 @@ bool DecryptedMessageAction::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageActionFlushHistorySecret8: {
         m_classType = static_cast<DecryptedMessageActionClassType>(x);
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageActionResendSecret17: {
         m_startSeqNo = in->fetchInt();
         m_endSeqNo = in->fetchInt();
@@ -246,21 +246,21 @@ bool DecryptedMessageAction::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageActionNotifyLayerSecret17: {
         m_layer = in->fetchInt();
         m_classType = static_cast<DecryptedMessageActionClassType>(x);
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageActionTypingSecret17: {
         m_action.fetch(in);
         m_classType = static_cast<DecryptedMessageActionClassType>(x);
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageActionRequestKeySecret20: {
         m_exchangeId = in->fetchLong();
         m_gA = in->fetchBytes();
@@ -268,7 +268,7 @@ bool DecryptedMessageAction::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageActionAcceptKeySecret20: {
         m_exchangeId = in->fetchLong();
         m_gB = in->fetchBytes();
@@ -277,14 +277,14 @@ bool DecryptedMessageAction::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageActionAbortKeySecret20: {
         m_exchangeId = in->fetchLong();
         m_classType = static_cast<DecryptedMessageActionClassType>(x);
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageActionCommitKeySecret20: {
         m_exchangeId = in->fetchLong();
         m_keyFingerprint = in->fetchLong();
@@ -292,13 +292,13 @@ bool DecryptedMessageAction::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageActionNoopSecret20: {
         m_classType = static_cast<DecryptedMessageActionClassType>(x);
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -313,7 +313,7 @@ bool DecryptedMessageAction::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageActionReadMessagesSecret8: {
         out->appendInt(CoreTypes::typeVector);
         out->appendInt(m_randomIds.count());
@@ -323,7 +323,7 @@ bool DecryptedMessageAction::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageActionDeleteMessagesSecret8: {
         out->appendInt(CoreTypes::typeVector);
         out->appendInt(m_randomIds.count());
@@ -333,7 +333,7 @@ bool DecryptedMessageAction::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageActionScreenshotMessagesSecret8: {
         out->appendInt(CoreTypes::typeVector);
         out->appendInt(m_randomIds.count());
@@ -343,38 +343,38 @@ bool DecryptedMessageAction::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageActionFlushHistorySecret8: {
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageActionResendSecret17: {
         out->appendInt(m_startSeqNo);
         out->appendInt(m_endSeqNo);
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageActionNotifyLayerSecret17: {
         out->appendInt(m_layer);
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageActionTypingSecret17: {
         m_action.push(out);
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageActionRequestKeySecret20: {
         out->appendLong(m_exchangeId);
         out->appendBytes(m_gA);
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageActionAcceptKeySecret20: {
         out->appendLong(m_exchangeId);
         out->appendBytes(m_gB);
@@ -382,25 +382,25 @@ bool DecryptedMessageAction::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageActionAbortKeySecret20: {
         out->appendLong(m_exchangeId);
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageActionCommitKeySecret20: {
         out->appendLong(m_exchangeId);
         out->appendLong(m_keyFingerprint);
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageActionNoopSecret20: {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -415,7 +415,7 @@ QMap<QString, QVariant> DecryptedMessageAction::toMap() const {
         return result;
     }
         break;
-    
+
     case typeDecryptedMessageActionReadMessagesSecret8: {
         result["classType"] = "DecryptedMessageAction::typeDecryptedMessageActionReadMessagesSecret8";
         QList<QVariant> _randomIds;
@@ -425,7 +425,7 @@ QMap<QString, QVariant> DecryptedMessageAction::toMap() const {
         return result;
     }
         break;
-    
+
     case typeDecryptedMessageActionDeleteMessagesSecret8: {
         result["classType"] = "DecryptedMessageAction::typeDecryptedMessageActionDeleteMessagesSecret8";
         QList<QVariant> _randomIds;
@@ -435,7 +435,7 @@ QMap<QString, QVariant> DecryptedMessageAction::toMap() const {
         return result;
     }
         break;
-    
+
     case typeDecryptedMessageActionScreenshotMessagesSecret8: {
         result["classType"] = "DecryptedMessageAction::typeDecryptedMessageActionScreenshotMessagesSecret8";
         QList<QVariant> _randomIds;
@@ -445,13 +445,13 @@ QMap<QString, QVariant> DecryptedMessageAction::toMap() const {
         return result;
     }
         break;
-    
+
     case typeDecryptedMessageActionFlushHistorySecret8: {
         result["classType"] = "DecryptedMessageAction::typeDecryptedMessageActionFlushHistorySecret8";
         return result;
     }
         break;
-    
+
     case typeDecryptedMessageActionResendSecret17: {
         result["classType"] = "DecryptedMessageAction::typeDecryptedMessageActionResendSecret17";
         if( startSeqNo() ) result["startSeqNo"] = QString::number(startSeqNo());
@@ -459,21 +459,21 @@ QMap<QString, QVariant> DecryptedMessageAction::toMap() const {
         return result;
     }
         break;
-    
+
     case typeDecryptedMessageActionNotifyLayerSecret17: {
         result["classType"] = "DecryptedMessageAction::typeDecryptedMessageActionNotifyLayerSecret17";
         if( layer() ) result["layer"] = QString::number(layer());
         return result;
     }
         break;
-    
+
     case typeDecryptedMessageActionTypingSecret17: {
         result["classType"] = "DecryptedMessageAction::typeDecryptedMessageActionTypingSecret17";
         if( !m_action.isNull() ) result["action"] = m_action.toMap();
         return result;
     }
         break;
-    
+
     case typeDecryptedMessageActionRequestKeySecret20: {
         result["classType"] = "DecryptedMessageAction::typeDecryptedMessageActionRequestKeySecret20";
         if( exchangeId() ) result["exchangeId"] = QString::number(exchangeId());
@@ -481,7 +481,7 @@ QMap<QString, QVariant> DecryptedMessageAction::toMap() const {
         return result;
     }
         break;
-    
+
     case typeDecryptedMessageActionAcceptKeySecret20: {
         result["classType"] = "DecryptedMessageAction::typeDecryptedMessageActionAcceptKeySecret20";
         if( exchangeId() ) result["exchangeId"] = QString::number(exchangeId());
@@ -490,14 +490,14 @@ QMap<QString, QVariant> DecryptedMessageAction::toMap() const {
         return result;
     }
         break;
-    
+
     case typeDecryptedMessageActionAbortKeySecret20: {
         result["classType"] = "DecryptedMessageAction::typeDecryptedMessageActionAbortKeySecret20";
         if( exchangeId() ) result["exchangeId"] = QString::number(exchangeId());
         return result;
     }
         break;
-    
+
     case typeDecryptedMessageActionCommitKeySecret20: {
         result["classType"] = "DecryptedMessageAction::typeDecryptedMessageActionCommitKeySecret20";
         if( exchangeId() ) result["exchangeId"] = QString::number(exchangeId());
@@ -505,13 +505,13 @@ QMap<QString, QVariant> DecryptedMessageAction::toMap() const {
         return result;
     }
         break;
-    
+
     case typeDecryptedMessageActionNoopSecret20: {
         result["classType"] = "DecryptedMessageAction::typeDecryptedMessageActionNoopSecret20";
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -526,7 +526,7 @@ DecryptedMessageAction DecryptedMessageAction::fromMap(const QMap<QString, QVari
             _ttlSeconds_var.convert( QVariant::nameToType("qint32") );
             result.setTtlSeconds( _ttlSeconds_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "DecryptedMessageAction::typeDecryptedMessageActionReadMessagesSecret8") {
@@ -567,13 +567,13 @@ DecryptedMessageAction DecryptedMessageAction::fromMap(const QMap<QString, QVari
             _startSeqNo_var.convert( QVariant::nameToType("qint32") );
             result.setStartSeqNo( _startSeqNo_var.value<qint32>() );
         }
-        
+
         QVariant _endSeqNo_var = map.value("endSeqNo");
         if( !_endSeqNo_var.isNull() ) {
             _endSeqNo_var.convert( QVariant::nameToType("qint32") );
             result.setEndSeqNo( _endSeqNo_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "DecryptedMessageAction::typeDecryptedMessageActionNotifyLayerSecret17") {
@@ -583,7 +583,7 @@ DecryptedMessageAction DecryptedMessageAction::fromMap(const QMap<QString, QVari
             _layer_var.convert( QVariant::nameToType("qint32") );
             result.setLayer( _layer_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "DecryptedMessageAction::typeDecryptedMessageActionTypingSecret17") {
@@ -591,7 +591,7 @@ DecryptedMessageAction DecryptedMessageAction::fromMap(const QMap<QString, QVari
         QVariant _action_var = map.value("action");
         if( !_action_var.isNull() )
             result.setAction( SendMessageAction::fromMap(_action_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "DecryptedMessageAction::typeDecryptedMessageActionRequestKeySecret20") {
@@ -601,13 +601,13 @@ DecryptedMessageAction DecryptedMessageAction::fromMap(const QMap<QString, QVari
             _exchangeId_var.convert( QVariant::nameToType("qint64") );
             result.setExchangeId( _exchangeId_var.value<qint64>() );
         }
-        
+
         QVariant _gA_var = map.value("gA");
         if( !_gA_var.isNull() ) {
             _gA_var.convert( QVariant::nameToType("QByteArray") );
             result.setGA( _gA_var.value<QByteArray>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "DecryptedMessageAction::typeDecryptedMessageActionAcceptKeySecret20") {
@@ -617,19 +617,19 @@ DecryptedMessageAction DecryptedMessageAction::fromMap(const QMap<QString, QVari
             _exchangeId_var.convert( QVariant::nameToType("qint64") );
             result.setExchangeId( _exchangeId_var.value<qint64>() );
         }
-        
+
         QVariant _gB_var = map.value("gB");
         if( !_gB_var.isNull() ) {
             _gB_var.convert( QVariant::nameToType("QByteArray") );
             result.setGB( _gB_var.value<QByteArray>() );
         }
-        
+
         QVariant _keyFingerprint_var = map.value("keyFingerprint");
         if( !_keyFingerprint_var.isNull() ) {
             _keyFingerprint_var.convert( QVariant::nameToType("qint64") );
             result.setKeyFingerprint( _keyFingerprint_var.value<qint64>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "DecryptedMessageAction::typeDecryptedMessageActionAbortKeySecret20") {
@@ -639,7 +639,7 @@ DecryptedMessageAction DecryptedMessageAction::fromMap(const QMap<QString, QVari
             _exchangeId_var.convert( QVariant::nameToType("qint64") );
             result.setExchangeId( _exchangeId_var.value<qint64>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "DecryptedMessageAction::typeDecryptedMessageActionCommitKeySecret20") {
@@ -649,13 +649,13 @@ DecryptedMessageAction DecryptedMessageAction::fromMap(const QMap<QString, QVari
             _exchangeId_var.convert( QVariant::nameToType("qint64") );
             result.setExchangeId( _exchangeId_var.value<qint64>() );
         }
-        
+
         QVariant _keyFingerprint_var = map.value("keyFingerprint");
         if( !_keyFingerprint_var.isNull() ) {
             _keyFingerprint_var.convert( QVariant::nameToType("qint64") );
             result.setKeyFingerprint( _keyFingerprint_var.value<qint64>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "DecryptedMessageAction::typeDecryptedMessageActionNoopSecret20") {
@@ -692,7 +692,7 @@ QDataStream &operator<<(QDataStream &stream, const DecryptedMessageAction &item)
         stream << item.randomIds();
         break;
     case DecryptedMessageAction::typeDecryptedMessageActionFlushHistorySecret8:
-        
+
         break;
     case DecryptedMessageAction::typeDecryptedMessageActionResendSecret17:
         stream << item.startSeqNo();
@@ -721,7 +721,7 @@ QDataStream &operator<<(QDataStream &stream, const DecryptedMessageAction &item)
         stream << item.keyFingerprint();
         break;
     case DecryptedMessageAction::typeDecryptedMessageActionNoopSecret20:
-        
+
         break;
     }
     return stream;
@@ -757,7 +757,7 @@ QDataStream &operator>>(QDataStream &stream, DecryptedMessageAction &item) {
     }
         break;
     case DecryptedMessageAction::typeDecryptedMessageActionFlushHistorySecret8: {
-        
+
     }
         break;
     case DecryptedMessageAction::typeDecryptedMessageActionResendSecret17: {
@@ -818,14 +818,14 @@ QDataStream &operator>>(QDataStream &stream, DecryptedMessageAction &item) {
     }
         break;
     case DecryptedMessageAction::typeDecryptedMessageActionNoopSecret20: {
-        
+
     }
         break;
     }
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const DecryptedMessageAction &item) {
+/*QDebug operator<<(QDebug debug,  const DecryptedMessageAction &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.DecryptedMessageAction(";
@@ -889,4 +889,4 @@ QDebug operator<<(QDebug debug,  const DecryptedMessageAction &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

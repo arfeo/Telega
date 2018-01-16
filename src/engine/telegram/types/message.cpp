@@ -67,7 +67,7 @@ Message::Message(const Null &null) :
 }
 
 Message::~Message() {
-    
+
 }
 
 void Message::setAction(const MessageAction &action) {
@@ -311,7 +311,7 @@ bool Message::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeMessage: {
         m_flags = in->fetchInt();
         m_id = in->fetchInt();
@@ -358,7 +358,7 @@ bool Message::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeMessageService: {
         m_flags = in->fetchInt();
         m_id = in->fetchInt();
@@ -375,7 +375,7 @@ bool Message::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -390,7 +390,7 @@ bool Message::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeMessage: {
         out->appendInt(m_flags);
         out->appendInt(m_id);
@@ -431,7 +431,7 @@ bool Message::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeMessageService: {
         out->appendInt(m_flags);
         out->appendInt(m_id);
@@ -447,7 +447,7 @@ bool Message::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -462,7 +462,7 @@ QMap<QString, QVariant> Message::toMap() const {
         return result;
     }
         break;
-    
+
     case typeMessage: {
         result["classType"] = "Message::typeMessage";
         if( out() ) result["out"] = QString::number(out());
@@ -489,7 +489,7 @@ QMap<QString, QVariant> Message::toMap() const {
         return result;
     }
         break;
-    
+
     case typeMessageService: {
         result["classType"] = "Message::typeMessageService";
         if( out() ) result["out"] = QString::number(out());
@@ -506,7 +506,7 @@ QMap<QString, QVariant> Message::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -521,7 +521,7 @@ Message Message::fromMap(const QMap<QString, QVariant> &map) {
             _id_var.convert( QVariant::nameToType("qint32") );
             result.setId( _id_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Message::typeMessage") {
@@ -531,83 +531,83 @@ Message Message::fromMap(const QMap<QString, QVariant> &map) {
             _out_var.convert( QVariant::nameToType("bool") );
             result.setOut( _out_var.value<bool>() );
         }
-        
+
         QVariant _mentioned_var = map.value("mentioned");
         if( !_mentioned_var.isNull() ) {
             _mentioned_var.convert( QVariant::nameToType("bool") );
             result.setMentioned( _mentioned_var.value<bool>() );
         }
-        
+
         QVariant _mediaUnread_var = map.value("mediaUnread");
         if( !_mediaUnread_var.isNull() ) {
             _mediaUnread_var.convert( QVariant::nameToType("bool") );
             result.setMediaUnread( _mediaUnread_var.value<bool>() );
         }
-        
+
         QVariant _silent_var = map.value("silent");
         if( !_silent_var.isNull() ) {
             _silent_var.convert( QVariant::nameToType("bool") );
             result.setSilent( _silent_var.value<bool>() );
         }
-        
+
         QVariant _post_var = map.value("post");
         if( !_post_var.isNull() ) {
             _post_var.convert( QVariant::nameToType("bool") );
             result.setPost( _post_var.value<bool>() );
         }
-        
+
         QVariant _id_var = map.value("id");
         if( !_id_var.isNull() ) {
             _id_var.convert( QVariant::nameToType("qint32") );
             result.setId( _id_var.value<qint32>() );
         }
-        
+
         QVariant _fromId_var = map.value("fromId");
         if( !_fromId_var.isNull() ) {
             _fromId_var.convert( QVariant::nameToType("qint32") );
             result.setFromId( _fromId_var.value<qint32>() );
         }
-        
+
         QVariant _toId_var = map.value("toId");
         if( !_toId_var.isNull() )
             result.setToId( Peer::fromMap(_toId_var.toMap()) );
-        
+
         QVariant _fwdFrom_var = map.value("fwdFrom");
         if( !_fwdFrom_var.isNull() )
             result.setFwdFrom( MessageFwdHeader::fromMap(_fwdFrom_var.toMap()) );
-        
+
         QVariant _viaBotId_var = map.value("viaBotId");
         if( !_viaBotId_var.isNull() ) {
             _viaBotId_var.convert( QVariant::nameToType("qint32") );
             result.setViaBotId( _viaBotId_var.value<qint32>() );
         }
-        
+
         QVariant _replyToMsgId_var = map.value("replyToMsgId");
         if( !_replyToMsgId_var.isNull() ) {
             _replyToMsgId_var.convert( QVariant::nameToType("qint32") );
             result.setReplyToMsgId( _replyToMsgId_var.value<qint32>() );
         }
-        
+
         QVariant _date_var = map.value("date");
         if( !_date_var.isNull() ) {
             _date_var.convert( QVariant::nameToType("qint32") );
             result.setDate( _date_var.value<qint32>() );
         }
-        
+
         QVariant _message_var = map.value("message");
         if( !_message_var.isNull() ) {
             _message_var.convert( QVariant::nameToType("QString") );
             result.setMessage( _message_var.value<QString>() );
         }
-        
+
         QVariant _media_var = map.value("media");
         if( !_media_var.isNull() )
             result.setMedia( MessageMedia::fromMap(_media_var.toMap()) );
-        
+
         QVariant _replyMarkup_var = map.value("replyMarkup");
         if( !_replyMarkup_var.isNull() )
             result.setReplyMarkup( ReplyMarkup::fromMap(_replyMarkup_var.toMap()) );
-        
+
         QList<QVariant> map_entities = map["entities"].toList();
         QList<MessageEntity> _entities;
         for(const QVariant &var: map_entities)
@@ -618,13 +618,13 @@ Message Message::fromMap(const QMap<QString, QVariant> &map) {
             _views_var.convert( QVariant::nameToType("qint32") );
             result.setViews( _views_var.value<qint32>() );
         }
-        
+
         QVariant _editDate_var = map.value("editDate");
         if( !_editDate_var.isNull() ) {
             _editDate_var.convert( QVariant::nameToType("qint32") );
             result.setEditDate( _editDate_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Message::typeMessageService") {
@@ -634,63 +634,63 @@ Message Message::fromMap(const QMap<QString, QVariant> &map) {
             _out_var.convert( QVariant::nameToType("bool") );
             result.setOut( _out_var.value<bool>() );
         }
-        
+
         QVariant _mentioned_var = map.value("mentioned");
         if( !_mentioned_var.isNull() ) {
             _mentioned_var.convert( QVariant::nameToType("bool") );
             result.setMentioned( _mentioned_var.value<bool>() );
         }
-        
+
         QVariant _mediaUnread_var = map.value("mediaUnread");
         if( !_mediaUnread_var.isNull() ) {
             _mediaUnread_var.convert( QVariant::nameToType("bool") );
             result.setMediaUnread( _mediaUnread_var.value<bool>() );
         }
-        
+
         QVariant _silent_var = map.value("silent");
         if( !_silent_var.isNull() ) {
             _silent_var.convert( QVariant::nameToType("bool") );
             result.setSilent( _silent_var.value<bool>() );
         }
-        
+
         QVariant _post_var = map.value("post");
         if( !_post_var.isNull() ) {
             _post_var.convert( QVariant::nameToType("bool") );
             result.setPost( _post_var.value<bool>() );
         }
-        
+
         QVariant _id_var = map.value("id");
         if( !_id_var.isNull() ) {
             _id_var.convert( QVariant::nameToType("qint32") );
             result.setId( _id_var.value<qint32>() );
         }
-        
+
         QVariant _fromId_var = map.value("fromId");
         if( !_fromId_var.isNull() ) {
             _fromId_var.convert( QVariant::nameToType("qint32") );
             result.setFromId( _fromId_var.value<qint32>() );
         }
-        
+
         QVariant _toId_var = map.value("toId");
         if( !_toId_var.isNull() )
             result.setToId( Peer::fromMap(_toId_var.toMap()) );
-        
+
         QVariant _replyToMsgId_var = map.value("replyToMsgId");
         if( !_replyToMsgId_var.isNull() ) {
             _replyToMsgId_var.convert( QVariant::nameToType("qint32") );
             result.setReplyToMsgId( _replyToMsgId_var.value<qint32>() );
         }
-        
+
         QVariant _date_var = map.value("date");
         if( !_date_var.isNull() ) {
             _date_var.convert( QVariant::nameToType("qint32") );
             result.setDate( _date_var.value<qint32>() );
         }
-        
+
         QVariant _action_var = map.value("action");
         if( !_action_var.isNull() )
             result.setAction( MessageAction::fromMap(_action_var.toMap()) );
-        
+
         return result;
     }
     return result;
@@ -826,7 +826,7 @@ QDataStream &operator>>(QDataStream &stream, Message &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const Message &item) {
+/*QDebug operator<<(QDebug debug,  const Message &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.Message(";
@@ -866,4 +866,4 @@ QDebug operator<<(QDebug debug,  const Message &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

@@ -11,9 +11,9 @@ StickerSetCoveredObject::StickerSetCoveredObject(const StickerSetCovered &core, 
     m_core(core)
 {
     m_cover = new DocumentObject(m_core.cover(), this);
-    connect(m_cover.data(), &DocumentObject::coreChanged, this, &StickerSetCoveredObject::coreCoverChanged);
+    connect(m_cover.data(), SIGNAL(coreChanged()), this, SLOT(coreCoverChanged()));
     m_set = new StickerSetObject(m_core.set(), this);
-    connect(m_set.data(), &StickerSetObject::coreChanged, this, &StickerSetCoveredObject::coreSetChanged);
+    connect(m_set.data(), SIGNAL(coreChanged()), this, SLOT(coreSetChanged()));
 }
 
 StickerSetCoveredObject::StickerSetCoveredObject(QObject *parent) :
@@ -23,9 +23,9 @@ StickerSetCoveredObject::StickerSetCoveredObject(QObject *parent) :
     m_core()
 {
     m_cover = new DocumentObject(m_core.cover(), this);
-    connect(m_cover.data(), &DocumentObject::coreChanged, this, &StickerSetCoveredObject::coreCoverChanged);
+    connect(m_cover.data(), SIGNAL(coreChanged()), this, SLOT(coreCoverChanged()));
     m_set = new StickerSetObject(m_core.set(), this);
-    connect(m_set.data(), &StickerSetObject::coreChanged, this, &StickerSetCoveredObject::coreSetChanged);
+    connect(m_set.data(), SIGNAL(coreChanged()), this, SLOT(coreSetChanged()));
 }
 
 StickerSetCoveredObject::~StickerSetCoveredObject() {
@@ -38,7 +38,7 @@ void StickerSetCoveredObject::setCover(DocumentObject* cover) {
     if(m_cover) {
         m_cover->setParent(this);
         m_core.setCover(m_cover->core());
-        connect(m_cover.data(), &DocumentObject::coreChanged, this, &StickerSetCoveredObject::coreCoverChanged);
+        connect(m_cover.data(), SIGNAL(coreChanged()), this, SLOT(coreCoverChanged()));
     }
     Q_EMIT coverChanged();
     Q_EMIT coreChanged();
@@ -66,7 +66,7 @@ void StickerSetCoveredObject::setSet(StickerSetObject* set) {
     if(m_set) {
         m_set->setParent(this);
         m_core.setSet(m_set->core());
-        connect(m_set.data(), &StickerSetObject::coreChanged, this, &StickerSetCoveredObject::coreSetChanged);
+        connect(m_set.data(), SIGNAL(coreChanged()), this, SLOT(coreSetChanged()));
     }
     Q_EMIT setChanged();
     Q_EMIT coreChanged();

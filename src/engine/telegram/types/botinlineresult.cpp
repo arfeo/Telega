@@ -51,7 +51,7 @@ BotInlineResult::BotInlineResult(const Null &null) :
 }
 
 BotInlineResult::~BotInlineResult() {
-    
+
 }
 
 void BotInlineResult::setContentType(const QString &contentType) {
@@ -284,7 +284,7 @@ bool BotInlineResult::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeBotInlineMediaResult: {
         m_flags = in->fetchInt();
         m_id = in->fetchQString();
@@ -306,7 +306,7 @@ bool BotInlineResult::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -351,7 +351,7 @@ bool BotInlineResult::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeBotInlineMediaResult: {
         out->appendInt(m_flags);
         out->appendQString(m_id);
@@ -372,7 +372,7 @@ bool BotInlineResult::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -398,7 +398,7 @@ QMap<QString, QVariant> BotInlineResult::toMap() const {
         return result;
     }
         break;
-    
+
     case typeBotInlineMediaResult: {
         result["classType"] = "BotInlineResult::typeBotInlineMediaResult";
         if( !m_id.isEmpty() ) result["id"] = QVariant::fromValue<QString>(m_id);
@@ -411,7 +411,7 @@ QMap<QString, QVariant> BotInlineResult::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -426,71 +426,71 @@ BotInlineResult BotInlineResult::fromMap(const QMap<QString, QVariant> &map) {
             _id_var.convert( QVariant::nameToType("QString") );
             result.setId( _id_var.value<QString>() );
         }
-        
+
         QVariant _type_var = map.value("type");
         if( !_type_var.isNull() ) {
             _type_var.convert( QVariant::nameToType("QString") );
             result.setType( _type_var.value<QString>() );
         }
-        
+
         QVariant _title_var = map.value("title");
         if( !_title_var.isNull() ) {
             _title_var.convert( QVariant::nameToType("QString") );
             result.setTitle( _title_var.value<QString>() );
         }
-        
+
         QVariant _description_var = map.value("description");
         if( !_description_var.isNull() ) {
             _description_var.convert( QVariant::nameToType("QString") );
             result.setDescription( _description_var.value<QString>() );
         }
-        
+
         QVariant _url_var = map.value("url");
         if( !_url_var.isNull() ) {
             _url_var.convert( QVariant::nameToType("QString") );
             result.setUrl( _url_var.value<QString>() );
         }
-        
+
         QVariant _thumbUrl_var = map.value("thumbUrl");
         if( !_thumbUrl_var.isNull() ) {
             _thumbUrl_var.convert( QVariant::nameToType("QString") );
             result.setThumbUrl( _thumbUrl_var.value<QString>() );
         }
-        
+
         QVariant _contentUrl_var = map.value("contentUrl");
         if( !_contentUrl_var.isNull() ) {
             _contentUrl_var.convert( QVariant::nameToType("QString") );
             result.setContentUrl( _contentUrl_var.value<QString>() );
         }
-        
+
         QVariant _contentType_var = map.value("contentType");
         if( !_contentType_var.isNull() ) {
             _contentType_var.convert( QVariant::nameToType("QString") );
             result.setContentType( _contentType_var.value<QString>() );
         }
-        
+
         QVariant _w_var = map.value("w");
         if( !_w_var.isNull() ) {
             _w_var.convert( QVariant::nameToType("qint32") );
             result.setW( _w_var.value<qint32>() );
         }
-        
+
         QVariant _h_var = map.value("h");
         if( !_h_var.isNull() ) {
             _h_var.convert( QVariant::nameToType("qint32") );
             result.setH( _h_var.value<qint32>() );
         }
-        
+
         QVariant _duration_var = map.value("duration");
         if( !_duration_var.isNull() ) {
             _duration_var.convert( QVariant::nameToType("qint32") );
             result.setDuration( _duration_var.value<qint32>() );
         }
-        
+
         QVariant _sendMessage_var = map.value("sendMessage");
         if( !_sendMessage_var.isNull() )
             result.setSendMessage( BotInlineMessage::fromMap(_sendMessage_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "BotInlineResult::typeBotInlineMediaResult") {
@@ -500,37 +500,37 @@ BotInlineResult BotInlineResult::fromMap(const QMap<QString, QVariant> &map) {
             _id_var.convert( QVariant::nameToType("QString") );
             result.setId( _id_var.value<QString>() );
         }
-        
+
         QVariant _type_var = map.value("type");
         if( !_type_var.isNull() ) {
             _type_var.convert( QVariant::nameToType("QString") );
             result.setType( _type_var.value<QString>() );
         }
-        
+
         QVariant _photo_var = map.value("photo");
         if( !_photo_var.isNull() )
             result.setPhoto( Photo::fromMap(_photo_var.toMap()) );
-        
+
         QVariant _document_var = map.value("document");
         if( !_document_var.isNull() )
             result.setDocument( Document::fromMap(_document_var.toMap()) );
-        
+
         QVariant _title_var = map.value("title");
         if( !_title_var.isNull() ) {
             _title_var.convert( QVariant::nameToType("QString") );
             result.setTitle( _title_var.value<QString>() );
         }
-        
+
         QVariant _description_var = map.value("description");
         if( !_description_var.isNull() ) {
             _description_var.convert( QVariant::nameToType("QString") );
             result.setDescription( _description_var.value<QString>() );
         }
-        
+
         QVariant _sendMessage_var = map.value("sendMessage");
         if( !_sendMessage_var.isNull() )
             result.setSendMessage( BotInlineMessage::fromMap(_sendMessage_var.toMap()) );
-        
+
         return result;
     }
     return result;
@@ -657,7 +657,7 @@ QDataStream &operator>>(QDataStream &stream, BotInlineResult &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const BotInlineResult &item) {
+/*QDebug operator<<(QDebug debug,  const BotInlineResult &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.BotInlineResult(";
@@ -693,4 +693,4 @@ QDebug operator<<(QDebug debug,  const BotInlineResult &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

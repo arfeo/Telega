@@ -35,7 +35,7 @@ AuthPasswordRecovery::AuthPasswordRecovery(const Null &null) :
 }
 
 AuthPasswordRecovery::~AuthPasswordRecovery() {
-    
+
 }
 
 void AuthPasswordRecovery::setEmailPattern(const QString &emailPattern) {
@@ -76,7 +76,7 @@ bool AuthPasswordRecovery::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -91,7 +91,7 @@ bool AuthPasswordRecovery::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -106,7 +106,7 @@ QMap<QString, QVariant> AuthPasswordRecovery::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -121,7 +121,7 @@ AuthPasswordRecovery AuthPasswordRecovery::fromMap(const QMap<QString, QVariant>
             _emailPattern_var.convert( QVariant::nameToType("QString") );
             result.setEmailPattern( _emailPattern_var.value<QString>() );
         }
-        
+
         return result;
     }
     return result;
@@ -163,7 +163,7 @@ QDataStream &operator>>(QDataStream &stream, AuthPasswordRecovery &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const AuthPasswordRecovery &item) {
+/*QDebug operator<<(QDebug debug,  const AuthPasswordRecovery &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.AuthPasswordRecovery(";
@@ -176,4 +176,4 @@ QDebug operator<<(QDebug debug,  const AuthPasswordRecovery &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

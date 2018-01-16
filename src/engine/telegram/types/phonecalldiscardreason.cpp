@@ -35,7 +35,7 @@ PhoneCallDiscardReason::PhoneCallDiscardReason(const Null &null) :
 }
 
 PhoneCallDiscardReason::~PhoneCallDiscardReason() {
-    
+
 }
 
 bool PhoneCallDiscardReason::operator ==(const PhoneCallDiscardReason &b) const {
@@ -65,25 +65,25 @@ bool PhoneCallDiscardReason::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typePhoneCallDiscardReasonDisconnect: {
         m_classType = static_cast<PhoneCallDiscardReasonClassType>(x);
         return true;
     }
         break;
-    
+
     case typePhoneCallDiscardReasonHangup: {
         m_classType = static_cast<PhoneCallDiscardReasonClassType>(x);
         return true;
     }
         break;
-    
+
     case typePhoneCallDiscardReasonBusy: {
         m_classType = static_cast<PhoneCallDiscardReasonClassType>(x);
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -97,22 +97,22 @@ bool PhoneCallDiscardReason::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typePhoneCallDiscardReasonDisconnect: {
         return true;
     }
         break;
-    
+
     case typePhoneCallDiscardReasonHangup: {
         return true;
     }
         break;
-    
+
     case typePhoneCallDiscardReasonBusy: {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -126,25 +126,25 @@ QMap<QString, QVariant> PhoneCallDiscardReason::toMap() const {
         return result;
     }
         break;
-    
+
     case typePhoneCallDiscardReasonDisconnect: {
         result["classType"] = "PhoneCallDiscardReason::typePhoneCallDiscardReasonDisconnect";
         return result;
     }
         break;
-    
+
     case typePhoneCallDiscardReasonHangup: {
         result["classType"] = "PhoneCallDiscardReason::typePhoneCallDiscardReasonHangup";
         return result;
     }
         break;
-    
+
     case typePhoneCallDiscardReasonBusy: {
         result["classType"] = "PhoneCallDiscardReason::typePhoneCallDiscardReasonBusy";
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -186,16 +186,16 @@ QDataStream &operator<<(QDataStream &stream, const PhoneCallDiscardReason &item)
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case PhoneCallDiscardReason::typePhoneCallDiscardReasonMissed:
-        
+
         break;
     case PhoneCallDiscardReason::typePhoneCallDiscardReasonDisconnect:
-        
+
         break;
     case PhoneCallDiscardReason::typePhoneCallDiscardReasonHangup:
-        
+
         break;
     case PhoneCallDiscardReason::typePhoneCallDiscardReasonBusy:
-        
+
         break;
     }
     return stream;
@@ -207,26 +207,26 @@ QDataStream &operator>>(QDataStream &stream, PhoneCallDiscardReason &item) {
     item.setClassType(static_cast<PhoneCallDiscardReason::PhoneCallDiscardReasonClassType>(type));
     switch(type) {
     case PhoneCallDiscardReason::typePhoneCallDiscardReasonMissed: {
-        
+
     }
         break;
     case PhoneCallDiscardReason::typePhoneCallDiscardReasonDisconnect: {
-        
+
     }
         break;
     case PhoneCallDiscardReason::typePhoneCallDiscardReasonHangup: {
-        
+
     }
         break;
     case PhoneCallDiscardReason::typePhoneCallDiscardReasonBusy: {
-        
+
     }
         break;
     }
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const PhoneCallDiscardReason &item) {
+/*QDebug operator<<(QDebug debug,  const PhoneCallDiscardReason &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.PhoneCallDiscardReason(";
@@ -247,4 +247,4 @@ QDebug operator<<(QDebug debug,  const PhoneCallDiscardReason &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

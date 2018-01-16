@@ -47,7 +47,7 @@ MessagesBotResults::MessagesBotResults(const Null &null) :
 }
 
 MessagesBotResults::~MessagesBotResults() {
-    
+
 }
 
 void MessagesBotResults::setCacheTime(qint32 cacheTime) {
@@ -167,7 +167,7 @@ bool MessagesBotResults::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -195,7 +195,7 @@ bool MessagesBotResults::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -218,7 +218,7 @@ QMap<QString, QVariant> MessagesBotResults::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -233,23 +233,23 @@ MessagesBotResults MessagesBotResults::fromMap(const QMap<QString, QVariant> &ma
             _gallery_var.convert( QVariant::nameToType("bool") );
             result.setGallery( _gallery_var.value<bool>() );
         }
-        
+
         QVariant _queryId_var = map.value("queryId");
         if( !_queryId_var.isNull() ) {
             _queryId_var.convert( QVariant::nameToType("qint64") );
             result.setQueryId( _queryId_var.value<qint64>() );
         }
-        
+
         QVariant _nextOffset_var = map.value("nextOffset");
         if( !_nextOffset_var.isNull() ) {
             _nextOffset_var.convert( QVariant::nameToType("QString") );
             result.setNextOffset( _nextOffset_var.value<QString>() );
         }
-        
+
         QVariant _switchPm_var = map.value("switchPm");
         if( !_switchPm_var.isNull() )
             result.setSwitchPm( InlineBotSwitchPM::fromMap(_switchPm_var.toMap()) );
-        
+
         QList<QVariant> map_results = map["results"].toList();
         QList<BotInlineResult> _results;
         for(const QVariant &var: map_results)
@@ -260,7 +260,7 @@ MessagesBotResults MessagesBotResults::fromMap(const QMap<QString, QVariant> &ma
             _cacheTime_var.convert( QVariant::nameToType("qint32") );
             result.setCacheTime( _cacheTime_var.value<qint32>() );
         }
-        
+
         return result;
     }
     return result;
@@ -322,7 +322,7 @@ QDataStream &operator>>(QDataStream &stream, MessagesBotResults &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const MessagesBotResults &item) {
+/*QDebug operator<<(QDebug debug,  const MessagesBotResults &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.MessagesBotResults(";
@@ -340,4 +340,4 @@ QDebug operator<<(QDebug debug,  const MessagesBotResults &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

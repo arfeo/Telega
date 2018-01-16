@@ -51,7 +51,7 @@ InputPeer::InputPeer(const Null &null) :
 }
 
 InputPeer::~InputPeer() {
-    
+
 }
 
 void InputPeer::setAccessHash(qint64 accessHash) {
@@ -121,20 +121,20 @@ bool InputPeer::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputPeerSelf: {
         m_classType = static_cast<InputPeerClassType>(x);
         return true;
     }
         break;
-    
+
     case typeInputPeerChat: {
         m_chatId = in->fetchInt();
         m_classType = static_cast<InputPeerClassType>(x);
         return true;
     }
         break;
-    
+
     case typeInputPeerUser: {
         m_userId = in->fetchInt();
         m_accessHash = in->fetchLong();
@@ -142,7 +142,7 @@ bool InputPeer::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputPeerChannel: {
         m_channelId = in->fetchInt();
         m_accessHash = in->fetchLong();
@@ -150,7 +150,7 @@ bool InputPeer::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -164,32 +164,32 @@ bool InputPeer::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeInputPeerSelf: {
         return true;
     }
         break;
-    
+
     case typeInputPeerChat: {
         out->appendInt(m_chatId);
         return true;
     }
         break;
-    
+
     case typeInputPeerUser: {
         out->appendInt(m_userId);
         out->appendLong(m_accessHash);
         return true;
     }
         break;
-    
+
     case typeInputPeerChannel: {
         out->appendInt(m_channelId);
         out->appendLong(m_accessHash);
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -203,20 +203,20 @@ QMap<QString, QVariant> InputPeer::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputPeerSelf: {
         result["classType"] = "InputPeer::typeInputPeerSelf";
         return result;
     }
         break;
-    
+
     case typeInputPeerChat: {
         result["classType"] = "InputPeer::typeInputPeerChat";
         if( chatId() ) result["chatId"] = QString::number(chatId());
         return result;
     }
         break;
-    
+
     case typeInputPeerUser: {
         result["classType"] = "InputPeer::typeInputPeerUser";
         if( userId() ) result["userId"] = QString::number(userId());
@@ -224,7 +224,7 @@ QMap<QString, QVariant> InputPeer::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputPeerChannel: {
         result["classType"] = "InputPeer::typeInputPeerChannel";
         if( channelId() ) result["channelId"] = QString::number(channelId());
@@ -232,7 +232,7 @@ QMap<QString, QVariant> InputPeer::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -255,7 +255,7 @@ InputPeer InputPeer::fromMap(const QMap<QString, QVariant> &map) {
             _chatId_var.convert( QVariant::nameToType("qint32") );
             result.setChatId( _chatId_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "InputPeer::typeInputPeerUser") {
@@ -265,13 +265,13 @@ InputPeer InputPeer::fromMap(const QMap<QString, QVariant> &map) {
             _userId_var.convert( QVariant::nameToType("qint32") );
             result.setUserId( _userId_var.value<qint32>() );
         }
-        
+
         QVariant _accessHash_var = map.value("accessHash");
         if( !_accessHash_var.isNull() ) {
             _accessHash_var.convert( QVariant::nameToType("qint64") );
             result.setAccessHash( _accessHash_var.value<qint64>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "InputPeer::typeInputPeerChannel") {
@@ -281,13 +281,13 @@ InputPeer InputPeer::fromMap(const QMap<QString, QVariant> &map) {
             _channelId_var.convert( QVariant::nameToType("qint32") );
             result.setChannelId( _channelId_var.value<qint32>() );
         }
-        
+
         QVariant _accessHash_var = map.value("accessHash");
         if( !_accessHash_var.isNull() ) {
             _accessHash_var.convert( QVariant::nameToType("qint64") );
             result.setAccessHash( _accessHash_var.value<qint64>() );
         }
-        
+
         return result;
     }
     return result;
@@ -308,10 +308,10 @@ QDataStream &operator<<(QDataStream &stream, const InputPeer &item) {
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case InputPeer::typeInputPeerEmpty:
-        
+
         break;
     case InputPeer::typeInputPeerSelf:
-        
+
         break;
     case InputPeer::typeInputPeerChat:
         stream << item.chatId();
@@ -334,11 +334,11 @@ QDataStream &operator>>(QDataStream &stream, InputPeer &item) {
     item.setClassType(static_cast<InputPeer::InputPeerClassType>(type));
     switch(type) {
     case InputPeer::typeInputPeerEmpty: {
-        
+
     }
         break;
     case InputPeer::typeInputPeerSelf: {
-        
+
     }
         break;
     case InputPeer::typeInputPeerChat: {
@@ -369,7 +369,7 @@ QDataStream &operator>>(QDataStream &stream, InputPeer &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const InputPeer &item) {
+/*QDebug operator<<(QDebug debug,  const InputPeer &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.InputPeer(";
@@ -398,4 +398,4 @@ QDebug operator<<(QDebug debug,  const InputPeer &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

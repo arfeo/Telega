@@ -63,7 +63,7 @@ UpdatesChannelDifference::UpdatesChannelDifference(const Null &null) :
 }
 
 UpdatesChannelDifference::~UpdatesChannelDifference() {
-    
+
 }
 
 void UpdatesChannelDifference::setChats(const QList<Chat> &chats) {
@@ -229,7 +229,7 @@ bool UpdatesChannelDifference::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdatesChannelDifferenceTooLong: {
         m_flags = in->fetchInt();
         m_pts = in->fetchInt();
@@ -268,7 +268,7 @@ bool UpdatesChannelDifference::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdatesChannelDifference: {
         m_flags = in->fetchInt();
         m_pts = in->fetchInt();
@@ -311,7 +311,7 @@ bool UpdatesChannelDifference::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -330,7 +330,7 @@ bool UpdatesChannelDifference::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUpdatesChannelDifferenceTooLong: {
         out->appendInt(m_flags);
         out->appendInt(m_pts);
@@ -359,7 +359,7 @@ bool UpdatesChannelDifference::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUpdatesChannelDifference: {
         out->appendInt(m_flags);
         out->appendInt(m_pts);
@@ -389,7 +389,7 @@ bool UpdatesChannelDifference::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -406,7 +406,7 @@ QMap<QString, QVariant> UpdatesChannelDifference::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdatesChannelDifferenceTooLong: {
         result["classType"] = "UpdatesChannelDifference::typeUpdatesChannelDifferenceTooLong";
         if( final() ) result["final"] = QString::number(final());
@@ -431,7 +431,7 @@ QMap<QString, QVariant> UpdatesChannelDifference::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdatesChannelDifference: {
         result["classType"] = "UpdatesChannelDifference::typeUpdatesChannelDifference";
         if( final() ) result["final"] = QString::number(final());
@@ -456,7 +456,7 @@ QMap<QString, QVariant> UpdatesChannelDifference::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -471,19 +471,19 @@ UpdatesChannelDifference UpdatesChannelDifference::fromMap(const QMap<QString, Q
             _final_var.convert( QVariant::nameToType("bool") );
             result.setFinal( _final_var.value<bool>() );
         }
-        
+
         QVariant _pts_var = map.value("pts");
         if( !_pts_var.isNull() ) {
             _pts_var.convert( QVariant::nameToType("qint32") );
             result.setPts( _pts_var.value<qint32>() );
         }
-        
+
         QVariant _timeout_var = map.value("timeout");
         if( !_timeout_var.isNull() ) {
             _timeout_var.convert( QVariant::nameToType("qint32") );
             result.setTimeout( _timeout_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "UpdatesChannelDifference::typeUpdatesChannelDifferenceTooLong") {
@@ -493,43 +493,43 @@ UpdatesChannelDifference UpdatesChannelDifference::fromMap(const QMap<QString, Q
             _final_var.convert( QVariant::nameToType("bool") );
             result.setFinal( _final_var.value<bool>() );
         }
-        
+
         QVariant _pts_var = map.value("pts");
         if( !_pts_var.isNull() ) {
             _pts_var.convert( QVariant::nameToType("qint32") );
             result.setPts( _pts_var.value<qint32>() );
         }
-        
+
         QVariant _timeout_var = map.value("timeout");
         if( !_timeout_var.isNull() ) {
             _timeout_var.convert( QVariant::nameToType("qint32") );
             result.setTimeout( _timeout_var.value<qint32>() );
         }
-        
+
         QVariant _topMessage_var = map.value("topMessage");
         if( !_topMessage_var.isNull() ) {
             _topMessage_var.convert( QVariant::nameToType("qint32") );
             result.setTopMessage( _topMessage_var.value<qint32>() );
         }
-        
+
         QVariant _readInboxMaxId_var = map.value("readInboxMaxId");
         if( !_readInboxMaxId_var.isNull() ) {
             _readInboxMaxId_var.convert( QVariant::nameToType("qint32") );
             result.setReadInboxMaxId( _readInboxMaxId_var.value<qint32>() );
         }
-        
+
         QVariant _readOutboxMaxId_var = map.value("readOutboxMaxId");
         if( !_readOutboxMaxId_var.isNull() ) {
             _readOutboxMaxId_var.convert( QVariant::nameToType("qint32") );
             result.setReadOutboxMaxId( _readOutboxMaxId_var.value<qint32>() );
         }
-        
+
         QVariant _unreadCount_var = map.value("unreadCount");
         if( !_unreadCount_var.isNull() ) {
             _unreadCount_var.convert( QVariant::nameToType("qint32") );
             result.setUnreadCount( _unreadCount_var.value<qint32>() );
         }
-        
+
         QList<QVariant> map_messages = map["messages"].toList();
         QList<Message> _messages;
         for(const QVariant &var: map_messages)
@@ -554,19 +554,19 @@ UpdatesChannelDifference UpdatesChannelDifference::fromMap(const QMap<QString, Q
             _final_var.convert( QVariant::nameToType("bool") );
             result.setFinal( _final_var.value<bool>() );
         }
-        
+
         QVariant _pts_var = map.value("pts");
         if( !_pts_var.isNull() ) {
             _pts_var.convert( QVariant::nameToType("qint32") );
             result.setPts( _pts_var.value<qint32>() );
         }
-        
+
         QVariant _timeout_var = map.value("timeout");
         if( !_timeout_var.isNull() ) {
             _timeout_var.convert( QVariant::nameToType("qint32") );
             result.setTimeout( _timeout_var.value<qint32>() );
         }
-        
+
         QList<QVariant> map_newMessages = map["newMessages"].toList();
         QList<Message> _newMessages;
         for(const QVariant &var: map_newMessages)
@@ -714,7 +714,7 @@ QDataStream &operator>>(QDataStream &stream, UpdatesChannelDifference &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const UpdatesChannelDifference &item) {
+/*QDebug operator<<(QDebug debug,  const UpdatesChannelDifference &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.UpdatesChannelDifference(";
@@ -752,4 +752,4 @@ QDebug operator<<(QDebug debug,  const UpdatesChannelDifference &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

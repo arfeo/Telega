@@ -55,7 +55,7 @@ Authorization::Authorization(const Null &null) :
 }
 
 Authorization::~Authorization() {
-    
+
 }
 
 void Authorization::setApiId(qint32 apiId) {
@@ -228,7 +228,7 @@ bool Authorization::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -255,7 +255,7 @@ bool Authorization::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -282,7 +282,7 @@ QMap<QString, QVariant> Authorization::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -297,79 +297,79 @@ Authorization Authorization::fromMap(const QMap<QString, QVariant> &map) {
             _hash_var.convert( QVariant::nameToType("qint64") );
             result.setHash( _hash_var.value<qint64>() );
         }
-        
+
         QVariant _flags_var = map.value("flags");
         if( !_flags_var.isNull() ) {
             _flags_var.convert( QVariant::nameToType("qint32") );
             result.setFlags( _flags_var.value<qint32>() );
         }
-        
+
         QVariant _deviceModel_var = map.value("deviceModel");
         if( !_deviceModel_var.isNull() ) {
             _deviceModel_var.convert( QVariant::nameToType("QString") );
             result.setDeviceModel( _deviceModel_var.value<QString>() );
         }
-        
+
         QVariant _platform_var = map.value("platform");
         if( !_platform_var.isNull() ) {
             _platform_var.convert( QVariant::nameToType("QString") );
             result.setPlatform( _platform_var.value<QString>() );
         }
-        
+
         QVariant _systemVersion_var = map.value("systemVersion");
         if( !_systemVersion_var.isNull() ) {
             _systemVersion_var.convert( QVariant::nameToType("QString") );
             result.setSystemVersion( _systemVersion_var.value<QString>() );
         }
-        
+
         QVariant _apiId_var = map.value("apiId");
         if( !_apiId_var.isNull() ) {
             _apiId_var.convert( QVariant::nameToType("qint32") );
             result.setApiId( _apiId_var.value<qint32>() );
         }
-        
+
         QVariant _appName_var = map.value("appName");
         if( !_appName_var.isNull() ) {
             _appName_var.convert( QVariant::nameToType("QString") );
             result.setAppName( _appName_var.value<QString>() );
         }
-        
+
         QVariant _appVersion_var = map.value("appVersion");
         if( !_appVersion_var.isNull() ) {
             _appVersion_var.convert( QVariant::nameToType("QString") );
             result.setAppVersion( _appVersion_var.value<QString>() );
         }
-        
+
         QVariant _dateCreated_var = map.value("dateCreated");
         if( !_dateCreated_var.isNull() ) {
             _dateCreated_var.convert( QVariant::nameToType("qint32") );
             result.setDateCreated( _dateCreated_var.value<qint32>() );
         }
-        
+
         QVariant _dateActive_var = map.value("dateActive");
         if( !_dateActive_var.isNull() ) {
             _dateActive_var.convert( QVariant::nameToType("qint32") );
             result.setDateActive( _dateActive_var.value<qint32>() );
         }
-        
+
         QVariant _ip_var = map.value("ip");
         if( !_ip_var.isNull() ) {
             _ip_var.convert( QVariant::nameToType("QString") );
             result.setIp( _ip_var.value<QString>() );
         }
-        
+
         QVariant _country_var = map.value("country");
         if( !_country_var.isNull() ) {
             _country_var.convert( QVariant::nameToType("QString") );
             result.setCountry( _country_var.value<QString>() );
         }
-        
+
         QVariant _region_var = map.value("region");
         if( !_region_var.isNull() ) {
             _region_var.convert( QVariant::nameToType("QString") );
             result.setRegion( _region_var.value<QString>() );
         }
-        
+
         return result;
     }
     return result;
@@ -459,7 +459,7 @@ QDataStream &operator>>(QDataStream &stream, Authorization &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const Authorization &item) {
+/*QDebug operator<<(QDebug debug,  const Authorization &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.Authorization(";
@@ -484,4 +484,4 @@ QDebug operator<<(QDebug debug,  const Authorization &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

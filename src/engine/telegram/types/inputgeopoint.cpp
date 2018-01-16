@@ -43,7 +43,7 @@ InputGeoPoint::InputGeoPoint(const Null &null) :
 }
 
 InputGeoPoint::~InputGeoPoint() {
-    
+
 }
 
 void InputGeoPoint::setLat(qreal lat) {
@@ -93,7 +93,7 @@ bool InputGeoPoint::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputGeoPoint: {
         m_lat = in->fetchDouble();
         m_longValue = in->fetchDouble();
@@ -101,7 +101,7 @@ bool InputGeoPoint::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -115,14 +115,14 @@ bool InputGeoPoint::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeInputGeoPoint: {
         out->appendDouble(m_lat);
         out->appendDouble(m_longValue);
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -136,7 +136,7 @@ QMap<QString, QVariant> InputGeoPoint::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputGeoPoint: {
         result["classType"] = "InputGeoPoint::typeInputGeoPoint";
         if( lat() ) result["lat"] = QString::number(lat());
@@ -144,7 +144,7 @@ QMap<QString, QVariant> InputGeoPoint::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -163,13 +163,13 @@ InputGeoPoint InputGeoPoint::fromMap(const QMap<QString, QVariant> &map) {
             _lat_var.convert( QVariant::nameToType("qreal") );
             result.setLat( _lat_var.value<qreal>() );
         }
-        
+
         QVariant _longValue_var = map.value("longValue");
         if( !_longValue_var.isNull() ) {
             _longValue_var.convert( QVariant::nameToType("qreal") );
             result.setLongValue( _longValue_var.value<qreal>() );
         }
-        
+
         return result;
     }
     return result;
@@ -190,7 +190,7 @@ QDataStream &operator<<(QDataStream &stream, const InputGeoPoint &item) {
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case InputGeoPoint::typeInputGeoPointEmpty:
-        
+
         break;
     case InputGeoPoint::typeInputGeoPoint:
         stream << item.lat();
@@ -206,7 +206,7 @@ QDataStream &operator>>(QDataStream &stream, InputGeoPoint &item) {
     item.setClassType(static_cast<InputGeoPoint::InputGeoPointClassType>(type));
     switch(type) {
     case InputGeoPoint::typeInputGeoPointEmpty: {
-        
+
     }
         break;
     case InputGeoPoint::typeInputGeoPoint: {
@@ -222,7 +222,7 @@ QDataStream &operator>>(QDataStream &stream, InputGeoPoint &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const InputGeoPoint &item) {
+/*QDebug operator<<(QDebug debug,  const InputGeoPoint &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.InputGeoPoint(";
@@ -239,4 +239,4 @@ QDebug operator<<(QDebug debug,  const InputGeoPoint &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

@@ -39,7 +39,7 @@ PhotosPhotos::PhotosPhotos(const Null &null) :
 }
 
 PhotosPhotos::~PhotosPhotos() {
-    
+
 }
 
 void PhotosPhotos::setCount(qint32 count) {
@@ -115,7 +115,7 @@ bool PhotosPhotos::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typePhotosPhotosSlice: {
         m_count = in->fetchInt();
         if(in->fetchInt() != (qint32)CoreTypes::typeVector) return false;
@@ -138,7 +138,7 @@ bool PhotosPhotos::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -162,7 +162,7 @@ bool PhotosPhotos::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typePhotosPhotosSlice: {
         out->appendInt(m_count);
         out->appendInt(CoreTypes::typeVector);
@@ -178,7 +178,7 @@ bool PhotosPhotos::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -200,7 +200,7 @@ QMap<QString, QVariant> PhotosPhotos::toMap() const {
         return result;
     }
         break;
-    
+
     case typePhotosPhotosSlice: {
         result["classType"] = "PhotosPhotos::typePhotosPhotosSlice";
         if( count() ) result["count"] = QString::number(count());
@@ -215,7 +215,7 @@ QMap<QString, QVariant> PhotosPhotos::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -244,7 +244,7 @@ PhotosPhotos PhotosPhotos::fromMap(const QMap<QString, QVariant> &map) {
             _count_var.convert( QVariant::nameToType("qint32") );
             result.setCount( _count_var.value<qint32>() );
         }
-        
+
         QList<QVariant> map_photos = map["photos"].toList();
         QList<Photo> _photos;
         for(const QVariant &var: map_photos)
@@ -317,7 +317,7 @@ QDataStream &operator>>(QDataStream &stream, PhotosPhotos &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const PhotosPhotos &item) {
+/*QDebug operator<<(QDebug debug,  const PhotosPhotos &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.PhotosPhotos(";
@@ -337,4 +337,4 @@ QDebug operator<<(QDebug debug,  const PhotosPhotos &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

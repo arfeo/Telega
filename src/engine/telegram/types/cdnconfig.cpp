@@ -35,7 +35,7 @@ CdnConfig::CdnConfig(const Null &null) :
 }
 
 CdnConfig::~CdnConfig() {
-    
+
 }
 
 void CdnConfig::setPublicKeys(const QList<CdnPublicKey> &publicKeys) {
@@ -83,7 +83,7 @@ bool CdnConfig::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -102,7 +102,7 @@ bool CdnConfig::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -120,7 +120,7 @@ QMap<QString, QVariant> CdnConfig::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -176,7 +176,7 @@ QDataStream &operator>>(QDataStream &stream, CdnConfig &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const CdnConfig &item) {
+/*QDebug operator<<(QDebug debug,  const CdnConfig &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.CdnConfig(";
@@ -189,4 +189,4 @@ QDebug operator<<(QDebug debug,  const CdnConfig &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

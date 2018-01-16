@@ -43,7 +43,7 @@ HelpAppUpdate::HelpAppUpdate(const Null &null) :
 }
 
 HelpAppUpdate::~HelpAppUpdate() {
-    
+
 }
 
 void HelpAppUpdate::setCritical(bool critical) {
@@ -117,13 +117,13 @@ bool HelpAppUpdate::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeHelpNoAppUpdate: {
         m_classType = static_cast<HelpAppUpdateClassType>(x);
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -141,12 +141,12 @@ bool HelpAppUpdate::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeHelpNoAppUpdate: {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -164,13 +164,13 @@ QMap<QString, QVariant> HelpAppUpdate::toMap() const {
         return result;
     }
         break;
-    
+
     case typeHelpNoAppUpdate: {
         result["classType"] = "HelpAppUpdate::typeHelpNoAppUpdate";
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -185,25 +185,25 @@ HelpAppUpdate HelpAppUpdate::fromMap(const QMap<QString, QVariant> &map) {
             _id_var.convert( QVariant::nameToType("qint32") );
             result.setId( _id_var.value<qint32>() );
         }
-        
+
         QVariant _critical_var = map.value("critical");
         if( !_critical_var.isNull() ) {
             _critical_var.convert( QVariant::nameToType("bool") );
             result.setCritical( _critical_var.value<bool>() );
         }
-        
+
         QVariant _url_var = map.value("url");
         if( !_url_var.isNull() ) {
             _url_var.convert( QVariant::nameToType("QString") );
             result.setUrl( _url_var.value<QString>() );
         }
-        
+
         QVariant _text_var = map.value("text");
         if( !_text_var.isNull() ) {
             _text_var.convert( QVariant::nameToType("QString") );
             result.setText( _text_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "HelpAppUpdate::typeHelpNoAppUpdate") {
@@ -234,7 +234,7 @@ QDataStream &operator<<(QDataStream &stream, const HelpAppUpdate &item) {
         stream << item.text();
         break;
     case HelpAppUpdate::typeHelpNoAppUpdate:
-        
+
         break;
     }
     return stream;
@@ -261,14 +261,14 @@ QDataStream &operator>>(QDataStream &stream, HelpAppUpdate &item) {
     }
         break;
     case HelpAppUpdate::typeHelpNoAppUpdate: {
-        
+
     }
         break;
     }
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const HelpAppUpdate &item) {
+/*QDebug operator<<(QDebug debug,  const HelpAppUpdate &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.HelpAppUpdate(";
@@ -287,4 +287,4 @@ QDebug operator<<(QDebug debug,  const HelpAppUpdate &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

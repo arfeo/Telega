@@ -35,7 +35,7 @@ ChatPhoto::ChatPhoto(const Null &null) :
 }
 
 ChatPhoto::~ChatPhoto() {
-    
+
 }
 
 void ChatPhoto::setPhotoBig(const FileLocation &photoBig) {
@@ -85,7 +85,7 @@ bool ChatPhoto::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeChatPhoto: {
         m_photoSmall.fetch(in);
         m_photoBig.fetch(in);
@@ -93,7 +93,7 @@ bool ChatPhoto::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -107,14 +107,14 @@ bool ChatPhoto::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeChatPhoto: {
         m_photoSmall.push(out);
         m_photoBig.push(out);
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -128,7 +128,7 @@ QMap<QString, QVariant> ChatPhoto::toMap() const {
         return result;
     }
         break;
-    
+
     case typeChatPhoto: {
         result["classType"] = "ChatPhoto::typeChatPhoto";
         if( !m_photoSmall.isNull() ) result["photoSmall"] = m_photoSmall.toMap();
@@ -136,7 +136,7 @@ QMap<QString, QVariant> ChatPhoto::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -153,11 +153,11 @@ ChatPhoto ChatPhoto::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _photoSmall_var = map.value("photoSmall");
         if( !_photoSmall_var.isNull() )
             result.setPhotoSmall( FileLocation::fromMap(_photoSmall_var.toMap()) );
-        
+
         QVariant _photoBig_var = map.value("photoBig");
         if( !_photoBig_var.isNull() )
             result.setPhotoBig( FileLocation::fromMap(_photoBig_var.toMap()) );
-        
+
         return result;
     }
     return result;
@@ -178,7 +178,7 @@ QDataStream &operator<<(QDataStream &stream, const ChatPhoto &item) {
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case ChatPhoto::typeChatPhotoEmpty:
-        
+
         break;
     case ChatPhoto::typeChatPhoto:
         stream << item.photoSmall();
@@ -194,7 +194,7 @@ QDataStream &operator>>(QDataStream &stream, ChatPhoto &item) {
     item.setClassType(static_cast<ChatPhoto::ChatPhotoClassType>(type));
     switch(type) {
     case ChatPhoto::typeChatPhotoEmpty: {
-        
+
     }
         break;
     case ChatPhoto::typeChatPhoto: {
@@ -210,7 +210,7 @@ QDataStream &operator>>(QDataStream &stream, ChatPhoto &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const ChatPhoto &item) {
+/*QDebug operator<<(QDebug debug,  const ChatPhoto &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.ChatPhoto(";
@@ -227,4 +227,4 @@ QDebug operator<<(QDebug debug,  const ChatPhoto &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

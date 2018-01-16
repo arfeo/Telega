@@ -39,7 +39,7 @@ MessagesDialogs::MessagesDialogs(const Null &null) :
 }
 
 MessagesDialogs::~MessagesDialogs() {
-    
+
 }
 
 void MessagesDialogs::setChats(const QList<Chat> &chats) {
@@ -151,7 +151,7 @@ bool MessagesDialogs::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeMessagesDialogsSlice: {
         m_count = in->fetchInt();
         if(in->fetchInt() != (qint32)CoreTypes::typeVector) return false;
@@ -190,7 +190,7 @@ bool MessagesDialogs::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -224,7 +224,7 @@ bool MessagesDialogs::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeMessagesDialogsSlice: {
         out->appendInt(m_count);
         out->appendInt(CoreTypes::typeVector);
@@ -250,7 +250,7 @@ bool MessagesDialogs::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -280,7 +280,7 @@ QMap<QString, QVariant> MessagesDialogs::toMap() const {
         return result;
     }
         break;
-    
+
     case typeMessagesDialogsSlice: {
         result["classType"] = "MessagesDialogs::typeMessagesDialogsSlice";
         if( count() ) result["count"] = QString::number(count());
@@ -303,7 +303,7 @@ QMap<QString, QVariant> MessagesDialogs::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -342,7 +342,7 @@ MessagesDialogs MessagesDialogs::fromMap(const QMap<QString, QVariant> &map) {
             _count_var.convert( QVariant::nameToType("qint32") );
             result.setCount( _count_var.value<qint32>() );
         }
-        
+
         QList<QVariant> map_dialogs = map["dialogs"].toList();
         QList<Dialog> _dialogs;
         for(const QVariant &var: map_dialogs)
@@ -441,7 +441,7 @@ QDataStream &operator>>(QDataStream &stream, MessagesDialogs &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const MessagesDialogs &item) {
+/*QDebug operator<<(QDebug debug,  const MessagesDialogs &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.MessagesDialogs(";
@@ -465,4 +465,4 @@ QDebug operator<<(QDebug debug,  const MessagesDialogs &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

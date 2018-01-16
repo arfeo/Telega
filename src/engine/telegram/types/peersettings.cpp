@@ -39,7 +39,7 @@ PeerSettings::PeerSettings(const Null &null) :
 }
 
 PeerSettings::~PeerSettings() {
-    
+
 }
 
 void PeerSettings::setFlags(qint32 flags) {
@@ -89,7 +89,7 @@ bool PeerSettings::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -104,7 +104,7 @@ bool PeerSettings::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -119,7 +119,7 @@ QMap<QString, QVariant> PeerSettings::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -134,7 +134,7 @@ PeerSettings PeerSettings::fromMap(const QMap<QString, QVariant> &map) {
             _reportSpam_var.convert( QVariant::nameToType("bool") );
             result.setReportSpam( _reportSpam_var.value<bool>() );
         }
-        
+
         return result;
     }
     return result;
@@ -176,7 +176,7 @@ QDataStream &operator>>(QDataStream &stream, PeerSettings &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const PeerSettings &item) {
+/*QDebug operator<<(QDebug debug,  const PeerSettings &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.PeerSettings(";
@@ -189,4 +189,4 @@ QDebug operator<<(QDebug debug,  const PeerSettings &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

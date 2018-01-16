@@ -10,7 +10,7 @@ RichTextObject::RichTextObject(const RichText &core, QObject *parent) :
     m_core(core)
 {
     m_textRich = new RichTextObject(m_core.textRich(), this);
-    connect(m_textRich.data(), &RichTextObject::coreChanged, this, &RichTextObject::coreTextRichChanged);
+    connect(m_textRich.data(), SIGNAL(coreChanged()), this, SLOT(coreTextRichChanged()));
 }
 
 RichTextObject::RichTextObject(QObject *parent) :
@@ -19,7 +19,7 @@ RichTextObject::RichTextObject(QObject *parent) :
     m_core()
 {
     m_textRich = new RichTextObject(m_core.textRich(), this);
-    connect(m_textRich.data(), &RichTextObject::coreChanged, this, &RichTextObject::coreTextRichChanged);
+    connect(m_textRich.data(), SIGNAL(coreChanged()), this, SLOT(coreTextRichChanged()));
 }
 
 RichTextObject::~RichTextObject() {
@@ -54,7 +54,7 @@ void RichTextObject::setTextRich(RichTextObject* textRich) {
     if(m_textRich) {
         m_textRich->setParent(this);
         m_core.setTextRich(m_textRich->core());
-        connect(m_textRich.data(), &RichTextObject::coreChanged, this, &RichTextObject::coreTextRichChanged);
+        connect(m_textRich.data(), SIGNAL(coreChanged()), this, SLOT(coreTextRichChanged()));
     }
     Q_EMIT textRichChanged();
     Q_EMIT coreChanged();

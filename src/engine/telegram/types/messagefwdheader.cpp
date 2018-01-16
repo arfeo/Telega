@@ -55,7 +55,7 @@ MessageFwdHeader::MessageFwdHeader(const Null &null) :
 }
 
 MessageFwdHeader::~MessageFwdHeader() {
-    
+
 }
 
 void MessageFwdHeader::setChannelId(qint32 channelId) {
@@ -152,7 +152,7 @@ bool MessageFwdHeader::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -177,7 +177,7 @@ bool MessageFwdHeader::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -195,7 +195,7 @@ QMap<QString, QVariant> MessageFwdHeader::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -210,25 +210,25 @@ MessageFwdHeader MessageFwdHeader::fromMap(const QMap<QString, QVariant> &map) {
             _fromId_var.convert( QVariant::nameToType("qint32") );
             result.setFromId( _fromId_var.value<qint32>() );
         }
-        
+
         QVariant _date_var = map.value("date");
         if( !_date_var.isNull() ) {
             _date_var.convert( QVariant::nameToType("qint32") );
             result.setDate( _date_var.value<qint32>() );
         }
-        
+
         QVariant _channelId_var = map.value("channelId");
         if( !_channelId_var.isNull() ) {
             _channelId_var.convert( QVariant::nameToType("qint32") );
             result.setChannelId( _channelId_var.value<qint32>() );
         }
-        
+
         QVariant _channelPost_var = map.value("channelPost");
         if( !_channelPost_var.isNull() ) {
             _channelPost_var.convert( QVariant::nameToType("qint32") );
             result.setChannelPost( _channelPost_var.value<qint32>() );
         }
-        
+
         return result;
     }
     return result;
@@ -286,7 +286,7 @@ QDataStream &operator>>(QDataStream &stream, MessageFwdHeader &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const MessageFwdHeader &item) {
+/*QDebug operator<<(QDebug debug,  const MessageFwdHeader &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.MessageFwdHeader(";
@@ -303,4 +303,4 @@ QDebug operator<<(QDebug debug,  const MessageFwdHeader &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

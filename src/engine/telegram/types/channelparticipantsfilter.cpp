@@ -35,7 +35,7 @@ ChannelParticipantsFilter::ChannelParticipantsFilter(const Null &null) :
 }
 
 ChannelParticipantsFilter::~ChannelParticipantsFilter() {
-    
+
 }
 
 void ChannelParticipantsFilter::setQ(const QString &q) {
@@ -75,40 +75,40 @@ bool ChannelParticipantsFilter::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeChannelParticipantsAdmins: {
         m_classType = static_cast<ChannelParticipantsFilterClassType>(x);
         return true;
     }
         break;
-    
+
     case typeChannelParticipantsKicked: {
         m_q = in->fetchQString();
         m_classType = static_cast<ChannelParticipantsFilterClassType>(x);
         return true;
     }
         break;
-    
+
     case typeChannelParticipantsBots: {
         m_classType = static_cast<ChannelParticipantsFilterClassType>(x);
         return true;
     }
         break;
-    
+
     case typeChannelParticipantsBanned: {
         m_q = in->fetchQString();
         m_classType = static_cast<ChannelParticipantsFilterClassType>(x);
         return true;
     }
         break;
-    
+
     case typeChannelParticipantsSearch: {
         m_q = in->fetchQString();
         m_classType = static_cast<ChannelParticipantsFilterClassType>(x);
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -122,35 +122,35 @@ bool ChannelParticipantsFilter::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeChannelParticipantsAdmins: {
         return true;
     }
         break;
-    
+
     case typeChannelParticipantsKicked: {
         out->appendQString(m_q);
         return true;
     }
         break;
-    
+
     case typeChannelParticipantsBots: {
         return true;
     }
         break;
-    
+
     case typeChannelParticipantsBanned: {
         out->appendQString(m_q);
         return true;
     }
         break;
-    
+
     case typeChannelParticipantsSearch: {
         out->appendQString(m_q);
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -164,40 +164,40 @@ QMap<QString, QVariant> ChannelParticipantsFilter::toMap() const {
         return result;
     }
         break;
-    
+
     case typeChannelParticipantsAdmins: {
         result["classType"] = "ChannelParticipantsFilter::typeChannelParticipantsAdmins";
         return result;
     }
         break;
-    
+
     case typeChannelParticipantsKicked: {
         result["classType"] = "ChannelParticipantsFilter::typeChannelParticipantsKicked";
         if( !m_q.isEmpty() ) result["q"] = QVariant::fromValue<QString>(m_q);
         return result;
     }
         break;
-    
+
     case typeChannelParticipantsBots: {
         result["classType"] = "ChannelParticipantsFilter::typeChannelParticipantsBots";
         return result;
     }
         break;
-    
+
     case typeChannelParticipantsBanned: {
         result["classType"] = "ChannelParticipantsFilter::typeChannelParticipantsBanned";
         if( !m_q.isEmpty() ) result["q"] = QVariant::fromValue<QString>(m_q);
         return result;
     }
         break;
-    
+
     case typeChannelParticipantsSearch: {
         result["classType"] = "ChannelParticipantsFilter::typeChannelParticipantsSearch";
         if( !m_q.isEmpty() ) result["q"] = QVariant::fromValue<QString>(m_q);
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -220,7 +220,7 @@ ChannelParticipantsFilter ChannelParticipantsFilter::fromMap(const QMap<QString,
             _q_var.convert( QVariant::nameToType("QString") );
             result.setQ( _q_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "ChannelParticipantsFilter::typeChannelParticipantsBots") {
@@ -234,7 +234,7 @@ ChannelParticipantsFilter ChannelParticipantsFilter::fromMap(const QMap<QString,
             _q_var.convert( QVariant::nameToType("QString") );
             result.setQ( _q_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "ChannelParticipantsFilter::typeChannelParticipantsSearch") {
@@ -244,7 +244,7 @@ ChannelParticipantsFilter ChannelParticipantsFilter::fromMap(const QMap<QString,
             _q_var.convert( QVariant::nameToType("QString") );
             result.setQ( _q_var.value<QString>() );
         }
-        
+
         return result;
     }
     return result;
@@ -265,16 +265,16 @@ QDataStream &operator<<(QDataStream &stream, const ChannelParticipantsFilter &it
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case ChannelParticipantsFilter::typeChannelParticipantsRecent:
-        
+
         break;
     case ChannelParticipantsFilter::typeChannelParticipantsAdmins:
-        
+
         break;
     case ChannelParticipantsFilter::typeChannelParticipantsKicked:
         stream << item.q();
         break;
     case ChannelParticipantsFilter::typeChannelParticipantsBots:
-        
+
         break;
     case ChannelParticipantsFilter::typeChannelParticipantsBanned:
         stream << item.q();
@@ -292,11 +292,11 @@ QDataStream &operator>>(QDataStream &stream, ChannelParticipantsFilter &item) {
     item.setClassType(static_cast<ChannelParticipantsFilter::ChannelParticipantsFilterClassType>(type));
     switch(type) {
     case ChannelParticipantsFilter::typeChannelParticipantsRecent: {
-        
+
     }
         break;
     case ChannelParticipantsFilter::typeChannelParticipantsAdmins: {
-        
+
     }
         break;
     case ChannelParticipantsFilter::typeChannelParticipantsKicked: {
@@ -306,7 +306,7 @@ QDataStream &operator>>(QDataStream &stream, ChannelParticipantsFilter &item) {
     }
         break;
     case ChannelParticipantsFilter::typeChannelParticipantsBots: {
-        
+
     }
         break;
     case ChannelParticipantsFilter::typeChannelParticipantsBanned: {
@@ -325,7 +325,7 @@ QDataStream &operator>>(QDataStream &stream, ChannelParticipantsFilter &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const ChannelParticipantsFilter &item) {
+/*QDebug operator<<(QDebug debug,  const ChannelParticipantsFilter &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.ChannelParticipantsFilter(";
@@ -355,4 +355,4 @@ QDebug operator<<(QDebug debug,  const ChannelParticipantsFilter &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

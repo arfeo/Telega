@@ -39,7 +39,7 @@ AccountPasswordInputSettings::AccountPasswordInputSettings(const Null &null) :
 }
 
 AccountPasswordInputSettings::~AccountPasswordInputSettings() {
-    
+
 }
 
 void AccountPasswordInputSettings::setEmail(const QString &email) {
@@ -140,7 +140,7 @@ bool AccountPasswordInputSettings::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -167,7 +167,7 @@ bool AccountPasswordInputSettings::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -185,7 +185,7 @@ QMap<QString, QVariant> AccountPasswordInputSettings::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -200,25 +200,25 @@ AccountPasswordInputSettings AccountPasswordInputSettings::fromMap(const QMap<QS
             _newSalt_var.convert( QVariant::nameToType("QByteArray") );
             result.setNewSalt( _newSalt_var.value<QByteArray>() );
         }
-        
+
         QVariant _newPasswordHash_var = map.value("newPasswordHash");
         if( !_newPasswordHash_var.isNull() ) {
             _newPasswordHash_var.convert( QVariant::nameToType("QByteArray") );
             result.setNewPasswordHash( _newPasswordHash_var.value<QByteArray>() );
         }
-        
+
         QVariant _hint_var = map.value("hint");
         if( !_hint_var.isNull() ) {
             _hint_var.convert( QVariant::nameToType("QString") );
             result.setHint( _hint_var.value<QString>() );
         }
-        
+
         QVariant _email_var = map.value("email");
         if( !_email_var.isNull() ) {
             _email_var.convert( QVariant::nameToType("QString") );
             result.setEmail( _email_var.value<QString>() );
         }
-        
+
         return result;
     }
     return result;
@@ -276,6 +276,7 @@ QDataStream &operator>>(QDataStream &stream, AccountPasswordInputSettings &item)
     return stream;
 }
 
+/*
 QDebug operator<<(QDebug debug,  const AccountPasswordInputSettings &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
@@ -293,4 +294,4 @@ QDebug operator<<(QDebug debug,  const AccountPasswordInputSettings &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

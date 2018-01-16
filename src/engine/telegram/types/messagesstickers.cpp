@@ -35,7 +35,7 @@ MessagesStickers::MessagesStickers(const Null &null) :
 }
 
 MessagesStickers::~MessagesStickers() {
-    
+
 }
 
 void MessagesStickers::setHash(const QString &hash) {
@@ -85,7 +85,7 @@ bool MessagesStickers::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeMessagesStickers: {
         m_hash = in->fetchQString();
         if(in->fetchInt() != (qint32)CoreTypes::typeVector) return false;
@@ -100,7 +100,7 @@ bool MessagesStickers::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -114,7 +114,7 @@ bool MessagesStickers::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeMessagesStickers: {
         out->appendQString(m_hash);
         out->appendInt(CoreTypes::typeVector);
@@ -125,7 +125,7 @@ bool MessagesStickers::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -139,7 +139,7 @@ QMap<QString, QVariant> MessagesStickers::toMap() const {
         return result;
     }
         break;
-    
+
     case typeMessagesStickers: {
         result["classType"] = "MessagesStickers::typeMessagesStickers";
         if( !m_hash.isEmpty() ) result["hash"] = QVariant::fromValue<QString>(m_hash);
@@ -150,7 +150,7 @@ QMap<QString, QVariant> MessagesStickers::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -169,7 +169,7 @@ MessagesStickers MessagesStickers::fromMap(const QMap<QString, QVariant> &map) {
             _hash_var.convert( QVariant::nameToType("QString") );
             result.setHash( _hash_var.value<QString>() );
         }
-        
+
         QList<QVariant> map_stickers = map["stickers"].toList();
         QList<Document> _stickers;
         for(const QVariant &var: map_stickers)
@@ -195,7 +195,7 @@ QDataStream &operator<<(QDataStream &stream, const MessagesStickers &item) {
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case MessagesStickers::typeMessagesStickersNotModified:
-        
+
         break;
     case MessagesStickers::typeMessagesStickers:
         stream << item.hash();
@@ -211,7 +211,7 @@ QDataStream &operator>>(QDataStream &stream, MessagesStickers &item) {
     item.setClassType(static_cast<MessagesStickers::MessagesStickersClassType>(type));
     switch(type) {
     case MessagesStickers::typeMessagesStickersNotModified: {
-        
+
     }
         break;
     case MessagesStickers::typeMessagesStickers: {
@@ -227,7 +227,7 @@ QDataStream &operator>>(QDataStream &stream, MessagesStickers &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const MessagesStickers &item) {
+/*QDebug operator<<(QDebug debug,  const MessagesStickers &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.MessagesStickers(";
@@ -244,4 +244,4 @@ QDebug operator<<(QDebug debug,  const MessagesStickers &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

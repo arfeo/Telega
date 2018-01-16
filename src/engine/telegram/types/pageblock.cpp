@@ -415,21 +415,21 @@ bool PageBlock::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typePageBlockTitle: {
         m_text.fetch(in);
         m_classType = static_cast<PageBlockClassType>(x);
         return true;
     }
         break;
-    
+
     case typePageBlockSubtitle: {
         m_text.fetch(in);
         m_classType = static_cast<PageBlockClassType>(x);
         return true;
     }
         break;
-    
+
     case typePageBlockAuthorDate: {
         m_authorRichText.fetch(in);
         m_publishedDate = in->fetchInt();
@@ -437,28 +437,28 @@ bool PageBlock::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typePageBlockHeader: {
         m_text.fetch(in);
         m_classType = static_cast<PageBlockClassType>(x);
         return true;
     }
         break;
-    
+
     case typePageBlockSubheader: {
         m_text.fetch(in);
         m_classType = static_cast<PageBlockClassType>(x);
         return true;
     }
         break;
-    
+
     case typePageBlockParagraph: {
         m_text.fetch(in);
         m_classType = static_cast<PageBlockClassType>(x);
         return true;
     }
         break;
-    
+
     case typePageBlockPreformatted: {
         m_text.fetch(in);
         m_language = in->fetchQString();
@@ -466,27 +466,27 @@ bool PageBlock::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typePageBlockFooter: {
         m_text.fetch(in);
         m_classType = static_cast<PageBlockClassType>(x);
         return true;
     }
         break;
-    
+
     case typePageBlockDivider: {
         m_classType = static_cast<PageBlockClassType>(x);
         return true;
     }
         break;
-    
+
     case typePageBlockAnchor: {
         m_name = in->fetchQString();
         m_classType = static_cast<PageBlockClassType>(x);
         return true;
     }
         break;
-    
+
     case typePageBlockList: {
         m_ordered = in->fetchBool();
         if(in->fetchInt() != (qint32)CoreTypes::typeVector) return false;
@@ -501,7 +501,7 @@ bool PageBlock::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typePageBlockBlockquote: {
         m_text.fetch(in);
         m_caption.fetch(in);
@@ -509,7 +509,7 @@ bool PageBlock::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typePageBlockPullquote: {
         m_text.fetch(in);
         m_caption.fetch(in);
@@ -517,7 +517,7 @@ bool PageBlock::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typePageBlockPhoto: {
         m_photoId = in->fetchLong();
         m_caption.fetch(in);
@@ -525,7 +525,7 @@ bool PageBlock::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typePageBlockVideo: {
         m_flags = in->fetchInt();
         m_videoId = in->fetchLong();
@@ -534,7 +534,7 @@ bool PageBlock::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typePageBlockCover: {
         if(!m_cover) m_cover = new PageBlock();
         m_cover->fetch(in);
@@ -542,7 +542,7 @@ bool PageBlock::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typePageBlockEmbed: {
         m_flags = in->fetchInt();
         if(m_flags & 1<<1) {
@@ -561,7 +561,7 @@ bool PageBlock::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typePageBlockEmbedPost: {
         m_url = in->fetchQString();
         m_webpageId = in->fetchLong();
@@ -581,7 +581,7 @@ bool PageBlock::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typePageBlockCollage: {
         if(in->fetchInt() != (qint32)CoreTypes::typeVector) return false;
         qint32 m_itemsVectorPageBlock_length = in->fetchInt();
@@ -596,7 +596,7 @@ bool PageBlock::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typePageBlockSlideshow: {
         if(in->fetchInt() != (qint32)CoreTypes::typeVector) return false;
         qint32 m_itemsVectorPageBlock_length = in->fetchInt();
@@ -611,14 +611,14 @@ bool PageBlock::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typePageBlockChannel: {
         m_channel.fetch(in);
         m_classType = static_cast<PageBlockClassType>(x);
         return true;
     }
         break;
-    
+
     case typePageBlockAudio: {
         m_audioId = in->fetchLong();
         m_caption.fetch(in);
@@ -626,7 +626,7 @@ bool PageBlock::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -640,68 +640,68 @@ bool PageBlock::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typePageBlockTitle: {
         m_text.push(out);
         return true;
     }
         break;
-    
+
     case typePageBlockSubtitle: {
         m_text.push(out);
         return true;
     }
         break;
-    
+
     case typePageBlockAuthorDate: {
         m_authorRichText.push(out);
         out->appendInt(m_publishedDate);
         return true;
     }
         break;
-    
+
     case typePageBlockHeader: {
         m_text.push(out);
         return true;
     }
         break;
-    
+
     case typePageBlockSubheader: {
         m_text.push(out);
         return true;
     }
         break;
-    
+
     case typePageBlockParagraph: {
         m_text.push(out);
         return true;
     }
         break;
-    
+
     case typePageBlockPreformatted: {
         m_text.push(out);
         out->appendQString(m_language);
         return true;
     }
         break;
-    
+
     case typePageBlockFooter: {
         m_text.push(out);
         return true;
     }
         break;
-    
+
     case typePageBlockDivider: {
         return true;
     }
         break;
-    
+
     case typePageBlockAnchor: {
         out->appendQString(m_name);
         return true;
     }
         break;
-    
+
     case typePageBlockList: {
         out->appendBool(m_ordered);
         out->appendInt(CoreTypes::typeVector);
@@ -712,28 +712,28 @@ bool PageBlock::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typePageBlockBlockquote: {
         m_text.push(out);
         m_caption.push(out);
         return true;
     }
         break;
-    
+
     case typePageBlockPullquote: {
         m_text.push(out);
         m_caption.push(out);
         return true;
     }
         break;
-    
+
     case typePageBlockPhoto: {
         out->appendLong(m_photoId);
         m_caption.push(out);
         return true;
     }
         break;
-    
+
     case typePageBlockVideo: {
         out->appendInt(m_flags);
         out->appendLong(m_videoId);
@@ -741,14 +741,14 @@ bool PageBlock::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typePageBlockCover: {
         if(m_cover) m_cover->push(out);
         else PageBlock().push(out);
         return true;
     }
         break;
-    
+
     case typePageBlockEmbed: {
         out->appendInt(m_flags);
         if(m_flags & 1<<1) {
@@ -766,7 +766,7 @@ bool PageBlock::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typePageBlockEmbedPost: {
         out->appendQString(m_url);
         out->appendLong(m_webpageId);
@@ -782,7 +782,7 @@ bool PageBlock::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typePageBlockCollage: {
         out->appendInt(CoreTypes::typeVector);
         out->appendInt(m_itemsVectorPageBlock.count());
@@ -793,7 +793,7 @@ bool PageBlock::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typePageBlockSlideshow: {
         out->appendInt(CoreTypes::typeVector);
         out->appendInt(m_itemsVectorPageBlock.count());
@@ -804,20 +804,20 @@ bool PageBlock::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typePageBlockChannel: {
         m_channel.push(out);
         return true;
     }
         break;
-    
+
     case typePageBlockAudio: {
         out->appendLong(m_audioId);
         m_caption.push(out);
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -831,21 +831,21 @@ QMap<QString, QVariant> PageBlock::toMap() const {
         return result;
     }
         break;
-    
+
     case typePageBlockTitle: {
         result["classType"] = "PageBlock::typePageBlockTitle";
         if( !m_text.isNull() ) result["text"] = m_text.toMap();
         return result;
     }
         break;
-    
+
     case typePageBlockSubtitle: {
         result["classType"] = "PageBlock::typePageBlockSubtitle";
         if( !m_text.isNull() ) result["text"] = m_text.toMap();
         return result;
     }
         break;
-    
+
     case typePageBlockAuthorDate: {
         result["classType"] = "PageBlock::typePageBlockAuthorDate";
         if( !m_authorRichText.isNull() ) result["authorRichText"] = m_authorRichText.toMap();
@@ -853,28 +853,28 @@ QMap<QString, QVariant> PageBlock::toMap() const {
         return result;
     }
         break;
-    
+
     case typePageBlockHeader: {
         result["classType"] = "PageBlock::typePageBlockHeader";
         if( !m_text.isNull() ) result["text"] = m_text.toMap();
         return result;
     }
         break;
-    
+
     case typePageBlockSubheader: {
         result["classType"] = "PageBlock::typePageBlockSubheader";
         if( !m_text.isNull() ) result["text"] = m_text.toMap();
         return result;
     }
         break;
-    
+
     case typePageBlockParagraph: {
         result["classType"] = "PageBlock::typePageBlockParagraph";
         if( !m_text.isNull() ) result["text"] = m_text.toMap();
         return result;
     }
         break;
-    
+
     case typePageBlockPreformatted: {
         result["classType"] = "PageBlock::typePageBlockPreformatted";
         if( !m_text.isNull() ) result["text"] = m_text.toMap();
@@ -882,27 +882,27 @@ QMap<QString, QVariant> PageBlock::toMap() const {
         return result;
     }
         break;
-    
+
     case typePageBlockFooter: {
         result["classType"] = "PageBlock::typePageBlockFooter";
         if( !m_text.isNull() ) result["text"] = m_text.toMap();
         return result;
     }
         break;
-    
+
     case typePageBlockDivider: {
         result["classType"] = "PageBlock::typePageBlockDivider";
         return result;
     }
         break;
-    
+
     case typePageBlockAnchor: {
         result["classType"] = "PageBlock::typePageBlockAnchor";
         if( !m_name.isEmpty() ) result["name"] = QVariant::fromValue<QString>(m_name);
         return result;
     }
         break;
-    
+
     case typePageBlockList: {
         result["classType"] = "PageBlock::typePageBlockList";
         if( ordered() ) result["ordered"] = QString::number(ordered());
@@ -913,7 +913,7 @@ QMap<QString, QVariant> PageBlock::toMap() const {
         return result;
     }
         break;
-    
+
     case typePageBlockBlockquote: {
         result["classType"] = "PageBlock::typePageBlockBlockquote";
         if( !m_text.isNull() ) result["text"] = m_text.toMap();
@@ -921,7 +921,7 @@ QMap<QString, QVariant> PageBlock::toMap() const {
         return result;
     }
         break;
-    
+
     case typePageBlockPullquote: {
         result["classType"] = "PageBlock::typePageBlockPullquote";
         if( !m_text.isNull() ) result["text"] = m_text.toMap();
@@ -929,7 +929,7 @@ QMap<QString, QVariant> PageBlock::toMap() const {
         return result;
     }
         break;
-    
+
     case typePageBlockPhoto: {
         result["classType"] = "PageBlock::typePageBlockPhoto";
         if( photoId() ) result["photoId"] = QString::number(photoId());
@@ -937,7 +937,7 @@ QMap<QString, QVariant> PageBlock::toMap() const {
         return result;
     }
         break;
-    
+
     case typePageBlockVideo: {
         result["classType"] = "PageBlock::typePageBlockVideo";
         if( autoplay() ) result["autoplay"] = QString::number(autoplay());
@@ -947,14 +947,14 @@ QMap<QString, QVariant> PageBlock::toMap() const {
         return result;
     }
         break;
-    
+
     case typePageBlockCover: {
         result["classType"] = "PageBlock::typePageBlockCover";
         result["cover"] = (m_cover? *m_cover : PageBlock()).toMap();
         return result;
     }
         break;
-    
+
     case typePageBlockEmbed: {
         result["classType"] = "PageBlock::typePageBlockEmbed";
         if( fullWidth() ) result["fullWidth"] = QString::number(fullWidth());
@@ -968,7 +968,7 @@ QMap<QString, QVariant> PageBlock::toMap() const {
         return result;
     }
         break;
-    
+
     case typePageBlockEmbedPost: {
         result["classType"] = "PageBlock::typePageBlockEmbedPost";
         if( !m_url.isEmpty() ) result["url"] = QVariant::fromValue<QString>(m_url);
@@ -984,7 +984,7 @@ QMap<QString, QVariant> PageBlock::toMap() const {
         return result;
     }
         break;
-    
+
     case typePageBlockCollage: {
         result["classType"] = "PageBlock::typePageBlockCollage";
         QList<QVariant> _itemsVectorPageBlock;
@@ -995,7 +995,7 @@ QMap<QString, QVariant> PageBlock::toMap() const {
         return result;
     }
         break;
-    
+
     case typePageBlockSlideshow: {
         result["classType"] = "PageBlock::typePageBlockSlideshow";
         QList<QVariant> _itemsVectorPageBlock;
@@ -1006,14 +1006,14 @@ QMap<QString, QVariant> PageBlock::toMap() const {
         return result;
     }
         break;
-    
+
     case typePageBlockChannel: {
         result["classType"] = "PageBlock::typePageBlockChannel";
         if( !m_channel.isNull() ) result["channel"] = m_channel.toMap();
         return result;
     }
         break;
-    
+
     case typePageBlockAudio: {
         result["classType"] = "PageBlock::typePageBlockAudio";
         if( audioId() ) result["audioId"] = QString::number(audioId());
@@ -1021,7 +1021,7 @@ QMap<QString, QVariant> PageBlock::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -1038,7 +1038,7 @@ PageBlock PageBlock::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _text_var = map.value("text");
         if( !_text_var.isNull() )
             result.setText( RichText::fromMap(_text_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "PageBlock::typePageBlockSubtitle") {
@@ -1046,7 +1046,7 @@ PageBlock PageBlock::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _text_var = map.value("text");
         if( !_text_var.isNull() )
             result.setText( RichText::fromMap(_text_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "PageBlock::typePageBlockAuthorDate") {
@@ -1054,13 +1054,13 @@ PageBlock PageBlock::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _authorRichText_var = map.value("authorRichText");
         if( !_authorRichText_var.isNull() )
             result.setAuthorRichText( RichText::fromMap(_authorRichText_var.toMap()) );
-        
+
         QVariant _publishedDate_var = map.value("publishedDate");
         if( !_publishedDate_var.isNull() ) {
             _publishedDate_var.convert( QVariant::nameToType("qint32") );
             result.setPublishedDate( _publishedDate_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "PageBlock::typePageBlockHeader") {
@@ -1068,7 +1068,7 @@ PageBlock PageBlock::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _text_var = map.value("text");
         if( !_text_var.isNull() )
             result.setText( RichText::fromMap(_text_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "PageBlock::typePageBlockSubheader") {
@@ -1076,7 +1076,7 @@ PageBlock PageBlock::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _text_var = map.value("text");
         if( !_text_var.isNull() )
             result.setText( RichText::fromMap(_text_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "PageBlock::typePageBlockParagraph") {
@@ -1084,7 +1084,7 @@ PageBlock PageBlock::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _text_var = map.value("text");
         if( !_text_var.isNull() )
             result.setText( RichText::fromMap(_text_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "PageBlock::typePageBlockPreformatted") {
@@ -1092,13 +1092,13 @@ PageBlock PageBlock::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _text_var = map.value("text");
         if( !_text_var.isNull() )
             result.setText( RichText::fromMap(_text_var.toMap()) );
-        
+
         QVariant _language_var = map.value("language");
         if( !_language_var.isNull() ) {
             _language_var.convert( QVariant::nameToType("QString") );
             result.setLanguage( _language_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "PageBlock::typePageBlockFooter") {
@@ -1106,7 +1106,7 @@ PageBlock PageBlock::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _text_var = map.value("text");
         if( !_text_var.isNull() )
             result.setText( RichText::fromMap(_text_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "PageBlock::typePageBlockDivider") {
@@ -1120,7 +1120,7 @@ PageBlock PageBlock::fromMap(const QMap<QString, QVariant> &map) {
             _name_var.convert( QVariant::nameToType("QString") );
             result.setName( _name_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "PageBlock::typePageBlockList") {
@@ -1130,7 +1130,7 @@ PageBlock PageBlock::fromMap(const QMap<QString, QVariant> &map) {
             _ordered_var.convert( QVariant::nameToType("bool") );
             result.setOrdered( _ordered_var.value<bool>() );
         }
-        
+
         QList<QVariant> map_itemsVectorRichText = map["itemsVectorRichText"].toList();
         QList<RichText> _itemsVectorRichText;
         for(const QVariant &var: map_itemsVectorRichText)
@@ -1143,11 +1143,11 @@ PageBlock PageBlock::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _text_var = map.value("text");
         if( !_text_var.isNull() )
             result.setText( RichText::fromMap(_text_var.toMap()) );
-        
+
         QVariant _caption_var = map.value("caption");
         if( !_caption_var.isNull() )
             result.setCaption( RichText::fromMap(_caption_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "PageBlock::typePageBlockPullquote") {
@@ -1155,11 +1155,11 @@ PageBlock PageBlock::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _text_var = map.value("text");
         if( !_text_var.isNull() )
             result.setText( RichText::fromMap(_text_var.toMap()) );
-        
+
         QVariant _caption_var = map.value("caption");
         if( !_caption_var.isNull() )
             result.setCaption( RichText::fromMap(_caption_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "PageBlock::typePageBlockPhoto") {
@@ -1169,11 +1169,11 @@ PageBlock PageBlock::fromMap(const QMap<QString, QVariant> &map) {
             _photoId_var.convert( QVariant::nameToType("qint64") );
             result.setPhotoId( _photoId_var.value<qint64>() );
         }
-        
+
         QVariant _caption_var = map.value("caption");
         if( !_caption_var.isNull() )
             result.setCaption( RichText::fromMap(_caption_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "PageBlock::typePageBlockVideo") {
@@ -1183,23 +1183,23 @@ PageBlock PageBlock::fromMap(const QMap<QString, QVariant> &map) {
             _autoplay_var.convert( QVariant::nameToType("bool") );
             result.setAutoplay( _autoplay_var.value<bool>() );
         }
-        
+
         QVariant _loop_var = map.value("loop");
         if( !_loop_var.isNull() ) {
             _loop_var.convert( QVariant::nameToType("bool") );
             result.setLoop( _loop_var.value<bool>() );
         }
-        
+
         QVariant _videoId_var = map.value("videoId");
         if( !_videoId_var.isNull() ) {
             _videoId_var.convert( QVariant::nameToType("qint64") );
             result.setVideoId( _videoId_var.value<qint64>() );
         }
-        
+
         QVariant _caption_var = map.value("caption");
         if( !_caption_var.isNull() )
             result.setCaption( RichText::fromMap(_caption_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "PageBlock::typePageBlockCover") {
@@ -1207,7 +1207,7 @@ PageBlock PageBlock::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _cover_var = map.value("cover");
         if( !_cover_var.isNull() )
             result.setCover( PageBlock::fromMap(_cover_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "PageBlock::typePageBlockEmbed") {
@@ -1217,47 +1217,47 @@ PageBlock PageBlock::fromMap(const QMap<QString, QVariant> &map) {
             _fullWidth_var.convert( QVariant::nameToType("bool") );
             result.setFullWidth( _fullWidth_var.value<bool>() );
         }
-        
+
         QVariant _allowScrolling_var = map.value("allowScrolling");
         if( !_allowScrolling_var.isNull() ) {
             _allowScrolling_var.convert( QVariant::nameToType("bool") );
             result.setAllowScrolling( _allowScrolling_var.value<bool>() );
         }
-        
+
         QVariant _url_var = map.value("url");
         if( !_url_var.isNull() ) {
             _url_var.convert( QVariant::nameToType("QString") );
             result.setUrl( _url_var.value<QString>() );
         }
-        
+
         QVariant _html_var = map.value("html");
         if( !_html_var.isNull() ) {
             _html_var.convert( QVariant::nameToType("QString") );
             result.setHtml( _html_var.value<QString>() );
         }
-        
+
         QVariant _posterPhotoId_var = map.value("posterPhotoId");
         if( !_posterPhotoId_var.isNull() ) {
             _posterPhotoId_var.convert( QVariant::nameToType("qint64") );
             result.setPosterPhotoId( _posterPhotoId_var.value<qint64>() );
         }
-        
+
         QVariant _w_var = map.value("w");
         if( !_w_var.isNull() ) {
             _w_var.convert( QVariant::nameToType("qint32") );
             result.setW( _w_var.value<qint32>() );
         }
-        
+
         QVariant _h_var = map.value("h");
         if( !_h_var.isNull() ) {
             _h_var.convert( QVariant::nameToType("qint32") );
             result.setH( _h_var.value<qint32>() );
         }
-        
+
         QVariant _caption_var = map.value("caption");
         if( !_caption_var.isNull() )
             result.setCaption( RichText::fromMap(_caption_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "PageBlock::typePageBlockEmbedPost") {
@@ -1267,31 +1267,31 @@ PageBlock PageBlock::fromMap(const QMap<QString, QVariant> &map) {
             _url_var.convert( QVariant::nameToType("QString") );
             result.setUrl( _url_var.value<QString>() );
         }
-        
+
         QVariant _webpageId_var = map.value("webpageId");
         if( !_webpageId_var.isNull() ) {
             _webpageId_var.convert( QVariant::nameToType("qint64") );
             result.setWebpageId( _webpageId_var.value<qint64>() );
         }
-        
+
         QVariant _authorPhotoId_var = map.value("authorPhotoId");
         if( !_authorPhotoId_var.isNull() ) {
             _authorPhotoId_var.convert( QVariant::nameToType("qint64") );
             result.setAuthorPhotoId( _authorPhotoId_var.value<qint64>() );
         }
-        
+
         QVariant _authorString_var = map.value("authorString");
         if( !_authorString_var.isNull() ) {
             _authorString_var.convert( QVariant::nameToType("QString") );
             result.setAuthorString( _authorString_var.value<QString>() );
         }
-        
+
         QVariant _date_var = map.value("date");
         if( !_date_var.isNull() ) {
             _date_var.convert( QVariant::nameToType("qint32") );
             result.setDate( _date_var.value<qint32>() );
         }
-        
+
         QList<QVariant> map_blocks = map["blocks"].toList();
         QList<PageBlock> _blocks;
         for(const QVariant &var: map_blocks)
@@ -1300,7 +1300,7 @@ PageBlock PageBlock::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _caption_var = map.value("caption");
         if( !_caption_var.isNull() )
             result.setCaption( RichText::fromMap(_caption_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "PageBlock::typePageBlockCollage") {
@@ -1313,7 +1313,7 @@ PageBlock PageBlock::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _caption_var = map.value("caption");
         if( !_caption_var.isNull() )
             result.setCaption( RichText::fromMap(_caption_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "PageBlock::typePageBlockSlideshow") {
@@ -1326,7 +1326,7 @@ PageBlock PageBlock::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _caption_var = map.value("caption");
         if( !_caption_var.isNull() )
             result.setCaption( RichText::fromMap(_caption_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "PageBlock::typePageBlockChannel") {
@@ -1334,7 +1334,7 @@ PageBlock PageBlock::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _channel_var = map.value("channel");
         if( !_channel_var.isNull() )
             result.setChannel( Chat::fromMap(_channel_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "PageBlock::typePageBlockAudio") {
@@ -1344,11 +1344,11 @@ PageBlock PageBlock::fromMap(const QMap<QString, QVariant> &map) {
             _audioId_var.convert( QVariant::nameToType("qint64") );
             result.setAudioId( _audioId_var.value<qint64>() );
         }
-        
+
         QVariant _caption_var = map.value("caption");
         if( !_caption_var.isNull() )
             result.setCaption( RichText::fromMap(_caption_var.toMap()) );
-        
+
         return result;
     }
     return result;
@@ -1369,7 +1369,7 @@ QDataStream &operator<<(QDataStream &stream, const PageBlock &item) {
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case PageBlock::typePageBlockUnsupported:
-        
+
         break;
     case PageBlock::typePageBlockTitle:
         stream << item.text();
@@ -1398,7 +1398,7 @@ QDataStream &operator<<(QDataStream &stream, const PageBlock &item) {
         stream << item.text();
         break;
     case PageBlock::typePageBlockDivider:
-        
+
         break;
     case PageBlock::typePageBlockAnchor:
         stream << item.name();
@@ -1470,7 +1470,7 @@ QDataStream &operator>>(QDataStream &stream, PageBlock &item) {
     item.setClassType(static_cast<PageBlock::PageBlockClassType>(type));
     switch(type) {
     case PageBlock::typePageBlockUnsupported: {
-        
+
     }
         break;
     case PageBlock::typePageBlockTitle: {
@@ -1528,7 +1528,7 @@ QDataStream &operator>>(QDataStream &stream, PageBlock &item) {
     }
         break;
     case PageBlock::typePageBlockDivider: {
-        
+
     }
         break;
     case PageBlock::typePageBlockAnchor: {
@@ -1676,7 +1676,7 @@ QDataStream &operator>>(QDataStream &stream, PageBlock &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const PageBlock &item) {
+/*QDebug operator<<(QDebug debug,  const PageBlock &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.PageBlock(";
@@ -1798,4 +1798,4 @@ QDebug operator<<(QDebug debug,  const PageBlock &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

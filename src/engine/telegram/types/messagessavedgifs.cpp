@@ -39,7 +39,7 @@ MessagesSavedGifs::MessagesSavedGifs(const Null &null) :
 }
 
 MessagesSavedGifs::~MessagesSavedGifs() {
-    
+
 }
 
 void MessagesSavedGifs::setGifs(const QList<Document> &gifs) {
@@ -89,7 +89,7 @@ bool MessagesSavedGifs::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeMessagesSavedGifs: {
         m_hash = in->fetchInt();
         if(in->fetchInt() != (qint32)CoreTypes::typeVector) return false;
@@ -104,7 +104,7 @@ bool MessagesSavedGifs::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -118,7 +118,7 @@ bool MessagesSavedGifs::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeMessagesSavedGifs: {
         out->appendInt(m_hash);
         out->appendInt(CoreTypes::typeVector);
@@ -129,7 +129,7 @@ bool MessagesSavedGifs::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -143,7 +143,7 @@ QMap<QString, QVariant> MessagesSavedGifs::toMap() const {
         return result;
     }
         break;
-    
+
     case typeMessagesSavedGifs: {
         result["classType"] = "MessagesSavedGifs::typeMessagesSavedGifs";
         if( hash() ) result["hash"] = QString::number(hash());
@@ -154,7 +154,7 @@ QMap<QString, QVariant> MessagesSavedGifs::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -173,7 +173,7 @@ MessagesSavedGifs MessagesSavedGifs::fromMap(const QMap<QString, QVariant> &map)
             _hash_var.convert( QVariant::nameToType("qint32") );
             result.setHash( _hash_var.value<qint32>() );
         }
-        
+
         QList<QVariant> map_gifs = map["gifs"].toList();
         QList<Document> _gifs;
         for(const QVariant &var: map_gifs)
@@ -199,7 +199,7 @@ QDataStream &operator<<(QDataStream &stream, const MessagesSavedGifs &item) {
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case MessagesSavedGifs::typeMessagesSavedGifsNotModified:
-        
+
         break;
     case MessagesSavedGifs::typeMessagesSavedGifs:
         stream << item.hash();
@@ -215,7 +215,7 @@ QDataStream &operator>>(QDataStream &stream, MessagesSavedGifs &item) {
     item.setClassType(static_cast<MessagesSavedGifs::MessagesSavedGifsClassType>(type));
     switch(type) {
     case MessagesSavedGifs::typeMessagesSavedGifsNotModified: {
-        
+
     }
         break;
     case MessagesSavedGifs::typeMessagesSavedGifs: {
@@ -231,7 +231,7 @@ QDataStream &operator>>(QDataStream &stream, MessagesSavedGifs &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const MessagesSavedGifs &item) {
+/*QDebug operator<<(QDebug debug,  const MessagesSavedGifs &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.MessagesSavedGifs(";
@@ -248,4 +248,4 @@ QDebug operator<<(QDebug debug,  const MessagesSavedGifs &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

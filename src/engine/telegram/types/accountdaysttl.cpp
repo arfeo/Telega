@@ -39,7 +39,7 @@ AccountDaysTTL::AccountDaysTTL(const Null &null) :
 }
 
 AccountDaysTTL::~AccountDaysTTL() {
-    
+
 }
 
 void AccountDaysTTL::setDays(qint32 days) {
@@ -80,7 +80,7 @@ bool AccountDaysTTL::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -95,7 +95,7 @@ bool AccountDaysTTL::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -110,7 +110,7 @@ QMap<QString, QVariant> AccountDaysTTL::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -125,7 +125,7 @@ AccountDaysTTL AccountDaysTTL::fromMap(const QMap<QString, QVariant> &map) {
             _days_var.convert( QVariant::nameToType("qint32") );
             result.setDays( _days_var.value<qint32>() );
         }
-        
+
         return result;
     }
     return result;
@@ -167,6 +167,7 @@ QDataStream &operator>>(QDataStream &stream, AccountDaysTTL &item) {
     return stream;
 }
 
+/*
 QDebug operator<<(QDebug debug,  const AccountDaysTTL &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
@@ -180,4 +181,5 @@ QDebug operator<<(QDebug debug,  const AccountDaysTTL &item) {
     debug.nospace() << ")";
     return debug;
 }
+*/
 

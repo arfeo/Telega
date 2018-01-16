@@ -35,7 +35,7 @@ Page::Page(const Null &null) :
 }
 
 Page::~Page() {
-    
+
 }
 
 void Page::setBlocks(const QList<PageBlock> &blocks) {
@@ -119,7 +119,7 @@ bool Page::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typePageFull: {
         if(in->fetchInt() != (qint32)CoreTypes::typeVector) return false;
         qint32 m_blocks_length = in->fetchInt();
@@ -149,7 +149,7 @@ bool Page::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -178,7 +178,7 @@ bool Page::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typePageFull: {
         out->appendInt(CoreTypes::typeVector);
         out->appendInt(m_blocks.count());
@@ -198,7 +198,7 @@ bool Page::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -224,7 +224,7 @@ QMap<QString, QVariant> Page::toMap() const {
         return result;
     }
         break;
-    
+
     case typePageFull: {
         result["classType"] = "Page::typePageFull";
         QList<QVariant> _blocks;
@@ -242,7 +242,7 @@ QMap<QString, QVariant> Page::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -352,7 +352,7 @@ QDataStream &operator>>(QDataStream &stream, Page &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const Page &item) {
+/*QDebug operator<<(QDebug debug,  const Page &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.Page(";
@@ -373,4 +373,4 @@ QDebug operator<<(QDebug debug,  const Page &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

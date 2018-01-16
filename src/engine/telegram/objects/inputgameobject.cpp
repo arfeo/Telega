@@ -10,7 +10,7 @@ InputGameObject::InputGameObject(const InputGame &core, QObject *parent) :
     m_core(core)
 {
     m_botId = new InputUserObject(m_core.botId(), this);
-    connect(m_botId.data(), &InputUserObject::coreChanged, this, &InputGameObject::coreBotIdChanged);
+    connect(m_botId.data(), SIGNAL(coreChanged()), this, SLOT(coreBotIdChanged()));
 }
 
 InputGameObject::InputGameObject(QObject *parent) :
@@ -19,7 +19,7 @@ InputGameObject::InputGameObject(QObject *parent) :
     m_core()
 {
     m_botId = new InputUserObject(m_core.botId(), this);
-    connect(m_botId.data(), &InputUserObject::coreChanged, this, &InputGameObject::coreBotIdChanged);
+    connect(m_botId.data(), SIGNAL(coreChanged()), this, SLOT(coreBotIdChanged()));
 }
 
 InputGameObject::~InputGameObject() {
@@ -43,7 +43,7 @@ void InputGameObject::setBotId(InputUserObject* botId) {
     if(m_botId) {
         m_botId->setParent(this);
         m_core.setBotId(m_botId->core());
-        connect(m_botId.data(), &InputUserObject::coreChanged, this, &InputGameObject::coreBotIdChanged);
+        connect(m_botId.data(), SIGNAL(coreChanged()), this, SLOT(coreBotIdChanged()));
     }
     Q_EMIT botIdChanged();
     Q_EMIT coreChanged();

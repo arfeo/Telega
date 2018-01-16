@@ -39,7 +39,7 @@ TopPeer::TopPeer(const Null &null) :
 }
 
 TopPeer::~TopPeer() {
-    
+
 }
 
 void TopPeer::setPeer(const Peer &peer) {
@@ -91,7 +91,7 @@ bool TopPeer::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -107,7 +107,7 @@ bool TopPeer::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -123,7 +123,7 @@ QMap<QString, QVariant> TopPeer::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -136,13 +136,13 @@ TopPeer TopPeer::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _peer_var = map.value("peer");
         if( !_peer_var.isNull() )
             result.setPeer( Peer::fromMap(_peer_var.toMap()) );
-        
+
         QVariant _rating_var = map.value("rating");
         if( !_rating_var.isNull() ) {
             _rating_var.convert( QVariant::nameToType("qreal") );
             result.setRating( _rating_var.value<qreal>() );
         }
-        
+
         return result;
     }
     return result;
@@ -188,7 +188,7 @@ QDataStream &operator>>(QDataStream &stream, TopPeer &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const TopPeer &item) {
+/*QDebug operator<<(QDebug debug,  const TopPeer &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.TopPeer(";
@@ -202,4 +202,4 @@ QDebug operator<<(QDebug debug,  const TopPeer &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

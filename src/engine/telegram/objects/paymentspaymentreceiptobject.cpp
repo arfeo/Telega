@@ -12,11 +12,11 @@ PaymentsPaymentReceiptObject::PaymentsPaymentReceiptObject(const PaymentsPayment
     m_core(core)
 {
     m_info = new PaymentRequestedInfoObject(m_core.info(), this);
-    connect(m_info.data(), &PaymentRequestedInfoObject::coreChanged, this, &PaymentsPaymentReceiptObject::coreInfoChanged);
+    connect(m_info.data(), SIGNAL(coreChanged()), this, SLOT(coreInfoChanged()));
     m_invoice = new InvoiceObject(m_core.invoice(), this);
-    connect(m_invoice.data(), &InvoiceObject::coreChanged, this, &PaymentsPaymentReceiptObject::coreInvoiceChanged);
+    connect(m_invoice.data(), SIGNAL(coreChanged()), this, SLOT(coreInvoiceChanged()));
     m_shipping = new ShippingOptionObject(m_core.shipping(), this);
-    connect(m_shipping.data(), &ShippingOptionObject::coreChanged, this, &PaymentsPaymentReceiptObject::coreShippingChanged);
+    connect(m_shipping.data(), SIGNAL(coreChanged()), this, SLOT(coreShippingChanged()));
 }
 
 PaymentsPaymentReceiptObject::PaymentsPaymentReceiptObject(QObject *parent) :
@@ -27,11 +27,11 @@ PaymentsPaymentReceiptObject::PaymentsPaymentReceiptObject(QObject *parent) :
     m_core()
 {
     m_info = new PaymentRequestedInfoObject(m_core.info(), this);
-    connect(m_info.data(), &PaymentRequestedInfoObject::coreChanged, this, &PaymentsPaymentReceiptObject::coreInfoChanged);
+    connect(m_info.data(), SIGNAL(coreChanged()), this, SLOT(coreInfoChanged()));
     m_invoice = new InvoiceObject(m_core.invoice(), this);
-    connect(m_invoice.data(), &InvoiceObject::coreChanged, this, &PaymentsPaymentReceiptObject::coreInvoiceChanged);
+    connect(m_invoice.data(), SIGNAL(coreChanged()), this, SLOT(coreInvoiceChanged()));
     m_shipping = new ShippingOptionObject(m_core.shipping(), this);
-    connect(m_shipping.data(), &ShippingOptionObject::coreChanged, this, &PaymentsPaymentReceiptObject::coreShippingChanged);
+    connect(m_shipping.data(), SIGNAL(coreChanged()), this, SLOT(coreShippingChanged()));
 }
 
 PaymentsPaymentReceiptObject::~PaymentsPaymentReceiptObject() {
@@ -99,7 +99,7 @@ void PaymentsPaymentReceiptObject::setInfo(PaymentRequestedInfoObject* info) {
     if(m_info) {
         m_info->setParent(this);
         m_core.setInfo(m_info->core());
-        connect(m_info.data(), &PaymentRequestedInfoObject::coreChanged, this, &PaymentsPaymentReceiptObject::coreInfoChanged);
+        connect(m_info.data(), SIGNAL(coreChanged()), this, SLOT(coreInfoChanged()));
     }
     Q_EMIT infoChanged();
     Q_EMIT coreChanged();
@@ -116,7 +116,7 @@ void PaymentsPaymentReceiptObject::setInvoice(InvoiceObject* invoice) {
     if(m_invoice) {
         m_invoice->setParent(this);
         m_core.setInvoice(m_invoice->core());
-        connect(m_invoice.data(), &InvoiceObject::coreChanged, this, &PaymentsPaymentReceiptObject::coreInvoiceChanged);
+        connect(m_invoice.data(), SIGNAL(coreChanged()), this, SLOT(coreInvoiceChanged()));
     }
     Q_EMIT invoiceChanged();
     Q_EMIT coreChanged();
@@ -144,7 +144,7 @@ void PaymentsPaymentReceiptObject::setShipping(ShippingOptionObject* shipping) {
     if(m_shipping) {
         m_shipping->setParent(this);
         m_core.setShipping(m_shipping->core());
-        connect(m_shipping.data(), &ShippingOptionObject::coreChanged, this, &PaymentsPaymentReceiptObject::coreShippingChanged);
+        connect(m_shipping.data(), SIGNAL(coreChanged()), this, SLOT(coreShippingChanged()));
     }
     Q_EMIT shippingChanged();
     Q_EMIT coreChanged();

@@ -35,7 +35,7 @@ ReportReason::ReportReason(const Null &null) :
 }
 
 ReportReason::~ReportReason() {
-    
+
 }
 
 void ReportReason::setText(const QString &text) {
@@ -75,26 +75,26 @@ bool ReportReason::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputReportReasonViolence: {
         m_classType = static_cast<ReportReasonClassType>(x);
         return true;
     }
         break;
-    
+
     case typeInputReportReasonPornography: {
         m_classType = static_cast<ReportReasonClassType>(x);
         return true;
     }
         break;
-    
+
     case typeInputReportReasonOther: {
         m_text = in->fetchQString();
         m_classType = static_cast<ReportReasonClassType>(x);
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -108,23 +108,23 @@ bool ReportReason::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeInputReportReasonViolence: {
         return true;
     }
         break;
-    
+
     case typeInputReportReasonPornography: {
         return true;
     }
         break;
-    
+
     case typeInputReportReasonOther: {
         out->appendQString(m_text);
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -138,26 +138,26 @@ QMap<QString, QVariant> ReportReason::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputReportReasonViolence: {
         result["classType"] = "ReportReason::typeInputReportReasonViolence";
         return result;
     }
         break;
-    
+
     case typeInputReportReasonPornography: {
         result["classType"] = "ReportReason::typeInputReportReasonPornography";
         return result;
     }
         break;
-    
+
     case typeInputReportReasonOther: {
         result["classType"] = "ReportReason::typeInputReportReasonOther";
         if( !m_text.isEmpty() ) result["text"] = QVariant::fromValue<QString>(m_text);
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -184,7 +184,7 @@ ReportReason ReportReason::fromMap(const QMap<QString, QVariant> &map) {
             _text_var.convert( QVariant::nameToType("QString") );
             result.setText( _text_var.value<QString>() );
         }
-        
+
         return result;
     }
     return result;
@@ -205,13 +205,13 @@ QDataStream &operator<<(QDataStream &stream, const ReportReason &item) {
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case ReportReason::typeInputReportReasonSpam:
-        
+
         break;
     case ReportReason::typeInputReportReasonViolence:
-        
+
         break;
     case ReportReason::typeInputReportReasonPornography:
-        
+
         break;
     case ReportReason::typeInputReportReasonOther:
         stream << item.text();
@@ -226,15 +226,15 @@ QDataStream &operator>>(QDataStream &stream, ReportReason &item) {
     item.setClassType(static_cast<ReportReason::ReportReasonClassType>(type));
     switch(type) {
     case ReportReason::typeInputReportReasonSpam: {
-        
+
     }
         break;
     case ReportReason::typeInputReportReasonViolence: {
-        
+
     }
         break;
     case ReportReason::typeInputReportReasonPornography: {
-        
+
     }
         break;
     case ReportReason::typeInputReportReasonOther: {
@@ -247,7 +247,7 @@ QDataStream &operator>>(QDataStream &stream, ReportReason &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const ReportReason &item) {
+/*QDebug operator<<(QDebug debug,  const ReportReason &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.ReportReason(";
@@ -269,4 +269,4 @@ QDebug operator<<(QDebug debug,  const ReportReason &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

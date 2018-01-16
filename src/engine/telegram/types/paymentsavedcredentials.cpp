@@ -35,7 +35,7 @@ PaymentSavedCredentials::PaymentSavedCredentials(const Null &null) :
 }
 
 PaymentSavedCredentials::~PaymentSavedCredentials() {
-    
+
 }
 
 void PaymentSavedCredentials::setId(const QString &id) {
@@ -87,7 +87,7 @@ bool PaymentSavedCredentials::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -103,7 +103,7 @@ bool PaymentSavedCredentials::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -119,7 +119,7 @@ QMap<QString, QVariant> PaymentSavedCredentials::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -134,13 +134,13 @@ PaymentSavedCredentials PaymentSavedCredentials::fromMap(const QMap<QString, QVa
             _id_var.convert( QVariant::nameToType("QString") );
             result.setId( _id_var.value<QString>() );
         }
-        
+
         QVariant _title_var = map.value("title");
         if( !_title_var.isNull() ) {
             _title_var.convert( QVariant::nameToType("QString") );
             result.setTitle( _title_var.value<QString>() );
         }
-        
+
         return result;
     }
     return result;
@@ -186,7 +186,7 @@ QDataStream &operator>>(QDataStream &stream, PaymentSavedCredentials &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const PaymentSavedCredentials &item) {
+/*QDebug operator<<(QDebug debug,  const PaymentSavedCredentials &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.PaymentSavedCredentials(";
@@ -200,4 +200,4 @@ QDebug operator<<(QDebug debug,  const PaymentSavedCredentials &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

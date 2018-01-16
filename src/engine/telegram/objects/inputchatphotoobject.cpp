@@ -11,9 +11,9 @@ InputChatPhotoObject::InputChatPhotoObject(const InputChatPhoto &core, QObject *
     m_core(core)
 {
     m_file = new InputFileObject(m_core.file(), this);
-    connect(m_file.data(), &InputFileObject::coreChanged, this, &InputChatPhotoObject::coreFileChanged);
+    connect(m_file.data(), SIGNAL(coreChanged()), this, SLOT(coreFileChanged()));
     m_id = new InputPhotoObject(m_core.id(), this);
-    connect(m_id.data(), &InputPhotoObject::coreChanged, this, &InputChatPhotoObject::coreIdChanged);
+    connect(m_id.data(), SIGNAL(coreChanged()), this, SLOT(coreIdChanged()));
 }
 
 InputChatPhotoObject::InputChatPhotoObject(QObject *parent) :
@@ -23,9 +23,9 @@ InputChatPhotoObject::InputChatPhotoObject(QObject *parent) :
     m_core()
 {
     m_file = new InputFileObject(m_core.file(), this);
-    connect(m_file.data(), &InputFileObject::coreChanged, this, &InputChatPhotoObject::coreFileChanged);
+    connect(m_file.data(), SIGNAL(coreChanged()), this, SLOT(coreFileChanged()));
     m_id = new InputPhotoObject(m_core.id(), this);
-    connect(m_id.data(), &InputPhotoObject::coreChanged, this, &InputChatPhotoObject::coreIdChanged);
+    connect(m_id.data(), SIGNAL(coreChanged()), this, SLOT(coreIdChanged()));
 }
 
 InputChatPhotoObject::~InputChatPhotoObject() {
@@ -38,7 +38,7 @@ void InputChatPhotoObject::setFile(InputFileObject* file) {
     if(m_file) {
         m_file->setParent(this);
         m_core.setFile(m_file->core());
-        connect(m_file.data(), &InputFileObject::coreChanged, this, &InputChatPhotoObject::coreFileChanged);
+        connect(m_file.data(), SIGNAL(coreChanged()), this, SLOT(coreFileChanged()));
     }
     Q_EMIT fileChanged();
     Q_EMIT coreChanged();
@@ -55,7 +55,7 @@ void InputChatPhotoObject::setId(InputPhotoObject* id) {
     if(m_id) {
         m_id->setParent(this);
         m_core.setId(m_id->core());
-        connect(m_id.data(), &InputPhotoObject::coreChanged, this, &InputChatPhotoObject::coreIdChanged);
+        connect(m_id.data(), SIGNAL(coreChanged()), this, SLOT(coreIdChanged()));
     }
     Q_EMIT idChanged();
     Q_EMIT coreChanged();

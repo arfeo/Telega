@@ -39,7 +39,7 @@ InputContact::InputContact(const Null &null) :
 }
 
 InputContact::~InputContact() {
-    
+
 }
 
 void InputContact::setClientId(qint64 clientId) {
@@ -113,7 +113,7 @@ bool InputContact::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -131,7 +131,7 @@ bool InputContact::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -149,7 +149,7 @@ QMap<QString, QVariant> InputContact::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -164,25 +164,25 @@ InputContact InputContact::fromMap(const QMap<QString, QVariant> &map) {
             _clientId_var.convert( QVariant::nameToType("qint64") );
             result.setClientId( _clientId_var.value<qint64>() );
         }
-        
+
         QVariant _phone_var = map.value("phone");
         if( !_phone_var.isNull() ) {
             _phone_var.convert( QVariant::nameToType("QString") );
             result.setPhone( _phone_var.value<QString>() );
         }
-        
+
         QVariant _firstName_var = map.value("firstName");
         if( !_firstName_var.isNull() ) {
             _firstName_var.convert( QVariant::nameToType("QString") );
             result.setFirstName( _firstName_var.value<QString>() );
         }
-        
+
         QVariant _lastName_var = map.value("lastName");
         if( !_lastName_var.isNull() ) {
             _lastName_var.convert( QVariant::nameToType("QString") );
             result.setLastName( _lastName_var.value<QString>() );
         }
-        
+
         return result;
     }
     return result;
@@ -236,7 +236,7 @@ QDataStream &operator>>(QDataStream &stream, InputContact &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const InputContact &item) {
+/*QDebug operator<<(QDebug debug,  const InputContact &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.InputContact(";
@@ -252,4 +252,4 @@ QDebug operator<<(QDebug debug,  const InputContact &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

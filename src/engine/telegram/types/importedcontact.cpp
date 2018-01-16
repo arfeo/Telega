@@ -43,7 +43,7 @@ ImportedContact::ImportedContact(const Null &null) :
 }
 
 ImportedContact::~ImportedContact() {
-    
+
 }
 
 void ImportedContact::setClientId(qint64 clientId) {
@@ -95,7 +95,7 @@ bool ImportedContact::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -111,7 +111,7 @@ bool ImportedContact::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -127,7 +127,7 @@ QMap<QString, QVariant> ImportedContact::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -142,13 +142,13 @@ ImportedContact ImportedContact::fromMap(const QMap<QString, QVariant> &map) {
             _userId_var.convert( QVariant::nameToType("qint32") );
             result.setUserId( _userId_var.value<qint32>() );
         }
-        
+
         QVariant _clientId_var = map.value("clientId");
         if( !_clientId_var.isNull() ) {
             _clientId_var.convert( QVariant::nameToType("qint64") );
             result.setClientId( _clientId_var.value<qint64>() );
         }
-        
+
         return result;
     }
     return result;
@@ -194,7 +194,7 @@ QDataStream &operator>>(QDataStream &stream, ImportedContact &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const ImportedContact &item) {
+/*QDebug operator<<(QDebug debug,  const ImportedContact &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.ImportedContact(";
@@ -208,4 +208,4 @@ QDebug operator<<(QDebug debug,  const ImportedContact &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

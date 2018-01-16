@@ -63,7 +63,7 @@ Chat::Chat(const Null &null) :
 }
 
 Chat::~Chat() {
-    
+
 }
 
 void Chat::setAccessHash(qint64 accessHash) {
@@ -365,7 +365,7 @@ bool Chat::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeChat: {
         m_flags = in->fetchInt();
         m_id = in->fetchInt();
@@ -381,7 +381,7 @@ bool Chat::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeChatForbidden: {
         m_id = in->fetchInt();
         m_title = in->fetchQString();
@@ -389,7 +389,7 @@ bool Chat::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeChannel: {
         m_flags = in->fetchInt();
         m_id = in->fetchInt();
@@ -416,7 +416,7 @@ bool Chat::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeChannelForbidden: {
         m_flags = in->fetchInt();
         m_id = in->fetchInt();
@@ -429,7 +429,7 @@ bool Chat::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -444,7 +444,7 @@ bool Chat::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeChat: {
         out->appendInt(m_flags);
         out->appendInt(m_id);
@@ -459,14 +459,14 @@ bool Chat::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeChatForbidden: {
         out->appendInt(m_id);
         out->appendQString(m_title);
         return true;
     }
         break;
-    
+
     case typeChannel: {
         out->appendInt(m_flags);
         out->appendInt(m_id);
@@ -492,7 +492,7 @@ bool Chat::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeChannelForbidden: {
         out->appendInt(m_flags);
         out->appendInt(m_id);
@@ -504,7 +504,7 @@ bool Chat::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -519,7 +519,7 @@ QMap<QString, QVariant> Chat::toMap() const {
         return result;
     }
         break;
-    
+
     case typeChat: {
         result["classType"] = "Chat::typeChat";
         if( creator() ) result["creator"] = QString::number(creator());
@@ -538,7 +538,7 @@ QMap<QString, QVariant> Chat::toMap() const {
         return result;
     }
         break;
-    
+
     case typeChatForbidden: {
         result["classType"] = "Chat::typeChatForbidden";
         if( id() ) result["id"] = QString::number(id());
@@ -546,7 +546,7 @@ QMap<QString, QVariant> Chat::toMap() const {
         return result;
     }
         break;
-    
+
     case typeChannel: {
         result["classType"] = "Chat::typeChannel";
         if( creator() ) result["creator"] = QString::number(creator());
@@ -571,7 +571,7 @@ QMap<QString, QVariant> Chat::toMap() const {
         return result;
     }
         break;
-    
+
     case typeChannelForbidden: {
         result["classType"] = "Chat::typeChannelForbidden";
         if( broadcast() ) result["broadcast"] = QString::number(broadcast());
@@ -583,7 +583,7 @@ QMap<QString, QVariant> Chat::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -598,7 +598,7 @@ Chat Chat::fromMap(const QMap<QString, QVariant> &map) {
             _id_var.convert( QVariant::nameToType("qint32") );
             result.setId( _id_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Chat::typeChat") {
@@ -608,75 +608,75 @@ Chat Chat::fromMap(const QMap<QString, QVariant> &map) {
             _creator_var.convert( QVariant::nameToType("bool") );
             result.setCreator( _creator_var.value<bool>() );
         }
-        
+
         QVariant _kicked_var = map.value("kicked");
         if( !_kicked_var.isNull() ) {
             _kicked_var.convert( QVariant::nameToType("bool") );
             result.setKicked( _kicked_var.value<bool>() );
         }
-        
+
         QVariant _left_var = map.value("left");
         if( !_left_var.isNull() ) {
             _left_var.convert( QVariant::nameToType("bool") );
             result.setLeft( _left_var.value<bool>() );
         }
-        
+
         QVariant _adminsEnabled_var = map.value("adminsEnabled");
         if( !_adminsEnabled_var.isNull() ) {
             _adminsEnabled_var.convert( QVariant::nameToType("bool") );
             result.setAdminsEnabled( _adminsEnabled_var.value<bool>() );
         }
-        
+
         QVariant _admin_var = map.value("admin");
         if( !_admin_var.isNull() ) {
             _admin_var.convert( QVariant::nameToType("bool") );
             result.setAdmin( _admin_var.value<bool>() );
         }
-        
+
         QVariant _deactivated_var = map.value("deactivated");
         if( !_deactivated_var.isNull() ) {
             _deactivated_var.convert( QVariant::nameToType("bool") );
             result.setDeactivated( _deactivated_var.value<bool>() );
         }
-        
+
         QVariant _id_var = map.value("id");
         if( !_id_var.isNull() ) {
             _id_var.convert( QVariant::nameToType("qint32") );
             result.setId( _id_var.value<qint32>() );
         }
-        
+
         QVariant _title_var = map.value("title");
         if( !_title_var.isNull() ) {
             _title_var.convert( QVariant::nameToType("QString") );
             result.setTitle( _title_var.value<QString>() );
         }
-        
+
         QVariant _photo_var = map.value("photo");
         if( !_photo_var.isNull() )
             result.setPhoto( ChatPhoto::fromMap(_photo_var.toMap()) );
-        
+
         QVariant _participantsCount_var = map.value("participantsCount");
         if( !_participantsCount_var.isNull() ) {
             _participantsCount_var.convert( QVariant::nameToType("qint32") );
             result.setParticipantsCount( _participantsCount_var.value<qint32>() );
         }
-        
+
         QVariant _date_var = map.value("date");
         if( !_date_var.isNull() ) {
             _date_var.convert( QVariant::nameToType("qint32") );
             result.setDate( _date_var.value<qint32>() );
         }
-        
+
         QVariant _version_var = map.value("version");
         if( !_version_var.isNull() ) {
             _version_var.convert( QVariant::nameToType("qint32") );
             result.setVersion( _version_var.value<qint32>() );
         }
-        
+
         QVariant _migratedTo_var = map.value("migratedTo");
         if( !_migratedTo_var.isNull() )
             result.setMigratedTo( InputChannel::fromMap(_migratedTo_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Chat::typeChatForbidden") {
@@ -686,13 +686,13 @@ Chat Chat::fromMap(const QMap<QString, QVariant> &map) {
             _id_var.convert( QVariant::nameToType("qint32") );
             result.setId( _id_var.value<qint32>() );
         }
-        
+
         QVariant _title_var = map.value("title");
         if( !_title_var.isNull() ) {
             _title_var.convert( QVariant::nameToType("QString") );
             result.setTitle( _title_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Chat::typeChannel") {
@@ -702,109 +702,109 @@ Chat Chat::fromMap(const QMap<QString, QVariant> &map) {
             _creator_var.convert( QVariant::nameToType("bool") );
             result.setCreator( _creator_var.value<bool>() );
         }
-        
+
         QVariant _left_var = map.value("left");
         if( !_left_var.isNull() ) {
             _left_var.convert( QVariant::nameToType("bool") );
             result.setLeft( _left_var.value<bool>() );
         }
-        
+
         QVariant _broadcast_var = map.value("broadcast");
         if( !_broadcast_var.isNull() ) {
             _broadcast_var.convert( QVariant::nameToType("bool") );
             result.setBroadcast( _broadcast_var.value<bool>() );
         }
-        
+
         QVariant _verified_var = map.value("verified");
         if( !_verified_var.isNull() ) {
             _verified_var.convert( QVariant::nameToType("bool") );
             result.setVerified( _verified_var.value<bool>() );
         }
-        
+
         QVariant _megagroup_var = map.value("megagroup");
         if( !_megagroup_var.isNull() ) {
             _megagroup_var.convert( QVariant::nameToType("bool") );
             result.setMegagroup( _megagroup_var.value<bool>() );
         }
-        
+
         QVariant _restricted_var = map.value("restricted");
         if( !_restricted_var.isNull() ) {
             _restricted_var.convert( QVariant::nameToType("bool") );
             result.setRestricted( _restricted_var.value<bool>() );
         }
-        
+
         QVariant _democracy_var = map.value("democracy");
         if( !_democracy_var.isNull() ) {
             _democracy_var.convert( QVariant::nameToType("bool") );
             result.setDemocracy( _democracy_var.value<bool>() );
         }
-        
+
         QVariant _signatures_var = map.value("signatures");
         if( !_signatures_var.isNull() ) {
             _signatures_var.convert( QVariant::nameToType("bool") );
             result.setSignatures( _signatures_var.value<bool>() );
         }
-        
+
         QVariant _min_var = map.value("min");
         if( !_min_var.isNull() ) {
             _min_var.convert( QVariant::nameToType("bool") );
             result.setMin( _min_var.value<bool>() );
         }
-        
+
         QVariant _id_var = map.value("id");
         if( !_id_var.isNull() ) {
             _id_var.convert( QVariant::nameToType("qint32") );
             result.setId( _id_var.value<qint32>() );
         }
-        
+
         QVariant _accessHash_var = map.value("accessHash");
         if( !_accessHash_var.isNull() ) {
             _accessHash_var.convert( QVariant::nameToType("qint64") );
             result.setAccessHash( _accessHash_var.value<qint64>() );
         }
-        
+
         QVariant _title_var = map.value("title");
         if( !_title_var.isNull() ) {
             _title_var.convert( QVariant::nameToType("QString") );
             result.setTitle( _title_var.value<QString>() );
         }
-        
+
         QVariant _username_var = map.value("username");
         if( !_username_var.isNull() ) {
             _username_var.convert( QVariant::nameToType("QString") );
             result.setUsername( _username_var.value<QString>() );
         }
-        
+
         QVariant _photo_var = map.value("photo");
         if( !_photo_var.isNull() )
             result.setPhoto( ChatPhoto::fromMap(_photo_var.toMap()) );
-        
+
         QVariant _date_var = map.value("date");
         if( !_date_var.isNull() ) {
             _date_var.convert( QVariant::nameToType("qint32") );
             result.setDate( _date_var.value<qint32>() );
         }
-        
+
         QVariant _version_var = map.value("version");
         if( !_version_var.isNull() ) {
             _version_var.convert( QVariant::nameToType("qint32") );
             result.setVersion( _version_var.value<qint32>() );
         }
-        
+
         QVariant _restrictionReason_var = map.value("restrictionReason");
         if( !_restrictionReason_var.isNull() ) {
             _restrictionReason_var.convert( QVariant::nameToType("QString") );
             result.setRestrictionReason( _restrictionReason_var.value<QString>() );
         }
-        
+
         QVariant _adminRights_var = map.value("adminRights");
         if( !_adminRights_var.isNull() )
             result.setAdminRights( ChannelAdminRights::fromMap(_adminRights_var.toMap()) );
-        
+
         QVariant _bannedRights_var = map.value("bannedRights");
         if( !_bannedRights_var.isNull() )
             result.setBannedRights( ChannelBannedRights::fromMap(_bannedRights_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Chat::typeChannelForbidden") {
@@ -814,37 +814,37 @@ Chat Chat::fromMap(const QMap<QString, QVariant> &map) {
             _broadcast_var.convert( QVariant::nameToType("bool") );
             result.setBroadcast( _broadcast_var.value<bool>() );
         }
-        
+
         QVariant _megagroup_var = map.value("megagroup");
         if( !_megagroup_var.isNull() ) {
             _megagroup_var.convert( QVariant::nameToType("bool") );
             result.setMegagroup( _megagroup_var.value<bool>() );
         }
-        
+
         QVariant _id_var = map.value("id");
         if( !_id_var.isNull() ) {
             _id_var.convert( QVariant::nameToType("qint32") );
             result.setId( _id_var.value<qint32>() );
         }
-        
+
         QVariant _accessHash_var = map.value("accessHash");
         if( !_accessHash_var.isNull() ) {
             _accessHash_var.convert( QVariant::nameToType("qint64") );
             result.setAccessHash( _accessHash_var.value<qint64>() );
         }
-        
+
         QVariant _title_var = map.value("title");
         if( !_title_var.isNull() ) {
             _title_var.convert( QVariant::nameToType("QString") );
             result.setTitle( _title_var.value<QString>() );
         }
-        
+
         QVariant _untilDate_var = map.value("untilDate");
         if( !_untilDate_var.isNull() ) {
             _untilDate_var.convert( QVariant::nameToType("qint32") );
             result.setUntilDate( _untilDate_var.value<qint32>() );
         }
-        
+
         return result;
     }
     return result;
@@ -1010,7 +1010,7 @@ QDataStream &operator>>(QDataStream &stream, Chat &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const Chat &item) {
+/*QDebug operator<<(QDebug debug,  const Chat &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.Chat(";
@@ -1061,4 +1061,4 @@ QDebug operator<<(QDebug debug,  const Chat &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

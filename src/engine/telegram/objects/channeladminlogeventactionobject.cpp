@@ -17,21 +17,21 @@ ChannelAdminLogEventActionObject::ChannelAdminLogEventActionObject(const Channel
     m_core(core)
 {
     m_message = new MessageObject(m_core.message(), this);
-    connect(m_message.data(), &MessageObject::coreChanged, this, &ChannelAdminLogEventActionObject::coreMessageChanged);
+    connect(m_message.data(), SIGNAL(coreChanged()), this, SLOT(coreMessageChanged()));
     m_newMessage = new MessageObject(m_core.newMessage(), this);
-    connect(m_newMessage.data(), &MessageObject::coreChanged, this, &ChannelAdminLogEventActionObject::coreNewMessageChanged);
+    connect(m_newMessage.data(), SIGNAL(coreChanged()), this, SLOT(coreNewMessageChanged()));
     m_newParticipant = new ChannelParticipantObject(m_core.newParticipant(), this);
-    connect(m_newParticipant.data(), &ChannelParticipantObject::coreChanged, this, &ChannelAdminLogEventActionObject::coreNewParticipantChanged);
+    connect(m_newParticipant.data(), SIGNAL(coreChanged()), this, SLOT(coreNewParticipantChanged()));
     m_newPhoto = new ChatPhotoObject(m_core.newPhoto(), this);
-    connect(m_newPhoto.data(), &ChatPhotoObject::coreChanged, this, &ChannelAdminLogEventActionObject::coreNewPhotoChanged);
+    connect(m_newPhoto.data(), SIGNAL(coreChanged()), this, SLOT(coreNewPhotoChanged()));
     m_participant = new ChannelParticipantObject(m_core.participant(), this);
-    connect(m_participant.data(), &ChannelParticipantObject::coreChanged, this, &ChannelAdminLogEventActionObject::coreParticipantChanged);
+    connect(m_participant.data(), SIGNAL(coreChanged()), this, SLOT(coreParticipantChanged()));
     m_prevMessage = new MessageObject(m_core.prevMessage(), this);
-    connect(m_prevMessage.data(), &MessageObject::coreChanged, this, &ChannelAdminLogEventActionObject::corePrevMessageChanged);
+    connect(m_prevMessage.data(), SIGNAL(coreChanged()), this, SLOT(corePrevMessageChanged()));
     m_prevParticipant = new ChannelParticipantObject(m_core.prevParticipant(), this);
-    connect(m_prevParticipant.data(), &ChannelParticipantObject::coreChanged, this, &ChannelAdminLogEventActionObject::corePrevParticipantChanged);
+    connect(m_prevParticipant.data(), SIGNAL(coreChanged()), this, SLOT(corePrevParticipantChanged()));
     m_prevPhoto = new ChatPhotoObject(m_core.prevPhoto(), this);
-    connect(m_prevPhoto.data(), &ChatPhotoObject::coreChanged, this, &ChannelAdminLogEventActionObject::corePrevPhotoChanged);
+    connect(m_prevPhoto.data(), SIGNAL(coreChanged()), this, SLOT(corePrevPhotoChanged()));
 }
 
 ChannelAdminLogEventActionObject::ChannelAdminLogEventActionObject(QObject *parent) :
@@ -47,21 +47,21 @@ ChannelAdminLogEventActionObject::ChannelAdminLogEventActionObject(QObject *pare
     m_core()
 {
     m_message = new MessageObject(m_core.message(), this);
-    connect(m_message.data(), &MessageObject::coreChanged, this, &ChannelAdminLogEventActionObject::coreMessageChanged);
+    connect(m_message.data(), SIGNAL(coreChanged()), this, SLOT(coreMessageChanged()));
     m_newMessage = new MessageObject(m_core.newMessage(), this);
-    connect(m_newMessage.data(), &MessageObject::coreChanged, this, &ChannelAdminLogEventActionObject::coreNewMessageChanged);
+    connect(m_newMessage.data(), SIGNAL(coreChanged()), this, SLOT(coreNewMessageChanged()));
     m_newParticipant = new ChannelParticipantObject(m_core.newParticipant(), this);
-    connect(m_newParticipant.data(), &ChannelParticipantObject::coreChanged, this, &ChannelAdminLogEventActionObject::coreNewParticipantChanged);
+    connect(m_newParticipant.data(), SIGNAL(coreChanged()), this, SLOT(coreNewParticipantChanged()));
     m_newPhoto = new ChatPhotoObject(m_core.newPhoto(), this);
-    connect(m_newPhoto.data(), &ChatPhotoObject::coreChanged, this, &ChannelAdminLogEventActionObject::coreNewPhotoChanged);
+    connect(m_newPhoto.data(), SIGNAL(coreChanged()), this, SLOT(coreNewPhotoChanged()));
     m_participant = new ChannelParticipantObject(m_core.participant(), this);
-    connect(m_participant.data(), &ChannelParticipantObject::coreChanged, this, &ChannelAdminLogEventActionObject::coreParticipantChanged);
+    connect(m_participant.data(), SIGNAL(coreChanged()), this, SLOT(coreParticipantChanged()));
     m_prevMessage = new MessageObject(m_core.prevMessage(), this);
-    connect(m_prevMessage.data(), &MessageObject::coreChanged, this, &ChannelAdminLogEventActionObject::corePrevMessageChanged);
+    connect(m_prevMessage.data(), SIGNAL(coreChanged()), this, SLOT(corePrevMessageChanged()));
     m_prevParticipant = new ChannelParticipantObject(m_core.prevParticipant(), this);
-    connect(m_prevParticipant.data(), &ChannelParticipantObject::coreChanged, this, &ChannelAdminLogEventActionObject::corePrevParticipantChanged);
+    connect(m_prevParticipant.data(), SIGNAL(coreChanged()), this, SLOT(corePrevParticipantChanged()));
     m_prevPhoto = new ChatPhotoObject(m_core.prevPhoto(), this);
-    connect(m_prevPhoto.data(), &ChatPhotoObject::coreChanged, this, &ChannelAdminLogEventActionObject::corePrevPhotoChanged);
+    connect(m_prevPhoto.data(), SIGNAL(coreChanged()), this, SLOT(corePrevPhotoChanged()));
 }
 
 ChannelAdminLogEventActionObject::~ChannelAdminLogEventActionObject() {
@@ -74,7 +74,7 @@ void ChannelAdminLogEventActionObject::setMessage(MessageObject* message) {
     if(m_message) {
         m_message->setParent(this);
         m_core.setMessage(m_message->core());
-        connect(m_message.data(), &MessageObject::coreChanged, this, &ChannelAdminLogEventActionObject::coreMessageChanged);
+        connect(m_message.data(), SIGNAL(coreChanged()), this, SLOT(coreMessageChanged()));
     }
     Q_EMIT messageChanged();
     Q_EMIT coreChanged();
@@ -91,7 +91,7 @@ void ChannelAdminLogEventActionObject::setNewMessage(MessageObject* newMessage) 
     if(m_newMessage) {
         m_newMessage->setParent(this);
         m_core.setNewMessage(m_newMessage->core());
-        connect(m_newMessage.data(), &MessageObject::coreChanged, this, &ChannelAdminLogEventActionObject::coreNewMessageChanged);
+        connect(m_newMessage.data(), SIGNAL(coreChanged()), this, SLOT(coreNewMessageChanged()));
     }
     Q_EMIT newMessageChanged();
     Q_EMIT coreChanged();
@@ -108,7 +108,7 @@ void ChannelAdminLogEventActionObject::setNewParticipant(ChannelParticipantObjec
     if(m_newParticipant) {
         m_newParticipant->setParent(this);
         m_core.setNewParticipant(m_newParticipant->core());
-        connect(m_newParticipant.data(), &ChannelParticipantObject::coreChanged, this, &ChannelAdminLogEventActionObject::coreNewParticipantChanged);
+        connect(m_newParticipant.data(), SIGNAL(coreChanged()), this, SLOT(coreNewParticipantChanged()));
     }
     Q_EMIT newParticipantChanged();
     Q_EMIT coreChanged();
@@ -125,7 +125,7 @@ void ChannelAdminLogEventActionObject::setNewPhoto(ChatPhotoObject* newPhoto) {
     if(m_newPhoto) {
         m_newPhoto->setParent(this);
         m_core.setNewPhoto(m_newPhoto->core());
-        connect(m_newPhoto.data(), &ChatPhotoObject::coreChanged, this, &ChannelAdminLogEventActionObject::coreNewPhotoChanged);
+        connect(m_newPhoto.data(), SIGNAL(coreChanged()), this, SLOT(coreNewPhotoChanged()));
     }
     Q_EMIT newPhotoChanged();
     Q_EMIT coreChanged();
@@ -164,7 +164,7 @@ void ChannelAdminLogEventActionObject::setParticipant(ChannelParticipantObject* 
     if(m_participant) {
         m_participant->setParent(this);
         m_core.setParticipant(m_participant->core());
-        connect(m_participant.data(), &ChannelParticipantObject::coreChanged, this, &ChannelAdminLogEventActionObject::coreParticipantChanged);
+        connect(m_participant.data(), SIGNAL(coreChanged()), this, SLOT(coreParticipantChanged()));
     }
     Q_EMIT participantChanged();
     Q_EMIT coreChanged();
@@ -181,7 +181,7 @@ void ChannelAdminLogEventActionObject::setPrevMessage(MessageObject* prevMessage
     if(m_prevMessage) {
         m_prevMessage->setParent(this);
         m_core.setPrevMessage(m_prevMessage->core());
-        connect(m_prevMessage.data(), &MessageObject::coreChanged, this, &ChannelAdminLogEventActionObject::corePrevMessageChanged);
+        connect(m_prevMessage.data(), SIGNAL(coreChanged()), this, SLOT(corePrevMessageChanged()));
     }
     Q_EMIT prevMessageChanged();
     Q_EMIT coreChanged();
@@ -198,7 +198,7 @@ void ChannelAdminLogEventActionObject::setPrevParticipant(ChannelParticipantObje
     if(m_prevParticipant) {
         m_prevParticipant->setParent(this);
         m_core.setPrevParticipant(m_prevParticipant->core());
-        connect(m_prevParticipant.data(), &ChannelParticipantObject::coreChanged, this, &ChannelAdminLogEventActionObject::corePrevParticipantChanged);
+        connect(m_prevParticipant.data(), SIGNAL(coreChanged()), this, SLOT(corePrevParticipantChanged()));
     }
     Q_EMIT prevParticipantChanged();
     Q_EMIT coreChanged();
@@ -215,7 +215,7 @@ void ChannelAdminLogEventActionObject::setPrevPhoto(ChatPhotoObject* prevPhoto) 
     if(m_prevPhoto) {
         m_prevPhoto->setParent(this);
         m_core.setPrevPhoto(m_prevPhoto->core());
-        connect(m_prevPhoto.data(), &ChatPhotoObject::coreChanged, this, &ChannelAdminLogEventActionObject::corePrevPhotoChanged);
+        connect(m_prevPhoto.data(), SIGNAL(coreChanged()), this, SLOT(corePrevPhotoChanged()));
     }
     Q_EMIT prevPhotoChanged();
     Q_EMIT coreChanged();

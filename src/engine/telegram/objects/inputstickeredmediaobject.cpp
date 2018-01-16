@@ -11,9 +11,9 @@ InputStickeredMediaObject::InputStickeredMediaObject(const InputStickeredMedia &
     m_core(core)
 {
     m_idInputDocument = new InputDocumentObject(m_core.idInputDocument(), this);
-    connect(m_idInputDocument.data(), &InputDocumentObject::coreChanged, this, &InputStickeredMediaObject::coreIdInputDocumentChanged);
+    connect(m_idInputDocument.data(), SIGNAL(coreChanged()), this, SLOT(coreIdInputDocumentChanged()));
     m_idInputPhoto = new InputPhotoObject(m_core.idInputPhoto(), this);
-    connect(m_idInputPhoto.data(), &InputPhotoObject::coreChanged, this, &InputStickeredMediaObject::coreIdInputPhotoChanged);
+    connect(m_idInputPhoto.data(), SIGNAL(coreChanged()), this, SLOT(coreIdInputPhotoChanged()));
 }
 
 InputStickeredMediaObject::InputStickeredMediaObject(QObject *parent) :
@@ -23,9 +23,9 @@ InputStickeredMediaObject::InputStickeredMediaObject(QObject *parent) :
     m_core()
 {
     m_idInputDocument = new InputDocumentObject(m_core.idInputDocument(), this);
-    connect(m_idInputDocument.data(), &InputDocumentObject::coreChanged, this, &InputStickeredMediaObject::coreIdInputDocumentChanged);
+    connect(m_idInputDocument.data(), SIGNAL(coreChanged()), this, SLOT(coreIdInputDocumentChanged()));
     m_idInputPhoto = new InputPhotoObject(m_core.idInputPhoto(), this);
-    connect(m_idInputPhoto.data(), &InputPhotoObject::coreChanged, this, &InputStickeredMediaObject::coreIdInputPhotoChanged);
+    connect(m_idInputPhoto.data(), SIGNAL(coreChanged()), this, SLOT(coreIdInputPhotoChanged()));
 }
 
 InputStickeredMediaObject::~InputStickeredMediaObject() {
@@ -38,7 +38,7 @@ void InputStickeredMediaObject::setIdInputDocument(InputDocumentObject* idInputD
     if(m_idInputDocument) {
         m_idInputDocument->setParent(this);
         m_core.setIdInputDocument(m_idInputDocument->core());
-        connect(m_idInputDocument.data(), &InputDocumentObject::coreChanged, this, &InputStickeredMediaObject::coreIdInputDocumentChanged);
+        connect(m_idInputDocument.data(), SIGNAL(coreChanged()), this, SLOT(coreIdInputDocumentChanged()));
     }
     Q_EMIT idInputDocumentChanged();
     Q_EMIT coreChanged();
@@ -55,7 +55,7 @@ void InputStickeredMediaObject::setIdInputPhoto(InputPhotoObject* idInputPhoto) 
     if(m_idInputPhoto) {
         m_idInputPhoto->setParent(this);
         m_core.setIdInputPhoto(m_idInputPhoto->core());
-        connect(m_idInputPhoto.data(), &InputPhotoObject::coreChanged, this, &InputStickeredMediaObject::coreIdInputPhotoChanged);
+        connect(m_idInputPhoto.data(), SIGNAL(coreChanged()), this, SLOT(coreIdInputPhotoChanged()));
     }
     Q_EMIT idInputPhotoChanged();
     Q_EMIT coreChanged();

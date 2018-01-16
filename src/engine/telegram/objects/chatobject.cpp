@@ -13,13 +13,13 @@ ChatObject::ChatObject(const Chat &core, QObject *parent) :
     m_core(core)
 {
     m_adminRights = new ChannelAdminRightsObject(m_core.adminRights(), this);
-    connect(m_adminRights.data(), &ChannelAdminRightsObject::coreChanged, this, &ChatObject::coreAdminRightsChanged);
+    connect(m_adminRights.data(), SIGNAL(coreChanged()), this, SLOT(coreAdminRightsChanged()));
     m_bannedRights = new ChannelBannedRightsObject(m_core.bannedRights(), this);
-    connect(m_bannedRights.data(), &ChannelBannedRightsObject::coreChanged, this, &ChatObject::coreBannedRightsChanged);
+    connect(m_bannedRights.data(), SIGNAL(coreChanged()), this, SLOT(coreBannedRightsChanged()));
     m_migratedTo = new InputChannelObject(m_core.migratedTo(), this);
-    connect(m_migratedTo.data(), &InputChannelObject::coreChanged, this, &ChatObject::coreMigratedToChanged);
+    connect(m_migratedTo.data(), SIGNAL(coreChanged()), this, SLOT(coreMigratedToChanged()));
     m_photo = new ChatPhotoObject(m_core.photo(), this);
-    connect(m_photo.data(), &ChatPhotoObject::coreChanged, this, &ChatObject::corePhotoChanged);
+    connect(m_photo.data(), SIGNAL(coreChanged()), this, SLOT(corePhotoChanged()));
 }
 
 ChatObject::ChatObject(QObject *parent) :
@@ -31,13 +31,13 @@ ChatObject::ChatObject(QObject *parent) :
     m_core()
 {
     m_adminRights = new ChannelAdminRightsObject(m_core.adminRights(), this);
-    connect(m_adminRights.data(), &ChannelAdminRightsObject::coreChanged, this, &ChatObject::coreAdminRightsChanged);
+    connect(m_adminRights.data(), SIGNAL(coreChanged()), this, SLOT(coreAdminRightsChanged()));
     m_bannedRights = new ChannelBannedRightsObject(m_core.bannedRights(), this);
-    connect(m_bannedRights.data(), &ChannelBannedRightsObject::coreChanged, this, &ChatObject::coreBannedRightsChanged);
+    connect(m_bannedRights.data(), SIGNAL(coreChanged()), this, SLOT(coreBannedRightsChanged()));
     m_migratedTo = new InputChannelObject(m_core.migratedTo(), this);
-    connect(m_migratedTo.data(), &InputChannelObject::coreChanged, this, &ChatObject::coreMigratedToChanged);
+    connect(m_migratedTo.data(), SIGNAL(coreChanged()), this, SLOT(coreMigratedToChanged()));
     m_photo = new ChatPhotoObject(m_core.photo(), this);
-    connect(m_photo.data(), &ChatPhotoObject::coreChanged, this, &ChatObject::corePhotoChanged);
+    connect(m_photo.data(), SIGNAL(coreChanged()), this, SLOT(corePhotoChanged()));
 }
 
 ChatObject::~ChatObject() {
@@ -72,7 +72,7 @@ void ChatObject::setAdminRights(ChannelAdminRightsObject* adminRights) {
     if(m_adminRights) {
         m_adminRights->setParent(this);
         m_core.setAdminRights(m_adminRights->core());
-        connect(m_adminRights.data(), &ChannelAdminRightsObject::coreChanged, this, &ChatObject::coreAdminRightsChanged);
+        connect(m_adminRights.data(), SIGNAL(coreChanged()), this, SLOT(coreAdminRightsChanged()));
     }
     Q_EMIT adminRightsChanged();
     Q_EMIT coreChanged();
@@ -100,7 +100,7 @@ void ChatObject::setBannedRights(ChannelBannedRightsObject* bannedRights) {
     if(m_bannedRights) {
         m_bannedRights->setParent(this);
         m_core.setBannedRights(m_bannedRights->core());
-        connect(m_bannedRights.data(), &ChannelBannedRightsObject::coreChanged, this, &ChatObject::coreBannedRightsChanged);
+        connect(m_bannedRights.data(), SIGNAL(coreChanged()), this, SLOT(coreBannedRightsChanged()));
     }
     Q_EMIT bannedRightsChanged();
     Q_EMIT coreChanged();
@@ -227,7 +227,7 @@ void ChatObject::setMigratedTo(InputChannelObject* migratedTo) {
     if(m_migratedTo) {
         m_migratedTo->setParent(this);
         m_core.setMigratedTo(m_migratedTo->core());
-        connect(m_migratedTo.data(), &InputChannelObject::coreChanged, this, &ChatObject::coreMigratedToChanged);
+        connect(m_migratedTo.data(), SIGNAL(coreChanged()), this, SLOT(coreMigratedToChanged()));
     }
     Q_EMIT migratedToChanged();
     Q_EMIT coreChanged();
@@ -266,7 +266,7 @@ void ChatObject::setPhoto(ChatPhotoObject* photo) {
     if(m_photo) {
         m_photo->setParent(this);
         m_core.setPhoto(m_photo->core());
-        connect(m_photo.data(), &ChatPhotoObject::coreChanged, this, &ChatObject::corePhotoChanged);
+        connect(m_photo.data(), SIGNAL(coreChanged()), this, SLOT(corePhotoChanged()));
     }
     Q_EMIT photoChanged();
     Q_EMIT coreChanged();

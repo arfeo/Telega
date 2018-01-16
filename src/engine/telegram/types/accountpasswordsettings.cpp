@@ -35,7 +35,7 @@ AccountPasswordSettings::AccountPasswordSettings(const Null &null) :
 }
 
 AccountPasswordSettings::~AccountPasswordSettings() {
-    
+
 }
 
 void AccountPasswordSettings::setEmail(const QString &email) {
@@ -76,7 +76,7 @@ bool AccountPasswordSettings::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -91,7 +91,7 @@ bool AccountPasswordSettings::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -106,7 +106,7 @@ QMap<QString, QVariant> AccountPasswordSettings::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -121,7 +121,7 @@ AccountPasswordSettings AccountPasswordSettings::fromMap(const QMap<QString, QVa
             _email_var.convert( QVariant::nameToType("QString") );
             result.setEmail( _email_var.value<QString>() );
         }
-        
+
         return result;
     }
     return result;
@@ -163,6 +163,7 @@ QDataStream &operator>>(QDataStream &stream, AccountPasswordSettings &item) {
     return stream;
 }
 
+/*
 QDebug operator<<(QDebug debug,  const AccountPasswordSettings &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
@@ -176,4 +177,5 @@ QDebug operator<<(QDebug debug,  const AccountPasswordSettings &item) {
     debug.nospace() << ")";
     return debug;
 }
+*/
 

@@ -39,7 +39,7 @@ MessagesChats::MessagesChats(const Null &null) :
 }
 
 MessagesChats::~MessagesChats() {
-    
+
 }
 
 void MessagesChats::setChats(const QList<Chat> &chats) {
@@ -97,7 +97,7 @@ bool MessagesChats::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeMessagesChatsSlice: {
         m_count = in->fetchInt();
         if(in->fetchInt() != (qint32)CoreTypes::typeVector) return false;
@@ -112,7 +112,7 @@ bool MessagesChats::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -131,7 +131,7 @@ bool MessagesChats::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeMessagesChatsSlice: {
         out->appendInt(m_count);
         out->appendInt(CoreTypes::typeVector);
@@ -142,7 +142,7 @@ bool MessagesChats::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -160,7 +160,7 @@ QMap<QString, QVariant> MessagesChats::toMap() const {
         return result;
     }
         break;
-    
+
     case typeMessagesChatsSlice: {
         result["classType"] = "MessagesChats::typeMessagesChatsSlice";
         if( count() ) result["count"] = QString::number(count());
@@ -171,7 +171,7 @@ QMap<QString, QVariant> MessagesChats::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -195,7 +195,7 @@ MessagesChats MessagesChats::fromMap(const QMap<QString, QVariant> &map) {
             _count_var.convert( QVariant::nameToType("qint32") );
             result.setCount( _count_var.value<qint32>() );
         }
-        
+
         QList<QVariant> map_chats = map["chats"].toList();
         QList<Chat> _chats;
         for(const QVariant &var: map_chats)
@@ -255,7 +255,7 @@ QDataStream &operator>>(QDataStream &stream, MessagesChats &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const MessagesChats &item) {
+/*QDebug operator<<(QDebug debug,  const MessagesChats &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.MessagesChats(";
@@ -273,4 +273,4 @@ QDebug operator<<(QDebug debug,  const MessagesChats &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

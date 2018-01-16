@@ -43,7 +43,7 @@ InputPhoto::InputPhoto(const Null &null) :
 }
 
 InputPhoto::~InputPhoto() {
-    
+
 }
 
 void InputPhoto::setAccessHash(qint64 accessHash) {
@@ -93,7 +93,7 @@ bool InputPhoto::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputPhoto: {
         m_id = in->fetchLong();
         m_accessHash = in->fetchLong();
@@ -101,7 +101,7 @@ bool InputPhoto::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -115,14 +115,14 @@ bool InputPhoto::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeInputPhoto: {
         out->appendLong(m_id);
         out->appendLong(m_accessHash);
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -136,7 +136,7 @@ QMap<QString, QVariant> InputPhoto::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputPhoto: {
         result["classType"] = "InputPhoto::typeInputPhoto";
         if( id() ) result["id"] = QString::number(id());
@@ -144,7 +144,7 @@ QMap<QString, QVariant> InputPhoto::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -163,13 +163,13 @@ InputPhoto InputPhoto::fromMap(const QMap<QString, QVariant> &map) {
             _id_var.convert( QVariant::nameToType("qint64") );
             result.setId( _id_var.value<qint64>() );
         }
-        
+
         QVariant _accessHash_var = map.value("accessHash");
         if( !_accessHash_var.isNull() ) {
             _accessHash_var.convert( QVariant::nameToType("qint64") );
             result.setAccessHash( _accessHash_var.value<qint64>() );
         }
-        
+
         return result;
     }
     return result;
@@ -190,7 +190,7 @@ QDataStream &operator<<(QDataStream &stream, const InputPhoto &item) {
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case InputPhoto::typeInputPhotoEmpty:
-        
+
         break;
     case InputPhoto::typeInputPhoto:
         stream << item.id();
@@ -206,7 +206,7 @@ QDataStream &operator>>(QDataStream &stream, InputPhoto &item) {
     item.setClassType(static_cast<InputPhoto::InputPhotoClassType>(type));
     switch(type) {
     case InputPhoto::typeInputPhotoEmpty: {
-        
+
     }
         break;
     case InputPhoto::typeInputPhoto: {
@@ -222,7 +222,7 @@ QDataStream &operator>>(QDataStream &stream, InputPhoto &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const InputPhoto &item) {
+/*QDebug operator<<(QDebug debug,  const InputPhoto &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.InputPhoto(";
@@ -239,4 +239,4 @@ QDebug operator<<(QDebug debug,  const InputPhoto &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

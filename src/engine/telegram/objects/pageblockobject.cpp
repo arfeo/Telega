@@ -14,15 +14,15 @@ PageBlockObject::PageBlockObject(const PageBlock &core, QObject *parent) :
     m_core(core)
 {
     m_authorRichText = new RichTextObject(m_core.authorRichText(), this);
-    connect(m_authorRichText.data(), &RichTextObject::coreChanged, this, &PageBlockObject::coreAuthorRichTextChanged);
+    connect(m_authorRichText.data(), SIGNAL(coreChanged()), this, SLOT(coreAuthorRichTextChanged()));
     m_caption = new RichTextObject(m_core.caption(), this);
-    connect(m_caption.data(), &RichTextObject::coreChanged, this, &PageBlockObject::coreCaptionChanged);
+    connect(m_caption.data(), SIGNAL(coreChanged()), this, SLOT(coreCaptionChanged()));
     m_channel = new ChatObject(m_core.channel(), this);
-    connect(m_channel.data(), &ChatObject::coreChanged, this, &PageBlockObject::coreChannelChanged);
+    connect(m_channel.data(), SIGNAL(coreChanged()), this, SLOT(coreChannelChanged()));
     m_cover = new PageBlockObject(m_core.cover(), this);
-    connect(m_cover.data(), &PageBlockObject::coreChanged, this, &PageBlockObject::coreCoverChanged);
+    connect(m_cover.data(), SIGNAL(coreChanged()), this, SLOT(coreCoverChanged()));
     m_text = new RichTextObject(m_core.text(), this);
-    connect(m_text.data(), &RichTextObject::coreChanged, this, &PageBlockObject::coreTextChanged);
+    connect(m_text.data(), SIGNAL(coreChanged()), this, SLOT(coreTextChanged()));
 }
 
 PageBlockObject::PageBlockObject(QObject *parent) :
@@ -35,15 +35,15 @@ PageBlockObject::PageBlockObject(QObject *parent) :
     m_core()
 {
     m_authorRichText = new RichTextObject(m_core.authorRichText(), this);
-    connect(m_authorRichText.data(), &RichTextObject::coreChanged, this, &PageBlockObject::coreAuthorRichTextChanged);
+    connect(m_authorRichText.data(), SIGNAL(coreChanged()), this, SLOT(coreAuthorRichTextChanged()));
     m_caption = new RichTextObject(m_core.caption(), this);
-    connect(m_caption.data(), &RichTextObject::coreChanged, this, &PageBlockObject::coreCaptionChanged);
+    connect(m_caption.data(), SIGNAL(coreChanged()), this, SLOT(coreCaptionChanged()));
     m_channel = new ChatObject(m_core.channel(), this);
-    connect(m_channel.data(), &ChatObject::coreChanged, this, &PageBlockObject::coreChannelChanged);
+    connect(m_channel.data(), SIGNAL(coreChanged()), this, SLOT(coreChannelChanged()));
     m_cover = new PageBlockObject(m_core.cover(), this);
-    connect(m_cover.data(), &PageBlockObject::coreChanged, this, &PageBlockObject::coreCoverChanged);
+    connect(m_cover.data(), SIGNAL(coreChanged()), this, SLOT(coreCoverChanged()));
     m_text = new RichTextObject(m_core.text(), this);
-    connect(m_text.data(), &RichTextObject::coreChanged, this, &PageBlockObject::coreTextChanged);
+    connect(m_text.data(), SIGNAL(coreChanged()), this, SLOT(coreTextChanged()));
 }
 
 PageBlockObject::~PageBlockObject() {
@@ -89,7 +89,7 @@ void PageBlockObject::setAuthorRichText(RichTextObject* authorRichText) {
     if(m_authorRichText) {
         m_authorRichText->setParent(this);
         m_core.setAuthorRichText(m_authorRichText->core());
-        connect(m_authorRichText.data(), &RichTextObject::coreChanged, this, &PageBlockObject::coreAuthorRichTextChanged);
+        connect(m_authorRichText.data(), SIGNAL(coreChanged()), this, SLOT(coreAuthorRichTextChanged()));
     }
     Q_EMIT authorRichTextChanged();
     Q_EMIT coreChanged();
@@ -139,7 +139,7 @@ void PageBlockObject::setCaption(RichTextObject* caption) {
     if(m_caption) {
         m_caption->setParent(this);
         m_core.setCaption(m_caption->core());
-        connect(m_caption.data(), &RichTextObject::coreChanged, this, &PageBlockObject::coreCaptionChanged);
+        connect(m_caption.data(), SIGNAL(coreChanged()), this, SLOT(coreCaptionChanged()));
     }
     Q_EMIT captionChanged();
     Q_EMIT coreChanged();
@@ -156,7 +156,7 @@ void PageBlockObject::setChannel(ChatObject* channel) {
     if(m_channel) {
         m_channel->setParent(this);
         m_core.setChannel(m_channel->core());
-        connect(m_channel.data(), &ChatObject::coreChanged, this, &PageBlockObject::coreChannelChanged);
+        connect(m_channel.data(), SIGNAL(coreChanged()), this, SLOT(coreChannelChanged()));
     }
     Q_EMIT channelChanged();
     Q_EMIT coreChanged();
@@ -173,7 +173,7 @@ void PageBlockObject::setCover(PageBlockObject* cover) {
     if(m_cover) {
         m_cover->setParent(this);
         m_core.setCover(m_cover->core());
-        connect(m_cover.data(), &PageBlockObject::coreChanged, this, &PageBlockObject::coreCoverChanged);
+        connect(m_cover.data(), SIGNAL(coreChanged()), this, SLOT(coreCoverChanged()));
     }
     Q_EMIT coverChanged();
     Q_EMIT coreChanged();
@@ -344,7 +344,7 @@ void PageBlockObject::setText(RichTextObject* text) {
     if(m_text) {
         m_text->setParent(this);
         m_core.setText(m_text->core());
-        connect(m_text.data(), &RichTextObject::coreChanged, this, &PageBlockObject::coreTextChanged);
+        connect(m_text.data(), SIGNAL(coreChanged()), this, SLOT(coreTextChanged()));
     }
     Q_EMIT textChanged();
     Q_EMIT coreChanged();

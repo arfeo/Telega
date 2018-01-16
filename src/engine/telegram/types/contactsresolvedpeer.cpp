@@ -35,7 +35,7 @@ ContactsResolvedPeer::ContactsResolvedPeer(const Null &null) :
 }
 
 ContactsResolvedPeer::~ContactsResolvedPeer() {
-    
+
 }
 
 void ContactsResolvedPeer::setChats(const QList<Chat> &chats) {
@@ -112,7 +112,7 @@ bool ContactsResolvedPeer::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -137,7 +137,7 @@ bool ContactsResolvedPeer::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -160,7 +160,7 @@ QMap<QString, QVariant> ContactsResolvedPeer::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -173,7 +173,7 @@ ContactsResolvedPeer ContactsResolvedPeer::fromMap(const QMap<QString, QVariant>
         QVariant _peer_var = map.value("peer");
         if( !_peer_var.isNull() )
             result.setPeer( Peer::fromMap(_peer_var.toMap()) );
-        
+
         QList<QVariant> map_chats = map["chats"].toList();
         QList<Chat> _chats;
         for(const QVariant &var: map_chats)
@@ -233,7 +233,7 @@ QDataStream &operator>>(QDataStream &stream, ContactsResolvedPeer &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const ContactsResolvedPeer &item) {
+/*QDebug operator<<(QDebug debug,  const ContactsResolvedPeer &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.ContactsResolvedPeer(";
@@ -248,4 +248,4 @@ QDebug operator<<(QDebug debug,  const ContactsResolvedPeer &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

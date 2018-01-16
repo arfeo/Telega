@@ -51,7 +51,7 @@ MaskCoords::MaskCoords(const Null &null) :
 }
 
 MaskCoords::~MaskCoords() {
-    
+
 }
 
 void MaskCoords::setN(qint32 n) {
@@ -125,7 +125,7 @@ bool MaskCoords::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -143,7 +143,7 @@ bool MaskCoords::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -161,7 +161,7 @@ QMap<QString, QVariant> MaskCoords::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -176,25 +176,25 @@ MaskCoords MaskCoords::fromMap(const QMap<QString, QVariant> &map) {
             _n_var.convert( QVariant::nameToType("qint32") );
             result.setN( _n_var.value<qint32>() );
         }
-        
+
         QVariant _x_var = map.value("x");
         if( !_x_var.isNull() ) {
             _x_var.convert( QVariant::nameToType("qreal") );
             result.setX( _x_var.value<qreal>() );
         }
-        
+
         QVariant _y_var = map.value("y");
         if( !_y_var.isNull() ) {
             _y_var.convert( QVariant::nameToType("qreal") );
             result.setY( _y_var.value<qreal>() );
         }
-        
+
         QVariant _zoom_var = map.value("zoom");
         if( !_zoom_var.isNull() ) {
             _zoom_var.convert( QVariant::nameToType("qreal") );
             result.setZoom( _zoom_var.value<qreal>() );
         }
-        
+
         return result;
     }
     return result;
@@ -248,7 +248,7 @@ QDataStream &operator>>(QDataStream &stream, MaskCoords &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const MaskCoords &item) {
+/*QDebug operator<<(QDebug debug,  const MaskCoords &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.MaskCoords(";
@@ -264,4 +264,4 @@ QDebug operator<<(QDebug debug,  const MaskCoords &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

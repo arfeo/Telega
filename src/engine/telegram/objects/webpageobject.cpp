@@ -12,11 +12,11 @@ WebPageObject::WebPageObject(const WebPage &core, QObject *parent) :
     m_core(core)
 {
     m_cachedPage = new PageObject(m_core.cachedPage(), this);
-    connect(m_cachedPage.data(), &PageObject::coreChanged, this, &WebPageObject::coreCachedPageChanged);
+    connect(m_cachedPage.data(), SIGNAL(coreChanged()), this, SLOT(coreCachedPageChanged()));
     m_document = new DocumentObject(m_core.document(), this);
-    connect(m_document.data(), &DocumentObject::coreChanged, this, &WebPageObject::coreDocumentChanged);
+    connect(m_document.data(), SIGNAL(coreChanged()), this, SLOT(coreDocumentChanged()));
     m_photo = new PhotoObject(m_core.photo(), this);
-    connect(m_photo.data(), &PhotoObject::coreChanged, this, &WebPageObject::corePhotoChanged);
+    connect(m_photo.data(), SIGNAL(coreChanged()), this, SLOT(corePhotoChanged()));
 }
 
 WebPageObject::WebPageObject(QObject *parent) :
@@ -27,11 +27,11 @@ WebPageObject::WebPageObject(QObject *parent) :
     m_core()
 {
     m_cachedPage = new PageObject(m_core.cachedPage(), this);
-    connect(m_cachedPage.data(), &PageObject::coreChanged, this, &WebPageObject::coreCachedPageChanged);
+    connect(m_cachedPage.data(), SIGNAL(coreChanged()), this, SLOT(coreCachedPageChanged()));
     m_document = new DocumentObject(m_core.document(), this);
-    connect(m_document.data(), &DocumentObject::coreChanged, this, &WebPageObject::coreDocumentChanged);
+    connect(m_document.data(), SIGNAL(coreChanged()), this, SLOT(coreDocumentChanged()));
     m_photo = new PhotoObject(m_core.photo(), this);
-    connect(m_photo.data(), &PhotoObject::coreChanged, this, &WebPageObject::corePhotoChanged);
+    connect(m_photo.data(), SIGNAL(coreChanged()), this, SLOT(corePhotoChanged()));
 }
 
 WebPageObject::~WebPageObject() {
@@ -55,7 +55,7 @@ void WebPageObject::setCachedPage(PageObject* cachedPage) {
     if(m_cachedPage) {
         m_cachedPage->setParent(this);
         m_core.setCachedPage(m_cachedPage->core());
-        connect(m_cachedPage.data(), &PageObject::coreChanged, this, &WebPageObject::coreCachedPageChanged);
+        connect(m_cachedPage.data(), SIGNAL(coreChanged()), this, SLOT(coreCachedPageChanged()));
     }
     Q_EMIT cachedPageChanged();
     Q_EMIT coreChanged();
@@ -105,7 +105,7 @@ void WebPageObject::setDocument(DocumentObject* document) {
     if(m_document) {
         m_document->setParent(this);
         m_core.setDocument(m_document->core());
-        connect(m_document.data(), &DocumentObject::coreChanged, this, &WebPageObject::coreDocumentChanged);
+        connect(m_document.data(), SIGNAL(coreChanged()), this, SLOT(coreDocumentChanged()));
     }
     Q_EMIT documentChanged();
     Q_EMIT coreChanged();
@@ -210,7 +210,7 @@ void WebPageObject::setPhoto(PhotoObject* photo) {
     if(m_photo) {
         m_photo->setParent(this);
         m_core.setPhoto(m_photo->core());
-        connect(m_photo.data(), &PhotoObject::coreChanged, this, &WebPageObject::corePhotoChanged);
+        connect(m_photo.data(), SIGNAL(coreChanged()), this, SLOT(corePhotoChanged()));
     }
     Q_EMIT photoChanged();
     Q_EMIT coreChanged();

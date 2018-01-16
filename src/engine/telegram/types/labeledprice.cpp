@@ -39,7 +39,7 @@ LabeledPrice::LabeledPrice(const Null &null) :
 }
 
 LabeledPrice::~LabeledPrice() {
-    
+
 }
 
 void LabeledPrice::setAmount(qint64 amount) {
@@ -91,7 +91,7 @@ bool LabeledPrice::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -107,7 +107,7 @@ bool LabeledPrice::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -123,7 +123,7 @@ QMap<QString, QVariant> LabeledPrice::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -138,13 +138,13 @@ LabeledPrice LabeledPrice::fromMap(const QMap<QString, QVariant> &map) {
             _label_var.convert( QVariant::nameToType("QString") );
             result.setLabel( _label_var.value<QString>() );
         }
-        
+
         QVariant _amount_var = map.value("amount");
         if( !_amount_var.isNull() ) {
             _amount_var.convert( QVariant::nameToType("qint64") );
             result.setAmount( _amount_var.value<qint64>() );
         }
-        
+
         return result;
     }
     return result;
@@ -190,7 +190,7 @@ QDataStream &operator>>(QDataStream &stream, LabeledPrice &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const LabeledPrice &item) {
+/*QDebug operator<<(QDebug debug,  const LabeledPrice &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.LabeledPrice(";
@@ -204,4 +204,4 @@ QDebug operator<<(QDebug debug,  const LabeledPrice &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

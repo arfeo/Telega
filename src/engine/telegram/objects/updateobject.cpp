@@ -33,53 +33,53 @@ UpdateObject::UpdateObject(const Update &core, QObject *parent) :
     m_core(core)
 {
     m_action = new SendMessageActionObject(m_core.action(), this);
-    connect(m_action.data(), &SendMessageActionObject::coreChanged, this, &UpdateObject::coreActionChanged);
+    connect(m_action.data(), SIGNAL(coreChanged()), this, SLOT(coreActionChanged()));
     m_chat = new EncryptedChatObject(m_core.chat(), this);
-    connect(m_chat.data(), &EncryptedChatObject::coreChanged, this, &UpdateObject::coreChatChanged);
+    connect(m_chat.data(), SIGNAL(coreChanged()), this, SLOT(coreChatChanged()));
     m_dataJSON = new DataJSONObject(m_core.dataJSON(), this);
-    connect(m_dataJSON.data(), &DataJSONObject::coreChanged, this, &UpdateObject::coreDataJSONChanged);
+    connect(m_dataJSON.data(), SIGNAL(coreChanged()), this, SLOT(coreDataJSONChanged()));
     m_difference = new LangPackDifferenceObject(m_core.difference(), this);
-    connect(m_difference.data(), &LangPackDifferenceObject::coreChanged, this, &UpdateObject::coreDifferenceChanged);
+    connect(m_difference.data(), SIGNAL(coreChanged()), this, SLOT(coreDifferenceChanged()));
     m_draft = new DraftMessageObject(m_core.draft(), this);
-    connect(m_draft.data(), &DraftMessageObject::coreChanged, this, &UpdateObject::coreDraftChanged);
+    connect(m_draft.data(), SIGNAL(coreChanged()), this, SLOT(coreDraftChanged()));
     m_foreignLink = new ContactLinkObject(m_core.foreignLink(), this);
-    connect(m_foreignLink.data(), &ContactLinkObject::coreChanged, this, &UpdateObject::coreForeignLinkChanged);
+    connect(m_foreignLink.data(), SIGNAL(coreChanged()), this, SLOT(coreForeignLinkChanged()));
     m_geo = new GeoPointObject(m_core.geo(), this);
-    connect(m_geo.data(), &GeoPointObject::coreChanged, this, &UpdateObject::coreGeoChanged);
+    connect(m_geo.data(), SIGNAL(coreChanged()), this, SLOT(coreGeoChanged()));
     m_info = new PaymentRequestedInfoObject(m_core.info(), this);
-    connect(m_info.data(), &PaymentRequestedInfoObject::coreChanged, this, &UpdateObject::coreInfoChanged);
+    connect(m_info.data(), SIGNAL(coreChanged()), this, SLOT(coreInfoChanged()));
     m_key = new PrivacyKeyObject(m_core.key(), this);
-    connect(m_key.data(), &PrivacyKeyObject::coreChanged, this, &UpdateObject::coreKeyChanged);
+    connect(m_key.data(), SIGNAL(coreChanged()), this, SLOT(coreKeyChanged()));
     m_media = new MessageMediaObject(m_core.media(), this);
-    connect(m_media.data(), &MessageMediaObject::coreChanged, this, &UpdateObject::coreMediaChanged);
+    connect(m_media.data(), SIGNAL(coreChanged()), this, SLOT(coreMediaChanged()));
     m_messageEncrypted = new EncryptedMessageObject(m_core.messageEncrypted(), this);
-    connect(m_messageEncrypted.data(), &EncryptedMessageObject::coreChanged, this, &UpdateObject::coreMessageEncryptedChanged);
+    connect(m_messageEncrypted.data(), SIGNAL(coreChanged()), this, SLOT(coreMessageEncryptedChanged()));
     m_message = new MessageObject(m_core.message(), this);
-    connect(m_message.data(), &MessageObject::coreChanged, this, &UpdateObject::coreMessageChanged);
+    connect(m_message.data(), SIGNAL(coreChanged()), this, SLOT(coreMessageChanged()));
     m_msgIdInputBotInlineMessageID = new InputBotInlineMessageIDObject(m_core.msgIdInputBotInlineMessageID(), this);
-    connect(m_msgIdInputBotInlineMessageID.data(), &InputBotInlineMessageIDObject::coreChanged, this, &UpdateObject::coreMsgIdInputBotInlineMessageIDChanged);
+    connect(m_msgIdInputBotInlineMessageID.data(), SIGNAL(coreChanged()), this, SLOT(coreMsgIdInputBotInlineMessageIDChanged()));
     m_myLink = new ContactLinkObject(m_core.myLink(), this);
-    connect(m_myLink.data(), &ContactLinkObject::coreChanged, this, &UpdateObject::coreMyLinkChanged);
+    connect(m_myLink.data(), SIGNAL(coreChanged()), this, SLOT(coreMyLinkChanged()));
     m_notifySettings = new PeerNotifySettingsObject(m_core.notifySettings(), this);
-    connect(m_notifySettings.data(), &PeerNotifySettingsObject::coreChanged, this, &UpdateObject::coreNotifySettingsChanged);
+    connect(m_notifySettings.data(), SIGNAL(coreChanged()), this, SLOT(coreNotifySettingsChanged()));
     m_participants = new ChatParticipantsObject(m_core.participants(), this);
-    connect(m_participants.data(), &ChatParticipantsObject::coreChanged, this, &UpdateObject::coreParticipantsChanged);
+    connect(m_participants.data(), SIGNAL(coreChanged()), this, SLOT(coreParticipantsChanged()));
     m_peerNotify = new NotifyPeerObject(m_core.peerNotify(), this);
-    connect(m_peerNotify.data(), &NotifyPeerObject::coreChanged, this, &UpdateObject::corePeerNotifyChanged);
+    connect(m_peerNotify.data(), SIGNAL(coreChanged()), this, SLOT(corePeerNotifyChanged()));
     m_peer = new PeerObject(m_core.peer(), this);
-    connect(m_peer.data(), &PeerObject::coreChanged, this, &UpdateObject::corePeerChanged);
+    connect(m_peer.data(), SIGNAL(coreChanged()), this, SLOT(corePeerChanged()));
     m_phoneCall = new PhoneCallObject(m_core.phoneCall(), this);
-    connect(m_phoneCall.data(), &PhoneCallObject::coreChanged, this, &UpdateObject::corePhoneCallChanged);
+    connect(m_phoneCall.data(), SIGNAL(coreChanged()), this, SLOT(corePhoneCallChanged()));
     m_photo = new UserProfilePhotoObject(m_core.photo(), this);
-    connect(m_photo.data(), &UserProfilePhotoObject::coreChanged, this, &UpdateObject::corePhotoChanged);
+    connect(m_photo.data(), SIGNAL(coreChanged()), this, SLOT(corePhotoChanged()));
     m_shippingAddress = new PostAddressObject(m_core.shippingAddress(), this);
-    connect(m_shippingAddress.data(), &PostAddressObject::coreChanged, this, &UpdateObject::coreShippingAddressChanged);
+    connect(m_shippingAddress.data(), SIGNAL(coreChanged()), this, SLOT(coreShippingAddressChanged()));
     m_status = new UserStatusObject(m_core.status(), this);
-    connect(m_status.data(), &UserStatusObject::coreChanged, this, &UpdateObject::coreStatusChanged);
+    connect(m_status.data(), SIGNAL(coreChanged()), this, SLOT(coreStatusChanged()));
     m_stickerset = new MessagesStickerSetObject(m_core.stickerset(), this);
-    connect(m_stickerset.data(), &MessagesStickerSetObject::coreChanged, this, &UpdateObject::coreStickersetChanged);
+    connect(m_stickerset.data(), SIGNAL(coreChanged()), this, SLOT(coreStickersetChanged()));
     m_webpage = new WebPageObject(m_core.webpage(), this);
-    connect(m_webpage.data(), &WebPageObject::coreChanged, this, &UpdateObject::coreWebpageChanged);
+    connect(m_webpage.data(), SIGNAL(coreChanged()), this, SLOT(coreWebpageChanged()));
 }
 
 UpdateObject::UpdateObject(QObject *parent) :
@@ -111,53 +111,53 @@ UpdateObject::UpdateObject(QObject *parent) :
     m_core()
 {
     m_action = new SendMessageActionObject(m_core.action(), this);
-    connect(m_action.data(), &SendMessageActionObject::coreChanged, this, &UpdateObject::coreActionChanged);
+    connect(m_action.data(), SIGNAL(coreChanged()), this, SLOT(coreActionChanged()));
     m_chat = new EncryptedChatObject(m_core.chat(), this);
-    connect(m_chat.data(), &EncryptedChatObject::coreChanged, this, &UpdateObject::coreChatChanged);
+    connect(m_chat.data(), SIGNAL(coreChanged()), this, SLOT(coreChatChanged()));
     m_dataJSON = new DataJSONObject(m_core.dataJSON(), this);
-    connect(m_dataJSON.data(), &DataJSONObject::coreChanged, this, &UpdateObject::coreDataJSONChanged);
+    connect(m_dataJSON.data(), SIGNAL(coreChanged()), this, SLOT(coreDataJSONChanged()));
     m_difference = new LangPackDifferenceObject(m_core.difference(), this);
-    connect(m_difference.data(), &LangPackDifferenceObject::coreChanged, this, &UpdateObject::coreDifferenceChanged);
+    connect(m_difference.data(), SIGNAL(coreChanged()), this, SLOT(coreDifferenceChanged()));
     m_draft = new DraftMessageObject(m_core.draft(), this);
-    connect(m_draft.data(), &DraftMessageObject::coreChanged, this, &UpdateObject::coreDraftChanged);
+    connect(m_draft.data(), SIGNAL(coreChanged()), this, SLOT(coreDraftChanged()));
     m_foreignLink = new ContactLinkObject(m_core.foreignLink(), this);
-    connect(m_foreignLink.data(), &ContactLinkObject::coreChanged, this, &UpdateObject::coreForeignLinkChanged);
+    connect(m_foreignLink.data(), SIGNAL(coreChanged()), this, SLOT(coreForeignLinkChanged()));
     m_geo = new GeoPointObject(m_core.geo(), this);
-    connect(m_geo.data(), &GeoPointObject::coreChanged, this, &UpdateObject::coreGeoChanged);
+    connect(m_geo.data(), SIGNAL(coreChanged()), this, SLOT(coreGeoChanged()));
     m_info = new PaymentRequestedInfoObject(m_core.info(), this);
-    connect(m_info.data(), &PaymentRequestedInfoObject::coreChanged, this, &UpdateObject::coreInfoChanged);
+    connect(m_info.data(), SIGNAL(coreChanged()), this, SLOT(coreInfoChanged()));
     m_key = new PrivacyKeyObject(m_core.key(), this);
-    connect(m_key.data(), &PrivacyKeyObject::coreChanged, this, &UpdateObject::coreKeyChanged);
+    connect(m_key.data(), SIGNAL(coreChanged()), this, SLOT(coreKeyChanged()));
     m_media = new MessageMediaObject(m_core.media(), this);
-    connect(m_media.data(), &MessageMediaObject::coreChanged, this, &UpdateObject::coreMediaChanged);
+    connect(m_media.data(), SIGNAL(coreChanged()), this, SLOT(coreMediaChanged()));
     m_messageEncrypted = new EncryptedMessageObject(m_core.messageEncrypted(), this);
-    connect(m_messageEncrypted.data(), &EncryptedMessageObject::coreChanged, this, &UpdateObject::coreMessageEncryptedChanged);
+    connect(m_messageEncrypted.data(), SIGNAL(coreChanged()), this, SLOT(coreMessageEncryptedChanged()));
     m_message = new MessageObject(m_core.message(), this);
-    connect(m_message.data(), &MessageObject::coreChanged, this, &UpdateObject::coreMessageChanged);
+    connect(m_message.data(), SIGNAL(coreChanged()), this, SLOT(coreMessageChanged()));
     m_msgIdInputBotInlineMessageID = new InputBotInlineMessageIDObject(m_core.msgIdInputBotInlineMessageID(), this);
-    connect(m_msgIdInputBotInlineMessageID.data(), &InputBotInlineMessageIDObject::coreChanged, this, &UpdateObject::coreMsgIdInputBotInlineMessageIDChanged);
+    connect(m_msgIdInputBotInlineMessageID.data(), SIGNAL(coreChanged()), this, SLOT(coreMsgIdInputBotInlineMessageIDChanged()));
     m_myLink = new ContactLinkObject(m_core.myLink(), this);
-    connect(m_myLink.data(), &ContactLinkObject::coreChanged, this, &UpdateObject::coreMyLinkChanged);
+    connect(m_myLink.data(), SIGNAL(coreChanged()), this, SLOT(coreMyLinkChanged()));
     m_notifySettings = new PeerNotifySettingsObject(m_core.notifySettings(), this);
-    connect(m_notifySettings.data(), &PeerNotifySettingsObject::coreChanged, this, &UpdateObject::coreNotifySettingsChanged);
+    connect(m_notifySettings.data(), SIGNAL(coreChanged()), this, SLOT(coreNotifySettingsChanged()));
     m_participants = new ChatParticipantsObject(m_core.participants(), this);
-    connect(m_participants.data(), &ChatParticipantsObject::coreChanged, this, &UpdateObject::coreParticipantsChanged);
+    connect(m_participants.data(), SIGNAL(coreChanged()), this, SLOT(coreParticipantsChanged()));
     m_peerNotify = new NotifyPeerObject(m_core.peerNotify(), this);
-    connect(m_peerNotify.data(), &NotifyPeerObject::coreChanged, this, &UpdateObject::corePeerNotifyChanged);
+    connect(m_peerNotify.data(), SIGNAL(coreChanged()), this, SLOT(corePeerNotifyChanged()));
     m_peer = new PeerObject(m_core.peer(), this);
-    connect(m_peer.data(), &PeerObject::coreChanged, this, &UpdateObject::corePeerChanged);
+    connect(m_peer.data(), SIGNAL(coreChanged()), this, SLOT(corePeerChanged()));
     m_phoneCall = new PhoneCallObject(m_core.phoneCall(), this);
-    connect(m_phoneCall.data(), &PhoneCallObject::coreChanged, this, &UpdateObject::corePhoneCallChanged);
+    connect(m_phoneCall.data(), SIGNAL(coreChanged()), this, SLOT(corePhoneCallChanged()));
     m_photo = new UserProfilePhotoObject(m_core.photo(), this);
-    connect(m_photo.data(), &UserProfilePhotoObject::coreChanged, this, &UpdateObject::corePhotoChanged);
+    connect(m_photo.data(), SIGNAL(coreChanged()), this, SLOT(corePhotoChanged()));
     m_shippingAddress = new PostAddressObject(m_core.shippingAddress(), this);
-    connect(m_shippingAddress.data(), &PostAddressObject::coreChanged, this, &UpdateObject::coreShippingAddressChanged);
+    connect(m_shippingAddress.data(), SIGNAL(coreChanged()), this, SLOT(coreShippingAddressChanged()));
     m_status = new UserStatusObject(m_core.status(), this);
-    connect(m_status.data(), &UserStatusObject::coreChanged, this, &UpdateObject::coreStatusChanged);
+    connect(m_status.data(), SIGNAL(coreChanged()), this, SLOT(coreStatusChanged()));
     m_stickerset = new MessagesStickerSetObject(m_core.stickerset(), this);
-    connect(m_stickerset.data(), &MessagesStickerSetObject::coreChanged, this, &UpdateObject::coreStickersetChanged);
+    connect(m_stickerset.data(), SIGNAL(coreChanged()), this, SLOT(coreStickersetChanged()));
     m_webpage = new WebPageObject(m_core.webpage(), this);
-    connect(m_webpage.data(), &WebPageObject::coreChanged, this, &UpdateObject::coreWebpageChanged);
+    connect(m_webpage.data(), SIGNAL(coreChanged()), this, SLOT(coreWebpageChanged()));
 }
 
 UpdateObject::~UpdateObject() {
@@ -170,7 +170,7 @@ void UpdateObject::setAction(SendMessageActionObject* action) {
     if(m_action) {
         m_action->setParent(this);
         m_core.setAction(m_action->core());
-        connect(m_action.data(), &SendMessageActionObject::coreChanged, this, &UpdateObject::coreActionChanged);
+        connect(m_action.data(), SIGNAL(coreChanged()), this, SLOT(coreActionChanged()));
     }
     Q_EMIT actionChanged();
     Q_EMIT coreChanged();
@@ -209,7 +209,7 @@ void UpdateObject::setChat(EncryptedChatObject* chat) {
     if(m_chat) {
         m_chat->setParent(this);
         m_core.setChat(m_chat->core());
-        connect(m_chat.data(), &EncryptedChatObject::coreChanged, this, &UpdateObject::coreChatChanged);
+        connect(m_chat.data(), SIGNAL(coreChanged()), this, SLOT(coreChatChanged()));
     }
     Q_EMIT chatChanged();
     Q_EMIT coreChanged();
@@ -259,7 +259,7 @@ void UpdateObject::setDataJSON(DataJSONObject* dataJSON) {
     if(m_dataJSON) {
         m_dataJSON->setParent(this);
         m_core.setDataJSON(m_dataJSON->core());
-        connect(m_dataJSON.data(), &DataJSONObject::coreChanged, this, &UpdateObject::coreDataJSONChanged);
+        connect(m_dataJSON.data(), SIGNAL(coreChanged()), this, SLOT(coreDataJSONChanged()));
     }
     Q_EMIT dataJSONChanged();
     Q_EMIT coreChanged();
@@ -309,7 +309,7 @@ void UpdateObject::setDifference(LangPackDifferenceObject* difference) {
     if(m_difference) {
         m_difference->setParent(this);
         m_core.setDifference(m_difference->core());
-        connect(m_difference.data(), &LangPackDifferenceObject::coreChanged, this, &UpdateObject::coreDifferenceChanged);
+        connect(m_difference.data(), SIGNAL(coreChanged()), this, SLOT(coreDifferenceChanged()));
     }
     Q_EMIT differenceChanged();
     Q_EMIT coreChanged();
@@ -326,7 +326,7 @@ void UpdateObject::setDraft(DraftMessageObject* draft) {
     if(m_draft) {
         m_draft->setParent(this);
         m_core.setDraft(m_draft->core());
-        connect(m_draft.data(), &DraftMessageObject::coreChanged, this, &UpdateObject::coreDraftChanged);
+        connect(m_draft.data(), SIGNAL(coreChanged()), this, SLOT(coreDraftChanged()));
     }
     Q_EMIT draftChanged();
     Q_EMIT coreChanged();
@@ -387,7 +387,7 @@ void UpdateObject::setForeignLink(ContactLinkObject* foreignLink) {
     if(m_foreignLink) {
         m_foreignLink->setParent(this);
         m_core.setForeignLink(m_foreignLink->core());
-        connect(m_foreignLink.data(), &ContactLinkObject::coreChanged, this, &UpdateObject::coreForeignLinkChanged);
+        connect(m_foreignLink.data(), SIGNAL(coreChanged()), this, SLOT(coreForeignLinkChanged()));
     }
     Q_EMIT foreignLinkChanged();
     Q_EMIT coreChanged();
@@ -415,7 +415,7 @@ void UpdateObject::setGeo(GeoPointObject* geo) {
     if(m_geo) {
         m_geo->setParent(this);
         m_core.setGeo(m_geo->core());
-        connect(m_geo.data(), &GeoPointObject::coreChanged, this, &UpdateObject::coreGeoChanged);
+        connect(m_geo.data(), SIGNAL(coreChanged()), this, SLOT(coreGeoChanged()));
     }
     Q_EMIT geoChanged();
     Q_EMIT coreChanged();
@@ -465,7 +465,7 @@ void UpdateObject::setInfo(PaymentRequestedInfoObject* info) {
     if(m_info) {
         m_info->setParent(this);
         m_core.setInfo(m_info->core());
-        connect(m_info.data(), &PaymentRequestedInfoObject::coreChanged, this, &UpdateObject::coreInfoChanged);
+        connect(m_info.data(), SIGNAL(coreChanged()), this, SLOT(coreInfoChanged()));
     }
     Q_EMIT infoChanged();
     Q_EMIT coreChanged();
@@ -504,7 +504,7 @@ void UpdateObject::setKey(PrivacyKeyObject* key) {
     if(m_key) {
         m_key->setParent(this);
         m_core.setKey(m_key->core());
-        connect(m_key.data(), &PrivacyKeyObject::coreChanged, this, &UpdateObject::coreKeyChanged);
+        connect(m_key.data(), SIGNAL(coreChanged()), this, SLOT(coreKeyChanged()));
     }
     Q_EMIT keyChanged();
     Q_EMIT coreChanged();
@@ -565,7 +565,7 @@ void UpdateObject::setMedia(MessageMediaObject* media) {
     if(m_media) {
         m_media->setParent(this);
         m_core.setMedia(m_media->core());
-        connect(m_media.data(), &MessageMediaObject::coreChanged, this, &UpdateObject::coreMediaChanged);
+        connect(m_media.data(), SIGNAL(coreChanged()), this, SLOT(coreMediaChanged()));
     }
     Q_EMIT mediaChanged();
     Q_EMIT coreChanged();
@@ -582,7 +582,7 @@ void UpdateObject::setMessageEncrypted(EncryptedMessageObject* messageEncrypted)
     if(m_messageEncrypted) {
         m_messageEncrypted->setParent(this);
         m_core.setMessageEncrypted(m_messageEncrypted->core());
-        connect(m_messageEncrypted.data(), &EncryptedMessageObject::coreChanged, this, &UpdateObject::coreMessageEncryptedChanged);
+        connect(m_messageEncrypted.data(), SIGNAL(coreChanged()), this, SLOT(coreMessageEncryptedChanged()));
     }
     Q_EMIT messageEncryptedChanged();
     Q_EMIT coreChanged();
@@ -599,7 +599,7 @@ void UpdateObject::setMessage(MessageObject* message) {
     if(m_message) {
         m_message->setParent(this);
         m_core.setMessage(m_message->core());
-        connect(m_message.data(), &MessageObject::coreChanged, this, &UpdateObject::coreMessageChanged);
+        connect(m_message.data(), SIGNAL(coreChanged()), this, SLOT(coreMessageChanged()));
     }
     Q_EMIT messageChanged();
     Q_EMIT coreChanged();
@@ -638,7 +638,7 @@ void UpdateObject::setMsgIdInputBotInlineMessageID(InputBotInlineMessageIDObject
     if(m_msgIdInputBotInlineMessageID) {
         m_msgIdInputBotInlineMessageID->setParent(this);
         m_core.setMsgIdInputBotInlineMessageID(m_msgIdInputBotInlineMessageID->core());
-        connect(m_msgIdInputBotInlineMessageID.data(), &InputBotInlineMessageIDObject::coreChanged, this, &UpdateObject::coreMsgIdInputBotInlineMessageIDChanged);
+        connect(m_msgIdInputBotInlineMessageID.data(), SIGNAL(coreChanged()), this, SLOT(coreMsgIdInputBotInlineMessageIDChanged()));
     }
     Q_EMIT msgIdInputBotInlineMessageIDChanged();
     Q_EMIT coreChanged();
@@ -666,7 +666,7 @@ void UpdateObject::setMyLink(ContactLinkObject* myLink) {
     if(m_myLink) {
         m_myLink->setParent(this);
         m_core.setMyLink(m_myLink->core());
-        connect(m_myLink.data(), &ContactLinkObject::coreChanged, this, &UpdateObject::coreMyLinkChanged);
+        connect(m_myLink.data(), SIGNAL(coreChanged()), this, SLOT(coreMyLinkChanged()));
     }
     Q_EMIT myLinkChanged();
     Q_EMIT coreChanged();
@@ -683,7 +683,7 @@ void UpdateObject::setNotifySettings(PeerNotifySettingsObject* notifySettings) {
     if(m_notifySettings) {
         m_notifySettings->setParent(this);
         m_core.setNotifySettings(m_notifySettings->core());
-        connect(m_notifySettings.data(), &PeerNotifySettingsObject::coreChanged, this, &UpdateObject::coreNotifySettingsChanged);
+        connect(m_notifySettings.data(), SIGNAL(coreChanged()), this, SLOT(coreNotifySettingsChanged()));
     }
     Q_EMIT notifySettingsChanged();
     Q_EMIT coreChanged();
@@ -733,7 +733,7 @@ void UpdateObject::setParticipants(ChatParticipantsObject* participants) {
     if(m_participants) {
         m_participants->setParent(this);
         m_core.setParticipants(m_participants->core());
-        connect(m_participants.data(), &ChatParticipantsObject::coreChanged, this, &UpdateObject::coreParticipantsChanged);
+        connect(m_participants.data(), SIGNAL(coreChanged()), this, SLOT(coreParticipantsChanged()));
     }
     Q_EMIT participantsChanged();
     Q_EMIT coreChanged();
@@ -761,7 +761,7 @@ void UpdateObject::setPeerNotify(NotifyPeerObject* peerNotify) {
     if(m_peerNotify) {
         m_peerNotify->setParent(this);
         m_core.setPeerNotify(m_peerNotify->core());
-        connect(m_peerNotify.data(), &NotifyPeerObject::coreChanged, this, &UpdateObject::corePeerNotifyChanged);
+        connect(m_peerNotify.data(), SIGNAL(coreChanged()), this, SLOT(corePeerNotifyChanged()));
     }
     Q_EMIT peerNotifyChanged();
     Q_EMIT coreChanged();
@@ -778,7 +778,7 @@ void UpdateObject::setPeer(PeerObject* peer) {
     if(m_peer) {
         m_peer->setParent(this);
         m_core.setPeer(m_peer->core());
-        connect(m_peer.data(), &PeerObject::coreChanged, this, &UpdateObject::corePeerChanged);
+        connect(m_peer.data(), SIGNAL(coreChanged()), this, SLOT(corePeerChanged()));
     }
     Q_EMIT peerChanged();
     Q_EMIT coreChanged();
@@ -806,7 +806,7 @@ void UpdateObject::setPhoneCall(PhoneCallObject* phoneCall) {
     if(m_phoneCall) {
         m_phoneCall->setParent(this);
         m_core.setPhoneCall(m_phoneCall->core());
-        connect(m_phoneCall.data(), &PhoneCallObject::coreChanged, this, &UpdateObject::corePhoneCallChanged);
+        connect(m_phoneCall.data(), SIGNAL(coreChanged()), this, SLOT(corePhoneCallChanged()));
     }
     Q_EMIT phoneCallChanged();
     Q_EMIT coreChanged();
@@ -823,7 +823,7 @@ void UpdateObject::setPhoto(UserProfilePhotoObject* photo) {
     if(m_photo) {
         m_photo->setParent(this);
         m_core.setPhoto(m_photo->core());
-        connect(m_photo.data(), &UserProfilePhotoObject::coreChanged, this, &UpdateObject::corePhotoChanged);
+        connect(m_photo.data(), SIGNAL(coreChanged()), this, SLOT(corePhotoChanged()));
     }
     Q_EMIT photoChanged();
     Q_EMIT coreChanged();
@@ -950,7 +950,7 @@ void UpdateObject::setShippingAddress(PostAddressObject* shippingAddress) {
     if(m_shippingAddress) {
         m_shippingAddress->setParent(this);
         m_core.setShippingAddress(m_shippingAddress->core());
-        connect(m_shippingAddress.data(), &PostAddressObject::coreChanged, this, &UpdateObject::coreShippingAddressChanged);
+        connect(m_shippingAddress.data(), SIGNAL(coreChanged()), this, SLOT(coreShippingAddressChanged()));
     }
     Q_EMIT shippingAddressChanged();
     Q_EMIT coreChanged();
@@ -978,7 +978,7 @@ void UpdateObject::setStatus(UserStatusObject* status) {
     if(m_status) {
         m_status->setParent(this);
         m_core.setStatus(m_status->core());
-        connect(m_status.data(), &UserStatusObject::coreChanged, this, &UpdateObject::coreStatusChanged);
+        connect(m_status.data(), SIGNAL(coreChanged()), this, SLOT(coreStatusChanged()));
     }
     Q_EMIT statusChanged();
     Q_EMIT coreChanged();
@@ -995,7 +995,7 @@ void UpdateObject::setStickerset(MessagesStickerSetObject* stickerset) {
     if(m_stickerset) {
         m_stickerset->setParent(this);
         m_core.setStickerset(m_stickerset->core());
-        connect(m_stickerset.data(), &MessagesStickerSetObject::coreChanged, this, &UpdateObject::coreStickersetChanged);
+        connect(m_stickerset.data(), SIGNAL(coreChanged()), this, SLOT(coreStickersetChanged()));
     }
     Q_EMIT stickersetChanged();
     Q_EMIT coreChanged();
@@ -1089,7 +1089,7 @@ void UpdateObject::setWebpage(WebPageObject* webpage) {
     if(m_webpage) {
         m_webpage->setParent(this);
         m_core.setWebpage(m_webpage->core());
-        connect(m_webpage.data(), &WebPageObject::coreChanged, this, &UpdateObject::coreWebpageChanged);
+        connect(m_webpage.data(), SIGNAL(coreChanged()), this, SLOT(coreWebpageChanged()));
     }
     Q_EMIT webpageChanged();
     Q_EMIT coreChanged();

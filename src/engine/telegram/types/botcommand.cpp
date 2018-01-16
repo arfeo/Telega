@@ -35,7 +35,7 @@ BotCommand::BotCommand(const Null &null) :
 }
 
 BotCommand::~BotCommand() {
-    
+
 }
 
 void BotCommand::setCommand(const QString &command) {
@@ -87,7 +87,7 @@ bool BotCommand::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -103,7 +103,7 @@ bool BotCommand::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -119,7 +119,7 @@ QMap<QString, QVariant> BotCommand::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -134,13 +134,13 @@ BotCommand BotCommand::fromMap(const QMap<QString, QVariant> &map) {
             _command_var.convert( QVariant::nameToType("QString") );
             result.setCommand( _command_var.value<QString>() );
         }
-        
+
         QVariant _description_var = map.value("description");
         if( !_description_var.isNull() ) {
             _description_var.convert( QVariant::nameToType("QString") );
             result.setDescription( _description_var.value<QString>() );
         }
-        
+
         return result;
     }
     return result;
@@ -186,7 +186,7 @@ QDataStream &operator>>(QDataStream &stream, BotCommand &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const BotCommand &item) {
+/*QDebug operator<<(QDebug debug,  const BotCommand &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.BotCommand(";
@@ -200,4 +200,4 @@ QDebug operator<<(QDebug debug,  const BotCommand &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

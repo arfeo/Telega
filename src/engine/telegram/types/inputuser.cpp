@@ -43,7 +43,7 @@ InputUser::InputUser(const Null &null) :
 }
 
 InputUser::~InputUser() {
-    
+
 }
 
 void InputUser::setAccessHash(qint64 accessHash) {
@@ -93,13 +93,13 @@ bool InputUser::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputUserSelf: {
         m_classType = static_cast<InputUserClassType>(x);
         return true;
     }
         break;
-    
+
     case typeInputUser: {
         m_userId = in->fetchInt();
         m_accessHash = in->fetchLong();
@@ -107,7 +107,7 @@ bool InputUser::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -121,19 +121,19 @@ bool InputUser::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeInputUserSelf: {
         return true;
     }
         break;
-    
+
     case typeInputUser: {
         out->appendInt(m_userId);
         out->appendLong(m_accessHash);
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -147,13 +147,13 @@ QMap<QString, QVariant> InputUser::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputUserSelf: {
         result["classType"] = "InputUser::typeInputUserSelf";
         return result;
     }
         break;
-    
+
     case typeInputUser: {
         result["classType"] = "InputUser::typeInputUser";
         if( userId() ) result["userId"] = QString::number(userId());
@@ -161,7 +161,7 @@ QMap<QString, QVariant> InputUser::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -184,13 +184,13 @@ InputUser InputUser::fromMap(const QMap<QString, QVariant> &map) {
             _userId_var.convert( QVariant::nameToType("qint32") );
             result.setUserId( _userId_var.value<qint32>() );
         }
-        
+
         QVariant _accessHash_var = map.value("accessHash");
         if( !_accessHash_var.isNull() ) {
             _accessHash_var.convert( QVariant::nameToType("qint64") );
             result.setAccessHash( _accessHash_var.value<qint64>() );
         }
-        
+
         return result;
     }
     return result;
@@ -211,10 +211,10 @@ QDataStream &operator<<(QDataStream &stream, const InputUser &item) {
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case InputUser::typeInputUserEmpty:
-        
+
         break;
     case InputUser::typeInputUserSelf:
-        
+
         break;
     case InputUser::typeInputUser:
         stream << item.userId();
@@ -230,11 +230,11 @@ QDataStream &operator>>(QDataStream &stream, InputUser &item) {
     item.setClassType(static_cast<InputUser::InputUserClassType>(type));
     switch(type) {
     case InputUser::typeInputUserEmpty: {
-        
+
     }
         break;
     case InputUser::typeInputUserSelf: {
-        
+
     }
         break;
     case InputUser::typeInputUser: {
@@ -250,7 +250,7 @@ QDataStream &operator>>(QDataStream &stream, InputUser &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const InputUser &item) {
+/*QDebug operator<<(QDebug debug,  const InputUser &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.InputUser(";
@@ -270,4 +270,4 @@ QDebug operator<<(QDebug debug,  const InputUser &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

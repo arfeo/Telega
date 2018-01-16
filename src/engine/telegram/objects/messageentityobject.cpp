@@ -10,7 +10,7 @@ MessageEntityObject::MessageEntityObject(const MessageEntity &core, QObject *par
     m_core(core)
 {
     m_userIdInputUser = new InputUserObject(m_core.userIdInputUser(), this);
-    connect(m_userIdInputUser.data(), &InputUserObject::coreChanged, this, &MessageEntityObject::coreUserIdInputUserChanged);
+    connect(m_userIdInputUser.data(), SIGNAL(coreChanged()), this, SLOT(coreUserIdInputUserChanged()));
 }
 
 MessageEntityObject::MessageEntityObject(QObject *parent) :
@@ -19,7 +19,7 @@ MessageEntityObject::MessageEntityObject(QObject *parent) :
     m_core()
 {
     m_userIdInputUser = new InputUserObject(m_core.userIdInputUser(), this);
-    connect(m_userIdInputUser.data(), &InputUserObject::coreChanged, this, &MessageEntityObject::coreUserIdInputUserChanged);
+    connect(m_userIdInputUser.data(), SIGNAL(coreChanged()), this, SLOT(coreUserIdInputUserChanged()));
 }
 
 MessageEntityObject::~MessageEntityObject() {
@@ -76,7 +76,7 @@ void MessageEntityObject::setUserIdInputUser(InputUserObject* userIdInputUser) {
     if(m_userIdInputUser) {
         m_userIdInputUser->setParent(this);
         m_core.setUserIdInputUser(m_userIdInputUser->core());
-        connect(m_userIdInputUser.data(), &InputUserObject::coreChanged, this, &MessageEntityObject::coreUserIdInputUserChanged);
+        connect(m_userIdInputUser.data(), SIGNAL(coreChanged()), this, SLOT(coreUserIdInputUserChanged()));
     }
     Q_EMIT userIdInputUserChanged();
     Q_EMIT coreChanged();

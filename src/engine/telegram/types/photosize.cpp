@@ -47,7 +47,7 @@ PhotoSize::PhotoSize(const Null &null) :
 }
 
 PhotoSize::~PhotoSize() {
-    
+
 }
 
 void PhotoSize::setBytes(const QByteArray &bytes) {
@@ -138,7 +138,7 @@ bool PhotoSize::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typePhotoSize: {
         m_type = in->fetchQString();
         m_location.fetch(in);
@@ -149,7 +149,7 @@ bool PhotoSize::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typePhotoCachedSize: {
         m_type = in->fetchQString();
         m_location.fetch(in);
@@ -160,7 +160,7 @@ bool PhotoSize::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -175,7 +175,7 @@ bool PhotoSize::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typePhotoSize: {
         out->appendQString(m_type);
         m_location.push(out);
@@ -185,7 +185,7 @@ bool PhotoSize::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typePhotoCachedSize: {
         out->appendQString(m_type);
         m_location.push(out);
@@ -195,7 +195,7 @@ bool PhotoSize::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -210,7 +210,7 @@ QMap<QString, QVariant> PhotoSize::toMap() const {
         return result;
     }
         break;
-    
+
     case typePhotoSize: {
         result["classType"] = "PhotoSize::typePhotoSize";
         if( !m_type.isEmpty() ) result["type"] = QVariant::fromValue<QString>(m_type);
@@ -221,7 +221,7 @@ QMap<QString, QVariant> PhotoSize::toMap() const {
         return result;
     }
         break;
-    
+
     case typePhotoCachedSize: {
         result["classType"] = "PhotoSize::typePhotoCachedSize";
         if( !m_type.isEmpty() ) result["type"] = QVariant::fromValue<QString>(m_type);
@@ -232,7 +232,7 @@ QMap<QString, QVariant> PhotoSize::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -247,7 +247,7 @@ PhotoSize PhotoSize::fromMap(const QMap<QString, QVariant> &map) {
             _type_var.convert( QVariant::nameToType("QString") );
             result.setType( _type_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "PhotoSize::typePhotoSize") {
@@ -257,29 +257,29 @@ PhotoSize PhotoSize::fromMap(const QMap<QString, QVariant> &map) {
             _type_var.convert( QVariant::nameToType("QString") );
             result.setType( _type_var.value<QString>() );
         }
-        
+
         QVariant _location_var = map.value("location");
         if( !_location_var.isNull() )
             result.setLocation( FileLocation::fromMap(_location_var.toMap()) );
-        
+
         QVariant _w_var = map.value("w");
         if( !_w_var.isNull() ) {
             _w_var.convert( QVariant::nameToType("qint32") );
             result.setW( _w_var.value<qint32>() );
         }
-        
+
         QVariant _h_var = map.value("h");
         if( !_h_var.isNull() ) {
             _h_var.convert( QVariant::nameToType("qint32") );
             result.setH( _h_var.value<qint32>() );
         }
-        
+
         QVariant _size_var = map.value("size");
         if( !_size_var.isNull() ) {
             _size_var.convert( QVariant::nameToType("qint32") );
             result.setSize( _size_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "PhotoSize::typePhotoCachedSize") {
@@ -289,29 +289,29 @@ PhotoSize PhotoSize::fromMap(const QMap<QString, QVariant> &map) {
             _type_var.convert( QVariant::nameToType("QString") );
             result.setType( _type_var.value<QString>() );
         }
-        
+
         QVariant _location_var = map.value("location");
         if( !_location_var.isNull() )
             result.setLocation( FileLocation::fromMap(_location_var.toMap()) );
-        
+
         QVariant _w_var = map.value("w");
         if( !_w_var.isNull() ) {
             _w_var.convert( QVariant::nameToType("qint32") );
             result.setW( _w_var.value<qint32>() );
         }
-        
+
         QVariant _h_var = map.value("h");
         if( !_h_var.isNull() ) {
             _h_var.convert( QVariant::nameToType("qint32") );
             result.setH( _h_var.value<qint32>() );
         }
-        
+
         QVariant _bytes_var = map.value("bytes");
         if( !_bytes_var.isNull() ) {
             _bytes_var.convert( QVariant::nameToType("QByteArray") );
             result.setBytes( _bytes_var.value<QByteArray>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "PhotoSize::typePhotoSizeEmptySecret23") {
@@ -321,7 +321,7 @@ PhotoSize PhotoSize::fromMap(const QMap<QString, QVariant> &map) {
             _type_var.convert( QVariant::nameToType("QString") );
             result.setType( _type_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "PhotoSize::typePhotoSizeSecret23") {
@@ -331,29 +331,29 @@ PhotoSize PhotoSize::fromMap(const QMap<QString, QVariant> &map) {
             _type_var.convert( QVariant::nameToType("QString") );
             result.setType( _type_var.value<QString>() );
         }
-        
+
         QVariant _location_var = map.value("location");
         if( !_location_var.isNull() )
             result.setLocation( FileLocation::fromMap(_location_var.toMap()) );
-        
+
         QVariant _w_var = map.value("w");
         if( !_w_var.isNull() ) {
             _w_var.convert( QVariant::nameToType("qint32") );
             result.setW( _w_var.value<qint32>() );
         }
-        
+
         QVariant _h_var = map.value("h");
         if( !_h_var.isNull() ) {
             _h_var.convert( QVariant::nameToType("qint32") );
             result.setH( _h_var.value<qint32>() );
         }
-        
+
         QVariant _size_var = map.value("size");
         if( !_size_var.isNull() ) {
             _size_var.convert( QVariant::nameToType("qint32") );
             result.setSize( _size_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "PhotoSize::typePhotoCachedSizeSecret23") {
@@ -363,29 +363,29 @@ PhotoSize PhotoSize::fromMap(const QMap<QString, QVariant> &map) {
             _type_var.convert( QVariant::nameToType("QString") );
             result.setType( _type_var.value<QString>() );
         }
-        
+
         QVariant _location_var = map.value("location");
         if( !_location_var.isNull() )
             result.setLocation( FileLocation::fromMap(_location_var.toMap()) );
-        
+
         QVariant _w_var = map.value("w");
         if( !_w_var.isNull() ) {
             _w_var.convert( QVariant::nameToType("qint32") );
             result.setW( _w_var.value<qint32>() );
         }
-        
+
         QVariant _h_var = map.value("h");
         if( !_h_var.isNull() ) {
             _h_var.convert( QVariant::nameToType("qint32") );
             result.setH( _h_var.value<qint32>() );
         }
-        
+
         QVariant _bytes_var = map.value("bytes");
         if( !_bytes_var.isNull() ) {
             _bytes_var.convert( QVariant::nameToType("QByteArray") );
             result.setBytes( _bytes_var.value<QByteArray>() );
         }
-        
+
         return result;
     }
     return result;
@@ -477,7 +477,7 @@ QDataStream &operator>>(QDataStream &stream, PhotoSize &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const PhotoSize &item) {
+/*QDebug operator<<(QDebug debug,  const PhotoSize &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.PhotoSize(";
@@ -506,4 +506,4 @@ QDebug operator<<(QDebug debug,  const PhotoSize &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

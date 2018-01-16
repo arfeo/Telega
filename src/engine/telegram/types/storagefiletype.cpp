@@ -35,7 +35,7 @@ StorageFileType::StorageFileType(const Null &null) :
 }
 
 StorageFileType::~StorageFileType() {
-    
+
 }
 
 bool StorageFileType::operator ==(const StorageFileType &b) const {
@@ -65,61 +65,61 @@ bool StorageFileType::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeStorageFilePartial: {
         m_classType = static_cast<StorageFileTypeClassType>(x);
         return true;
     }
         break;
-    
+
     case typeStorageFileJpeg: {
         m_classType = static_cast<StorageFileTypeClassType>(x);
         return true;
     }
         break;
-    
+
     case typeStorageFileGif: {
         m_classType = static_cast<StorageFileTypeClassType>(x);
         return true;
     }
         break;
-    
+
     case typeStorageFilePng: {
         m_classType = static_cast<StorageFileTypeClassType>(x);
         return true;
     }
         break;
-    
+
     case typeStorageFilePdf: {
         m_classType = static_cast<StorageFileTypeClassType>(x);
         return true;
     }
         break;
-    
+
     case typeStorageFileMp3: {
         m_classType = static_cast<StorageFileTypeClassType>(x);
         return true;
     }
         break;
-    
+
     case typeStorageFileMov: {
         m_classType = static_cast<StorageFileTypeClassType>(x);
         return true;
     }
         break;
-    
+
     case typeStorageFileMp4: {
         m_classType = static_cast<StorageFileTypeClassType>(x);
         return true;
     }
         break;
-    
+
     case typeStorageFileWebp: {
         m_classType = static_cast<StorageFileTypeClassType>(x);
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -133,52 +133,52 @@ bool StorageFileType::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeStorageFilePartial: {
         return true;
     }
         break;
-    
+
     case typeStorageFileJpeg: {
         return true;
     }
         break;
-    
+
     case typeStorageFileGif: {
         return true;
     }
         break;
-    
+
     case typeStorageFilePng: {
         return true;
     }
         break;
-    
+
     case typeStorageFilePdf: {
         return true;
     }
         break;
-    
+
     case typeStorageFileMp3: {
         return true;
     }
         break;
-    
+
     case typeStorageFileMov: {
         return true;
     }
         break;
-    
+
     case typeStorageFileMp4: {
         return true;
     }
         break;
-    
+
     case typeStorageFileWebp: {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -192,61 +192,61 @@ QMap<QString, QVariant> StorageFileType::toMap() const {
         return result;
     }
         break;
-    
+
     case typeStorageFilePartial: {
         result["classType"] = "StorageFileType::typeStorageFilePartial";
         return result;
     }
         break;
-    
+
     case typeStorageFileJpeg: {
         result["classType"] = "StorageFileType::typeStorageFileJpeg";
         return result;
     }
         break;
-    
+
     case typeStorageFileGif: {
         result["classType"] = "StorageFileType::typeStorageFileGif";
         return result;
     }
         break;
-    
+
     case typeStorageFilePng: {
         result["classType"] = "StorageFileType::typeStorageFilePng";
         return result;
     }
         break;
-    
+
     case typeStorageFilePdf: {
         result["classType"] = "StorageFileType::typeStorageFilePdf";
         return result;
     }
         break;
-    
+
     case typeStorageFileMp3: {
         result["classType"] = "StorageFileType::typeStorageFileMp3";
         return result;
     }
         break;
-    
+
     case typeStorageFileMov: {
         result["classType"] = "StorageFileType::typeStorageFileMov";
         return result;
     }
         break;
-    
+
     case typeStorageFileMp4: {
         result["classType"] = "StorageFileType::typeStorageFileMp4";
         return result;
     }
         break;
-    
+
     case typeStorageFileWebp: {
         result["classType"] = "StorageFileType::typeStorageFileWebp";
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -312,34 +312,34 @@ QDataStream &operator<<(QDataStream &stream, const StorageFileType &item) {
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case StorageFileType::typeStorageFileUnknown:
-        
+
         break;
     case StorageFileType::typeStorageFilePartial:
-        
+
         break;
     case StorageFileType::typeStorageFileJpeg:
-        
+
         break;
     case StorageFileType::typeStorageFileGif:
-        
+
         break;
     case StorageFileType::typeStorageFilePng:
-        
+
         break;
     case StorageFileType::typeStorageFilePdf:
-        
+
         break;
     case StorageFileType::typeStorageFileMp3:
-        
+
         break;
     case StorageFileType::typeStorageFileMov:
-        
+
         break;
     case StorageFileType::typeStorageFileMp4:
-        
+
         break;
     case StorageFileType::typeStorageFileWebp:
-        
+
         break;
     }
     return stream;
@@ -351,50 +351,50 @@ QDataStream &operator>>(QDataStream &stream, StorageFileType &item) {
     item.setClassType(static_cast<StorageFileType::StorageFileTypeClassType>(type));
     switch(type) {
     case StorageFileType::typeStorageFileUnknown: {
-        
+
     }
         break;
     case StorageFileType::typeStorageFilePartial: {
-        
+
     }
         break;
     case StorageFileType::typeStorageFileJpeg: {
-        
+
     }
         break;
     case StorageFileType::typeStorageFileGif: {
-        
+
     }
         break;
     case StorageFileType::typeStorageFilePng: {
-        
+
     }
         break;
     case StorageFileType::typeStorageFilePdf: {
-        
+
     }
         break;
     case StorageFileType::typeStorageFileMp3: {
-        
+
     }
         break;
     case StorageFileType::typeStorageFileMov: {
-        
+
     }
         break;
     case StorageFileType::typeStorageFileMp4: {
-        
+
     }
         break;
     case StorageFileType::typeStorageFileWebp: {
-        
+
     }
         break;
     }
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const StorageFileType &item) {
+/*QDebug operator<<(QDebug debug,  const StorageFileType &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.StorageFileType(";
@@ -433,4 +433,4 @@ QDebug operator<<(QDebug debug,  const StorageFileType &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

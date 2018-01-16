@@ -39,7 +39,7 @@ ChannelsChannelParticipants::ChannelsChannelParticipants(const Null &null) :
 }
 
 ChannelsChannelParticipants::~ChannelsChannelParticipants() {
-    
+
 }
 
 void ChannelsChannelParticipants::setCount(qint32 count) {
@@ -116,7 +116,7 @@ bool ChannelsChannelParticipants::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -141,7 +141,7 @@ bool ChannelsChannelParticipants::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -164,7 +164,7 @@ QMap<QString, QVariant> ChannelsChannelParticipants::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -179,7 +179,7 @@ ChannelsChannelParticipants ChannelsChannelParticipants::fromMap(const QMap<QStr
             _count_var.convert( QVariant::nameToType("qint32") );
             result.setCount( _count_var.value<qint32>() );
         }
-        
+
         QList<QVariant> map_participants = map["participants"].toList();
         QList<ChannelParticipant> _participants;
         for(const QVariant &var: map_participants)
@@ -239,7 +239,7 @@ QDataStream &operator>>(QDataStream &stream, ChannelsChannelParticipants &item) 
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const ChannelsChannelParticipants &item) {
+/*QDebug operator<<(QDebug debug,  const ChannelsChannelParticipants &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.ChannelsChannelParticipants(";
@@ -254,4 +254,4 @@ QDebug operator<<(QDebug debug,  const ChannelsChannelParticipants &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

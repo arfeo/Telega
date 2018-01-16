@@ -17,21 +17,21 @@ InputMediaObject::InputMediaObject(const InputMedia &core, QObject *parent) :
     m_core(core)
 {
     m_file = new InputFileObject(m_core.file(), this);
-    connect(m_file.data(), &InputFileObject::coreChanged, this, &InputMediaObject::coreFileChanged);
+    connect(m_file.data(), SIGNAL(coreChanged()), this, SLOT(coreFileChanged()));
     m_geoPoint = new InputGeoPointObject(m_core.geoPoint(), this);
-    connect(m_geoPoint.data(), &InputGeoPointObject::coreChanged, this, &InputMediaObject::coreGeoPointChanged);
+    connect(m_geoPoint.data(), SIGNAL(coreChanged()), this, SLOT(coreGeoPointChanged()));
     m_idInputDocument = new InputDocumentObject(m_core.idInputDocument(), this);
-    connect(m_idInputDocument.data(), &InputDocumentObject::coreChanged, this, &InputMediaObject::coreIdInputDocumentChanged);
+    connect(m_idInputDocument.data(), SIGNAL(coreChanged()), this, SLOT(coreIdInputDocumentChanged()));
     m_idInputGame = new InputGameObject(m_core.idInputGame(), this);
-    connect(m_idInputGame.data(), &InputGameObject::coreChanged, this, &InputMediaObject::coreIdInputGameChanged);
+    connect(m_idInputGame.data(), SIGNAL(coreChanged()), this, SLOT(coreIdInputGameChanged()));
     m_idInputPhoto = new InputPhotoObject(m_core.idInputPhoto(), this);
-    connect(m_idInputPhoto.data(), &InputPhotoObject::coreChanged, this, &InputMediaObject::coreIdInputPhotoChanged);
+    connect(m_idInputPhoto.data(), SIGNAL(coreChanged()), this, SLOT(coreIdInputPhotoChanged()));
     m_invoice = new InvoiceObject(m_core.invoice(), this);
-    connect(m_invoice.data(), &InvoiceObject::coreChanged, this, &InputMediaObject::coreInvoiceChanged);
+    connect(m_invoice.data(), SIGNAL(coreChanged()), this, SLOT(coreInvoiceChanged()));
     m_photo = new InputWebDocumentObject(m_core.photo(), this);
-    connect(m_photo.data(), &InputWebDocumentObject::coreChanged, this, &InputMediaObject::corePhotoChanged);
+    connect(m_photo.data(), SIGNAL(coreChanged()), this, SLOT(corePhotoChanged()));
     m_thumb = new InputFileObject(m_core.thumb(), this);
-    connect(m_thumb.data(), &InputFileObject::coreChanged, this, &InputMediaObject::coreThumbChanged);
+    connect(m_thumb.data(), SIGNAL(coreChanged()), this, SLOT(coreThumbChanged()));
 }
 
 InputMediaObject::InputMediaObject(QObject *parent) :
@@ -47,21 +47,21 @@ InputMediaObject::InputMediaObject(QObject *parent) :
     m_core()
 {
     m_file = new InputFileObject(m_core.file(), this);
-    connect(m_file.data(), &InputFileObject::coreChanged, this, &InputMediaObject::coreFileChanged);
+    connect(m_file.data(), SIGNAL(coreChanged()), this, SLOT(coreFileChanged()));
     m_geoPoint = new InputGeoPointObject(m_core.geoPoint(), this);
-    connect(m_geoPoint.data(), &InputGeoPointObject::coreChanged, this, &InputMediaObject::coreGeoPointChanged);
+    connect(m_geoPoint.data(), SIGNAL(coreChanged()), this, SLOT(coreGeoPointChanged()));
     m_idInputDocument = new InputDocumentObject(m_core.idInputDocument(), this);
-    connect(m_idInputDocument.data(), &InputDocumentObject::coreChanged, this, &InputMediaObject::coreIdInputDocumentChanged);
+    connect(m_idInputDocument.data(), SIGNAL(coreChanged()), this, SLOT(coreIdInputDocumentChanged()));
     m_idInputGame = new InputGameObject(m_core.idInputGame(), this);
-    connect(m_idInputGame.data(), &InputGameObject::coreChanged, this, &InputMediaObject::coreIdInputGameChanged);
+    connect(m_idInputGame.data(), SIGNAL(coreChanged()), this, SLOT(coreIdInputGameChanged()));
     m_idInputPhoto = new InputPhotoObject(m_core.idInputPhoto(), this);
-    connect(m_idInputPhoto.data(), &InputPhotoObject::coreChanged, this, &InputMediaObject::coreIdInputPhotoChanged);
+    connect(m_idInputPhoto.data(), SIGNAL(coreChanged()), this, SLOT(coreIdInputPhotoChanged()));
     m_invoice = new InvoiceObject(m_core.invoice(), this);
-    connect(m_invoice.data(), &InvoiceObject::coreChanged, this, &InputMediaObject::coreInvoiceChanged);
+    connect(m_invoice.data(), SIGNAL(coreChanged()), this, SLOT(coreInvoiceChanged()));
     m_photo = new InputWebDocumentObject(m_core.photo(), this);
-    connect(m_photo.data(), &InputWebDocumentObject::coreChanged, this, &InputMediaObject::corePhotoChanged);
+    connect(m_photo.data(), SIGNAL(coreChanged()), this, SLOT(corePhotoChanged()));
     m_thumb = new InputFileObject(m_core.thumb(), this);
-    connect(m_thumb.data(), &InputFileObject::coreChanged, this, &InputMediaObject::coreThumbChanged);
+    connect(m_thumb.data(), SIGNAL(coreChanged()), this, SLOT(coreThumbChanged()));
 }
 
 InputMediaObject::~InputMediaObject() {
@@ -118,7 +118,7 @@ void InputMediaObject::setFile(InputFileObject* file) {
     if(m_file) {
         m_file->setParent(this);
         m_core.setFile(m_file->core());
-        connect(m_file.data(), &InputFileObject::coreChanged, this, &InputMediaObject::coreFileChanged);
+        connect(m_file.data(), SIGNAL(coreChanged()), this, SLOT(coreFileChanged()));
     }
     Q_EMIT fileChanged();
     Q_EMIT coreChanged();
@@ -157,7 +157,7 @@ void InputMediaObject::setGeoPoint(InputGeoPointObject* geoPoint) {
     if(m_geoPoint) {
         m_geoPoint->setParent(this);
         m_core.setGeoPoint(m_geoPoint->core());
-        connect(m_geoPoint.data(), &InputGeoPointObject::coreChanged, this, &InputMediaObject::coreGeoPointChanged);
+        connect(m_geoPoint.data(), SIGNAL(coreChanged()), this, SLOT(coreGeoPointChanged()));
     }
     Q_EMIT geoPointChanged();
     Q_EMIT coreChanged();
@@ -174,7 +174,7 @@ void InputMediaObject::setIdInputDocument(InputDocumentObject* idInputDocument) 
     if(m_idInputDocument) {
         m_idInputDocument->setParent(this);
         m_core.setIdInputDocument(m_idInputDocument->core());
-        connect(m_idInputDocument.data(), &InputDocumentObject::coreChanged, this, &InputMediaObject::coreIdInputDocumentChanged);
+        connect(m_idInputDocument.data(), SIGNAL(coreChanged()), this, SLOT(coreIdInputDocumentChanged()));
     }
     Q_EMIT idInputDocumentChanged();
     Q_EMIT coreChanged();
@@ -191,7 +191,7 @@ void InputMediaObject::setIdInputGame(InputGameObject* idInputGame) {
     if(m_idInputGame) {
         m_idInputGame->setParent(this);
         m_core.setIdInputGame(m_idInputGame->core());
-        connect(m_idInputGame.data(), &InputGameObject::coreChanged, this, &InputMediaObject::coreIdInputGameChanged);
+        connect(m_idInputGame.data(), SIGNAL(coreChanged()), this, SLOT(coreIdInputGameChanged()));
     }
     Q_EMIT idInputGameChanged();
     Q_EMIT coreChanged();
@@ -208,7 +208,7 @@ void InputMediaObject::setIdInputPhoto(InputPhotoObject* idInputPhoto) {
     if(m_idInputPhoto) {
         m_idInputPhoto->setParent(this);
         m_core.setIdInputPhoto(m_idInputPhoto->core());
-        connect(m_idInputPhoto.data(), &InputPhotoObject::coreChanged, this, &InputMediaObject::coreIdInputPhotoChanged);
+        connect(m_idInputPhoto.data(), SIGNAL(coreChanged()), this, SLOT(coreIdInputPhotoChanged()));
     }
     Q_EMIT idInputPhotoChanged();
     Q_EMIT coreChanged();
@@ -225,7 +225,7 @@ void InputMediaObject::setInvoice(InvoiceObject* invoice) {
     if(m_invoice) {
         m_invoice->setParent(this);
         m_core.setInvoice(m_invoice->core());
-        connect(m_invoice.data(), &InvoiceObject::coreChanged, this, &InputMediaObject::coreInvoiceChanged);
+        connect(m_invoice.data(), SIGNAL(coreChanged()), this, SLOT(coreInvoiceChanged()));
     }
     Q_EMIT invoiceChanged();
     Q_EMIT coreChanged();
@@ -286,7 +286,7 @@ void InputMediaObject::setPhoto(InputWebDocumentObject* photo) {
     if(m_photo) {
         m_photo->setParent(this);
         m_core.setPhoto(m_photo->core());
-        connect(m_photo.data(), &InputWebDocumentObject::coreChanged, this, &InputMediaObject::corePhotoChanged);
+        connect(m_photo.data(), SIGNAL(coreChanged()), this, SLOT(corePhotoChanged()));
     }
     Q_EMIT photoChanged();
     Q_EMIT coreChanged();
@@ -347,7 +347,7 @@ void InputMediaObject::setThumb(InputFileObject* thumb) {
     if(m_thumb) {
         m_thumb->setParent(this);
         m_core.setThumb(m_thumb->core());
-        connect(m_thumb.data(), &InputFileObject::coreChanged, this, &InputMediaObject::coreThumbChanged);
+        connect(m_thumb.data(), SIGNAL(coreChanged()), this, SLOT(coreThumbChanged()));
     }
     Q_EMIT thumbChanged();
     Q_EMIT coreChanged();

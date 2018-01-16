@@ -147,7 +147,7 @@ Config::Config(const Null &null) :
 }
 
 Config::~Config() {
-    
+
 }
 
 void Config::setCallConnectTimeoutMs(qint32 callConnectTimeoutMs) {
@@ -564,7 +564,7 @@ bool Config::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -624,7 +624,7 @@ bool Config::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -676,7 +676,7 @@ QMap<QString, QVariant> Config::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -691,31 +691,31 @@ Config Config::fromMap(const QMap<QString, QVariant> &map) {
             _phonecallsEnabled_var.convert( QVariant::nameToType("bool") );
             result.setPhonecallsEnabled( _phonecallsEnabled_var.value<bool>() );
         }
-        
+
         QVariant _date_var = map.value("date");
         if( !_date_var.isNull() ) {
             _date_var.convert( QVariant::nameToType("qint32") );
             result.setDate( _date_var.value<qint32>() );
         }
-        
+
         QVariant _expires_var = map.value("expires");
         if( !_expires_var.isNull() ) {
             _expires_var.convert( QVariant::nameToType("qint32") );
             result.setExpires( _expires_var.value<qint32>() );
         }
-        
+
         QVariant _testMode_var = map.value("testMode");
         if( !_testMode_var.isNull() ) {
             _testMode_var.convert( QVariant::nameToType("bool") );
             result.setTestMode( _testMode_var.value<bool>() );
         }
-        
+
         QVariant _thisDc_var = map.value("thisDc");
         if( !_thisDc_var.isNull() ) {
             _thisDc_var.convert( QVariant::nameToType("qint32") );
             result.setThisDc( _thisDc_var.value<qint32>() );
         }
-        
+
         QList<QVariant> map_dcOptions = map["dcOptions"].toList();
         QList<DcOption> _dcOptions;
         for(const QVariant &var: map_dcOptions)
@@ -726,151 +726,151 @@ Config Config::fromMap(const QMap<QString, QVariant> &map) {
             _chatSizeMax_var.convert( QVariant::nameToType("qint32") );
             result.setChatSizeMax( _chatSizeMax_var.value<qint32>() );
         }
-        
+
         QVariant _megagroupSizeMax_var = map.value("megagroupSizeMax");
         if( !_megagroupSizeMax_var.isNull() ) {
             _megagroupSizeMax_var.convert( QVariant::nameToType("qint32") );
             result.setMegagroupSizeMax( _megagroupSizeMax_var.value<qint32>() );
         }
-        
+
         QVariant _forwardedCountMax_var = map.value("forwardedCountMax");
         if( !_forwardedCountMax_var.isNull() ) {
             _forwardedCountMax_var.convert( QVariant::nameToType("qint32") );
             result.setForwardedCountMax( _forwardedCountMax_var.value<qint32>() );
         }
-        
+
         QVariant _onlineUpdatePeriodMs_var = map.value("onlineUpdatePeriodMs");
         if( !_onlineUpdatePeriodMs_var.isNull() ) {
             _onlineUpdatePeriodMs_var.convert( QVariant::nameToType("qint32") );
             result.setOnlineUpdatePeriodMs( _onlineUpdatePeriodMs_var.value<qint32>() );
         }
-        
+
         QVariant _offlineBlurTimeoutMs_var = map.value("offlineBlurTimeoutMs");
         if( !_offlineBlurTimeoutMs_var.isNull() ) {
             _offlineBlurTimeoutMs_var.convert( QVariant::nameToType("qint32") );
             result.setOfflineBlurTimeoutMs( _offlineBlurTimeoutMs_var.value<qint32>() );
         }
-        
+
         QVariant _offlineIdleTimeoutMs_var = map.value("offlineIdleTimeoutMs");
         if( !_offlineIdleTimeoutMs_var.isNull() ) {
             _offlineIdleTimeoutMs_var.convert( QVariant::nameToType("qint32") );
             result.setOfflineIdleTimeoutMs( _offlineIdleTimeoutMs_var.value<qint32>() );
         }
-        
+
         QVariant _onlineCloudTimeoutMs_var = map.value("onlineCloudTimeoutMs");
         if( !_onlineCloudTimeoutMs_var.isNull() ) {
             _onlineCloudTimeoutMs_var.convert( QVariant::nameToType("qint32") );
             result.setOnlineCloudTimeoutMs( _onlineCloudTimeoutMs_var.value<qint32>() );
         }
-        
+
         QVariant _notifyCloudDelayMs_var = map.value("notifyCloudDelayMs");
         if( !_notifyCloudDelayMs_var.isNull() ) {
             _notifyCloudDelayMs_var.convert( QVariant::nameToType("qint32") );
             result.setNotifyCloudDelayMs( _notifyCloudDelayMs_var.value<qint32>() );
         }
-        
+
         QVariant _notifyDefaultDelayMs_var = map.value("notifyDefaultDelayMs");
         if( !_notifyDefaultDelayMs_var.isNull() ) {
             _notifyDefaultDelayMs_var.convert( QVariant::nameToType("qint32") );
             result.setNotifyDefaultDelayMs( _notifyDefaultDelayMs_var.value<qint32>() );
         }
-        
+
         QVariant _chatBigSize_var = map.value("chatBigSize");
         if( !_chatBigSize_var.isNull() ) {
             _chatBigSize_var.convert( QVariant::nameToType("qint32") );
             result.setChatBigSize( _chatBigSize_var.value<qint32>() );
         }
-        
+
         QVariant _pushChatPeriodMs_var = map.value("pushChatPeriodMs");
         if( !_pushChatPeriodMs_var.isNull() ) {
             _pushChatPeriodMs_var.convert( QVariant::nameToType("qint32") );
             result.setPushChatPeriodMs( _pushChatPeriodMs_var.value<qint32>() );
         }
-        
+
         QVariant _pushChatLimit_var = map.value("pushChatLimit");
         if( !_pushChatLimit_var.isNull() ) {
             _pushChatLimit_var.convert( QVariant::nameToType("qint32") );
             result.setPushChatLimit( _pushChatLimit_var.value<qint32>() );
         }
-        
+
         QVariant _savedGifsLimit_var = map.value("savedGifsLimit");
         if( !_savedGifsLimit_var.isNull() ) {
             _savedGifsLimit_var.convert( QVariant::nameToType("qint32") );
             result.setSavedGifsLimit( _savedGifsLimit_var.value<qint32>() );
         }
-        
+
         QVariant _editTimeLimit_var = map.value("editTimeLimit");
         if( !_editTimeLimit_var.isNull() ) {
             _editTimeLimit_var.convert( QVariant::nameToType("qint32") );
             result.setEditTimeLimit( _editTimeLimit_var.value<qint32>() );
         }
-        
+
         QVariant _ratingEDecay_var = map.value("ratingEDecay");
         if( !_ratingEDecay_var.isNull() ) {
             _ratingEDecay_var.convert( QVariant::nameToType("qint32") );
             result.setRatingEDecay( _ratingEDecay_var.value<qint32>() );
         }
-        
+
         QVariant _stickersRecentLimit_var = map.value("stickersRecentLimit");
         if( !_stickersRecentLimit_var.isNull() ) {
             _stickersRecentLimit_var.convert( QVariant::nameToType("qint32") );
             result.setStickersRecentLimit( _stickersRecentLimit_var.value<qint32>() );
         }
-        
+
         QVariant _tmpSessions_var = map.value("tmpSessions");
         if( !_tmpSessions_var.isNull() ) {
             _tmpSessions_var.convert( QVariant::nameToType("qint32") );
             result.setTmpSessions( _tmpSessions_var.value<qint32>() );
         }
-        
+
         QVariant _pinnedDialogsCountMax_var = map.value("pinnedDialogsCountMax");
         if( !_pinnedDialogsCountMax_var.isNull() ) {
             _pinnedDialogsCountMax_var.convert( QVariant::nameToType("qint32") );
             result.setPinnedDialogsCountMax( _pinnedDialogsCountMax_var.value<qint32>() );
         }
-        
+
         QVariant _callReceiveTimeoutMs_var = map.value("callReceiveTimeoutMs");
         if( !_callReceiveTimeoutMs_var.isNull() ) {
             _callReceiveTimeoutMs_var.convert( QVariant::nameToType("qint32") );
             result.setCallReceiveTimeoutMs( _callReceiveTimeoutMs_var.value<qint32>() );
         }
-        
+
         QVariant _callRingTimeoutMs_var = map.value("callRingTimeoutMs");
         if( !_callRingTimeoutMs_var.isNull() ) {
             _callRingTimeoutMs_var.convert( QVariant::nameToType("qint32") );
             result.setCallRingTimeoutMs( _callRingTimeoutMs_var.value<qint32>() );
         }
-        
+
         QVariant _callConnectTimeoutMs_var = map.value("callConnectTimeoutMs");
         if( !_callConnectTimeoutMs_var.isNull() ) {
             _callConnectTimeoutMs_var.convert( QVariant::nameToType("qint32") );
             result.setCallConnectTimeoutMs( _callConnectTimeoutMs_var.value<qint32>() );
         }
-        
+
         QVariant _callPacketTimeoutMs_var = map.value("callPacketTimeoutMs");
         if( !_callPacketTimeoutMs_var.isNull() ) {
             _callPacketTimeoutMs_var.convert( QVariant::nameToType("qint32") );
             result.setCallPacketTimeoutMs( _callPacketTimeoutMs_var.value<qint32>() );
         }
-        
+
         QVariant _meUrlPrefix_var = map.value("meUrlPrefix");
         if( !_meUrlPrefix_var.isNull() ) {
             _meUrlPrefix_var.convert( QVariant::nameToType("QString") );
             result.setMeUrlPrefix( _meUrlPrefix_var.value<QString>() );
         }
-        
+
         QVariant _suggestedLangCode_var = map.value("suggestedLangCode");
         if( !_suggestedLangCode_var.isNull() ) {
             _suggestedLangCode_var.convert( QVariant::nameToType("QString") );
             result.setSuggestedLangCode( _suggestedLangCode_var.value<QString>() );
         }
-        
+
         QVariant _langPackVersion_var = map.value("langPackVersion");
         if( !_langPackVersion_var.isNull() ) {
             _langPackVersion_var.convert( QVariant::nameToType("qint32") );
             result.setLangPackVersion( _langPackVersion_var.value<qint32>() );
         }
-        
+
         QList<QVariant> map_disabledFeatures = map["disabledFeatures"].toList();
         QList<DisabledFeature> _disabledFeatures;
         for(const QVariant &var: map_disabledFeatures)
@@ -1041,7 +1041,7 @@ QDataStream &operator>>(QDataStream &stream, Config &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const Config &item) {
+/*QDebug operator<<(QDebug debug,  const Config &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.Config(";
@@ -1085,4 +1085,4 @@ QDebug operator<<(QDebug debug,  const Config &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

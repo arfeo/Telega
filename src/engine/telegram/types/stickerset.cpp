@@ -55,7 +55,7 @@ StickerSet::StickerSet(const Null &null) :
 }
 
 StickerSet::~StickerSet() {
-    
+
 }
 
 void StickerSet::setAccessHash(qint64 accessHash) {
@@ -198,7 +198,7 @@ bool StickerSet::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -219,7 +219,7 @@ bool StickerSet::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -243,7 +243,7 @@ QMap<QString, QVariant> StickerSet::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -258,61 +258,61 @@ StickerSet StickerSet::fromMap(const QMap<QString, QVariant> &map) {
             _installed_var.convert( QVariant::nameToType("bool") );
             result.setInstalled( _installed_var.value<bool>() );
         }
-        
+
         QVariant _archived_var = map.value("archived");
         if( !_archived_var.isNull() ) {
             _archived_var.convert( QVariant::nameToType("bool") );
             result.setArchived( _archived_var.value<bool>() );
         }
-        
+
         QVariant _official_var = map.value("official");
         if( !_official_var.isNull() ) {
             _official_var.convert( QVariant::nameToType("bool") );
             result.setOfficial( _official_var.value<bool>() );
         }
-        
+
         QVariant _masks_var = map.value("masks");
         if( !_masks_var.isNull() ) {
             _masks_var.convert( QVariant::nameToType("bool") );
             result.setMasks( _masks_var.value<bool>() );
         }
-        
+
         QVariant _id_var = map.value("id");
         if( !_id_var.isNull() ) {
             _id_var.convert( QVariant::nameToType("qint64") );
             result.setId( _id_var.value<qint64>() );
         }
-        
+
         QVariant _accessHash_var = map.value("accessHash");
         if( !_accessHash_var.isNull() ) {
             _accessHash_var.convert( QVariant::nameToType("qint64") );
             result.setAccessHash( _accessHash_var.value<qint64>() );
         }
-        
+
         QVariant _title_var = map.value("title");
         if( !_title_var.isNull() ) {
             _title_var.convert( QVariant::nameToType("QString") );
             result.setTitle( _title_var.value<QString>() );
         }
-        
+
         QVariant _shortName_var = map.value("shortName");
         if( !_shortName_var.isNull() ) {
             _shortName_var.convert( QVariant::nameToType("QString") );
             result.setShortName( _shortName_var.value<QString>() );
         }
-        
+
         QVariant _count_var = map.value("count");
         if( !_count_var.isNull() ) {
             _count_var.convert( QVariant::nameToType("qint32") );
             result.setCount( _count_var.value<qint32>() );
         }
-        
+
         QVariant _hash_var = map.value("hash");
         if( !_hash_var.isNull() ) {
             _hash_var.convert( QVariant::nameToType("qint32") );
             result.setHash( _hash_var.value<qint32>() );
         }
-        
+
         return result;
     }
     return result;
@@ -378,7 +378,7 @@ QDataStream &operator>>(QDataStream &stream, StickerSet &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const StickerSet &item) {
+/*QDebug operator<<(QDebug debug,  const StickerSet &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.StickerSet(";
@@ -397,4 +397,4 @@ QDebug operator<<(QDebug debug,  const StickerSet &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

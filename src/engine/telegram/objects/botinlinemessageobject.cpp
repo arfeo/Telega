@@ -11,9 +11,9 @@ BotInlineMessageObject::BotInlineMessageObject(const BotInlineMessage &core, QOb
     m_core(core)
 {
     m_geo = new GeoPointObject(m_core.geo(), this);
-    connect(m_geo.data(), &GeoPointObject::coreChanged, this, &BotInlineMessageObject::coreGeoChanged);
+    connect(m_geo.data(), SIGNAL(coreChanged()), this, SLOT(coreGeoChanged()));
     m_replyMarkup = new ReplyMarkupObject(m_core.replyMarkup(), this);
-    connect(m_replyMarkup.data(), &ReplyMarkupObject::coreChanged, this, &BotInlineMessageObject::coreReplyMarkupChanged);
+    connect(m_replyMarkup.data(), SIGNAL(coreChanged()), this, SLOT(coreReplyMarkupChanged()));
 }
 
 BotInlineMessageObject::BotInlineMessageObject(QObject *parent) :
@@ -23,9 +23,9 @@ BotInlineMessageObject::BotInlineMessageObject(QObject *parent) :
     m_core()
 {
     m_geo = new GeoPointObject(m_core.geo(), this);
-    connect(m_geo.data(), &GeoPointObject::coreChanged, this, &BotInlineMessageObject::coreGeoChanged);
+    connect(m_geo.data(), SIGNAL(coreChanged()), this, SLOT(coreGeoChanged()));
     m_replyMarkup = new ReplyMarkupObject(m_core.replyMarkup(), this);
-    connect(m_replyMarkup.data(), &ReplyMarkupObject::coreChanged, this, &BotInlineMessageObject::coreReplyMarkupChanged);
+    connect(m_replyMarkup.data(), SIGNAL(coreChanged()), this, SLOT(coreReplyMarkupChanged()));
 }
 
 BotInlineMessageObject::~BotInlineMessageObject() {
@@ -93,7 +93,7 @@ void BotInlineMessageObject::setGeo(GeoPointObject* geo) {
     if(m_geo) {
         m_geo->setParent(this);
         m_core.setGeo(m_geo->core());
-        connect(m_geo.data(), &GeoPointObject::coreChanged, this, &BotInlineMessageObject::coreGeoChanged);
+        connect(m_geo.data(), SIGNAL(coreChanged()), this, SLOT(coreGeoChanged()));
     }
     Q_EMIT geoChanged();
     Q_EMIT coreChanged();
@@ -165,7 +165,7 @@ void BotInlineMessageObject::setReplyMarkup(ReplyMarkupObject* replyMarkup) {
     if(m_replyMarkup) {
         m_replyMarkup->setParent(this);
         m_core.setReplyMarkup(m_replyMarkup->core());
-        connect(m_replyMarkup.data(), &ReplyMarkupObject::coreChanged, this, &BotInlineMessageObject::coreReplyMarkupChanged);
+        connect(m_replyMarkup.data(), SIGNAL(coreChanged()), this, SLOT(coreReplyMarkupChanged()));
     }
     Q_EMIT replyMarkupChanged();
     Q_EMIT coreChanged();

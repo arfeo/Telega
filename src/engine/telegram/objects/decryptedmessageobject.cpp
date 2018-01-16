@@ -11,9 +11,9 @@ DecryptedMessageObject::DecryptedMessageObject(const DecryptedMessage &core, QOb
     m_core(core)
 {
     m_action = new DecryptedMessageActionObject(m_core.action(), this);
-    connect(m_action.data(), &DecryptedMessageActionObject::coreChanged, this, &DecryptedMessageObject::coreActionChanged);
+    connect(m_action.data(), SIGNAL(coreChanged()), this, SLOT(coreActionChanged()));
     m_media = new DecryptedMessageMediaObject(m_core.media(), this);
-    connect(m_media.data(), &DecryptedMessageMediaObject::coreChanged, this, &DecryptedMessageObject::coreMediaChanged);
+    connect(m_media.data(), SIGNAL(coreChanged()), this, SLOT(coreMediaChanged()));
 }
 
 DecryptedMessageObject::DecryptedMessageObject(QObject *parent) :
@@ -23,9 +23,9 @@ DecryptedMessageObject::DecryptedMessageObject(QObject *parent) :
     m_core()
 {
     m_action = new DecryptedMessageActionObject(m_core.action(), this);
-    connect(m_action.data(), &DecryptedMessageActionObject::coreChanged, this, &DecryptedMessageObject::coreActionChanged);
+    connect(m_action.data(), SIGNAL(coreChanged()), this, SLOT(coreActionChanged()));
     m_media = new DecryptedMessageMediaObject(m_core.media(), this);
-    connect(m_media.data(), &DecryptedMessageMediaObject::coreChanged, this, &DecryptedMessageObject::coreMediaChanged);
+    connect(m_media.data(), SIGNAL(coreChanged()), this, SLOT(coreMediaChanged()));
 }
 
 DecryptedMessageObject::~DecryptedMessageObject() {
@@ -38,7 +38,7 @@ void DecryptedMessageObject::setAction(DecryptedMessageActionObject* action) {
     if(m_action) {
         m_action->setParent(this);
         m_core.setAction(m_action->core());
-        connect(m_action.data(), &DecryptedMessageActionObject::coreChanged, this, &DecryptedMessageObject::coreActionChanged);
+        connect(m_action.data(), SIGNAL(coreChanged()), this, SLOT(coreActionChanged()));
     }
     Q_EMIT actionChanged();
     Q_EMIT coreChanged();
@@ -55,7 +55,7 @@ void DecryptedMessageObject::setMedia(DecryptedMessageMediaObject* media) {
     if(m_media) {
         m_media->setParent(this);
         m_core.setMedia(m_media->core());
-        connect(m_media.data(), &DecryptedMessageMediaObject::coreChanged, this, &DecryptedMessageObject::coreMediaChanged);
+        connect(m_media.data(), SIGNAL(coreChanged()), this, SLOT(coreMediaChanged()));
     }
     Q_EMIT mediaChanged();
     Q_EMIT coreChanged();

@@ -35,7 +35,7 @@ StickerPack::StickerPack(const Null &null) :
 }
 
 StickerPack::~StickerPack() {
-    
+
 }
 
 void StickerPack::setDocuments(const QList<qint64> &documents) {
@@ -94,7 +94,7 @@ bool StickerPack::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -114,7 +114,7 @@ bool StickerPack::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -133,7 +133,7 @@ QMap<QString, QVariant> StickerPack::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -148,7 +148,7 @@ StickerPack StickerPack::fromMap(const QMap<QString, QVariant> &map) {
             _emoticon_var.convert( QVariant::nameToType("QString") );
             result.setEmoticon( _emoticon_var.value<QString>() );
         }
-        
+
         QList<QVariant> map_documents = map["documents"].toList();
         QList<qint64> _documents;
         for(const QVariant &var: map_documents)
@@ -199,7 +199,7 @@ QDataStream &operator>>(QDataStream &stream, StickerPack &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const StickerPack &item) {
+/*QDebug operator<<(QDebug debug,  const StickerPack &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.StickerPack(";
@@ -213,4 +213,4 @@ QDebug operator<<(QDebug debug,  const StickerPack &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

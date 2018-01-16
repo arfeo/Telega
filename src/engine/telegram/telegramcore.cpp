@@ -17,704 +17,704 @@ void TelegramCore::setApi(TelegramApi *api)
 {
     mApi = api;
 
-    connect(api, &TelegramApi::accountRegisterDeviceAnswer, this, &TelegramCore::onAccountRegisterDeviceAnswer);
-    connect(api, &TelegramApi::accountRegisterDeviceError, this, &TelegramCore::onAccountRegisterDeviceError);
+    connect(api, SIGNAL(accountRegisterDeviceAnswer()), this, SLOT(onAccountRegisterDeviceAnswer()));
+    connect(api, SIGNAL(accountRegisterDeviceError()), this, SLOT(onAccountRegisterDeviceError()));
 
-    connect(api, &TelegramApi::accountUnregisterDeviceAnswer, this, &TelegramCore::onAccountUnregisterDeviceAnswer);
-    connect(api, &TelegramApi::accountUnregisterDeviceError, this, &TelegramCore::onAccountUnregisterDeviceError);
+    connect(api, SIGNAL(accountUnregisterDeviceAnswer()), this, SLOT(onAccountUnregisterDeviceAnswer()));
+    connect(api, SIGNAL(accountUnregisterDeviceError()), this, SLOT(onAccountUnregisterDeviceError()));
 
-    connect(api, &TelegramApi::accountUpdateNotifySettingsAnswer, this, &TelegramCore::onAccountUpdateNotifySettingsAnswer);
-    connect(api, &TelegramApi::accountUpdateNotifySettingsError, this, &TelegramCore::onAccountUpdateNotifySettingsError);
+    connect(api, SIGNAL(accountUpdateNotifySettingsAnswer()), this, SLOT(onAccountUpdateNotifySettingsAnswer()));
+    connect(api, SIGNAL(accountUpdateNotifySettingsError()), this, SLOT(onAccountUpdateNotifySettingsError()));
 
-    connect(api, &TelegramApi::accountGetNotifySettingsAnswer, this, &TelegramCore::onAccountGetNotifySettingsAnswer);
-    connect(api, &TelegramApi::accountGetNotifySettingsError, this, &TelegramCore::onAccountGetNotifySettingsError);
+    connect(api, SIGNAL(accountGetNotifySettingsAnswer()), this, SLOT(onAccountGetNotifySettingsAnswer()));
+    connect(api, SIGNAL(accountGetNotifySettingsError()), this, SLOT(onAccountGetNotifySettingsError()));
 
-    connect(api, &TelegramApi::accountResetNotifySettingsAnswer, this, &TelegramCore::onAccountResetNotifySettingsAnswer);
-    connect(api, &TelegramApi::accountResetNotifySettingsError, this, &TelegramCore::onAccountResetNotifySettingsError);
+    connect(api, SIGNAL(accountResetNotifySettingsAnswer()), this, SLOT(onAccountResetNotifySettingsAnswer()));
+    connect(api, SIGNAL(accountResetNotifySettingsError()), this, SLOT(onAccountResetNotifySettingsError()));
 
-    connect(api, &TelegramApi::accountUpdateProfileAnswer, this, &TelegramCore::onAccountUpdateProfileAnswer);
-    connect(api, &TelegramApi::accountUpdateProfileError, this, &TelegramCore::onAccountUpdateProfileError);
+    connect(api, SIGNAL(accountUpdateProfileAnswer()), this, SLOT(onAccountUpdateProfileAnswer()));
+    connect(api, SIGNAL(accountUpdateProfileError()), this, SLOT(onAccountUpdateProfileError()));
 
-    connect(api, &TelegramApi::accountUpdateStatusAnswer, this, &TelegramCore::onAccountUpdateStatusAnswer);
-    connect(api, &TelegramApi::accountUpdateStatusError, this, &TelegramCore::onAccountUpdateStatusError);
+    connect(api, SIGNAL(accountUpdateStatusAnswer()), this, SLOT(onAccountUpdateStatusAnswer()));
+    connect(api, SIGNAL(accountUpdateStatusError()), this, SLOT(onAccountUpdateStatusError()));
 
-    connect(api, &TelegramApi::accountGetWallPapersAnswer, this, &TelegramCore::onAccountGetWallPapersAnswer);
-    connect(api, &TelegramApi::accountGetWallPapersError, this, &TelegramCore::onAccountGetWallPapersError);
+    connect(api, SIGNAL(accountGetWallPapersAnswer()), this, SLOT(onAccountGetWallPapersAnswer()));
+    connect(api, SIGNAL(accountGetWallPapersError()), this, SLOT(onAccountGetWallPapersError()));
 
-    connect(api, &TelegramApi::accountReportPeerAnswer, this, &TelegramCore::onAccountReportPeerAnswer);
-    connect(api, &TelegramApi::accountReportPeerError, this, &TelegramCore::onAccountReportPeerError);
+    connect(api, SIGNAL(accountReportPeerAnswer()), this, SLOT(onAccountReportPeerAnswer()));
+    connect(api, SIGNAL(accountReportPeerError()), this, SLOT(onAccountReportPeerError()));
 
-    connect(api, &TelegramApi::accountCheckUsernameAnswer, this, &TelegramCore::onAccountCheckUsernameAnswer);
-    connect(api, &TelegramApi::accountCheckUsernameError, this, &TelegramCore::onAccountCheckUsernameError);
+    connect(api, SIGNAL(accountCheckUsernameAnswer()), this, SLOT(onAccountCheckUsernameAnswer()));
+    connect(api, SIGNAL(accountCheckUsernameError()), this, SLOT(onAccountCheckUsernameError()));
 
-    connect(api, &TelegramApi::accountUpdateUsernameAnswer, this, &TelegramCore::onAccountUpdateUsernameAnswer);
-    connect(api, &TelegramApi::accountUpdateUsernameError, this, &TelegramCore::onAccountUpdateUsernameError);
+    connect(api, SIGNAL(accountUpdateUsernameAnswer()), this, SLOT(onAccountUpdateUsernameAnswer()));
+    connect(api, SIGNAL(accountUpdateUsernameError()), this, SLOT(onAccountUpdateUsernameError()));
 
-    connect(api, &TelegramApi::accountGetPrivacyAnswer, this, &TelegramCore::onAccountGetPrivacyAnswer);
-    connect(api, &TelegramApi::accountGetPrivacyError, this, &TelegramCore::onAccountGetPrivacyError);
+    connect(api, SIGNAL(accountGetPrivacyAnswer()), this, SLOT(onAccountGetPrivacyAnswer()));
+    connect(api, SIGNAL(accountGetPrivacyError()), this, SLOT(onAccountGetPrivacyError()));
 
-    connect(api, &TelegramApi::accountSetPrivacyAnswer, this, &TelegramCore::onAccountSetPrivacyAnswer);
-    connect(api, &TelegramApi::accountSetPrivacyError, this, &TelegramCore::onAccountSetPrivacyError);
+    connect(api, SIGNAL(accountSetPrivacyAnswer()), this, SLOT(onAccountSetPrivacyAnswer()));
+    connect(api, SIGNAL(accountSetPrivacyError()), this, SLOT(onAccountSetPrivacyError()));
 
-    connect(api, &TelegramApi::accountDeleteAccountAnswer, this, &TelegramCore::onAccountDeleteAccountAnswer);
-    connect(api, &TelegramApi::accountDeleteAccountError, this, &TelegramCore::onAccountDeleteAccountError);
+    connect(api, SIGNAL(accountDeleteAccountAnswer()), this, SLOT(onAccountDeleteAccountAnswer()));
+    connect(api, SIGNAL(accountDeleteAccountError()), this, SLOT(onAccountDeleteAccountError()));
 
-    connect(api, &TelegramApi::accountGetAccountTTLAnswer, this, &TelegramCore::onAccountGetAccountTTLAnswer);
-    connect(api, &TelegramApi::accountGetAccountTTLError, this, &TelegramCore::onAccountGetAccountTTLError);
+    connect(api, SIGNAL(accountGetAccountTTLAnswer()), this, SLOT(onAccountGetAccountTTLAnswer()));
+    connect(api, SIGNAL(accountGetAccountTTLError()), this, SLOT(onAccountGetAccountTTLError()));
 
-    connect(api, &TelegramApi::accountSetAccountTTLAnswer, this, &TelegramCore::onAccountSetAccountTTLAnswer);
-    connect(api, &TelegramApi::accountSetAccountTTLError, this, &TelegramCore::onAccountSetAccountTTLError);
+    connect(api, SIGNAL(accountSetAccountTTLAnswer()), this, SLOT(onAccountSetAccountTTLAnswer()));
+    connect(api, SIGNAL(accountSetAccountTTLError()), this, SLOT(onAccountSetAccountTTLError()));
 
-    connect(api, &TelegramApi::accountSendChangePhoneCodeAnswer, this, &TelegramCore::onAccountSendChangePhoneCodeAnswer);
-    connect(api, &TelegramApi::accountSendChangePhoneCodeError, this, &TelegramCore::onAccountSendChangePhoneCodeError);
+    connect(api, SIGNAL(accountSendChangePhoneCodeAnswer()), this, SLOT(onAccountSendChangePhoneCodeAnswer()));
+    connect(api, SIGNAL(accountSendChangePhoneCodeError()), this, SLOT(onAccountSendChangePhoneCodeError()));
 
-    connect(api, &TelegramApi::accountChangePhoneAnswer, this, &TelegramCore::onAccountChangePhoneAnswer);
-    connect(api, &TelegramApi::accountChangePhoneError, this, &TelegramCore::onAccountChangePhoneError);
+    connect(api, SIGNAL(accountChangePhoneAnswer()), this, SLOT(onAccountChangePhoneAnswer()));
+    connect(api, SIGNAL(accountChangePhoneError()), this, SLOT(onAccountChangePhoneError()));
 
-    connect(api, &TelegramApi::accountUpdateDeviceLockedAnswer, this, &TelegramCore::onAccountUpdateDeviceLockedAnswer);
-    connect(api, &TelegramApi::accountUpdateDeviceLockedError, this, &TelegramCore::onAccountUpdateDeviceLockedError);
+    connect(api, SIGNAL(accountUpdateDeviceLockedAnswer()), this, SLOT(onAccountUpdateDeviceLockedAnswer()));
+    connect(api, SIGNAL(accountUpdateDeviceLockedError()), this, SLOT(onAccountUpdateDeviceLockedError()));
 
-    connect(api, &TelegramApi::accountGetAuthorizationsAnswer, this, &TelegramCore::onAccountGetAuthorizationsAnswer);
-    connect(api, &TelegramApi::accountGetAuthorizationsError, this, &TelegramCore::onAccountGetAuthorizationsError);
+    connect(api, SIGNAL(accountGetAuthorizationsAnswer()), this, SLOT(onAccountGetAuthorizationsAnswer()));
+    connect(api, SIGNAL(accountGetAuthorizationsError()), this, SLOT(onAccountGetAuthorizationsError()));
 
-    connect(api, &TelegramApi::accountResetAuthorizationAnswer, this, &TelegramCore::onAccountResetAuthorizationAnswer);
-    connect(api, &TelegramApi::accountResetAuthorizationError, this, &TelegramCore::onAccountResetAuthorizationError);
+    connect(api, SIGNAL(accountResetAuthorizationAnswer()), this, SLOT(onAccountResetAuthorizationAnswer()));
+    connect(api, SIGNAL(accountResetAuthorizationError()), this, SLOT(onAccountResetAuthorizationError()));
 
-    connect(api, &TelegramApi::accountGetPasswordAnswer, this, &TelegramCore::onAccountGetPasswordAnswer);
-    connect(api, &TelegramApi::accountGetPasswordError, this, &TelegramCore::onAccountGetPasswordError);
+    connect(api, SIGNAL(accountGetPasswordAnswer()), this, SLOT(onAccountGetPasswordAnswer()));
+    connect(api, SIGNAL(accountGetPasswordError()), this, SLOT(onAccountGetPasswordError()));
 
-    connect(api, &TelegramApi::accountGetPasswordSettingsAnswer, this, &TelegramCore::onAccountGetPasswordSettingsAnswer);
-    connect(api, &TelegramApi::accountGetPasswordSettingsError, this, &TelegramCore::onAccountGetPasswordSettingsError);
+    connect(api, SIGNAL(accountGetPasswordSettingsAnswer()), this, SLOT(onAccountGetPasswordSettingsAnswer()));
+    connect(api, SIGNAL(accountGetPasswordSettingsError()), this, SLOT(onAccountGetPasswordSettingsError()));
 
-    connect(api, &TelegramApi::accountUpdatePasswordSettingsAnswer, this, &TelegramCore::onAccountUpdatePasswordSettingsAnswer);
-    connect(api, &TelegramApi::accountUpdatePasswordSettingsError, this, &TelegramCore::onAccountUpdatePasswordSettingsError);
+    connect(api, SIGNAL(accountUpdatePasswordSettingsAnswer()), this, SLOT(onAccountUpdatePasswordSettingsAnswer()));
+    connect(api, SIGNAL(accountUpdatePasswordSettingsError()), this, SLOT(onAccountUpdatePasswordSettingsError()));
 
-    connect(api, &TelegramApi::accountSendConfirmPhoneCodeAnswer, this, &TelegramCore::onAccountSendConfirmPhoneCodeAnswer);
-    connect(api, &TelegramApi::accountSendConfirmPhoneCodeError, this, &TelegramCore::onAccountSendConfirmPhoneCodeError);
+    connect(api, SIGNAL(accountSendConfirmPhoneCodeAnswer()), this, SLOT(onAccountSendConfirmPhoneCodeAnswer()));
+    connect(api, SIGNAL(accountSendConfirmPhoneCodeError()), this, SLOT(onAccountSendConfirmPhoneCodeError()));
 
-    connect(api, &TelegramApi::accountConfirmPhoneAnswer, this, &TelegramCore::onAccountConfirmPhoneAnswer);
-    connect(api, &TelegramApi::accountConfirmPhoneError, this, &TelegramCore::onAccountConfirmPhoneError);
+    connect(api, SIGNAL(accountConfirmPhoneAnswer()), this, SLOT(onAccountConfirmPhoneAnswer()));
+    connect(api, SIGNAL(accountConfirmPhoneError()), this, SLOT(onAccountConfirmPhoneError()));
 
-    connect(api, &TelegramApi::accountGetTmpPasswordAnswer, this, &TelegramCore::onAccountGetTmpPasswordAnswer);
-    connect(api, &TelegramApi::accountGetTmpPasswordError, this, &TelegramCore::onAccountGetTmpPasswordError);
+    connect(api, SIGNAL(accountGetTmpPasswordAnswer()), this, SLOT(onAccountGetTmpPasswordAnswer()));
+    connect(api, SIGNAL(accountGetTmpPasswordError()), this, SLOT(onAccountGetTmpPasswordError()));
 
 
-    connect(api, &TelegramApi::authCheckPhoneAnswer, this, &TelegramCore::onAuthCheckPhoneAnswer);
-    connect(api, &TelegramApi::authCheckPhoneError, this, &TelegramCore::onAuthCheckPhoneError);
+    connect(api, SIGNAL(authCheckPhoneAnswer()), this, SLOT(onAuthCheckPhoneAnswer()));
+    connect(api, SIGNAL(authCheckPhoneError()), this, SLOT(onAuthCheckPhoneError()));
 
-    connect(api, &TelegramApi::authSendCodeAnswer, this, &TelegramCore::onAuthSendCodeAnswer);
-    connect(api, &TelegramApi::authSendCodeError, this, &TelegramCore::onAuthSendCodeError);
+    connect(api, SIGNAL(authSendCodeAnswer()), this, SLOT(onAuthSendCodeAnswer()));
+    connect(api, SIGNAL(authSendCodeError()), this, SLOT(onAuthSendCodeError()));
 
-    connect(api, &TelegramApi::authSignUpAnswer, this, &TelegramCore::onAuthSignUpAnswer);
-    connect(api, &TelegramApi::authSignUpError, this, &TelegramCore::onAuthSignUpError);
+    connect(api, SIGNAL(authSignUpAnswer()), this, SLOT(onAuthSignUpAnswer()));
+    connect(api, SIGNAL(authSignUpError()), this, SLOT(onAuthSignUpError()));
 
-    connect(api, &TelegramApi::authSignInAnswer, this, &TelegramCore::onAuthSignInAnswer);
-    connect(api, &TelegramApi::authSignInError, this, &TelegramCore::onAuthSignInError);
+    connect(api, SIGNAL(authSignInAnswer()), this, SLOT(onAuthSignInAnswer()));
+    connect(api, SIGNAL(authSignInError()), this, SLOT(onAuthSignInError()));
 
-    connect(api, &TelegramApi::authLogOutAnswer, this, &TelegramCore::onAuthLogOutAnswer);
-    connect(api, &TelegramApi::authLogOutError, this, &TelegramCore::onAuthLogOutError);
+    connect(api, SIGNAL(authLogOutAnswer()), this, SLOT(onAuthLogOutAnswer()));
+    connect(api, SIGNAL(authLogOutError()), this, SLOT(onAuthLogOutError()));
 
-    connect(api, &TelegramApi::authResetAuthorizationsAnswer, this, &TelegramCore::onAuthResetAuthorizationsAnswer);
-    connect(api, &TelegramApi::authResetAuthorizationsError, this, &TelegramCore::onAuthResetAuthorizationsError);
+    connect(api, SIGNAL(authResetAuthorizationsAnswer()), this, SLOT(onAuthResetAuthorizationsAnswer()));
+    connect(api, SIGNAL(authResetAuthorizationsError()), this, SLOT(onAuthResetAuthorizationsError()));
 
-    connect(api, &TelegramApi::authSendInvitesAnswer, this, &TelegramCore::onAuthSendInvitesAnswer);
-    connect(api, &TelegramApi::authSendInvitesError, this, &TelegramCore::onAuthSendInvitesError);
+    connect(api, SIGNAL(authSendInvitesAnswer()), this, SLOT(onAuthSendInvitesAnswer()));
+    connect(api, SIGNAL(authSendInvitesError()), this, SLOT(onAuthSendInvitesError()));
 
-    connect(api, &TelegramApi::authExportAuthorizationAnswer, this, &TelegramCore::onAuthExportAuthorizationAnswer);
-    connect(api, &TelegramApi::authExportAuthorizationError, this, &TelegramCore::onAuthExportAuthorizationError);
+    connect(api, SIGNAL(authExportAuthorizationAnswer()), this, SLOT(onAuthExportAuthorizationAnswer()));
+    connect(api, SIGNAL(authExportAuthorizationError()), this, SLOT(onAuthExportAuthorizationError()));
 
-    connect(api, &TelegramApi::authImportAuthorizationAnswer, this, &TelegramCore::onAuthImportAuthorizationAnswer);
-    connect(api, &TelegramApi::authImportAuthorizationError, this, &TelegramCore::onAuthImportAuthorizationError);
+    connect(api, SIGNAL(authImportAuthorizationAnswer()), this, SLOT(onAuthImportAuthorizationAnswer()));
+    connect(api, SIGNAL(authImportAuthorizationError()), this, SLOT(onAuthImportAuthorizationError()));
 
-    connect(api, &TelegramApi::authBindTempAuthKeyAnswer, this, &TelegramCore::onAuthBindTempAuthKeyAnswer);
-    connect(api, &TelegramApi::authBindTempAuthKeyError, this, &TelegramCore::onAuthBindTempAuthKeyError);
+    connect(api, SIGNAL(authBindTempAuthKeyAnswer()), this, SLOT(onAuthBindTempAuthKeyAnswer()));
+    connect(api, SIGNAL(authBindTempAuthKeyError()), this, SLOT(onAuthBindTempAuthKeyError()));
 
-    connect(api, &TelegramApi::authImportBotAuthorizationAnswer, this, &TelegramCore::onAuthImportBotAuthorizationAnswer);
-    connect(api, &TelegramApi::authImportBotAuthorizationError, this, &TelegramCore::onAuthImportBotAuthorizationError);
+    connect(api, SIGNAL(authImportBotAuthorizationAnswer()), this, SLOT(onAuthImportBotAuthorizationAnswer()));
+    connect(api, SIGNAL(authImportBotAuthorizationError()), this, SLOT(onAuthImportBotAuthorizationError()));
 
-    connect(api, &TelegramApi::authCheckPasswordAnswer, this, &TelegramCore::onAuthCheckPasswordAnswer);
-    connect(api, &TelegramApi::authCheckPasswordError, this, &TelegramCore::onAuthCheckPasswordError);
+    connect(api, SIGNAL(authCheckPasswordAnswer()), this, SLOT(onAuthCheckPasswordAnswer()));
+    connect(api, SIGNAL(authCheckPasswordError()), this, SLOT(onAuthCheckPasswordError()));
 
-    connect(api, &TelegramApi::authRequestPasswordRecoveryAnswer, this, &TelegramCore::onAuthRequestPasswordRecoveryAnswer);
-    connect(api, &TelegramApi::authRequestPasswordRecoveryError, this, &TelegramCore::onAuthRequestPasswordRecoveryError);
+    connect(api, SIGNAL(authRequestPasswordRecoveryAnswer()), this, SLOT(onAuthRequestPasswordRecoveryAnswer()));
+    connect(api, SIGNAL(authRequestPasswordRecoveryError()), this, SLOT(onAuthRequestPasswordRecoveryError()));
 
-    connect(api, &TelegramApi::authRecoverPasswordAnswer, this, &TelegramCore::onAuthRecoverPasswordAnswer);
-    connect(api, &TelegramApi::authRecoverPasswordError, this, &TelegramCore::onAuthRecoverPasswordError);
+    connect(api, SIGNAL(authRecoverPasswordAnswer()), this, SLOT(onAuthRecoverPasswordAnswer()));
+    connect(api, SIGNAL(authRecoverPasswordError()), this, SLOT(onAuthRecoverPasswordError()));
 
-    connect(api, &TelegramApi::authResendCodeAnswer, this, &TelegramCore::onAuthResendCodeAnswer);
-    connect(api, &TelegramApi::authResendCodeError, this, &TelegramCore::onAuthResendCodeError);
+    connect(api, SIGNAL(authResendCodeAnswer()), this, SLOT(onAuthResendCodeAnswer()));
+    connect(api, SIGNAL(authResendCodeError()), this, SLOT(onAuthResendCodeError()));
 
-    connect(api, &TelegramApi::authCancelCodeAnswer, this, &TelegramCore::onAuthCancelCodeAnswer);
-    connect(api, &TelegramApi::authCancelCodeError, this, &TelegramCore::onAuthCancelCodeError);
+    connect(api, SIGNAL(authCancelCodeAnswer()), this, SLOT(onAuthCancelCodeAnswer()));
+    connect(api, SIGNAL(authCancelCodeError()), this, SLOT(onAuthCancelCodeError()));
 
-    connect(api, &TelegramApi::authDropTempAuthKeysAnswer, this, &TelegramCore::onAuthDropTempAuthKeysAnswer);
-    connect(api, &TelegramApi::authDropTempAuthKeysError, this, &TelegramCore::onAuthDropTempAuthKeysError);
+    connect(api, SIGNAL(authDropTempAuthKeysAnswer()), this, SLOT(onAuthDropTempAuthKeysAnswer()));
+    connect(api, SIGNAL(authDropTempAuthKeysError()), this, SLOT(onAuthDropTempAuthKeysError()));
 
 
-    connect(api, &TelegramApi::botsSendCustomRequestAnswer, this, &TelegramCore::onBotsSendCustomRequestAnswer);
-    connect(api, &TelegramApi::botsSendCustomRequestError, this, &TelegramCore::onBotsSendCustomRequestError);
+    connect(api, SIGNAL(botsSendCustomRequestAnswer()), this, SLOT(onBotsSendCustomRequestAnswer()));
+    connect(api, SIGNAL(botsSendCustomRequestError()), this, SLOT(onBotsSendCustomRequestError()));
 
-    connect(api, &TelegramApi::botsAnswerWebhookJSONQueryAnswer, this, &TelegramCore::onBotsAnswerWebhookJSONQueryAnswer);
-    connect(api, &TelegramApi::botsAnswerWebhookJSONQueryError, this, &TelegramCore::onBotsAnswerWebhookJSONQueryError);
+    connect(api, SIGNAL(botsAnswerWebhookJSONQueryAnswer()), this, SLOT(onBotsAnswerWebhookJSONQueryAnswer()));
+    connect(api, SIGNAL(botsAnswerWebhookJSONQueryError()), this, SLOT(onBotsAnswerWebhookJSONQueryError()));
 
 
-    connect(api, &TelegramApi::channelsReadHistoryAnswer, this, &TelegramCore::onChannelsReadHistoryAnswer);
-    connect(api, &TelegramApi::channelsReadHistoryError, this, &TelegramCore::onChannelsReadHistoryError);
+    connect(api, SIGNAL(channelsReadHistoryAnswer()), this, SLOT(onChannelsReadHistoryAnswer()));
+    connect(api, SIGNAL(channelsReadHistoryError()), this, SLOT(onChannelsReadHistoryError()));
 
-    connect(api, &TelegramApi::channelsDeleteMessagesAnswer, this, &TelegramCore::onChannelsDeleteMessagesAnswer);
-    connect(api, &TelegramApi::channelsDeleteMessagesError, this, &TelegramCore::onChannelsDeleteMessagesError);
+    connect(api, SIGNAL(channelsDeleteMessagesAnswer()), this, SLOT(onChannelsDeleteMessagesAnswer()));
+    connect(api, SIGNAL(channelsDeleteMessagesError()), this, SLOT(onChannelsDeleteMessagesError()));
 
-    connect(api, &TelegramApi::channelsDeleteUserHistoryAnswer, this, &TelegramCore::onChannelsDeleteUserHistoryAnswer);
-    connect(api, &TelegramApi::channelsDeleteUserHistoryError, this, &TelegramCore::onChannelsDeleteUserHistoryError);
+    connect(api, SIGNAL(channelsDeleteUserHistoryAnswer()), this, SLOT(onChannelsDeleteUserHistoryAnswer()));
+    connect(api, SIGNAL(channelsDeleteUserHistoryError()), this, SLOT(onChannelsDeleteUserHistoryError()));
 
-    connect(api, &TelegramApi::channelsReportSpamAnswer, this, &TelegramCore::onChannelsReportSpamAnswer);
-    connect(api, &TelegramApi::channelsReportSpamError, this, &TelegramCore::onChannelsReportSpamError);
+    connect(api, SIGNAL(channelsReportSpamAnswer()), this, SLOT(onChannelsReportSpamAnswer()));
+    connect(api, SIGNAL(channelsReportSpamError()), this, SLOT(onChannelsReportSpamError()));
 
-    connect(api, &TelegramApi::channelsGetMessagesAnswer, this, &TelegramCore::onChannelsGetMessagesAnswer);
-    connect(api, &TelegramApi::channelsGetMessagesError, this, &TelegramCore::onChannelsGetMessagesError);
+    connect(api, SIGNAL(channelsGetMessagesAnswer()), this, SLOT(onChannelsGetMessagesAnswer()));
+    connect(api, SIGNAL(channelsGetMessagesError()), this, SLOT(onChannelsGetMessagesError()));
 
-    connect(api, &TelegramApi::channelsGetParticipantsAnswer, this, &TelegramCore::onChannelsGetParticipantsAnswer);
-    connect(api, &TelegramApi::channelsGetParticipantsError, this, &TelegramCore::onChannelsGetParticipantsError);
+    connect(api, SIGNAL(channelsGetParticipantsAnswer()), this, SLOT(onChannelsGetParticipantsAnswer()));
+    connect(api, SIGNAL(channelsGetParticipantsError()), this, SLOT(onChannelsGetParticipantsError()));
 
-    connect(api, &TelegramApi::channelsGetParticipantAnswer, this, &TelegramCore::onChannelsGetParticipantAnswer);
-    connect(api, &TelegramApi::channelsGetParticipantError, this, &TelegramCore::onChannelsGetParticipantError);
+    connect(api, SIGNAL(channelsGetParticipantAnswer()), this, SLOT(onChannelsGetParticipantAnswer()));
+    connect(api, SIGNAL(channelsGetParticipantError()), this, SLOT(onChannelsGetParticipantError()));
 
-    connect(api, &TelegramApi::channelsGetChannelsAnswer, this, &TelegramCore::onChannelsGetChannelsAnswer);
-    connect(api, &TelegramApi::channelsGetChannelsError, this, &TelegramCore::onChannelsGetChannelsError);
+    connect(api, SIGNAL(channelsGetChannelsAnswer()), this, SLOT(onChannelsGetChannelsAnswer()));
+    connect(api, SIGNAL(channelsGetChannelsError()), this, SLOT(onChannelsGetChannelsError()));
 
-    connect(api, &TelegramApi::channelsGetFullChannelAnswer, this, &TelegramCore::onChannelsGetFullChannelAnswer);
-    connect(api, &TelegramApi::channelsGetFullChannelError, this, &TelegramCore::onChannelsGetFullChannelError);
+    connect(api, SIGNAL(channelsGetFullChannelAnswer()), this, SLOT(onChannelsGetFullChannelAnswer()));
+    connect(api, SIGNAL(channelsGetFullChannelError()), this, SLOT(onChannelsGetFullChannelError()));
 
-    connect(api, &TelegramApi::channelsCreateChannelAnswer, this, &TelegramCore::onChannelsCreateChannelAnswer);
-    connect(api, &TelegramApi::channelsCreateChannelError, this, &TelegramCore::onChannelsCreateChannelError);
+    connect(api, SIGNAL(channelsCreateChannelAnswer()), this, SLOT(onChannelsCreateChannelAnswer()));
+    connect(api, SIGNAL(channelsCreateChannelError()), this, SLOT(onChannelsCreateChannelError()));
 
-    connect(api, &TelegramApi::channelsEditAboutAnswer, this, &TelegramCore::onChannelsEditAboutAnswer);
-    connect(api, &TelegramApi::channelsEditAboutError, this, &TelegramCore::onChannelsEditAboutError);
+    connect(api, SIGNAL(channelsEditAboutAnswer()), this, SLOT(onChannelsEditAboutAnswer()));
+    connect(api, SIGNAL(channelsEditAboutError()), this, SLOT(onChannelsEditAboutError()));
 
-    connect(api, &TelegramApi::channelsEditAdminAnswer, this, &TelegramCore::onChannelsEditAdminAnswer);
-    connect(api, &TelegramApi::channelsEditAdminError, this, &TelegramCore::onChannelsEditAdminError);
+    connect(api, SIGNAL(channelsEditAdminAnswer()), this, SLOT(onChannelsEditAdminAnswer()));
+    connect(api, SIGNAL(channelsEditAdminError()), this, SLOT(onChannelsEditAdminError()));
 
-    connect(api, &TelegramApi::channelsEditTitleAnswer, this, &TelegramCore::onChannelsEditTitleAnswer);
-    connect(api, &TelegramApi::channelsEditTitleError, this, &TelegramCore::onChannelsEditTitleError);
+    connect(api, SIGNAL(channelsEditTitleAnswer()), this, SLOT(onChannelsEditTitleAnswer()));
+    connect(api, SIGNAL(channelsEditTitleError()), this, SLOT(onChannelsEditTitleError()));
 
-    connect(api, &TelegramApi::channelsEditPhotoAnswer, this, &TelegramCore::onChannelsEditPhotoAnswer);
-    connect(api, &TelegramApi::channelsEditPhotoError, this, &TelegramCore::onChannelsEditPhotoError);
+    connect(api, SIGNAL(channelsEditPhotoAnswer()), this, SLOT(onChannelsEditPhotoAnswer()));
+    connect(api, SIGNAL(channelsEditPhotoError()), this, SLOT(onChannelsEditPhotoError()));
 
-    connect(api, &TelegramApi::channelsCheckUsernameAnswer, this, &TelegramCore::onChannelsCheckUsernameAnswer);
-    connect(api, &TelegramApi::channelsCheckUsernameError, this, &TelegramCore::onChannelsCheckUsernameError);
+    connect(api, SIGNAL(channelsCheckUsernameAnswer()), this, SLOT(onChannelsCheckUsernameAnswer()));
+    connect(api, SIGNAL(channelsCheckUsernameError()), this, SLOT(onChannelsCheckUsernameError()));
 
-    connect(api, &TelegramApi::channelsUpdateUsernameAnswer, this, &TelegramCore::onChannelsUpdateUsernameAnswer);
-    connect(api, &TelegramApi::channelsUpdateUsernameError, this, &TelegramCore::onChannelsUpdateUsernameError);
+    connect(api, SIGNAL(channelsUpdateUsernameAnswer()), this, SLOT(onChannelsUpdateUsernameAnswer()));
+    connect(api, SIGNAL(channelsUpdateUsernameError()), this, SLOT(onChannelsUpdateUsernameError()));
 
-    connect(api, &TelegramApi::channelsJoinChannelAnswer, this, &TelegramCore::onChannelsJoinChannelAnswer);
-    connect(api, &TelegramApi::channelsJoinChannelError, this, &TelegramCore::onChannelsJoinChannelError);
+    connect(api, SIGNAL(channelsJoinChannelAnswer()), this, SLOT(onChannelsJoinChannelAnswer()));
+    connect(api, SIGNAL(channelsJoinChannelError()), this, SLOT(onChannelsJoinChannelError()));
 
-    connect(api, &TelegramApi::channelsLeaveChannelAnswer, this, &TelegramCore::onChannelsLeaveChannelAnswer);
-    connect(api, &TelegramApi::channelsLeaveChannelError, this, &TelegramCore::onChannelsLeaveChannelError);
+    connect(api, SIGNAL(channelsLeaveChannelAnswer()), this, SLOT(onChannelsLeaveChannelAnswer()));
+    connect(api, SIGNAL(channelsLeaveChannelError()), this, SLOT(onChannelsLeaveChannelError()));
 
-    connect(api, &TelegramApi::channelsInviteToChannelAnswer, this, &TelegramCore::onChannelsInviteToChannelAnswer);
-    connect(api, &TelegramApi::channelsInviteToChannelError, this, &TelegramCore::onChannelsInviteToChannelError);
+    connect(api, SIGNAL(channelsInviteToChannelAnswer()), this, SLOT(onChannelsInviteToChannelAnswer()));
+    connect(api, SIGNAL(channelsInviteToChannelError()), this, SLOT(onChannelsInviteToChannelError()));
 
-    connect(api, &TelegramApi::channelsExportInviteAnswer, this, &TelegramCore::onChannelsExportInviteAnswer);
-    connect(api, &TelegramApi::channelsExportInviteError, this, &TelegramCore::onChannelsExportInviteError);
+    connect(api, SIGNAL(channelsExportInviteAnswer()), this, SLOT(onChannelsExportInviteAnswer()));
+    connect(api, SIGNAL(channelsExportInviteError()), this, SLOT(onChannelsExportInviteError()));
 
-    connect(api, &TelegramApi::channelsDeleteChannelAnswer, this, &TelegramCore::onChannelsDeleteChannelAnswer);
-    connect(api, &TelegramApi::channelsDeleteChannelError, this, &TelegramCore::onChannelsDeleteChannelError);
+    connect(api, SIGNAL(channelsDeleteChannelAnswer()), this, SLOT(onChannelsDeleteChannelAnswer()));
+    connect(api, SIGNAL(channelsDeleteChannelError()), this, SLOT(onChannelsDeleteChannelError()));
 
-    connect(api, &TelegramApi::channelsToggleInvitesAnswer, this, &TelegramCore::onChannelsToggleInvitesAnswer);
-    connect(api, &TelegramApi::channelsToggleInvitesError, this, &TelegramCore::onChannelsToggleInvitesError);
+    connect(api, SIGNAL(channelsToggleInvitesAnswer()), this, SLOT(onChannelsToggleInvitesAnswer()));
+    connect(api, SIGNAL(channelsToggleInvitesError()), this, SLOT(onChannelsToggleInvitesError()));
 
-    connect(api, &TelegramApi::channelsExportMessageLinkAnswer, this, &TelegramCore::onChannelsExportMessageLinkAnswer);
-    connect(api, &TelegramApi::channelsExportMessageLinkError, this, &TelegramCore::onChannelsExportMessageLinkError);
+    connect(api, SIGNAL(channelsExportMessageLinkAnswer()), this, SLOT(onChannelsExportMessageLinkAnswer()));
+    connect(api, SIGNAL(channelsExportMessageLinkError()), this, SLOT(onChannelsExportMessageLinkError()));
 
-    connect(api, &TelegramApi::channelsToggleSignaturesAnswer, this, &TelegramCore::onChannelsToggleSignaturesAnswer);
-    connect(api, &TelegramApi::channelsToggleSignaturesError, this, &TelegramCore::onChannelsToggleSignaturesError);
+    connect(api, SIGNAL(channelsToggleSignaturesAnswer()), this, SLOT(onChannelsToggleSignaturesAnswer()));
+    connect(api, SIGNAL(channelsToggleSignaturesError()), this, SLOT(onChannelsToggleSignaturesError()));
 
-    connect(api, &TelegramApi::channelsUpdatePinnedMessageAnswer, this, &TelegramCore::onChannelsUpdatePinnedMessageAnswer);
-    connect(api, &TelegramApi::channelsUpdatePinnedMessageError, this, &TelegramCore::onChannelsUpdatePinnedMessageError);
+    connect(api, SIGNAL(channelsUpdatePinnedMessageAnswer()), this, SLOT(onChannelsUpdatePinnedMessageAnswer()));
+    connect(api, SIGNAL(channelsUpdatePinnedMessageError()), this, SLOT(onChannelsUpdatePinnedMessageError()));
 
-    connect(api, &TelegramApi::channelsGetAdminedPublicChannelsAnswer, this, &TelegramCore::onChannelsGetAdminedPublicChannelsAnswer);
-    connect(api, &TelegramApi::channelsGetAdminedPublicChannelsError, this, &TelegramCore::onChannelsGetAdminedPublicChannelsError);
+    connect(api, SIGNAL(channelsGetAdminedPublicChannelsAnswer()), this, SLOT(onChannelsGetAdminedPublicChannelsAnswer()));
+    connect(api, SIGNAL(channelsGetAdminedPublicChannelsError()), this, SLOT(onChannelsGetAdminedPublicChannelsError()));
 
-    connect(api, &TelegramApi::channelsEditBannedAnswer, this, &TelegramCore::onChannelsEditBannedAnswer);
-    connect(api, &TelegramApi::channelsEditBannedError, this, &TelegramCore::onChannelsEditBannedError);
+    connect(api, SIGNAL(channelsEditBannedAnswer()), this, SLOT(onChannelsEditBannedAnswer()));
+    connect(api, SIGNAL(channelsEditBannedError()), this, SLOT(onChannelsEditBannedError()));
 
-    connect(api, &TelegramApi::channelsGetAdminLogAnswer, this, &TelegramCore::onChannelsGetAdminLogAnswer);
-    connect(api, &TelegramApi::channelsGetAdminLogError, this, &TelegramCore::onChannelsGetAdminLogError);
+    connect(api, SIGNAL(channelsGetAdminLogAnswer()), this, SLOT(onChannelsGetAdminLogAnswer()));
+    connect(api, SIGNAL(channelsGetAdminLogError()), this, SLOT(onChannelsGetAdminLogError()));
 
 
-    connect(api, &TelegramApi::contactsGetStatusesAnswer, this, &TelegramCore::onContactsGetStatusesAnswer);
-    connect(api, &TelegramApi::contactsGetStatusesError, this, &TelegramCore::onContactsGetStatusesError);
+    connect(api, SIGNAL(contactsGetStatusesAnswer()), this, SLOT(onContactsGetStatusesAnswer()));
+    connect(api, SIGNAL(contactsGetStatusesError()), this, SLOT(onContactsGetStatusesError()));
 
-    connect(api, &TelegramApi::contactsGetContactsAnswer, this, &TelegramCore::onContactsGetContactsAnswer);
-    connect(api, &TelegramApi::contactsGetContactsError, this, &TelegramCore::onContactsGetContactsError);
+    connect(api, SIGNAL(contactsGetContactsAnswer()), this, SLOT(onContactsGetContactsAnswer()));
+    connect(api, SIGNAL(contactsGetContactsError()), this, SLOT(onContactsGetContactsError()));
 
-    connect(api, &TelegramApi::contactsImportContactsAnswer, this, &TelegramCore::onContactsImportContactsAnswer);
-    connect(api, &TelegramApi::contactsImportContactsError, this, &TelegramCore::onContactsImportContactsError);
+    connect(api, SIGNAL(contactsImportContactsAnswer()), this, SLOT(onContactsImportContactsAnswer()));
+    connect(api, SIGNAL(contactsImportContactsError()), this, SLOT(onContactsImportContactsError()));
 
-    connect(api, &TelegramApi::contactsDeleteContactAnswer, this, &TelegramCore::onContactsDeleteContactAnswer);
-    connect(api, &TelegramApi::contactsDeleteContactError, this, &TelegramCore::onContactsDeleteContactError);
+    connect(api, SIGNAL(contactsDeleteContactAnswer()), this, SLOT(onContactsDeleteContactAnswer()));
+    connect(api, SIGNAL(contactsDeleteContactError()), this, SLOT(onContactsDeleteContactError()));
 
-    connect(api, &TelegramApi::contactsDeleteContactsAnswer, this, &TelegramCore::onContactsDeleteContactsAnswer);
-    connect(api, &TelegramApi::contactsDeleteContactsError, this, &TelegramCore::onContactsDeleteContactsError);
+    connect(api, SIGNAL(contactsDeleteContactsAnswer()), this, SLOT(onContactsDeleteContactsAnswer()));
+    connect(api, SIGNAL(contactsDeleteContactsError()), this, SLOT(onContactsDeleteContactsError()));
 
-    connect(api, &TelegramApi::contactsBlockAnswer, this, &TelegramCore::onContactsBlockAnswer);
-    connect(api, &TelegramApi::contactsBlockError, this, &TelegramCore::onContactsBlockError);
+    connect(api, SIGNAL(contactsBlockAnswer()), this, SLOT(onContactsBlockAnswer()));
+    connect(api, SIGNAL(contactsBlockError()), this, SLOT(onContactsBlockError()));
 
-    connect(api, &TelegramApi::contactsUnblockAnswer, this, &TelegramCore::onContactsUnblockAnswer);
-    connect(api, &TelegramApi::contactsUnblockError, this, &TelegramCore::onContactsUnblockError);
+    connect(api, SIGNAL(contactsUnblockAnswer()), this, SLOT(onContactsUnblockAnswer()));
+    connect(api, SIGNAL(contactsUnblockError()), this, SLOT(onContactsUnblockError()));
 
-    connect(api, &TelegramApi::contactsGetBlockedAnswer, this, &TelegramCore::onContactsGetBlockedAnswer);
-    connect(api, &TelegramApi::contactsGetBlockedError, this, &TelegramCore::onContactsGetBlockedError);
+    connect(api, SIGNAL(contactsGetBlockedAnswer()), this, SLOT(onContactsGetBlockedAnswer()));
+    connect(api, SIGNAL(contactsGetBlockedError()), this, SLOT(onContactsGetBlockedError()));
 
-    connect(api, &TelegramApi::contactsExportCardAnswer, this, &TelegramCore::onContactsExportCardAnswer);
-    connect(api, &TelegramApi::contactsExportCardError, this, &TelegramCore::onContactsExportCardError);
+    connect(api, SIGNAL(contactsExportCardAnswer()), this, SLOT(onContactsExportCardAnswer()));
+    connect(api, SIGNAL(contactsExportCardError()), this, SLOT(onContactsExportCardError()));
 
-    connect(api, &TelegramApi::contactsImportCardAnswer, this, &TelegramCore::onContactsImportCardAnswer);
-    connect(api, &TelegramApi::contactsImportCardError, this, &TelegramCore::onContactsImportCardError);
+    connect(api, SIGNAL(contactsImportCardAnswer()), this, SLOT(onContactsImportCardAnswer()));
+    connect(api, SIGNAL(contactsImportCardError()), this, SLOT(onContactsImportCardError()));
 
-    connect(api, &TelegramApi::contactsSearchAnswer, this, &TelegramCore::onContactsSearchAnswer);
-    connect(api, &TelegramApi::contactsSearchError, this, &TelegramCore::onContactsSearchError);
+    connect(api, SIGNAL(contactsSearchAnswer()), this, SLOT(onContactsSearchAnswer()));
+    connect(api, SIGNAL(contactsSearchError()), this, SLOT(onContactsSearchError()));
 
-    connect(api, &TelegramApi::contactsResolveUsernameAnswer, this, &TelegramCore::onContactsResolveUsernameAnswer);
-    connect(api, &TelegramApi::contactsResolveUsernameError, this, &TelegramCore::onContactsResolveUsernameError);
+    connect(api, SIGNAL(contactsResolveUsernameAnswer()), this, SLOT(onContactsResolveUsernameAnswer()));
+    connect(api, SIGNAL(contactsResolveUsernameError()), this, SLOT(onContactsResolveUsernameError()));
 
-    connect(api, &TelegramApi::contactsGetTopPeersAnswer, this, &TelegramCore::onContactsGetTopPeersAnswer);
-    connect(api, &TelegramApi::contactsGetTopPeersError, this, &TelegramCore::onContactsGetTopPeersError);
+    connect(api, SIGNAL(contactsGetTopPeersAnswer()), this, SLOT(onContactsGetTopPeersAnswer()));
+    connect(api, SIGNAL(contactsGetTopPeersError()), this, SLOT(onContactsGetTopPeersError()));
 
-    connect(api, &TelegramApi::contactsResetTopPeerRatingAnswer, this, &TelegramCore::onContactsResetTopPeerRatingAnswer);
-    connect(api, &TelegramApi::contactsResetTopPeerRatingError, this, &TelegramCore::onContactsResetTopPeerRatingError);
+    connect(api, SIGNAL(contactsResetTopPeerRatingAnswer()), this, SLOT(onContactsResetTopPeerRatingAnswer()));
+    connect(api, SIGNAL(contactsResetTopPeerRatingError()), this, SLOT(onContactsResetTopPeerRatingError()));
 
 
-    connect(api, &TelegramApi::helpGetConfigAnswer, this, &TelegramCore::onHelpGetConfigAnswer);
-    connect(api, &TelegramApi::helpGetConfigError, this, &TelegramCore::onHelpGetConfigError);
+    connect(api, SIGNAL(helpGetConfigAnswer()), this, SLOT(onHelpGetConfigAnswer()));
+    connect(api, SIGNAL(helpGetConfigError()), this, SLOT(onHelpGetConfigError()));
 
-    connect(api, &TelegramApi::helpGetNearestDcAnswer, this, &TelegramCore::onHelpGetNearestDcAnswer);
-    connect(api, &TelegramApi::helpGetNearestDcError, this, &TelegramCore::onHelpGetNearestDcError);
+    connect(api, SIGNAL(helpGetNearestDcAnswer()), this, SLOT(onHelpGetNearestDcAnswer()));
+    connect(api, SIGNAL(helpGetNearestDcError()), this, SLOT(onHelpGetNearestDcError()));
 
-    connect(api, &TelegramApi::helpGetAppUpdateAnswer, this, &TelegramCore::onHelpGetAppUpdateAnswer);
-    connect(api, &TelegramApi::helpGetAppUpdateError, this, &TelegramCore::onHelpGetAppUpdateError);
+    connect(api, SIGNAL(helpGetAppUpdateAnswer()), this, SLOT(onHelpGetAppUpdateAnswer()));
+    connect(api, SIGNAL(helpGetAppUpdateError()), this, SLOT(onHelpGetAppUpdateError()));
 
-    connect(api, &TelegramApi::helpSaveAppLogAnswer, this, &TelegramCore::onHelpSaveAppLogAnswer);
-    connect(api, &TelegramApi::helpSaveAppLogError, this, &TelegramCore::onHelpSaveAppLogError);
+    connect(api, SIGNAL(helpSaveAppLogAnswer()), this, SLOT(onHelpSaveAppLogAnswer()));
+    connect(api, SIGNAL(helpSaveAppLogError()), this, SLOT(onHelpSaveAppLogError()));
 
-    connect(api, &TelegramApi::helpGetInviteTextAnswer, this, &TelegramCore::onHelpGetInviteTextAnswer);
-    connect(api, &TelegramApi::helpGetInviteTextError, this, &TelegramCore::onHelpGetInviteTextError);
+    connect(api, SIGNAL(helpGetInviteTextAnswer()), this, SLOT(onHelpGetInviteTextAnswer()));
+    connect(api, SIGNAL(helpGetInviteTextError()), this, SLOT(onHelpGetInviteTextError()));
 
-    connect(api, &TelegramApi::helpGetSupportAnswer, this, &TelegramCore::onHelpGetSupportAnswer);
-    connect(api, &TelegramApi::helpGetSupportError, this, &TelegramCore::onHelpGetSupportError);
+    connect(api, SIGNAL(helpGetSupportAnswer()), this, SLOT(onHelpGetSupportAnswer()));
+    connect(api, SIGNAL(helpGetSupportError()), this, SLOT(onHelpGetSupportError()));
 
-    connect(api, &TelegramApi::helpGetAppChangelogAnswer, this, &TelegramCore::onHelpGetAppChangelogAnswer);
-    connect(api, &TelegramApi::helpGetAppChangelogError, this, &TelegramCore::onHelpGetAppChangelogError);
+    connect(api, SIGNAL(helpGetAppChangelogAnswer()), this, SLOT(onHelpGetAppChangelogAnswer()));
+    connect(api, SIGNAL(helpGetAppChangelogError()), this, SLOT(onHelpGetAppChangelogError()));
 
-    connect(api, &TelegramApi::helpGetTermsOfServiceAnswer, this, &TelegramCore::onHelpGetTermsOfServiceAnswer);
-    connect(api, &TelegramApi::helpGetTermsOfServiceError, this, &TelegramCore::onHelpGetTermsOfServiceError);
+    connect(api, SIGNAL(helpGetTermsOfServiceAnswer()), this, SLOT(onHelpGetTermsOfServiceAnswer()));
+    connect(api, SIGNAL(helpGetTermsOfServiceError()), this, SLOT(onHelpGetTermsOfServiceError()));
 
-    connect(api, &TelegramApi::helpSetBotUpdatesStatusAnswer, this, &TelegramCore::onHelpSetBotUpdatesStatusAnswer);
-    connect(api, &TelegramApi::helpSetBotUpdatesStatusError, this, &TelegramCore::onHelpSetBotUpdatesStatusError);
+    connect(api, SIGNAL(helpSetBotUpdatesStatusAnswer()), this, SLOT(onHelpSetBotUpdatesStatusAnswer()));
+    connect(api, SIGNAL(helpSetBotUpdatesStatusError()), this, SLOT(onHelpSetBotUpdatesStatusError()));
 
-    connect(api, &TelegramApi::helpGetCdnConfigAnswer, this, &TelegramCore::onHelpGetCdnConfigAnswer);
-    connect(api, &TelegramApi::helpGetCdnConfigError, this, &TelegramCore::onHelpGetCdnConfigError);
+    connect(api, SIGNAL(helpGetCdnConfigAnswer()), this, SLOT(onHelpGetCdnConfigAnswer()));
+    connect(api, SIGNAL(helpGetCdnConfigError()), this, SLOT(onHelpGetCdnConfigError()));
 
 
-    connect(api, &TelegramApi::langpackGetLangPackAnswer, this, &TelegramCore::onLangpackGetLangPackAnswer);
-    connect(api, &TelegramApi::langpackGetLangPackError, this, &TelegramCore::onLangpackGetLangPackError);
+    connect(api, SIGNAL(langpackGetLangPackAnswer()), this, SLOT(onLangpackGetLangPackAnswer()));
+    connect(api, SIGNAL(langpackGetLangPackError()), this, SLOT(onLangpackGetLangPackError()));
 
-    connect(api, &TelegramApi::langpackGetStringsAnswer, this, &TelegramCore::onLangpackGetStringsAnswer);
-    connect(api, &TelegramApi::langpackGetStringsError, this, &TelegramCore::onLangpackGetStringsError);
+    connect(api, SIGNAL(langpackGetStringsAnswer()), this, SLOT(onLangpackGetStringsAnswer()));
+    connect(api, SIGNAL(langpackGetStringsError()), this, SLOT(onLangpackGetStringsError()));
 
-    connect(api, &TelegramApi::langpackGetDifferenceAnswer, this, &TelegramCore::onLangpackGetDifferenceAnswer);
-    connect(api, &TelegramApi::langpackGetDifferenceError, this, &TelegramCore::onLangpackGetDifferenceError);
+    connect(api, SIGNAL(langpackGetDifferenceAnswer()), this, SLOT(onLangpackGetDifferenceAnswer()));
+    connect(api, SIGNAL(langpackGetDifferenceError()), this, SLOT(onLangpackGetDifferenceError()));
 
-    connect(api, &TelegramApi::langpackGetLanguagesAnswer, this, &TelegramCore::onLangpackGetLanguagesAnswer);
-    connect(api, &TelegramApi::langpackGetLanguagesError, this, &TelegramCore::onLangpackGetLanguagesError);
+    connect(api, SIGNAL(langpackGetLanguagesAnswer()), this, SLOT(onLangpackGetLanguagesAnswer()));
+    connect(api, SIGNAL(langpackGetLanguagesError()), this, SLOT(onLangpackGetLanguagesError()));
 
 
-    connect(api, &TelegramApi::messagesGetMessagesAnswer, this, &TelegramCore::onMessagesGetMessagesAnswer);
-    connect(api, &TelegramApi::messagesGetMessagesError, this, &TelegramCore::onMessagesGetMessagesError);
+    connect(api, SIGNAL(messagesGetMessagesAnswer()), this, SLOT(onMessagesGetMessagesAnswer()));
+    connect(api, SIGNAL(messagesGetMessagesError()), this, SLOT(onMessagesGetMessagesError()));
 
-    connect(api, &TelegramApi::messagesGetDialogsAnswer, this, &TelegramCore::onMessagesGetDialogsAnswer);
-    connect(api, &TelegramApi::messagesGetDialogsError, this, &TelegramCore::onMessagesGetDialogsError);
+    connect(api, SIGNAL(messagesGetDialogsAnswer()), this, SLOT(onMessagesGetDialogsAnswer()));
+    connect(api, SIGNAL(messagesGetDialogsError()), this, SLOT(onMessagesGetDialogsError()));
 
-    connect(api, &TelegramApi::messagesGetHistoryAnswer, this, &TelegramCore::onMessagesGetHistoryAnswer);
-    connect(api, &TelegramApi::messagesGetHistoryError, this, &TelegramCore::onMessagesGetHistoryError);
+    connect(api, SIGNAL(messagesGetHistoryAnswer()), this, SLOT(onMessagesGetHistoryAnswer()));
+    connect(api, SIGNAL(messagesGetHistoryError()), this, SLOT(onMessagesGetHistoryError()));
 
-    connect(api, &TelegramApi::messagesSearchAnswer, this, &TelegramCore::onMessagesSearchAnswer);
-    connect(api, &TelegramApi::messagesSearchError, this, &TelegramCore::onMessagesSearchError);
+    connect(api, SIGNAL(messagesSearchAnswer()), this, SLOT(onMessagesSearchAnswer()));
+    connect(api, SIGNAL(messagesSearchError()), this, SLOT(onMessagesSearchError()));
 
-    connect(api, &TelegramApi::messagesReadHistoryAnswer, this, &TelegramCore::onMessagesReadHistoryAnswer);
-    connect(api, &TelegramApi::messagesReadHistoryError, this, &TelegramCore::onMessagesReadHistoryError);
+    connect(api, SIGNAL(messagesReadHistoryAnswer()), this, SLOT(onMessagesReadHistoryAnswer()));
+    connect(api, SIGNAL(messagesReadHistoryError()), this, SLOT(onMessagesReadHistoryError()));
 
-    connect(api, &TelegramApi::messagesDeleteHistoryAnswer, this, &TelegramCore::onMessagesDeleteHistoryAnswer);
-    connect(api, &TelegramApi::messagesDeleteHistoryError, this, &TelegramCore::onMessagesDeleteHistoryError);
+    connect(api, SIGNAL(messagesDeleteHistoryAnswer()), this, SLOT(onMessagesDeleteHistoryAnswer()));
+    connect(api, SIGNAL(messagesDeleteHistoryError()), this, SLOT(onMessagesDeleteHistoryError()));
 
-    connect(api, &TelegramApi::messagesDeleteMessagesAnswer, this, &TelegramCore::onMessagesDeleteMessagesAnswer);
-    connect(api, &TelegramApi::messagesDeleteMessagesError, this, &TelegramCore::onMessagesDeleteMessagesError);
+    connect(api, SIGNAL(messagesDeleteMessagesAnswer()), this, SLOT(onMessagesDeleteMessagesAnswer()));
+    connect(api, SIGNAL(messagesDeleteMessagesError()), this, SLOT(onMessagesDeleteMessagesError()));
 
-    connect(api, &TelegramApi::messagesReceivedMessagesAnswer, this, &TelegramCore::onMessagesReceivedMessagesAnswer);
-    connect(api, &TelegramApi::messagesReceivedMessagesError, this, &TelegramCore::onMessagesReceivedMessagesError);
+    connect(api, SIGNAL(messagesReceivedMessagesAnswer()), this, SLOT(onMessagesReceivedMessagesAnswer()));
+    connect(api, SIGNAL(messagesReceivedMessagesError()), this, SLOT(onMessagesReceivedMessagesError()));
 
-    connect(api, &TelegramApi::messagesSetTypingAnswer, this, &TelegramCore::onMessagesSetTypingAnswer);
-    connect(api, &TelegramApi::messagesSetTypingError, this, &TelegramCore::onMessagesSetTypingError);
+    connect(api, SIGNAL(messagesSetTypingAnswer()), this, SLOT(onMessagesSetTypingAnswer()));
+    connect(api, SIGNAL(messagesSetTypingError()), this, SLOT(onMessagesSetTypingError()));
 
-    connect(api, &TelegramApi::messagesSendMessageAnswer, this, &TelegramCore::onMessagesSendMessageAnswer);
-    connect(api, &TelegramApi::messagesSendMessageError, this, &TelegramCore::onMessagesSendMessageError);
+    connect(api, SIGNAL(messagesSendMessageAnswer()), this, SLOT(onMessagesSendMessageAnswer()));
+    connect(api, SIGNAL(messagesSendMessageError()), this, SLOT(onMessagesSendMessageError()));
 
-    connect(api, &TelegramApi::messagesSendMediaAnswer, this, &TelegramCore::onMessagesSendMediaAnswer);
-    connect(api, &TelegramApi::messagesSendMediaError, this, &TelegramCore::onMessagesSendMediaError);
+    connect(api, SIGNAL(messagesSendMediaAnswer()), this, SLOT(onMessagesSendMediaAnswer()));
+    connect(api, SIGNAL(messagesSendMediaError()), this, SLOT(onMessagesSendMediaError()));
 
-    connect(api, &TelegramApi::messagesForwardMessagesAnswer, this, &TelegramCore::onMessagesForwardMessagesAnswer);
-    connect(api, &TelegramApi::messagesForwardMessagesError, this, &TelegramCore::onMessagesForwardMessagesError);
+    connect(api, SIGNAL(messagesForwardMessagesAnswer()), this, SLOT(onMessagesForwardMessagesAnswer()));
+    connect(api, SIGNAL(messagesForwardMessagesError()), this, SLOT(onMessagesForwardMessagesError()));
 
-    connect(api, &TelegramApi::messagesReportSpamAnswer, this, &TelegramCore::onMessagesReportSpamAnswer);
-    connect(api, &TelegramApi::messagesReportSpamError, this, &TelegramCore::onMessagesReportSpamError);
+    connect(api, SIGNAL(messagesReportSpamAnswer()), this, SLOT(onMessagesReportSpamAnswer()));
+    connect(api, SIGNAL(messagesReportSpamError()), this, SLOT(onMessagesReportSpamError()));
 
-    connect(api, &TelegramApi::messagesHideReportSpamAnswer, this, &TelegramCore::onMessagesHideReportSpamAnswer);
-    connect(api, &TelegramApi::messagesHideReportSpamError, this, &TelegramCore::onMessagesHideReportSpamError);
+    connect(api, SIGNAL(messagesHideReportSpamAnswer()), this, SLOT(onMessagesHideReportSpamAnswer()));
+    connect(api, SIGNAL(messagesHideReportSpamError()), this, SLOT(onMessagesHideReportSpamError()));
 
-    connect(api, &TelegramApi::messagesGetPeerSettingsAnswer, this, &TelegramCore::onMessagesGetPeerSettingsAnswer);
-    connect(api, &TelegramApi::messagesGetPeerSettingsError, this, &TelegramCore::onMessagesGetPeerSettingsError);
+    connect(api, SIGNAL(messagesGetPeerSettingsAnswer()), this, SLOT(onMessagesGetPeerSettingsAnswer()));
+    connect(api, SIGNAL(messagesGetPeerSettingsError()), this, SLOT(onMessagesGetPeerSettingsError()));
 
-    connect(api, &TelegramApi::messagesGetChatsAnswer, this, &TelegramCore::onMessagesGetChatsAnswer);
-    connect(api, &TelegramApi::messagesGetChatsError, this, &TelegramCore::onMessagesGetChatsError);
+    connect(api, SIGNAL(messagesGetChatsAnswer()), this, SLOT(onMessagesGetChatsAnswer()));
+    connect(api, SIGNAL(messagesGetChatsError()), this, SLOT(onMessagesGetChatsError()));
 
-    connect(api, &TelegramApi::messagesGetFullChatAnswer, this, &TelegramCore::onMessagesGetFullChatAnswer);
-    connect(api, &TelegramApi::messagesGetFullChatError, this, &TelegramCore::onMessagesGetFullChatError);
+    connect(api, SIGNAL(messagesGetFullChatAnswer()), this, SLOT(onMessagesGetFullChatAnswer()));
+    connect(api, SIGNAL(messagesGetFullChatError()), this, SLOT(onMessagesGetFullChatError()));
 
-    connect(api, &TelegramApi::messagesEditChatTitleAnswer, this, &TelegramCore::onMessagesEditChatTitleAnswer);
-    connect(api, &TelegramApi::messagesEditChatTitleError, this, &TelegramCore::onMessagesEditChatTitleError);
+    connect(api, SIGNAL(messagesEditChatTitleAnswer()), this, SLOT(onMessagesEditChatTitleAnswer()));
+    connect(api, SIGNAL(messagesEditChatTitleError()), this, SLOT(onMessagesEditChatTitleError()));
 
-    connect(api, &TelegramApi::messagesEditChatPhotoAnswer, this, &TelegramCore::onMessagesEditChatPhotoAnswer);
-    connect(api, &TelegramApi::messagesEditChatPhotoError, this, &TelegramCore::onMessagesEditChatPhotoError);
+    connect(api, SIGNAL(messagesEditChatPhotoAnswer()), this, SLOT(onMessagesEditChatPhotoAnswer()));
+    connect(api, SIGNAL(messagesEditChatPhotoError()), this, SLOT(onMessagesEditChatPhotoError()));
 
-    connect(api, &TelegramApi::messagesAddChatUserAnswer, this, &TelegramCore::onMessagesAddChatUserAnswer);
-    connect(api, &TelegramApi::messagesAddChatUserError, this, &TelegramCore::onMessagesAddChatUserError);
+    connect(api, SIGNAL(messagesAddChatUserAnswer()), this, SLOT(onMessagesAddChatUserAnswer()));
+    connect(api, SIGNAL(messagesAddChatUserError()), this, SLOT(onMessagesAddChatUserError()));
 
-    connect(api, &TelegramApi::messagesDeleteChatUserAnswer, this, &TelegramCore::onMessagesDeleteChatUserAnswer);
-    connect(api, &TelegramApi::messagesDeleteChatUserError, this, &TelegramCore::onMessagesDeleteChatUserError);
+    connect(api, SIGNAL(messagesDeleteChatUserAnswer()), this, SLOT(onMessagesDeleteChatUserAnswer()));
+    connect(api, SIGNAL(messagesDeleteChatUserError()), this, SLOT(onMessagesDeleteChatUserError()));
 
-    connect(api, &TelegramApi::messagesCreateChatAnswer, this, &TelegramCore::onMessagesCreateChatAnswer);
-    connect(api, &TelegramApi::messagesCreateChatError, this, &TelegramCore::onMessagesCreateChatError);
+    connect(api, SIGNAL(messagesCreateChatAnswer()), this, SLOT(onMessagesCreateChatAnswer()));
+    connect(api, SIGNAL(messagesCreateChatError()), this, SLOT(onMessagesCreateChatError()));
 
-    connect(api, &TelegramApi::messagesForwardMessageAnswer, this, &TelegramCore::onMessagesForwardMessageAnswer);
-    connect(api, &TelegramApi::messagesForwardMessageError, this, &TelegramCore::onMessagesForwardMessageError);
+    connect(api, SIGNAL(messagesForwardMessageAnswer()), this, SLOT(onMessagesForwardMessageAnswer()));
+    connect(api, SIGNAL(messagesForwardMessageError()), this, SLOT(onMessagesForwardMessageError()));
 
-    connect(api, &TelegramApi::messagesGetDhConfigAnswer, this, &TelegramCore::onMessagesGetDhConfigAnswer);
-    connect(api, &TelegramApi::messagesGetDhConfigError, this, &TelegramCore::onMessagesGetDhConfigError);
+    connect(api, SIGNAL(messagesGetDhConfigAnswer()), this, SLOT(onMessagesGetDhConfigAnswer()));
+    connect(api, SIGNAL(messagesGetDhConfigError()), this, SLOT(onMessagesGetDhConfigError()));
 
-    connect(api, &TelegramApi::messagesRequestEncryptionAnswer, this, &TelegramCore::onMessagesRequestEncryptionAnswer);
-    connect(api, &TelegramApi::messagesRequestEncryptionError, this, &TelegramCore::onMessagesRequestEncryptionError);
+    connect(api, SIGNAL(messagesRequestEncryptionAnswer()), this, SLOT(onMessagesRequestEncryptionAnswer()));
+    connect(api, SIGNAL(messagesRequestEncryptionError()), this, SLOT(onMessagesRequestEncryptionError()));
 
-    connect(api, &TelegramApi::messagesAcceptEncryptionAnswer, this, &TelegramCore::onMessagesAcceptEncryptionAnswer);
-    connect(api, &TelegramApi::messagesAcceptEncryptionError, this, &TelegramCore::onMessagesAcceptEncryptionError);
+    connect(api, SIGNAL(messagesAcceptEncryptionAnswer()), this, SLOT(onMessagesAcceptEncryptionAnswer()));
+    connect(api, SIGNAL(messagesAcceptEncryptionError()), this, SLOT(onMessagesAcceptEncryptionError()));
 
-    connect(api, &TelegramApi::messagesDiscardEncryptionAnswer, this, &TelegramCore::onMessagesDiscardEncryptionAnswer);
-    connect(api, &TelegramApi::messagesDiscardEncryptionError, this, &TelegramCore::onMessagesDiscardEncryptionError);
+    connect(api, SIGNAL(messagesDiscardEncryptionAnswer()), this, SLOT(onMessagesDiscardEncryptionAnswer()));
+    connect(api, SIGNAL(messagesDiscardEncryptionError()), this, SLOT(onMessagesDiscardEncryptionError()));
 
-    connect(api, &TelegramApi::messagesSetEncryptedTypingAnswer, this, &TelegramCore::onMessagesSetEncryptedTypingAnswer);
-    connect(api, &TelegramApi::messagesSetEncryptedTypingError, this, &TelegramCore::onMessagesSetEncryptedTypingError);
+    connect(api, SIGNAL(messagesSetEncryptedTypingAnswer()), this, SLOT(onMessagesSetEncryptedTypingAnswer()));
+    connect(api, SIGNAL(messagesSetEncryptedTypingError()), this, SLOT(onMessagesSetEncryptedTypingError()));
 
-    connect(api, &TelegramApi::messagesReadEncryptedHistoryAnswer, this, &TelegramCore::onMessagesReadEncryptedHistoryAnswer);
-    connect(api, &TelegramApi::messagesReadEncryptedHistoryError, this, &TelegramCore::onMessagesReadEncryptedHistoryError);
+    connect(api, SIGNAL(messagesReadEncryptedHistoryAnswer()), this, SLOT(onMessagesReadEncryptedHistoryAnswer()));
+    connect(api, SIGNAL(messagesReadEncryptedHistoryError()), this, SLOT(onMessagesReadEncryptedHistoryError()));
 
-    connect(api, &TelegramApi::messagesSendEncryptedAnswer, this, &TelegramCore::onMessagesSendEncryptedAnswer);
-    connect(api, &TelegramApi::messagesSendEncryptedError, this, &TelegramCore::onMessagesSendEncryptedError);
+    connect(api, SIGNAL(messagesSendEncryptedAnswer()), this, SLOT(onMessagesSendEncryptedAnswer()));
+    connect(api, SIGNAL(messagesSendEncryptedError()), this, SLOT(onMessagesSendEncryptedError()));
 
-    connect(api, &TelegramApi::messagesSendEncryptedFileAnswer, this, &TelegramCore::onMessagesSendEncryptedFileAnswer);
-    connect(api, &TelegramApi::messagesSendEncryptedFileError, this, &TelegramCore::onMessagesSendEncryptedFileError);
+    connect(api, SIGNAL(messagesSendEncryptedFileAnswer()), this, SLOT(onMessagesSendEncryptedFileAnswer()));
+    connect(api, SIGNAL(messagesSendEncryptedFileError()), this, SLOT(onMessagesSendEncryptedFileError()));
 
-    connect(api, &TelegramApi::messagesSendEncryptedServiceAnswer, this, &TelegramCore::onMessagesSendEncryptedServiceAnswer);
-    connect(api, &TelegramApi::messagesSendEncryptedServiceError, this, &TelegramCore::onMessagesSendEncryptedServiceError);
+    connect(api, SIGNAL(messagesSendEncryptedServiceAnswer()), this, SLOT(onMessagesSendEncryptedServiceAnswer()));
+    connect(api, SIGNAL(messagesSendEncryptedServiceError()), this, SLOT(onMessagesSendEncryptedServiceError()));
 
-    connect(api, &TelegramApi::messagesReceivedQueueAnswer, this, &TelegramCore::onMessagesReceivedQueueAnswer);
-    connect(api, &TelegramApi::messagesReceivedQueueError, this, &TelegramCore::onMessagesReceivedQueueError);
+    connect(api, SIGNAL(messagesReceivedQueueAnswer()), this, SLOT(onMessagesReceivedQueueAnswer()));
+    connect(api, SIGNAL(messagesReceivedQueueError()), this, SLOT(onMessagesReceivedQueueError()));
 
-    connect(api, &TelegramApi::messagesReportEncryptedSpamAnswer, this, &TelegramCore::onMessagesReportEncryptedSpamAnswer);
-    connect(api, &TelegramApi::messagesReportEncryptedSpamError, this, &TelegramCore::onMessagesReportEncryptedSpamError);
+    connect(api, SIGNAL(messagesReportEncryptedSpamAnswer()), this, SLOT(onMessagesReportEncryptedSpamAnswer()));
+    connect(api, SIGNAL(messagesReportEncryptedSpamError()), this, SLOT(onMessagesReportEncryptedSpamError()));
 
-    connect(api, &TelegramApi::messagesReadMessageContentsAnswer, this, &TelegramCore::onMessagesReadMessageContentsAnswer);
-    connect(api, &TelegramApi::messagesReadMessageContentsError, this, &TelegramCore::onMessagesReadMessageContentsError);
+    connect(api, SIGNAL(messagesReadMessageContentsAnswer()), this, SLOT(onMessagesReadMessageContentsAnswer()));
+    connect(api, SIGNAL(messagesReadMessageContentsError()), this, SLOT(onMessagesReadMessageContentsError()));
 
-    connect(api, &TelegramApi::messagesGetAllStickersAnswer, this, &TelegramCore::onMessagesGetAllStickersAnswer);
-    connect(api, &TelegramApi::messagesGetAllStickersError, this, &TelegramCore::onMessagesGetAllStickersError);
+    connect(api, SIGNAL(messagesGetAllStickersAnswer()), this, SLOT(onMessagesGetAllStickersAnswer()));
+    connect(api, SIGNAL(messagesGetAllStickersError()), this, SLOT(onMessagesGetAllStickersError()));
 
-    connect(api, &TelegramApi::messagesGetWebPagePreviewAnswer, this, &TelegramCore::onMessagesGetWebPagePreviewAnswer);
-    connect(api, &TelegramApi::messagesGetWebPagePreviewError, this, &TelegramCore::onMessagesGetWebPagePreviewError);
+    connect(api, SIGNAL(messagesGetWebPagePreviewAnswer()), this, SLOT(onMessagesGetWebPagePreviewAnswer()));
+    connect(api, SIGNAL(messagesGetWebPagePreviewError()), this, SLOT(onMessagesGetWebPagePreviewError()));
 
-    connect(api, &TelegramApi::messagesExportChatInviteAnswer, this, &TelegramCore::onMessagesExportChatInviteAnswer);
-    connect(api, &TelegramApi::messagesExportChatInviteError, this, &TelegramCore::onMessagesExportChatInviteError);
+    connect(api, SIGNAL(messagesExportChatInviteAnswer()), this, SLOT(onMessagesExportChatInviteAnswer()));
+    connect(api, SIGNAL(messagesExportChatInviteError()), this, SLOT(onMessagesExportChatInviteError()));
 
-    connect(api, &TelegramApi::messagesCheckChatInviteAnswer, this, &TelegramCore::onMessagesCheckChatInviteAnswer);
-    connect(api, &TelegramApi::messagesCheckChatInviteError, this, &TelegramCore::onMessagesCheckChatInviteError);
+    connect(api, SIGNAL(messagesCheckChatInviteAnswer()), this, SLOT(onMessagesCheckChatInviteAnswer()));
+    connect(api, SIGNAL(messagesCheckChatInviteError()), this, SLOT(onMessagesCheckChatInviteError()));
 
-    connect(api, &TelegramApi::messagesImportChatInviteAnswer, this, &TelegramCore::onMessagesImportChatInviteAnswer);
-    connect(api, &TelegramApi::messagesImportChatInviteError, this, &TelegramCore::onMessagesImportChatInviteError);
+    connect(api, SIGNAL(messagesImportChatInviteAnswer()), this, SLOT(onMessagesImportChatInviteAnswer()));
+    connect(api, SIGNAL(messagesImportChatInviteError()), this, SLOT(onMessagesImportChatInviteError()));
 
-    connect(api, &TelegramApi::messagesGetStickerSetAnswer, this, &TelegramCore::onMessagesGetStickerSetAnswer);
-    connect(api, &TelegramApi::messagesGetStickerSetError, this, &TelegramCore::onMessagesGetStickerSetError);
+    connect(api, SIGNAL(messagesGetStickerSetAnswer()), this, SLOT(onMessagesGetStickerSetAnswer()));
+    connect(api, SIGNAL(messagesGetStickerSetError()), this, SLOT(onMessagesGetStickerSetError()));
 
-    connect(api, &TelegramApi::messagesInstallStickerSetAnswer, this, &TelegramCore::onMessagesInstallStickerSetAnswer);
-    connect(api, &TelegramApi::messagesInstallStickerSetError, this, &TelegramCore::onMessagesInstallStickerSetError);
+    connect(api, SIGNAL(messagesInstallStickerSetAnswer()), this, SLOT(onMessagesInstallStickerSetAnswer()));
+    connect(api, SIGNAL(messagesInstallStickerSetError()), this, SLOT(onMessagesInstallStickerSetError()));
 
-    connect(api, &TelegramApi::messagesUninstallStickerSetAnswer, this, &TelegramCore::onMessagesUninstallStickerSetAnswer);
-    connect(api, &TelegramApi::messagesUninstallStickerSetError, this, &TelegramCore::onMessagesUninstallStickerSetError);
+    connect(api, SIGNAL(messagesUninstallStickerSetAnswer()), this, SLOT(onMessagesUninstallStickerSetAnswer()));
+    connect(api, SIGNAL(messagesUninstallStickerSetError()), this, SLOT(onMessagesUninstallStickerSetError()));
 
-    connect(api, &TelegramApi::messagesStartBotAnswer, this, &TelegramCore::onMessagesStartBotAnswer);
-    connect(api, &TelegramApi::messagesStartBotError, this, &TelegramCore::onMessagesStartBotError);
+    connect(api, SIGNAL(messagesStartBotAnswer()), this, SLOT(onMessagesStartBotAnswer()));
+    connect(api, SIGNAL(messagesStartBotError()), this, SLOT(onMessagesStartBotError()));
 
-    connect(api, &TelegramApi::messagesGetMessagesViewsAnswer, this, &TelegramCore::onMessagesGetMessagesViewsAnswer);
-    connect(api, &TelegramApi::messagesGetMessagesViewsError, this, &TelegramCore::onMessagesGetMessagesViewsError);
+    connect(api, SIGNAL(messagesGetMessagesViewsAnswer()), this, SLOT(onMessagesGetMessagesViewsAnswer()));
+    connect(api, SIGNAL(messagesGetMessagesViewsError()), this, SLOT(onMessagesGetMessagesViewsError()));
 
-    connect(api, &TelegramApi::messagesToggleChatAdminsAnswer, this, &TelegramCore::onMessagesToggleChatAdminsAnswer);
-    connect(api, &TelegramApi::messagesToggleChatAdminsError, this, &TelegramCore::onMessagesToggleChatAdminsError);
+    connect(api, SIGNAL(messagesToggleChatAdminsAnswer()), this, SLOT(onMessagesToggleChatAdminsAnswer()));
+    connect(api, SIGNAL(messagesToggleChatAdminsError()), this, SLOT(onMessagesToggleChatAdminsError()));
 
-    connect(api, &TelegramApi::messagesEditChatAdminAnswer, this, &TelegramCore::onMessagesEditChatAdminAnswer);
-    connect(api, &TelegramApi::messagesEditChatAdminError, this, &TelegramCore::onMessagesEditChatAdminError);
+    connect(api, SIGNAL(messagesEditChatAdminAnswer()), this, SLOT(onMessagesEditChatAdminAnswer()));
+    connect(api, SIGNAL(messagesEditChatAdminError()), this, SLOT(onMessagesEditChatAdminError()));
 
-    connect(api, &TelegramApi::messagesMigrateChatAnswer, this, &TelegramCore::onMessagesMigrateChatAnswer);
-    connect(api, &TelegramApi::messagesMigrateChatError, this, &TelegramCore::onMessagesMigrateChatError);
+    connect(api, SIGNAL(messagesMigrateChatAnswer()), this, SLOT(onMessagesMigrateChatAnswer()));
+    connect(api, SIGNAL(messagesMigrateChatError()), this, SLOT(onMessagesMigrateChatError()));
 
-    connect(api, &TelegramApi::messagesSearchGlobalAnswer, this, &TelegramCore::onMessagesSearchGlobalAnswer);
-    connect(api, &TelegramApi::messagesSearchGlobalError, this, &TelegramCore::onMessagesSearchGlobalError);
+    connect(api, SIGNAL(messagesSearchGlobalAnswer()), this, SLOT(onMessagesSearchGlobalAnswer()));
+    connect(api, SIGNAL(messagesSearchGlobalError()), this, SLOT(onMessagesSearchGlobalError()));
 
-    connect(api, &TelegramApi::messagesReorderStickerSetsAnswer, this, &TelegramCore::onMessagesReorderStickerSetsAnswer);
-    connect(api, &TelegramApi::messagesReorderStickerSetsError, this, &TelegramCore::onMessagesReorderStickerSetsError);
+    connect(api, SIGNAL(messagesReorderStickerSetsAnswer()), this, SLOT(onMessagesReorderStickerSetsAnswer()));
+    connect(api, SIGNAL(messagesReorderStickerSetsError()), this, SLOT(onMessagesReorderStickerSetsError()));
 
-    connect(api, &TelegramApi::messagesGetDocumentByHashAnswer, this, &TelegramCore::onMessagesGetDocumentByHashAnswer);
-    connect(api, &TelegramApi::messagesGetDocumentByHashError, this, &TelegramCore::onMessagesGetDocumentByHashError);
+    connect(api, SIGNAL(messagesGetDocumentByHashAnswer()), this, SLOT(onMessagesGetDocumentByHashAnswer()));
+    connect(api, SIGNAL(messagesGetDocumentByHashError()), this, SLOT(onMessagesGetDocumentByHashError()));
 
-    connect(api, &TelegramApi::messagesSearchGifsAnswer, this, &TelegramCore::onMessagesSearchGifsAnswer);
-    connect(api, &TelegramApi::messagesSearchGifsError, this, &TelegramCore::onMessagesSearchGifsError);
+    connect(api, SIGNAL(messagesSearchGifsAnswer()), this, SLOT(onMessagesSearchGifsAnswer()));
+    connect(api, SIGNAL(messagesSearchGifsError()), this, SLOT(onMessagesSearchGifsError()));
 
-    connect(api, &TelegramApi::messagesGetSavedGifsAnswer, this, &TelegramCore::onMessagesGetSavedGifsAnswer);
-    connect(api, &TelegramApi::messagesGetSavedGifsError, this, &TelegramCore::onMessagesGetSavedGifsError);
+    connect(api, SIGNAL(messagesGetSavedGifsAnswer()), this, SLOT(onMessagesGetSavedGifsAnswer()));
+    connect(api, SIGNAL(messagesGetSavedGifsError()), this, SLOT(onMessagesGetSavedGifsError()));
 
-    connect(api, &TelegramApi::messagesSaveGifAnswer, this, &TelegramCore::onMessagesSaveGifAnswer);
-    connect(api, &TelegramApi::messagesSaveGifError, this, &TelegramCore::onMessagesSaveGifError);
+    connect(api, SIGNAL(messagesSaveGifAnswer()), this, SLOT(onMessagesSaveGifAnswer()));
+    connect(api, SIGNAL(messagesSaveGifError()), this, SLOT(onMessagesSaveGifError()));
 
-    connect(api, &TelegramApi::messagesGetInlineBotResultsAnswer, this, &TelegramCore::onMessagesGetInlineBotResultsAnswer);
-    connect(api, &TelegramApi::messagesGetInlineBotResultsError, this, &TelegramCore::onMessagesGetInlineBotResultsError);
+    connect(api, SIGNAL(messagesGetInlineBotResultsAnswer()), this, SLOT(onMessagesGetInlineBotResultsAnswer()));
+    connect(api, SIGNAL(messagesGetInlineBotResultsError()), this, SLOT(onMessagesGetInlineBotResultsError()));
 
-    connect(api, &TelegramApi::messagesSetInlineBotResultsAnswer, this, &TelegramCore::onMessagesSetInlineBotResultsAnswer);
-    connect(api, &TelegramApi::messagesSetInlineBotResultsError, this, &TelegramCore::onMessagesSetInlineBotResultsError);
+    connect(api, SIGNAL(messagesSetInlineBotResultsAnswer()), this, SLOT(onMessagesSetInlineBotResultsAnswer()));
+    connect(api, SIGNAL(messagesSetInlineBotResultsError()), this, SLOT(onMessagesSetInlineBotResultsError()));
 
-    connect(api, &TelegramApi::messagesSendInlineBotResultAnswer, this, &TelegramCore::onMessagesSendInlineBotResultAnswer);
-    connect(api, &TelegramApi::messagesSendInlineBotResultError, this, &TelegramCore::onMessagesSendInlineBotResultError);
+    connect(api, SIGNAL(messagesSendInlineBotResultAnswer()), this, SLOT(onMessagesSendInlineBotResultAnswer()));
+    connect(api, SIGNAL(messagesSendInlineBotResultError()), this, SLOT(onMessagesSendInlineBotResultError()));
 
-    connect(api, &TelegramApi::messagesGetMessageEditDataAnswer, this, &TelegramCore::onMessagesGetMessageEditDataAnswer);
-    connect(api, &TelegramApi::messagesGetMessageEditDataError, this, &TelegramCore::onMessagesGetMessageEditDataError);
+    connect(api, SIGNAL(messagesGetMessageEditDataAnswer()), this, SLOT(onMessagesGetMessageEditDataAnswer()));
+    connect(api, SIGNAL(messagesGetMessageEditDataError()), this, SLOT(onMessagesGetMessageEditDataError()));
 
-    connect(api, &TelegramApi::messagesEditMessageAnswer, this, &TelegramCore::onMessagesEditMessageAnswer);
-    connect(api, &TelegramApi::messagesEditMessageError, this, &TelegramCore::onMessagesEditMessageError);
+    connect(api, SIGNAL(messagesEditMessageAnswer()), this, SLOT(onMessagesEditMessageAnswer()));
+    connect(api, SIGNAL(messagesEditMessageError()), this, SLOT(onMessagesEditMessageError()));
 
-    connect(api, &TelegramApi::messagesEditInlineBotMessageAnswer, this, &TelegramCore::onMessagesEditInlineBotMessageAnswer);
-    connect(api, &TelegramApi::messagesEditInlineBotMessageError, this, &TelegramCore::onMessagesEditInlineBotMessageError);
+    connect(api, SIGNAL(messagesEditInlineBotMessageAnswer()), this, SLOT(onMessagesEditInlineBotMessageAnswer()));
+    connect(api, SIGNAL(messagesEditInlineBotMessageError()), this, SLOT(onMessagesEditInlineBotMessageError()));
 
-    connect(api, &TelegramApi::messagesGetBotCallbackAnswerAnswer, this, &TelegramCore::onMessagesGetBotCallbackAnswerAnswer);
-    connect(api, &TelegramApi::messagesGetBotCallbackAnswerError, this, &TelegramCore::onMessagesGetBotCallbackAnswerError);
+    connect(api, SIGNAL(messagesGetBotCallbackAnswerAnswer()), this, SLOT(onMessagesGetBotCallbackAnswerAnswer()));
+    connect(api, SIGNAL(messagesGetBotCallbackAnswerError()), this, SLOT(onMessagesGetBotCallbackAnswerError()));
 
-    connect(api, &TelegramApi::messagesSetBotCallbackAnswerAnswer, this, &TelegramCore::onMessagesSetBotCallbackAnswerAnswer);
-    connect(api, &TelegramApi::messagesSetBotCallbackAnswerError, this, &TelegramCore::onMessagesSetBotCallbackAnswerError);
+    connect(api, SIGNAL(messagesSetBotCallbackAnswerAnswer()), this, SLOT(onMessagesSetBotCallbackAnswerAnswer()));
+    connect(api, SIGNAL(messagesSetBotCallbackAnswerError()), this, SLOT(onMessagesSetBotCallbackAnswerError()));
 
-    connect(api, &TelegramApi::messagesGetPeerDialogsAnswer, this, &TelegramCore::onMessagesGetPeerDialogsAnswer);
-    connect(api, &TelegramApi::messagesGetPeerDialogsError, this, &TelegramCore::onMessagesGetPeerDialogsError);
+    connect(api, SIGNAL(messagesGetPeerDialogsAnswer()), this, SLOT(onMessagesGetPeerDialogsAnswer()));
+    connect(api, SIGNAL(messagesGetPeerDialogsError()), this, SLOT(onMessagesGetPeerDialogsError()));
 
-    connect(api, &TelegramApi::messagesSaveDraftAnswer, this, &TelegramCore::onMessagesSaveDraftAnswer);
-    connect(api, &TelegramApi::messagesSaveDraftError, this, &TelegramCore::onMessagesSaveDraftError);
+    connect(api, SIGNAL(messagesSaveDraftAnswer()), this, SLOT(onMessagesSaveDraftAnswer()));
+    connect(api, SIGNAL(messagesSaveDraftError()), this, SLOT(onMessagesSaveDraftError()));
 
-    connect(api, &TelegramApi::messagesGetAllDraftsAnswer, this, &TelegramCore::onMessagesGetAllDraftsAnswer);
-    connect(api, &TelegramApi::messagesGetAllDraftsError, this, &TelegramCore::onMessagesGetAllDraftsError);
+    connect(api, SIGNAL(messagesGetAllDraftsAnswer()), this, SLOT(onMessagesGetAllDraftsAnswer()));
+    connect(api, SIGNAL(messagesGetAllDraftsError()), this, SLOT(onMessagesGetAllDraftsError()));
 
-    connect(api, &TelegramApi::messagesGetFeaturedStickersAnswer, this, &TelegramCore::onMessagesGetFeaturedStickersAnswer);
-    connect(api, &TelegramApi::messagesGetFeaturedStickersError, this, &TelegramCore::onMessagesGetFeaturedStickersError);
+    connect(api, SIGNAL(messagesGetFeaturedStickersAnswer()), this, SLOT(onMessagesGetFeaturedStickersAnswer()));
+    connect(api, SIGNAL(messagesGetFeaturedStickersError()), this, SLOT(onMessagesGetFeaturedStickersError()));
 
-    connect(api, &TelegramApi::messagesReadFeaturedStickersAnswer, this, &TelegramCore::onMessagesReadFeaturedStickersAnswer);
-    connect(api, &TelegramApi::messagesReadFeaturedStickersError, this, &TelegramCore::onMessagesReadFeaturedStickersError);
+    connect(api, SIGNAL(messagesReadFeaturedStickersAnswer()), this, SLOT(onMessagesReadFeaturedStickersAnswer()));
+    connect(api, SIGNAL(messagesReadFeaturedStickersError()), this, SLOT(onMessagesReadFeaturedStickersError()));
 
-    connect(api, &TelegramApi::messagesGetRecentStickersAnswer, this, &TelegramCore::onMessagesGetRecentStickersAnswer);
-    connect(api, &TelegramApi::messagesGetRecentStickersError, this, &TelegramCore::onMessagesGetRecentStickersError);
+    connect(api, SIGNAL(messagesGetRecentStickersAnswer()), this, SLOT(onMessagesGetRecentStickersAnswer()));
+    connect(api, SIGNAL(messagesGetRecentStickersError()), this, SLOT(onMessagesGetRecentStickersError()));
 
-    connect(api, &TelegramApi::messagesSaveRecentStickerAnswer, this, &TelegramCore::onMessagesSaveRecentStickerAnswer);
-    connect(api, &TelegramApi::messagesSaveRecentStickerError, this, &TelegramCore::onMessagesSaveRecentStickerError);
+    connect(api, SIGNAL(messagesSaveRecentStickerAnswer()), this, SLOT(onMessagesSaveRecentStickerAnswer()));
+    connect(api, SIGNAL(messagesSaveRecentStickerError()), this, SLOT(onMessagesSaveRecentStickerError()));
 
-    connect(api, &TelegramApi::messagesClearRecentStickersAnswer, this, &TelegramCore::onMessagesClearRecentStickersAnswer);
-    connect(api, &TelegramApi::messagesClearRecentStickersError, this, &TelegramCore::onMessagesClearRecentStickersError);
+    connect(api, SIGNAL(messagesClearRecentStickersAnswer()), this, SLOT(onMessagesClearRecentStickersAnswer()));
+    connect(api, SIGNAL(messagesClearRecentStickersError()), this, SLOT(onMessagesClearRecentStickersError()));
 
-    connect(api, &TelegramApi::messagesGetArchivedStickersAnswer, this, &TelegramCore::onMessagesGetArchivedStickersAnswer);
-    connect(api, &TelegramApi::messagesGetArchivedStickersError, this, &TelegramCore::onMessagesGetArchivedStickersError);
+    connect(api, SIGNAL(messagesGetArchivedStickersAnswer()), this, SLOT(onMessagesGetArchivedStickersAnswer()));
+    connect(api, SIGNAL(messagesGetArchivedStickersError()), this, SLOT(onMessagesGetArchivedStickersError()));
 
-    connect(api, &TelegramApi::messagesGetMaskStickersAnswer, this, &TelegramCore::onMessagesGetMaskStickersAnswer);
-    connect(api, &TelegramApi::messagesGetMaskStickersError, this, &TelegramCore::onMessagesGetMaskStickersError);
+    connect(api, SIGNAL(messagesGetMaskStickersAnswer()), this, SLOT(onMessagesGetMaskStickersAnswer()));
+    connect(api, SIGNAL(messagesGetMaskStickersError()), this, SLOT(onMessagesGetMaskStickersError()));
 
-    connect(api, &TelegramApi::messagesGetAttachedStickersAnswer, this, &TelegramCore::onMessagesGetAttachedStickersAnswer);
-    connect(api, &TelegramApi::messagesGetAttachedStickersError, this, &TelegramCore::onMessagesGetAttachedStickersError);
+    connect(api, SIGNAL(messagesGetAttachedStickersAnswer()), this, SLOT(onMessagesGetAttachedStickersAnswer()));
+    connect(api, SIGNAL(messagesGetAttachedStickersError()), this, SLOT(onMessagesGetAttachedStickersError()));
 
-    connect(api, &TelegramApi::messagesSetGameScoreAnswer, this, &TelegramCore::onMessagesSetGameScoreAnswer);
-    connect(api, &TelegramApi::messagesSetGameScoreError, this, &TelegramCore::onMessagesSetGameScoreError);
+    connect(api, SIGNAL(messagesSetGameScoreAnswer()), this, SLOT(onMessagesSetGameScoreAnswer()));
+    connect(api, SIGNAL(messagesSetGameScoreError()), this, SLOT(onMessagesSetGameScoreError()));
 
-    connect(api, &TelegramApi::messagesSetInlineGameScoreAnswer, this, &TelegramCore::onMessagesSetInlineGameScoreAnswer);
-    connect(api, &TelegramApi::messagesSetInlineGameScoreError, this, &TelegramCore::onMessagesSetInlineGameScoreError);
+    connect(api, SIGNAL(messagesSetInlineGameScoreAnswer()), this, SLOT(onMessagesSetInlineGameScoreAnswer()));
+    connect(api, SIGNAL(messagesSetInlineGameScoreError()), this, SLOT(onMessagesSetInlineGameScoreError()));
 
-    connect(api, &TelegramApi::messagesGetGameHighScoresAnswer, this, &TelegramCore::onMessagesGetGameHighScoresAnswer);
-    connect(api, &TelegramApi::messagesGetGameHighScoresError, this, &TelegramCore::onMessagesGetGameHighScoresError);
+    connect(api, SIGNAL(messagesGetGameHighScoresAnswer()), this, SLOT(onMessagesGetGameHighScoresAnswer()));
+    connect(api, SIGNAL(messagesGetGameHighScoresError()), this, SLOT(onMessagesGetGameHighScoresError()));
 
-    connect(api, &TelegramApi::messagesGetInlineGameHighScoresAnswer, this, &TelegramCore::onMessagesGetInlineGameHighScoresAnswer);
-    connect(api, &TelegramApi::messagesGetInlineGameHighScoresError, this, &TelegramCore::onMessagesGetInlineGameHighScoresError);
+    connect(api, SIGNAL(messagesGetInlineGameHighScoresAnswer()), this, SLOT(onMessagesGetInlineGameHighScoresAnswer()));
+    connect(api, SIGNAL(messagesGetInlineGameHighScoresError()), this, SLOT(onMessagesGetInlineGameHighScoresError()));
 
-    connect(api, &TelegramApi::messagesGetCommonChatsAnswer, this, &TelegramCore::onMessagesGetCommonChatsAnswer);
-    connect(api, &TelegramApi::messagesGetCommonChatsError, this, &TelegramCore::onMessagesGetCommonChatsError);
+    connect(api, SIGNAL(messagesGetCommonChatsAnswer()), this, SLOT(onMessagesGetCommonChatsAnswer()));
+    connect(api, SIGNAL(messagesGetCommonChatsError()), this, SLOT(onMessagesGetCommonChatsError()));
 
-    connect(api, &TelegramApi::messagesGetAllChatsAnswer, this, &TelegramCore::onMessagesGetAllChatsAnswer);
-    connect(api, &TelegramApi::messagesGetAllChatsError, this, &TelegramCore::onMessagesGetAllChatsError);
+    connect(api, SIGNAL(messagesGetAllChatsAnswer()), this, SLOT(onMessagesGetAllChatsAnswer()));
+    connect(api, SIGNAL(messagesGetAllChatsError()), this, SLOT(onMessagesGetAllChatsError()));
 
-    connect(api, &TelegramApi::messagesGetWebPageAnswer, this, &TelegramCore::onMessagesGetWebPageAnswer);
-    connect(api, &TelegramApi::messagesGetWebPageError, this, &TelegramCore::onMessagesGetWebPageError);
+    connect(api, SIGNAL(messagesGetWebPageAnswer()), this, SLOT(onMessagesGetWebPageAnswer()));
+    connect(api, SIGNAL(messagesGetWebPageError()), this, SLOT(onMessagesGetWebPageError()));
 
-    connect(api, &TelegramApi::messagesToggleDialogPinAnswer, this, &TelegramCore::onMessagesToggleDialogPinAnswer);
-    connect(api, &TelegramApi::messagesToggleDialogPinError, this, &TelegramCore::onMessagesToggleDialogPinError);
+    connect(api, SIGNAL(messagesToggleDialogPinAnswer()), this, SLOT(onMessagesToggleDialogPinAnswer()));
+    connect(api, SIGNAL(messagesToggleDialogPinError()), this, SLOT(onMessagesToggleDialogPinError()));
 
-    connect(api, &TelegramApi::messagesReorderPinnedDialogsAnswer, this, &TelegramCore::onMessagesReorderPinnedDialogsAnswer);
-    connect(api, &TelegramApi::messagesReorderPinnedDialogsError, this, &TelegramCore::onMessagesReorderPinnedDialogsError);
+    connect(api, SIGNAL(messagesReorderPinnedDialogsAnswer()), this, SLOT(onMessagesReorderPinnedDialogsAnswer()));
+    connect(api, SIGNAL(messagesReorderPinnedDialogsError()), this, SLOT(onMessagesReorderPinnedDialogsError()));
 
-    connect(api, &TelegramApi::messagesGetPinnedDialogsAnswer, this, &TelegramCore::onMessagesGetPinnedDialogsAnswer);
-    connect(api, &TelegramApi::messagesGetPinnedDialogsError, this, &TelegramCore::onMessagesGetPinnedDialogsError);
+    connect(api, SIGNAL(messagesGetPinnedDialogsAnswer()), this, SLOT(onMessagesGetPinnedDialogsAnswer()));
+    connect(api, SIGNAL(messagesGetPinnedDialogsError()), this, SLOT(onMessagesGetPinnedDialogsError()));
 
-    connect(api, &TelegramApi::messagesSetBotShippingResultsAnswer, this, &TelegramCore::onMessagesSetBotShippingResultsAnswer);
-    connect(api, &TelegramApi::messagesSetBotShippingResultsError, this, &TelegramCore::onMessagesSetBotShippingResultsError);
+    connect(api, SIGNAL(messagesSetBotShippingResultsAnswer()), this, SLOT(onMessagesSetBotShippingResultsAnswer()));
+    connect(api, SIGNAL(messagesSetBotShippingResultsError()), this, SLOT(onMessagesSetBotShippingResultsError()));
 
-    connect(api, &TelegramApi::messagesSetBotPrecheckoutResultsAnswer, this, &TelegramCore::onMessagesSetBotPrecheckoutResultsAnswer);
-    connect(api, &TelegramApi::messagesSetBotPrecheckoutResultsError, this, &TelegramCore::onMessagesSetBotPrecheckoutResultsError);
+    connect(api, SIGNAL(messagesSetBotPrecheckoutResultsAnswer()), this, SLOT(onMessagesSetBotPrecheckoutResultsAnswer()));
+    connect(api, SIGNAL(messagesSetBotPrecheckoutResultsError()), this, SLOT(onMessagesSetBotPrecheckoutResultsError()));
 
-    connect(api, &TelegramApi::messagesUploadMediaAnswer, this, &TelegramCore::onMessagesUploadMediaAnswer);
-    connect(api, &TelegramApi::messagesUploadMediaError, this, &TelegramCore::onMessagesUploadMediaError);
+    connect(api, SIGNAL(messagesUploadMediaAnswer()), this, SLOT(onMessagesUploadMediaAnswer()));
+    connect(api, SIGNAL(messagesUploadMediaError()), this, SLOT(onMessagesUploadMediaError()));
 
 
-    connect(api, &TelegramApi::paymentsGetPaymentFormAnswer, this, &TelegramCore::onPaymentsGetPaymentFormAnswer);
-    connect(api, &TelegramApi::paymentsGetPaymentFormError, this, &TelegramCore::onPaymentsGetPaymentFormError);
+    connect(api, SIGNAL(paymentsGetPaymentFormAnswer()), this, SLOT(onPaymentsGetPaymentFormAnswer()));
+    connect(api, SIGNAL(paymentsGetPaymentFormError()), this, SLOT(onPaymentsGetPaymentFormError()));
 
-    connect(api, &TelegramApi::paymentsGetPaymentReceiptAnswer, this, &TelegramCore::onPaymentsGetPaymentReceiptAnswer);
-    connect(api, &TelegramApi::paymentsGetPaymentReceiptError, this, &TelegramCore::onPaymentsGetPaymentReceiptError);
+    connect(api, SIGNAL(paymentsGetPaymentReceiptAnswer()), this, SLOT(onPaymentsGetPaymentReceiptAnswer()));
+    connect(api, SIGNAL(paymentsGetPaymentReceiptError()), this, SLOT(onPaymentsGetPaymentReceiptError()));
 
-    connect(api, &TelegramApi::paymentsValidateRequestedInfoAnswer, this, &TelegramCore::onPaymentsValidateRequestedInfoAnswer);
-    connect(api, &TelegramApi::paymentsValidateRequestedInfoError, this, &TelegramCore::onPaymentsValidateRequestedInfoError);
+    connect(api, SIGNAL(paymentsValidateRequestedInfoAnswer()), this, SLOT(onPaymentsValidateRequestedInfoAnswer()));
+    connect(api, SIGNAL(paymentsValidateRequestedInfoError()), this, SLOT(onPaymentsValidateRequestedInfoError()));
 
-    connect(api, &TelegramApi::paymentsSendPaymentFormAnswer, this, &TelegramCore::onPaymentsSendPaymentFormAnswer);
-    connect(api, &TelegramApi::paymentsSendPaymentFormError, this, &TelegramCore::onPaymentsSendPaymentFormError);
+    connect(api, SIGNAL(paymentsSendPaymentFormAnswer()), this, SLOT(onPaymentsSendPaymentFormAnswer()));
+    connect(api, SIGNAL(paymentsSendPaymentFormError()), this, SLOT(onPaymentsSendPaymentFormError()));
 
-    connect(api, &TelegramApi::paymentsGetSavedInfoAnswer, this, &TelegramCore::onPaymentsGetSavedInfoAnswer);
-    connect(api, &TelegramApi::paymentsGetSavedInfoError, this, &TelegramCore::onPaymentsGetSavedInfoError);
+    connect(api, SIGNAL(paymentsGetSavedInfoAnswer()), this, SLOT(onPaymentsGetSavedInfoAnswer()));
+    connect(api, SIGNAL(paymentsGetSavedInfoError()), this, SLOT(onPaymentsGetSavedInfoError()));
 
-    connect(api, &TelegramApi::paymentsClearSavedInfoAnswer, this, &TelegramCore::onPaymentsClearSavedInfoAnswer);
-    connect(api, &TelegramApi::paymentsClearSavedInfoError, this, &TelegramCore::onPaymentsClearSavedInfoError);
+    connect(api, SIGNAL(paymentsClearSavedInfoAnswer()), this, SLOT(onPaymentsClearSavedInfoAnswer()));
+    connect(api, SIGNAL(paymentsClearSavedInfoError()), this, SLOT(onPaymentsClearSavedInfoError()));
 
 
-    connect(api, &TelegramApi::phoneGetCallConfigAnswer, this, &TelegramCore::onPhoneGetCallConfigAnswer);
-    connect(api, &TelegramApi::phoneGetCallConfigError, this, &TelegramCore::onPhoneGetCallConfigError);
+    connect(api, SIGNAL(phoneGetCallConfigAnswer()), this, SLOT(onPhoneGetCallConfigAnswer()));
+    connect(api, SIGNAL(phoneGetCallConfigError()), this, SLOT(onPhoneGetCallConfigError()));
 
-    connect(api, &TelegramApi::phoneRequestCallAnswer, this, &TelegramCore::onPhoneRequestCallAnswer);
-    connect(api, &TelegramApi::phoneRequestCallError, this, &TelegramCore::onPhoneRequestCallError);
+    connect(api, SIGNAL(phoneRequestCallAnswer()), this, SLOT(onPhoneRequestCallAnswer()));
+    connect(api, SIGNAL(phoneRequestCallError()), this, SLOT(onPhoneRequestCallError()));
 
-    connect(api, &TelegramApi::phoneAcceptCallAnswer, this, &TelegramCore::onPhoneAcceptCallAnswer);
-    connect(api, &TelegramApi::phoneAcceptCallError, this, &TelegramCore::onPhoneAcceptCallError);
+    connect(api, SIGNAL(phoneAcceptCallAnswer()), this, SLOT(onPhoneAcceptCallAnswer()));
+    connect(api, SIGNAL(phoneAcceptCallError()), this, SLOT(onPhoneAcceptCallError()));
 
-    connect(api, &TelegramApi::phoneConfirmCallAnswer, this, &TelegramCore::onPhoneConfirmCallAnswer);
-    connect(api, &TelegramApi::phoneConfirmCallError, this, &TelegramCore::onPhoneConfirmCallError);
+    connect(api, SIGNAL(phoneConfirmCallAnswer()), this, SLOT(onPhoneConfirmCallAnswer()));
+    connect(api, SIGNAL(phoneConfirmCallError()), this, SLOT(onPhoneConfirmCallError()));
 
-    connect(api, &TelegramApi::phoneReceivedCallAnswer, this, &TelegramCore::onPhoneReceivedCallAnswer);
-    connect(api, &TelegramApi::phoneReceivedCallError, this, &TelegramCore::onPhoneReceivedCallError);
+    connect(api, SIGNAL(phoneReceivedCallAnswer()), this, SLOT(onPhoneReceivedCallAnswer()));
+    connect(api, SIGNAL(phoneReceivedCallError()), this, SLOT(onPhoneReceivedCallError()));
 
-    connect(api, &TelegramApi::phoneDiscardCallAnswer, this, &TelegramCore::onPhoneDiscardCallAnswer);
-    connect(api, &TelegramApi::phoneDiscardCallError, this, &TelegramCore::onPhoneDiscardCallError);
+    connect(api, SIGNAL(phoneDiscardCallAnswer()), this, SLOT(onPhoneDiscardCallAnswer()));
+    connect(api, SIGNAL(phoneDiscardCallError()), this, SLOT(onPhoneDiscardCallError()));
 
-    connect(api, &TelegramApi::phoneSetCallRatingAnswer, this, &TelegramCore::onPhoneSetCallRatingAnswer);
-    connect(api, &TelegramApi::phoneSetCallRatingError, this, &TelegramCore::onPhoneSetCallRatingError);
+    connect(api, SIGNAL(phoneSetCallRatingAnswer()), this, SLOT(onPhoneSetCallRatingAnswer()));
+    connect(api, SIGNAL(phoneSetCallRatingError()), this, SLOT(onPhoneSetCallRatingError()));
 
-    connect(api, &TelegramApi::phoneSaveCallDebugAnswer, this, &TelegramCore::onPhoneSaveCallDebugAnswer);
-    connect(api, &TelegramApi::phoneSaveCallDebugError, this, &TelegramCore::onPhoneSaveCallDebugError);
+    connect(api, SIGNAL(phoneSaveCallDebugAnswer()), this, SLOT(onPhoneSaveCallDebugAnswer()));
+    connect(api, SIGNAL(phoneSaveCallDebugError()), this, SLOT(onPhoneSaveCallDebugError()));
 
 
-    connect(api, &TelegramApi::photosUpdateProfilePhotoAnswer, this, &TelegramCore::onPhotosUpdateProfilePhotoAnswer);
-    connect(api, &TelegramApi::photosUpdateProfilePhotoError, this, &TelegramCore::onPhotosUpdateProfilePhotoError);
+    connect(api, SIGNAL(photosUpdateProfilePhotoAnswer()), this, SLOT(onPhotosUpdateProfilePhotoAnswer()));
+    connect(api, SIGNAL(photosUpdateProfilePhotoError()), this, SLOT(onPhotosUpdateProfilePhotoError()));
 
-    connect(api, &TelegramApi::photosUploadProfilePhotoAnswer, this, &TelegramCore::onPhotosUploadProfilePhotoAnswer);
-    connect(api, &TelegramApi::photosUploadProfilePhotoError, this, &TelegramCore::onPhotosUploadProfilePhotoError);
+    connect(api, SIGNAL(photosUploadProfilePhotoAnswer()), this, SLOT(onPhotosUploadProfilePhotoAnswer()));
+    connect(api, SIGNAL(photosUploadProfilePhotoError()), this, SLOT(onPhotosUploadProfilePhotoError()));
 
-    connect(api, &TelegramApi::photosDeletePhotosAnswer, this, &TelegramCore::onPhotosDeletePhotosAnswer);
-    connect(api, &TelegramApi::photosDeletePhotosError, this, &TelegramCore::onPhotosDeletePhotosError);
+    connect(api, SIGNAL(photosDeletePhotosAnswer()), this, SLOT(onPhotosDeletePhotosAnswer()));
+    connect(api, SIGNAL(photosDeletePhotosError()), this, SLOT(onPhotosDeletePhotosError()));
 
-    connect(api, &TelegramApi::photosGetUserPhotosAnswer, this, &TelegramCore::onPhotosGetUserPhotosAnswer);
-    connect(api, &TelegramApi::photosGetUserPhotosError, this, &TelegramCore::onPhotosGetUserPhotosError);
+    connect(api, SIGNAL(photosGetUserPhotosAnswer()), this, SLOT(onPhotosGetUserPhotosAnswer()));
+    connect(api, SIGNAL(photosGetUserPhotosError()), this, SLOT(onPhotosGetUserPhotosError()));
 
 
-    connect(api, &TelegramApi::stickersCreateStickerSetAnswer, this, &TelegramCore::onStickersCreateStickerSetAnswer);
-    connect(api, &TelegramApi::stickersCreateStickerSetError, this, &TelegramCore::onStickersCreateStickerSetError);
+    connect(api, SIGNAL(stickersCreateStickerSetAnswer()), this, SLOT(onStickersCreateStickerSetAnswer()));
+    connect(api, SIGNAL(stickersCreateStickerSetError()), this, SLOT(onStickersCreateStickerSetError()));
 
-    connect(api, &TelegramApi::stickersRemoveStickerFromSetAnswer, this, &TelegramCore::onStickersRemoveStickerFromSetAnswer);
-    connect(api, &TelegramApi::stickersRemoveStickerFromSetError, this, &TelegramCore::onStickersRemoveStickerFromSetError);
+    connect(api, SIGNAL(stickersRemoveStickerFromSetAnswer()), this, SLOT(onStickersRemoveStickerFromSetAnswer()));
+    connect(api, SIGNAL(stickersRemoveStickerFromSetError()), this, SLOT(onStickersRemoveStickerFromSetError()));
 
-    connect(api, &TelegramApi::stickersChangeStickerPositionAnswer, this, &TelegramCore::onStickersChangeStickerPositionAnswer);
-    connect(api, &TelegramApi::stickersChangeStickerPositionError, this, &TelegramCore::onStickersChangeStickerPositionError);
+    connect(api, SIGNAL(stickersChangeStickerPositionAnswer()), this, SLOT(onStickersChangeStickerPositionAnswer()));
+    connect(api, SIGNAL(stickersChangeStickerPositionError()), this, SLOT(onStickersChangeStickerPositionError()));
 
-    connect(api, &TelegramApi::stickersAddStickerToSetAnswer, this, &TelegramCore::onStickersAddStickerToSetAnswer);
-    connect(api, &TelegramApi::stickersAddStickerToSetError, this, &TelegramCore::onStickersAddStickerToSetError);
+    connect(api, SIGNAL(stickersAddStickerToSetAnswer()), this, SLOT(onStickersAddStickerToSetAnswer()));
+    connect(api, SIGNAL(stickersAddStickerToSetError()), this, SLOT(onStickersAddStickerToSetError()));
 
 
-    connect(api, &TelegramApi::updatesGetStateAnswer, this, &TelegramCore::onUpdatesGetStateAnswer);
-    connect(api, &TelegramApi::updatesGetStateError, this, &TelegramCore::onUpdatesGetStateError);
+    connect(api, SIGNAL(updatesGetStateAnswer()), this, SLOT(onUpdatesGetStateAnswer()));
+    connect(api, SIGNAL(updatesGetStateError()), this, SLOT(onUpdatesGetStateError()));
 
-    connect(api, &TelegramApi::updatesGetDifferenceAnswer, this, &TelegramCore::onUpdatesGetDifferenceAnswer);
-    connect(api, &TelegramApi::updatesGetDifferenceError, this, &TelegramCore::onUpdatesGetDifferenceError);
+    connect(api, SIGNAL(updatesGetDifferenceAnswer()), this, SLOT(onUpdatesGetDifferenceAnswer()));
+    connect(api, SIGNAL(updatesGetDifferenceError()), this, SLOT(onUpdatesGetDifferenceError()));
 
-    connect(api, &TelegramApi::updatesGetChannelDifferenceAnswer, this, &TelegramCore::onUpdatesGetChannelDifferenceAnswer);
-    connect(api, &TelegramApi::updatesGetChannelDifferenceError, this, &TelegramCore::onUpdatesGetChannelDifferenceError);
+    connect(api, SIGNAL(updatesGetChannelDifferenceAnswer()), this, SLOT(onUpdatesGetChannelDifferenceAnswer()));
+    connect(api, SIGNAL(updatesGetChannelDifferenceError()), this, SLOT(onUpdatesGetChannelDifferenceError()));
 
 
-    connect(api, &TelegramApi::uploadSaveFilePartAnswer, this, &TelegramCore::onUploadSaveFilePartAnswer);
-    connect(api, &TelegramApi::uploadSaveFilePartError, this, &TelegramCore::onUploadSaveFilePartError);
+    connect(api, SIGNAL(uploadSaveFilePartAnswer()), this, SLOT(onUploadSaveFilePartAnswer()));
+    connect(api, SIGNAL(uploadSaveFilePartError()), this, SLOT(onUploadSaveFilePartError()));
 
-    connect(api, &TelegramApi::uploadGetFileAnswer, this, &TelegramCore::onUploadGetFileAnswer);
-    connect(api, &TelegramApi::uploadGetFileError, this, &TelegramCore::onUploadGetFileError);
+    connect(api, SIGNAL(uploadGetFileAnswer()), this, SLOT(onUploadGetFileAnswer()));
+    connect(api, SIGNAL(uploadGetFileError()), this, SLOT(onUploadGetFileError()));
 
-    connect(api, &TelegramApi::uploadSaveBigFilePartAnswer, this, &TelegramCore::onUploadSaveBigFilePartAnswer);
-    connect(api, &TelegramApi::uploadSaveBigFilePartError, this, &TelegramCore::onUploadSaveBigFilePartError);
+    connect(api, SIGNAL(uploadSaveBigFilePartAnswer()), this, SLOT(onUploadSaveBigFilePartAnswer()));
+    connect(api, SIGNAL(uploadSaveBigFilePartError()), this, SLOT(onUploadSaveBigFilePartError()));
 
-    connect(api, &TelegramApi::uploadGetWebFileAnswer, this, &TelegramCore::onUploadGetWebFileAnswer);
-    connect(api, &TelegramApi::uploadGetWebFileError, this, &TelegramCore::onUploadGetWebFileError);
+    connect(api, SIGNAL(uploadGetWebFileAnswer()), this, SLOT(onUploadGetWebFileAnswer()));
+    connect(api, SIGNAL(uploadGetWebFileError()), this, SLOT(onUploadGetWebFileError()));
 
-    connect(api, &TelegramApi::uploadGetCdnFileAnswer, this, &TelegramCore::onUploadGetCdnFileAnswer);
-    connect(api, &TelegramApi::uploadGetCdnFileError, this, &TelegramCore::onUploadGetCdnFileError);
+    connect(api, SIGNAL(uploadGetCdnFileAnswer()), this, SLOT(onUploadGetCdnFileAnswer()));
+    connect(api, SIGNAL(uploadGetCdnFileError()), this, SLOT(onUploadGetCdnFileError()));
 
-    connect(api, &TelegramApi::uploadReuploadCdnFileAnswer, this, &TelegramCore::onUploadReuploadCdnFileAnswer);
-    connect(api, &TelegramApi::uploadReuploadCdnFileError, this, &TelegramCore::onUploadReuploadCdnFileError);
+    connect(api, SIGNAL(uploadReuploadCdnFileAnswer()), this, SLOT(onUploadReuploadCdnFileAnswer()));
+    connect(api, SIGNAL(uploadReuploadCdnFileError()), this, SLOT(onUploadReuploadCdnFileError()));
 
 
-    connect(api, &TelegramApi::usersGetUsersAnswer, this, &TelegramCore::onUsersGetUsersAnswer);
-    connect(api, &TelegramApi::usersGetUsersError, this, &TelegramCore::onUsersGetUsersError);
+    connect(api, SIGNAL(usersGetUsersAnswer()), this, SLOT(onUsersGetUsersAnswer()));
+    connect(api, SIGNAL(usersGetUsersError()), this, SLOT(onUsersGetUsersError()));
 
-    connect(api, &TelegramApi::usersGetFullUserAnswer, this, &TelegramCore::onUsersGetFullUserAnswer);
-    connect(api, &TelegramApi::usersGetFullUserError, this, &TelegramCore::onUsersGetFullUserError);
+    connect(api, SIGNAL(usersGetFullUserAnswer()), this, SLOT(onUsersGetFullUserAnswer()));
+    connect(api, SIGNAL(usersGetFullUserError()), this, SLOT(onUsersGetFullUserError()));
 
-    connect(api, &TelegramApi::error, this, &TelegramCore::onError);
+    connect(api, SIGNAL(error()), this, SLOT(onError()));
 }
 
 qint64 TelegramCore::accountRegisterDevice(qint32 token_type, const QString &token, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->accountRegisterDevice(token_type, token);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "accountRegisterDevice";
-        mRecallArgs[msgId]["token_type"] = QVariant::fromValue<qint32>(token_type);
-        mRecallArgs[msgId]["token"] = QVariant::fromValue<QString>(token);
+        //mRecallArgs[msgId][""] = "accountRegisterDevice";
+        //mRecallArgs[msgId]["token_type"] = QVariant::fromValue<qint32>(token_type);
+        //mRecallArgs[msgId]["token"] = QVariant::fromValue<QString>(token);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -722,7 +722,7 @@ qint64 TelegramCore::accountRegisterDevice(qint32 token_type, const QString &tok
 void TelegramCore::onAccountRegisterDeviceAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT accountRegisterDeviceAnswer(msgId, result);
 }
@@ -731,33 +731,33 @@ void TelegramCore::onAccountRegisterDeviceError(qint64 msgId, qint32 errorCode, 
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT accountRegisterDeviceError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::accountUnregisterDevice(qint32 token_type, const QString &token, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::accountUnregisterDevice(qint32 token_type, const QString &token, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->accountUnregisterDevice(token_type, token);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "accountUnregisterDevice";
-        mRecallArgs[msgId]["token_type"] = QVariant::fromValue<qint32>(token_type);
-        mRecallArgs[msgId]["token"] = QVariant::fromValue<QString>(token);
+        //mRecallArgs[msgId][""] = "accountUnregisterDevice";
+        //mRecallArgs[msgId]["token_type"] = QVariant::fromValue<qint32>(token_type);
+        //mRecallArgs[msgId]["token"] = QVariant::fromValue<QString>(token);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -765,7 +765,7 @@ qint64 TelegramCore::accountUnregisterDevice(qint32 token_type, const QString &t
 void TelegramCore::onAccountUnregisterDeviceAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT accountUnregisterDeviceAnswer(msgId, result);
 }
@@ -774,33 +774,33 @@ void TelegramCore::onAccountUnregisterDeviceError(qint64 msgId, qint32 errorCode
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT accountUnregisterDeviceError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::accountUpdateNotifySettings(const InputNotifyPeer &peer, const InputPeerNotifySettings &settings, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::accountUpdateNotifySettings(const InputNotifyPeer &peer, const InputPeerNotifySettings &settings, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->accountUpdateNotifySettings(peer, settings);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "accountUpdateNotifySettings";
-        mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputNotifyPeer>(peer);
-        mRecallArgs[msgId]["settings"] = QVariant::fromValue<InputPeerNotifySettings>(settings);
+        //mRecallArgs[msgId][""] = "accountUpdateNotifySettings";
+        //mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputNotifyPeer>(peer);
+        //mRecallArgs[msgId]["settings"] = QVariant::fromValue<InputPeerNotifySettings>(settings);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -808,7 +808,7 @@ qint64 TelegramCore::accountUpdateNotifySettings(const InputNotifyPeer &peer, co
 void TelegramCore::onAccountUpdateNotifySettingsAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT accountUpdateNotifySettingsAnswer(msgId, result);
 }
@@ -817,32 +817,32 @@ void TelegramCore::onAccountUpdateNotifySettingsError(qint64 msgId, qint32 error
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT accountUpdateNotifySettingsError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::accountGetNotifySettings(const InputNotifyPeer &peer, Callback<PeerNotifySettings > callBack, qint32 timeout) {
+qint64 TelegramCore::accountGetNotifySettings(const InputNotifyPeer &peer, bool callBack, qint32 timeout) {
     if(!mApi) {
         const PeerNotifySettings &result = PeerNotifySettings();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->accountGetNotifySettings(peer);
     if(msgId) {
-        callBackPush<PeerNotifySettings >(msgId, callBack);
+        //callBackPush<PeerNotifySettings >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "accountGetNotifySettings";
-        mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputNotifyPeer>(peer);
+        //mRecallArgs[msgId][""] = "accountGetNotifySettings";
+        //mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputNotifyPeer>(peer);
     } else {
         const PeerNotifySettings &result = PeerNotifySettings();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -850,7 +850,7 @@ qint64 TelegramCore::accountGetNotifySettings(const InputNotifyPeer &peer, Callb
 void TelegramCore::onAccountGetNotifySettingsAnswer(qint64 msgId, const PeerNotifySettings &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<PeerNotifySettings >(msgId, result);
+    //callBackCall<PeerNotifySettings >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT accountGetNotifySettingsAnswer(msgId, result);
 }
@@ -859,31 +859,31 @@ void TelegramCore::onAccountGetNotifySettingsError(qint64 msgId, qint32 errorCod
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const PeerNotifySettings &result = PeerNotifySettings();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<PeerNotifySettings >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<PeerNotifySettings >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT accountGetNotifySettingsError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::accountResetNotifySettings(Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::accountResetNotifySettings(bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->accountResetNotifySettings();
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "accountResetNotifySettings";
+        //mRecallArgs[msgId][""] = "accountResetNotifySettings";
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -891,7 +891,7 @@ qint64 TelegramCore::accountResetNotifySettings(Callback<bool > callBack, qint32
 void TelegramCore::onAccountResetNotifySettingsAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT accountResetNotifySettingsAnswer(msgId, result);
 }
@@ -900,34 +900,34 @@ void TelegramCore::onAccountResetNotifySettingsError(qint64 msgId, qint32 errorC
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT accountResetNotifySettingsError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::accountUpdateProfile(const QString &first_name, const QString &last_name, const QString &about, Callback<User > callBack, qint32 timeout) {
+qint64 TelegramCore::accountUpdateProfile(const QString &first_name, const QString &last_name, const QString &about, bool callBack, qint32 timeout) {
     if(!mApi) {
         const User &result = User();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->accountUpdateProfile(first_name, last_name, about);
     if(msgId) {
-        callBackPush<User >(msgId, callBack);
+        //callBackPush<User >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "accountUpdateProfile";
-        mRecallArgs[msgId]["first_name"] = QVariant::fromValue<QString>(first_name);
-        mRecallArgs[msgId]["last_name"] = QVariant::fromValue<QString>(last_name);
-        mRecallArgs[msgId]["about"] = QVariant::fromValue<QString>(about);
+        //mRecallArgs[msgId][""] = "accountUpdateProfile";
+        //mRecallArgs[msgId]["first_name"] = QVariant::fromValue<QString>(first_name);
+        //mRecallArgs[msgId]["last_name"] = QVariant::fromValue<QString>(last_name);
+        //mRecallArgs[msgId]["about"] = QVariant::fromValue<QString>(about);
     } else {
         const User &result = User();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -935,7 +935,7 @@ qint64 TelegramCore::accountUpdateProfile(const QString &first_name, const QStri
 void TelegramCore::onAccountUpdateProfileAnswer(qint64 msgId, const User &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<User >(msgId, result);
+    //callBackCall<User >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT accountUpdateProfileAnswer(msgId, result);
 }
@@ -944,32 +944,32 @@ void TelegramCore::onAccountUpdateProfileError(qint64 msgId, qint32 errorCode, c
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const User &result = User();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<User >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<User >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT accountUpdateProfileError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::accountUpdateStatus(bool offline, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::accountUpdateStatus(bool offline, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->accountUpdateStatus(offline);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "accountUpdateStatus";
-        mRecallArgs[msgId]["offline"] = QVariant::fromValue<bool>(offline);
+        //mRecallArgs[msgId][""] = "accountUpdateStatus";
+        //mRecallArgs[msgId]["offline"] = QVariant::fromValue<bool>(offline);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -977,7 +977,7 @@ qint64 TelegramCore::accountUpdateStatus(bool offline, Callback<bool > callBack,
 void TelegramCore::onAccountUpdateStatusAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT accountUpdateStatusAnswer(msgId, result);
 }
@@ -986,31 +986,31 @@ void TelegramCore::onAccountUpdateStatusError(qint64 msgId, qint32 errorCode, co
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT accountUpdateStatusError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::accountGetWallPapers(Callback<QList<WallPaper> > callBack, qint32 timeout) {
+qint64 TelegramCore::accountGetWallPapers(bool callBack, qint32 timeout) {
     if(!mApi) {
         const QList<WallPaper> &result = QList<WallPaper>();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->accountGetWallPapers();
     if(msgId) {
-        callBackPush<QList<WallPaper> >(msgId, callBack);
+        //callBackPush<QList<WallPaper> >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "accountGetWallPapers";
+        //mRecallArgs[msgId][""] = "accountGetWallPapers";
     } else {
         const QList<WallPaper> &result = QList<WallPaper>();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -1018,7 +1018,7 @@ qint64 TelegramCore::accountGetWallPapers(Callback<QList<WallPaper> > callBack, 
 void TelegramCore::onAccountGetWallPapersAnswer(qint64 msgId, const QList<WallPaper> &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<QList<WallPaper> >(msgId, result);
+    //callBackCall<QList<WallPaper> >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT accountGetWallPapersAnswer(msgId, result);
 }
@@ -1027,33 +1027,33 @@ void TelegramCore::onAccountGetWallPapersError(qint64 msgId, qint32 errorCode, c
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const QList<WallPaper> &result = QList<WallPaper>();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<QList<WallPaper> >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<QList<WallPaper> >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT accountGetWallPapersError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::accountReportPeer(const InputPeer &peer, const ReportReason &reason, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::accountReportPeer(const InputPeer &peer, const ReportReason &reason, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->accountReportPeer(peer, reason);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "accountReportPeer";
-        mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
-        mRecallArgs[msgId]["reason"] = QVariant::fromValue<ReportReason>(reason);
+        //mRecallArgs[msgId][""] = "accountReportPeer";
+        //mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
+        //mRecallArgs[msgId]["reason"] = QVariant::fromValue<ReportReason>(reason);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -1061,7 +1061,7 @@ qint64 TelegramCore::accountReportPeer(const InputPeer &peer, const ReportReason
 void TelegramCore::onAccountReportPeerAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT accountReportPeerAnswer(msgId, result);
 }
@@ -1070,32 +1070,32 @@ void TelegramCore::onAccountReportPeerError(qint64 msgId, qint32 errorCode, cons
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT accountReportPeerError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::accountCheckUsername(const QString &username, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::accountCheckUsername(const QString &username, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->accountCheckUsername(username);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "accountCheckUsername";
-        mRecallArgs[msgId]["username"] = QVariant::fromValue<QString>(username);
+        //mRecallArgs[msgId][""] = "accountCheckUsername";
+        //mRecallArgs[msgId]["username"] = QVariant::fromValue<QString>(username);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -1103,7 +1103,7 @@ qint64 TelegramCore::accountCheckUsername(const QString &username, Callback<bool
 void TelegramCore::onAccountCheckUsernameAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT accountCheckUsernameAnswer(msgId, result);
 }
@@ -1112,32 +1112,32 @@ void TelegramCore::onAccountCheckUsernameError(qint64 msgId, qint32 errorCode, c
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT accountCheckUsernameError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::accountUpdateUsername(const QString &username, Callback<User > callBack, qint32 timeout) {
+qint64 TelegramCore::accountUpdateUsername(const QString &username, bool callBack, qint32 timeout) {
     if(!mApi) {
         const User &result = User();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->accountUpdateUsername(username);
     if(msgId) {
-        callBackPush<User >(msgId, callBack);
+        //callBackPush<User >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "accountUpdateUsername";
-        mRecallArgs[msgId]["username"] = QVariant::fromValue<QString>(username);
+        //mRecallArgs[msgId][""] = "accountUpdateUsername";
+        //mRecallArgs[msgId]["username"] = QVariant::fromValue<QString>(username);
     } else {
         const User &result = User();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -1145,7 +1145,7 @@ qint64 TelegramCore::accountUpdateUsername(const QString &username, Callback<Use
 void TelegramCore::onAccountUpdateUsernameAnswer(qint64 msgId, const User &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<User >(msgId, result);
+    //callBackCall<User >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT accountUpdateUsernameAnswer(msgId, result);
 }
@@ -1154,32 +1154,32 @@ void TelegramCore::onAccountUpdateUsernameError(qint64 msgId, qint32 errorCode, 
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const User &result = User();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<User >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<User >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT accountUpdateUsernameError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::accountGetPrivacy(const InputPrivacyKey &key, Callback<AccountPrivacyRules > callBack, qint32 timeout) {
+qint64 TelegramCore::accountGetPrivacy(const InputPrivacyKey &key, bool callBack, qint32 timeout) {
     if(!mApi) {
         const AccountPrivacyRules &result = AccountPrivacyRules();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->accountGetPrivacy(key);
     if(msgId) {
-        callBackPush<AccountPrivacyRules >(msgId, callBack);
+        //callBackPush<AccountPrivacyRules >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "accountGetPrivacy";
-        mRecallArgs[msgId]["key"] = QVariant::fromValue<InputPrivacyKey>(key);
+        //mRecallArgs[msgId][""] = "accountGetPrivacy";
+        //mRecallArgs[msgId]["key"] = QVariant::fromValue<InputPrivacyKey>(key);
     } else {
         const AccountPrivacyRules &result = AccountPrivacyRules();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -1187,7 +1187,7 @@ qint64 TelegramCore::accountGetPrivacy(const InputPrivacyKey &key, Callback<Acco
 void TelegramCore::onAccountGetPrivacyAnswer(qint64 msgId, const AccountPrivacyRules &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<AccountPrivacyRules >(msgId, result);
+    //callBackCall<AccountPrivacyRules >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT accountGetPrivacyAnswer(msgId, result);
 }
@@ -1196,33 +1196,33 @@ void TelegramCore::onAccountGetPrivacyError(qint64 msgId, qint32 errorCode, cons
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const AccountPrivacyRules &result = AccountPrivacyRules();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<AccountPrivacyRules >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<AccountPrivacyRules >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT accountGetPrivacyError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::accountSetPrivacy(const InputPrivacyKey &key, const QList<InputPrivacyRule> &rules, Callback<AccountPrivacyRules > callBack, qint32 timeout) {
+qint64 TelegramCore::accountSetPrivacy(const InputPrivacyKey &key, const QList<InputPrivacyRule> &rules, bool callBack, qint32 timeout) {
     if(!mApi) {
         const AccountPrivacyRules &result = AccountPrivacyRules();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->accountSetPrivacy(key, rules);
     if(msgId) {
-        callBackPush<AccountPrivacyRules >(msgId, callBack);
+        //callBackPush<AccountPrivacyRules >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "accountSetPrivacy";
-        mRecallArgs[msgId]["key"] = QVariant::fromValue<InputPrivacyKey>(key);
-        mRecallArgs[msgId]["rules"] = QVariant::fromValue<QList<InputPrivacyRule>>(rules);
+        //mRecallArgs[msgId][""] = "accountSetPrivacy";
+        //mRecallArgs[msgId]["key"] = QVariant::fromValue<InputPrivacyKey>(key);
+        //mRecallArgs[msgId]["rules"] = QVariant::fromValue<QList<InputPrivacyRule>>(rules);
     } else {
         const AccountPrivacyRules &result = AccountPrivacyRules();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -1230,7 +1230,7 @@ qint64 TelegramCore::accountSetPrivacy(const InputPrivacyKey &key, const QList<I
 void TelegramCore::onAccountSetPrivacyAnswer(qint64 msgId, const AccountPrivacyRules &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<AccountPrivacyRules >(msgId, result);
+    //callBackCall<AccountPrivacyRules >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT accountSetPrivacyAnswer(msgId, result);
 }
@@ -1239,32 +1239,32 @@ void TelegramCore::onAccountSetPrivacyError(qint64 msgId, qint32 errorCode, cons
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const AccountPrivacyRules &result = AccountPrivacyRules();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<AccountPrivacyRules >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<AccountPrivacyRules >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT accountSetPrivacyError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::accountDeleteAccount(const QString &reason, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::accountDeleteAccount(const QString &reason, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->accountDeleteAccount(reason);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "accountDeleteAccount";
-        mRecallArgs[msgId]["reason"] = QVariant::fromValue<QString>(reason);
+        //mRecallArgs[msgId][""] = "accountDeleteAccount";
+        //mRecallArgs[msgId]["reason"] = QVariant::fromValue<QString>(reason);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -1272,7 +1272,7 @@ qint64 TelegramCore::accountDeleteAccount(const QString &reason, Callback<bool >
 void TelegramCore::onAccountDeleteAccountAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT accountDeleteAccountAnswer(msgId, result);
 }
@@ -1281,31 +1281,31 @@ void TelegramCore::onAccountDeleteAccountError(qint64 msgId, qint32 errorCode, c
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT accountDeleteAccountError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::accountGetAccountTTL(Callback<AccountDaysTTL > callBack, qint32 timeout) {
+qint64 TelegramCore::accountGetAccountTTL(bool callBack, qint32 timeout) {
     if(!mApi) {
         const AccountDaysTTL &result = AccountDaysTTL();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->accountGetAccountTTL();
     if(msgId) {
-        callBackPush<AccountDaysTTL >(msgId, callBack);
+        //callBackPush<AccountDaysTTL >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "accountGetAccountTTL";
+        //mRecallArgs[msgId][""] = "accountGetAccountTTL";
     } else {
         const AccountDaysTTL &result = AccountDaysTTL();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -1313,7 +1313,7 @@ qint64 TelegramCore::accountGetAccountTTL(Callback<AccountDaysTTL > callBack, qi
 void TelegramCore::onAccountGetAccountTTLAnswer(qint64 msgId, const AccountDaysTTL &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<AccountDaysTTL >(msgId, result);
+    //callBackCall<AccountDaysTTL >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT accountGetAccountTTLAnswer(msgId, result);
 }
@@ -1322,32 +1322,32 @@ void TelegramCore::onAccountGetAccountTTLError(qint64 msgId, qint32 errorCode, c
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const AccountDaysTTL &result = AccountDaysTTL();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<AccountDaysTTL >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<AccountDaysTTL >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT accountGetAccountTTLError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::accountSetAccountTTL(const AccountDaysTTL &ttl, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::accountSetAccountTTL(const AccountDaysTTL &ttl, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->accountSetAccountTTL(ttl);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "accountSetAccountTTL";
-        mRecallArgs[msgId]["ttl"] = QVariant::fromValue<AccountDaysTTL>(ttl);
+        //mRecallArgs[msgId][""] = "accountSetAccountTTL";
+        //mRecallArgs[msgId]["ttl"] = QVariant::fromValue<AccountDaysTTL>(ttl);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -1355,7 +1355,7 @@ qint64 TelegramCore::accountSetAccountTTL(const AccountDaysTTL &ttl, Callback<bo
 void TelegramCore::onAccountSetAccountTTLAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT accountSetAccountTTLAnswer(msgId, result);
 }
@@ -1364,34 +1364,34 @@ void TelegramCore::onAccountSetAccountTTLError(qint64 msgId, qint32 errorCode, c
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT accountSetAccountTTLError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::accountSendChangePhoneCode(bool allow_flashcall, const QString &phone_number, bool current_number, Callback<AuthSentCode > callBack, qint32 timeout) {
+qint64 TelegramCore::accountSendChangePhoneCode(bool allow_flashcall, const QString &phone_number, bool current_number, bool callBack, qint32 timeout) {
     if(!mApi) {
         const AuthSentCode &result = AuthSentCode();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->accountSendChangePhoneCode(allow_flashcall, phone_number, current_number);
     if(msgId) {
-        callBackPush<AuthSentCode >(msgId, callBack);
+        //callBackPush<AuthSentCode >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "accountSendChangePhoneCode";
-        mRecallArgs[msgId]["allow_flashcall"] = QVariant::fromValue<bool>(allow_flashcall);
-        mRecallArgs[msgId]["phone_number"] = QVariant::fromValue<QString>(phone_number);
-        mRecallArgs[msgId]["current_number"] = QVariant::fromValue<bool>(current_number);
+        //mRecallArgs[msgId][""] = "accountSendChangePhoneCode";
+        //mRecallArgs[msgId]["allow_flashcall"] = QVariant::fromValue<bool>(allow_flashcall);
+        //mRecallArgs[msgId]["phone_number"] = QVariant::fromValue<QString>(phone_number);
+        //mRecallArgs[msgId]["current_number"] = QVariant::fromValue<bool>(current_number);
     } else {
         const AuthSentCode &result = AuthSentCode();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -1399,7 +1399,7 @@ qint64 TelegramCore::accountSendChangePhoneCode(bool allow_flashcall, const QStr
 void TelegramCore::onAccountSendChangePhoneCodeAnswer(qint64 msgId, const AuthSentCode &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<AuthSentCode >(msgId, result);
+    //callBackCall<AuthSentCode >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT accountSendChangePhoneCodeAnswer(msgId, result);
 }
@@ -1408,34 +1408,34 @@ void TelegramCore::onAccountSendChangePhoneCodeError(qint64 msgId, qint32 errorC
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const AuthSentCode &result = AuthSentCode();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<AuthSentCode >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<AuthSentCode >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT accountSendChangePhoneCodeError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::accountChangePhone(const QString &phone_number, const QString &phone_code_hash, const QString &phone_code, Callback<User > callBack, qint32 timeout) {
+qint64 TelegramCore::accountChangePhone(const QString &phone_number, const QString &phone_code_hash, const QString &phone_code, bool callBack, qint32 timeout) {
     if(!mApi) {
         const User &result = User();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->accountChangePhone(phone_number, phone_code_hash, phone_code);
     if(msgId) {
-        callBackPush<User >(msgId, callBack);
+        //callBackPush<User >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "accountChangePhone";
-        mRecallArgs[msgId]["phone_number"] = QVariant::fromValue<QString>(phone_number);
-        mRecallArgs[msgId]["phone_code_hash"] = QVariant::fromValue<QString>(phone_code_hash);
-        mRecallArgs[msgId]["phone_code"] = QVariant::fromValue<QString>(phone_code);
+        //mRecallArgs[msgId][""] = "accountChangePhone";
+        //mRecallArgs[msgId]["phone_number"] = QVariant::fromValue<QString>(phone_number);
+        //mRecallArgs[msgId]["phone_code_hash"] = QVariant::fromValue<QString>(phone_code_hash);
+        //mRecallArgs[msgId]["phone_code"] = QVariant::fromValue<QString>(phone_code);
     } else {
         const User &result = User();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -1443,7 +1443,7 @@ qint64 TelegramCore::accountChangePhone(const QString &phone_number, const QStri
 void TelegramCore::onAccountChangePhoneAnswer(qint64 msgId, const User &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<User >(msgId, result);
+    //callBackCall<User >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT accountChangePhoneAnswer(msgId, result);
 }
@@ -1452,32 +1452,32 @@ void TelegramCore::onAccountChangePhoneError(qint64 msgId, qint32 errorCode, con
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const User &result = User();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<User >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<User >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT accountChangePhoneError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::accountUpdateDeviceLocked(qint32 period, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::accountUpdateDeviceLocked(qint32 period, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->accountUpdateDeviceLocked(period);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "accountUpdateDeviceLocked";
-        mRecallArgs[msgId]["period"] = QVariant::fromValue<qint32>(period);
+        //mRecallArgs[msgId][""] = "accountUpdateDeviceLocked";
+        //mRecallArgs[msgId]["period"] = QVariant::fromValue<qint32>(period);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -1485,7 +1485,7 @@ qint64 TelegramCore::accountUpdateDeviceLocked(qint32 period, Callback<bool > ca
 void TelegramCore::onAccountUpdateDeviceLockedAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT accountUpdateDeviceLockedAnswer(msgId, result);
 }
@@ -1494,31 +1494,31 @@ void TelegramCore::onAccountUpdateDeviceLockedError(qint64 msgId, qint32 errorCo
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT accountUpdateDeviceLockedError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::accountGetAuthorizations(Callback<AccountAuthorizations > callBack, qint32 timeout) {
+qint64 TelegramCore::accountGetAuthorizations(bool callBack, qint32 timeout) {
     if(!mApi) {
         const AccountAuthorizations &result = AccountAuthorizations();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->accountGetAuthorizations();
     if(msgId) {
-        callBackPush<AccountAuthorizations >(msgId, callBack);
+        //callBackPush<AccountAuthorizations >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "accountGetAuthorizations";
+        //mRecallArgs[msgId][""] = "accountGetAuthorizations";
     } else {
         const AccountAuthorizations &result = AccountAuthorizations();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -1526,7 +1526,7 @@ qint64 TelegramCore::accountGetAuthorizations(Callback<AccountAuthorizations > c
 void TelegramCore::onAccountGetAuthorizationsAnswer(qint64 msgId, const AccountAuthorizations &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<AccountAuthorizations >(msgId, result);
+    //callBackCall<AccountAuthorizations >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT accountGetAuthorizationsAnswer(msgId, result);
 }
@@ -1535,32 +1535,32 @@ void TelegramCore::onAccountGetAuthorizationsError(qint64 msgId, qint32 errorCod
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const AccountAuthorizations &result = AccountAuthorizations();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<AccountAuthorizations >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<AccountAuthorizations >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT accountGetAuthorizationsError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::accountResetAuthorization(qint64 hash, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::accountResetAuthorization(qint64 hash, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->accountResetAuthorization(hash);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "accountResetAuthorization";
-        mRecallArgs[msgId]["hash"] = QVariant::fromValue<qint64>(hash);
+        //mRecallArgs[msgId][""] = "accountResetAuthorization";
+        //mRecallArgs[msgId]["hash"] = QVariant::fromValue<qint64>(hash);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -1568,7 +1568,7 @@ qint64 TelegramCore::accountResetAuthorization(qint64 hash, Callback<bool > call
 void TelegramCore::onAccountResetAuthorizationAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT accountResetAuthorizationAnswer(msgId, result);
 }
@@ -1577,31 +1577,31 @@ void TelegramCore::onAccountResetAuthorizationError(qint64 msgId, qint32 errorCo
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT accountResetAuthorizationError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::accountGetPassword(Callback<AccountPassword > callBack, qint32 timeout) {
+qint64 TelegramCore::accountGetPassword(bool callBack, qint32 timeout) {
     if(!mApi) {
         const AccountPassword &result = AccountPassword();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->accountGetPassword();
     if(msgId) {
-        callBackPush<AccountPassword >(msgId, callBack);
+        //callBackPush<AccountPassword >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "accountGetPassword";
+        //mRecallArgs[msgId][""] = "accountGetPassword";
     } else {
         const AccountPassword &result = AccountPassword();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -1609,7 +1609,7 @@ qint64 TelegramCore::accountGetPassword(Callback<AccountPassword > callBack, qin
 void TelegramCore::onAccountGetPasswordAnswer(qint64 msgId, const AccountPassword &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<AccountPassword >(msgId, result);
+    //callBackCall<AccountPassword >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT accountGetPasswordAnswer(msgId, result);
 }
@@ -1618,32 +1618,32 @@ void TelegramCore::onAccountGetPasswordError(qint64 msgId, qint32 errorCode, con
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const AccountPassword &result = AccountPassword();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<AccountPassword >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<AccountPassword >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT accountGetPasswordError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::accountGetPasswordSettings(const QByteArray &current_password_hash, Callback<AccountPasswordSettings > callBack, qint32 timeout) {
+qint64 TelegramCore::accountGetPasswordSettings(const QByteArray &current_password_hash, bool callBack, qint32 timeout) {
     if(!mApi) {
         const AccountPasswordSettings &result = AccountPasswordSettings();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->accountGetPasswordSettings(current_password_hash);
     if(msgId) {
-        callBackPush<AccountPasswordSettings >(msgId, callBack);
+        //callBackPush<AccountPasswordSettings >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "accountGetPasswordSettings";
-        mRecallArgs[msgId]["current_password_hash"] = QVariant::fromValue<QByteArray>(current_password_hash);
+        //mRecallArgs[msgId][""] = "accountGetPasswordSettings";
+        //mRecallArgs[msgId]["current_password_hash"] = QVariant::fromValue<QByteArray>(current_password_hash);
     } else {
         const AccountPasswordSettings &result = AccountPasswordSettings();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -1651,7 +1651,7 @@ qint64 TelegramCore::accountGetPasswordSettings(const QByteArray &current_passwo
 void TelegramCore::onAccountGetPasswordSettingsAnswer(qint64 msgId, const AccountPasswordSettings &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<AccountPasswordSettings >(msgId, result);
+    //callBackCall<AccountPasswordSettings >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT accountGetPasswordSettingsAnswer(msgId, result);
 }
@@ -1660,33 +1660,33 @@ void TelegramCore::onAccountGetPasswordSettingsError(qint64 msgId, qint32 errorC
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const AccountPasswordSettings &result = AccountPasswordSettings();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<AccountPasswordSettings >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<AccountPasswordSettings >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT accountGetPasswordSettingsError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::accountUpdatePasswordSettings(const QByteArray &current_password_hash, const AccountPasswordInputSettings &new_settings, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::accountUpdatePasswordSettings(const QByteArray &current_password_hash, const AccountPasswordInputSettings &new_settings, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->accountUpdatePasswordSettings(current_password_hash, new_settings);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "accountUpdatePasswordSettings";
-        mRecallArgs[msgId]["current_password_hash"] = QVariant::fromValue<QByteArray>(current_password_hash);
-        mRecallArgs[msgId]["new_settings"] = QVariant::fromValue<AccountPasswordInputSettings>(new_settings);
+        //mRecallArgs[msgId][""] = "accountUpdatePasswordSettings";
+        //mRecallArgs[msgId]["current_password_hash"] = QVariant::fromValue<QByteArray>(current_password_hash);
+        //mRecallArgs[msgId]["new_settings"] = QVariant::fromValue<AccountPasswordInputSettings>(new_settings);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -1694,7 +1694,7 @@ qint64 TelegramCore::accountUpdatePasswordSettings(const QByteArray &current_pas
 void TelegramCore::onAccountUpdatePasswordSettingsAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT accountUpdatePasswordSettingsAnswer(msgId, result);
 }
@@ -1703,34 +1703,34 @@ void TelegramCore::onAccountUpdatePasswordSettingsError(qint64 msgId, qint32 err
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT accountUpdatePasswordSettingsError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::accountSendConfirmPhoneCode(bool allow_flashcall, const QString &hash, bool current_number, Callback<AuthSentCode > callBack, qint32 timeout) {
+qint64 TelegramCore::accountSendConfirmPhoneCode(bool allow_flashcall, const QString &hash, bool current_number, bool callBack, qint32 timeout) {
     if(!mApi) {
         const AuthSentCode &result = AuthSentCode();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->accountSendConfirmPhoneCode(allow_flashcall, hash, current_number);
     if(msgId) {
-        callBackPush<AuthSentCode >(msgId, callBack);
+        //callBackPush<AuthSentCode >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "accountSendConfirmPhoneCode";
-        mRecallArgs[msgId]["allow_flashcall"] = QVariant::fromValue<bool>(allow_flashcall);
-        mRecallArgs[msgId]["hash"] = QVariant::fromValue<QString>(hash);
-        mRecallArgs[msgId]["current_number"] = QVariant::fromValue<bool>(current_number);
+        //mRecallArgs[msgId][""] = "accountSendConfirmPhoneCode";
+        //mRecallArgs[msgId]["allow_flashcall"] = QVariant::fromValue<bool>(allow_flashcall);
+        //mRecallArgs[msgId]["hash"] = QVariant::fromValue<QString>(hash);
+        //mRecallArgs[msgId]["current_number"] = QVariant::fromValue<bool>(current_number);
     } else {
         const AuthSentCode &result = AuthSentCode();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -1738,7 +1738,7 @@ qint64 TelegramCore::accountSendConfirmPhoneCode(bool allow_flashcall, const QSt
 void TelegramCore::onAccountSendConfirmPhoneCodeAnswer(qint64 msgId, const AuthSentCode &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<AuthSentCode >(msgId, result);
+    //callBackCall<AuthSentCode >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT accountSendConfirmPhoneCodeAnswer(msgId, result);
 }
@@ -1747,33 +1747,33 @@ void TelegramCore::onAccountSendConfirmPhoneCodeError(qint64 msgId, qint32 error
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const AuthSentCode &result = AuthSentCode();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<AuthSentCode >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<AuthSentCode >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT accountSendConfirmPhoneCodeError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::accountConfirmPhone(const QString &phone_code_hash, const QString &phone_code, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::accountConfirmPhone(const QString &phone_code_hash, const QString &phone_code, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->accountConfirmPhone(phone_code_hash, phone_code);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "accountConfirmPhone";
-        mRecallArgs[msgId]["phone_code_hash"] = QVariant::fromValue<QString>(phone_code_hash);
-        mRecallArgs[msgId]["phone_code"] = QVariant::fromValue<QString>(phone_code);
+        //mRecallArgs[msgId][""] = "accountConfirmPhone";
+        //mRecallArgs[msgId]["phone_code_hash"] = QVariant::fromValue<QString>(phone_code_hash);
+        //mRecallArgs[msgId]["phone_code"] = QVariant::fromValue<QString>(phone_code);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -1781,7 +1781,7 @@ qint64 TelegramCore::accountConfirmPhone(const QString &phone_code_hash, const Q
 void TelegramCore::onAccountConfirmPhoneAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT accountConfirmPhoneAnswer(msgId, result);
 }
@@ -1790,33 +1790,33 @@ void TelegramCore::onAccountConfirmPhoneError(qint64 msgId, qint32 errorCode, co
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT accountConfirmPhoneError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::accountGetTmpPassword(const QByteArray &password_hash, qint32 period, Callback<AccountTmpPassword > callBack, qint32 timeout) {
+qint64 TelegramCore::accountGetTmpPassword(const QByteArray &password_hash, qint32 period, bool callBack, qint32 timeout) {
     if(!mApi) {
         const AccountTmpPassword &result = AccountTmpPassword();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->accountGetTmpPassword(password_hash, period);
     if(msgId) {
-        callBackPush<AccountTmpPassword >(msgId, callBack);
+        //callBackPush<AccountTmpPassword >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "accountGetTmpPassword";
-        mRecallArgs[msgId]["password_hash"] = QVariant::fromValue<QByteArray>(password_hash);
-        mRecallArgs[msgId]["period"] = QVariant::fromValue<qint32>(period);
+        //mRecallArgs[msgId][""] = "accountGetTmpPassword";
+        //mRecallArgs[msgId]["password_hash"] = QVariant::fromValue<QByteArray>(password_hash);
+        //mRecallArgs[msgId]["period"] = QVariant::fromValue<qint32>(period);
     } else {
         const AccountTmpPassword &result = AccountTmpPassword();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -1824,7 +1824,7 @@ qint64 TelegramCore::accountGetTmpPassword(const QByteArray &password_hash, qint
 void TelegramCore::onAccountGetTmpPasswordAnswer(qint64 msgId, const AccountTmpPassword &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<AccountTmpPassword >(msgId, result);
+    //callBackCall<AccountTmpPassword >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT accountGetTmpPasswordAnswer(msgId, result);
 }
@@ -1833,33 +1833,33 @@ void TelegramCore::onAccountGetTmpPasswordError(qint64 msgId, qint32 errorCode, 
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const AccountTmpPassword &result = AccountTmpPassword();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<AccountTmpPassword >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<AccountTmpPassword >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT accountGetTmpPasswordError(msgId, errorCode, errorText);
 }
 
 
-qint64 TelegramCore::authCheckPhone(const QString &phone_number, Callback<AuthCheckedPhone > callBack, qint32 timeout) {
+qint64 TelegramCore::authCheckPhone(const QString &phone_number, bool callBack, qint32 timeout) {
     if(!mApi) {
         const AuthCheckedPhone &result = AuthCheckedPhone();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->authCheckPhone(phone_number);
     if(msgId) {
-        callBackPush<AuthCheckedPhone >(msgId, callBack);
+        //callBackPush<AuthCheckedPhone >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "authCheckPhone";
-        mRecallArgs[msgId]["phone_number"] = QVariant::fromValue<QString>(phone_number);
+        //mRecallArgs[msgId][""] = "authCheckPhone";
+        //mRecallArgs[msgId]["phone_number"] = QVariant::fromValue<QString>(phone_number);
     } else {
         const AuthCheckedPhone &result = AuthCheckedPhone();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -1867,7 +1867,7 @@ qint64 TelegramCore::authCheckPhone(const QString &phone_number, Callback<AuthCh
 void TelegramCore::onAuthCheckPhoneAnswer(qint64 msgId, const AuthCheckedPhone &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<AuthCheckedPhone >(msgId, result);
+    //callBackCall<AuthCheckedPhone >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT authCheckPhoneAnswer(msgId, result);
 }
@@ -1876,36 +1876,36 @@ void TelegramCore::onAuthCheckPhoneError(qint64 msgId, qint32 errorCode, const Q
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const AuthCheckedPhone &result = AuthCheckedPhone();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<AuthCheckedPhone >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<AuthCheckedPhone >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT authCheckPhoneError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::authSendCode(bool allow_flashcall, const QString &phone_number, bool current_number, qint32 api_id, const QString &api_hash, Callback<AuthSentCode > callBack, qint32 timeout) {
+qint64 TelegramCore::authSendCode(bool allow_flashcall, const QString &phone_number, bool current_number, qint32 api_id, const QString &api_hash, bool callBack, qint32 timeout) {
     if(!mApi) {
         const AuthSentCode &result = AuthSentCode();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->authSendCode(allow_flashcall, phone_number, current_number, api_id, api_hash);
     if(msgId) {
-        callBackPush<AuthSentCode >(msgId, callBack);
+        //callBackPush<AuthSentCode >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "authSendCode";
-        mRecallArgs[msgId]["allow_flashcall"] = QVariant::fromValue<bool>(allow_flashcall);
-        mRecallArgs[msgId]["phone_number"] = QVariant::fromValue<QString>(phone_number);
-        mRecallArgs[msgId]["current_number"] = QVariant::fromValue<bool>(current_number);
-        mRecallArgs[msgId]["api_id"] = QVariant::fromValue<qint32>(api_id);
-        mRecallArgs[msgId]["api_hash"] = QVariant::fromValue<QString>(api_hash);
+        //mRecallArgs[msgId][""] = "authSendCode";
+        //mRecallArgs[msgId]["allow_flashcall"] = QVariant::fromValue<bool>(allow_flashcall);
+        //mRecallArgs[msgId]["phone_number"] = QVariant::fromValue<QString>(phone_number);
+        //mRecallArgs[msgId]["current_number"] = QVariant::fromValue<bool>(current_number);
+        //mRecallArgs[msgId]["api_id"] = QVariant::fromValue<qint32>(api_id);
+        //mRecallArgs[msgId]["api_hash"] = QVariant::fromValue<QString>(api_hash);
     } else {
         const AuthSentCode &result = AuthSentCode();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -1913,7 +1913,7 @@ qint64 TelegramCore::authSendCode(bool allow_flashcall, const QString &phone_num
 void TelegramCore::onAuthSendCodeAnswer(qint64 msgId, const AuthSentCode &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<AuthSentCode >(msgId, result);
+    //callBackCall<AuthSentCode >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT authSendCodeAnswer(msgId, result);
 }
@@ -1922,36 +1922,36 @@ void TelegramCore::onAuthSendCodeError(qint64 msgId, qint32 errorCode, const QSt
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const AuthSentCode &result = AuthSentCode();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<AuthSentCode >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<AuthSentCode >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT authSendCodeError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::authSignUp(const QString &phone_number, const QString &phone_code_hash, const QString &phone_code, const QString &first_name, const QString &last_name, Callback<AuthAuthorization > callBack, qint32 timeout) {
+qint64 TelegramCore::authSignUp(const QString &phone_number, const QString &phone_code_hash, const QString &phone_code, const QString &first_name, const QString &last_name, bool callBack, qint32 timeout) {
     if(!mApi) {
         const AuthAuthorization &result = AuthAuthorization();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->authSignUp(phone_number, phone_code_hash, phone_code, first_name, last_name);
     if(msgId) {
-        callBackPush<AuthAuthorization >(msgId, callBack);
+        //callBackPush<AuthAuthorization >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "authSignUp";
-        mRecallArgs[msgId]["phone_number"] = QVariant::fromValue<QString>(phone_number);
-        mRecallArgs[msgId]["phone_code_hash"] = QVariant::fromValue<QString>(phone_code_hash);
-        mRecallArgs[msgId]["phone_code"] = QVariant::fromValue<QString>(phone_code);
-        mRecallArgs[msgId]["first_name"] = QVariant::fromValue<QString>(first_name);
-        mRecallArgs[msgId]["last_name"] = QVariant::fromValue<QString>(last_name);
+        //mRecallArgs[msgId][""] = "authSignUp";
+        //mRecallArgs[msgId]["phone_number"] = QVariant::fromValue<QString>(phone_number);
+        //mRecallArgs[msgId]["phone_code_hash"] = QVariant::fromValue<QString>(phone_code_hash);
+        //mRecallArgs[msgId]["phone_code"] = QVariant::fromValue<QString>(phone_code);
+        //mRecallArgs[msgId]["first_name"] = QVariant::fromValue<QString>(first_name);
+        //mRecallArgs[msgId]["last_name"] = QVariant::fromValue<QString>(last_name);
     } else {
         const AuthAuthorization &result = AuthAuthorization();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -1959,7 +1959,7 @@ qint64 TelegramCore::authSignUp(const QString &phone_number, const QString &phon
 void TelegramCore::onAuthSignUpAnswer(qint64 msgId, const AuthAuthorization &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<AuthAuthorization >(msgId, result);
+    //callBackCall<AuthAuthorization >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT authSignUpAnswer(msgId, result);
 }
@@ -1968,34 +1968,34 @@ void TelegramCore::onAuthSignUpError(qint64 msgId, qint32 errorCode, const QStri
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const AuthAuthorization &result = AuthAuthorization();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<AuthAuthorization >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<AuthAuthorization >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT authSignUpError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::authSignIn(const QString &phone_number, const QString &phone_code_hash, const QString &phone_code, Callback<AuthAuthorization > callBack, qint32 timeout) {
+qint64 TelegramCore::authSignIn(const QString &phone_number, const QString &phone_code_hash, const QString &phone_code, bool callBack, qint32 timeout) {
     if(!mApi) {
         const AuthAuthorization &result = AuthAuthorization();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->authSignIn(phone_number, phone_code_hash, phone_code);
     if(msgId) {
-        callBackPush<AuthAuthorization >(msgId, callBack);
+        //callBackPush<AuthAuthorization >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "authSignIn";
-        mRecallArgs[msgId]["phone_number"] = QVariant::fromValue<QString>(phone_number);
-        mRecallArgs[msgId]["phone_code_hash"] = QVariant::fromValue<QString>(phone_code_hash);
-        mRecallArgs[msgId]["phone_code"] = QVariant::fromValue<QString>(phone_code);
+        //mRecallArgs[msgId][""] = "authSignIn";
+        //mRecallArgs[msgId]["phone_number"] = QVariant::fromValue<QString>(phone_number);
+        //mRecallArgs[msgId]["phone_code_hash"] = QVariant::fromValue<QString>(phone_code_hash);
+        //mRecallArgs[msgId]["phone_code"] = QVariant::fromValue<QString>(phone_code);
     } else {
         const AuthAuthorization &result = AuthAuthorization();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -2003,7 +2003,7 @@ qint64 TelegramCore::authSignIn(const QString &phone_number, const QString &phon
 void TelegramCore::onAuthSignInAnswer(qint64 msgId, const AuthAuthorization &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<AuthAuthorization >(msgId, result);
+    //callBackCall<AuthAuthorization >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT authSignInAnswer(msgId, result);
 }
@@ -2012,31 +2012,31 @@ void TelegramCore::onAuthSignInError(qint64 msgId, qint32 errorCode, const QStri
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const AuthAuthorization &result = AuthAuthorization();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<AuthAuthorization >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<AuthAuthorization >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT authSignInError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::authLogOut(Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::authLogOut(bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->authLogOut();
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "authLogOut";
+        //mRecallArgs[msgId][""] = "authLogOut";
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -2044,7 +2044,7 @@ qint64 TelegramCore::authLogOut(Callback<bool > callBack, qint32 timeout) {
 void TelegramCore::onAuthLogOutAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT authLogOutAnswer(msgId, result);
 }
@@ -2053,31 +2053,31 @@ void TelegramCore::onAuthLogOutError(qint64 msgId, qint32 errorCode, const QStri
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT authLogOutError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::authResetAuthorizations(Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::authResetAuthorizations(bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->authResetAuthorizations();
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "authResetAuthorizations";
+        //mRecallArgs[msgId][""] = "authResetAuthorizations";
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -2085,7 +2085,7 @@ qint64 TelegramCore::authResetAuthorizations(Callback<bool > callBack, qint32 ti
 void TelegramCore::onAuthResetAuthorizationsAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT authResetAuthorizationsAnswer(msgId, result);
 }
@@ -2094,33 +2094,33 @@ void TelegramCore::onAuthResetAuthorizationsError(qint64 msgId, qint32 errorCode
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT authResetAuthorizationsError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::authSendInvites(const QList<QString> &phone_numbers, const QString &message, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::authSendInvites(const QList<QString> &phone_numbers, const QString &message, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->authSendInvites(phone_numbers, message);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "authSendInvites";
-        mRecallArgs[msgId]["phone_numbers"] = QVariant::fromValue<QList<QString>>(phone_numbers);
-        mRecallArgs[msgId]["message"] = QVariant::fromValue<QString>(message);
+        //mRecallArgs[msgId][""] = "authSendInvites";
+        //mRecallArgs[msgId]["phone_numbers"] = QVariant::fromValue<QList<QString>>(phone_numbers);
+        //mRecallArgs[msgId]["message"] = QVariant::fromValue<QString>(message);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -2128,7 +2128,7 @@ qint64 TelegramCore::authSendInvites(const QList<QString> &phone_numbers, const 
 void TelegramCore::onAuthSendInvitesAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT authSendInvitesAnswer(msgId, result);
 }
@@ -2137,32 +2137,32 @@ void TelegramCore::onAuthSendInvitesError(qint64 msgId, qint32 errorCode, const 
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT authSendInvitesError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::authExportAuthorization(qint32 dc_id, Callback<AuthExportedAuthorization > callBack, qint32 timeout) {
+qint64 TelegramCore::authExportAuthorization(qint32 dc_id, bool callBack, qint32 timeout) {
     if(!mApi) {
         const AuthExportedAuthorization &result = AuthExportedAuthorization();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->authExportAuthorization(dc_id);
     if(msgId) {
-        callBackPush<AuthExportedAuthorization >(msgId, callBack);
+        //callBackPush<AuthExportedAuthorization >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "authExportAuthorization";
-        mRecallArgs[msgId]["dc_id"] = QVariant::fromValue<qint32>(dc_id);
+        //mRecallArgs[msgId][""] = "authExportAuthorization";
+        //mRecallArgs[msgId]["dc_id"] = QVariant::fromValue<qint32>(dc_id);
     } else {
         const AuthExportedAuthorization &result = AuthExportedAuthorization();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -2170,7 +2170,7 @@ qint64 TelegramCore::authExportAuthorization(qint32 dc_id, Callback<AuthExported
 void TelegramCore::onAuthExportAuthorizationAnswer(qint64 msgId, const AuthExportedAuthorization &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<AuthExportedAuthorization >(msgId, result);
+    //callBackCall<AuthExportedAuthorization >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT authExportAuthorizationAnswer(msgId, result);
 }
@@ -2179,33 +2179,33 @@ void TelegramCore::onAuthExportAuthorizationError(qint64 msgId, qint32 errorCode
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const AuthExportedAuthorization &result = AuthExportedAuthorization();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<AuthExportedAuthorization >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<AuthExportedAuthorization >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT authExportAuthorizationError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::authImportAuthorization(qint32 id, const QByteArray &bytes, Callback<AuthAuthorization > callBack, qint32 timeout) {
+qint64 TelegramCore::authImportAuthorization(qint32 id, const QByteArray &bytes, bool callBack, qint32 timeout) {
     if(!mApi) {
         const AuthAuthorization &result = AuthAuthorization();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->authImportAuthorization(id, bytes);
     if(msgId) {
-        callBackPush<AuthAuthorization >(msgId, callBack);
+        //callBackPush<AuthAuthorization >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "authImportAuthorization";
-        mRecallArgs[msgId]["id"] = QVariant::fromValue<qint32>(id);
-        mRecallArgs[msgId]["bytes"] = QVariant::fromValue<QByteArray>(bytes);
+        //mRecallArgs[msgId][""] = "authImportAuthorization";
+        //mRecallArgs[msgId]["id"] = QVariant::fromValue<qint32>(id);
+        //mRecallArgs[msgId]["bytes"] = QVariant::fromValue<QByteArray>(bytes);
     } else {
         const AuthAuthorization &result = AuthAuthorization();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -2213,7 +2213,7 @@ qint64 TelegramCore::authImportAuthorization(qint32 id, const QByteArray &bytes,
 void TelegramCore::onAuthImportAuthorizationAnswer(qint64 msgId, const AuthAuthorization &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<AuthAuthorization >(msgId, result);
+    //callBackCall<AuthAuthorization >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT authImportAuthorizationAnswer(msgId, result);
 }
@@ -2222,35 +2222,35 @@ void TelegramCore::onAuthImportAuthorizationError(qint64 msgId, qint32 errorCode
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const AuthAuthorization &result = AuthAuthorization();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<AuthAuthorization >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<AuthAuthorization >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT authImportAuthorizationError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::authBindTempAuthKey(qint64 perm_auth_key_id, qint64 nonce, qint32 expires_at, const QByteArray &encrypted_message, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::authBindTempAuthKey(qint64 perm_auth_key_id, qint64 nonce, qint32 expires_at, const QByteArray &encrypted_message, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->authBindTempAuthKey(perm_auth_key_id, nonce, expires_at, encrypted_message);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "authBindTempAuthKey";
-        mRecallArgs[msgId]["perm_auth_key_id"] = QVariant::fromValue<qint64>(perm_auth_key_id);
-        mRecallArgs[msgId]["nonce"] = QVariant::fromValue<qint64>(nonce);
-        mRecallArgs[msgId]["expires_at"] = QVariant::fromValue<qint32>(expires_at);
-        mRecallArgs[msgId]["encrypted_message"] = QVariant::fromValue<QByteArray>(encrypted_message);
+        //mRecallArgs[msgId][""] = "authBindTempAuthKey";
+        //mRecallArgs[msgId]["perm_auth_key_id"] = QVariant::fromValue<qint64>(perm_auth_key_id);
+        //mRecallArgs[msgId]["nonce"] = QVariant::fromValue<qint64>(nonce);
+        //mRecallArgs[msgId]["expires_at"] = QVariant::fromValue<qint32>(expires_at);
+        //mRecallArgs[msgId]["encrypted_message"] = QVariant::fromValue<QByteArray>(encrypted_message);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -2258,7 +2258,7 @@ qint64 TelegramCore::authBindTempAuthKey(qint64 perm_auth_key_id, qint64 nonce, 
 void TelegramCore::onAuthBindTempAuthKeyAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT authBindTempAuthKeyAnswer(msgId, result);
 }
@@ -2267,35 +2267,35 @@ void TelegramCore::onAuthBindTempAuthKeyError(qint64 msgId, qint32 errorCode, co
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT authBindTempAuthKeyError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::authImportBotAuthorization(qint32 flags, qint32 api_id, const QString &api_hash, const QString &bot_auth_token, Callback<AuthAuthorization > callBack, qint32 timeout) {
+qint64 TelegramCore::authImportBotAuthorization(qint32 flags, qint32 api_id, const QString &api_hash, const QString &bot_auth_token, bool callBack, qint32 timeout) {
     if(!mApi) {
         const AuthAuthorization &result = AuthAuthorization();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->authImportBotAuthorization(flags, api_id, api_hash, bot_auth_token);
     if(msgId) {
-        callBackPush<AuthAuthorization >(msgId, callBack);
+        //callBackPush<AuthAuthorization >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "authImportBotAuthorization";
-        mRecallArgs[msgId]["flags"] = QVariant::fromValue<qint32>(flags);
-        mRecallArgs[msgId]["api_id"] = QVariant::fromValue<qint32>(api_id);
-        mRecallArgs[msgId]["api_hash"] = QVariant::fromValue<QString>(api_hash);
-        mRecallArgs[msgId]["bot_auth_token"] = QVariant::fromValue<QString>(bot_auth_token);
+        //mRecallArgs[msgId][""] = "authImportBotAuthorization";
+        //mRecallArgs[msgId]["flags"] = QVariant::fromValue<qint32>(flags);
+        //mRecallArgs[msgId]["api_id"] = QVariant::fromValue<qint32>(api_id);
+        //mRecallArgs[msgId]["api_hash"] = QVariant::fromValue<QString>(api_hash);
+        //mRecallArgs[msgId]["bot_auth_token"] = QVariant::fromValue<QString>(bot_auth_token);
     } else {
         const AuthAuthorization &result = AuthAuthorization();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -2303,7 +2303,7 @@ qint64 TelegramCore::authImportBotAuthorization(qint32 flags, qint32 api_id, con
 void TelegramCore::onAuthImportBotAuthorizationAnswer(qint64 msgId, const AuthAuthorization &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<AuthAuthorization >(msgId, result);
+    //callBackCall<AuthAuthorization >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT authImportBotAuthorizationAnswer(msgId, result);
 }
@@ -2312,32 +2312,32 @@ void TelegramCore::onAuthImportBotAuthorizationError(qint64 msgId, qint32 errorC
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const AuthAuthorization &result = AuthAuthorization();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<AuthAuthorization >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<AuthAuthorization >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT authImportBotAuthorizationError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::authCheckPassword(const QByteArray &password_hash, Callback<AuthAuthorization > callBack, qint32 timeout) {
+qint64 TelegramCore::authCheckPassword(const QByteArray &password_hash, bool callBack, qint32 timeout) {
     if(!mApi) {
         const AuthAuthorization &result = AuthAuthorization();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->authCheckPassword(password_hash);
     if(msgId) {
-        callBackPush<AuthAuthorization >(msgId, callBack);
+        //callBackPush<AuthAuthorization >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "authCheckPassword";
-        mRecallArgs[msgId]["password_hash"] = QVariant::fromValue<QByteArray>(password_hash);
+        //mRecallArgs[msgId][""] = "authCheckPassword";
+        //mRecallArgs[msgId]["password_hash"] = QVariant::fromValue<QByteArray>(password_hash);
     } else {
         const AuthAuthorization &result = AuthAuthorization();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -2345,7 +2345,7 @@ qint64 TelegramCore::authCheckPassword(const QByteArray &password_hash, Callback
 void TelegramCore::onAuthCheckPasswordAnswer(qint64 msgId, const AuthAuthorization &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<AuthAuthorization >(msgId, result);
+    //callBackCall<AuthAuthorization >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT authCheckPasswordAnswer(msgId, result);
 }
@@ -2354,31 +2354,31 @@ void TelegramCore::onAuthCheckPasswordError(qint64 msgId, qint32 errorCode, cons
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const AuthAuthorization &result = AuthAuthorization();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<AuthAuthorization >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<AuthAuthorization >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT authCheckPasswordError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::authRequestPasswordRecovery(Callback<AuthPasswordRecovery > callBack, qint32 timeout) {
+qint64 TelegramCore::authRequestPasswordRecovery(bool callBack, qint32 timeout) {
     if(!mApi) {
         const AuthPasswordRecovery &result = AuthPasswordRecovery();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->authRequestPasswordRecovery();
     if(msgId) {
-        callBackPush<AuthPasswordRecovery >(msgId, callBack);
+        //callBackPush<AuthPasswordRecovery >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "authRequestPasswordRecovery";
+        //mRecallArgs[msgId][""] = "authRequestPasswordRecovery";
     } else {
         const AuthPasswordRecovery &result = AuthPasswordRecovery();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -2386,7 +2386,7 @@ qint64 TelegramCore::authRequestPasswordRecovery(Callback<AuthPasswordRecovery >
 void TelegramCore::onAuthRequestPasswordRecoveryAnswer(qint64 msgId, const AuthPasswordRecovery &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<AuthPasswordRecovery >(msgId, result);
+    //callBackCall<AuthPasswordRecovery >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT authRequestPasswordRecoveryAnswer(msgId, result);
 }
@@ -2395,32 +2395,32 @@ void TelegramCore::onAuthRequestPasswordRecoveryError(qint64 msgId, qint32 error
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const AuthPasswordRecovery &result = AuthPasswordRecovery();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<AuthPasswordRecovery >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<AuthPasswordRecovery >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT authRequestPasswordRecoveryError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::authRecoverPassword(const QString &code, Callback<AuthAuthorization > callBack, qint32 timeout) {
+qint64 TelegramCore::authRecoverPassword(const QString &code, bool callBack, qint32 timeout) {
     if(!mApi) {
         const AuthAuthorization &result = AuthAuthorization();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->authRecoverPassword(code);
     if(msgId) {
-        callBackPush<AuthAuthorization >(msgId, callBack);
+        //callBackPush<AuthAuthorization >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "authRecoverPassword";
-        mRecallArgs[msgId]["code"] = QVariant::fromValue<QString>(code);
+        //mRecallArgs[msgId][""] = "authRecoverPassword";
+        //mRecallArgs[msgId]["code"] = QVariant::fromValue<QString>(code);
     } else {
         const AuthAuthorization &result = AuthAuthorization();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -2428,7 +2428,7 @@ qint64 TelegramCore::authRecoverPassword(const QString &code, Callback<AuthAutho
 void TelegramCore::onAuthRecoverPasswordAnswer(qint64 msgId, const AuthAuthorization &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<AuthAuthorization >(msgId, result);
+    //callBackCall<AuthAuthorization >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT authRecoverPasswordAnswer(msgId, result);
 }
@@ -2437,33 +2437,33 @@ void TelegramCore::onAuthRecoverPasswordError(qint64 msgId, qint32 errorCode, co
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const AuthAuthorization &result = AuthAuthorization();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<AuthAuthorization >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<AuthAuthorization >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT authRecoverPasswordError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::authResendCode(const QString &phone_number, const QString &phone_code_hash, Callback<AuthSentCode > callBack, qint32 timeout) {
+qint64 TelegramCore::authResendCode(const QString &phone_number, const QString &phone_code_hash, bool callBack, qint32 timeout) {
     if(!mApi) {
         const AuthSentCode &result = AuthSentCode();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->authResendCode(phone_number, phone_code_hash);
     if(msgId) {
-        callBackPush<AuthSentCode >(msgId, callBack);
+        //callBackPush<AuthSentCode >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "authResendCode";
-        mRecallArgs[msgId]["phone_number"] = QVariant::fromValue<QString>(phone_number);
-        mRecallArgs[msgId]["phone_code_hash"] = QVariant::fromValue<QString>(phone_code_hash);
+        //mRecallArgs[msgId][""] = "authResendCode";
+        //mRecallArgs[msgId]["phone_number"] = QVariant::fromValue<QString>(phone_number);
+        //mRecallArgs[msgId]["phone_code_hash"] = QVariant::fromValue<QString>(phone_code_hash);
     } else {
         const AuthSentCode &result = AuthSentCode();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -2471,7 +2471,7 @@ qint64 TelegramCore::authResendCode(const QString &phone_number, const QString &
 void TelegramCore::onAuthResendCodeAnswer(qint64 msgId, const AuthSentCode &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<AuthSentCode >(msgId, result);
+    //callBackCall<AuthSentCode >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT authResendCodeAnswer(msgId, result);
 }
@@ -2480,33 +2480,33 @@ void TelegramCore::onAuthResendCodeError(qint64 msgId, qint32 errorCode, const Q
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const AuthSentCode &result = AuthSentCode();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<AuthSentCode >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<AuthSentCode >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT authResendCodeError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::authCancelCode(const QString &phone_number, const QString &phone_code_hash, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::authCancelCode(const QString &phone_number, const QString &phone_code_hash, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->authCancelCode(phone_number, phone_code_hash);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "authCancelCode";
-        mRecallArgs[msgId]["phone_number"] = QVariant::fromValue<QString>(phone_number);
-        mRecallArgs[msgId]["phone_code_hash"] = QVariant::fromValue<QString>(phone_code_hash);
+        //mRecallArgs[msgId][""] = "authCancelCode";
+        //mRecallArgs[msgId]["phone_number"] = QVariant::fromValue<QString>(phone_number);
+        //mRecallArgs[msgId]["phone_code_hash"] = QVariant::fromValue<QString>(phone_code_hash);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -2514,7 +2514,7 @@ qint64 TelegramCore::authCancelCode(const QString &phone_number, const QString &
 void TelegramCore::onAuthCancelCodeAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT authCancelCodeAnswer(msgId, result);
 }
@@ -2523,32 +2523,32 @@ void TelegramCore::onAuthCancelCodeError(qint64 msgId, qint32 errorCode, const Q
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT authCancelCodeError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::authDropTempAuthKeys(const QList<qint64> &except_auth_keys, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::authDropTempAuthKeys(const QList<qint64> &except_auth_keys, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->authDropTempAuthKeys(except_auth_keys);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "authDropTempAuthKeys";
-        mRecallArgs[msgId]["except_auth_keys"] = QVariant::fromValue<QList<qint64>>(except_auth_keys);
+        //mRecallArgs[msgId][""] = "authDropTempAuthKeys";
+        //mRecallArgs[msgId]["except_auth_keys"] = QVariant::fromValue<QList<qint64>>(except_auth_keys);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -2556,7 +2556,7 @@ qint64 TelegramCore::authDropTempAuthKeys(const QList<qint64> &except_auth_keys,
 void TelegramCore::onAuthDropTempAuthKeysAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT authDropTempAuthKeysAnswer(msgId, result);
 }
@@ -2565,34 +2565,34 @@ void TelegramCore::onAuthDropTempAuthKeysError(qint64 msgId, qint32 errorCode, c
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT authDropTempAuthKeysError(msgId, errorCode, errorText);
 }
 
 
-qint64 TelegramCore::botsSendCustomRequest(const QString &custom_method, const DataJSON &params, Callback<DataJSON > callBack, qint32 timeout) {
+qint64 TelegramCore::botsSendCustomRequest(const QString &custom_method, const DataJSON &params, bool callBack, qint32 timeout) {
     if(!mApi) {
         const DataJSON &result = DataJSON();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->botsSendCustomRequest(custom_method, params);
     if(msgId) {
-        callBackPush<DataJSON >(msgId, callBack);
+        //callBackPush<DataJSON >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "botsSendCustomRequest";
-        mRecallArgs[msgId]["custom_method"] = QVariant::fromValue<QString>(custom_method);
-        mRecallArgs[msgId]["params"] = QVariant::fromValue<DataJSON>(params);
+        //mRecallArgs[msgId][""] = "botsSendCustomRequest";
+        //mRecallArgs[msgId]["custom_method"] = QVariant::fromValue<QString>(custom_method);
+        //mRecallArgs[msgId]["params"] = QVariant::fromValue<DataJSON>(params);
     } else {
         const DataJSON &result = DataJSON();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -2600,7 +2600,7 @@ qint64 TelegramCore::botsSendCustomRequest(const QString &custom_method, const D
 void TelegramCore::onBotsSendCustomRequestAnswer(qint64 msgId, const DataJSON &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<DataJSON >(msgId, result);
+    //callBackCall<DataJSON >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT botsSendCustomRequestAnswer(msgId, result);
 }
@@ -2609,33 +2609,33 @@ void TelegramCore::onBotsSendCustomRequestError(qint64 msgId, qint32 errorCode, 
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const DataJSON &result = DataJSON();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<DataJSON >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<DataJSON >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT botsSendCustomRequestError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::botsAnswerWebhookJSONQuery(qint64 query_id, const DataJSON &data, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::botsAnswerWebhookJSONQuery(qint64 query_id, const DataJSON &data, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->botsAnswerWebhookJSONQuery(query_id, data);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "botsAnswerWebhookJSONQuery";
-        mRecallArgs[msgId]["query_id"] = QVariant::fromValue<qint64>(query_id);
-        mRecallArgs[msgId]["data"] = QVariant::fromValue<DataJSON>(data);
+        //mRecallArgs[msgId][""] = "botsAnswerWebhookJSONQuery";
+        //mRecallArgs[msgId]["query_id"] = QVariant::fromValue<qint64>(query_id);
+        //mRecallArgs[msgId]["data"] = QVariant::fromValue<DataJSON>(data);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -2643,7 +2643,7 @@ qint64 TelegramCore::botsAnswerWebhookJSONQuery(qint64 query_id, const DataJSON 
 void TelegramCore::onBotsAnswerWebhookJSONQueryAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT botsAnswerWebhookJSONQueryAnswer(msgId, result);
 }
@@ -2652,34 +2652,34 @@ void TelegramCore::onBotsAnswerWebhookJSONQueryError(qint64 msgId, qint32 errorC
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT botsAnswerWebhookJSONQueryError(msgId, errorCode, errorText);
 }
 
 
-qint64 TelegramCore::channelsReadHistory(const InputChannel &channel, qint32 max_id, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::channelsReadHistory(const InputChannel &channel, qint32 max_id, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->channelsReadHistory(channel, max_id);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "channelsReadHistory";
-        mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
-        mRecallArgs[msgId]["max_id"] = QVariant::fromValue<qint32>(max_id);
+        //mRecallArgs[msgId][""] = "channelsReadHistory";
+        //mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
+        //mRecallArgs[msgId]["max_id"] = QVariant::fromValue<qint32>(max_id);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -2687,7 +2687,7 @@ qint64 TelegramCore::channelsReadHistory(const InputChannel &channel, qint32 max
 void TelegramCore::onChannelsReadHistoryAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT channelsReadHistoryAnswer(msgId, result);
 }
@@ -2696,33 +2696,33 @@ void TelegramCore::onChannelsReadHistoryError(qint64 msgId, qint32 errorCode, co
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT channelsReadHistoryError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::channelsDeleteMessages(const InputChannel &channel, const QList<qint32> &id, Callback<MessagesAffectedMessages > callBack, qint32 timeout) {
+qint64 TelegramCore::channelsDeleteMessages(const InputChannel &channel, const QList<qint32> &id, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesAffectedMessages &result = MessagesAffectedMessages();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->channelsDeleteMessages(channel, id);
     if(msgId) {
-        callBackPush<MessagesAffectedMessages >(msgId, callBack);
+        //callBackPush<MessagesAffectedMessages >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "channelsDeleteMessages";
-        mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
-        mRecallArgs[msgId]["id"] = QVariant::fromValue<QList<qint32>>(id);
+        //mRecallArgs[msgId][""] = "channelsDeleteMessages";
+        //mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
+        //mRecallArgs[msgId]["id"] = QVariant::fromValue<QList<qint32>>(id);
     } else {
         const MessagesAffectedMessages &result = MessagesAffectedMessages();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -2730,7 +2730,7 @@ qint64 TelegramCore::channelsDeleteMessages(const InputChannel &channel, const Q
 void TelegramCore::onChannelsDeleteMessagesAnswer(qint64 msgId, const MessagesAffectedMessages &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesAffectedMessages >(msgId, result);
+    //callBackCall<MessagesAffectedMessages >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT channelsDeleteMessagesAnswer(msgId, result);
 }
@@ -2739,33 +2739,33 @@ void TelegramCore::onChannelsDeleteMessagesError(qint64 msgId, qint32 errorCode,
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesAffectedMessages &result = MessagesAffectedMessages();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesAffectedMessages >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesAffectedMessages >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT channelsDeleteMessagesError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::channelsDeleteUserHistory(const InputChannel &channel, const InputUser &user_id, Callback<MessagesAffectedHistory > callBack, qint32 timeout) {
+qint64 TelegramCore::channelsDeleteUserHistory(const InputChannel &channel, const InputUser &user_id, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesAffectedHistory &result = MessagesAffectedHistory();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->channelsDeleteUserHistory(channel, user_id);
     if(msgId) {
-        callBackPush<MessagesAffectedHistory >(msgId, callBack);
+        //callBackPush<MessagesAffectedHistory >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "channelsDeleteUserHistory";
-        mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
-        mRecallArgs[msgId]["user_id"] = QVariant::fromValue<InputUser>(user_id);
+        //mRecallArgs[msgId][""] = "channelsDeleteUserHistory";
+        //mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
+        //mRecallArgs[msgId]["user_id"] = QVariant::fromValue<InputUser>(user_id);
     } else {
         const MessagesAffectedHistory &result = MessagesAffectedHistory();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -2773,7 +2773,7 @@ qint64 TelegramCore::channelsDeleteUserHistory(const InputChannel &channel, cons
 void TelegramCore::onChannelsDeleteUserHistoryAnswer(qint64 msgId, const MessagesAffectedHistory &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesAffectedHistory >(msgId, result);
+    //callBackCall<MessagesAffectedHistory >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT channelsDeleteUserHistoryAnswer(msgId, result);
 }
@@ -2782,34 +2782,34 @@ void TelegramCore::onChannelsDeleteUserHistoryError(qint64 msgId, qint32 errorCo
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesAffectedHistory &result = MessagesAffectedHistory();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesAffectedHistory >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesAffectedHistory >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT channelsDeleteUserHistoryError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::channelsReportSpam(const InputChannel &channel, const InputUser &user_id, const QList<qint32> &id, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::channelsReportSpam(const InputChannel &channel, const InputUser &user_id, const QList<qint32> &id, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->channelsReportSpam(channel, user_id, id);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "channelsReportSpam";
-        mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
-        mRecallArgs[msgId]["user_id"] = QVariant::fromValue<InputUser>(user_id);
-        mRecallArgs[msgId]["id"] = QVariant::fromValue<QList<qint32>>(id);
+        //mRecallArgs[msgId][""] = "channelsReportSpam";
+        //mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
+        //mRecallArgs[msgId]["user_id"] = QVariant::fromValue<InputUser>(user_id);
+        //mRecallArgs[msgId]["id"] = QVariant::fromValue<QList<qint32>>(id);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -2817,7 +2817,7 @@ qint64 TelegramCore::channelsReportSpam(const InputChannel &channel, const Input
 void TelegramCore::onChannelsReportSpamAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT channelsReportSpamAnswer(msgId, result);
 }
@@ -2826,33 +2826,33 @@ void TelegramCore::onChannelsReportSpamError(qint64 msgId, qint32 errorCode, con
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT channelsReportSpamError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::channelsGetMessages(const InputChannel &channel, const QList<qint32> &id, Callback<MessagesMessages > callBack, qint32 timeout) {
+qint64 TelegramCore::channelsGetMessages(const InputChannel &channel, const QList<qint32> &id, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesMessages &result = MessagesMessages();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->channelsGetMessages(channel, id);
     if(msgId) {
-        callBackPush<MessagesMessages >(msgId, callBack);
+        //callBackPush<MessagesMessages >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "channelsGetMessages";
-        mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
-        mRecallArgs[msgId]["id"] = QVariant::fromValue<QList<qint32>>(id);
+        //mRecallArgs[msgId][""] = "channelsGetMessages";
+        //mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
+        //mRecallArgs[msgId]["id"] = QVariant::fromValue<QList<qint32>>(id);
     } else {
         const MessagesMessages &result = MessagesMessages();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -2860,7 +2860,7 @@ qint64 TelegramCore::channelsGetMessages(const InputChannel &channel, const QLis
 void TelegramCore::onChannelsGetMessagesAnswer(qint64 msgId, const MessagesMessages &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesMessages >(msgId, result);
+    //callBackCall<MessagesMessages >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT channelsGetMessagesAnswer(msgId, result);
 }
@@ -2869,35 +2869,35 @@ void TelegramCore::onChannelsGetMessagesError(qint64 msgId, qint32 errorCode, co
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesMessages &result = MessagesMessages();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesMessages >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesMessages >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT channelsGetMessagesError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::channelsGetParticipants(const InputChannel &channel, const ChannelParticipantsFilter &filter, qint32 offset, qint32 limit, Callback<ChannelsChannelParticipants > callBack, qint32 timeout) {
+qint64 TelegramCore::channelsGetParticipants(const InputChannel &channel, const ChannelParticipantsFilter &filter, qint32 offset, qint32 limit, bool callBack, qint32 timeout) {
     if(!mApi) {
         const ChannelsChannelParticipants &result = ChannelsChannelParticipants();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->channelsGetParticipants(channel, filter, offset, limit);
     if(msgId) {
-        callBackPush<ChannelsChannelParticipants >(msgId, callBack);
+        //callBackPush<ChannelsChannelParticipants >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "channelsGetParticipants";
-        mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
-        mRecallArgs[msgId]["filter"] = QVariant::fromValue<ChannelParticipantsFilter>(filter);
-        mRecallArgs[msgId]["offset"] = QVariant::fromValue<qint32>(offset);
-        mRecallArgs[msgId]["limit"] = QVariant::fromValue<qint32>(limit);
+        //mRecallArgs[msgId][""] = "channelsGetParticipants";
+        //mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
+        //mRecallArgs[msgId]["filter"] = QVariant::fromValue<ChannelParticipantsFilter>(filter);
+        //mRecallArgs[msgId]["offset"] = QVariant::fromValue<qint32>(offset);
+        //mRecallArgs[msgId]["limit"] = QVariant::fromValue<qint32>(limit);
     } else {
         const ChannelsChannelParticipants &result = ChannelsChannelParticipants();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -2905,7 +2905,7 @@ qint64 TelegramCore::channelsGetParticipants(const InputChannel &channel, const 
 void TelegramCore::onChannelsGetParticipantsAnswer(qint64 msgId, const ChannelsChannelParticipants &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<ChannelsChannelParticipants >(msgId, result);
+    //callBackCall<ChannelsChannelParticipants >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT channelsGetParticipantsAnswer(msgId, result);
 }
@@ -2914,33 +2914,33 @@ void TelegramCore::onChannelsGetParticipantsError(qint64 msgId, qint32 errorCode
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const ChannelsChannelParticipants &result = ChannelsChannelParticipants();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<ChannelsChannelParticipants >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<ChannelsChannelParticipants >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT channelsGetParticipantsError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::channelsGetParticipant(const InputChannel &channel, const InputUser &user_id, Callback<ChannelsChannelParticipant > callBack, qint32 timeout) {
+qint64 TelegramCore::channelsGetParticipant(const InputChannel &channel, const InputUser &user_id, bool callBack, qint32 timeout) {
     if(!mApi) {
         const ChannelsChannelParticipant &result = ChannelsChannelParticipant();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->channelsGetParticipant(channel, user_id);
     if(msgId) {
-        callBackPush<ChannelsChannelParticipant >(msgId, callBack);
+        //callBackPush<ChannelsChannelParticipant >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "channelsGetParticipant";
-        mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
-        mRecallArgs[msgId]["user_id"] = QVariant::fromValue<InputUser>(user_id);
+        //mRecallArgs[msgId][""] = "channelsGetParticipant";
+        //mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
+        //mRecallArgs[msgId]["user_id"] = QVariant::fromValue<InputUser>(user_id);
     } else {
         const ChannelsChannelParticipant &result = ChannelsChannelParticipant();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -2948,7 +2948,7 @@ qint64 TelegramCore::channelsGetParticipant(const InputChannel &channel, const I
 void TelegramCore::onChannelsGetParticipantAnswer(qint64 msgId, const ChannelsChannelParticipant &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<ChannelsChannelParticipant >(msgId, result);
+    //callBackCall<ChannelsChannelParticipant >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT channelsGetParticipantAnswer(msgId, result);
 }
@@ -2957,32 +2957,32 @@ void TelegramCore::onChannelsGetParticipantError(qint64 msgId, qint32 errorCode,
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const ChannelsChannelParticipant &result = ChannelsChannelParticipant();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<ChannelsChannelParticipant >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<ChannelsChannelParticipant >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT channelsGetParticipantError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::channelsGetChannels(const QList<InputChannel> &id, Callback<MessagesChats > callBack, qint32 timeout) {
+qint64 TelegramCore::channelsGetChannels(const QList<InputChannel> &id, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesChats &result = MessagesChats();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->channelsGetChannels(id);
     if(msgId) {
-        callBackPush<MessagesChats >(msgId, callBack);
+        //callBackPush<MessagesChats >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "channelsGetChannels";
-        mRecallArgs[msgId]["id"] = QVariant::fromValue<QList<InputChannel>>(id);
+        //mRecallArgs[msgId][""] = "channelsGetChannels";
+        //mRecallArgs[msgId]["id"] = QVariant::fromValue<QList<InputChannel>>(id);
     } else {
         const MessagesChats &result = MessagesChats();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -2990,7 +2990,7 @@ qint64 TelegramCore::channelsGetChannels(const QList<InputChannel> &id, Callback
 void TelegramCore::onChannelsGetChannelsAnswer(qint64 msgId, const MessagesChats &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesChats >(msgId, result);
+    //callBackCall<MessagesChats >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT channelsGetChannelsAnswer(msgId, result);
 }
@@ -2999,32 +2999,32 @@ void TelegramCore::onChannelsGetChannelsError(qint64 msgId, qint32 errorCode, co
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesChats &result = MessagesChats();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesChats >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesChats >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT channelsGetChannelsError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::channelsGetFullChannel(const InputChannel &channel, Callback<MessagesChatFull > callBack, qint32 timeout) {
+qint64 TelegramCore::channelsGetFullChannel(const InputChannel &channel, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesChatFull &result = MessagesChatFull();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->channelsGetFullChannel(channel);
     if(msgId) {
-        callBackPush<MessagesChatFull >(msgId, callBack);
+        //callBackPush<MessagesChatFull >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "channelsGetFullChannel";
-        mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
+        //mRecallArgs[msgId][""] = "channelsGetFullChannel";
+        //mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
     } else {
         const MessagesChatFull &result = MessagesChatFull();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -3032,7 +3032,7 @@ qint64 TelegramCore::channelsGetFullChannel(const InputChannel &channel, Callbac
 void TelegramCore::onChannelsGetFullChannelAnswer(qint64 msgId, const MessagesChatFull &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesChatFull >(msgId, result);
+    //callBackCall<MessagesChatFull >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT channelsGetFullChannelAnswer(msgId, result);
 }
@@ -3041,35 +3041,35 @@ void TelegramCore::onChannelsGetFullChannelError(qint64 msgId, qint32 errorCode,
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesChatFull &result = MessagesChatFull();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesChatFull >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesChatFull >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT channelsGetFullChannelError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::channelsCreateChannel(bool broadcast, bool megagroup, const QString &title, const QString &about, Callback<UpdatesType > callBack, qint32 timeout) {
+qint64 TelegramCore::channelsCreateChannel(bool broadcast, bool megagroup, const QString &title, const QString &about, bool callBack, qint32 timeout) {
     if(!mApi) {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->channelsCreateChannel(broadcast, megagroup, title, about);
     if(msgId) {
-        callBackPush<UpdatesType >(msgId, callBack);
+        //callBackPush<UpdatesType >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "channelsCreateChannel";
-        mRecallArgs[msgId]["broadcast"] = QVariant::fromValue<bool>(broadcast);
-        mRecallArgs[msgId]["megagroup"] = QVariant::fromValue<bool>(megagroup);
-        mRecallArgs[msgId]["title"] = QVariant::fromValue<QString>(title);
-        mRecallArgs[msgId]["about"] = QVariant::fromValue<QString>(about);
+        //mRecallArgs[msgId][""] = "channelsCreateChannel";
+        //mRecallArgs[msgId]["broadcast"] = QVariant::fromValue<bool>(broadcast);
+        //mRecallArgs[msgId]["megagroup"] = QVariant::fromValue<bool>(megagroup);
+        //mRecallArgs[msgId]["title"] = QVariant::fromValue<QString>(title);
+        //mRecallArgs[msgId]["about"] = QVariant::fromValue<QString>(about);
     } else {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -3077,7 +3077,7 @@ qint64 TelegramCore::channelsCreateChannel(bool broadcast, bool megagroup, const
 void TelegramCore::onChannelsCreateChannelAnswer(qint64 msgId, const UpdatesType &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<UpdatesType >(msgId, result);
+    //callBackCall<UpdatesType >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT channelsCreateChannelAnswer(msgId, result);
 }
@@ -3086,33 +3086,33 @@ void TelegramCore::onChannelsCreateChannelError(qint64 msgId, qint32 errorCode, 
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const UpdatesType &result = UpdatesType();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<UpdatesType >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<UpdatesType >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT channelsCreateChannelError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::channelsEditAbout(const InputChannel &channel, const QString &about, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::channelsEditAbout(const InputChannel &channel, const QString &about, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->channelsEditAbout(channel, about);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "channelsEditAbout";
-        mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
-        mRecallArgs[msgId]["about"] = QVariant::fromValue<QString>(about);
+        //mRecallArgs[msgId][""] = "channelsEditAbout";
+        //mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
+        //mRecallArgs[msgId]["about"] = QVariant::fromValue<QString>(about);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -3120,7 +3120,7 @@ qint64 TelegramCore::channelsEditAbout(const InputChannel &channel, const QStrin
 void TelegramCore::onChannelsEditAboutAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT channelsEditAboutAnswer(msgId, result);
 }
@@ -3129,34 +3129,34 @@ void TelegramCore::onChannelsEditAboutError(qint64 msgId, qint32 errorCode, cons
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT channelsEditAboutError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::channelsEditAdmin(const InputChannel &channel, const InputUser &user_id, const ChannelAdminRights &admin_rights, Callback<UpdatesType > callBack, qint32 timeout) {
+qint64 TelegramCore::channelsEditAdmin(const InputChannel &channel, const InputUser &user_id, const ChannelAdminRights &admin_rights, bool callBack, qint32 timeout) {
     if(!mApi) {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->channelsEditAdmin(channel, user_id, admin_rights);
     if(msgId) {
-        callBackPush<UpdatesType >(msgId, callBack);
+        //callBackPush<UpdatesType >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "channelsEditAdmin";
-        mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
-        mRecallArgs[msgId]["user_id"] = QVariant::fromValue<InputUser>(user_id);
-        mRecallArgs[msgId]["admin_rights"] = QVariant::fromValue<ChannelAdminRights>(admin_rights);
+        //mRecallArgs[msgId][""] = "channelsEditAdmin";
+        //mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
+        //mRecallArgs[msgId]["user_id"] = QVariant::fromValue<InputUser>(user_id);
+        //mRecallArgs[msgId]["admin_rights"] = QVariant::fromValue<ChannelAdminRights>(admin_rights);
     } else {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -3164,7 +3164,7 @@ qint64 TelegramCore::channelsEditAdmin(const InputChannel &channel, const InputU
 void TelegramCore::onChannelsEditAdminAnswer(qint64 msgId, const UpdatesType &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<UpdatesType >(msgId, result);
+    //callBackCall<UpdatesType >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT channelsEditAdminAnswer(msgId, result);
 }
@@ -3173,33 +3173,33 @@ void TelegramCore::onChannelsEditAdminError(qint64 msgId, qint32 errorCode, cons
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const UpdatesType &result = UpdatesType();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<UpdatesType >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<UpdatesType >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT channelsEditAdminError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::channelsEditTitle(const InputChannel &channel, const QString &title, Callback<UpdatesType > callBack, qint32 timeout) {
+qint64 TelegramCore::channelsEditTitle(const InputChannel &channel, const QString &title, bool callBack, qint32 timeout) {
     if(!mApi) {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->channelsEditTitle(channel, title);
     if(msgId) {
-        callBackPush<UpdatesType >(msgId, callBack);
+        //callBackPush<UpdatesType >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "channelsEditTitle";
-        mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
-        mRecallArgs[msgId]["title"] = QVariant::fromValue<QString>(title);
+        //mRecallArgs[msgId][""] = "channelsEditTitle";
+        //mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
+        //mRecallArgs[msgId]["title"] = QVariant::fromValue<QString>(title);
     } else {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -3207,7 +3207,7 @@ qint64 TelegramCore::channelsEditTitle(const InputChannel &channel, const QStrin
 void TelegramCore::onChannelsEditTitleAnswer(qint64 msgId, const UpdatesType &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<UpdatesType >(msgId, result);
+    //callBackCall<UpdatesType >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT channelsEditTitleAnswer(msgId, result);
 }
@@ -3216,33 +3216,33 @@ void TelegramCore::onChannelsEditTitleError(qint64 msgId, qint32 errorCode, cons
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const UpdatesType &result = UpdatesType();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<UpdatesType >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<UpdatesType >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT channelsEditTitleError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::channelsEditPhoto(const InputChannel &channel, const InputChatPhoto &photo, Callback<UpdatesType > callBack, qint32 timeout) {
+qint64 TelegramCore::channelsEditPhoto(const InputChannel &channel, const InputChatPhoto &photo, bool callBack, qint32 timeout) {
     if(!mApi) {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->channelsEditPhoto(channel, photo);
     if(msgId) {
-        callBackPush<UpdatesType >(msgId, callBack);
+        //callBackPush<UpdatesType >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "channelsEditPhoto";
-        mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
-        mRecallArgs[msgId]["photo"] = QVariant::fromValue<InputChatPhoto>(photo);
+        //mRecallArgs[msgId][""] = "channelsEditPhoto";
+        //mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
+        //mRecallArgs[msgId]["photo"] = QVariant::fromValue<InputChatPhoto>(photo);
     } else {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -3250,7 +3250,7 @@ qint64 TelegramCore::channelsEditPhoto(const InputChannel &channel, const InputC
 void TelegramCore::onChannelsEditPhotoAnswer(qint64 msgId, const UpdatesType &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<UpdatesType >(msgId, result);
+    //callBackCall<UpdatesType >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT channelsEditPhotoAnswer(msgId, result);
 }
@@ -3259,33 +3259,33 @@ void TelegramCore::onChannelsEditPhotoError(qint64 msgId, qint32 errorCode, cons
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const UpdatesType &result = UpdatesType();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<UpdatesType >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<UpdatesType >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT channelsEditPhotoError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::channelsCheckUsername(const InputChannel &channel, const QString &username, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::channelsCheckUsername(const InputChannel &channel, const QString &username, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->channelsCheckUsername(channel, username);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "channelsCheckUsername";
-        mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
-        mRecallArgs[msgId]["username"] = QVariant::fromValue<QString>(username);
+        //mRecallArgs[msgId][""] = "channelsCheckUsername";
+        //mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
+        //mRecallArgs[msgId]["username"] = QVariant::fromValue<QString>(username);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -3293,7 +3293,7 @@ qint64 TelegramCore::channelsCheckUsername(const InputChannel &channel, const QS
 void TelegramCore::onChannelsCheckUsernameAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT channelsCheckUsernameAnswer(msgId, result);
 }
@@ -3302,33 +3302,33 @@ void TelegramCore::onChannelsCheckUsernameError(qint64 msgId, qint32 errorCode, 
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT channelsCheckUsernameError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::channelsUpdateUsername(const InputChannel &channel, const QString &username, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::channelsUpdateUsername(const InputChannel &channel, const QString &username, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->channelsUpdateUsername(channel, username);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "channelsUpdateUsername";
-        mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
-        mRecallArgs[msgId]["username"] = QVariant::fromValue<QString>(username);
+        //mRecallArgs[msgId][""] = "channelsUpdateUsername";
+        //mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
+        //mRecallArgs[msgId]["username"] = QVariant::fromValue<QString>(username);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -3336,7 +3336,7 @@ qint64 TelegramCore::channelsUpdateUsername(const InputChannel &channel, const Q
 void TelegramCore::onChannelsUpdateUsernameAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT channelsUpdateUsernameAnswer(msgId, result);
 }
@@ -3345,32 +3345,32 @@ void TelegramCore::onChannelsUpdateUsernameError(qint64 msgId, qint32 errorCode,
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT channelsUpdateUsernameError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::channelsJoinChannel(const InputChannel &channel, Callback<UpdatesType > callBack, qint32 timeout) {
+qint64 TelegramCore::channelsJoinChannel(const InputChannel &channel, bool callBack, qint32 timeout) {
     if(!mApi) {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->channelsJoinChannel(channel);
     if(msgId) {
-        callBackPush<UpdatesType >(msgId, callBack);
+        //callBackPush<UpdatesType >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "channelsJoinChannel";
-        mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
+        //mRecallArgs[msgId][""] = "channelsJoinChannel";
+        //mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
     } else {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -3378,7 +3378,7 @@ qint64 TelegramCore::channelsJoinChannel(const InputChannel &channel, Callback<U
 void TelegramCore::onChannelsJoinChannelAnswer(qint64 msgId, const UpdatesType &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<UpdatesType >(msgId, result);
+    //callBackCall<UpdatesType >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT channelsJoinChannelAnswer(msgId, result);
 }
@@ -3387,32 +3387,32 @@ void TelegramCore::onChannelsJoinChannelError(qint64 msgId, qint32 errorCode, co
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const UpdatesType &result = UpdatesType();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<UpdatesType >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<UpdatesType >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT channelsJoinChannelError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::channelsLeaveChannel(const InputChannel &channel, Callback<UpdatesType > callBack, qint32 timeout) {
+qint64 TelegramCore::channelsLeaveChannel(const InputChannel &channel, bool callBack, qint32 timeout) {
     if(!mApi) {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->channelsLeaveChannel(channel);
     if(msgId) {
-        callBackPush<UpdatesType >(msgId, callBack);
+        //callBackPush<UpdatesType >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "channelsLeaveChannel";
-        mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
+        //mRecallArgs[msgId][""] = "channelsLeaveChannel";
+        //mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
     } else {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -3420,7 +3420,7 @@ qint64 TelegramCore::channelsLeaveChannel(const InputChannel &channel, Callback<
 void TelegramCore::onChannelsLeaveChannelAnswer(qint64 msgId, const UpdatesType &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<UpdatesType >(msgId, result);
+    //callBackCall<UpdatesType >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT channelsLeaveChannelAnswer(msgId, result);
 }
@@ -3429,33 +3429,33 @@ void TelegramCore::onChannelsLeaveChannelError(qint64 msgId, qint32 errorCode, c
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const UpdatesType &result = UpdatesType();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<UpdatesType >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<UpdatesType >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT channelsLeaveChannelError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::channelsInviteToChannel(const InputChannel &channel, const QList<InputUser> &users, Callback<UpdatesType > callBack, qint32 timeout) {
+qint64 TelegramCore::channelsInviteToChannel(const InputChannel &channel, const QList<InputUser> &users, bool callBack, qint32 timeout) {
     if(!mApi) {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->channelsInviteToChannel(channel, users);
     if(msgId) {
-        callBackPush<UpdatesType >(msgId, callBack);
+        //callBackPush<UpdatesType >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "channelsInviteToChannel";
-        mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
-        mRecallArgs[msgId]["users"] = QVariant::fromValue<QList<InputUser>>(users);
+        //mRecallArgs[msgId][""] = "channelsInviteToChannel";
+        //mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
+        //mRecallArgs[msgId]["users"] = QVariant::fromValue<QList<InputUser>>(users);
     } else {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -3463,7 +3463,7 @@ qint64 TelegramCore::channelsInviteToChannel(const InputChannel &channel, const 
 void TelegramCore::onChannelsInviteToChannelAnswer(qint64 msgId, const UpdatesType &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<UpdatesType >(msgId, result);
+    //callBackCall<UpdatesType >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT channelsInviteToChannelAnswer(msgId, result);
 }
@@ -3472,32 +3472,32 @@ void TelegramCore::onChannelsInviteToChannelError(qint64 msgId, qint32 errorCode
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const UpdatesType &result = UpdatesType();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<UpdatesType >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<UpdatesType >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT channelsInviteToChannelError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::channelsExportInvite(const InputChannel &channel, Callback<ExportedChatInvite > callBack, qint32 timeout) {
+qint64 TelegramCore::channelsExportInvite(const InputChannel &channel, bool callBack, qint32 timeout) {
     if(!mApi) {
         const ExportedChatInvite &result = ExportedChatInvite();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->channelsExportInvite(channel);
     if(msgId) {
-        callBackPush<ExportedChatInvite >(msgId, callBack);
+        //callBackPush<ExportedChatInvite >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "channelsExportInvite";
-        mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
+        //mRecallArgs[msgId][""] = "channelsExportInvite";
+        //mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
     } else {
         const ExportedChatInvite &result = ExportedChatInvite();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -3505,7 +3505,7 @@ qint64 TelegramCore::channelsExportInvite(const InputChannel &channel, Callback<
 void TelegramCore::onChannelsExportInviteAnswer(qint64 msgId, const ExportedChatInvite &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<ExportedChatInvite >(msgId, result);
+    //callBackCall<ExportedChatInvite >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT channelsExportInviteAnswer(msgId, result);
 }
@@ -3514,32 +3514,32 @@ void TelegramCore::onChannelsExportInviteError(qint64 msgId, qint32 errorCode, c
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const ExportedChatInvite &result = ExportedChatInvite();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<ExportedChatInvite >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<ExportedChatInvite >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT channelsExportInviteError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::channelsDeleteChannel(const InputChannel &channel, Callback<UpdatesType > callBack, qint32 timeout) {
+qint64 TelegramCore::channelsDeleteChannel(const InputChannel &channel, bool callBack, qint32 timeout) {
     if(!mApi) {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->channelsDeleteChannel(channel);
     if(msgId) {
-        callBackPush<UpdatesType >(msgId, callBack);
+        //callBackPush<UpdatesType >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "channelsDeleteChannel";
-        mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
+        //mRecallArgs[msgId][""] = "channelsDeleteChannel";
+        //mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
     } else {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -3547,7 +3547,7 @@ qint64 TelegramCore::channelsDeleteChannel(const InputChannel &channel, Callback
 void TelegramCore::onChannelsDeleteChannelAnswer(qint64 msgId, const UpdatesType &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<UpdatesType >(msgId, result);
+    //callBackCall<UpdatesType >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT channelsDeleteChannelAnswer(msgId, result);
 }
@@ -3556,33 +3556,33 @@ void TelegramCore::onChannelsDeleteChannelError(qint64 msgId, qint32 errorCode, 
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const UpdatesType &result = UpdatesType();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<UpdatesType >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<UpdatesType >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT channelsDeleteChannelError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::channelsToggleInvites(const InputChannel &channel, bool enabled, Callback<UpdatesType > callBack, qint32 timeout) {
+qint64 TelegramCore::channelsToggleInvites(const InputChannel &channel, bool enabled, bool callBack, qint32 timeout) {
     if(!mApi) {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->channelsToggleInvites(channel, enabled);
     if(msgId) {
-        callBackPush<UpdatesType >(msgId, callBack);
+        //callBackPush<UpdatesType >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "channelsToggleInvites";
-        mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
-        mRecallArgs[msgId]["enabled"] = QVariant::fromValue<bool>(enabled);
+        //mRecallArgs[msgId][""] = "channelsToggleInvites";
+        //mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
+        //mRecallArgs[msgId]["enabled"] = QVariant::fromValue<bool>(enabled);
     } else {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -3590,7 +3590,7 @@ qint64 TelegramCore::channelsToggleInvites(const InputChannel &channel, bool ena
 void TelegramCore::onChannelsToggleInvitesAnswer(qint64 msgId, const UpdatesType &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<UpdatesType >(msgId, result);
+    //callBackCall<UpdatesType >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT channelsToggleInvitesAnswer(msgId, result);
 }
@@ -3599,33 +3599,33 @@ void TelegramCore::onChannelsToggleInvitesError(qint64 msgId, qint32 errorCode, 
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const UpdatesType &result = UpdatesType();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<UpdatesType >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<UpdatesType >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT channelsToggleInvitesError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::channelsExportMessageLink(const InputChannel &channel, qint32 id, Callback<ExportedMessageLink > callBack, qint32 timeout) {
+qint64 TelegramCore::channelsExportMessageLink(const InputChannel &channel, qint32 id, bool callBack, qint32 timeout) {
     if(!mApi) {
         const ExportedMessageLink &result = ExportedMessageLink();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->channelsExportMessageLink(channel, id);
     if(msgId) {
-        callBackPush<ExportedMessageLink >(msgId, callBack);
+        //callBackPush<ExportedMessageLink >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "channelsExportMessageLink";
-        mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
-        mRecallArgs[msgId]["id"] = QVariant::fromValue<qint32>(id);
+        //mRecallArgs[msgId][""] = "channelsExportMessageLink";
+        //mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
+        //mRecallArgs[msgId]["id"] = QVariant::fromValue<qint32>(id);
     } else {
         const ExportedMessageLink &result = ExportedMessageLink();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -3633,7 +3633,7 @@ qint64 TelegramCore::channelsExportMessageLink(const InputChannel &channel, qint
 void TelegramCore::onChannelsExportMessageLinkAnswer(qint64 msgId, const ExportedMessageLink &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<ExportedMessageLink >(msgId, result);
+    //callBackCall<ExportedMessageLink >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT channelsExportMessageLinkAnswer(msgId, result);
 }
@@ -3642,33 +3642,33 @@ void TelegramCore::onChannelsExportMessageLinkError(qint64 msgId, qint32 errorCo
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const ExportedMessageLink &result = ExportedMessageLink();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<ExportedMessageLink >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<ExportedMessageLink >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT channelsExportMessageLinkError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::channelsToggleSignatures(const InputChannel &channel, bool enabled, Callback<UpdatesType > callBack, qint32 timeout) {
+qint64 TelegramCore::channelsToggleSignatures(const InputChannel &channel, bool enabled, bool callBack, qint32 timeout) {
     if(!mApi) {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->channelsToggleSignatures(channel, enabled);
     if(msgId) {
-        callBackPush<UpdatesType >(msgId, callBack);
+        //callBackPush<UpdatesType >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "channelsToggleSignatures";
-        mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
-        mRecallArgs[msgId]["enabled"] = QVariant::fromValue<bool>(enabled);
+        //mRecallArgs[msgId][""] = "channelsToggleSignatures";
+        //mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
+        //mRecallArgs[msgId]["enabled"] = QVariant::fromValue<bool>(enabled);
     } else {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -3676,7 +3676,7 @@ qint64 TelegramCore::channelsToggleSignatures(const InputChannel &channel, bool 
 void TelegramCore::onChannelsToggleSignaturesAnswer(qint64 msgId, const UpdatesType &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<UpdatesType >(msgId, result);
+    //callBackCall<UpdatesType >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT channelsToggleSignaturesAnswer(msgId, result);
 }
@@ -3685,34 +3685,34 @@ void TelegramCore::onChannelsToggleSignaturesError(qint64 msgId, qint32 errorCod
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const UpdatesType &result = UpdatesType();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<UpdatesType >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<UpdatesType >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT channelsToggleSignaturesError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::channelsUpdatePinnedMessage(bool silent, const InputChannel &channel, qint32 id, Callback<UpdatesType > callBack, qint32 timeout) {
+qint64 TelegramCore::channelsUpdatePinnedMessage(bool silent, const InputChannel &channel, qint32 id, bool callBack, qint32 timeout) {
     if(!mApi) {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->channelsUpdatePinnedMessage(silent, channel, id);
     if(msgId) {
-        callBackPush<UpdatesType >(msgId, callBack);
+        //callBackPush<UpdatesType >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "channelsUpdatePinnedMessage";
-        mRecallArgs[msgId]["silent"] = QVariant::fromValue<bool>(silent);
-        mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
-        mRecallArgs[msgId]["id"] = QVariant::fromValue<qint32>(id);
+        //mRecallArgs[msgId][""] = "channelsUpdatePinnedMessage";
+        //mRecallArgs[msgId]["silent"] = QVariant::fromValue<bool>(silent);
+        //mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
+        //mRecallArgs[msgId]["id"] = QVariant::fromValue<qint32>(id);
     } else {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -3720,7 +3720,7 @@ qint64 TelegramCore::channelsUpdatePinnedMessage(bool silent, const InputChannel
 void TelegramCore::onChannelsUpdatePinnedMessageAnswer(qint64 msgId, const UpdatesType &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<UpdatesType >(msgId, result);
+    //callBackCall<UpdatesType >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT channelsUpdatePinnedMessageAnswer(msgId, result);
 }
@@ -3729,31 +3729,31 @@ void TelegramCore::onChannelsUpdatePinnedMessageError(qint64 msgId, qint32 error
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const UpdatesType &result = UpdatesType();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<UpdatesType >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<UpdatesType >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT channelsUpdatePinnedMessageError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::channelsGetAdminedPublicChannels(Callback<MessagesChats > callBack, qint32 timeout) {
+qint64 TelegramCore::channelsGetAdminedPublicChannels(bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesChats &result = MessagesChats();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->channelsGetAdminedPublicChannels();
     if(msgId) {
-        callBackPush<MessagesChats >(msgId, callBack);
+        //callBackPush<MessagesChats >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "channelsGetAdminedPublicChannels";
+        //mRecallArgs[msgId][""] = "channelsGetAdminedPublicChannels";
     } else {
         const MessagesChats &result = MessagesChats();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -3761,7 +3761,7 @@ qint64 TelegramCore::channelsGetAdminedPublicChannels(Callback<MessagesChats > c
 void TelegramCore::onChannelsGetAdminedPublicChannelsAnswer(qint64 msgId, const MessagesChats &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesChats >(msgId, result);
+    //callBackCall<MessagesChats >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT channelsGetAdminedPublicChannelsAnswer(msgId, result);
 }
@@ -3770,34 +3770,34 @@ void TelegramCore::onChannelsGetAdminedPublicChannelsError(qint64 msgId, qint32 
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesChats &result = MessagesChats();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesChats >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesChats >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT channelsGetAdminedPublicChannelsError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::channelsEditBanned(const InputChannel &channel, const InputUser &user_id, const ChannelBannedRights &banned_rights, Callback<UpdatesType > callBack, qint32 timeout) {
+qint64 TelegramCore::channelsEditBanned(const InputChannel &channel, const InputUser &user_id, const ChannelBannedRights &banned_rights, bool callBack, qint32 timeout) {
     if(!mApi) {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->channelsEditBanned(channel, user_id, banned_rights);
     if(msgId) {
-        callBackPush<UpdatesType >(msgId, callBack);
+        //callBackPush<UpdatesType >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "channelsEditBanned";
-        mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
-        mRecallArgs[msgId]["user_id"] = QVariant::fromValue<InputUser>(user_id);
-        mRecallArgs[msgId]["banned_rights"] = QVariant::fromValue<ChannelBannedRights>(banned_rights);
+        //mRecallArgs[msgId][""] = "channelsEditBanned";
+        //mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
+        //mRecallArgs[msgId]["user_id"] = QVariant::fromValue<InputUser>(user_id);
+        //mRecallArgs[msgId]["banned_rights"] = QVariant::fromValue<ChannelBannedRights>(banned_rights);
     } else {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -3805,7 +3805,7 @@ qint64 TelegramCore::channelsEditBanned(const InputChannel &channel, const Input
 void TelegramCore::onChannelsEditBannedAnswer(qint64 msgId, const UpdatesType &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<UpdatesType >(msgId, result);
+    //callBackCall<UpdatesType >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT channelsEditBannedAnswer(msgId, result);
 }
@@ -3814,38 +3814,38 @@ void TelegramCore::onChannelsEditBannedError(qint64 msgId, qint32 errorCode, con
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const UpdatesType &result = UpdatesType();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<UpdatesType >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<UpdatesType >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT channelsEditBannedError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::channelsGetAdminLog(const InputChannel &channel, const QString &q, const ChannelAdminLogEventsFilter &events_filter, const QList<InputUser> &admins, qint64 max_id, qint64 min_id, qint32 limit, Callback<ChannelsAdminLogResults > callBack, qint32 timeout) {
+qint64 TelegramCore::channelsGetAdminLog(const InputChannel &channel, const QString &q, const ChannelAdminLogEventsFilter &events_filter, const QList<InputUser> &admins, qint64 max_id, qint64 min_id, qint32 limit, bool callBack, qint32 timeout) {
     if(!mApi) {
         const ChannelsAdminLogResults &result = ChannelsAdminLogResults();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->channelsGetAdminLog(channel, q, events_filter, admins, max_id, min_id, limit);
     if(msgId) {
-        callBackPush<ChannelsAdminLogResults >(msgId, callBack);
+        //callBackPush<ChannelsAdminLogResults >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "channelsGetAdminLog";
-        mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
-        mRecallArgs[msgId]["q"] = QVariant::fromValue<QString>(q);
-        mRecallArgs[msgId]["events_filter"] = QVariant::fromValue<ChannelAdminLogEventsFilter>(events_filter);
-        mRecallArgs[msgId]["admins"] = QVariant::fromValue<QList<InputUser>>(admins);
-        mRecallArgs[msgId]["max_id"] = QVariant::fromValue<qint64>(max_id);
-        mRecallArgs[msgId]["min_id"] = QVariant::fromValue<qint64>(min_id);
-        mRecallArgs[msgId]["limit"] = QVariant::fromValue<qint32>(limit);
+        //mRecallArgs[msgId][""] = "channelsGetAdminLog";
+        //mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
+        //mRecallArgs[msgId]["q"] = QVariant::fromValue<QString>(q);
+        //mRecallArgs[msgId]["events_filter"] = QVariant::fromValue<ChannelAdminLogEventsFilter>(events_filter);
+        //mRecallArgs[msgId]["admins"] = QVariant::fromValue<QList<InputUser>>(admins);
+        //mRecallArgs[msgId]["max_id"] = QVariant::fromValue<qint64>(max_id);
+        //mRecallArgs[msgId]["min_id"] = QVariant::fromValue<qint64>(min_id);
+        //mRecallArgs[msgId]["limit"] = QVariant::fromValue<qint32>(limit);
     } else {
         const ChannelsAdminLogResults &result = ChannelsAdminLogResults();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -3853,7 +3853,7 @@ qint64 TelegramCore::channelsGetAdminLog(const InputChannel &channel, const QStr
 void TelegramCore::onChannelsGetAdminLogAnswer(qint64 msgId, const ChannelsAdminLogResults &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<ChannelsAdminLogResults >(msgId, result);
+    //callBackCall<ChannelsAdminLogResults >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT channelsGetAdminLogAnswer(msgId, result);
 }
@@ -3862,32 +3862,32 @@ void TelegramCore::onChannelsGetAdminLogError(qint64 msgId, qint32 errorCode, co
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const ChannelsAdminLogResults &result = ChannelsAdminLogResults();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<ChannelsAdminLogResults >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<ChannelsAdminLogResults >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT channelsGetAdminLogError(msgId, errorCode, errorText);
 }
 
 
-qint64 TelegramCore::contactsGetStatuses(Callback<QList<ContactStatus> > callBack, qint32 timeout) {
+qint64 TelegramCore::contactsGetStatuses(bool callBack, qint32 timeout) {
     if(!mApi) {
         const QList<ContactStatus> &result = QList<ContactStatus>();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->contactsGetStatuses();
     if(msgId) {
-        callBackPush<QList<ContactStatus> >(msgId, callBack);
+        //callBackPush<QList<ContactStatus> >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "contactsGetStatuses";
+        //mRecallArgs[msgId][""] = "contactsGetStatuses";
     } else {
         const QList<ContactStatus> &result = QList<ContactStatus>();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -3895,7 +3895,7 @@ qint64 TelegramCore::contactsGetStatuses(Callback<QList<ContactStatus> > callBac
 void TelegramCore::onContactsGetStatusesAnswer(qint64 msgId, const QList<ContactStatus> &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<QList<ContactStatus> >(msgId, result);
+    //callBackCall<QList<ContactStatus> >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT contactsGetStatusesAnswer(msgId, result);
 }
@@ -3904,32 +3904,32 @@ void TelegramCore::onContactsGetStatusesError(qint64 msgId, qint32 errorCode, co
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const QList<ContactStatus> &result = QList<ContactStatus>();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<QList<ContactStatus> >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<QList<ContactStatus> >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT contactsGetStatusesError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::contactsGetContacts(const QString &hash, Callback<ContactsContacts > callBack, qint32 timeout) {
+qint64 TelegramCore::contactsGetContacts(const QString &hash, bool callBack, qint32 timeout) {
     if(!mApi) {
         const ContactsContacts &result = ContactsContacts();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->contactsGetContacts(hash);
     if(msgId) {
-        callBackPush<ContactsContacts >(msgId, callBack);
+        //callBackPush<ContactsContacts >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "contactsGetContacts";
-        mRecallArgs[msgId]["hash"] = QVariant::fromValue<QString>(hash);
+        //mRecallArgs[msgId][""] = "contactsGetContacts";
+        //mRecallArgs[msgId]["hash"] = QVariant::fromValue<QString>(hash);
     } else {
         const ContactsContacts &result = ContactsContacts();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -3937,7 +3937,7 @@ qint64 TelegramCore::contactsGetContacts(const QString &hash, Callback<ContactsC
 void TelegramCore::onContactsGetContactsAnswer(qint64 msgId, const ContactsContacts &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<ContactsContacts >(msgId, result);
+    //callBackCall<ContactsContacts >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT contactsGetContactsAnswer(msgId, result);
 }
@@ -3946,33 +3946,33 @@ void TelegramCore::onContactsGetContactsError(qint64 msgId, qint32 errorCode, co
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const ContactsContacts &result = ContactsContacts();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<ContactsContacts >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<ContactsContacts >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT contactsGetContactsError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::contactsImportContacts(const QList<InputContact> &contacts, bool replace, Callback<ContactsImportedContacts > callBack, qint32 timeout) {
+qint64 TelegramCore::contactsImportContacts(const QList<InputContact> &contacts, bool replace, bool callBack, qint32 timeout) {
     if(!mApi) {
         const ContactsImportedContacts &result = ContactsImportedContacts();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->contactsImportContacts(contacts, replace);
     if(msgId) {
-        callBackPush<ContactsImportedContacts >(msgId, callBack);
+        //callBackPush<ContactsImportedContacts >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "contactsImportContacts";
-        mRecallArgs[msgId]["contacts"] = QVariant::fromValue<QList<InputContact>>(contacts);
-        mRecallArgs[msgId]["replace"] = QVariant::fromValue<bool>(replace);
+        //mRecallArgs[msgId][""] = "contactsImportContacts";
+        //mRecallArgs[msgId]["contacts"] = QVariant::fromValue<QList<InputContact>>(contacts);
+        //mRecallArgs[msgId]["replace"] = QVariant::fromValue<bool>(replace);
     } else {
         const ContactsImportedContacts &result = ContactsImportedContacts();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -3980,7 +3980,7 @@ qint64 TelegramCore::contactsImportContacts(const QList<InputContact> &contacts,
 void TelegramCore::onContactsImportContactsAnswer(qint64 msgId, const ContactsImportedContacts &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<ContactsImportedContacts >(msgId, result);
+    //callBackCall<ContactsImportedContacts >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT contactsImportContactsAnswer(msgId, result);
 }
@@ -3989,32 +3989,32 @@ void TelegramCore::onContactsImportContactsError(qint64 msgId, qint32 errorCode,
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const ContactsImportedContacts &result = ContactsImportedContacts();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<ContactsImportedContacts >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<ContactsImportedContacts >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT contactsImportContactsError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::contactsDeleteContact(const InputUser &id, Callback<ContactsLink > callBack, qint32 timeout) {
+qint64 TelegramCore::contactsDeleteContact(const InputUser &id, bool callBack, qint32 timeout) {
     if(!mApi) {
         const ContactsLink &result = ContactsLink();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->contactsDeleteContact(id);
     if(msgId) {
-        callBackPush<ContactsLink >(msgId, callBack);
+        //callBackPush<ContactsLink >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "contactsDeleteContact";
-        mRecallArgs[msgId]["id"] = QVariant::fromValue<InputUser>(id);
+        //mRecallArgs[msgId][""] = "contactsDeleteContact";
+        //mRecallArgs[msgId]["id"] = QVariant::fromValue<InputUser>(id);
     } else {
         const ContactsLink &result = ContactsLink();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -4022,7 +4022,7 @@ qint64 TelegramCore::contactsDeleteContact(const InputUser &id, Callback<Contact
 void TelegramCore::onContactsDeleteContactAnswer(qint64 msgId, const ContactsLink &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<ContactsLink >(msgId, result);
+    //callBackCall<ContactsLink >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT contactsDeleteContactAnswer(msgId, result);
 }
@@ -4031,32 +4031,32 @@ void TelegramCore::onContactsDeleteContactError(qint64 msgId, qint32 errorCode, 
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const ContactsLink &result = ContactsLink();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<ContactsLink >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<ContactsLink >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT contactsDeleteContactError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::contactsDeleteContacts(const QList<InputUser> &id, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::contactsDeleteContacts(const QList<InputUser> &id, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->contactsDeleteContacts(id);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "contactsDeleteContacts";
-        mRecallArgs[msgId]["id"] = QVariant::fromValue<QList<InputUser>>(id);
+        //mRecallArgs[msgId][""] = "contactsDeleteContacts";
+        //mRecallArgs[msgId]["id"] = QVariant::fromValue<QList<InputUser>>(id);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -4064,7 +4064,7 @@ qint64 TelegramCore::contactsDeleteContacts(const QList<InputUser> &id, Callback
 void TelegramCore::onContactsDeleteContactsAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT contactsDeleteContactsAnswer(msgId, result);
 }
@@ -4073,32 +4073,32 @@ void TelegramCore::onContactsDeleteContactsError(qint64 msgId, qint32 errorCode,
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT contactsDeleteContactsError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::contactsBlock(const InputUser &id, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::contactsBlock(const InputUser &id, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->contactsBlock(id);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "contactsBlock";
-        mRecallArgs[msgId]["id"] = QVariant::fromValue<InputUser>(id);
+        //mRecallArgs[msgId][""] = "contactsBlock";
+        //mRecallArgs[msgId]["id"] = QVariant::fromValue<InputUser>(id);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -4106,7 +4106,7 @@ qint64 TelegramCore::contactsBlock(const InputUser &id, Callback<bool > callBack
 void TelegramCore::onContactsBlockAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT contactsBlockAnswer(msgId, result);
 }
@@ -4115,32 +4115,32 @@ void TelegramCore::onContactsBlockError(qint64 msgId, qint32 errorCode, const QS
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT contactsBlockError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::contactsUnblock(const InputUser &id, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::contactsUnblock(const InputUser &id, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->contactsUnblock(id);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "contactsUnblock";
-        mRecallArgs[msgId]["id"] = QVariant::fromValue<InputUser>(id);
+        //mRecallArgs[msgId][""] = "contactsUnblock";
+        //mRecallArgs[msgId]["id"] = QVariant::fromValue<InputUser>(id);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -4148,7 +4148,7 @@ qint64 TelegramCore::contactsUnblock(const InputUser &id, Callback<bool > callBa
 void TelegramCore::onContactsUnblockAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT contactsUnblockAnswer(msgId, result);
 }
@@ -4157,33 +4157,33 @@ void TelegramCore::onContactsUnblockError(qint64 msgId, qint32 errorCode, const 
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT contactsUnblockError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::contactsGetBlocked(qint32 offset, qint32 limit, Callback<ContactsBlocked > callBack, qint32 timeout) {
+qint64 TelegramCore::contactsGetBlocked(qint32 offset, qint32 limit, bool callBack, qint32 timeout) {
     if(!mApi) {
         const ContactsBlocked &result = ContactsBlocked();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->contactsGetBlocked(offset, limit);
     if(msgId) {
-        callBackPush<ContactsBlocked >(msgId, callBack);
+        //callBackPush<ContactsBlocked >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "contactsGetBlocked";
-        mRecallArgs[msgId]["offset"] = QVariant::fromValue<qint32>(offset);
-        mRecallArgs[msgId]["limit"] = QVariant::fromValue<qint32>(limit);
+        //mRecallArgs[msgId][""] = "contactsGetBlocked";
+        //mRecallArgs[msgId]["offset"] = QVariant::fromValue<qint32>(offset);
+        //mRecallArgs[msgId]["limit"] = QVariant::fromValue<qint32>(limit);
     } else {
         const ContactsBlocked &result = ContactsBlocked();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -4191,7 +4191,7 @@ qint64 TelegramCore::contactsGetBlocked(qint32 offset, qint32 limit, Callback<Co
 void TelegramCore::onContactsGetBlockedAnswer(qint64 msgId, const ContactsBlocked &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<ContactsBlocked >(msgId, result);
+    //callBackCall<ContactsBlocked >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT contactsGetBlockedAnswer(msgId, result);
 }
@@ -4200,31 +4200,31 @@ void TelegramCore::onContactsGetBlockedError(qint64 msgId, qint32 errorCode, con
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const ContactsBlocked &result = ContactsBlocked();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<ContactsBlocked >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<ContactsBlocked >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT contactsGetBlockedError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::contactsExportCard(Callback<QList<qint32> > callBack, qint32 timeout) {
+qint64 TelegramCore::contactsExportCard(bool callBack, qint32 timeout) {
     if(!mApi) {
         const QList<qint32> &result = QList<qint32>();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->contactsExportCard();
     if(msgId) {
-        callBackPush<QList<qint32> >(msgId, callBack);
+        //callBackPush<QList<qint32> >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "contactsExportCard";
+        //mRecallArgs[msgId][""] = "contactsExportCard";
     } else {
         const QList<qint32> &result = QList<qint32>();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -4232,7 +4232,7 @@ qint64 TelegramCore::contactsExportCard(Callback<QList<qint32> > callBack, qint3
 void TelegramCore::onContactsExportCardAnswer(qint64 msgId, const QList<qint32> &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<QList<qint32> >(msgId, result);
+    //callBackCall<QList<qint32> >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT contactsExportCardAnswer(msgId, result);
 }
@@ -4241,32 +4241,32 @@ void TelegramCore::onContactsExportCardError(qint64 msgId, qint32 errorCode, con
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const QList<qint32> &result = QList<qint32>();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<QList<qint32> >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<QList<qint32> >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT contactsExportCardError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::contactsImportCard(const QList<qint32> &export_card, Callback<User > callBack, qint32 timeout) {
+qint64 TelegramCore::contactsImportCard(const QList<qint32> &export_card, bool callBack, qint32 timeout) {
     if(!mApi) {
         const User &result = User();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->contactsImportCard(export_card);
     if(msgId) {
-        callBackPush<User >(msgId, callBack);
+        //callBackPush<User >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "contactsImportCard";
-        mRecallArgs[msgId]["export_card"] = QVariant::fromValue<QList<qint32>>(export_card);
+        //mRecallArgs[msgId][""] = "contactsImportCard";
+        //mRecallArgs[msgId]["export_card"] = QVariant::fromValue<QList<qint32>>(export_card);
     } else {
         const User &result = User();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -4274,7 +4274,7 @@ qint64 TelegramCore::contactsImportCard(const QList<qint32> &export_card, Callba
 void TelegramCore::onContactsImportCardAnswer(qint64 msgId, const User &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<User >(msgId, result);
+    //callBackCall<User >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT contactsImportCardAnswer(msgId, result);
 }
@@ -4283,33 +4283,33 @@ void TelegramCore::onContactsImportCardError(qint64 msgId, qint32 errorCode, con
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const User &result = User();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<User >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<User >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT contactsImportCardError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::contactsSearch(const QString &q, qint32 limit, Callback<ContactsFound > callBack, qint32 timeout) {
+qint64 TelegramCore::contactsSearch(const QString &q, qint32 limit, bool callBack, qint32 timeout) {
     if(!mApi) {
         const ContactsFound &result = ContactsFound();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->contactsSearch(q, limit);
     if(msgId) {
-        callBackPush<ContactsFound >(msgId, callBack);
+        //callBackPush<ContactsFound >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "contactsSearch";
-        mRecallArgs[msgId]["q"] = QVariant::fromValue<QString>(q);
-        mRecallArgs[msgId]["limit"] = QVariant::fromValue<qint32>(limit);
+        //mRecallArgs[msgId][""] = "contactsSearch";
+        //mRecallArgs[msgId]["q"] = QVariant::fromValue<QString>(q);
+        //mRecallArgs[msgId]["limit"] = QVariant::fromValue<qint32>(limit);
     } else {
         const ContactsFound &result = ContactsFound();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -4317,7 +4317,7 @@ qint64 TelegramCore::contactsSearch(const QString &q, qint32 limit, Callback<Con
 void TelegramCore::onContactsSearchAnswer(qint64 msgId, const ContactsFound &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<ContactsFound >(msgId, result);
+    //callBackCall<ContactsFound >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT contactsSearchAnswer(msgId, result);
 }
@@ -4326,32 +4326,32 @@ void TelegramCore::onContactsSearchError(qint64 msgId, qint32 errorCode, const Q
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const ContactsFound &result = ContactsFound();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<ContactsFound >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<ContactsFound >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT contactsSearchError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::contactsResolveUsername(const QString &username, Callback<ContactsResolvedPeer > callBack, qint32 timeout) {
+qint64 TelegramCore::contactsResolveUsername(const QString &username, bool callBack, qint32 timeout) {
     if(!mApi) {
         const ContactsResolvedPeer &result = ContactsResolvedPeer();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->contactsResolveUsername(username);
     if(msgId) {
-        callBackPush<ContactsResolvedPeer >(msgId, callBack);
+        //callBackPush<ContactsResolvedPeer >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "contactsResolveUsername";
-        mRecallArgs[msgId]["username"] = QVariant::fromValue<QString>(username);
+        //mRecallArgs[msgId][""] = "contactsResolveUsername";
+        //mRecallArgs[msgId]["username"] = QVariant::fromValue<QString>(username);
     } else {
         const ContactsResolvedPeer &result = ContactsResolvedPeer();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -4359,7 +4359,7 @@ qint64 TelegramCore::contactsResolveUsername(const QString &username, Callback<C
 void TelegramCore::onContactsResolveUsernameAnswer(qint64 msgId, const ContactsResolvedPeer &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<ContactsResolvedPeer >(msgId, result);
+    //callBackCall<ContactsResolvedPeer >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT contactsResolveUsernameAnswer(msgId, result);
 }
@@ -4368,40 +4368,40 @@ void TelegramCore::onContactsResolveUsernameError(qint64 msgId, qint32 errorCode
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const ContactsResolvedPeer &result = ContactsResolvedPeer();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<ContactsResolvedPeer >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<ContactsResolvedPeer >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT contactsResolveUsernameError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::contactsGetTopPeers(bool correspondents, bool bots_pm, bool bots_inline, bool phone_calls, bool groups, bool channels, qint32 offset, qint32 limit, qint32 hash, Callback<ContactsTopPeers > callBack, qint32 timeout) {
+qint64 TelegramCore::contactsGetTopPeers(bool correspondents, bool bots_pm, bool bots_inline, bool phone_calls, bool groups, bool channels, qint32 offset, qint32 limit, qint32 hash, bool callBack, qint32 timeout) {
     if(!mApi) {
         const ContactsTopPeers &result = ContactsTopPeers();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->contactsGetTopPeers(correspondents, bots_pm, bots_inline, phone_calls, groups, channels, offset, limit, hash);
     if(msgId) {
-        callBackPush<ContactsTopPeers >(msgId, callBack);
+        //callBackPush<ContactsTopPeers >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "contactsGetTopPeers";
-        mRecallArgs[msgId]["correspondents"] = QVariant::fromValue<bool>(correspondents);
-        mRecallArgs[msgId]["bots_pm"] = QVariant::fromValue<bool>(bots_pm);
-        mRecallArgs[msgId]["bots_inline"] = QVariant::fromValue<bool>(bots_inline);
-        mRecallArgs[msgId]["phone_calls"] = QVariant::fromValue<bool>(phone_calls);
-        mRecallArgs[msgId]["groups"] = QVariant::fromValue<bool>(groups);
-        mRecallArgs[msgId]["channels"] = QVariant::fromValue<bool>(channels);
-        mRecallArgs[msgId]["offset"] = QVariant::fromValue<qint32>(offset);
-        mRecallArgs[msgId]["limit"] = QVariant::fromValue<qint32>(limit);
-        mRecallArgs[msgId]["hash"] = QVariant::fromValue<qint32>(hash);
+        //mRecallArgs[msgId][""] = "contactsGetTopPeers";
+        //mRecallArgs[msgId]["correspondents"] = QVariant::fromValue<bool>(correspondents);
+        //mRecallArgs[msgId]["bots_pm"] = QVariant::fromValue<bool>(bots_pm);
+        //mRecallArgs[msgId]["bots_inline"] = QVariant::fromValue<bool>(bots_inline);
+        //mRecallArgs[msgId]["phone_calls"] = QVariant::fromValue<bool>(phone_calls);
+        //mRecallArgs[msgId]["groups"] = QVariant::fromValue<bool>(groups);
+        //mRecallArgs[msgId]["channels"] = QVariant::fromValue<bool>(channels);
+        //mRecallArgs[msgId]["offset"] = QVariant::fromValue<qint32>(offset);
+        //mRecallArgs[msgId]["limit"] = QVariant::fromValue<qint32>(limit);
+        //mRecallArgs[msgId]["hash"] = QVariant::fromValue<qint32>(hash);
     } else {
         const ContactsTopPeers &result = ContactsTopPeers();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -4409,7 +4409,7 @@ qint64 TelegramCore::contactsGetTopPeers(bool correspondents, bool bots_pm, bool
 void TelegramCore::onContactsGetTopPeersAnswer(qint64 msgId, const ContactsTopPeers &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<ContactsTopPeers >(msgId, result);
+    //callBackCall<ContactsTopPeers >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT contactsGetTopPeersAnswer(msgId, result);
 }
@@ -4418,33 +4418,33 @@ void TelegramCore::onContactsGetTopPeersError(qint64 msgId, qint32 errorCode, co
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const ContactsTopPeers &result = ContactsTopPeers();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<ContactsTopPeers >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<ContactsTopPeers >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT contactsGetTopPeersError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::contactsResetTopPeerRating(const TopPeerCategory &category, const InputPeer &peer, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::contactsResetTopPeerRating(const TopPeerCategory &category, const InputPeer &peer, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->contactsResetTopPeerRating(category, peer);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "contactsResetTopPeerRating";
-        mRecallArgs[msgId]["category"] = QVariant::fromValue<TopPeerCategory>(category);
-        mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
+        //mRecallArgs[msgId][""] = "contactsResetTopPeerRating";
+        //mRecallArgs[msgId]["category"] = QVariant::fromValue<TopPeerCategory>(category);
+        //mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -4452,7 +4452,7 @@ qint64 TelegramCore::contactsResetTopPeerRating(const TopPeerCategory &category,
 void TelegramCore::onContactsResetTopPeerRatingAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT contactsResetTopPeerRatingAnswer(msgId, result);
 }
@@ -4461,32 +4461,32 @@ void TelegramCore::onContactsResetTopPeerRatingError(qint64 msgId, qint32 errorC
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT contactsResetTopPeerRatingError(msgId, errorCode, errorText);
 }
 
 
-qint64 TelegramCore::helpGetConfig(Callback<Config > callBack, qint32 timeout) {
+qint64 TelegramCore::helpGetConfig(bool callBack, qint32 timeout) {
     if(!mApi) {
         const Config &result = Config();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->helpGetConfig();
     if(msgId) {
-        callBackPush<Config >(msgId, callBack);
+        //callBackPush<Config >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "helpGetConfig";
+        //mRecallArgs[msgId][""] = "helpGetConfig";
     } else {
         const Config &result = Config();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -4494,7 +4494,7 @@ qint64 TelegramCore::helpGetConfig(Callback<Config > callBack, qint32 timeout) {
 void TelegramCore::onHelpGetConfigAnswer(qint64 msgId, const Config &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<Config >(msgId, result);
+    //callBackCall<Config >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT helpGetConfigAnswer(msgId, result);
 }
@@ -4503,31 +4503,31 @@ void TelegramCore::onHelpGetConfigError(qint64 msgId, qint32 errorCode, const QS
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const Config &result = Config();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<Config >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<Config >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT helpGetConfigError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::helpGetNearestDc(Callback<NearestDc > callBack, qint32 timeout) {
+qint64 TelegramCore::helpGetNearestDc(bool callBack, qint32 timeout) {
     if(!mApi) {
         const NearestDc &result = NearestDc();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->helpGetNearestDc();
     if(msgId) {
-        callBackPush<NearestDc >(msgId, callBack);
+        //callBackPush<NearestDc >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "helpGetNearestDc";
+        //mRecallArgs[msgId][""] = "helpGetNearestDc";
     } else {
         const NearestDc &result = NearestDc();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -4535,7 +4535,7 @@ qint64 TelegramCore::helpGetNearestDc(Callback<NearestDc > callBack, qint32 time
 void TelegramCore::onHelpGetNearestDcAnswer(qint64 msgId, const NearestDc &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<NearestDc >(msgId, result);
+    //callBackCall<NearestDc >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT helpGetNearestDcAnswer(msgId, result);
 }
@@ -4544,31 +4544,31 @@ void TelegramCore::onHelpGetNearestDcError(qint64 msgId, qint32 errorCode, const
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const NearestDc &result = NearestDc();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<NearestDc >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<NearestDc >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT helpGetNearestDcError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::helpGetAppUpdate(Callback<HelpAppUpdate > callBack, qint32 timeout) {
+qint64 TelegramCore::helpGetAppUpdate(bool callBack, qint32 timeout) {
     if(!mApi) {
         const HelpAppUpdate &result = HelpAppUpdate();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->helpGetAppUpdate();
     if(msgId) {
-        callBackPush<HelpAppUpdate >(msgId, callBack);
+        //callBackPush<HelpAppUpdate >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "helpGetAppUpdate";
+        //mRecallArgs[msgId][""] = "helpGetAppUpdate";
     } else {
         const HelpAppUpdate &result = HelpAppUpdate();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -4576,7 +4576,7 @@ qint64 TelegramCore::helpGetAppUpdate(Callback<HelpAppUpdate > callBack, qint32 
 void TelegramCore::onHelpGetAppUpdateAnswer(qint64 msgId, const HelpAppUpdate &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<HelpAppUpdate >(msgId, result);
+    //callBackCall<HelpAppUpdate >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT helpGetAppUpdateAnswer(msgId, result);
 }
@@ -4585,32 +4585,32 @@ void TelegramCore::onHelpGetAppUpdateError(qint64 msgId, qint32 errorCode, const
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const HelpAppUpdate &result = HelpAppUpdate();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<HelpAppUpdate >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<HelpAppUpdate >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT helpGetAppUpdateError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::helpSaveAppLog(const QList<InputAppEvent> &events, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::helpSaveAppLog(const QList<InputAppEvent> &events, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->helpSaveAppLog(events);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "helpSaveAppLog";
-        mRecallArgs[msgId]["events"] = QVariant::fromValue<QList<InputAppEvent>>(events);
+        //mRecallArgs[msgId][""] = "helpSaveAppLog";
+        //mRecallArgs[msgId]["events"] = QVariant::fromValue<QList<InputAppEvent>>(events);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -4618,7 +4618,7 @@ qint64 TelegramCore::helpSaveAppLog(const QList<InputAppEvent> &events, Callback
 void TelegramCore::onHelpSaveAppLogAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT helpSaveAppLogAnswer(msgId, result);
 }
@@ -4627,31 +4627,31 @@ void TelegramCore::onHelpSaveAppLogError(qint64 msgId, qint32 errorCode, const Q
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT helpSaveAppLogError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::helpGetInviteText(Callback<HelpInviteText > callBack, qint32 timeout) {
+qint64 TelegramCore::helpGetInviteText(bool callBack, qint32 timeout) {
     if(!mApi) {
         const HelpInviteText &result = HelpInviteText();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->helpGetInviteText();
     if(msgId) {
-        callBackPush<HelpInviteText >(msgId, callBack);
+        //callBackPush<HelpInviteText >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "helpGetInviteText";
+        //mRecallArgs[msgId][""] = "helpGetInviteText";
     } else {
         const HelpInviteText &result = HelpInviteText();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -4659,7 +4659,7 @@ qint64 TelegramCore::helpGetInviteText(Callback<HelpInviteText > callBack, qint3
 void TelegramCore::onHelpGetInviteTextAnswer(qint64 msgId, const HelpInviteText &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<HelpInviteText >(msgId, result);
+    //callBackCall<HelpInviteText >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT helpGetInviteTextAnswer(msgId, result);
 }
@@ -4668,31 +4668,31 @@ void TelegramCore::onHelpGetInviteTextError(qint64 msgId, qint32 errorCode, cons
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const HelpInviteText &result = HelpInviteText();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<HelpInviteText >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<HelpInviteText >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT helpGetInviteTextError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::helpGetSupport(Callback<HelpSupport > callBack, qint32 timeout) {
+qint64 TelegramCore::helpGetSupport(bool callBack, qint32 timeout) {
     if(!mApi) {
         const HelpSupport &result = HelpSupport();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->helpGetSupport();
     if(msgId) {
-        callBackPush<HelpSupport >(msgId, callBack);
+        //callBackPush<HelpSupport >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "helpGetSupport";
+        //mRecallArgs[msgId][""] = "helpGetSupport";
     } else {
         const HelpSupport &result = HelpSupport();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -4700,7 +4700,7 @@ qint64 TelegramCore::helpGetSupport(Callback<HelpSupport > callBack, qint32 time
 void TelegramCore::onHelpGetSupportAnswer(qint64 msgId, const HelpSupport &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<HelpSupport >(msgId, result);
+    //callBackCall<HelpSupport >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT helpGetSupportAnswer(msgId, result);
 }
@@ -4709,32 +4709,32 @@ void TelegramCore::onHelpGetSupportError(qint64 msgId, qint32 errorCode, const Q
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const HelpSupport &result = HelpSupport();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<HelpSupport >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<HelpSupport >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT helpGetSupportError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::helpGetAppChangelog(const QString &prev_app_version, Callback<UpdatesType > callBack, qint32 timeout) {
+qint64 TelegramCore::helpGetAppChangelog(const QString &prev_app_version, bool callBack, qint32 timeout) {
     if(!mApi) {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->helpGetAppChangelog(prev_app_version);
     if(msgId) {
-        callBackPush<UpdatesType >(msgId, callBack);
+        //callBackPush<UpdatesType >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "helpGetAppChangelog";
-        mRecallArgs[msgId]["prev_app_version"] = QVariant::fromValue<QString>(prev_app_version);
+        //mRecallArgs[msgId][""] = "helpGetAppChangelog";
+        //mRecallArgs[msgId]["prev_app_version"] = QVariant::fromValue<QString>(prev_app_version);
     } else {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -4742,7 +4742,7 @@ qint64 TelegramCore::helpGetAppChangelog(const QString &prev_app_version, Callba
 void TelegramCore::onHelpGetAppChangelogAnswer(qint64 msgId, const UpdatesType &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<UpdatesType >(msgId, result);
+    //callBackCall<UpdatesType >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT helpGetAppChangelogAnswer(msgId, result);
 }
@@ -4751,31 +4751,31 @@ void TelegramCore::onHelpGetAppChangelogError(qint64 msgId, qint32 errorCode, co
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const UpdatesType &result = UpdatesType();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<UpdatesType >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<UpdatesType >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT helpGetAppChangelogError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::helpGetTermsOfService(Callback<HelpTermsOfService > callBack, qint32 timeout) {
+qint64 TelegramCore::helpGetTermsOfService(bool callBack, qint32 timeout) {
     if(!mApi) {
         const HelpTermsOfService &result = HelpTermsOfService();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->helpGetTermsOfService();
     if(msgId) {
-        callBackPush<HelpTermsOfService >(msgId, callBack);
+        //callBackPush<HelpTermsOfService >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "helpGetTermsOfService";
+        //mRecallArgs[msgId][""] = "helpGetTermsOfService";
     } else {
         const HelpTermsOfService &result = HelpTermsOfService();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -4783,7 +4783,7 @@ qint64 TelegramCore::helpGetTermsOfService(Callback<HelpTermsOfService > callBac
 void TelegramCore::onHelpGetTermsOfServiceAnswer(qint64 msgId, const HelpTermsOfService &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<HelpTermsOfService >(msgId, result);
+    //callBackCall<HelpTermsOfService >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT helpGetTermsOfServiceAnswer(msgId, result);
 }
@@ -4792,33 +4792,33 @@ void TelegramCore::onHelpGetTermsOfServiceError(qint64 msgId, qint32 errorCode, 
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const HelpTermsOfService &result = HelpTermsOfService();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<HelpTermsOfService >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<HelpTermsOfService >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT helpGetTermsOfServiceError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::helpSetBotUpdatesStatus(qint32 pending_updates_count, const QString &message, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::helpSetBotUpdatesStatus(qint32 pending_updates_count, const QString &message, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->helpSetBotUpdatesStatus(pending_updates_count, message);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "helpSetBotUpdatesStatus";
-        mRecallArgs[msgId]["pending_updates_count"] = QVariant::fromValue<qint32>(pending_updates_count);
-        mRecallArgs[msgId]["message"] = QVariant::fromValue<QString>(message);
+        //mRecallArgs[msgId][""] = "helpSetBotUpdatesStatus";
+        //mRecallArgs[msgId]["pending_updates_count"] = QVariant::fromValue<qint32>(pending_updates_count);
+        //mRecallArgs[msgId]["message"] = QVariant::fromValue<QString>(message);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -4826,7 +4826,7 @@ qint64 TelegramCore::helpSetBotUpdatesStatus(qint32 pending_updates_count, const
 void TelegramCore::onHelpSetBotUpdatesStatusAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT helpSetBotUpdatesStatusAnswer(msgId, result);
 }
@@ -4835,31 +4835,31 @@ void TelegramCore::onHelpSetBotUpdatesStatusError(qint64 msgId, qint32 errorCode
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT helpSetBotUpdatesStatusError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::helpGetCdnConfig(Callback<CdnConfig > callBack, qint32 timeout) {
+qint64 TelegramCore::helpGetCdnConfig(bool callBack, qint32 timeout) {
     if(!mApi) {
         const CdnConfig &result = CdnConfig();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->helpGetCdnConfig();
     if(msgId) {
-        callBackPush<CdnConfig >(msgId, callBack);
+        //callBackPush<CdnConfig >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "helpGetCdnConfig";
+        //mRecallArgs[msgId][""] = "helpGetCdnConfig";
     } else {
         const CdnConfig &result = CdnConfig();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -4867,7 +4867,7 @@ qint64 TelegramCore::helpGetCdnConfig(Callback<CdnConfig > callBack, qint32 time
 void TelegramCore::onHelpGetCdnConfigAnswer(qint64 msgId, const CdnConfig &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<CdnConfig >(msgId, result);
+    //callBackCall<CdnConfig >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT helpGetCdnConfigAnswer(msgId, result);
 }
@@ -4876,33 +4876,33 @@ void TelegramCore::onHelpGetCdnConfigError(qint64 msgId, qint32 errorCode, const
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const CdnConfig &result = CdnConfig();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<CdnConfig >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<CdnConfig >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT helpGetCdnConfigError(msgId, errorCode, errorText);
 }
 
 
-qint64 TelegramCore::langpackGetLangPack(const QString &lang_code, Callback<LangPackDifference > callBack, qint32 timeout) {
+qint64 TelegramCore::langpackGetLangPack(const QString &lang_code, bool callBack, qint32 timeout) {
     if(!mApi) {
         const LangPackDifference &result = LangPackDifference();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->langpackGetLangPack(lang_code);
     if(msgId) {
-        callBackPush<LangPackDifference >(msgId, callBack);
+        //callBackPush<LangPackDifference >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "langpackGetLangPack";
-        mRecallArgs[msgId]["lang_code"] = QVariant::fromValue<QString>(lang_code);
+        //mRecallArgs[msgId][""] = "langpackGetLangPack";
+        //mRecallArgs[msgId]["lang_code"] = QVariant::fromValue<QString>(lang_code);
     } else {
         const LangPackDifference &result = LangPackDifference();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -4910,7 +4910,7 @@ qint64 TelegramCore::langpackGetLangPack(const QString &lang_code, Callback<Lang
 void TelegramCore::onLangpackGetLangPackAnswer(qint64 msgId, const LangPackDifference &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<LangPackDifference >(msgId, result);
+    //callBackCall<LangPackDifference >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT langpackGetLangPackAnswer(msgId, result);
 }
@@ -4919,33 +4919,33 @@ void TelegramCore::onLangpackGetLangPackError(qint64 msgId, qint32 errorCode, co
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const LangPackDifference &result = LangPackDifference();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<LangPackDifference >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<LangPackDifference >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT langpackGetLangPackError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::langpackGetStrings(const QString &lang_code, const QList<QString> &keys, Callback<QList<LangPackString> > callBack, qint32 timeout) {
+qint64 TelegramCore::langpackGetStrings(const QString &lang_code, const QList<QString> &keys, bool callBack, qint32 timeout) {
     if(!mApi) {
         const QList<LangPackString> &result = QList<LangPackString>();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->langpackGetStrings(lang_code, keys);
     if(msgId) {
-        callBackPush<QList<LangPackString> >(msgId, callBack);
+        //callBackPush<QList<LangPackString> >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "langpackGetStrings";
-        mRecallArgs[msgId]["lang_code"] = QVariant::fromValue<QString>(lang_code);
-        mRecallArgs[msgId]["keys"] = QVariant::fromValue<QList<QString>>(keys);
+        //mRecallArgs[msgId][""] = "langpackGetStrings";
+        //mRecallArgs[msgId]["lang_code"] = QVariant::fromValue<QString>(lang_code);
+        //mRecallArgs[msgId]["keys"] = QVariant::fromValue<QList<QString>>(keys);
     } else {
         const QList<LangPackString> &result = QList<LangPackString>();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -4953,7 +4953,7 @@ qint64 TelegramCore::langpackGetStrings(const QString &lang_code, const QList<QS
 void TelegramCore::onLangpackGetStringsAnswer(qint64 msgId, const QList<LangPackString> &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<QList<LangPackString> >(msgId, result);
+    //callBackCall<QList<LangPackString> >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT langpackGetStringsAnswer(msgId, result);
 }
@@ -4962,32 +4962,32 @@ void TelegramCore::onLangpackGetStringsError(qint64 msgId, qint32 errorCode, con
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const QList<LangPackString> &result = QList<LangPackString>();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<QList<LangPackString> >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<QList<LangPackString> >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT langpackGetStringsError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::langpackGetDifference(qint32 from_version, Callback<LangPackDifference > callBack, qint32 timeout) {
+qint64 TelegramCore::langpackGetDifference(qint32 from_version, bool callBack, qint32 timeout) {
     if(!mApi) {
         const LangPackDifference &result = LangPackDifference();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->langpackGetDifference(from_version);
     if(msgId) {
-        callBackPush<LangPackDifference >(msgId, callBack);
+        //callBackPush<LangPackDifference >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "langpackGetDifference";
-        mRecallArgs[msgId]["from_version"] = QVariant::fromValue<qint32>(from_version);
+        //mRecallArgs[msgId][""] = "langpackGetDifference";
+        //mRecallArgs[msgId]["from_version"] = QVariant::fromValue<qint32>(from_version);
     } else {
         const LangPackDifference &result = LangPackDifference();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -4995,7 +4995,7 @@ qint64 TelegramCore::langpackGetDifference(qint32 from_version, Callback<LangPac
 void TelegramCore::onLangpackGetDifferenceAnswer(qint64 msgId, const LangPackDifference &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<LangPackDifference >(msgId, result);
+    //callBackCall<LangPackDifference >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT langpackGetDifferenceAnswer(msgId, result);
 }
@@ -5004,31 +5004,31 @@ void TelegramCore::onLangpackGetDifferenceError(qint64 msgId, qint32 errorCode, 
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const LangPackDifference &result = LangPackDifference();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<LangPackDifference >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<LangPackDifference >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT langpackGetDifferenceError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::langpackGetLanguages(Callback<QList<LangPackLanguage> > callBack, qint32 timeout) {
+qint64 TelegramCore::langpackGetLanguages(bool callBack, qint32 timeout) {
     if(!mApi) {
         const QList<LangPackLanguage> &result = QList<LangPackLanguage>();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->langpackGetLanguages();
     if(msgId) {
-        callBackPush<QList<LangPackLanguage> >(msgId, callBack);
+        //callBackPush<QList<LangPackLanguage> >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "langpackGetLanguages";
+        //mRecallArgs[msgId][""] = "langpackGetLanguages";
     } else {
         const QList<LangPackLanguage> &result = QList<LangPackLanguage>();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -5036,7 +5036,7 @@ qint64 TelegramCore::langpackGetLanguages(Callback<QList<LangPackLanguage> > cal
 void TelegramCore::onLangpackGetLanguagesAnswer(qint64 msgId, const QList<LangPackLanguage> &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<QList<LangPackLanguage> >(msgId, result);
+    //callBackCall<QList<LangPackLanguage> >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT langpackGetLanguagesAnswer(msgId, result);
 }
@@ -5045,33 +5045,33 @@ void TelegramCore::onLangpackGetLanguagesError(qint64 msgId, qint32 errorCode, c
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const QList<LangPackLanguage> &result = QList<LangPackLanguage>();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<QList<LangPackLanguage> >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<QList<LangPackLanguage> >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT langpackGetLanguagesError(msgId, errorCode, errorText);
 }
 
 
-qint64 TelegramCore::messagesGetMessages(const QList<qint32> &id, Callback<MessagesMessages > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesGetMessages(const QList<qint32> &id, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesMessages &result = MessagesMessages();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesGetMessages(id);
     if(msgId) {
-        callBackPush<MessagesMessages >(msgId, callBack);
+        //callBackPush<MessagesMessages >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesGetMessages";
-        mRecallArgs[msgId]["id"] = QVariant::fromValue<QList<qint32>>(id);
+        //mRecallArgs[msgId][""] = "messagesGetMessages";
+        //mRecallArgs[msgId]["id"] = QVariant::fromValue<QList<qint32>>(id);
     } else {
         const MessagesMessages &result = MessagesMessages();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -5079,7 +5079,7 @@ qint64 TelegramCore::messagesGetMessages(const QList<qint32> &id, Callback<Messa
 void TelegramCore::onMessagesGetMessagesAnswer(qint64 msgId, const MessagesMessages &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesMessages >(msgId, result);
+    //callBackCall<MessagesMessages >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesGetMessagesAnswer(msgId, result);
 }
@@ -5088,36 +5088,36 @@ void TelegramCore::onMessagesGetMessagesError(qint64 msgId, qint32 errorCode, co
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesMessages &result = MessagesMessages();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesMessages >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesMessages >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesGetMessagesError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesGetDialogs(bool exclude_pinned, qint32 offset_date, qint32 offset_id, const InputPeer &offset_peer, qint32 limit, Callback<MessagesDialogs > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesGetDialogs(bool exclude_pinned, qint32 offset_date, qint32 offset_id, const InputPeer &offset_peer, qint32 limit, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesDialogs &result = MessagesDialogs();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesGetDialogs(exclude_pinned, offset_date, offset_id, offset_peer, limit);
     if(msgId) {
-        callBackPush<MessagesDialogs >(msgId, callBack);
+        //callBackPush<MessagesDialogs >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesGetDialogs";
-        mRecallArgs[msgId]["exclude_pinned"] = QVariant::fromValue<bool>(exclude_pinned);
-        mRecallArgs[msgId]["offset_date"] = QVariant::fromValue<qint32>(offset_date);
-        mRecallArgs[msgId]["offset_id"] = QVariant::fromValue<qint32>(offset_id);
-        mRecallArgs[msgId]["offset_peer"] = QVariant::fromValue<InputPeer>(offset_peer);
-        mRecallArgs[msgId]["limit"] = QVariant::fromValue<qint32>(limit);
+        //mRecallArgs[msgId][""] = "messagesGetDialogs";
+        //mRecallArgs[msgId]["exclude_pinned"] = QVariant::fromValue<bool>(exclude_pinned);
+        //mRecallArgs[msgId]["offset_date"] = QVariant::fromValue<qint32>(offset_date);
+        //mRecallArgs[msgId]["offset_id"] = QVariant::fromValue<qint32>(offset_id);
+        //mRecallArgs[msgId]["offset_peer"] = QVariant::fromValue<InputPeer>(offset_peer);
+        //mRecallArgs[msgId]["limit"] = QVariant::fromValue<qint32>(limit);
     } else {
         const MessagesDialogs &result = MessagesDialogs();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -5125,7 +5125,7 @@ qint64 TelegramCore::messagesGetDialogs(bool exclude_pinned, qint32 offset_date,
 void TelegramCore::onMessagesGetDialogsAnswer(qint64 msgId, const MessagesDialogs &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesDialogs >(msgId, result);
+    //callBackCall<MessagesDialogs >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesGetDialogsAnswer(msgId, result);
 }
@@ -5134,38 +5134,38 @@ void TelegramCore::onMessagesGetDialogsError(qint64 msgId, qint32 errorCode, con
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesDialogs &result = MessagesDialogs();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesDialogs >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesDialogs >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesGetDialogsError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesGetHistory(const InputPeer &peer, qint32 offset_id, qint32 offset_date, qint32 add_offset, qint32 limit, qint32 max_id, qint32 min_id, Callback<MessagesMessages > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesGetHistory(const InputPeer &peer, qint32 offset_id, qint32 offset_date, qint32 add_offset, qint32 limit, qint32 max_id, qint32 min_id, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesMessages &result = MessagesMessages();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesGetHistory(peer, offset_id, offset_date, add_offset, limit, max_id, min_id);
     if(msgId) {
-        callBackPush<MessagesMessages >(msgId, callBack);
+        //callBackPush<MessagesMessages >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesGetHistory";
-        mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
-        mRecallArgs[msgId]["offset_id"] = QVariant::fromValue<qint32>(offset_id);
-        mRecallArgs[msgId]["offset_date"] = QVariant::fromValue<qint32>(offset_date);
-        mRecallArgs[msgId]["add_offset"] = QVariant::fromValue<qint32>(add_offset);
-        mRecallArgs[msgId]["limit"] = QVariant::fromValue<qint32>(limit);
-        mRecallArgs[msgId]["max_id"] = QVariant::fromValue<qint32>(max_id);
-        mRecallArgs[msgId]["min_id"] = QVariant::fromValue<qint32>(min_id);
+        //mRecallArgs[msgId][""] = "messagesGetHistory";
+        //mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
+        //mRecallArgs[msgId]["offset_id"] = QVariant::fromValue<qint32>(offset_id);
+        //mRecallArgs[msgId]["offset_date"] = QVariant::fromValue<qint32>(offset_date);
+        //mRecallArgs[msgId]["add_offset"] = QVariant::fromValue<qint32>(add_offset);
+        //mRecallArgs[msgId]["limit"] = QVariant::fromValue<qint32>(limit);
+        //mRecallArgs[msgId]["max_id"] = QVariant::fromValue<qint32>(max_id);
+        //mRecallArgs[msgId]["min_id"] = QVariant::fromValue<qint32>(min_id);
     } else {
         const MessagesMessages &result = MessagesMessages();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -5173,7 +5173,7 @@ qint64 TelegramCore::messagesGetHistory(const InputPeer &peer, qint32 offset_id,
 void TelegramCore::onMessagesGetHistoryAnswer(qint64 msgId, const MessagesMessages &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesMessages >(msgId, result);
+    //callBackCall<MessagesMessages >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesGetHistoryAnswer(msgId, result);
 }
@@ -5182,40 +5182,40 @@ void TelegramCore::onMessagesGetHistoryError(qint64 msgId, qint32 errorCode, con
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesMessages &result = MessagesMessages();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesMessages >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesMessages >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesGetHistoryError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesSearch(const InputPeer &peer, const QString &q, const InputUser &from_id, const MessagesFilter &filter, qint32 min_date, qint32 max_date, qint32 offset, qint32 max_id, qint32 limit, Callback<MessagesMessages > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesSearch(const InputPeer &peer, const QString &q, const InputUser &from_id, const MessagesFilter &filter, qint32 min_date, qint32 max_date, qint32 offset, qint32 max_id, qint32 limit, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesMessages &result = MessagesMessages();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesSearch(peer, q, from_id, filter, min_date, max_date, offset, max_id, limit);
     if(msgId) {
-        callBackPush<MessagesMessages >(msgId, callBack);
+        //callBackPush<MessagesMessages >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesSearch";
-        mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
-        mRecallArgs[msgId]["q"] = QVariant::fromValue<QString>(q);
-        mRecallArgs[msgId]["from_id"] = QVariant::fromValue<InputUser>(from_id);
-        mRecallArgs[msgId]["filter"] = QVariant::fromValue<MessagesFilter>(filter);
-        mRecallArgs[msgId]["min_date"] = QVariant::fromValue<qint32>(min_date);
-        mRecallArgs[msgId]["max_date"] = QVariant::fromValue<qint32>(max_date);
-        mRecallArgs[msgId]["offset"] = QVariant::fromValue<qint32>(offset);
-        mRecallArgs[msgId]["max_id"] = QVariant::fromValue<qint32>(max_id);
-        mRecallArgs[msgId]["limit"] = QVariant::fromValue<qint32>(limit);
+        //mRecallArgs[msgId][""] = "messagesSearch";
+        //mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
+        //mRecallArgs[msgId]["q"] = QVariant::fromValue<QString>(q);
+        //mRecallArgs[msgId]["from_id"] = QVariant::fromValue<InputUser>(from_id);
+        //mRecallArgs[msgId]["filter"] = QVariant::fromValue<MessagesFilter>(filter);
+        //mRecallArgs[msgId]["min_date"] = QVariant::fromValue<qint32>(min_date);
+        //mRecallArgs[msgId]["max_date"] = QVariant::fromValue<qint32>(max_date);
+        //mRecallArgs[msgId]["offset"] = QVariant::fromValue<qint32>(offset);
+        //mRecallArgs[msgId]["max_id"] = QVariant::fromValue<qint32>(max_id);
+        //mRecallArgs[msgId]["limit"] = QVariant::fromValue<qint32>(limit);
     } else {
         const MessagesMessages &result = MessagesMessages();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -5223,7 +5223,7 @@ qint64 TelegramCore::messagesSearch(const InputPeer &peer, const QString &q, con
 void TelegramCore::onMessagesSearchAnswer(qint64 msgId, const MessagesMessages &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesMessages >(msgId, result);
+    //callBackCall<MessagesMessages >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesSearchAnswer(msgId, result);
 }
@@ -5232,33 +5232,33 @@ void TelegramCore::onMessagesSearchError(qint64 msgId, qint32 errorCode, const Q
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesMessages &result = MessagesMessages();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesMessages >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesMessages >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesSearchError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesReadHistory(const InputPeer &peer, qint32 max_id, Callback<MessagesAffectedMessages > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesReadHistory(const InputPeer &peer, qint32 max_id, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesAffectedMessages &result = MessagesAffectedMessages();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesReadHistory(peer, max_id);
     if(msgId) {
-        callBackPush<MessagesAffectedMessages >(msgId, callBack);
+        //callBackPush<MessagesAffectedMessages >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesReadHistory";
-        mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
-        mRecallArgs[msgId]["max_id"] = QVariant::fromValue<qint32>(max_id);
+        //mRecallArgs[msgId][""] = "messagesReadHistory";
+        //mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
+        //mRecallArgs[msgId]["max_id"] = QVariant::fromValue<qint32>(max_id);
     } else {
         const MessagesAffectedMessages &result = MessagesAffectedMessages();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -5266,7 +5266,7 @@ qint64 TelegramCore::messagesReadHistory(const InputPeer &peer, qint32 max_id, C
 void TelegramCore::onMessagesReadHistoryAnswer(qint64 msgId, const MessagesAffectedMessages &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesAffectedMessages >(msgId, result);
+    //callBackCall<MessagesAffectedMessages >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesReadHistoryAnswer(msgId, result);
 }
@@ -5275,34 +5275,34 @@ void TelegramCore::onMessagesReadHistoryError(qint64 msgId, qint32 errorCode, co
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesAffectedMessages &result = MessagesAffectedMessages();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesAffectedMessages >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesAffectedMessages >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesReadHistoryError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesDeleteHistory(bool just_clear, const InputPeer &peer, qint32 max_id, Callback<MessagesAffectedHistory > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesDeleteHistory(bool just_clear, const InputPeer &peer, qint32 max_id, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesAffectedHistory &result = MessagesAffectedHistory();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesDeleteHistory(just_clear, peer, max_id);
     if(msgId) {
-        callBackPush<MessagesAffectedHistory >(msgId, callBack);
+        //callBackPush<MessagesAffectedHistory >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesDeleteHistory";
-        mRecallArgs[msgId]["just_clear"] = QVariant::fromValue<bool>(just_clear);
-        mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
-        mRecallArgs[msgId]["max_id"] = QVariant::fromValue<qint32>(max_id);
+        //mRecallArgs[msgId][""] = "messagesDeleteHistory";
+        //mRecallArgs[msgId]["just_clear"] = QVariant::fromValue<bool>(just_clear);
+        //mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
+        //mRecallArgs[msgId]["max_id"] = QVariant::fromValue<qint32>(max_id);
     } else {
         const MessagesAffectedHistory &result = MessagesAffectedHistory();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -5310,7 +5310,7 @@ qint64 TelegramCore::messagesDeleteHistory(bool just_clear, const InputPeer &pee
 void TelegramCore::onMessagesDeleteHistoryAnswer(qint64 msgId, const MessagesAffectedHistory &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesAffectedHistory >(msgId, result);
+    //callBackCall<MessagesAffectedHistory >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesDeleteHistoryAnswer(msgId, result);
 }
@@ -5319,33 +5319,33 @@ void TelegramCore::onMessagesDeleteHistoryError(qint64 msgId, qint32 errorCode, 
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesAffectedHistory &result = MessagesAffectedHistory();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesAffectedHistory >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesAffectedHistory >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesDeleteHistoryError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesDeleteMessages(bool revoke, const QList<qint32> &id, Callback<MessagesAffectedMessages > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesDeleteMessages(bool revoke, const QList<qint32> &id, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesAffectedMessages &result = MessagesAffectedMessages();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesDeleteMessages(revoke, id);
     if(msgId) {
-        callBackPush<MessagesAffectedMessages >(msgId, callBack);
+        //callBackPush<MessagesAffectedMessages >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesDeleteMessages";
-        mRecallArgs[msgId]["revoke"] = QVariant::fromValue<bool>(revoke);
-        mRecallArgs[msgId]["id"] = QVariant::fromValue<QList<qint32>>(id);
+        //mRecallArgs[msgId][""] = "messagesDeleteMessages";
+        //mRecallArgs[msgId]["revoke"] = QVariant::fromValue<bool>(revoke);
+        //mRecallArgs[msgId]["id"] = QVariant::fromValue<QList<qint32>>(id);
     } else {
         const MessagesAffectedMessages &result = MessagesAffectedMessages();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -5353,7 +5353,7 @@ qint64 TelegramCore::messagesDeleteMessages(bool revoke, const QList<qint32> &id
 void TelegramCore::onMessagesDeleteMessagesAnswer(qint64 msgId, const MessagesAffectedMessages &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesAffectedMessages >(msgId, result);
+    //callBackCall<MessagesAffectedMessages >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesDeleteMessagesAnswer(msgId, result);
 }
@@ -5362,32 +5362,32 @@ void TelegramCore::onMessagesDeleteMessagesError(qint64 msgId, qint32 errorCode,
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesAffectedMessages &result = MessagesAffectedMessages();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesAffectedMessages >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesAffectedMessages >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesDeleteMessagesError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesReceivedMessages(qint32 max_id, Callback<QList<ReceivedNotifyMessage> > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesReceivedMessages(qint32 max_id, bool callBack, qint32 timeout) {
     if(!mApi) {
         const QList<ReceivedNotifyMessage> &result = QList<ReceivedNotifyMessage>();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesReceivedMessages(max_id);
     if(msgId) {
-        callBackPush<QList<ReceivedNotifyMessage> >(msgId, callBack);
+        //callBackPush<QList<ReceivedNotifyMessage> >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesReceivedMessages";
-        mRecallArgs[msgId]["max_id"] = QVariant::fromValue<qint32>(max_id);
+        //mRecallArgs[msgId][""] = "messagesReceivedMessages";
+        //mRecallArgs[msgId]["max_id"] = QVariant::fromValue<qint32>(max_id);
     } else {
         const QList<ReceivedNotifyMessage> &result = QList<ReceivedNotifyMessage>();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -5395,7 +5395,7 @@ qint64 TelegramCore::messagesReceivedMessages(qint32 max_id, Callback<QList<Rece
 void TelegramCore::onMessagesReceivedMessagesAnswer(qint64 msgId, const QList<ReceivedNotifyMessage> &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<QList<ReceivedNotifyMessage> >(msgId, result);
+    //callBackCall<QList<ReceivedNotifyMessage> >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesReceivedMessagesAnswer(msgId, result);
 }
@@ -5404,33 +5404,33 @@ void TelegramCore::onMessagesReceivedMessagesError(qint64 msgId, qint32 errorCod
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const QList<ReceivedNotifyMessage> &result = QList<ReceivedNotifyMessage>();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<QList<ReceivedNotifyMessage> >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<QList<ReceivedNotifyMessage> >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesReceivedMessagesError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesSetTyping(const InputPeer &peer, const SendMessageAction &action, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesSetTyping(const InputPeer &peer, const SendMessageAction &action, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesSetTyping(peer, action);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesSetTyping";
-        mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
-        mRecallArgs[msgId]["action"] = QVariant::fromValue<SendMessageAction>(action);
+        //mRecallArgs[msgId][""] = "messagesSetTyping";
+        //mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
+        //mRecallArgs[msgId]["action"] = QVariant::fromValue<SendMessageAction>(action);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -5438,7 +5438,7 @@ qint64 TelegramCore::messagesSetTyping(const InputPeer &peer, const SendMessageA
 void TelegramCore::onMessagesSetTypingAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesSetTypingAnswer(msgId, result);
 }
@@ -5447,41 +5447,41 @@ void TelegramCore::onMessagesSetTypingError(qint64 msgId, qint32 errorCode, cons
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesSetTypingError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesSendMessage(bool no_webpage, bool silent, bool background, bool clear_draft, const InputPeer &peer, qint32 reply_to_msg_id, const QString &message, qint64 random_id, const ReplyMarkup &reply_markup, const QList<MessageEntity> &entities, Callback<UpdatesType > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesSendMessage(bool no_webpage, bool silent, bool background, bool clear_draft, const InputPeer &peer, qint32 reply_to_msg_id, const QString &message, qint64 random_id, const ReplyMarkup &reply_markup, const QList<MessageEntity> &entities, bool callBack, qint32 timeout) {
     if(!mApi) {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesSendMessage(no_webpage, silent, background, clear_draft, peer, reply_to_msg_id, message, random_id, reply_markup, entities);
     if(msgId) {
-        callBackPush<UpdatesType >(msgId, callBack);
+        //callBackPush<UpdatesType >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesSendMessage";
-        mRecallArgs[msgId]["no_webpage"] = QVariant::fromValue<bool>(no_webpage);
-        mRecallArgs[msgId]["silent"] = QVariant::fromValue<bool>(silent);
-        mRecallArgs[msgId]["background"] = QVariant::fromValue<bool>(background);
-        mRecallArgs[msgId]["clear_draft"] = QVariant::fromValue<bool>(clear_draft);
-        mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
-        mRecallArgs[msgId]["reply_to_msg_id"] = QVariant::fromValue<qint32>(reply_to_msg_id);
-        mRecallArgs[msgId]["message"] = QVariant::fromValue<QString>(message);
-        mRecallArgs[msgId]["random_id"] = QVariant::fromValue<qint64>(random_id);
-        mRecallArgs[msgId]["reply_markup"] = QVariant::fromValue<ReplyMarkup>(reply_markup);
-        mRecallArgs[msgId]["entities"] = QVariant::fromValue<QList<MessageEntity>>(entities);
+        //mRecallArgs[msgId][""] = "messagesSendMessage";
+        //mRecallArgs[msgId]["no_webpage"] = QVariant::fromValue<bool>(no_webpage);
+        //mRecallArgs[msgId]["silent"] = QVariant::fromValue<bool>(silent);
+        //mRecallArgs[msgId]["background"] = QVariant::fromValue<bool>(background);
+        //mRecallArgs[msgId]["clear_draft"] = QVariant::fromValue<bool>(clear_draft);
+        //mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
+        //mRecallArgs[msgId]["reply_to_msg_id"] = QVariant::fromValue<qint32>(reply_to_msg_id);
+        //mRecallArgs[msgId]["message"] = QVariant::fromValue<QString>(message);
+        //mRecallArgs[msgId]["random_id"] = QVariant::fromValue<qint64>(random_id);
+        //mRecallArgs[msgId]["reply_markup"] = QVariant::fromValue<ReplyMarkup>(reply_markup);
+        //mRecallArgs[msgId]["entities"] = QVariant::fromValue<QList<MessageEntity>>(entities);
     } else {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -5489,7 +5489,7 @@ qint64 TelegramCore::messagesSendMessage(bool no_webpage, bool silent, bool back
 void TelegramCore::onMessagesSendMessageAnswer(qint64 msgId, const UpdatesType &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<UpdatesType >(msgId, result);
+    //callBackCall<UpdatesType >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesSendMessageAnswer(msgId, result);
 }
@@ -5498,39 +5498,39 @@ void TelegramCore::onMessagesSendMessageError(qint64 msgId, qint32 errorCode, co
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const UpdatesType &result = UpdatesType();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<UpdatesType >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<UpdatesType >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesSendMessageError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesSendMedia(bool silent, bool background, bool clear_draft, const InputPeer &peer, qint32 reply_to_msg_id, const InputMedia &media, qint64 random_id, const ReplyMarkup &reply_markup, Callback<UpdatesType > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesSendMedia(bool silent, bool background, bool clear_draft, const InputPeer &peer, qint32 reply_to_msg_id, const InputMedia &media, qint64 random_id, const ReplyMarkup &reply_markup, bool callBack, qint32 timeout) {
     if(!mApi) {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesSendMedia(silent, background, clear_draft, peer, reply_to_msg_id, media, random_id, reply_markup);
     if(msgId) {
-        callBackPush<UpdatesType >(msgId, callBack);
+        //callBackPush<UpdatesType >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesSendMedia";
-        mRecallArgs[msgId]["silent"] = QVariant::fromValue<bool>(silent);
-        mRecallArgs[msgId]["background"] = QVariant::fromValue<bool>(background);
-        mRecallArgs[msgId]["clear_draft"] = QVariant::fromValue<bool>(clear_draft);
-        mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
-        mRecallArgs[msgId]["reply_to_msg_id"] = QVariant::fromValue<qint32>(reply_to_msg_id);
-        mRecallArgs[msgId]["media"] = QVariant::fromValue<InputMedia>(media);
-        mRecallArgs[msgId]["random_id"] = QVariant::fromValue<qint64>(random_id);
-        mRecallArgs[msgId]["reply_markup"] = QVariant::fromValue<ReplyMarkup>(reply_markup);
+        //mRecallArgs[msgId][""] = "messagesSendMedia";
+        //mRecallArgs[msgId]["silent"] = QVariant::fromValue<bool>(silent);
+        //mRecallArgs[msgId]["background"] = QVariant::fromValue<bool>(background);
+        //mRecallArgs[msgId]["clear_draft"] = QVariant::fromValue<bool>(clear_draft);
+        //mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
+        //mRecallArgs[msgId]["reply_to_msg_id"] = QVariant::fromValue<qint32>(reply_to_msg_id);
+        //mRecallArgs[msgId]["media"] = QVariant::fromValue<InputMedia>(media);
+        //mRecallArgs[msgId]["random_id"] = QVariant::fromValue<qint64>(random_id);
+        //mRecallArgs[msgId]["reply_markup"] = QVariant::fromValue<ReplyMarkup>(reply_markup);
     } else {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -5538,7 +5538,7 @@ qint64 TelegramCore::messagesSendMedia(bool silent, bool background, bool clear_
 void TelegramCore::onMessagesSendMediaAnswer(qint64 msgId, const UpdatesType &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<UpdatesType >(msgId, result);
+    //callBackCall<UpdatesType >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesSendMediaAnswer(msgId, result);
 }
@@ -5547,38 +5547,38 @@ void TelegramCore::onMessagesSendMediaError(qint64 msgId, qint32 errorCode, cons
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const UpdatesType &result = UpdatesType();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<UpdatesType >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<UpdatesType >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesSendMediaError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesForwardMessages(bool silent, bool background, bool with_my_score, const InputPeer &from_peer, const QList<qint32> &id, const QList<qint64> &random_id, const InputPeer &to_peer, Callback<UpdatesType > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesForwardMessages(bool silent, bool background, bool with_my_score, const InputPeer &from_peer, const QList<qint32> &id, const QList<qint64> &random_id, const InputPeer &to_peer, bool callBack, qint32 timeout) {
     if(!mApi) {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesForwardMessages(silent, background, with_my_score, from_peer, id, random_id, to_peer);
     if(msgId) {
-        callBackPush<UpdatesType >(msgId, callBack);
+        //callBackPush<UpdatesType >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesForwardMessages";
-        mRecallArgs[msgId]["silent"] = QVariant::fromValue<bool>(silent);
-        mRecallArgs[msgId]["background"] = QVariant::fromValue<bool>(background);
-        mRecallArgs[msgId]["with_my_score"] = QVariant::fromValue<bool>(with_my_score);
-        mRecallArgs[msgId]["from_peer"] = QVariant::fromValue<InputPeer>(from_peer);
-        mRecallArgs[msgId]["id"] = QVariant::fromValue<QList<qint32>>(id);
-        mRecallArgs[msgId]["random_id"] = QVariant::fromValue<QList<qint64>>(random_id);
-        mRecallArgs[msgId]["to_peer"] = QVariant::fromValue<InputPeer>(to_peer);
+        //mRecallArgs[msgId][""] = "messagesForwardMessages";
+        //mRecallArgs[msgId]["silent"] = QVariant::fromValue<bool>(silent);
+        //mRecallArgs[msgId]["background"] = QVariant::fromValue<bool>(background);
+        //mRecallArgs[msgId]["with_my_score"] = QVariant::fromValue<bool>(with_my_score);
+        //mRecallArgs[msgId]["from_peer"] = QVariant::fromValue<InputPeer>(from_peer);
+        //mRecallArgs[msgId]["id"] = QVariant::fromValue<QList<qint32>>(id);
+        //mRecallArgs[msgId]["random_id"] = QVariant::fromValue<QList<qint64>>(random_id);
+        //mRecallArgs[msgId]["to_peer"] = QVariant::fromValue<InputPeer>(to_peer);
     } else {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -5586,7 +5586,7 @@ qint64 TelegramCore::messagesForwardMessages(bool silent, bool background, bool 
 void TelegramCore::onMessagesForwardMessagesAnswer(qint64 msgId, const UpdatesType &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<UpdatesType >(msgId, result);
+    //callBackCall<UpdatesType >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesForwardMessagesAnswer(msgId, result);
 }
@@ -5595,32 +5595,32 @@ void TelegramCore::onMessagesForwardMessagesError(qint64 msgId, qint32 errorCode
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const UpdatesType &result = UpdatesType();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<UpdatesType >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<UpdatesType >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesForwardMessagesError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesReportSpam(const InputPeer &peer, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesReportSpam(const InputPeer &peer, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesReportSpam(peer);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesReportSpam";
-        mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
+        //mRecallArgs[msgId][""] = "messagesReportSpam";
+        //mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -5628,7 +5628,7 @@ qint64 TelegramCore::messagesReportSpam(const InputPeer &peer, Callback<bool > c
 void TelegramCore::onMessagesReportSpamAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesReportSpamAnswer(msgId, result);
 }
@@ -5637,32 +5637,32 @@ void TelegramCore::onMessagesReportSpamError(qint64 msgId, qint32 errorCode, con
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesReportSpamError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesHideReportSpam(const InputPeer &peer, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesHideReportSpam(const InputPeer &peer, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesHideReportSpam(peer);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesHideReportSpam";
-        mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
+        //mRecallArgs[msgId][""] = "messagesHideReportSpam";
+        //mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -5670,7 +5670,7 @@ qint64 TelegramCore::messagesHideReportSpam(const InputPeer &peer, Callback<bool
 void TelegramCore::onMessagesHideReportSpamAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesHideReportSpamAnswer(msgId, result);
 }
@@ -5679,32 +5679,32 @@ void TelegramCore::onMessagesHideReportSpamError(qint64 msgId, qint32 errorCode,
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesHideReportSpamError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesGetPeerSettings(const InputPeer &peer, Callback<PeerSettings > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesGetPeerSettings(const InputPeer &peer, bool callBack, qint32 timeout) {
     if(!mApi) {
         const PeerSettings &result = PeerSettings();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesGetPeerSettings(peer);
     if(msgId) {
-        callBackPush<PeerSettings >(msgId, callBack);
+        //callBackPush<PeerSettings >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesGetPeerSettings";
-        mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
+        //mRecallArgs[msgId][""] = "messagesGetPeerSettings";
+        //mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
     } else {
         const PeerSettings &result = PeerSettings();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -5712,7 +5712,7 @@ qint64 TelegramCore::messagesGetPeerSettings(const InputPeer &peer, Callback<Pee
 void TelegramCore::onMessagesGetPeerSettingsAnswer(qint64 msgId, const PeerSettings &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<PeerSettings >(msgId, result);
+    //callBackCall<PeerSettings >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesGetPeerSettingsAnswer(msgId, result);
 }
@@ -5721,32 +5721,32 @@ void TelegramCore::onMessagesGetPeerSettingsError(qint64 msgId, qint32 errorCode
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const PeerSettings &result = PeerSettings();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<PeerSettings >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<PeerSettings >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesGetPeerSettingsError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesGetChats(const QList<qint32> &id, Callback<MessagesChats > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesGetChats(const QList<qint32> &id, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesChats &result = MessagesChats();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesGetChats(id);
     if(msgId) {
-        callBackPush<MessagesChats >(msgId, callBack);
+        //callBackPush<MessagesChats >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesGetChats";
-        mRecallArgs[msgId]["id"] = QVariant::fromValue<QList<qint32>>(id);
+        //mRecallArgs[msgId][""] = "messagesGetChats";
+        //mRecallArgs[msgId]["id"] = QVariant::fromValue<QList<qint32>>(id);
     } else {
         const MessagesChats &result = MessagesChats();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -5754,7 +5754,7 @@ qint64 TelegramCore::messagesGetChats(const QList<qint32> &id, Callback<Messages
 void TelegramCore::onMessagesGetChatsAnswer(qint64 msgId, const MessagesChats &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesChats >(msgId, result);
+    //callBackCall<MessagesChats >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesGetChatsAnswer(msgId, result);
 }
@@ -5763,32 +5763,32 @@ void TelegramCore::onMessagesGetChatsError(qint64 msgId, qint32 errorCode, const
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesChats &result = MessagesChats();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesChats >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesChats >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesGetChatsError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesGetFullChat(qint32 chat_id, Callback<MessagesChatFull > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesGetFullChat(qint32 chat_id, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesChatFull &result = MessagesChatFull();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesGetFullChat(chat_id);
     if(msgId) {
-        callBackPush<MessagesChatFull >(msgId, callBack);
+        //callBackPush<MessagesChatFull >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesGetFullChat";
-        mRecallArgs[msgId]["chat_id"] = QVariant::fromValue<qint32>(chat_id);
+        //mRecallArgs[msgId][""] = "messagesGetFullChat";
+        //mRecallArgs[msgId]["chat_id"] = QVariant::fromValue<qint32>(chat_id);
     } else {
         const MessagesChatFull &result = MessagesChatFull();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -5796,7 +5796,7 @@ qint64 TelegramCore::messagesGetFullChat(qint32 chat_id, Callback<MessagesChatFu
 void TelegramCore::onMessagesGetFullChatAnswer(qint64 msgId, const MessagesChatFull &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesChatFull >(msgId, result);
+    //callBackCall<MessagesChatFull >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesGetFullChatAnswer(msgId, result);
 }
@@ -5805,33 +5805,33 @@ void TelegramCore::onMessagesGetFullChatError(qint64 msgId, qint32 errorCode, co
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesChatFull &result = MessagesChatFull();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesChatFull >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesChatFull >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesGetFullChatError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesEditChatTitle(qint32 chat_id, const QString &title, Callback<UpdatesType > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesEditChatTitle(qint32 chat_id, const QString &title, bool callBack, qint32 timeout) {
     if(!mApi) {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesEditChatTitle(chat_id, title);
     if(msgId) {
-        callBackPush<UpdatesType >(msgId, callBack);
+        //callBackPush<UpdatesType >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesEditChatTitle";
-        mRecallArgs[msgId]["chat_id"] = QVariant::fromValue<qint32>(chat_id);
-        mRecallArgs[msgId]["title"] = QVariant::fromValue<QString>(title);
+        //mRecallArgs[msgId][""] = "messagesEditChatTitle";
+        //mRecallArgs[msgId]["chat_id"] = QVariant::fromValue<qint32>(chat_id);
+        //mRecallArgs[msgId]["title"] = QVariant::fromValue<QString>(title);
     } else {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -5839,7 +5839,7 @@ qint64 TelegramCore::messagesEditChatTitle(qint32 chat_id, const QString &title,
 void TelegramCore::onMessagesEditChatTitleAnswer(qint64 msgId, const UpdatesType &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<UpdatesType >(msgId, result);
+    //callBackCall<UpdatesType >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesEditChatTitleAnswer(msgId, result);
 }
@@ -5848,33 +5848,33 @@ void TelegramCore::onMessagesEditChatTitleError(qint64 msgId, qint32 errorCode, 
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const UpdatesType &result = UpdatesType();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<UpdatesType >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<UpdatesType >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesEditChatTitleError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesEditChatPhoto(qint32 chat_id, const InputChatPhoto &photo, Callback<UpdatesType > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesEditChatPhoto(qint32 chat_id, const InputChatPhoto &photo, bool callBack, qint32 timeout) {
     if(!mApi) {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesEditChatPhoto(chat_id, photo);
     if(msgId) {
-        callBackPush<UpdatesType >(msgId, callBack);
+        //callBackPush<UpdatesType >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesEditChatPhoto";
-        mRecallArgs[msgId]["chat_id"] = QVariant::fromValue<qint32>(chat_id);
-        mRecallArgs[msgId]["photo"] = QVariant::fromValue<InputChatPhoto>(photo);
+        //mRecallArgs[msgId][""] = "messagesEditChatPhoto";
+        //mRecallArgs[msgId]["chat_id"] = QVariant::fromValue<qint32>(chat_id);
+        //mRecallArgs[msgId]["photo"] = QVariant::fromValue<InputChatPhoto>(photo);
     } else {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -5882,7 +5882,7 @@ qint64 TelegramCore::messagesEditChatPhoto(qint32 chat_id, const InputChatPhoto 
 void TelegramCore::onMessagesEditChatPhotoAnswer(qint64 msgId, const UpdatesType &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<UpdatesType >(msgId, result);
+    //callBackCall<UpdatesType >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesEditChatPhotoAnswer(msgId, result);
 }
@@ -5891,34 +5891,34 @@ void TelegramCore::onMessagesEditChatPhotoError(qint64 msgId, qint32 errorCode, 
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const UpdatesType &result = UpdatesType();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<UpdatesType >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<UpdatesType >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesEditChatPhotoError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesAddChatUser(qint32 chat_id, const InputUser &user_id, qint32 fwd_limit, Callback<UpdatesType > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesAddChatUser(qint32 chat_id, const InputUser &user_id, qint32 fwd_limit, bool callBack, qint32 timeout) {
     if(!mApi) {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesAddChatUser(chat_id, user_id, fwd_limit);
     if(msgId) {
-        callBackPush<UpdatesType >(msgId, callBack);
+        //callBackPush<UpdatesType >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesAddChatUser";
-        mRecallArgs[msgId]["chat_id"] = QVariant::fromValue<qint32>(chat_id);
-        mRecallArgs[msgId]["user_id"] = QVariant::fromValue<InputUser>(user_id);
-        mRecallArgs[msgId]["fwd_limit"] = QVariant::fromValue<qint32>(fwd_limit);
+        //mRecallArgs[msgId][""] = "messagesAddChatUser";
+        //mRecallArgs[msgId]["chat_id"] = QVariant::fromValue<qint32>(chat_id);
+        //mRecallArgs[msgId]["user_id"] = QVariant::fromValue<InputUser>(user_id);
+        //mRecallArgs[msgId]["fwd_limit"] = QVariant::fromValue<qint32>(fwd_limit);
     } else {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -5926,7 +5926,7 @@ qint64 TelegramCore::messagesAddChatUser(qint32 chat_id, const InputUser &user_i
 void TelegramCore::onMessagesAddChatUserAnswer(qint64 msgId, const UpdatesType &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<UpdatesType >(msgId, result);
+    //callBackCall<UpdatesType >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesAddChatUserAnswer(msgId, result);
 }
@@ -5935,33 +5935,33 @@ void TelegramCore::onMessagesAddChatUserError(qint64 msgId, qint32 errorCode, co
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const UpdatesType &result = UpdatesType();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<UpdatesType >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<UpdatesType >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesAddChatUserError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesDeleteChatUser(qint32 chat_id, const InputUser &user_id, Callback<UpdatesType > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesDeleteChatUser(qint32 chat_id, const InputUser &user_id, bool callBack, qint32 timeout) {
     if(!mApi) {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesDeleteChatUser(chat_id, user_id);
     if(msgId) {
-        callBackPush<UpdatesType >(msgId, callBack);
+        //callBackPush<UpdatesType >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesDeleteChatUser";
-        mRecallArgs[msgId]["chat_id"] = QVariant::fromValue<qint32>(chat_id);
-        mRecallArgs[msgId]["user_id"] = QVariant::fromValue<InputUser>(user_id);
+        //mRecallArgs[msgId][""] = "messagesDeleteChatUser";
+        //mRecallArgs[msgId]["chat_id"] = QVariant::fromValue<qint32>(chat_id);
+        //mRecallArgs[msgId]["user_id"] = QVariant::fromValue<InputUser>(user_id);
     } else {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -5969,7 +5969,7 @@ qint64 TelegramCore::messagesDeleteChatUser(qint32 chat_id, const InputUser &use
 void TelegramCore::onMessagesDeleteChatUserAnswer(qint64 msgId, const UpdatesType &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<UpdatesType >(msgId, result);
+    //callBackCall<UpdatesType >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesDeleteChatUserAnswer(msgId, result);
 }
@@ -5978,33 +5978,33 @@ void TelegramCore::onMessagesDeleteChatUserError(qint64 msgId, qint32 errorCode,
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const UpdatesType &result = UpdatesType();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<UpdatesType >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<UpdatesType >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesDeleteChatUserError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesCreateChat(const QList<InputUser> &users, const QString &title, Callback<UpdatesType > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesCreateChat(const QList<InputUser> &users, const QString &title, bool callBack, qint32 timeout) {
     if(!mApi) {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesCreateChat(users, title);
     if(msgId) {
-        callBackPush<UpdatesType >(msgId, callBack);
+        //callBackPush<UpdatesType >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesCreateChat";
-        mRecallArgs[msgId]["users"] = QVariant::fromValue<QList<InputUser>>(users);
-        mRecallArgs[msgId]["title"] = QVariant::fromValue<QString>(title);
+        //mRecallArgs[msgId][""] = "messagesCreateChat";
+        //mRecallArgs[msgId]["users"] = QVariant::fromValue<QList<InputUser>>(users);
+        //mRecallArgs[msgId]["title"] = QVariant::fromValue<QString>(title);
     } else {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -6012,7 +6012,7 @@ qint64 TelegramCore::messagesCreateChat(const QList<InputUser> &users, const QSt
 void TelegramCore::onMessagesCreateChatAnswer(qint64 msgId, const UpdatesType &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<UpdatesType >(msgId, result);
+    //callBackCall<UpdatesType >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesCreateChatAnswer(msgId, result);
 }
@@ -6021,34 +6021,34 @@ void TelegramCore::onMessagesCreateChatError(qint64 msgId, qint32 errorCode, con
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const UpdatesType &result = UpdatesType();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<UpdatesType >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<UpdatesType >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesCreateChatError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesForwardMessage(const InputPeer &peer, qint32 id, qint64 random_id, Callback<UpdatesType > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesForwardMessage(const InputPeer &peer, qint32 id, qint64 random_id, bool callBack, qint32 timeout) {
     if(!mApi) {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesForwardMessage(peer, id, random_id);
     if(msgId) {
-        callBackPush<UpdatesType >(msgId, callBack);
+        //callBackPush<UpdatesType >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesForwardMessage";
-        mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
-        mRecallArgs[msgId]["id"] = QVariant::fromValue<qint32>(id);
-        mRecallArgs[msgId]["random_id"] = QVariant::fromValue<qint64>(random_id);
+        //mRecallArgs[msgId][""] = "messagesForwardMessage";
+        //mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
+        //mRecallArgs[msgId]["id"] = QVariant::fromValue<qint32>(id);
+        //mRecallArgs[msgId]["random_id"] = QVariant::fromValue<qint64>(random_id);
     } else {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -6056,7 +6056,7 @@ qint64 TelegramCore::messagesForwardMessage(const InputPeer &peer, qint32 id, qi
 void TelegramCore::onMessagesForwardMessageAnswer(qint64 msgId, const UpdatesType &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<UpdatesType >(msgId, result);
+    //callBackCall<UpdatesType >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesForwardMessageAnswer(msgId, result);
 }
@@ -6065,33 +6065,33 @@ void TelegramCore::onMessagesForwardMessageError(qint64 msgId, qint32 errorCode,
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const UpdatesType &result = UpdatesType();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<UpdatesType >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<UpdatesType >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesForwardMessageError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesGetDhConfig(qint32 version, qint32 random_length, Callback<MessagesDhConfig > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesGetDhConfig(qint32 version, qint32 random_length, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesDhConfig &result = MessagesDhConfig();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesGetDhConfig(version, random_length);
     if(msgId) {
-        callBackPush<MessagesDhConfig >(msgId, callBack);
+        //callBackPush<MessagesDhConfig >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesGetDhConfig";
-        mRecallArgs[msgId]["version"] = QVariant::fromValue<qint32>(version);
-        mRecallArgs[msgId]["random_length"] = QVariant::fromValue<qint32>(random_length);
+        //mRecallArgs[msgId][""] = "messagesGetDhConfig";
+        //mRecallArgs[msgId]["version"] = QVariant::fromValue<qint32>(version);
+        //mRecallArgs[msgId]["random_length"] = QVariant::fromValue<qint32>(random_length);
     } else {
         const MessagesDhConfig &result = MessagesDhConfig();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -6099,7 +6099,7 @@ qint64 TelegramCore::messagesGetDhConfig(qint32 version, qint32 random_length, C
 void TelegramCore::onMessagesGetDhConfigAnswer(qint64 msgId, const MessagesDhConfig &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesDhConfig >(msgId, result);
+    //callBackCall<MessagesDhConfig >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesGetDhConfigAnswer(msgId, result);
 }
@@ -6108,34 +6108,34 @@ void TelegramCore::onMessagesGetDhConfigError(qint64 msgId, qint32 errorCode, co
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesDhConfig &result = MessagesDhConfig();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesDhConfig >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesDhConfig >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesGetDhConfigError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesRequestEncryption(const InputUser &user_id, qint32 random_id, const QByteArray &g_a, Callback<EncryptedChat > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesRequestEncryption(const InputUser &user_id, qint32 random_id, const QByteArray &g_a, bool callBack, qint32 timeout) {
     if(!mApi) {
         const EncryptedChat &result = EncryptedChat();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesRequestEncryption(user_id, random_id, g_a);
     if(msgId) {
-        callBackPush<EncryptedChat >(msgId, callBack);
+        //callBackPush<EncryptedChat >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesRequestEncryption";
-        mRecallArgs[msgId]["user_id"] = QVariant::fromValue<InputUser>(user_id);
-        mRecallArgs[msgId]["random_id"] = QVariant::fromValue<qint32>(random_id);
-        mRecallArgs[msgId]["g_a"] = QVariant::fromValue<QByteArray>(g_a);
+        //mRecallArgs[msgId][""] = "messagesRequestEncryption";
+        //mRecallArgs[msgId]["user_id"] = QVariant::fromValue<InputUser>(user_id);
+        //mRecallArgs[msgId]["random_id"] = QVariant::fromValue<qint32>(random_id);
+        //mRecallArgs[msgId]["g_a"] = QVariant::fromValue<QByteArray>(g_a);
     } else {
         const EncryptedChat &result = EncryptedChat();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -6143,7 +6143,7 @@ qint64 TelegramCore::messagesRequestEncryption(const InputUser &user_id, qint32 
 void TelegramCore::onMessagesRequestEncryptionAnswer(qint64 msgId, const EncryptedChat &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<EncryptedChat >(msgId, result);
+    //callBackCall<EncryptedChat >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesRequestEncryptionAnswer(msgId, result);
 }
@@ -6152,34 +6152,34 @@ void TelegramCore::onMessagesRequestEncryptionError(qint64 msgId, qint32 errorCo
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const EncryptedChat &result = EncryptedChat();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<EncryptedChat >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<EncryptedChat >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesRequestEncryptionError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesAcceptEncryption(const InputEncryptedChat &peer, const QByteArray &g_b, qint64 key_fingerprint, Callback<EncryptedChat > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesAcceptEncryption(const InputEncryptedChat &peer, const QByteArray &g_b, qint64 key_fingerprint, bool callBack, qint32 timeout) {
     if(!mApi) {
         const EncryptedChat &result = EncryptedChat();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesAcceptEncryption(peer, g_b, key_fingerprint);
     if(msgId) {
-        callBackPush<EncryptedChat >(msgId, callBack);
+        //callBackPush<EncryptedChat >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesAcceptEncryption";
-        mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputEncryptedChat>(peer);
-        mRecallArgs[msgId]["g_b"] = QVariant::fromValue<QByteArray>(g_b);
-        mRecallArgs[msgId]["key_fingerprint"] = QVariant::fromValue<qint64>(key_fingerprint);
+        //mRecallArgs[msgId][""] = "messagesAcceptEncryption";
+        //mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputEncryptedChat>(peer);
+        //mRecallArgs[msgId]["g_b"] = QVariant::fromValue<QByteArray>(g_b);
+        //mRecallArgs[msgId]["key_fingerprint"] = QVariant::fromValue<qint64>(key_fingerprint);
     } else {
         const EncryptedChat &result = EncryptedChat();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -6187,7 +6187,7 @@ qint64 TelegramCore::messagesAcceptEncryption(const InputEncryptedChat &peer, co
 void TelegramCore::onMessagesAcceptEncryptionAnswer(qint64 msgId, const EncryptedChat &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<EncryptedChat >(msgId, result);
+    //callBackCall<EncryptedChat >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesAcceptEncryptionAnswer(msgId, result);
 }
@@ -6196,32 +6196,32 @@ void TelegramCore::onMessagesAcceptEncryptionError(qint64 msgId, qint32 errorCod
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const EncryptedChat &result = EncryptedChat();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<EncryptedChat >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<EncryptedChat >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesAcceptEncryptionError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesDiscardEncryption(qint32 chat_id, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesDiscardEncryption(qint32 chat_id, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesDiscardEncryption(chat_id);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesDiscardEncryption";
-        mRecallArgs[msgId]["chat_id"] = QVariant::fromValue<qint32>(chat_id);
+        //mRecallArgs[msgId][""] = "messagesDiscardEncryption";
+        //mRecallArgs[msgId]["chat_id"] = QVariant::fromValue<qint32>(chat_id);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -6229,7 +6229,7 @@ qint64 TelegramCore::messagesDiscardEncryption(qint32 chat_id, Callback<bool > c
 void TelegramCore::onMessagesDiscardEncryptionAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesDiscardEncryptionAnswer(msgId, result);
 }
@@ -6238,33 +6238,33 @@ void TelegramCore::onMessagesDiscardEncryptionError(qint64 msgId, qint32 errorCo
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesDiscardEncryptionError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesSetEncryptedTyping(const InputEncryptedChat &peer, bool typing, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesSetEncryptedTyping(const InputEncryptedChat &peer, bool typing, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesSetEncryptedTyping(peer, typing);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesSetEncryptedTyping";
-        mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputEncryptedChat>(peer);
-        mRecallArgs[msgId]["typing"] = QVariant::fromValue<bool>(typing);
+        //mRecallArgs[msgId][""] = "messagesSetEncryptedTyping";
+        //mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputEncryptedChat>(peer);
+        //mRecallArgs[msgId]["typing"] = QVariant::fromValue<bool>(typing);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -6272,7 +6272,7 @@ qint64 TelegramCore::messagesSetEncryptedTyping(const InputEncryptedChat &peer, 
 void TelegramCore::onMessagesSetEncryptedTypingAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesSetEncryptedTypingAnswer(msgId, result);
 }
@@ -6281,33 +6281,33 @@ void TelegramCore::onMessagesSetEncryptedTypingError(qint64 msgId, qint32 errorC
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesSetEncryptedTypingError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesReadEncryptedHistory(const InputEncryptedChat &peer, qint32 max_date, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesReadEncryptedHistory(const InputEncryptedChat &peer, qint32 max_date, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesReadEncryptedHistory(peer, max_date);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesReadEncryptedHistory";
-        mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputEncryptedChat>(peer);
-        mRecallArgs[msgId]["max_date"] = QVariant::fromValue<qint32>(max_date);
+        //mRecallArgs[msgId][""] = "messagesReadEncryptedHistory";
+        //mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputEncryptedChat>(peer);
+        //mRecallArgs[msgId]["max_date"] = QVariant::fromValue<qint32>(max_date);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -6315,7 +6315,7 @@ qint64 TelegramCore::messagesReadEncryptedHistory(const InputEncryptedChat &peer
 void TelegramCore::onMessagesReadEncryptedHistoryAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesReadEncryptedHistoryAnswer(msgId, result);
 }
@@ -6324,34 +6324,34 @@ void TelegramCore::onMessagesReadEncryptedHistoryError(qint64 msgId, qint32 erro
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesReadEncryptedHistoryError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesSendEncrypted(const InputEncryptedChat &peer, qint64 random_id, const QByteArray &data, Callback<MessagesSentEncryptedMessage > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesSendEncrypted(const InputEncryptedChat &peer, qint64 random_id, const QByteArray &data, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesSentEncryptedMessage &result = MessagesSentEncryptedMessage();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesSendEncrypted(peer, random_id, data);
     if(msgId) {
-        callBackPush<MessagesSentEncryptedMessage >(msgId, callBack);
+        //callBackPush<MessagesSentEncryptedMessage >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesSendEncrypted";
-        mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputEncryptedChat>(peer);
-        mRecallArgs[msgId]["random_id"] = QVariant::fromValue<qint64>(random_id);
-        mRecallArgs[msgId]["data"] = QVariant::fromValue<QByteArray>(data);
+        //mRecallArgs[msgId][""] = "messagesSendEncrypted";
+        //mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputEncryptedChat>(peer);
+        //mRecallArgs[msgId]["random_id"] = QVariant::fromValue<qint64>(random_id);
+        //mRecallArgs[msgId]["data"] = QVariant::fromValue<QByteArray>(data);
     } else {
         const MessagesSentEncryptedMessage &result = MessagesSentEncryptedMessage();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -6359,7 +6359,7 @@ qint64 TelegramCore::messagesSendEncrypted(const InputEncryptedChat &peer, qint6
 void TelegramCore::onMessagesSendEncryptedAnswer(qint64 msgId, const MessagesSentEncryptedMessage &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesSentEncryptedMessage >(msgId, result);
+    //callBackCall<MessagesSentEncryptedMessage >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesSendEncryptedAnswer(msgId, result);
 }
@@ -6368,35 +6368,35 @@ void TelegramCore::onMessagesSendEncryptedError(qint64 msgId, qint32 errorCode, 
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesSentEncryptedMessage &result = MessagesSentEncryptedMessage();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesSentEncryptedMessage >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesSentEncryptedMessage >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesSendEncryptedError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesSendEncryptedFile(const InputEncryptedChat &peer, qint64 random_id, const QByteArray &data, const InputEncryptedFile &file, Callback<MessagesSentEncryptedMessage > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesSendEncryptedFile(const InputEncryptedChat &peer, qint64 random_id, const QByteArray &data, const InputEncryptedFile &file, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesSentEncryptedMessage &result = MessagesSentEncryptedMessage();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesSendEncryptedFile(peer, random_id, data, file);
     if(msgId) {
-        callBackPush<MessagesSentEncryptedMessage >(msgId, callBack);
+        //callBackPush<MessagesSentEncryptedMessage >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesSendEncryptedFile";
-        mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputEncryptedChat>(peer);
-        mRecallArgs[msgId]["random_id"] = QVariant::fromValue<qint64>(random_id);
-        mRecallArgs[msgId]["data"] = QVariant::fromValue<QByteArray>(data);
-        mRecallArgs[msgId]["file"] = QVariant::fromValue<InputEncryptedFile>(file);
+        //mRecallArgs[msgId][""] = "messagesSendEncryptedFile";
+        //mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputEncryptedChat>(peer);
+        //mRecallArgs[msgId]["random_id"] = QVariant::fromValue<qint64>(random_id);
+        //mRecallArgs[msgId]["data"] = QVariant::fromValue<QByteArray>(data);
+        //mRecallArgs[msgId]["file"] = QVariant::fromValue<InputEncryptedFile>(file);
     } else {
         const MessagesSentEncryptedMessage &result = MessagesSentEncryptedMessage();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -6404,7 +6404,7 @@ qint64 TelegramCore::messagesSendEncryptedFile(const InputEncryptedChat &peer, q
 void TelegramCore::onMessagesSendEncryptedFileAnswer(qint64 msgId, const MessagesSentEncryptedMessage &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesSentEncryptedMessage >(msgId, result);
+    //callBackCall<MessagesSentEncryptedMessage >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesSendEncryptedFileAnswer(msgId, result);
 }
@@ -6413,34 +6413,34 @@ void TelegramCore::onMessagesSendEncryptedFileError(qint64 msgId, qint32 errorCo
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesSentEncryptedMessage &result = MessagesSentEncryptedMessage();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesSentEncryptedMessage >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesSentEncryptedMessage >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesSendEncryptedFileError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesSendEncryptedService(const InputEncryptedChat &peer, qint64 random_id, const QByteArray &data, Callback<MessagesSentEncryptedMessage > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesSendEncryptedService(const InputEncryptedChat &peer, qint64 random_id, const QByteArray &data, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesSentEncryptedMessage &result = MessagesSentEncryptedMessage();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesSendEncryptedService(peer, random_id, data);
     if(msgId) {
-        callBackPush<MessagesSentEncryptedMessage >(msgId, callBack);
+        //callBackPush<MessagesSentEncryptedMessage >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesSendEncryptedService";
-        mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputEncryptedChat>(peer);
-        mRecallArgs[msgId]["random_id"] = QVariant::fromValue<qint64>(random_id);
-        mRecallArgs[msgId]["data"] = QVariant::fromValue<QByteArray>(data);
+        //mRecallArgs[msgId][""] = "messagesSendEncryptedService";
+        //mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputEncryptedChat>(peer);
+        //mRecallArgs[msgId]["random_id"] = QVariant::fromValue<qint64>(random_id);
+        //mRecallArgs[msgId]["data"] = QVariant::fromValue<QByteArray>(data);
     } else {
         const MessagesSentEncryptedMessage &result = MessagesSentEncryptedMessage();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -6448,7 +6448,7 @@ qint64 TelegramCore::messagesSendEncryptedService(const InputEncryptedChat &peer
 void TelegramCore::onMessagesSendEncryptedServiceAnswer(qint64 msgId, const MessagesSentEncryptedMessage &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesSentEncryptedMessage >(msgId, result);
+    //callBackCall<MessagesSentEncryptedMessage >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesSendEncryptedServiceAnswer(msgId, result);
 }
@@ -6457,32 +6457,32 @@ void TelegramCore::onMessagesSendEncryptedServiceError(qint64 msgId, qint32 erro
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesSentEncryptedMessage &result = MessagesSentEncryptedMessage();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesSentEncryptedMessage >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesSentEncryptedMessage >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesSendEncryptedServiceError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesReceivedQueue(qint32 max_qts, Callback<QList<qint64> > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesReceivedQueue(qint32 max_qts, bool callBack, qint32 timeout) {
     if(!mApi) {
         const QList<qint64> &result = QList<qint64>();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesReceivedQueue(max_qts);
     if(msgId) {
-        callBackPush<QList<qint64> >(msgId, callBack);
+        //callBackPush<QList<qint64> >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesReceivedQueue";
-        mRecallArgs[msgId]["max_qts"] = QVariant::fromValue<qint32>(max_qts);
+        //mRecallArgs[msgId][""] = "messagesReceivedQueue";
+        //mRecallArgs[msgId]["max_qts"] = QVariant::fromValue<qint32>(max_qts);
     } else {
         const QList<qint64> &result = QList<qint64>();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -6490,7 +6490,7 @@ qint64 TelegramCore::messagesReceivedQueue(qint32 max_qts, Callback<QList<qint64
 void TelegramCore::onMessagesReceivedQueueAnswer(qint64 msgId, const QList<qint64> &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<QList<qint64> >(msgId, result);
+    //callBackCall<QList<qint64> >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesReceivedQueueAnswer(msgId, result);
 }
@@ -6499,32 +6499,32 @@ void TelegramCore::onMessagesReceivedQueueError(qint64 msgId, qint32 errorCode, 
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const QList<qint64> &result = QList<qint64>();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<QList<qint64> >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<QList<qint64> >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesReceivedQueueError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesReportEncryptedSpam(const InputEncryptedChat &peer, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesReportEncryptedSpam(const InputEncryptedChat &peer, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesReportEncryptedSpam(peer);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesReportEncryptedSpam";
-        mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputEncryptedChat>(peer);
+        //mRecallArgs[msgId][""] = "messagesReportEncryptedSpam";
+        //mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputEncryptedChat>(peer);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -6532,7 +6532,7 @@ qint64 TelegramCore::messagesReportEncryptedSpam(const InputEncryptedChat &peer,
 void TelegramCore::onMessagesReportEncryptedSpamAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesReportEncryptedSpamAnswer(msgId, result);
 }
@@ -6541,32 +6541,32 @@ void TelegramCore::onMessagesReportEncryptedSpamError(qint64 msgId, qint32 error
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesReportEncryptedSpamError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesReadMessageContents(const QList<qint32> &id, Callback<MessagesAffectedMessages > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesReadMessageContents(const QList<qint32> &id, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesAffectedMessages &result = MessagesAffectedMessages();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesReadMessageContents(id);
     if(msgId) {
-        callBackPush<MessagesAffectedMessages >(msgId, callBack);
+        //callBackPush<MessagesAffectedMessages >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesReadMessageContents";
-        mRecallArgs[msgId]["id"] = QVariant::fromValue<QList<qint32>>(id);
+        //mRecallArgs[msgId][""] = "messagesReadMessageContents";
+        //mRecallArgs[msgId]["id"] = QVariant::fromValue<QList<qint32>>(id);
     } else {
         const MessagesAffectedMessages &result = MessagesAffectedMessages();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -6574,7 +6574,7 @@ qint64 TelegramCore::messagesReadMessageContents(const QList<qint32> &id, Callba
 void TelegramCore::onMessagesReadMessageContentsAnswer(qint64 msgId, const MessagesAffectedMessages &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesAffectedMessages >(msgId, result);
+    //callBackCall<MessagesAffectedMessages >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesReadMessageContentsAnswer(msgId, result);
 }
@@ -6583,32 +6583,32 @@ void TelegramCore::onMessagesReadMessageContentsError(qint64 msgId, qint32 error
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesAffectedMessages &result = MessagesAffectedMessages();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesAffectedMessages >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesAffectedMessages >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesReadMessageContentsError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesGetAllStickers(qint32 hash, Callback<MessagesAllStickers > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesGetAllStickers(qint32 hash, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesAllStickers &result = MessagesAllStickers();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesGetAllStickers(hash);
     if(msgId) {
-        callBackPush<MessagesAllStickers >(msgId, callBack);
+        //callBackPush<MessagesAllStickers >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesGetAllStickers";
-        mRecallArgs[msgId]["hash"] = QVariant::fromValue<qint32>(hash);
+        //mRecallArgs[msgId][""] = "messagesGetAllStickers";
+        //mRecallArgs[msgId]["hash"] = QVariant::fromValue<qint32>(hash);
     } else {
         const MessagesAllStickers &result = MessagesAllStickers();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -6616,7 +6616,7 @@ qint64 TelegramCore::messagesGetAllStickers(qint32 hash, Callback<MessagesAllSti
 void TelegramCore::onMessagesGetAllStickersAnswer(qint64 msgId, const MessagesAllStickers &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesAllStickers >(msgId, result);
+    //callBackCall<MessagesAllStickers >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesGetAllStickersAnswer(msgId, result);
 }
@@ -6625,32 +6625,32 @@ void TelegramCore::onMessagesGetAllStickersError(qint64 msgId, qint32 errorCode,
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesAllStickers &result = MessagesAllStickers();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesAllStickers >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesAllStickers >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesGetAllStickersError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesGetWebPagePreview(const QString &message, Callback<MessageMedia > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesGetWebPagePreview(const QString &message, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessageMedia &result = MessageMedia();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesGetWebPagePreview(message);
     if(msgId) {
-        callBackPush<MessageMedia >(msgId, callBack);
+        //callBackPush<MessageMedia >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesGetWebPagePreview";
-        mRecallArgs[msgId]["message"] = QVariant::fromValue<QString>(message);
+        //mRecallArgs[msgId][""] = "messagesGetWebPagePreview";
+        //mRecallArgs[msgId]["message"] = QVariant::fromValue<QString>(message);
     } else {
         const MessageMedia &result = MessageMedia();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -6658,7 +6658,7 @@ qint64 TelegramCore::messagesGetWebPagePreview(const QString &message, Callback<
 void TelegramCore::onMessagesGetWebPagePreviewAnswer(qint64 msgId, const MessageMedia &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessageMedia >(msgId, result);
+    //callBackCall<MessageMedia >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesGetWebPagePreviewAnswer(msgId, result);
 }
@@ -6667,32 +6667,32 @@ void TelegramCore::onMessagesGetWebPagePreviewError(qint64 msgId, qint32 errorCo
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessageMedia &result = MessageMedia();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessageMedia >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessageMedia >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesGetWebPagePreviewError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesExportChatInvite(qint32 chat_id, Callback<ExportedChatInvite > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesExportChatInvite(qint32 chat_id, bool callBack, qint32 timeout) {
     if(!mApi) {
         const ExportedChatInvite &result = ExportedChatInvite();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesExportChatInvite(chat_id);
     if(msgId) {
-        callBackPush<ExportedChatInvite >(msgId, callBack);
+        //callBackPush<ExportedChatInvite >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesExportChatInvite";
-        mRecallArgs[msgId]["chat_id"] = QVariant::fromValue<qint32>(chat_id);
+        //mRecallArgs[msgId][""] = "messagesExportChatInvite";
+        //mRecallArgs[msgId]["chat_id"] = QVariant::fromValue<qint32>(chat_id);
     } else {
         const ExportedChatInvite &result = ExportedChatInvite();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -6700,7 +6700,7 @@ qint64 TelegramCore::messagesExportChatInvite(qint32 chat_id, Callback<ExportedC
 void TelegramCore::onMessagesExportChatInviteAnswer(qint64 msgId, const ExportedChatInvite &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<ExportedChatInvite >(msgId, result);
+    //callBackCall<ExportedChatInvite >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesExportChatInviteAnswer(msgId, result);
 }
@@ -6709,32 +6709,32 @@ void TelegramCore::onMessagesExportChatInviteError(qint64 msgId, qint32 errorCod
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const ExportedChatInvite &result = ExportedChatInvite();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<ExportedChatInvite >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<ExportedChatInvite >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesExportChatInviteError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesCheckChatInvite(const QString &hash, Callback<ChatInvite > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesCheckChatInvite(const QString &hash, bool callBack, qint32 timeout) {
     if(!mApi) {
         const ChatInvite &result = ChatInvite();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesCheckChatInvite(hash);
     if(msgId) {
-        callBackPush<ChatInvite >(msgId, callBack);
+        //callBackPush<ChatInvite >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesCheckChatInvite";
-        mRecallArgs[msgId]["hash"] = QVariant::fromValue<QString>(hash);
+        //mRecallArgs[msgId][""] = "messagesCheckChatInvite";
+        //mRecallArgs[msgId]["hash"] = QVariant::fromValue<QString>(hash);
     } else {
         const ChatInvite &result = ChatInvite();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -6742,7 +6742,7 @@ qint64 TelegramCore::messagesCheckChatInvite(const QString &hash, Callback<ChatI
 void TelegramCore::onMessagesCheckChatInviteAnswer(qint64 msgId, const ChatInvite &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<ChatInvite >(msgId, result);
+    //callBackCall<ChatInvite >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesCheckChatInviteAnswer(msgId, result);
 }
@@ -6751,32 +6751,32 @@ void TelegramCore::onMessagesCheckChatInviteError(qint64 msgId, qint32 errorCode
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const ChatInvite &result = ChatInvite();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<ChatInvite >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<ChatInvite >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesCheckChatInviteError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesImportChatInvite(const QString &hash, Callback<UpdatesType > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesImportChatInvite(const QString &hash, bool callBack, qint32 timeout) {
     if(!mApi) {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesImportChatInvite(hash);
     if(msgId) {
-        callBackPush<UpdatesType >(msgId, callBack);
+        //callBackPush<UpdatesType >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesImportChatInvite";
-        mRecallArgs[msgId]["hash"] = QVariant::fromValue<QString>(hash);
+        //mRecallArgs[msgId][""] = "messagesImportChatInvite";
+        //mRecallArgs[msgId]["hash"] = QVariant::fromValue<QString>(hash);
     } else {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -6784,7 +6784,7 @@ qint64 TelegramCore::messagesImportChatInvite(const QString &hash, Callback<Upda
 void TelegramCore::onMessagesImportChatInviteAnswer(qint64 msgId, const UpdatesType &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<UpdatesType >(msgId, result);
+    //callBackCall<UpdatesType >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesImportChatInviteAnswer(msgId, result);
 }
@@ -6793,32 +6793,32 @@ void TelegramCore::onMessagesImportChatInviteError(qint64 msgId, qint32 errorCod
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const UpdatesType &result = UpdatesType();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<UpdatesType >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<UpdatesType >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesImportChatInviteError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesGetStickerSet(const InputStickerSet &stickerset, Callback<MessagesStickerSet > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesGetStickerSet(const InputStickerSet &stickerset, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesStickerSet &result = MessagesStickerSet();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesGetStickerSet(stickerset);
     if(msgId) {
-        callBackPush<MessagesStickerSet >(msgId, callBack);
+        //callBackPush<MessagesStickerSet >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesGetStickerSet";
-        mRecallArgs[msgId]["stickerset"] = QVariant::fromValue<InputStickerSet>(stickerset);
+        //mRecallArgs[msgId][""] = "messagesGetStickerSet";
+        //mRecallArgs[msgId]["stickerset"] = QVariant::fromValue<InputStickerSet>(stickerset);
     } else {
         const MessagesStickerSet &result = MessagesStickerSet();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -6826,7 +6826,7 @@ qint64 TelegramCore::messagesGetStickerSet(const InputStickerSet &stickerset, Ca
 void TelegramCore::onMessagesGetStickerSetAnswer(qint64 msgId, const MessagesStickerSet &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesStickerSet >(msgId, result);
+    //callBackCall<MessagesStickerSet >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesGetStickerSetAnswer(msgId, result);
 }
@@ -6835,33 +6835,33 @@ void TelegramCore::onMessagesGetStickerSetError(qint64 msgId, qint32 errorCode, 
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesStickerSet &result = MessagesStickerSet();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesStickerSet >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesStickerSet >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesGetStickerSetError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesInstallStickerSet(const InputStickerSet &stickerset, bool archived, Callback<MessagesStickerSetInstallResult > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesInstallStickerSet(const InputStickerSet &stickerset, bool archived, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesStickerSetInstallResult &result = MessagesStickerSetInstallResult();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesInstallStickerSet(stickerset, archived);
     if(msgId) {
-        callBackPush<MessagesStickerSetInstallResult >(msgId, callBack);
+        //callBackPush<MessagesStickerSetInstallResult >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesInstallStickerSet";
-        mRecallArgs[msgId]["stickerset"] = QVariant::fromValue<InputStickerSet>(stickerset);
-        mRecallArgs[msgId]["archived"] = QVariant::fromValue<bool>(archived);
+        //mRecallArgs[msgId][""] = "messagesInstallStickerSet";
+        //mRecallArgs[msgId]["stickerset"] = QVariant::fromValue<InputStickerSet>(stickerset);
+        //mRecallArgs[msgId]["archived"] = QVariant::fromValue<bool>(archived);
     } else {
         const MessagesStickerSetInstallResult &result = MessagesStickerSetInstallResult();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -6869,7 +6869,7 @@ qint64 TelegramCore::messagesInstallStickerSet(const InputStickerSet &stickerset
 void TelegramCore::onMessagesInstallStickerSetAnswer(qint64 msgId, const MessagesStickerSetInstallResult &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesStickerSetInstallResult >(msgId, result);
+    //callBackCall<MessagesStickerSetInstallResult >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesInstallStickerSetAnswer(msgId, result);
 }
@@ -6878,32 +6878,32 @@ void TelegramCore::onMessagesInstallStickerSetError(qint64 msgId, qint32 errorCo
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesStickerSetInstallResult &result = MessagesStickerSetInstallResult();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesStickerSetInstallResult >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesStickerSetInstallResult >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesInstallStickerSetError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesUninstallStickerSet(const InputStickerSet &stickerset, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesUninstallStickerSet(const InputStickerSet &stickerset, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesUninstallStickerSet(stickerset);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesUninstallStickerSet";
-        mRecallArgs[msgId]["stickerset"] = QVariant::fromValue<InputStickerSet>(stickerset);
+        //mRecallArgs[msgId][""] = "messagesUninstallStickerSet";
+        //mRecallArgs[msgId]["stickerset"] = QVariant::fromValue<InputStickerSet>(stickerset);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -6911,7 +6911,7 @@ qint64 TelegramCore::messagesUninstallStickerSet(const InputStickerSet &stickers
 void TelegramCore::onMessagesUninstallStickerSetAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesUninstallStickerSetAnswer(msgId, result);
 }
@@ -6920,35 +6920,35 @@ void TelegramCore::onMessagesUninstallStickerSetError(qint64 msgId, qint32 error
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesUninstallStickerSetError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesStartBot(const InputUser &bot, const InputPeer &peer, qint64 random_id, const QString &start_param, Callback<UpdatesType > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesStartBot(const InputUser &bot, const InputPeer &peer, qint64 random_id, const QString &start_param, bool callBack, qint32 timeout) {
     if(!mApi) {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesStartBot(bot, peer, random_id, start_param);
     if(msgId) {
-        callBackPush<UpdatesType >(msgId, callBack);
+        //callBackPush<UpdatesType >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesStartBot";
-        mRecallArgs[msgId]["bot"] = QVariant::fromValue<InputUser>(bot);
-        mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
-        mRecallArgs[msgId]["random_id"] = QVariant::fromValue<qint64>(random_id);
-        mRecallArgs[msgId]["start_param"] = QVariant::fromValue<QString>(start_param);
+        //mRecallArgs[msgId][""] = "messagesStartBot";
+        //mRecallArgs[msgId]["bot"] = QVariant::fromValue<InputUser>(bot);
+        //mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
+        //mRecallArgs[msgId]["random_id"] = QVariant::fromValue<qint64>(random_id);
+        //mRecallArgs[msgId]["start_param"] = QVariant::fromValue<QString>(start_param);
     } else {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -6956,7 +6956,7 @@ qint64 TelegramCore::messagesStartBot(const InputUser &bot, const InputPeer &pee
 void TelegramCore::onMessagesStartBotAnswer(qint64 msgId, const UpdatesType &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<UpdatesType >(msgId, result);
+    //callBackCall<UpdatesType >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesStartBotAnswer(msgId, result);
 }
@@ -6965,34 +6965,34 @@ void TelegramCore::onMessagesStartBotError(qint64 msgId, qint32 errorCode, const
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const UpdatesType &result = UpdatesType();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<UpdatesType >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<UpdatesType >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesStartBotError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesGetMessagesViews(const InputPeer &peer, const QList<qint32> &id, bool increment, Callback<QList<qint32> > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesGetMessagesViews(const InputPeer &peer, const QList<qint32> &id, bool increment, bool callBack, qint32 timeout) {
     if(!mApi) {
         const QList<qint32> &result = QList<qint32>();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesGetMessagesViews(peer, id, increment);
     if(msgId) {
-        callBackPush<QList<qint32> >(msgId, callBack);
+        //callBackPush<QList<qint32> >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesGetMessagesViews";
-        mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
-        mRecallArgs[msgId]["id"] = QVariant::fromValue<QList<qint32>>(id);
-        mRecallArgs[msgId]["increment"] = QVariant::fromValue<bool>(increment);
+        //mRecallArgs[msgId][""] = "messagesGetMessagesViews";
+        //mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
+        //mRecallArgs[msgId]["id"] = QVariant::fromValue<QList<qint32>>(id);
+        //mRecallArgs[msgId]["increment"] = QVariant::fromValue<bool>(increment);
     } else {
         const QList<qint32> &result = QList<qint32>();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -7000,7 +7000,7 @@ qint64 TelegramCore::messagesGetMessagesViews(const InputPeer &peer, const QList
 void TelegramCore::onMessagesGetMessagesViewsAnswer(qint64 msgId, const QList<qint32> &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<QList<qint32> >(msgId, result);
+    //callBackCall<QList<qint32> >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesGetMessagesViewsAnswer(msgId, result);
 }
@@ -7009,33 +7009,33 @@ void TelegramCore::onMessagesGetMessagesViewsError(qint64 msgId, qint32 errorCod
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const QList<qint32> &result = QList<qint32>();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<QList<qint32> >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<QList<qint32> >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesGetMessagesViewsError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesToggleChatAdmins(qint32 chat_id, bool enabled, Callback<UpdatesType > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesToggleChatAdmins(qint32 chat_id, bool enabled, bool callBack, qint32 timeout) {
     if(!mApi) {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesToggleChatAdmins(chat_id, enabled);
     if(msgId) {
-        callBackPush<UpdatesType >(msgId, callBack);
+        //callBackPush<UpdatesType >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesToggleChatAdmins";
-        mRecallArgs[msgId]["chat_id"] = QVariant::fromValue<qint32>(chat_id);
-        mRecallArgs[msgId]["enabled"] = QVariant::fromValue<bool>(enabled);
+        //mRecallArgs[msgId][""] = "messagesToggleChatAdmins";
+        //mRecallArgs[msgId]["chat_id"] = QVariant::fromValue<qint32>(chat_id);
+        //mRecallArgs[msgId]["enabled"] = QVariant::fromValue<bool>(enabled);
     } else {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -7043,7 +7043,7 @@ qint64 TelegramCore::messagesToggleChatAdmins(qint32 chat_id, bool enabled, Call
 void TelegramCore::onMessagesToggleChatAdminsAnswer(qint64 msgId, const UpdatesType &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<UpdatesType >(msgId, result);
+    //callBackCall<UpdatesType >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesToggleChatAdminsAnswer(msgId, result);
 }
@@ -7052,34 +7052,34 @@ void TelegramCore::onMessagesToggleChatAdminsError(qint64 msgId, qint32 errorCod
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const UpdatesType &result = UpdatesType();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<UpdatesType >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<UpdatesType >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesToggleChatAdminsError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesEditChatAdmin(qint32 chat_id, const InputUser &user_id, bool is_admin, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesEditChatAdmin(qint32 chat_id, const InputUser &user_id, bool is_admin, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesEditChatAdmin(chat_id, user_id, is_admin);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesEditChatAdmin";
-        mRecallArgs[msgId]["chat_id"] = QVariant::fromValue<qint32>(chat_id);
-        mRecallArgs[msgId]["user_id"] = QVariant::fromValue<InputUser>(user_id);
-        mRecallArgs[msgId]["is_admin"] = QVariant::fromValue<bool>(is_admin);
+        //mRecallArgs[msgId][""] = "messagesEditChatAdmin";
+        //mRecallArgs[msgId]["chat_id"] = QVariant::fromValue<qint32>(chat_id);
+        //mRecallArgs[msgId]["user_id"] = QVariant::fromValue<InputUser>(user_id);
+        //mRecallArgs[msgId]["is_admin"] = QVariant::fromValue<bool>(is_admin);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -7087,7 +7087,7 @@ qint64 TelegramCore::messagesEditChatAdmin(qint32 chat_id, const InputUser &user
 void TelegramCore::onMessagesEditChatAdminAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesEditChatAdminAnswer(msgId, result);
 }
@@ -7096,32 +7096,32 @@ void TelegramCore::onMessagesEditChatAdminError(qint64 msgId, qint32 errorCode, 
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesEditChatAdminError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesMigrateChat(qint32 chat_id, Callback<UpdatesType > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesMigrateChat(qint32 chat_id, bool callBack, qint32 timeout) {
     if(!mApi) {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesMigrateChat(chat_id);
     if(msgId) {
-        callBackPush<UpdatesType >(msgId, callBack);
+        //callBackPush<UpdatesType >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesMigrateChat";
-        mRecallArgs[msgId]["chat_id"] = QVariant::fromValue<qint32>(chat_id);
+        //mRecallArgs[msgId][""] = "messagesMigrateChat";
+        //mRecallArgs[msgId]["chat_id"] = QVariant::fromValue<qint32>(chat_id);
     } else {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -7129,7 +7129,7 @@ qint64 TelegramCore::messagesMigrateChat(qint32 chat_id, Callback<UpdatesType > 
 void TelegramCore::onMessagesMigrateChatAnswer(qint64 msgId, const UpdatesType &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<UpdatesType >(msgId, result);
+    //callBackCall<UpdatesType >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesMigrateChatAnswer(msgId, result);
 }
@@ -7138,36 +7138,36 @@ void TelegramCore::onMessagesMigrateChatError(qint64 msgId, qint32 errorCode, co
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const UpdatesType &result = UpdatesType();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<UpdatesType >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<UpdatesType >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesMigrateChatError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesSearchGlobal(const QString &q, qint32 offset_date, const InputPeer &offset_peer, qint32 offset_id, qint32 limit, Callback<MessagesMessages > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesSearchGlobal(const QString &q, qint32 offset_date, const InputPeer &offset_peer, qint32 offset_id, qint32 limit, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesMessages &result = MessagesMessages();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesSearchGlobal(q, offset_date, offset_peer, offset_id, limit);
     if(msgId) {
-        callBackPush<MessagesMessages >(msgId, callBack);
+        //callBackPush<MessagesMessages >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesSearchGlobal";
-        mRecallArgs[msgId]["q"] = QVariant::fromValue<QString>(q);
-        mRecallArgs[msgId]["offset_date"] = QVariant::fromValue<qint32>(offset_date);
-        mRecallArgs[msgId]["offset_peer"] = QVariant::fromValue<InputPeer>(offset_peer);
-        mRecallArgs[msgId]["offset_id"] = QVariant::fromValue<qint32>(offset_id);
-        mRecallArgs[msgId]["limit"] = QVariant::fromValue<qint32>(limit);
+        //mRecallArgs[msgId][""] = "messagesSearchGlobal";
+        //mRecallArgs[msgId]["q"] = QVariant::fromValue<QString>(q);
+        //mRecallArgs[msgId]["offset_date"] = QVariant::fromValue<qint32>(offset_date);
+        //mRecallArgs[msgId]["offset_peer"] = QVariant::fromValue<InputPeer>(offset_peer);
+        //mRecallArgs[msgId]["offset_id"] = QVariant::fromValue<qint32>(offset_id);
+        //mRecallArgs[msgId]["limit"] = QVariant::fromValue<qint32>(limit);
     } else {
         const MessagesMessages &result = MessagesMessages();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -7175,7 +7175,7 @@ qint64 TelegramCore::messagesSearchGlobal(const QString &q, qint32 offset_date, 
 void TelegramCore::onMessagesSearchGlobalAnswer(qint64 msgId, const MessagesMessages &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesMessages >(msgId, result);
+    //callBackCall<MessagesMessages >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesSearchGlobalAnswer(msgId, result);
 }
@@ -7184,33 +7184,33 @@ void TelegramCore::onMessagesSearchGlobalError(qint64 msgId, qint32 errorCode, c
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesMessages &result = MessagesMessages();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesMessages >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesMessages >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesSearchGlobalError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesReorderStickerSets(bool masks, const QList<qint64> &order, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesReorderStickerSets(bool masks, const QList<qint64> &order, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesReorderStickerSets(masks, order);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesReorderStickerSets";
-        mRecallArgs[msgId]["masks"] = QVariant::fromValue<bool>(masks);
-        mRecallArgs[msgId]["order"] = QVariant::fromValue<QList<qint64>>(order);
+        //mRecallArgs[msgId][""] = "messagesReorderStickerSets";
+        //mRecallArgs[msgId]["masks"] = QVariant::fromValue<bool>(masks);
+        //mRecallArgs[msgId]["order"] = QVariant::fromValue<QList<qint64>>(order);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -7218,7 +7218,7 @@ qint64 TelegramCore::messagesReorderStickerSets(bool masks, const QList<qint64> 
 void TelegramCore::onMessagesReorderStickerSetsAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesReorderStickerSetsAnswer(msgId, result);
 }
@@ -7227,34 +7227,34 @@ void TelegramCore::onMessagesReorderStickerSetsError(qint64 msgId, qint32 errorC
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesReorderStickerSetsError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesGetDocumentByHash(const QByteArray &sha256, qint32 size, const QString &mime_type, Callback<Document > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesGetDocumentByHash(const QByteArray &sha256, qint32 size, const QString &mime_type, bool callBack, qint32 timeout) {
     if(!mApi) {
         const Document &result = Document();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesGetDocumentByHash(sha256, size, mime_type);
     if(msgId) {
-        callBackPush<Document >(msgId, callBack);
+        //callBackPush<Document >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesGetDocumentByHash";
-        mRecallArgs[msgId]["sha256"] = QVariant::fromValue<QByteArray>(sha256);
-        mRecallArgs[msgId]["size"] = QVariant::fromValue<qint32>(size);
-        mRecallArgs[msgId]["mime_type"] = QVariant::fromValue<QString>(mime_type);
+        //mRecallArgs[msgId][""] = "messagesGetDocumentByHash";
+        //mRecallArgs[msgId]["sha256"] = QVariant::fromValue<QByteArray>(sha256);
+        //mRecallArgs[msgId]["size"] = QVariant::fromValue<qint32>(size);
+        //mRecallArgs[msgId]["mime_type"] = QVariant::fromValue<QString>(mime_type);
     } else {
         const Document &result = Document();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -7262,7 +7262,7 @@ qint64 TelegramCore::messagesGetDocumentByHash(const QByteArray &sha256, qint32 
 void TelegramCore::onMessagesGetDocumentByHashAnswer(qint64 msgId, const Document &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<Document >(msgId, result);
+    //callBackCall<Document >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesGetDocumentByHashAnswer(msgId, result);
 }
@@ -7271,33 +7271,33 @@ void TelegramCore::onMessagesGetDocumentByHashError(qint64 msgId, qint32 errorCo
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const Document &result = Document();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<Document >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<Document >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesGetDocumentByHashError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesSearchGifs(const QString &q, qint32 offset, Callback<MessagesFoundGifs > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesSearchGifs(const QString &q, qint32 offset, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesFoundGifs &result = MessagesFoundGifs();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesSearchGifs(q, offset);
     if(msgId) {
-        callBackPush<MessagesFoundGifs >(msgId, callBack);
+        //callBackPush<MessagesFoundGifs >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesSearchGifs";
-        mRecallArgs[msgId]["q"] = QVariant::fromValue<QString>(q);
-        mRecallArgs[msgId]["offset"] = QVariant::fromValue<qint32>(offset);
+        //mRecallArgs[msgId][""] = "messagesSearchGifs";
+        //mRecallArgs[msgId]["q"] = QVariant::fromValue<QString>(q);
+        //mRecallArgs[msgId]["offset"] = QVariant::fromValue<qint32>(offset);
     } else {
         const MessagesFoundGifs &result = MessagesFoundGifs();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -7305,7 +7305,7 @@ qint64 TelegramCore::messagesSearchGifs(const QString &q, qint32 offset, Callbac
 void TelegramCore::onMessagesSearchGifsAnswer(qint64 msgId, const MessagesFoundGifs &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesFoundGifs >(msgId, result);
+    //callBackCall<MessagesFoundGifs >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesSearchGifsAnswer(msgId, result);
 }
@@ -7314,32 +7314,32 @@ void TelegramCore::onMessagesSearchGifsError(qint64 msgId, qint32 errorCode, con
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesFoundGifs &result = MessagesFoundGifs();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesFoundGifs >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesFoundGifs >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesSearchGifsError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesGetSavedGifs(qint32 hash, Callback<MessagesSavedGifs > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesGetSavedGifs(qint32 hash, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesSavedGifs &result = MessagesSavedGifs();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesGetSavedGifs(hash);
     if(msgId) {
-        callBackPush<MessagesSavedGifs >(msgId, callBack);
+        //callBackPush<MessagesSavedGifs >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesGetSavedGifs";
-        mRecallArgs[msgId]["hash"] = QVariant::fromValue<qint32>(hash);
+        //mRecallArgs[msgId][""] = "messagesGetSavedGifs";
+        //mRecallArgs[msgId]["hash"] = QVariant::fromValue<qint32>(hash);
     } else {
         const MessagesSavedGifs &result = MessagesSavedGifs();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -7347,7 +7347,7 @@ qint64 TelegramCore::messagesGetSavedGifs(qint32 hash, Callback<MessagesSavedGif
 void TelegramCore::onMessagesGetSavedGifsAnswer(qint64 msgId, const MessagesSavedGifs &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesSavedGifs >(msgId, result);
+    //callBackCall<MessagesSavedGifs >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesGetSavedGifsAnswer(msgId, result);
 }
@@ -7356,33 +7356,33 @@ void TelegramCore::onMessagesGetSavedGifsError(qint64 msgId, qint32 errorCode, c
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesSavedGifs &result = MessagesSavedGifs();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesSavedGifs >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesSavedGifs >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesGetSavedGifsError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesSaveGif(const InputDocument &id, bool unsave, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesSaveGif(const InputDocument &id, bool unsave, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesSaveGif(id, unsave);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesSaveGif";
-        mRecallArgs[msgId]["id"] = QVariant::fromValue<InputDocument>(id);
-        mRecallArgs[msgId]["unsave"] = QVariant::fromValue<bool>(unsave);
+        //mRecallArgs[msgId][""] = "messagesSaveGif";
+        //mRecallArgs[msgId]["id"] = QVariant::fromValue<InputDocument>(id);
+        //mRecallArgs[msgId]["unsave"] = QVariant::fromValue<bool>(unsave);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -7390,7 +7390,7 @@ qint64 TelegramCore::messagesSaveGif(const InputDocument &id, bool unsave, Callb
 void TelegramCore::onMessagesSaveGifAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesSaveGifAnswer(msgId, result);
 }
@@ -7399,36 +7399,36 @@ void TelegramCore::onMessagesSaveGifError(qint64 msgId, qint32 errorCode, const 
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesSaveGifError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesGetInlineBotResults(const InputUser &bot, const InputPeer &peer, const InputGeoPoint &geo_point, const QString &query, const QString &offset, Callback<MessagesBotResults > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesGetInlineBotResults(const InputUser &bot, const InputPeer &peer, const InputGeoPoint &geo_point, const QString &query, const QString &offset, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesBotResults &result = MessagesBotResults();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesGetInlineBotResults(bot, peer, geo_point, query, offset);
     if(msgId) {
-        callBackPush<MessagesBotResults >(msgId, callBack);
+        //callBackPush<MessagesBotResults >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesGetInlineBotResults";
-        mRecallArgs[msgId]["bot"] = QVariant::fromValue<InputUser>(bot);
-        mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
-        mRecallArgs[msgId]["geo_point"] = QVariant::fromValue<InputGeoPoint>(geo_point);
-        mRecallArgs[msgId]["query"] = QVariant::fromValue<QString>(query);
-        mRecallArgs[msgId]["offset"] = QVariant::fromValue<QString>(offset);
+        //mRecallArgs[msgId][""] = "messagesGetInlineBotResults";
+        //mRecallArgs[msgId]["bot"] = QVariant::fromValue<InputUser>(bot);
+        //mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
+        //mRecallArgs[msgId]["geo_point"] = QVariant::fromValue<InputGeoPoint>(geo_point);
+        //mRecallArgs[msgId]["query"] = QVariant::fromValue<QString>(query);
+        //mRecallArgs[msgId]["offset"] = QVariant::fromValue<QString>(offset);
     } else {
         const MessagesBotResults &result = MessagesBotResults();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -7436,7 +7436,7 @@ qint64 TelegramCore::messagesGetInlineBotResults(const InputUser &bot, const Inp
 void TelegramCore::onMessagesGetInlineBotResultsAnswer(qint64 msgId, const MessagesBotResults &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesBotResults >(msgId, result);
+    //callBackCall<MessagesBotResults >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesGetInlineBotResultsAnswer(msgId, result);
 }
@@ -7445,38 +7445,38 @@ void TelegramCore::onMessagesGetInlineBotResultsError(qint64 msgId, qint32 error
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesBotResults &result = MessagesBotResults();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesBotResults >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesBotResults >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesGetInlineBotResultsError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesSetInlineBotResults(bool gallery, bool privateValue, qint64 query_id, const QList<InputBotInlineResult> &results, qint32 cache_time, const QString &next_offset, const InlineBotSwitchPM &switch_pm, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesSetInlineBotResults(bool gallery, bool privateValue, qint64 query_id, const QList<InputBotInlineResult> &results, qint32 cache_time, const QString &next_offset, const InlineBotSwitchPM &switch_pm, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesSetInlineBotResults(gallery, privateValue, query_id, results, cache_time, next_offset, switch_pm);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesSetInlineBotResults";
-        mRecallArgs[msgId]["gallery"] = QVariant::fromValue<bool>(gallery);
-        mRecallArgs[msgId]["privateValue"] = QVariant::fromValue<bool>(privateValue);
-        mRecallArgs[msgId]["query_id"] = QVariant::fromValue<qint64>(query_id);
-        mRecallArgs[msgId]["results"] = QVariant::fromValue<QList<InputBotInlineResult>>(results);
-        mRecallArgs[msgId]["cache_time"] = QVariant::fromValue<qint32>(cache_time);
-        mRecallArgs[msgId]["next_offset"] = QVariant::fromValue<QString>(next_offset);
-        mRecallArgs[msgId]["switch_pm"] = QVariant::fromValue<InlineBotSwitchPM>(switch_pm);
+        //mRecallArgs[msgId][""] = "messagesSetInlineBotResults";
+        //mRecallArgs[msgId]["gallery"] = QVariant::fromValue<bool>(gallery);
+        //mRecallArgs[msgId]["privateValue"] = QVariant::fromValue<bool>(privateValue);
+        //mRecallArgs[msgId]["query_id"] = QVariant::fromValue<qint64>(query_id);
+        //mRecallArgs[msgId]["results"] = QVariant::fromValue<QList<InputBotInlineResult>>(results);
+        //mRecallArgs[msgId]["cache_time"] = QVariant::fromValue<qint32>(cache_time);
+        //mRecallArgs[msgId]["next_offset"] = QVariant::fromValue<QString>(next_offset);
+        //mRecallArgs[msgId]["switch_pm"] = QVariant::fromValue<InlineBotSwitchPM>(switch_pm);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -7484,7 +7484,7 @@ qint64 TelegramCore::messagesSetInlineBotResults(bool gallery, bool privateValue
 void TelegramCore::onMessagesSetInlineBotResultsAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesSetInlineBotResultsAnswer(msgId, result);
 }
@@ -7493,39 +7493,39 @@ void TelegramCore::onMessagesSetInlineBotResultsError(qint64 msgId, qint32 error
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesSetInlineBotResultsError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesSendInlineBotResult(bool silent, bool background, bool clear_draft, const InputPeer &peer, qint32 reply_to_msg_id, qint64 random_id, qint64 query_id, const QString &id, Callback<UpdatesType > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesSendInlineBotResult(bool silent, bool background, bool clear_draft, const InputPeer &peer, qint32 reply_to_msg_id, qint64 random_id, qint64 query_id, const QString &id, bool callBack, qint32 timeout) {
     if(!mApi) {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesSendInlineBotResult(silent, background, clear_draft, peer, reply_to_msg_id, random_id, query_id, id);
     if(msgId) {
-        callBackPush<UpdatesType >(msgId, callBack);
+        //callBackPush<UpdatesType >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesSendInlineBotResult";
-        mRecallArgs[msgId]["silent"] = QVariant::fromValue<bool>(silent);
-        mRecallArgs[msgId]["background"] = QVariant::fromValue<bool>(background);
-        mRecallArgs[msgId]["clear_draft"] = QVariant::fromValue<bool>(clear_draft);
-        mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
-        mRecallArgs[msgId]["reply_to_msg_id"] = QVariant::fromValue<qint32>(reply_to_msg_id);
-        mRecallArgs[msgId]["random_id"] = QVariant::fromValue<qint64>(random_id);
-        mRecallArgs[msgId]["query_id"] = QVariant::fromValue<qint64>(query_id);
-        mRecallArgs[msgId]["id"] = QVariant::fromValue<QString>(id);
+        //mRecallArgs[msgId][""] = "messagesSendInlineBotResult";
+        //mRecallArgs[msgId]["silent"] = QVariant::fromValue<bool>(silent);
+        //mRecallArgs[msgId]["background"] = QVariant::fromValue<bool>(background);
+        //mRecallArgs[msgId]["clear_draft"] = QVariant::fromValue<bool>(clear_draft);
+        //mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
+        //mRecallArgs[msgId]["reply_to_msg_id"] = QVariant::fromValue<qint32>(reply_to_msg_id);
+        //mRecallArgs[msgId]["random_id"] = QVariant::fromValue<qint64>(random_id);
+        //mRecallArgs[msgId]["query_id"] = QVariant::fromValue<qint64>(query_id);
+        //mRecallArgs[msgId]["id"] = QVariant::fromValue<QString>(id);
     } else {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -7533,7 +7533,7 @@ qint64 TelegramCore::messagesSendInlineBotResult(bool silent, bool background, b
 void TelegramCore::onMessagesSendInlineBotResultAnswer(qint64 msgId, const UpdatesType &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<UpdatesType >(msgId, result);
+    //callBackCall<UpdatesType >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesSendInlineBotResultAnswer(msgId, result);
 }
@@ -7542,33 +7542,33 @@ void TelegramCore::onMessagesSendInlineBotResultError(qint64 msgId, qint32 error
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const UpdatesType &result = UpdatesType();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<UpdatesType >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<UpdatesType >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesSendInlineBotResultError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesGetMessageEditData(const InputPeer &peer, qint32 id, Callback<MessagesMessageEditData > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesGetMessageEditData(const InputPeer &peer, qint32 id, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesMessageEditData &result = MessagesMessageEditData();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesGetMessageEditData(peer, id);
     if(msgId) {
-        callBackPush<MessagesMessageEditData >(msgId, callBack);
+        //callBackPush<MessagesMessageEditData >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesGetMessageEditData";
-        mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
-        mRecallArgs[msgId]["id"] = QVariant::fromValue<qint32>(id);
+        //mRecallArgs[msgId][""] = "messagesGetMessageEditData";
+        //mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
+        //mRecallArgs[msgId]["id"] = QVariant::fromValue<qint32>(id);
     } else {
         const MessagesMessageEditData &result = MessagesMessageEditData();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -7576,7 +7576,7 @@ qint64 TelegramCore::messagesGetMessageEditData(const InputPeer &peer, qint32 id
 void TelegramCore::onMessagesGetMessageEditDataAnswer(qint64 msgId, const MessagesMessageEditData &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesMessageEditData >(msgId, result);
+    //callBackCall<MessagesMessageEditData >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesGetMessageEditDataAnswer(msgId, result);
 }
@@ -7585,37 +7585,37 @@ void TelegramCore::onMessagesGetMessageEditDataError(qint64 msgId, qint32 errorC
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesMessageEditData &result = MessagesMessageEditData();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesMessageEditData >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesMessageEditData >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesGetMessageEditDataError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesEditMessage(bool no_webpage, const InputPeer &peer, qint32 id, const QString &message, const ReplyMarkup &reply_markup, const QList<MessageEntity> &entities, Callback<UpdatesType > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesEditMessage(bool no_webpage, const InputPeer &peer, qint32 id, const QString &message, const ReplyMarkup &reply_markup, const QList<MessageEntity> &entities, bool callBack, qint32 timeout) {
     if(!mApi) {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesEditMessage(no_webpage, peer, id, message, reply_markup, entities);
     if(msgId) {
-        callBackPush<UpdatesType >(msgId, callBack);
+        //callBackPush<UpdatesType >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesEditMessage";
-        mRecallArgs[msgId]["no_webpage"] = QVariant::fromValue<bool>(no_webpage);
-        mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
-        mRecallArgs[msgId]["id"] = QVariant::fromValue<qint32>(id);
-        mRecallArgs[msgId]["message"] = QVariant::fromValue<QString>(message);
-        mRecallArgs[msgId]["reply_markup"] = QVariant::fromValue<ReplyMarkup>(reply_markup);
-        mRecallArgs[msgId]["entities"] = QVariant::fromValue<QList<MessageEntity>>(entities);
+        //mRecallArgs[msgId][""] = "messagesEditMessage";
+        //mRecallArgs[msgId]["no_webpage"] = QVariant::fromValue<bool>(no_webpage);
+        //mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
+        //mRecallArgs[msgId]["id"] = QVariant::fromValue<qint32>(id);
+        //mRecallArgs[msgId]["message"] = QVariant::fromValue<QString>(message);
+        //mRecallArgs[msgId]["reply_markup"] = QVariant::fromValue<ReplyMarkup>(reply_markup);
+        //mRecallArgs[msgId]["entities"] = QVariant::fromValue<QList<MessageEntity>>(entities);
     } else {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -7623,7 +7623,7 @@ qint64 TelegramCore::messagesEditMessage(bool no_webpage, const InputPeer &peer,
 void TelegramCore::onMessagesEditMessageAnswer(qint64 msgId, const UpdatesType &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<UpdatesType >(msgId, result);
+    //callBackCall<UpdatesType >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesEditMessageAnswer(msgId, result);
 }
@@ -7632,36 +7632,36 @@ void TelegramCore::onMessagesEditMessageError(qint64 msgId, qint32 errorCode, co
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const UpdatesType &result = UpdatesType();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<UpdatesType >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<UpdatesType >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesEditMessageError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesEditInlineBotMessage(bool no_webpage, const InputBotInlineMessageID &id, const QString &message, const ReplyMarkup &reply_markup, const QList<MessageEntity> &entities, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesEditInlineBotMessage(bool no_webpage, const InputBotInlineMessageID &id, const QString &message, const ReplyMarkup &reply_markup, const QList<MessageEntity> &entities, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesEditInlineBotMessage(no_webpage, id, message, reply_markup, entities);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesEditInlineBotMessage";
-        mRecallArgs[msgId]["no_webpage"] = QVariant::fromValue<bool>(no_webpage);
-        mRecallArgs[msgId]["id"] = QVariant::fromValue<InputBotInlineMessageID>(id);
-        mRecallArgs[msgId]["message"] = QVariant::fromValue<QString>(message);
-        mRecallArgs[msgId]["reply_markup"] = QVariant::fromValue<ReplyMarkup>(reply_markup);
-        mRecallArgs[msgId]["entities"] = QVariant::fromValue<QList<MessageEntity>>(entities);
+        //mRecallArgs[msgId][""] = "messagesEditInlineBotMessage";
+        //mRecallArgs[msgId]["no_webpage"] = QVariant::fromValue<bool>(no_webpage);
+        //mRecallArgs[msgId]["id"] = QVariant::fromValue<InputBotInlineMessageID>(id);
+        //mRecallArgs[msgId]["message"] = QVariant::fromValue<QString>(message);
+        //mRecallArgs[msgId]["reply_markup"] = QVariant::fromValue<ReplyMarkup>(reply_markup);
+        //mRecallArgs[msgId]["entities"] = QVariant::fromValue<QList<MessageEntity>>(entities);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -7669,7 +7669,7 @@ qint64 TelegramCore::messagesEditInlineBotMessage(bool no_webpage, const InputBo
 void TelegramCore::onMessagesEditInlineBotMessageAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesEditInlineBotMessageAnswer(msgId, result);
 }
@@ -7678,35 +7678,35 @@ void TelegramCore::onMessagesEditInlineBotMessageError(qint64 msgId, qint32 erro
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesEditInlineBotMessageError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesGetBotCallbackAnswer(bool game, const InputPeer &peer, qint32 msg_id, const QByteArray &data, Callback<MessagesBotCallbackAnswer > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesGetBotCallbackAnswer(bool game, const InputPeer &peer, qint32 msg_id, const QByteArray &data, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesBotCallbackAnswer &result = MessagesBotCallbackAnswer();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesGetBotCallbackAnswer(game, peer, msg_id, data);
     if(msgId) {
-        callBackPush<MessagesBotCallbackAnswer >(msgId, callBack);
+        //callBackPush<MessagesBotCallbackAnswer >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesGetBotCallbackAnswer";
-        mRecallArgs[msgId]["game"] = QVariant::fromValue<bool>(game);
-        mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
-        mRecallArgs[msgId]["msg_id"] = QVariant::fromValue<qint32>(msg_id);
-        mRecallArgs[msgId]["data"] = QVariant::fromValue<QByteArray>(data);
+        //mRecallArgs[msgId][""] = "messagesGetBotCallbackAnswer";
+        //mRecallArgs[msgId]["game"] = QVariant::fromValue<bool>(game);
+        //mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
+        //mRecallArgs[msgId]["msg_id"] = QVariant::fromValue<qint32>(msg_id);
+        //mRecallArgs[msgId]["data"] = QVariant::fromValue<QByteArray>(data);
     } else {
         const MessagesBotCallbackAnswer &result = MessagesBotCallbackAnswer();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -7714,7 +7714,7 @@ qint64 TelegramCore::messagesGetBotCallbackAnswer(bool game, const InputPeer &pe
 void TelegramCore::onMessagesGetBotCallbackAnswerAnswer(qint64 msgId, const MessagesBotCallbackAnswer &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesBotCallbackAnswer >(msgId, result);
+    //callBackCall<MessagesBotCallbackAnswer >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesGetBotCallbackAnswerAnswer(msgId, result);
 }
@@ -7723,36 +7723,36 @@ void TelegramCore::onMessagesGetBotCallbackAnswerError(qint64 msgId, qint32 erro
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesBotCallbackAnswer &result = MessagesBotCallbackAnswer();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesBotCallbackAnswer >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesBotCallbackAnswer >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesGetBotCallbackAnswerError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesSetBotCallbackAnswer(bool alert, qint64 query_id, const QString &message, const QString &url, qint32 cache_time, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesSetBotCallbackAnswer(bool alert, qint64 query_id, const QString &message, const QString &url, qint32 cache_time, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesSetBotCallbackAnswer(alert, query_id, message, url, cache_time);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesSetBotCallbackAnswer";
-        mRecallArgs[msgId]["alert"] = QVariant::fromValue<bool>(alert);
-        mRecallArgs[msgId]["query_id"] = QVariant::fromValue<qint64>(query_id);
-        mRecallArgs[msgId]["message"] = QVariant::fromValue<QString>(message);
-        mRecallArgs[msgId]["url"] = QVariant::fromValue<QString>(url);
-        mRecallArgs[msgId]["cache_time"] = QVariant::fromValue<qint32>(cache_time);
+        //mRecallArgs[msgId][""] = "messagesSetBotCallbackAnswer";
+        //mRecallArgs[msgId]["alert"] = QVariant::fromValue<bool>(alert);
+        //mRecallArgs[msgId]["query_id"] = QVariant::fromValue<qint64>(query_id);
+        //mRecallArgs[msgId]["message"] = QVariant::fromValue<QString>(message);
+        //mRecallArgs[msgId]["url"] = QVariant::fromValue<QString>(url);
+        //mRecallArgs[msgId]["cache_time"] = QVariant::fromValue<qint32>(cache_time);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -7760,7 +7760,7 @@ qint64 TelegramCore::messagesSetBotCallbackAnswer(bool alert, qint64 query_id, c
 void TelegramCore::onMessagesSetBotCallbackAnswerAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesSetBotCallbackAnswerAnswer(msgId, result);
 }
@@ -7769,32 +7769,32 @@ void TelegramCore::onMessagesSetBotCallbackAnswerError(qint64 msgId, qint32 erro
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesSetBotCallbackAnswerError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesGetPeerDialogs(const QList<InputPeer> &peers, Callback<MessagesPeerDialogs > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesGetPeerDialogs(const QList<InputPeer> &peers, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesPeerDialogs &result = MessagesPeerDialogs();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesGetPeerDialogs(peers);
     if(msgId) {
-        callBackPush<MessagesPeerDialogs >(msgId, callBack);
+        //callBackPush<MessagesPeerDialogs >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesGetPeerDialogs";
-        mRecallArgs[msgId]["peers"] = QVariant::fromValue<QList<InputPeer>>(peers);
+        //mRecallArgs[msgId][""] = "messagesGetPeerDialogs";
+        //mRecallArgs[msgId]["peers"] = QVariant::fromValue<QList<InputPeer>>(peers);
     } else {
         const MessagesPeerDialogs &result = MessagesPeerDialogs();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -7802,7 +7802,7 @@ qint64 TelegramCore::messagesGetPeerDialogs(const QList<InputPeer> &peers, Callb
 void TelegramCore::onMessagesGetPeerDialogsAnswer(qint64 msgId, const MessagesPeerDialogs &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesPeerDialogs >(msgId, result);
+    //callBackCall<MessagesPeerDialogs >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesGetPeerDialogsAnswer(msgId, result);
 }
@@ -7811,36 +7811,36 @@ void TelegramCore::onMessagesGetPeerDialogsError(qint64 msgId, qint32 errorCode,
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesPeerDialogs &result = MessagesPeerDialogs();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesPeerDialogs >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesPeerDialogs >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesGetPeerDialogsError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesSaveDraft(bool no_webpage, qint32 reply_to_msg_id, const InputPeer &peer, const QString &message, const QList<MessageEntity> &entities, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesSaveDraft(bool no_webpage, qint32 reply_to_msg_id, const InputPeer &peer, const QString &message, const QList<MessageEntity> &entities, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesSaveDraft(no_webpage, reply_to_msg_id, peer, message, entities);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesSaveDraft";
-        mRecallArgs[msgId]["no_webpage"] = QVariant::fromValue<bool>(no_webpage);
-        mRecallArgs[msgId]["reply_to_msg_id"] = QVariant::fromValue<qint32>(reply_to_msg_id);
-        mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
-        mRecallArgs[msgId]["message"] = QVariant::fromValue<QString>(message);
-        mRecallArgs[msgId]["entities"] = QVariant::fromValue<QList<MessageEntity>>(entities);
+        //mRecallArgs[msgId][""] = "messagesSaveDraft";
+        //mRecallArgs[msgId]["no_webpage"] = QVariant::fromValue<bool>(no_webpage);
+        //mRecallArgs[msgId]["reply_to_msg_id"] = QVariant::fromValue<qint32>(reply_to_msg_id);
+        //mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
+        //mRecallArgs[msgId]["message"] = QVariant::fromValue<QString>(message);
+        //mRecallArgs[msgId]["entities"] = QVariant::fromValue<QList<MessageEntity>>(entities);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -7848,7 +7848,7 @@ qint64 TelegramCore::messagesSaveDraft(bool no_webpage, qint32 reply_to_msg_id, 
 void TelegramCore::onMessagesSaveDraftAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesSaveDraftAnswer(msgId, result);
 }
@@ -7857,31 +7857,31 @@ void TelegramCore::onMessagesSaveDraftError(qint64 msgId, qint32 errorCode, cons
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesSaveDraftError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesGetAllDrafts(Callback<UpdatesType > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesGetAllDrafts(bool callBack, qint32 timeout) {
     if(!mApi) {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesGetAllDrafts();
     if(msgId) {
-        callBackPush<UpdatesType >(msgId, callBack);
+        //callBackPush<UpdatesType >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesGetAllDrafts";
+        //mRecallArgs[msgId][""] = "messagesGetAllDrafts";
     } else {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -7889,7 +7889,7 @@ qint64 TelegramCore::messagesGetAllDrafts(Callback<UpdatesType > callBack, qint3
 void TelegramCore::onMessagesGetAllDraftsAnswer(qint64 msgId, const UpdatesType &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<UpdatesType >(msgId, result);
+    //callBackCall<UpdatesType >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesGetAllDraftsAnswer(msgId, result);
 }
@@ -7898,32 +7898,32 @@ void TelegramCore::onMessagesGetAllDraftsError(qint64 msgId, qint32 errorCode, c
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const UpdatesType &result = UpdatesType();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<UpdatesType >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<UpdatesType >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesGetAllDraftsError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesGetFeaturedStickers(qint32 hash, Callback<MessagesFeaturedStickers > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesGetFeaturedStickers(qint32 hash, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesFeaturedStickers &result = MessagesFeaturedStickers();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesGetFeaturedStickers(hash);
     if(msgId) {
-        callBackPush<MessagesFeaturedStickers >(msgId, callBack);
+        //callBackPush<MessagesFeaturedStickers >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesGetFeaturedStickers";
-        mRecallArgs[msgId]["hash"] = QVariant::fromValue<qint32>(hash);
+        //mRecallArgs[msgId][""] = "messagesGetFeaturedStickers";
+        //mRecallArgs[msgId]["hash"] = QVariant::fromValue<qint32>(hash);
     } else {
         const MessagesFeaturedStickers &result = MessagesFeaturedStickers();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -7931,7 +7931,7 @@ qint64 TelegramCore::messagesGetFeaturedStickers(qint32 hash, Callback<MessagesF
 void TelegramCore::onMessagesGetFeaturedStickersAnswer(qint64 msgId, const MessagesFeaturedStickers &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesFeaturedStickers >(msgId, result);
+    //callBackCall<MessagesFeaturedStickers >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesGetFeaturedStickersAnswer(msgId, result);
 }
@@ -7940,32 +7940,32 @@ void TelegramCore::onMessagesGetFeaturedStickersError(qint64 msgId, qint32 error
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesFeaturedStickers &result = MessagesFeaturedStickers();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesFeaturedStickers >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesFeaturedStickers >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesGetFeaturedStickersError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesReadFeaturedStickers(const QList<qint64> &id, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesReadFeaturedStickers(const QList<qint64> &id, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesReadFeaturedStickers(id);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesReadFeaturedStickers";
-        mRecallArgs[msgId]["id"] = QVariant::fromValue<QList<qint64>>(id);
+        //mRecallArgs[msgId][""] = "messagesReadFeaturedStickers";
+        //mRecallArgs[msgId]["id"] = QVariant::fromValue<QList<qint64>>(id);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -7973,7 +7973,7 @@ qint64 TelegramCore::messagesReadFeaturedStickers(const QList<qint64> &id, Callb
 void TelegramCore::onMessagesReadFeaturedStickersAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesReadFeaturedStickersAnswer(msgId, result);
 }
@@ -7982,33 +7982,33 @@ void TelegramCore::onMessagesReadFeaturedStickersError(qint64 msgId, qint32 erro
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesReadFeaturedStickersError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesGetRecentStickers(bool attached, qint32 hash, Callback<MessagesRecentStickers > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesGetRecentStickers(bool attached, qint32 hash, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesRecentStickers &result = MessagesRecentStickers();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesGetRecentStickers(attached, hash);
     if(msgId) {
-        callBackPush<MessagesRecentStickers >(msgId, callBack);
+        //callBackPush<MessagesRecentStickers >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesGetRecentStickers";
-        mRecallArgs[msgId]["attached"] = QVariant::fromValue<bool>(attached);
-        mRecallArgs[msgId]["hash"] = QVariant::fromValue<qint32>(hash);
+        //mRecallArgs[msgId][""] = "messagesGetRecentStickers";
+        //mRecallArgs[msgId]["attached"] = QVariant::fromValue<bool>(attached);
+        //mRecallArgs[msgId]["hash"] = QVariant::fromValue<qint32>(hash);
     } else {
         const MessagesRecentStickers &result = MessagesRecentStickers();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -8016,7 +8016,7 @@ qint64 TelegramCore::messagesGetRecentStickers(bool attached, qint32 hash, Callb
 void TelegramCore::onMessagesGetRecentStickersAnswer(qint64 msgId, const MessagesRecentStickers &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesRecentStickers >(msgId, result);
+    //callBackCall<MessagesRecentStickers >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesGetRecentStickersAnswer(msgId, result);
 }
@@ -8025,34 +8025,34 @@ void TelegramCore::onMessagesGetRecentStickersError(qint64 msgId, qint32 errorCo
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesRecentStickers &result = MessagesRecentStickers();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesRecentStickers >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesRecentStickers >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesGetRecentStickersError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesSaveRecentSticker(bool attached, const InputDocument &id, bool unsave, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesSaveRecentSticker(bool attached, const InputDocument &id, bool unsave, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesSaveRecentSticker(attached, id, unsave);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesSaveRecentSticker";
-        mRecallArgs[msgId]["attached"] = QVariant::fromValue<bool>(attached);
-        mRecallArgs[msgId]["id"] = QVariant::fromValue<InputDocument>(id);
-        mRecallArgs[msgId]["unsave"] = QVariant::fromValue<bool>(unsave);
+        //mRecallArgs[msgId][""] = "messagesSaveRecentSticker";
+        //mRecallArgs[msgId]["attached"] = QVariant::fromValue<bool>(attached);
+        //mRecallArgs[msgId]["id"] = QVariant::fromValue<InputDocument>(id);
+        //mRecallArgs[msgId]["unsave"] = QVariant::fromValue<bool>(unsave);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -8060,7 +8060,7 @@ qint64 TelegramCore::messagesSaveRecentSticker(bool attached, const InputDocumen
 void TelegramCore::onMessagesSaveRecentStickerAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesSaveRecentStickerAnswer(msgId, result);
 }
@@ -8069,32 +8069,32 @@ void TelegramCore::onMessagesSaveRecentStickerError(qint64 msgId, qint32 errorCo
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesSaveRecentStickerError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesClearRecentStickers(bool attached, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesClearRecentStickers(bool attached, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesClearRecentStickers(attached);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesClearRecentStickers";
-        mRecallArgs[msgId]["attached"] = QVariant::fromValue<bool>(attached);
+        //mRecallArgs[msgId][""] = "messagesClearRecentStickers";
+        //mRecallArgs[msgId]["attached"] = QVariant::fromValue<bool>(attached);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -8102,7 +8102,7 @@ qint64 TelegramCore::messagesClearRecentStickers(bool attached, Callback<bool > 
 void TelegramCore::onMessagesClearRecentStickersAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesClearRecentStickersAnswer(msgId, result);
 }
@@ -8111,34 +8111,34 @@ void TelegramCore::onMessagesClearRecentStickersError(qint64 msgId, qint32 error
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesClearRecentStickersError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesGetArchivedStickers(bool masks, qint64 offset_id, qint32 limit, Callback<MessagesArchivedStickers > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesGetArchivedStickers(bool masks, qint64 offset_id, qint32 limit, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesArchivedStickers &result = MessagesArchivedStickers();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesGetArchivedStickers(masks, offset_id, limit);
     if(msgId) {
-        callBackPush<MessagesArchivedStickers >(msgId, callBack);
+        //callBackPush<MessagesArchivedStickers >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesGetArchivedStickers";
-        mRecallArgs[msgId]["masks"] = QVariant::fromValue<bool>(masks);
-        mRecallArgs[msgId]["offset_id"] = QVariant::fromValue<qint64>(offset_id);
-        mRecallArgs[msgId]["limit"] = QVariant::fromValue<qint32>(limit);
+        //mRecallArgs[msgId][""] = "messagesGetArchivedStickers";
+        //mRecallArgs[msgId]["masks"] = QVariant::fromValue<bool>(masks);
+        //mRecallArgs[msgId]["offset_id"] = QVariant::fromValue<qint64>(offset_id);
+        //mRecallArgs[msgId]["limit"] = QVariant::fromValue<qint32>(limit);
     } else {
         const MessagesArchivedStickers &result = MessagesArchivedStickers();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -8146,7 +8146,7 @@ qint64 TelegramCore::messagesGetArchivedStickers(bool masks, qint64 offset_id, q
 void TelegramCore::onMessagesGetArchivedStickersAnswer(qint64 msgId, const MessagesArchivedStickers &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesArchivedStickers >(msgId, result);
+    //callBackCall<MessagesArchivedStickers >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesGetArchivedStickersAnswer(msgId, result);
 }
@@ -8155,32 +8155,32 @@ void TelegramCore::onMessagesGetArchivedStickersError(qint64 msgId, qint32 error
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesArchivedStickers &result = MessagesArchivedStickers();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesArchivedStickers >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesArchivedStickers >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesGetArchivedStickersError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesGetMaskStickers(qint32 hash, Callback<MessagesAllStickers > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesGetMaskStickers(qint32 hash, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesAllStickers &result = MessagesAllStickers();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesGetMaskStickers(hash);
     if(msgId) {
-        callBackPush<MessagesAllStickers >(msgId, callBack);
+        //callBackPush<MessagesAllStickers >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesGetMaskStickers";
-        mRecallArgs[msgId]["hash"] = QVariant::fromValue<qint32>(hash);
+        //mRecallArgs[msgId][""] = "messagesGetMaskStickers";
+        //mRecallArgs[msgId]["hash"] = QVariant::fromValue<qint32>(hash);
     } else {
         const MessagesAllStickers &result = MessagesAllStickers();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -8188,7 +8188,7 @@ qint64 TelegramCore::messagesGetMaskStickers(qint32 hash, Callback<MessagesAllSt
 void TelegramCore::onMessagesGetMaskStickersAnswer(qint64 msgId, const MessagesAllStickers &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesAllStickers >(msgId, result);
+    //callBackCall<MessagesAllStickers >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesGetMaskStickersAnswer(msgId, result);
 }
@@ -8197,32 +8197,32 @@ void TelegramCore::onMessagesGetMaskStickersError(qint64 msgId, qint32 errorCode
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesAllStickers &result = MessagesAllStickers();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesAllStickers >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesAllStickers >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesGetMaskStickersError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesGetAttachedStickers(const InputStickeredMedia &media, Callback<QList<StickerSetCovered> > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesGetAttachedStickers(const InputStickeredMedia &media, bool callBack, qint32 timeout) {
     if(!mApi) {
         const QList<StickerSetCovered> &result = QList<StickerSetCovered>();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesGetAttachedStickers(media);
     if(msgId) {
-        callBackPush<QList<StickerSetCovered> >(msgId, callBack);
+        //callBackPush<QList<StickerSetCovered> >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesGetAttachedStickers";
-        mRecallArgs[msgId]["media"] = QVariant::fromValue<InputStickeredMedia>(media);
+        //mRecallArgs[msgId][""] = "messagesGetAttachedStickers";
+        //mRecallArgs[msgId]["media"] = QVariant::fromValue<InputStickeredMedia>(media);
     } else {
         const QList<StickerSetCovered> &result = QList<StickerSetCovered>();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -8230,7 +8230,7 @@ qint64 TelegramCore::messagesGetAttachedStickers(const InputStickeredMedia &medi
 void TelegramCore::onMessagesGetAttachedStickersAnswer(qint64 msgId, const QList<StickerSetCovered> &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<QList<StickerSetCovered> >(msgId, result);
+    //callBackCall<QList<StickerSetCovered> >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesGetAttachedStickersAnswer(msgId, result);
 }
@@ -8239,37 +8239,37 @@ void TelegramCore::onMessagesGetAttachedStickersError(qint64 msgId, qint32 error
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const QList<StickerSetCovered> &result = QList<StickerSetCovered>();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<QList<StickerSetCovered> >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<QList<StickerSetCovered> >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesGetAttachedStickersError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesSetGameScore(bool edit_message, bool force, const InputPeer &peer, qint32 id, const InputUser &user_id, qint32 score, Callback<UpdatesType > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesSetGameScore(bool edit_message, bool force, const InputPeer &peer, qint32 id, const InputUser &user_id, qint32 score, bool callBack, qint32 timeout) {
     if(!mApi) {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesSetGameScore(edit_message, force, peer, id, user_id, score);
     if(msgId) {
-        callBackPush<UpdatesType >(msgId, callBack);
+        //callBackPush<UpdatesType >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesSetGameScore";
-        mRecallArgs[msgId]["edit_message"] = QVariant::fromValue<bool>(edit_message);
-        mRecallArgs[msgId]["force"] = QVariant::fromValue<bool>(force);
-        mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
-        mRecallArgs[msgId]["id"] = QVariant::fromValue<qint32>(id);
-        mRecallArgs[msgId]["user_id"] = QVariant::fromValue<InputUser>(user_id);
-        mRecallArgs[msgId]["score"] = QVariant::fromValue<qint32>(score);
+        //mRecallArgs[msgId][""] = "messagesSetGameScore";
+        //mRecallArgs[msgId]["edit_message"] = QVariant::fromValue<bool>(edit_message);
+        //mRecallArgs[msgId]["force"] = QVariant::fromValue<bool>(force);
+        //mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
+        //mRecallArgs[msgId]["id"] = QVariant::fromValue<qint32>(id);
+        //mRecallArgs[msgId]["user_id"] = QVariant::fromValue<InputUser>(user_id);
+        //mRecallArgs[msgId]["score"] = QVariant::fromValue<qint32>(score);
     } else {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -8277,7 +8277,7 @@ qint64 TelegramCore::messagesSetGameScore(bool edit_message, bool force, const I
 void TelegramCore::onMessagesSetGameScoreAnswer(qint64 msgId, const UpdatesType &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<UpdatesType >(msgId, result);
+    //callBackCall<UpdatesType >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesSetGameScoreAnswer(msgId, result);
 }
@@ -8286,36 +8286,36 @@ void TelegramCore::onMessagesSetGameScoreError(qint64 msgId, qint32 errorCode, c
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const UpdatesType &result = UpdatesType();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<UpdatesType >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<UpdatesType >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesSetGameScoreError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesSetInlineGameScore(bool edit_message, bool force, const InputBotInlineMessageID &id, const InputUser &user_id, qint32 score, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesSetInlineGameScore(bool edit_message, bool force, const InputBotInlineMessageID &id, const InputUser &user_id, qint32 score, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesSetInlineGameScore(edit_message, force, id, user_id, score);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesSetInlineGameScore";
-        mRecallArgs[msgId]["edit_message"] = QVariant::fromValue<bool>(edit_message);
-        mRecallArgs[msgId]["force"] = QVariant::fromValue<bool>(force);
-        mRecallArgs[msgId]["id"] = QVariant::fromValue<InputBotInlineMessageID>(id);
-        mRecallArgs[msgId]["user_id"] = QVariant::fromValue<InputUser>(user_id);
-        mRecallArgs[msgId]["score"] = QVariant::fromValue<qint32>(score);
+        //mRecallArgs[msgId][""] = "messagesSetInlineGameScore";
+        //mRecallArgs[msgId]["edit_message"] = QVariant::fromValue<bool>(edit_message);
+        //mRecallArgs[msgId]["force"] = QVariant::fromValue<bool>(force);
+        //mRecallArgs[msgId]["id"] = QVariant::fromValue<InputBotInlineMessageID>(id);
+        //mRecallArgs[msgId]["user_id"] = QVariant::fromValue<InputUser>(user_id);
+        //mRecallArgs[msgId]["score"] = QVariant::fromValue<qint32>(score);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -8323,7 +8323,7 @@ qint64 TelegramCore::messagesSetInlineGameScore(bool edit_message, bool force, c
 void TelegramCore::onMessagesSetInlineGameScoreAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesSetInlineGameScoreAnswer(msgId, result);
 }
@@ -8332,34 +8332,34 @@ void TelegramCore::onMessagesSetInlineGameScoreError(qint64 msgId, qint32 errorC
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesSetInlineGameScoreError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesGetGameHighScores(const InputPeer &peer, qint32 id, const InputUser &user_id, Callback<MessagesHighScores > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesGetGameHighScores(const InputPeer &peer, qint32 id, const InputUser &user_id, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesHighScores &result = MessagesHighScores();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesGetGameHighScores(peer, id, user_id);
     if(msgId) {
-        callBackPush<MessagesHighScores >(msgId, callBack);
+        //callBackPush<MessagesHighScores >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesGetGameHighScores";
-        mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
-        mRecallArgs[msgId]["id"] = QVariant::fromValue<qint32>(id);
-        mRecallArgs[msgId]["user_id"] = QVariant::fromValue<InputUser>(user_id);
+        //mRecallArgs[msgId][""] = "messagesGetGameHighScores";
+        //mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
+        //mRecallArgs[msgId]["id"] = QVariant::fromValue<qint32>(id);
+        //mRecallArgs[msgId]["user_id"] = QVariant::fromValue<InputUser>(user_id);
     } else {
         const MessagesHighScores &result = MessagesHighScores();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -8367,7 +8367,7 @@ qint64 TelegramCore::messagesGetGameHighScores(const InputPeer &peer, qint32 id,
 void TelegramCore::onMessagesGetGameHighScoresAnswer(qint64 msgId, const MessagesHighScores &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesHighScores >(msgId, result);
+    //callBackCall<MessagesHighScores >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesGetGameHighScoresAnswer(msgId, result);
 }
@@ -8376,33 +8376,33 @@ void TelegramCore::onMessagesGetGameHighScoresError(qint64 msgId, qint32 errorCo
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesHighScores &result = MessagesHighScores();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesHighScores >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesHighScores >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesGetGameHighScoresError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesGetInlineGameHighScores(const InputBotInlineMessageID &id, const InputUser &user_id, Callback<MessagesHighScores > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesGetInlineGameHighScores(const InputBotInlineMessageID &id, const InputUser &user_id, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesHighScores &result = MessagesHighScores();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesGetInlineGameHighScores(id, user_id);
     if(msgId) {
-        callBackPush<MessagesHighScores >(msgId, callBack);
+        //callBackPush<MessagesHighScores >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesGetInlineGameHighScores";
-        mRecallArgs[msgId]["id"] = QVariant::fromValue<InputBotInlineMessageID>(id);
-        mRecallArgs[msgId]["user_id"] = QVariant::fromValue<InputUser>(user_id);
+        //mRecallArgs[msgId][""] = "messagesGetInlineGameHighScores";
+        //mRecallArgs[msgId]["id"] = QVariant::fromValue<InputBotInlineMessageID>(id);
+        //mRecallArgs[msgId]["user_id"] = QVariant::fromValue<InputUser>(user_id);
     } else {
         const MessagesHighScores &result = MessagesHighScores();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -8410,7 +8410,7 @@ qint64 TelegramCore::messagesGetInlineGameHighScores(const InputBotInlineMessage
 void TelegramCore::onMessagesGetInlineGameHighScoresAnswer(qint64 msgId, const MessagesHighScores &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesHighScores >(msgId, result);
+    //callBackCall<MessagesHighScores >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesGetInlineGameHighScoresAnswer(msgId, result);
 }
@@ -8419,34 +8419,34 @@ void TelegramCore::onMessagesGetInlineGameHighScoresError(qint64 msgId, qint32 e
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesHighScores &result = MessagesHighScores();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesHighScores >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesHighScores >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesGetInlineGameHighScoresError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesGetCommonChats(const InputUser &user_id, qint32 max_id, qint32 limit, Callback<MessagesChats > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesGetCommonChats(const InputUser &user_id, qint32 max_id, qint32 limit, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesChats &result = MessagesChats();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesGetCommonChats(user_id, max_id, limit);
     if(msgId) {
-        callBackPush<MessagesChats >(msgId, callBack);
+        //callBackPush<MessagesChats >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesGetCommonChats";
-        mRecallArgs[msgId]["user_id"] = QVariant::fromValue<InputUser>(user_id);
-        mRecallArgs[msgId]["max_id"] = QVariant::fromValue<qint32>(max_id);
-        mRecallArgs[msgId]["limit"] = QVariant::fromValue<qint32>(limit);
+        //mRecallArgs[msgId][""] = "messagesGetCommonChats";
+        //mRecallArgs[msgId]["user_id"] = QVariant::fromValue<InputUser>(user_id);
+        //mRecallArgs[msgId]["max_id"] = QVariant::fromValue<qint32>(max_id);
+        //mRecallArgs[msgId]["limit"] = QVariant::fromValue<qint32>(limit);
     } else {
         const MessagesChats &result = MessagesChats();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -8454,7 +8454,7 @@ qint64 TelegramCore::messagesGetCommonChats(const InputUser &user_id, qint32 max
 void TelegramCore::onMessagesGetCommonChatsAnswer(qint64 msgId, const MessagesChats &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesChats >(msgId, result);
+    //callBackCall<MessagesChats >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesGetCommonChatsAnswer(msgId, result);
 }
@@ -8463,32 +8463,32 @@ void TelegramCore::onMessagesGetCommonChatsError(qint64 msgId, qint32 errorCode,
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesChats &result = MessagesChats();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesChats >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesChats >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesGetCommonChatsError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesGetAllChats(const QList<qint32> &except_ids, Callback<MessagesChats > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesGetAllChats(const QList<qint32> &except_ids, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesChats &result = MessagesChats();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesGetAllChats(except_ids);
     if(msgId) {
-        callBackPush<MessagesChats >(msgId, callBack);
+        //callBackPush<MessagesChats >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesGetAllChats";
-        mRecallArgs[msgId]["except_ids"] = QVariant::fromValue<QList<qint32>>(except_ids);
+        //mRecallArgs[msgId][""] = "messagesGetAllChats";
+        //mRecallArgs[msgId]["except_ids"] = QVariant::fromValue<QList<qint32>>(except_ids);
     } else {
         const MessagesChats &result = MessagesChats();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -8496,7 +8496,7 @@ qint64 TelegramCore::messagesGetAllChats(const QList<qint32> &except_ids, Callba
 void TelegramCore::onMessagesGetAllChatsAnswer(qint64 msgId, const MessagesChats &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesChats >(msgId, result);
+    //callBackCall<MessagesChats >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesGetAllChatsAnswer(msgId, result);
 }
@@ -8505,33 +8505,33 @@ void TelegramCore::onMessagesGetAllChatsError(qint64 msgId, qint32 errorCode, co
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesChats &result = MessagesChats();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesChats >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesChats >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesGetAllChatsError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesGetWebPage(const QString &url, qint32 hash, Callback<WebPage > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesGetWebPage(const QString &url, qint32 hash, bool callBack, qint32 timeout) {
     if(!mApi) {
         const WebPage &result = WebPage();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesGetWebPage(url, hash);
     if(msgId) {
-        callBackPush<WebPage >(msgId, callBack);
+        //callBackPush<WebPage >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesGetWebPage";
-        mRecallArgs[msgId]["url"] = QVariant::fromValue<QString>(url);
-        mRecallArgs[msgId]["hash"] = QVariant::fromValue<qint32>(hash);
+        //mRecallArgs[msgId][""] = "messagesGetWebPage";
+        //mRecallArgs[msgId]["url"] = QVariant::fromValue<QString>(url);
+        //mRecallArgs[msgId]["hash"] = QVariant::fromValue<qint32>(hash);
     } else {
         const WebPage &result = WebPage();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -8539,7 +8539,7 @@ qint64 TelegramCore::messagesGetWebPage(const QString &url, qint32 hash, Callbac
 void TelegramCore::onMessagesGetWebPageAnswer(qint64 msgId, const WebPage &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<WebPage >(msgId, result);
+    //callBackCall<WebPage >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesGetWebPageAnswer(msgId, result);
 }
@@ -8548,33 +8548,33 @@ void TelegramCore::onMessagesGetWebPageError(qint64 msgId, qint32 errorCode, con
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const WebPage &result = WebPage();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<WebPage >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<WebPage >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesGetWebPageError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesToggleDialogPin(bool pinned, const InputPeer &peer, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesToggleDialogPin(bool pinned, const InputPeer &peer, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesToggleDialogPin(pinned, peer);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesToggleDialogPin";
-        mRecallArgs[msgId]["pinned"] = QVariant::fromValue<bool>(pinned);
-        mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
+        //mRecallArgs[msgId][""] = "messagesToggleDialogPin";
+        //mRecallArgs[msgId]["pinned"] = QVariant::fromValue<bool>(pinned);
+        //mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -8582,7 +8582,7 @@ qint64 TelegramCore::messagesToggleDialogPin(bool pinned, const InputPeer &peer,
 void TelegramCore::onMessagesToggleDialogPinAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesToggleDialogPinAnswer(msgId, result);
 }
@@ -8591,33 +8591,33 @@ void TelegramCore::onMessagesToggleDialogPinError(qint64 msgId, qint32 errorCode
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesToggleDialogPinError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesReorderPinnedDialogs(bool force, const QList<InputPeer> &order, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesReorderPinnedDialogs(bool force, const QList<InputPeer> &order, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesReorderPinnedDialogs(force, order);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesReorderPinnedDialogs";
-        mRecallArgs[msgId]["force"] = QVariant::fromValue<bool>(force);
-        mRecallArgs[msgId]["order"] = QVariant::fromValue<QList<InputPeer>>(order);
+        //mRecallArgs[msgId][""] = "messagesReorderPinnedDialogs";
+        //mRecallArgs[msgId]["force"] = QVariant::fromValue<bool>(force);
+        //mRecallArgs[msgId]["order"] = QVariant::fromValue<QList<InputPeer>>(order);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -8625,7 +8625,7 @@ qint64 TelegramCore::messagesReorderPinnedDialogs(bool force, const QList<InputP
 void TelegramCore::onMessagesReorderPinnedDialogsAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesReorderPinnedDialogsAnswer(msgId, result);
 }
@@ -8634,31 +8634,31 @@ void TelegramCore::onMessagesReorderPinnedDialogsError(qint64 msgId, qint32 erro
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesReorderPinnedDialogsError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesGetPinnedDialogs(Callback<MessagesPeerDialogs > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesGetPinnedDialogs(bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesPeerDialogs &result = MessagesPeerDialogs();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesGetPinnedDialogs();
     if(msgId) {
-        callBackPush<MessagesPeerDialogs >(msgId, callBack);
+        //callBackPush<MessagesPeerDialogs >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesGetPinnedDialogs";
+        //mRecallArgs[msgId][""] = "messagesGetPinnedDialogs";
     } else {
         const MessagesPeerDialogs &result = MessagesPeerDialogs();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -8666,7 +8666,7 @@ qint64 TelegramCore::messagesGetPinnedDialogs(Callback<MessagesPeerDialogs > cal
 void TelegramCore::onMessagesGetPinnedDialogsAnswer(qint64 msgId, const MessagesPeerDialogs &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesPeerDialogs >(msgId, result);
+    //callBackCall<MessagesPeerDialogs >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesGetPinnedDialogsAnswer(msgId, result);
 }
@@ -8675,34 +8675,34 @@ void TelegramCore::onMessagesGetPinnedDialogsError(qint64 msgId, qint32 errorCod
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesPeerDialogs &result = MessagesPeerDialogs();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesPeerDialogs >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesPeerDialogs >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesGetPinnedDialogsError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesSetBotShippingResults(qint64 query_id, const QString &error, const QList<ShippingOption> &shipping_options, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesSetBotShippingResults(qint64 query_id, const QString &error, const QList<ShippingOption> &shipping_options, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesSetBotShippingResults(query_id, error, shipping_options);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesSetBotShippingResults";
-        mRecallArgs[msgId]["query_id"] = QVariant::fromValue<qint64>(query_id);
-        mRecallArgs[msgId]["error"] = QVariant::fromValue<QString>(error);
-        mRecallArgs[msgId]["shipping_options"] = QVariant::fromValue<QList<ShippingOption>>(shipping_options);
+        //mRecallArgs[msgId][""] = "messagesSetBotShippingResults";
+        //mRecallArgs[msgId]["query_id"] = QVariant::fromValue<qint64>(query_id);
+        //mRecallArgs[msgId]["error"] = QVariant::fromValue<QString>(error);
+        //mRecallArgs[msgId]["shipping_options"] = QVariant::fromValue<QList<ShippingOption>>(shipping_options);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -8710,7 +8710,7 @@ qint64 TelegramCore::messagesSetBotShippingResults(qint64 query_id, const QStrin
 void TelegramCore::onMessagesSetBotShippingResultsAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesSetBotShippingResultsAnswer(msgId, result);
 }
@@ -8719,34 +8719,34 @@ void TelegramCore::onMessagesSetBotShippingResultsError(qint64 msgId, qint32 err
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesSetBotShippingResultsError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesSetBotPrecheckoutResults(bool success, qint64 query_id, const QString &error, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesSetBotPrecheckoutResults(bool success, qint64 query_id, const QString &error, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesSetBotPrecheckoutResults(success, query_id, error);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesSetBotPrecheckoutResults";
-        mRecallArgs[msgId]["success"] = QVariant::fromValue<bool>(success);
-        mRecallArgs[msgId]["query_id"] = QVariant::fromValue<qint64>(query_id);
-        mRecallArgs[msgId]["error"] = QVariant::fromValue<QString>(error);
+        //mRecallArgs[msgId][""] = "messagesSetBotPrecheckoutResults";
+        //mRecallArgs[msgId]["success"] = QVariant::fromValue<bool>(success);
+        //mRecallArgs[msgId]["query_id"] = QVariant::fromValue<qint64>(query_id);
+        //mRecallArgs[msgId]["error"] = QVariant::fromValue<QString>(error);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -8754,7 +8754,7 @@ qint64 TelegramCore::messagesSetBotPrecheckoutResults(bool success, qint64 query
 void TelegramCore::onMessagesSetBotPrecheckoutResultsAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesSetBotPrecheckoutResultsAnswer(msgId, result);
 }
@@ -8763,33 +8763,33 @@ void TelegramCore::onMessagesSetBotPrecheckoutResultsError(qint64 msgId, qint32 
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesSetBotPrecheckoutResultsError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::messagesUploadMedia(const InputPeer &peer, const InputMedia &media, Callback<MessageMedia > callBack, qint32 timeout) {
+qint64 TelegramCore::messagesUploadMedia(const InputPeer &peer, const InputMedia &media, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessageMedia &result = MessageMedia();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->messagesUploadMedia(peer, media);
     if(msgId) {
-        callBackPush<MessageMedia >(msgId, callBack);
+        //callBackPush<MessageMedia >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "messagesUploadMedia";
-        mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
-        mRecallArgs[msgId]["media"] = QVariant::fromValue<InputMedia>(media);
+        //mRecallArgs[msgId][""] = "messagesUploadMedia";
+        //mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPeer>(peer);
+        //mRecallArgs[msgId]["media"] = QVariant::fromValue<InputMedia>(media);
     } else {
         const MessageMedia &result = MessageMedia();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -8797,7 +8797,7 @@ qint64 TelegramCore::messagesUploadMedia(const InputPeer &peer, const InputMedia
 void TelegramCore::onMessagesUploadMediaAnswer(qint64 msgId, const MessageMedia &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessageMedia >(msgId, result);
+    //callBackCall<MessageMedia >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT messagesUploadMediaAnswer(msgId, result);
 }
@@ -8806,33 +8806,33 @@ void TelegramCore::onMessagesUploadMediaError(qint64 msgId, qint32 errorCode, co
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessageMedia &result = MessageMedia();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessageMedia >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessageMedia >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT messagesUploadMediaError(msgId, errorCode, errorText);
 }
 
 
-qint64 TelegramCore::paymentsGetPaymentForm(qint32 msg_id, Callback<PaymentsPaymentForm > callBack, qint32 timeout) {
+qint64 TelegramCore::paymentsGetPaymentForm(qint32 msg_id, bool callBack, qint32 timeout) {
     if(!mApi) {
         const PaymentsPaymentForm &result = PaymentsPaymentForm();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->paymentsGetPaymentForm(msg_id);
     if(msgId) {
-        callBackPush<PaymentsPaymentForm >(msgId, callBack);
+        //callBackPush<PaymentsPaymentForm >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "paymentsGetPaymentForm";
-        mRecallArgs[msgId]["msg_id"] = QVariant::fromValue<qint32>(msg_id);
+        //mRecallArgs[msgId][""] = "paymentsGetPaymentForm";
+        //mRecallArgs[msgId]["msg_id"] = QVariant::fromValue<qint32>(msg_id);
     } else {
         const PaymentsPaymentForm &result = PaymentsPaymentForm();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -8840,7 +8840,7 @@ qint64 TelegramCore::paymentsGetPaymentForm(qint32 msg_id, Callback<PaymentsPaym
 void TelegramCore::onPaymentsGetPaymentFormAnswer(qint64 msgId, const PaymentsPaymentForm &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<PaymentsPaymentForm >(msgId, result);
+    //callBackCall<PaymentsPaymentForm >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT paymentsGetPaymentFormAnswer(msgId, result);
 }
@@ -8849,32 +8849,32 @@ void TelegramCore::onPaymentsGetPaymentFormError(qint64 msgId, qint32 errorCode,
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const PaymentsPaymentForm &result = PaymentsPaymentForm();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<PaymentsPaymentForm >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<PaymentsPaymentForm >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT paymentsGetPaymentFormError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::paymentsGetPaymentReceipt(qint32 msg_id, Callback<PaymentsPaymentReceipt > callBack, qint32 timeout) {
+qint64 TelegramCore::paymentsGetPaymentReceipt(qint32 msg_id, bool callBack, qint32 timeout) {
     if(!mApi) {
         const PaymentsPaymentReceipt &result = PaymentsPaymentReceipt();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->paymentsGetPaymentReceipt(msg_id);
     if(msgId) {
-        callBackPush<PaymentsPaymentReceipt >(msgId, callBack);
+        //callBackPush<PaymentsPaymentReceipt >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "paymentsGetPaymentReceipt";
-        mRecallArgs[msgId]["msg_id"] = QVariant::fromValue<qint32>(msg_id);
+        //mRecallArgs[msgId][""] = "paymentsGetPaymentReceipt";
+        //mRecallArgs[msgId]["msg_id"] = QVariant::fromValue<qint32>(msg_id);
     } else {
         const PaymentsPaymentReceipt &result = PaymentsPaymentReceipt();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -8882,7 +8882,7 @@ qint64 TelegramCore::paymentsGetPaymentReceipt(qint32 msg_id, Callback<PaymentsP
 void TelegramCore::onPaymentsGetPaymentReceiptAnswer(qint64 msgId, const PaymentsPaymentReceipt &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<PaymentsPaymentReceipt >(msgId, result);
+    //callBackCall<PaymentsPaymentReceipt >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT paymentsGetPaymentReceiptAnswer(msgId, result);
 }
@@ -8891,34 +8891,34 @@ void TelegramCore::onPaymentsGetPaymentReceiptError(qint64 msgId, qint32 errorCo
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const PaymentsPaymentReceipt &result = PaymentsPaymentReceipt();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<PaymentsPaymentReceipt >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<PaymentsPaymentReceipt >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT paymentsGetPaymentReceiptError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::paymentsValidateRequestedInfo(bool save, qint32 msg_id, const PaymentRequestedInfo &info, Callback<PaymentsValidatedRequestedInfo > callBack, qint32 timeout) {
+qint64 TelegramCore::paymentsValidateRequestedInfo(bool save, qint32 msg_id, const PaymentRequestedInfo &info, bool callBack, qint32 timeout) {
     if(!mApi) {
         const PaymentsValidatedRequestedInfo &result = PaymentsValidatedRequestedInfo();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->paymentsValidateRequestedInfo(save, msg_id, info);
     if(msgId) {
-        callBackPush<PaymentsValidatedRequestedInfo >(msgId, callBack);
+        //callBackPush<PaymentsValidatedRequestedInfo >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "paymentsValidateRequestedInfo";
-        mRecallArgs[msgId]["save"] = QVariant::fromValue<bool>(save);
-        mRecallArgs[msgId]["msg_id"] = QVariant::fromValue<qint32>(msg_id);
-        mRecallArgs[msgId]["info"] = QVariant::fromValue<PaymentRequestedInfo>(info);
+        //mRecallArgs[msgId][""] = "paymentsValidateRequestedInfo";
+        //mRecallArgs[msgId]["save"] = QVariant::fromValue<bool>(save);
+        //mRecallArgs[msgId]["msg_id"] = QVariant::fromValue<qint32>(msg_id);
+        //mRecallArgs[msgId]["info"] = QVariant::fromValue<PaymentRequestedInfo>(info);
     } else {
         const PaymentsValidatedRequestedInfo &result = PaymentsValidatedRequestedInfo();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -8926,7 +8926,7 @@ qint64 TelegramCore::paymentsValidateRequestedInfo(bool save, qint32 msg_id, con
 void TelegramCore::onPaymentsValidateRequestedInfoAnswer(qint64 msgId, const PaymentsValidatedRequestedInfo &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<PaymentsValidatedRequestedInfo >(msgId, result);
+    //callBackCall<PaymentsValidatedRequestedInfo >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT paymentsValidateRequestedInfoAnswer(msgId, result);
 }
@@ -8935,35 +8935,35 @@ void TelegramCore::onPaymentsValidateRequestedInfoError(qint64 msgId, qint32 err
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const PaymentsValidatedRequestedInfo &result = PaymentsValidatedRequestedInfo();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<PaymentsValidatedRequestedInfo >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<PaymentsValidatedRequestedInfo >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT paymentsValidateRequestedInfoError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::paymentsSendPaymentForm(qint32 msg_id, const QString &requested_info_id, const QString &shipping_option_id, const InputPaymentCredentials &credentials, Callback<PaymentsPaymentResult > callBack, qint32 timeout) {
+qint64 TelegramCore::paymentsSendPaymentForm(qint32 msg_id, const QString &requested_info_id, const QString &shipping_option_id, const InputPaymentCredentials &credentials, bool callBack, qint32 timeout) {
     if(!mApi) {
         const PaymentsPaymentResult &result = PaymentsPaymentResult();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->paymentsSendPaymentForm(msg_id, requested_info_id, shipping_option_id, credentials);
     if(msgId) {
-        callBackPush<PaymentsPaymentResult >(msgId, callBack);
+        //callBackPush<PaymentsPaymentResult >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "paymentsSendPaymentForm";
-        mRecallArgs[msgId]["msg_id"] = QVariant::fromValue<qint32>(msg_id);
-        mRecallArgs[msgId]["requested_info_id"] = QVariant::fromValue<QString>(requested_info_id);
-        mRecallArgs[msgId]["shipping_option_id"] = QVariant::fromValue<QString>(shipping_option_id);
-        mRecallArgs[msgId]["credentials"] = QVariant::fromValue<InputPaymentCredentials>(credentials);
+        //mRecallArgs[msgId][""] = "paymentsSendPaymentForm";
+        //mRecallArgs[msgId]["msg_id"] = QVariant::fromValue<qint32>(msg_id);
+        //mRecallArgs[msgId]["requested_info_id"] = QVariant::fromValue<QString>(requested_info_id);
+        //mRecallArgs[msgId]["shipping_option_id"] = QVariant::fromValue<QString>(shipping_option_id);
+        //mRecallArgs[msgId]["credentials"] = QVariant::fromValue<InputPaymentCredentials>(credentials);
     } else {
         const PaymentsPaymentResult &result = PaymentsPaymentResult();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -8971,7 +8971,7 @@ qint64 TelegramCore::paymentsSendPaymentForm(qint32 msg_id, const QString &reque
 void TelegramCore::onPaymentsSendPaymentFormAnswer(qint64 msgId, const PaymentsPaymentResult &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<PaymentsPaymentResult >(msgId, result);
+    //callBackCall<PaymentsPaymentResult >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT paymentsSendPaymentFormAnswer(msgId, result);
 }
@@ -8980,31 +8980,31 @@ void TelegramCore::onPaymentsSendPaymentFormError(qint64 msgId, qint32 errorCode
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const PaymentsPaymentResult &result = PaymentsPaymentResult();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<PaymentsPaymentResult >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<PaymentsPaymentResult >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT paymentsSendPaymentFormError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::paymentsGetSavedInfo(Callback<PaymentsSavedInfo > callBack, qint32 timeout) {
+qint64 TelegramCore::paymentsGetSavedInfo(bool callBack, qint32 timeout) {
     if(!mApi) {
         const PaymentsSavedInfo &result = PaymentsSavedInfo();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->paymentsGetSavedInfo();
     if(msgId) {
-        callBackPush<PaymentsSavedInfo >(msgId, callBack);
+        //callBackPush<PaymentsSavedInfo >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "paymentsGetSavedInfo";
+        //mRecallArgs[msgId][""] = "paymentsGetSavedInfo";
     } else {
         const PaymentsSavedInfo &result = PaymentsSavedInfo();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -9012,7 +9012,7 @@ qint64 TelegramCore::paymentsGetSavedInfo(Callback<PaymentsSavedInfo > callBack,
 void TelegramCore::onPaymentsGetSavedInfoAnswer(qint64 msgId, const PaymentsSavedInfo &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<PaymentsSavedInfo >(msgId, result);
+    //callBackCall<PaymentsSavedInfo >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT paymentsGetSavedInfoAnswer(msgId, result);
 }
@@ -9021,33 +9021,33 @@ void TelegramCore::onPaymentsGetSavedInfoError(qint64 msgId, qint32 errorCode, c
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const PaymentsSavedInfo &result = PaymentsSavedInfo();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<PaymentsSavedInfo >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<PaymentsSavedInfo >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT paymentsGetSavedInfoError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::paymentsClearSavedInfo(bool credentials, bool info, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::paymentsClearSavedInfo(bool credentials, bool info, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->paymentsClearSavedInfo(credentials, info);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "paymentsClearSavedInfo";
-        mRecallArgs[msgId]["credentials"] = QVariant::fromValue<bool>(credentials);
-        mRecallArgs[msgId]["info"] = QVariant::fromValue<bool>(info);
+        //mRecallArgs[msgId][""] = "paymentsClearSavedInfo";
+        //mRecallArgs[msgId]["credentials"] = QVariant::fromValue<bool>(credentials);
+        //mRecallArgs[msgId]["info"] = QVariant::fromValue<bool>(info);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -9055,7 +9055,7 @@ qint64 TelegramCore::paymentsClearSavedInfo(bool credentials, bool info, Callbac
 void TelegramCore::onPaymentsClearSavedInfoAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT paymentsClearSavedInfoAnswer(msgId, result);
 }
@@ -9064,32 +9064,32 @@ void TelegramCore::onPaymentsClearSavedInfoError(qint64 msgId, qint32 errorCode,
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT paymentsClearSavedInfoError(msgId, errorCode, errorText);
 }
 
 
-qint64 TelegramCore::phoneGetCallConfig(Callback<DataJSON > callBack, qint32 timeout) {
+qint64 TelegramCore::phoneGetCallConfig(bool callBack, qint32 timeout) {
     if(!mApi) {
         const DataJSON &result = DataJSON();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->phoneGetCallConfig();
     if(msgId) {
-        callBackPush<DataJSON >(msgId, callBack);
+        //callBackPush<DataJSON >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "phoneGetCallConfig";
+        //mRecallArgs[msgId][""] = "phoneGetCallConfig";
     } else {
         const DataJSON &result = DataJSON();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -9097,7 +9097,7 @@ qint64 TelegramCore::phoneGetCallConfig(Callback<DataJSON > callBack, qint32 tim
 void TelegramCore::onPhoneGetCallConfigAnswer(qint64 msgId, const DataJSON &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<DataJSON >(msgId, result);
+    //callBackCall<DataJSON >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT phoneGetCallConfigAnswer(msgId, result);
 }
@@ -9106,35 +9106,35 @@ void TelegramCore::onPhoneGetCallConfigError(qint64 msgId, qint32 errorCode, con
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const DataJSON &result = DataJSON();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<DataJSON >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<DataJSON >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT phoneGetCallConfigError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::phoneRequestCall(const InputUser &user_id, qint32 random_id, const QByteArray &g_a_hash, const PhoneCallProtocol &protocol, Callback<PhonePhoneCall > callBack, qint32 timeout) {
+qint64 TelegramCore::phoneRequestCall(const InputUser &user_id, qint32 random_id, const QByteArray &g_a_hash, const PhoneCallProtocol &protocol, bool callBack, qint32 timeout) {
     if(!mApi) {
         const PhonePhoneCall &result = PhonePhoneCall();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->phoneRequestCall(user_id, random_id, g_a_hash, protocol);
     if(msgId) {
-        callBackPush<PhonePhoneCall >(msgId, callBack);
+        //callBackPush<PhonePhoneCall >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "phoneRequestCall";
-        mRecallArgs[msgId]["user_id"] = QVariant::fromValue<InputUser>(user_id);
-        mRecallArgs[msgId]["random_id"] = QVariant::fromValue<qint32>(random_id);
-        mRecallArgs[msgId]["g_a_hash"] = QVariant::fromValue<QByteArray>(g_a_hash);
-        mRecallArgs[msgId]["protocol"] = QVariant::fromValue<PhoneCallProtocol>(protocol);
+        //mRecallArgs[msgId][""] = "phoneRequestCall";
+        //mRecallArgs[msgId]["user_id"] = QVariant::fromValue<InputUser>(user_id);
+        //mRecallArgs[msgId]["random_id"] = QVariant::fromValue<qint32>(random_id);
+        //mRecallArgs[msgId]["g_a_hash"] = QVariant::fromValue<QByteArray>(g_a_hash);
+        //mRecallArgs[msgId]["protocol"] = QVariant::fromValue<PhoneCallProtocol>(protocol);
     } else {
         const PhonePhoneCall &result = PhonePhoneCall();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -9142,7 +9142,7 @@ qint64 TelegramCore::phoneRequestCall(const InputUser &user_id, qint32 random_id
 void TelegramCore::onPhoneRequestCallAnswer(qint64 msgId, const PhonePhoneCall &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<PhonePhoneCall >(msgId, result);
+    //callBackCall<PhonePhoneCall >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT phoneRequestCallAnswer(msgId, result);
 }
@@ -9151,34 +9151,34 @@ void TelegramCore::onPhoneRequestCallError(qint64 msgId, qint32 errorCode, const
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const PhonePhoneCall &result = PhonePhoneCall();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<PhonePhoneCall >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<PhonePhoneCall >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT phoneRequestCallError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::phoneAcceptCall(const InputPhoneCall &peer, const QByteArray &g_b, const PhoneCallProtocol &protocol, Callback<PhonePhoneCall > callBack, qint32 timeout) {
+qint64 TelegramCore::phoneAcceptCall(const InputPhoneCall &peer, const QByteArray &g_b, const PhoneCallProtocol &protocol, bool callBack, qint32 timeout) {
     if(!mApi) {
         const PhonePhoneCall &result = PhonePhoneCall();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->phoneAcceptCall(peer, g_b, protocol);
     if(msgId) {
-        callBackPush<PhonePhoneCall >(msgId, callBack);
+        //callBackPush<PhonePhoneCall >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "phoneAcceptCall";
-        mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPhoneCall>(peer);
-        mRecallArgs[msgId]["g_b"] = QVariant::fromValue<QByteArray>(g_b);
-        mRecallArgs[msgId]["protocol"] = QVariant::fromValue<PhoneCallProtocol>(protocol);
+        //mRecallArgs[msgId][""] = "phoneAcceptCall";
+        //mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPhoneCall>(peer);
+        //mRecallArgs[msgId]["g_b"] = QVariant::fromValue<QByteArray>(g_b);
+        //mRecallArgs[msgId]["protocol"] = QVariant::fromValue<PhoneCallProtocol>(protocol);
     } else {
         const PhonePhoneCall &result = PhonePhoneCall();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -9186,7 +9186,7 @@ qint64 TelegramCore::phoneAcceptCall(const InputPhoneCall &peer, const QByteArra
 void TelegramCore::onPhoneAcceptCallAnswer(qint64 msgId, const PhonePhoneCall &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<PhonePhoneCall >(msgId, result);
+    //callBackCall<PhonePhoneCall >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT phoneAcceptCallAnswer(msgId, result);
 }
@@ -9195,35 +9195,35 @@ void TelegramCore::onPhoneAcceptCallError(qint64 msgId, qint32 errorCode, const 
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const PhonePhoneCall &result = PhonePhoneCall();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<PhonePhoneCall >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<PhonePhoneCall >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT phoneAcceptCallError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::phoneConfirmCall(const InputPhoneCall &peer, const QByteArray &g_a, qint64 key_fingerprint, const PhoneCallProtocol &protocol, Callback<PhonePhoneCall > callBack, qint32 timeout) {
+qint64 TelegramCore::phoneConfirmCall(const InputPhoneCall &peer, const QByteArray &g_a, qint64 key_fingerprint, const PhoneCallProtocol &protocol, bool callBack, qint32 timeout) {
     if(!mApi) {
         const PhonePhoneCall &result = PhonePhoneCall();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->phoneConfirmCall(peer, g_a, key_fingerprint, protocol);
     if(msgId) {
-        callBackPush<PhonePhoneCall >(msgId, callBack);
+        //callBackPush<PhonePhoneCall >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "phoneConfirmCall";
-        mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPhoneCall>(peer);
-        mRecallArgs[msgId]["g_a"] = QVariant::fromValue<QByteArray>(g_a);
-        mRecallArgs[msgId]["key_fingerprint"] = QVariant::fromValue<qint64>(key_fingerprint);
-        mRecallArgs[msgId]["protocol"] = QVariant::fromValue<PhoneCallProtocol>(protocol);
+        //mRecallArgs[msgId][""] = "phoneConfirmCall";
+        //mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPhoneCall>(peer);
+        //mRecallArgs[msgId]["g_a"] = QVariant::fromValue<QByteArray>(g_a);
+        //mRecallArgs[msgId]["key_fingerprint"] = QVariant::fromValue<qint64>(key_fingerprint);
+        //mRecallArgs[msgId]["protocol"] = QVariant::fromValue<PhoneCallProtocol>(protocol);
     } else {
         const PhonePhoneCall &result = PhonePhoneCall();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -9231,7 +9231,7 @@ qint64 TelegramCore::phoneConfirmCall(const InputPhoneCall &peer, const QByteArr
 void TelegramCore::onPhoneConfirmCallAnswer(qint64 msgId, const PhonePhoneCall &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<PhonePhoneCall >(msgId, result);
+    //callBackCall<PhonePhoneCall >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT phoneConfirmCallAnswer(msgId, result);
 }
@@ -9240,32 +9240,32 @@ void TelegramCore::onPhoneConfirmCallError(qint64 msgId, qint32 errorCode, const
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const PhonePhoneCall &result = PhonePhoneCall();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<PhonePhoneCall >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<PhonePhoneCall >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT phoneConfirmCallError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::phoneReceivedCall(const InputPhoneCall &peer, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::phoneReceivedCall(const InputPhoneCall &peer, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->phoneReceivedCall(peer);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "phoneReceivedCall";
-        mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPhoneCall>(peer);
+        //mRecallArgs[msgId][""] = "phoneReceivedCall";
+        //mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPhoneCall>(peer);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -9273,7 +9273,7 @@ qint64 TelegramCore::phoneReceivedCall(const InputPhoneCall &peer, Callback<bool
 void TelegramCore::onPhoneReceivedCallAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT phoneReceivedCallAnswer(msgId, result);
 }
@@ -9282,35 +9282,35 @@ void TelegramCore::onPhoneReceivedCallError(qint64 msgId, qint32 errorCode, cons
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT phoneReceivedCallError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::phoneDiscardCall(const InputPhoneCall &peer, qint32 duration, const PhoneCallDiscardReason &reason, qint64 connection_id, Callback<UpdatesType > callBack, qint32 timeout) {
+qint64 TelegramCore::phoneDiscardCall(const InputPhoneCall &peer, qint32 duration, const PhoneCallDiscardReason &reason, qint64 connection_id, bool callBack, qint32 timeout) {
     if(!mApi) {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->phoneDiscardCall(peer, duration, reason, connection_id);
     if(msgId) {
-        callBackPush<UpdatesType >(msgId, callBack);
+        //callBackPush<UpdatesType >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "phoneDiscardCall";
-        mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPhoneCall>(peer);
-        mRecallArgs[msgId]["duration"] = QVariant::fromValue<qint32>(duration);
-        mRecallArgs[msgId]["reason"] = QVariant::fromValue<PhoneCallDiscardReason>(reason);
-        mRecallArgs[msgId]["connection_id"] = QVariant::fromValue<qint64>(connection_id);
+        //mRecallArgs[msgId][""] = "phoneDiscardCall";
+        //mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPhoneCall>(peer);
+        //mRecallArgs[msgId]["duration"] = QVariant::fromValue<qint32>(duration);
+        //mRecallArgs[msgId]["reason"] = QVariant::fromValue<PhoneCallDiscardReason>(reason);
+        //mRecallArgs[msgId]["connection_id"] = QVariant::fromValue<qint64>(connection_id);
     } else {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -9318,7 +9318,7 @@ qint64 TelegramCore::phoneDiscardCall(const InputPhoneCall &peer, qint32 duratio
 void TelegramCore::onPhoneDiscardCallAnswer(qint64 msgId, const UpdatesType &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<UpdatesType >(msgId, result);
+    //callBackCall<UpdatesType >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT phoneDiscardCallAnswer(msgId, result);
 }
@@ -9327,34 +9327,34 @@ void TelegramCore::onPhoneDiscardCallError(qint64 msgId, qint32 errorCode, const
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const UpdatesType &result = UpdatesType();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<UpdatesType >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<UpdatesType >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT phoneDiscardCallError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::phoneSetCallRating(const InputPhoneCall &peer, qint32 rating, const QString &comment, Callback<UpdatesType > callBack, qint32 timeout) {
+qint64 TelegramCore::phoneSetCallRating(const InputPhoneCall &peer, qint32 rating, const QString &comment, bool callBack, qint32 timeout) {
     if(!mApi) {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->phoneSetCallRating(peer, rating, comment);
     if(msgId) {
-        callBackPush<UpdatesType >(msgId, callBack);
+        //callBackPush<UpdatesType >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "phoneSetCallRating";
-        mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPhoneCall>(peer);
-        mRecallArgs[msgId]["rating"] = QVariant::fromValue<qint32>(rating);
-        mRecallArgs[msgId]["comment"] = QVariant::fromValue<QString>(comment);
+        //mRecallArgs[msgId][""] = "phoneSetCallRating";
+        //mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPhoneCall>(peer);
+        //mRecallArgs[msgId]["rating"] = QVariant::fromValue<qint32>(rating);
+        //mRecallArgs[msgId]["comment"] = QVariant::fromValue<QString>(comment);
     } else {
         const UpdatesType &result = UpdatesType();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -9362,7 +9362,7 @@ qint64 TelegramCore::phoneSetCallRating(const InputPhoneCall &peer, qint32 ratin
 void TelegramCore::onPhoneSetCallRatingAnswer(qint64 msgId, const UpdatesType &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<UpdatesType >(msgId, result);
+    //callBackCall<UpdatesType >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT phoneSetCallRatingAnswer(msgId, result);
 }
@@ -9371,33 +9371,33 @@ void TelegramCore::onPhoneSetCallRatingError(qint64 msgId, qint32 errorCode, con
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const UpdatesType &result = UpdatesType();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<UpdatesType >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<UpdatesType >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT phoneSetCallRatingError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::phoneSaveCallDebug(const InputPhoneCall &peer, const DataJSON &debug, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::phoneSaveCallDebug(const InputPhoneCall &peer, const DataJSON &debug, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->phoneSaveCallDebug(peer, debug);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "phoneSaveCallDebug";
-        mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPhoneCall>(peer);
-        mRecallArgs[msgId]["debug"] = QVariant::fromValue<DataJSON>(debug);
+        //mRecallArgs[msgId][""] = "phoneSaveCallDebug";
+        //mRecallArgs[msgId]["peer"] = QVariant::fromValue<InputPhoneCall>(peer);
+        //mRecallArgs[msgId]["debug"] = QVariant::fromValue<DataJSON>(debug);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -9405,7 +9405,7 @@ qint64 TelegramCore::phoneSaveCallDebug(const InputPhoneCall &peer, const DataJS
 void TelegramCore::onPhoneSaveCallDebugAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT phoneSaveCallDebugAnswer(msgId, result);
 }
@@ -9414,33 +9414,33 @@ void TelegramCore::onPhoneSaveCallDebugError(qint64 msgId, qint32 errorCode, con
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT phoneSaveCallDebugError(msgId, errorCode, errorText);
 }
 
 
-qint64 TelegramCore::photosUpdateProfilePhoto(const InputPhoto &id, Callback<UserProfilePhoto > callBack, qint32 timeout) {
+qint64 TelegramCore::photosUpdateProfilePhoto(const InputPhoto &id, bool callBack, qint32 timeout) {
     if(!mApi) {
         const UserProfilePhoto &result = UserProfilePhoto();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->photosUpdateProfilePhoto(id);
     if(msgId) {
-        callBackPush<UserProfilePhoto >(msgId, callBack);
+        //callBackPush<UserProfilePhoto >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "photosUpdateProfilePhoto";
-        mRecallArgs[msgId]["id"] = QVariant::fromValue<InputPhoto>(id);
+        //mRecallArgs[msgId][""] = "photosUpdateProfilePhoto";
+        //mRecallArgs[msgId]["id"] = QVariant::fromValue<InputPhoto>(id);
     } else {
         const UserProfilePhoto &result = UserProfilePhoto();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -9448,7 +9448,7 @@ qint64 TelegramCore::photosUpdateProfilePhoto(const InputPhoto &id, Callback<Use
 void TelegramCore::onPhotosUpdateProfilePhotoAnswer(qint64 msgId, const UserProfilePhoto &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<UserProfilePhoto >(msgId, result);
+    //callBackCall<UserProfilePhoto >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT photosUpdateProfilePhotoAnswer(msgId, result);
 }
@@ -9457,32 +9457,32 @@ void TelegramCore::onPhotosUpdateProfilePhotoError(qint64 msgId, qint32 errorCod
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const UserProfilePhoto &result = UserProfilePhoto();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<UserProfilePhoto >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<UserProfilePhoto >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT photosUpdateProfilePhotoError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::photosUploadProfilePhoto(const InputFile &file, Callback<PhotosPhoto > callBack, qint32 timeout) {
+qint64 TelegramCore::photosUploadProfilePhoto(const InputFile &file, bool callBack, qint32 timeout) {
     if(!mApi) {
         const PhotosPhoto &result = PhotosPhoto();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->photosUploadProfilePhoto(file);
     if(msgId) {
-        callBackPush<PhotosPhoto >(msgId, callBack);
+        //callBackPush<PhotosPhoto >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "photosUploadProfilePhoto";
-        mRecallArgs[msgId]["file"] = QVariant::fromValue<InputFile>(file);
+        //mRecallArgs[msgId][""] = "photosUploadProfilePhoto";
+        //mRecallArgs[msgId]["file"] = QVariant::fromValue<InputFile>(file);
     } else {
         const PhotosPhoto &result = PhotosPhoto();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -9490,7 +9490,7 @@ qint64 TelegramCore::photosUploadProfilePhoto(const InputFile &file, Callback<Ph
 void TelegramCore::onPhotosUploadProfilePhotoAnswer(qint64 msgId, const PhotosPhoto &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<PhotosPhoto >(msgId, result);
+    //callBackCall<PhotosPhoto >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT photosUploadProfilePhotoAnswer(msgId, result);
 }
@@ -9499,32 +9499,32 @@ void TelegramCore::onPhotosUploadProfilePhotoError(qint64 msgId, qint32 errorCod
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const PhotosPhoto &result = PhotosPhoto();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<PhotosPhoto >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<PhotosPhoto >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT photosUploadProfilePhotoError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::photosDeletePhotos(const QList<InputPhoto> &id, Callback<QList<qint64> > callBack, qint32 timeout) {
+qint64 TelegramCore::photosDeletePhotos(const QList<InputPhoto> &id, bool callBack, qint32 timeout) {
     if(!mApi) {
         const QList<qint64> &result = QList<qint64>();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->photosDeletePhotos(id);
     if(msgId) {
-        callBackPush<QList<qint64> >(msgId, callBack);
+        //callBackPush<QList<qint64> >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "photosDeletePhotos";
-        mRecallArgs[msgId]["id"] = QVariant::fromValue<QList<InputPhoto>>(id);
+        //mRecallArgs[msgId][""] = "photosDeletePhotos";
+        //mRecallArgs[msgId]["id"] = QVariant::fromValue<QList<InputPhoto>>(id);
     } else {
         const QList<qint64> &result = QList<qint64>();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -9532,7 +9532,7 @@ qint64 TelegramCore::photosDeletePhotos(const QList<InputPhoto> &id, Callback<QL
 void TelegramCore::onPhotosDeletePhotosAnswer(qint64 msgId, const QList<qint64> &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<QList<qint64> >(msgId, result);
+    //callBackCall<QList<qint64> >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT photosDeletePhotosAnswer(msgId, result);
 }
@@ -9541,35 +9541,35 @@ void TelegramCore::onPhotosDeletePhotosError(qint64 msgId, qint32 errorCode, con
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const QList<qint64> &result = QList<qint64>();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<QList<qint64> >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<QList<qint64> >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT photosDeletePhotosError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::photosGetUserPhotos(const InputUser &user_id, qint32 offset, qint64 max_id, qint32 limit, Callback<PhotosPhotos > callBack, qint32 timeout) {
+qint64 TelegramCore::photosGetUserPhotos(const InputUser &user_id, qint32 offset, qint64 max_id, qint32 limit, bool callBack, qint32 timeout) {
     if(!mApi) {
         const PhotosPhotos &result = PhotosPhotos();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->photosGetUserPhotos(user_id, offset, max_id, limit);
     if(msgId) {
-        callBackPush<PhotosPhotos >(msgId, callBack);
+        //callBackPush<PhotosPhotos >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "photosGetUserPhotos";
-        mRecallArgs[msgId]["user_id"] = QVariant::fromValue<InputUser>(user_id);
-        mRecallArgs[msgId]["offset"] = QVariant::fromValue<qint32>(offset);
-        mRecallArgs[msgId]["max_id"] = QVariant::fromValue<qint64>(max_id);
-        mRecallArgs[msgId]["limit"] = QVariant::fromValue<qint32>(limit);
+        //mRecallArgs[msgId][""] = "photosGetUserPhotos";
+        //mRecallArgs[msgId]["user_id"] = QVariant::fromValue<InputUser>(user_id);
+        //mRecallArgs[msgId]["offset"] = QVariant::fromValue<qint32>(offset);
+        //mRecallArgs[msgId]["max_id"] = QVariant::fromValue<qint64>(max_id);
+        //mRecallArgs[msgId]["limit"] = QVariant::fromValue<qint32>(limit);
     } else {
         const PhotosPhotos &result = PhotosPhotos();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -9577,7 +9577,7 @@ qint64 TelegramCore::photosGetUserPhotos(const InputUser &user_id, qint32 offset
 void TelegramCore::onPhotosGetUserPhotosAnswer(qint64 msgId, const PhotosPhotos &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<PhotosPhotos >(msgId, result);
+    //callBackCall<PhotosPhotos >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT photosGetUserPhotosAnswer(msgId, result);
 }
@@ -9586,37 +9586,37 @@ void TelegramCore::onPhotosGetUserPhotosError(qint64 msgId, qint32 errorCode, co
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const PhotosPhotos &result = PhotosPhotos();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<PhotosPhotos >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<PhotosPhotos >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT photosGetUserPhotosError(msgId, errorCode, errorText);
 }
 
 
-qint64 TelegramCore::stickersCreateStickerSet(bool masks, const InputUser &user_id, const QString &title, const QString &short_name, const QList<InputStickerSetItem> &stickers, Callback<MessagesStickerSet > callBack, qint32 timeout) {
+qint64 TelegramCore::stickersCreateStickerSet(bool masks, const InputUser &user_id, const QString &title, const QString &short_name, const QList<InputStickerSetItem> &stickers, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesStickerSet &result = MessagesStickerSet();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->stickersCreateStickerSet(masks, user_id, title, short_name, stickers);
     if(msgId) {
-        callBackPush<MessagesStickerSet >(msgId, callBack);
+        //callBackPush<MessagesStickerSet >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "stickersCreateStickerSet";
-        mRecallArgs[msgId]["masks"] = QVariant::fromValue<bool>(masks);
-        mRecallArgs[msgId]["user_id"] = QVariant::fromValue<InputUser>(user_id);
-        mRecallArgs[msgId]["title"] = QVariant::fromValue<QString>(title);
-        mRecallArgs[msgId]["short_name"] = QVariant::fromValue<QString>(short_name);
-        mRecallArgs[msgId]["stickers"] = QVariant::fromValue<QList<InputStickerSetItem>>(stickers);
+        //mRecallArgs[msgId][""] = "stickersCreateStickerSet";
+        //mRecallArgs[msgId]["masks"] = QVariant::fromValue<bool>(masks);
+        //mRecallArgs[msgId]["user_id"] = QVariant::fromValue<InputUser>(user_id);
+        //mRecallArgs[msgId]["title"] = QVariant::fromValue<QString>(title);
+        //mRecallArgs[msgId]["short_name"] = QVariant::fromValue<QString>(short_name);
+        //mRecallArgs[msgId]["stickers"] = QVariant::fromValue<QList<InputStickerSetItem>>(stickers);
     } else {
         const MessagesStickerSet &result = MessagesStickerSet();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -9624,7 +9624,7 @@ qint64 TelegramCore::stickersCreateStickerSet(bool masks, const InputUser &user_
 void TelegramCore::onStickersCreateStickerSetAnswer(qint64 msgId, const MessagesStickerSet &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesStickerSet >(msgId, result);
+    //callBackCall<MessagesStickerSet >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT stickersCreateStickerSetAnswer(msgId, result);
 }
@@ -9633,32 +9633,32 @@ void TelegramCore::onStickersCreateStickerSetError(qint64 msgId, qint32 errorCod
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesStickerSet &result = MessagesStickerSet();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesStickerSet >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesStickerSet >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT stickersCreateStickerSetError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::stickersRemoveStickerFromSet(const InputDocument &sticker, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::stickersRemoveStickerFromSet(const InputDocument &sticker, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->stickersRemoveStickerFromSet(sticker);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "stickersRemoveStickerFromSet";
-        mRecallArgs[msgId]["sticker"] = QVariant::fromValue<InputDocument>(sticker);
+        //mRecallArgs[msgId][""] = "stickersRemoveStickerFromSet";
+        //mRecallArgs[msgId]["sticker"] = QVariant::fromValue<InputDocument>(sticker);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -9666,7 +9666,7 @@ qint64 TelegramCore::stickersRemoveStickerFromSet(const InputDocument &sticker, 
 void TelegramCore::onStickersRemoveStickerFromSetAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT stickersRemoveStickerFromSetAnswer(msgId, result);
 }
@@ -9675,33 +9675,33 @@ void TelegramCore::onStickersRemoveStickerFromSetError(qint64 msgId, qint32 erro
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT stickersRemoveStickerFromSetError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::stickersChangeStickerPosition(const InputDocument &sticker, qint32 position, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::stickersChangeStickerPosition(const InputDocument &sticker, qint32 position, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->stickersChangeStickerPosition(sticker, position);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "stickersChangeStickerPosition";
-        mRecallArgs[msgId]["sticker"] = QVariant::fromValue<InputDocument>(sticker);
-        mRecallArgs[msgId]["position"] = QVariant::fromValue<qint32>(position);
+        //mRecallArgs[msgId][""] = "stickersChangeStickerPosition";
+        //mRecallArgs[msgId]["sticker"] = QVariant::fromValue<InputDocument>(sticker);
+        //mRecallArgs[msgId]["position"] = QVariant::fromValue<qint32>(position);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -9709,7 +9709,7 @@ qint64 TelegramCore::stickersChangeStickerPosition(const InputDocument &sticker,
 void TelegramCore::onStickersChangeStickerPositionAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT stickersChangeStickerPositionAnswer(msgId, result);
 }
@@ -9718,33 +9718,33 @@ void TelegramCore::onStickersChangeStickerPositionError(qint64 msgId, qint32 err
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT stickersChangeStickerPositionError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::stickersAddStickerToSet(const InputStickerSet &stickerset, const InputStickerSetItem &sticker, Callback<MessagesStickerSet > callBack, qint32 timeout) {
+qint64 TelegramCore::stickersAddStickerToSet(const InputStickerSet &stickerset, const InputStickerSetItem &sticker, bool callBack, qint32 timeout) {
     if(!mApi) {
         const MessagesStickerSet &result = MessagesStickerSet();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->stickersAddStickerToSet(stickerset, sticker);
     if(msgId) {
-        callBackPush<MessagesStickerSet >(msgId, callBack);
+        //callBackPush<MessagesStickerSet >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "stickersAddStickerToSet";
-        mRecallArgs[msgId]["stickerset"] = QVariant::fromValue<InputStickerSet>(stickerset);
-        mRecallArgs[msgId]["sticker"] = QVariant::fromValue<InputStickerSetItem>(sticker);
+        //mRecallArgs[msgId][""] = "stickersAddStickerToSet";
+        //mRecallArgs[msgId]["stickerset"] = QVariant::fromValue<InputStickerSet>(stickerset);
+        //mRecallArgs[msgId]["sticker"] = QVariant::fromValue<InputStickerSetItem>(sticker);
     } else {
         const MessagesStickerSet &result = MessagesStickerSet();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -9752,7 +9752,7 @@ qint64 TelegramCore::stickersAddStickerToSet(const InputStickerSet &stickerset, 
 void TelegramCore::onStickersAddStickerToSetAnswer(qint64 msgId, const MessagesStickerSet &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<MessagesStickerSet >(msgId, result);
+    //callBackCall<MessagesStickerSet >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT stickersAddStickerToSetAnswer(msgId, result);
 }
@@ -9761,32 +9761,32 @@ void TelegramCore::onStickersAddStickerToSetError(qint64 msgId, qint32 errorCode
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const MessagesStickerSet &result = MessagesStickerSet();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<MessagesStickerSet >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<MessagesStickerSet >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT stickersAddStickerToSetError(msgId, errorCode, errorText);
 }
 
 
-qint64 TelegramCore::updatesGetState(Callback<UpdatesState > callBack, qint32 timeout) {
+qint64 TelegramCore::updatesGetState(bool callBack, qint32 timeout) {
     if(!mApi) {
         const UpdatesState &result = UpdatesState();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->updatesGetState();
     if(msgId) {
-        callBackPush<UpdatesState >(msgId, callBack);
+        //callBackPush<UpdatesState >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "updatesGetState";
+        //mRecallArgs[msgId][""] = "updatesGetState";
     } else {
         const UpdatesState &result = UpdatesState();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -9794,7 +9794,7 @@ qint64 TelegramCore::updatesGetState(Callback<UpdatesState > callBack, qint32 ti
 void TelegramCore::onUpdatesGetStateAnswer(qint64 msgId, const UpdatesState &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<UpdatesState >(msgId, result);
+    //callBackCall<UpdatesState >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT updatesGetStateAnswer(msgId, result);
 }
@@ -9803,35 +9803,35 @@ void TelegramCore::onUpdatesGetStateError(qint64 msgId, qint32 errorCode, const 
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const UpdatesState &result = UpdatesState();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<UpdatesState >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<UpdatesState >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT updatesGetStateError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::updatesGetDifference(qint32 pts, qint32 pts_total_limit, qint32 date, qint32 qts, Callback<UpdatesDifference > callBack, qint32 timeout) {
+qint64 TelegramCore::updatesGetDifference(qint32 pts, qint32 pts_total_limit, qint32 date, qint32 qts, bool callBack, qint32 timeout) {
     if(!mApi) {
         const UpdatesDifference &result = UpdatesDifference();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->updatesGetDifference(pts, pts_total_limit, date, qts);
     if(msgId) {
-        callBackPush<UpdatesDifference >(msgId, callBack);
+        //callBackPush<UpdatesDifference >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "updatesGetDifference";
-        mRecallArgs[msgId]["pts"] = QVariant::fromValue<qint32>(pts);
-        mRecallArgs[msgId]["pts_total_limit"] = QVariant::fromValue<qint32>(pts_total_limit);
-        mRecallArgs[msgId]["date"] = QVariant::fromValue<qint32>(date);
-        mRecallArgs[msgId]["qts"] = QVariant::fromValue<qint32>(qts);
+        //mRecallArgs[msgId][""] = "updatesGetDifference";
+        //mRecallArgs[msgId]["pts"] = QVariant::fromValue<qint32>(pts);
+        //mRecallArgs[msgId]["pts_total_limit"] = QVariant::fromValue<qint32>(pts_total_limit);
+        //mRecallArgs[msgId]["date"] = QVariant::fromValue<qint32>(date);
+        //mRecallArgs[msgId]["qts"] = QVariant::fromValue<qint32>(qts);
     } else {
         const UpdatesDifference &result = UpdatesDifference();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -9839,7 +9839,7 @@ qint64 TelegramCore::updatesGetDifference(qint32 pts, qint32 pts_total_limit, qi
 void TelegramCore::onUpdatesGetDifferenceAnswer(qint64 msgId, const UpdatesDifference &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<UpdatesDifference >(msgId, result);
+    //callBackCall<UpdatesDifference >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT updatesGetDifferenceAnswer(msgId, result);
 }
@@ -9848,36 +9848,36 @@ void TelegramCore::onUpdatesGetDifferenceError(qint64 msgId, qint32 errorCode, c
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const UpdatesDifference &result = UpdatesDifference();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<UpdatesDifference >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<UpdatesDifference >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT updatesGetDifferenceError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::updatesGetChannelDifference(bool force, const InputChannel &channel, const ChannelMessagesFilter &filter, qint32 pts, qint32 limit, Callback<UpdatesChannelDifference > callBack, qint32 timeout) {
+qint64 TelegramCore::updatesGetChannelDifference(bool force, const InputChannel &channel, const ChannelMessagesFilter &filter, qint32 pts, qint32 limit, bool callBack, qint32 timeout) {
     if(!mApi) {
         const UpdatesChannelDifference &result = UpdatesChannelDifference();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->updatesGetChannelDifference(force, channel, filter, pts, limit);
     if(msgId) {
-        callBackPush<UpdatesChannelDifference >(msgId, callBack);
+        //callBackPush<UpdatesChannelDifference >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "updatesGetChannelDifference";
-        mRecallArgs[msgId]["force"] = QVariant::fromValue<bool>(force);
-        mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
-        mRecallArgs[msgId]["filter"] = QVariant::fromValue<ChannelMessagesFilter>(filter);
-        mRecallArgs[msgId]["pts"] = QVariant::fromValue<qint32>(pts);
-        mRecallArgs[msgId]["limit"] = QVariant::fromValue<qint32>(limit);
+        //mRecallArgs[msgId][""] = "updatesGetChannelDifference";
+        //mRecallArgs[msgId]["force"] = QVariant::fromValue<bool>(force);
+        //mRecallArgs[msgId]["channel"] = QVariant::fromValue<InputChannel>(channel);
+        //mRecallArgs[msgId]["filter"] = QVariant::fromValue<ChannelMessagesFilter>(filter);
+        //mRecallArgs[msgId]["pts"] = QVariant::fromValue<qint32>(pts);
+        //mRecallArgs[msgId]["limit"] = QVariant::fromValue<qint32>(limit);
     } else {
         const UpdatesChannelDifference &result = UpdatesChannelDifference();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -9885,7 +9885,7 @@ qint64 TelegramCore::updatesGetChannelDifference(bool force, const InputChannel 
 void TelegramCore::onUpdatesGetChannelDifferenceAnswer(qint64 msgId, const UpdatesChannelDifference &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<UpdatesChannelDifference >(msgId, result);
+    //callBackCall<UpdatesChannelDifference >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT updatesGetChannelDifferenceAnswer(msgId, result);
 }
@@ -9894,35 +9894,35 @@ void TelegramCore::onUpdatesGetChannelDifferenceError(qint64 msgId, qint32 error
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const UpdatesChannelDifference &result = UpdatesChannelDifference();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<UpdatesChannelDifference >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<UpdatesChannelDifference >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT updatesGetChannelDifferenceError(msgId, errorCode, errorText);
 }
 
 
-qint64 TelegramCore::uploadSaveFilePart(qint64 file_id, qint32 file_part, const QByteArray &bytes, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::uploadSaveFilePart(qint64 file_id, qint32 file_part, const QByteArray &bytes, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->uploadSaveFilePart(file_id, file_part, bytes);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "uploadSaveFilePart";
-        mRecallArgs[msgId]["file_id"] = QVariant::fromValue<qint64>(file_id);
-        mRecallArgs[msgId]["file_part"] = QVariant::fromValue<qint32>(file_part);
-        mRecallArgs[msgId]["bytes"] = QVariant::fromValue<QByteArray>(bytes);
+        //mRecallArgs[msgId][""] = "uploadSaveFilePart";
+        //mRecallArgs[msgId]["file_id"] = QVariant::fromValue<qint64>(file_id);
+        //mRecallArgs[msgId]["file_part"] = QVariant::fromValue<qint32>(file_part);
+        //mRecallArgs[msgId]["bytes"] = QVariant::fromValue<QByteArray>(bytes);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -9930,7 +9930,7 @@ qint64 TelegramCore::uploadSaveFilePart(qint64 file_id, qint32 file_part, const 
 void TelegramCore::onUploadSaveFilePartAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT uploadSaveFilePartAnswer(msgId, result);
 }
@@ -9939,34 +9939,34 @@ void TelegramCore::onUploadSaveFilePartError(qint64 msgId, qint32 errorCode, con
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT uploadSaveFilePartError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::uploadGetFile(const InputFileLocation &location, qint32 offset, qint32 limit, Callback<UploadFile > callBack, qint32 timeout) {
+qint64 TelegramCore::uploadGetFile(const InputFileLocation &location, qint32 offset, qint32 limit, bool callBack, qint32 timeout) {
     if(!mApi) {
         const UploadFile &result = UploadFile();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->uploadGetFile(location, offset, limit);
     if(msgId) {
-        callBackPush<UploadFile >(msgId, callBack);
+        //callBackPush<UploadFile >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "uploadGetFile";
-        mRecallArgs[msgId]["location"] = QVariant::fromValue<InputFileLocation>(location);
-        mRecallArgs[msgId]["offset"] = QVariant::fromValue<qint32>(offset);
-        mRecallArgs[msgId]["limit"] = QVariant::fromValue<qint32>(limit);
+        //mRecallArgs[msgId][""] = "uploadGetFile";
+        //mRecallArgs[msgId]["location"] = QVariant::fromValue<InputFileLocation>(location);
+        //mRecallArgs[msgId]["offset"] = QVariant::fromValue<qint32>(offset);
+        //mRecallArgs[msgId]["limit"] = QVariant::fromValue<qint32>(limit);
     } else {
         const UploadFile &result = UploadFile();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -9974,7 +9974,7 @@ qint64 TelegramCore::uploadGetFile(const InputFileLocation &location, qint32 off
 void TelegramCore::onUploadGetFileAnswer(qint64 msgId, const UploadFile &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<UploadFile >(msgId, result);
+    //callBackCall<UploadFile >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT uploadGetFileAnswer(msgId, result);
 }
@@ -9983,35 +9983,35 @@ void TelegramCore::onUploadGetFileError(qint64 msgId, qint32 errorCode, const QS
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const UploadFile &result = UploadFile();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<UploadFile >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<UploadFile >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT uploadGetFileError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::uploadSaveBigFilePart(qint64 file_id, qint32 file_part, qint32 file_total_parts, const QByteArray &bytes, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::uploadSaveBigFilePart(qint64 file_id, qint32 file_part, qint32 file_total_parts, const QByteArray &bytes, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->uploadSaveBigFilePart(file_id, file_part, file_total_parts, bytes);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "uploadSaveBigFilePart";
-        mRecallArgs[msgId]["file_id"] = QVariant::fromValue<qint64>(file_id);
-        mRecallArgs[msgId]["file_part"] = QVariant::fromValue<qint32>(file_part);
-        mRecallArgs[msgId]["file_total_parts"] = QVariant::fromValue<qint32>(file_total_parts);
-        mRecallArgs[msgId]["bytes"] = QVariant::fromValue<QByteArray>(bytes);
+        //mRecallArgs[msgId][""] = "uploadSaveBigFilePart";
+        //mRecallArgs[msgId]["file_id"] = QVariant::fromValue<qint64>(file_id);
+        //mRecallArgs[msgId]["file_part"] = QVariant::fromValue<qint32>(file_part);
+        //mRecallArgs[msgId]["file_total_parts"] = QVariant::fromValue<qint32>(file_total_parts);
+        //mRecallArgs[msgId]["bytes"] = QVariant::fromValue<QByteArray>(bytes);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -10019,7 +10019,7 @@ qint64 TelegramCore::uploadSaveBigFilePart(qint64 file_id, qint32 file_part, qin
 void TelegramCore::onUploadSaveBigFilePartAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT uploadSaveBigFilePartAnswer(msgId, result);
 }
@@ -10028,34 +10028,34 @@ void TelegramCore::onUploadSaveBigFilePartError(qint64 msgId, qint32 errorCode, 
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT uploadSaveBigFilePartError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::uploadGetWebFile(const InputWebFileLocation &location, qint32 offset, qint32 limit, Callback<UploadWebFile > callBack, qint32 timeout) {
+qint64 TelegramCore::uploadGetWebFile(const InputWebFileLocation &location, qint32 offset, qint32 limit, bool callBack, qint32 timeout) {
     if(!mApi) {
         const UploadWebFile &result = UploadWebFile();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->uploadGetWebFile(location, offset, limit);
     if(msgId) {
-        callBackPush<UploadWebFile >(msgId, callBack);
+        //callBackPush<UploadWebFile >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "uploadGetWebFile";
-        mRecallArgs[msgId]["location"] = QVariant::fromValue<InputWebFileLocation>(location);
-        mRecallArgs[msgId]["offset"] = QVariant::fromValue<qint32>(offset);
-        mRecallArgs[msgId]["limit"] = QVariant::fromValue<qint32>(limit);
+        //mRecallArgs[msgId][""] = "uploadGetWebFile";
+        //mRecallArgs[msgId]["location"] = QVariant::fromValue<InputWebFileLocation>(location);
+        //mRecallArgs[msgId]["offset"] = QVariant::fromValue<qint32>(offset);
+        //mRecallArgs[msgId]["limit"] = QVariant::fromValue<qint32>(limit);
     } else {
         const UploadWebFile &result = UploadWebFile();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -10063,7 +10063,7 @@ qint64 TelegramCore::uploadGetWebFile(const InputWebFileLocation &location, qint
 void TelegramCore::onUploadGetWebFileAnswer(qint64 msgId, const UploadWebFile &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<UploadWebFile >(msgId, result);
+    //callBackCall<UploadWebFile >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT uploadGetWebFileAnswer(msgId, result);
 }
@@ -10072,34 +10072,34 @@ void TelegramCore::onUploadGetWebFileError(qint64 msgId, qint32 errorCode, const
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const UploadWebFile &result = UploadWebFile();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<UploadWebFile >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<UploadWebFile >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT uploadGetWebFileError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::uploadGetCdnFile(const QByteArray &file_token, qint32 offset, qint32 limit, Callback<UploadCdnFile > callBack, qint32 timeout) {
+qint64 TelegramCore::uploadGetCdnFile(const QByteArray &file_token, qint32 offset, qint32 limit, bool callBack, qint32 timeout) {
     if(!mApi) {
         const UploadCdnFile &result = UploadCdnFile();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->uploadGetCdnFile(file_token, offset, limit);
     if(msgId) {
-        callBackPush<UploadCdnFile >(msgId, callBack);
+        //callBackPush<UploadCdnFile >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "uploadGetCdnFile";
-        mRecallArgs[msgId]["file_token"] = QVariant::fromValue<QByteArray>(file_token);
-        mRecallArgs[msgId]["offset"] = QVariant::fromValue<qint32>(offset);
-        mRecallArgs[msgId]["limit"] = QVariant::fromValue<qint32>(limit);
+        //mRecallArgs[msgId][""] = "uploadGetCdnFile";
+        //mRecallArgs[msgId]["file_token"] = QVariant::fromValue<QByteArray>(file_token);
+        //mRecallArgs[msgId]["offset"] = QVariant::fromValue<qint32>(offset);
+        //mRecallArgs[msgId]["limit"] = QVariant::fromValue<qint32>(limit);
     } else {
         const UploadCdnFile &result = UploadCdnFile();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -10107,7 +10107,7 @@ qint64 TelegramCore::uploadGetCdnFile(const QByteArray &file_token, qint32 offse
 void TelegramCore::onUploadGetCdnFileAnswer(qint64 msgId, const UploadCdnFile &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<UploadCdnFile >(msgId, result);
+    //callBackCall<UploadCdnFile >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT uploadGetCdnFileAnswer(msgId, result);
 }
@@ -10116,33 +10116,33 @@ void TelegramCore::onUploadGetCdnFileError(qint64 msgId, qint32 errorCode, const
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const UploadCdnFile &result = UploadCdnFile();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<UploadCdnFile >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<UploadCdnFile >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT uploadGetCdnFileError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::uploadReuploadCdnFile(const QByteArray &file_token, const QByteArray &request_token, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::uploadReuploadCdnFile(const QByteArray &file_token, const QByteArray &request_token, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->uploadReuploadCdnFile(file_token, request_token);
     if(msgId) {
-        callBackPush<bool >(msgId, callBack);
+        //callBackPush<bool >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "uploadReuploadCdnFile";
-        mRecallArgs[msgId]["file_token"] = QVariant::fromValue<QByteArray>(file_token);
-        mRecallArgs[msgId]["request_token"] = QVariant::fromValue<QByteArray>(request_token);
+        //mRecallArgs[msgId][""] = "uploadReuploadCdnFile";
+        //mRecallArgs[msgId]["file_token"] = QVariant::fromValue<QByteArray>(file_token);
+        //mRecallArgs[msgId]["request_token"] = QVariant::fromValue<QByteArray>(request_token);
     } else {
         bool result = 0;
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -10150,7 +10150,7 @@ qint64 TelegramCore::uploadReuploadCdnFile(const QByteArray &file_token, const Q
 void TelegramCore::onUploadReuploadCdnFileAnswer(qint64 msgId, bool result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<bool >(msgId, result);
+    //callBackCall<bool >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT uploadReuploadCdnFileAnswer(msgId, result);
 }
@@ -10159,33 +10159,33 @@ void TelegramCore::onUploadReuploadCdnFileError(qint64 msgId, qint32 errorCode, 
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     bool result = 0;
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<bool >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<bool >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT uploadReuploadCdnFileError(msgId, errorCode, errorText);
 }
 
 
-qint64 TelegramCore::usersGetUsers(const QList<InputUser> &id, Callback<QList<User> > callBack, qint32 timeout) {
+qint64 TelegramCore::usersGetUsers(const QList<InputUser> &id, bool callBack, qint32 timeout) {
     if(!mApi) {
         const QList<User> &result = QList<User>();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->usersGetUsers(id);
     if(msgId) {
-        callBackPush<QList<User> >(msgId, callBack);
+        //callBackPush<QList<User> >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "usersGetUsers";
-        mRecallArgs[msgId]["id"] = QVariant::fromValue<QList<InputUser>>(id);
+        //mRecallArgs[msgId][""] = "usersGetUsers";
+        //mRecallArgs[msgId]["id"] = QVariant::fromValue<QList<InputUser>>(id);
     } else {
         const QList<User> &result = QList<User>();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -10193,7 +10193,7 @@ qint64 TelegramCore::usersGetUsers(const QList<InputUser> &id, Callback<QList<Us
 void TelegramCore::onUsersGetUsersAnswer(qint64 msgId, const QList<User> &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<QList<User> >(msgId, result);
+    //callBackCall<QList<User> >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT usersGetUsersAnswer(msgId, result);
 }
@@ -10202,32 +10202,32 @@ void TelegramCore::onUsersGetUsersError(qint64 msgId, qint32 errorCode, const QS
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const QList<User> &result = QList<User>();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<QList<User> >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<QList<User> >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT usersGetUsersError(msgId, errorCode, errorText);
 }
 
-qint64 TelegramCore::usersGetFullUser(const InputUser &id, Callback<UserFull > callBack, qint32 timeout) {
+qint64 TelegramCore::usersGetFullUser(const InputUser &id, bool callBack, qint32 timeout) {
     if(!mApi) {
         const UserFull &result = UserFull();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
         return 0;
     }
     qint64 msgId = mApi->usersGetFullUser(id);
     if(msgId) {
-        callBackPush<UserFull >(msgId, callBack);
+        //callBackPush<UserFull >(msgId, callBack);
         startTimeOut(msgId, timeout);
-        mRecallArgs[msgId][""] = "usersGetFullUser";
-        mRecallArgs[msgId]["id"] = QVariant::fromValue<InputUser>(id);
+        //mRecallArgs[msgId][""] = "usersGetFullUser";
+        //mRecallArgs[msgId]["id"] = QVariant::fromValue<InputUser>(id);
     } else {
         const UserFull &result = UserFull();
-        if(callBack)
-            callBack(0, result, apiError());
+        //if(callBack)
+            //callBack(0, result, apiError());
     }
     return msgId;
 }
@@ -10235,7 +10235,7 @@ qint64 TelegramCore::usersGetFullUser(const InputUser &id, Callback<UserFull > c
 void TelegramCore::onUsersGetFullUserAnswer(qint64 msgId, const UserFull &result, const QVariant &attachedData) {
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
-    callBackCall<UserFull >(msgId, result);
+    //callBackCall<UserFull >(msgId, result);
     stopTimeOut(msgId);
     Q_EMIT usersGetFullUserAnswer(msgId, result);
 }
@@ -10244,11 +10244,11 @@ void TelegramCore::onUsersGetFullUserError(qint64 msgId, qint32 errorCode, const
     Q_UNUSED(attachedData);
     mLastArgs = mRecallArgs.take(msgId);
     const UserFull &result = UserFull();
-    CallbackError error;
-    error.errorCode = errorCode;
-    error.errorText = errorText;
-    error.null = false;
-    callBackCall<UserFull >(msgId, result, error);
+    //CallbackError error;
+    //error.errorCode = errorCode;
+    //error.errorText = errorText;
+    //error.null = false;
+    //callBackCall<UserFull >(msgId, result, error);
     stopTimeOut(msgId);
     Q_EMIT usersGetFullUserError(msgId, errorCode, errorText);
 }
@@ -10268,6 +10268,7 @@ qint64 TelegramCore::retry(qint64 mid)
         return result;
     const QVariantHash &args = mRecallArgs.take(mid);
     const QString &functionName = args.value("").toString();
+    /*
     if(functionName.isEmpty())
         return result;
     if(functionName == "accountRegisterDevice") {
@@ -10723,6 +10724,7 @@ qint64 TelegramCore::retry(qint64 mid)
     } else  {
         return result;
     }
+    */
 
     return result;
 }
@@ -10750,6 +10752,6 @@ void TelegramCore::timerEvent(QTimerEvent *e)
 
 TelegramCore::~TelegramCore()
 {
-    mCallbacks.clear();
+    //mCallbacks.clear();
 }
 

@@ -10,7 +10,7 @@ UploadWebFileObject::UploadWebFileObject(const UploadWebFile &core, QObject *par
     m_core(core)
 {
     m_fileType = new StorageFileTypeObject(m_core.fileType(), this);
-    connect(m_fileType.data(), &StorageFileTypeObject::coreChanged, this, &UploadWebFileObject::coreFileTypeChanged);
+    connect(m_fileType.data(), SIGNAL(coreChanged()), this, SLOT(coreFileTypeChanged()));
 }
 
 UploadWebFileObject::UploadWebFileObject(QObject *parent) :
@@ -19,7 +19,7 @@ UploadWebFileObject::UploadWebFileObject(QObject *parent) :
     m_core()
 {
     m_fileType = new StorageFileTypeObject(m_core.fileType(), this);
-    connect(m_fileType.data(), &StorageFileTypeObject::coreChanged, this, &UploadWebFileObject::coreFileTypeChanged);
+    connect(m_fileType.data(), SIGNAL(coreChanged()), this, SLOT(coreFileTypeChanged()));
 }
 
 UploadWebFileObject::~UploadWebFileObject() {
@@ -43,7 +43,7 @@ void UploadWebFileObject::setFileType(StorageFileTypeObject* fileType) {
     if(m_fileType) {
         m_fileType->setParent(this);
         m_core.setFileType(m_fileType->core());
-        connect(m_fileType.data(), &StorageFileTypeObject::coreChanged, this, &UploadWebFileObject::coreFileTypeChanged);
+        connect(m_fileType.data(), SIGNAL(coreChanged()), this, SLOT(coreFileTypeChanged()));
     }
     Q_EMIT fileTypeChanged();
     Q_EMIT coreChanged();

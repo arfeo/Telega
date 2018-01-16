@@ -35,7 +35,7 @@ AccountPrivacyRules::AccountPrivacyRules(const Null &null) :
 }
 
 AccountPrivacyRules::~AccountPrivacyRules() {
-    
+
 }
 
 void AccountPrivacyRules::setRules(const QList<PrivacyRule> &rules) {
@@ -101,7 +101,7 @@ bool AccountPrivacyRules::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -125,7 +125,7 @@ bool AccountPrivacyRules::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -147,7 +147,7 @@ QMap<QString, QVariant> AccountPrivacyRules::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -212,6 +212,7 @@ QDataStream &operator>>(QDataStream &stream, AccountPrivacyRules &item) {
     return stream;
 }
 
+/*
 QDebug operator<<(QDebug debug,  const AccountPrivacyRules &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
@@ -226,4 +227,4 @@ QDebug operator<<(QDebug debug,  const AccountPrivacyRules &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

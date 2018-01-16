@@ -35,7 +35,7 @@ ContactLink::ContactLink(const Null &null) :
 }
 
 ContactLink::~ContactLink() {
-    
+
 }
 
 bool ContactLink::operator ==(const ContactLink &b) const {
@@ -65,25 +65,25 @@ bool ContactLink::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeContactLinkNone: {
         m_classType = static_cast<ContactLinkClassType>(x);
         return true;
     }
         break;
-    
+
     case typeContactLinkHasPhone: {
         m_classType = static_cast<ContactLinkClassType>(x);
         return true;
     }
         break;
-    
+
     case typeContactLinkContact: {
         m_classType = static_cast<ContactLinkClassType>(x);
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -97,22 +97,22 @@ bool ContactLink::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeContactLinkNone: {
         return true;
     }
         break;
-    
+
     case typeContactLinkHasPhone: {
         return true;
     }
         break;
-    
+
     case typeContactLinkContact: {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -126,25 +126,25 @@ QMap<QString, QVariant> ContactLink::toMap() const {
         return result;
     }
         break;
-    
+
     case typeContactLinkNone: {
         result["classType"] = "ContactLink::typeContactLinkNone";
         return result;
     }
         break;
-    
+
     case typeContactLinkHasPhone: {
         result["classType"] = "ContactLink::typeContactLinkHasPhone";
         return result;
     }
         break;
-    
+
     case typeContactLinkContact: {
         result["classType"] = "ContactLink::typeContactLinkContact";
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -186,16 +186,16 @@ QDataStream &operator<<(QDataStream &stream, const ContactLink &item) {
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case ContactLink::typeContactLinkUnknown:
-        
+
         break;
     case ContactLink::typeContactLinkNone:
-        
+
         break;
     case ContactLink::typeContactLinkHasPhone:
-        
+
         break;
     case ContactLink::typeContactLinkContact:
-        
+
         break;
     }
     return stream;
@@ -207,26 +207,26 @@ QDataStream &operator>>(QDataStream &stream, ContactLink &item) {
     item.setClassType(static_cast<ContactLink::ContactLinkClassType>(type));
     switch(type) {
     case ContactLink::typeContactLinkUnknown: {
-        
+
     }
         break;
     case ContactLink::typeContactLinkNone: {
-        
+
     }
         break;
     case ContactLink::typeContactLinkHasPhone: {
-        
+
     }
         break;
     case ContactLink::typeContactLinkContact: {
-        
+
     }
         break;
     }
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const ContactLink &item) {
+/*QDebug operator<<(QDebug debug,  const ContactLink &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.ContactLink(";
@@ -247,4 +247,4 @@ QDebug operator<<(QDebug debug,  const ContactLink &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

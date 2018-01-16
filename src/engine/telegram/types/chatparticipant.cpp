@@ -47,7 +47,7 @@ ChatParticipant::ChatParticipant(const Null &null) :
 }
 
 ChatParticipant::~ChatParticipant() {
-    
+
 }
 
 void ChatParticipant::setDate(qint32 date) {
@@ -110,14 +110,14 @@ bool ChatParticipant::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeChatParticipantCreator: {
         m_userId = in->fetchInt();
         m_classType = static_cast<ChatParticipantClassType>(x);
         return true;
     }
         break;
-    
+
     case typeChatParticipantAdmin: {
         m_userId = in->fetchInt();
         m_inviterId = in->fetchInt();
@@ -126,7 +126,7 @@ bool ChatParticipant::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -143,13 +143,13 @@ bool ChatParticipant::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeChatParticipantCreator: {
         out->appendInt(m_userId);
         return true;
     }
         break;
-    
+
     case typeChatParticipantAdmin: {
         out->appendInt(m_userId);
         out->appendInt(m_inviterId);
@@ -157,7 +157,7 @@ bool ChatParticipant::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -174,14 +174,14 @@ QMap<QString, QVariant> ChatParticipant::toMap() const {
         return result;
     }
         break;
-    
+
     case typeChatParticipantCreator: {
         result["classType"] = "ChatParticipant::typeChatParticipantCreator";
         if( userId() ) result["userId"] = QString::number(userId());
         return result;
     }
         break;
-    
+
     case typeChatParticipantAdmin: {
         result["classType"] = "ChatParticipant::typeChatParticipantAdmin";
         if( userId() ) result["userId"] = QString::number(userId());
@@ -190,7 +190,7 @@ QMap<QString, QVariant> ChatParticipant::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -205,19 +205,19 @@ ChatParticipant ChatParticipant::fromMap(const QMap<QString, QVariant> &map) {
             _userId_var.convert( QVariant::nameToType("qint32") );
             result.setUserId( _userId_var.value<qint32>() );
         }
-        
+
         QVariant _inviterId_var = map.value("inviterId");
         if( !_inviterId_var.isNull() ) {
             _inviterId_var.convert( QVariant::nameToType("qint32") );
             result.setInviterId( _inviterId_var.value<qint32>() );
         }
-        
+
         QVariant _date_var = map.value("date");
         if( !_date_var.isNull() ) {
             _date_var.convert( QVariant::nameToType("qint32") );
             result.setDate( _date_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "ChatParticipant::typeChatParticipantCreator") {
@@ -227,7 +227,7 @@ ChatParticipant ChatParticipant::fromMap(const QMap<QString, QVariant> &map) {
             _userId_var.convert( QVariant::nameToType("qint32") );
             result.setUserId( _userId_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "ChatParticipant::typeChatParticipantAdmin") {
@@ -237,19 +237,19 @@ ChatParticipant ChatParticipant::fromMap(const QMap<QString, QVariant> &map) {
             _userId_var.convert( QVariant::nameToType("qint32") );
             result.setUserId( _userId_var.value<qint32>() );
         }
-        
+
         QVariant _inviterId_var = map.value("inviterId");
         if( !_inviterId_var.isNull() ) {
             _inviterId_var.convert( QVariant::nameToType("qint32") );
             result.setInviterId( _inviterId_var.value<qint32>() );
         }
-        
+
         QVariant _date_var = map.value("date");
         if( !_date_var.isNull() ) {
             _date_var.convert( QVariant::nameToType("qint32") );
             result.setDate( _date_var.value<qint32>() );
         }
-        
+
         return result;
     }
     return result;
@@ -325,7 +325,7 @@ QDataStream &operator>>(QDataStream &stream, ChatParticipant &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const ChatParticipant &item) {
+/*QDebug operator<<(QDebug debug,  const ChatParticipant &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.ChatParticipant(";
@@ -350,4 +350,4 @@ QDebug operator<<(QDebug debug,  const ChatParticipant &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

@@ -35,7 +35,7 @@ ExportedChatInvite::ExportedChatInvite(const Null &null) :
 }
 
 ExportedChatInvite::~ExportedChatInvite() {
-    
+
 }
 
 void ExportedChatInvite::setLink(const QString &link) {
@@ -75,14 +75,14 @@ bool ExportedChatInvite::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeChatInviteExported: {
         m_link = in->fetchQString();
         m_classType = static_cast<ExportedChatInviteClassType>(x);
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -96,13 +96,13 @@ bool ExportedChatInvite::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeChatInviteExported: {
         out->appendQString(m_link);
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -116,14 +116,14 @@ QMap<QString, QVariant> ExportedChatInvite::toMap() const {
         return result;
     }
         break;
-    
+
     case typeChatInviteExported: {
         result["classType"] = "ExportedChatInvite::typeChatInviteExported";
         if( !m_link.isEmpty() ) result["link"] = QVariant::fromValue<QString>(m_link);
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -142,7 +142,7 @@ ExportedChatInvite ExportedChatInvite::fromMap(const QMap<QString, QVariant> &ma
             _link_var.convert( QVariant::nameToType("QString") );
             result.setLink( _link_var.value<QString>() );
         }
-        
+
         return result;
     }
     return result;
@@ -163,7 +163,7 @@ QDataStream &operator<<(QDataStream &stream, const ExportedChatInvite &item) {
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case ExportedChatInvite::typeChatInviteEmpty:
-        
+
         break;
     case ExportedChatInvite::typeChatInviteExported:
         stream << item.link();
@@ -178,7 +178,7 @@ QDataStream &operator>>(QDataStream &stream, ExportedChatInvite &item) {
     item.setClassType(static_cast<ExportedChatInvite::ExportedChatInviteClassType>(type));
     switch(type) {
     case ExportedChatInvite::typeChatInviteEmpty: {
-        
+
     }
         break;
     case ExportedChatInvite::typeChatInviteExported: {
@@ -191,7 +191,7 @@ QDataStream &operator>>(QDataStream &stream, ExportedChatInvite &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const ExportedChatInvite &item) {
+/*QDebug operator<<(QDebug debug,  const ExportedChatInvite &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.ExportedChatInvite(";
@@ -207,4 +207,4 @@ QDebug operator<<(QDebug debug,  const ExportedChatInvite &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

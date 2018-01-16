@@ -43,7 +43,7 @@ InputStickerSet::InputStickerSet(const Null &null) :
 }
 
 InputStickerSet::~InputStickerSet() {
-    
+
 }
 
 void InputStickerSet::setAccessHash(qint64 accessHash) {
@@ -103,7 +103,7 @@ bool InputStickerSet::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputStickerSetID: {
         m_id = in->fetchLong();
         m_accessHash = in->fetchLong();
@@ -111,14 +111,14 @@ bool InputStickerSet::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputStickerSetShortName: {
         m_shortName = in->fetchQString();
         m_classType = static_cast<InputStickerSetClassType>(x);
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -132,20 +132,20 @@ bool InputStickerSet::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeInputStickerSetID: {
         out->appendLong(m_id);
         out->appendLong(m_accessHash);
         return true;
     }
         break;
-    
+
     case typeInputStickerSetShortName: {
         out->appendQString(m_shortName);
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -159,7 +159,7 @@ QMap<QString, QVariant> InputStickerSet::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputStickerSetID: {
         result["classType"] = "InputStickerSet::typeInputStickerSetID";
         if( id() ) result["id"] = QString::number(id());
@@ -167,14 +167,14 @@ QMap<QString, QVariant> InputStickerSet::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputStickerSetShortName: {
         result["classType"] = "InputStickerSet::typeInputStickerSetShortName";
         if( !m_shortName.isEmpty() ) result["shortName"] = QVariant::fromValue<QString>(m_shortName);
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -193,13 +193,13 @@ InputStickerSet InputStickerSet::fromMap(const QMap<QString, QVariant> &map) {
             _id_var.convert( QVariant::nameToType("qint64") );
             result.setId( _id_var.value<qint64>() );
         }
-        
+
         QVariant _accessHash_var = map.value("accessHash");
         if( !_accessHash_var.isNull() ) {
             _accessHash_var.convert( QVariant::nameToType("qint64") );
             result.setAccessHash( _accessHash_var.value<qint64>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "InputStickerSet::typeInputStickerSetShortName") {
@@ -209,7 +209,7 @@ InputStickerSet InputStickerSet::fromMap(const QMap<QString, QVariant> &map) {
             _shortName_var.convert( QVariant::nameToType("QString") );
             result.setShortName( _shortName_var.value<QString>() );
         }
-        
+
         return result;
     }
     return result;
@@ -230,7 +230,7 @@ QDataStream &operator<<(QDataStream &stream, const InputStickerSet &item) {
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case InputStickerSet::typeInputStickerSetEmpty:
-        
+
         break;
     case InputStickerSet::typeInputStickerSetID:
         stream << item.id();
@@ -249,7 +249,7 @@ QDataStream &operator>>(QDataStream &stream, InputStickerSet &item) {
     item.setClassType(static_cast<InputStickerSet::InputStickerSetClassType>(type));
     switch(type) {
     case InputStickerSet::typeInputStickerSetEmpty: {
-        
+
     }
         break;
     case InputStickerSet::typeInputStickerSetID: {
@@ -271,7 +271,7 @@ QDataStream &operator>>(QDataStream &stream, InputStickerSet &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const InputStickerSet &item) {
+/*QDebug operator<<(QDebug debug,  const InputStickerSet &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.InputStickerSet(";
@@ -292,4 +292,4 @@ QDebug operator<<(QDebug debug,  const InputStickerSet &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

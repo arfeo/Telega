@@ -43,7 +43,7 @@ InputDocument::InputDocument(const Null &null) :
 }
 
 InputDocument::~InputDocument() {
-    
+
 }
 
 void InputDocument::setAccessHash(qint64 accessHash) {
@@ -93,7 +93,7 @@ bool InputDocument::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputDocument: {
         m_id = in->fetchLong();
         m_accessHash = in->fetchLong();
@@ -101,7 +101,7 @@ bool InputDocument::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -115,14 +115,14 @@ bool InputDocument::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeInputDocument: {
         out->appendLong(m_id);
         out->appendLong(m_accessHash);
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -136,7 +136,7 @@ QMap<QString, QVariant> InputDocument::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputDocument: {
         result["classType"] = "InputDocument::typeInputDocument";
         if( id() ) result["id"] = QString::number(id());
@@ -144,7 +144,7 @@ QMap<QString, QVariant> InputDocument::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -163,13 +163,13 @@ InputDocument InputDocument::fromMap(const QMap<QString, QVariant> &map) {
             _id_var.convert( QVariant::nameToType("qint64") );
             result.setId( _id_var.value<qint64>() );
         }
-        
+
         QVariant _accessHash_var = map.value("accessHash");
         if( !_accessHash_var.isNull() ) {
             _accessHash_var.convert( QVariant::nameToType("qint64") );
             result.setAccessHash( _accessHash_var.value<qint64>() );
         }
-        
+
         return result;
     }
     return result;
@@ -190,7 +190,7 @@ QDataStream &operator<<(QDataStream &stream, const InputDocument &item) {
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case InputDocument::typeInputDocumentEmpty:
-        
+
         break;
     case InputDocument::typeInputDocument:
         stream << item.id();
@@ -206,7 +206,7 @@ QDataStream &operator>>(QDataStream &stream, InputDocument &item) {
     item.setClassType(static_cast<InputDocument::InputDocumentClassType>(type));
     switch(type) {
     case InputDocument::typeInputDocumentEmpty: {
-        
+
     }
         break;
     case InputDocument::typeInputDocument: {
@@ -222,7 +222,7 @@ QDataStream &operator>>(QDataStream &stream, InputDocument &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const InputDocument &item) {
+/*QDebug operator<<(QDebug debug,  const InputDocument &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.InputDocument(";
@@ -239,4 +239,4 @@ QDebug operator<<(QDebug debug,  const InputDocument &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

@@ -39,7 +39,7 @@ AuthCheckedPhone::AuthCheckedPhone(const Null &null) :
 }
 
 AuthCheckedPhone::~AuthCheckedPhone() {
-    
+
 }
 
 void AuthCheckedPhone::setPhoneRegistered(bool phoneRegistered) {
@@ -80,7 +80,7 @@ bool AuthCheckedPhone::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -95,7 +95,7 @@ bool AuthCheckedPhone::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -110,7 +110,7 @@ QMap<QString, QVariant> AuthCheckedPhone::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -125,7 +125,7 @@ AuthCheckedPhone AuthCheckedPhone::fromMap(const QMap<QString, QVariant> &map) {
             _phoneRegistered_var.convert( QVariant::nameToType("bool") );
             result.setPhoneRegistered( _phoneRegistered_var.value<bool>() );
         }
-        
+
         return result;
     }
     return result;
@@ -167,6 +167,7 @@ QDataStream &operator>>(QDataStream &stream, AuthCheckedPhone &item) {
     return stream;
 }
 
+/*
 QDebug operator<<(QDebug debug,  const AuthCheckedPhone &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
@@ -180,4 +181,4 @@ QDebug operator<<(QDebug debug,  const AuthCheckedPhone &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

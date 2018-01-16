@@ -35,7 +35,7 @@ InlineBotSwitchPM::InlineBotSwitchPM(const Null &null) :
 }
 
 InlineBotSwitchPM::~InlineBotSwitchPM() {
-    
+
 }
 
 void InlineBotSwitchPM::setStartParam(const QString &startParam) {
@@ -87,7 +87,7 @@ bool InlineBotSwitchPM::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -103,7 +103,7 @@ bool InlineBotSwitchPM::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -119,7 +119,7 @@ QMap<QString, QVariant> InlineBotSwitchPM::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -134,13 +134,13 @@ InlineBotSwitchPM InlineBotSwitchPM::fromMap(const QMap<QString, QVariant> &map)
             _text_var.convert( QVariant::nameToType("QString") );
             result.setText( _text_var.value<QString>() );
         }
-        
+
         QVariant _startParam_var = map.value("startParam");
         if( !_startParam_var.isNull() ) {
             _startParam_var.convert( QVariant::nameToType("QString") );
             result.setStartParam( _startParam_var.value<QString>() );
         }
-        
+
         return result;
     }
     return result;
@@ -186,7 +186,7 @@ QDataStream &operator>>(QDataStream &stream, InlineBotSwitchPM &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const InlineBotSwitchPM &item) {
+/*QDebug operator<<(QDebug debug,  const InlineBotSwitchPM &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.InlineBotSwitchPM(";
@@ -200,4 +200,4 @@ QDebug operator<<(QDebug debug,  const InlineBotSwitchPM &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

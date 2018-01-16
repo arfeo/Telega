@@ -43,7 +43,7 @@ NearestDc::NearestDc(const Null &null) :
 }
 
 NearestDc::~NearestDc() {
-    
+
 }
 
 void NearestDc::setCountry(const QString &country) {
@@ -106,7 +106,7 @@ bool NearestDc::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -123,7 +123,7 @@ bool NearestDc::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -140,7 +140,7 @@ QMap<QString, QVariant> NearestDc::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -155,19 +155,19 @@ NearestDc NearestDc::fromMap(const QMap<QString, QVariant> &map) {
             _country_var.convert( QVariant::nameToType("QString") );
             result.setCountry( _country_var.value<QString>() );
         }
-        
+
         QVariant _thisDc_var = map.value("thisDc");
         if( !_thisDc_var.isNull() ) {
             _thisDc_var.convert( QVariant::nameToType("qint32") );
             result.setThisDc( _thisDc_var.value<qint32>() );
         }
-        
+
         QVariant _nearestDc_var = map.value("nearestDc");
         if( !_nearestDc_var.isNull() ) {
             _nearestDc_var.convert( QVariant::nameToType("qint32") );
             result.setNearestDc( _nearestDc_var.value<qint32>() );
         }
-        
+
         return result;
     }
     return result;
@@ -217,7 +217,7 @@ QDataStream &operator>>(QDataStream &stream, NearestDc &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const NearestDc &item) {
+/*QDebug operator<<(QDebug debug,  const NearestDc &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.NearestDc(";
@@ -232,4 +232,4 @@ QDebug operator<<(QDebug debug,  const NearestDc &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

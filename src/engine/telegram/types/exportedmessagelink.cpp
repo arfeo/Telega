@@ -35,7 +35,7 @@ ExportedMessageLink::ExportedMessageLink(const Null &null) :
 }
 
 ExportedMessageLink::~ExportedMessageLink() {
-    
+
 }
 
 void ExportedMessageLink::setLink(const QString &link) {
@@ -76,7 +76,7 @@ bool ExportedMessageLink::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -91,7 +91,7 @@ bool ExportedMessageLink::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -106,7 +106,7 @@ QMap<QString, QVariant> ExportedMessageLink::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -121,7 +121,7 @@ ExportedMessageLink ExportedMessageLink::fromMap(const QMap<QString, QVariant> &
             _link_var.convert( QVariant::nameToType("QString") );
             result.setLink( _link_var.value<QString>() );
         }
-        
+
         return result;
     }
     return result;
@@ -163,7 +163,7 @@ QDataStream &operator>>(QDataStream &stream, ExportedMessageLink &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const ExportedMessageLink &item) {
+/*QDebug operator<<(QDebug debug,  const ExportedMessageLink &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.ExportedMessageLink(";
@@ -176,4 +176,4 @@ QDebug operator<<(QDebug debug,  const ExportedMessageLink &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

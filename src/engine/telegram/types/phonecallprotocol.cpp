@@ -47,7 +47,7 @@ PhoneCallProtocol::PhoneCallProtocol(const Null &null) :
 }
 
 PhoneCallProtocol::~PhoneCallProtocol() {
-    
+
 }
 
 void PhoneCallProtocol::setFlags(qint32 flags) {
@@ -128,7 +128,7 @@ bool PhoneCallProtocol::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -145,7 +145,7 @@ bool PhoneCallProtocol::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -163,7 +163,7 @@ QMap<QString, QVariant> PhoneCallProtocol::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -178,25 +178,25 @@ PhoneCallProtocol PhoneCallProtocol::fromMap(const QMap<QString, QVariant> &map)
             _udpP2p_var.convert( QVariant::nameToType("bool") );
             result.setUdpP2p( _udpP2p_var.value<bool>() );
         }
-        
+
         QVariant _udpReflector_var = map.value("udpReflector");
         if( !_udpReflector_var.isNull() ) {
             _udpReflector_var.convert( QVariant::nameToType("bool") );
             result.setUdpReflector( _udpReflector_var.value<bool>() );
         }
-        
+
         QVariant _minLayer_var = map.value("minLayer");
         if( !_minLayer_var.isNull() ) {
             _minLayer_var.convert( QVariant::nameToType("qint32") );
             result.setMinLayer( _minLayer_var.value<qint32>() );
         }
-        
+
         QVariant _maxLayer_var = map.value("maxLayer");
         if( !_maxLayer_var.isNull() ) {
             _maxLayer_var.convert( QVariant::nameToType("qint32") );
             result.setMaxLayer( _maxLayer_var.value<qint32>() );
         }
-        
+
         return result;
     }
     return result;
@@ -246,7 +246,7 @@ QDataStream &operator>>(QDataStream &stream, PhoneCallProtocol &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const PhoneCallProtocol &item) {
+/*QDebug operator<<(QDebug debug,  const PhoneCallProtocol &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.PhoneCallProtocol(";
@@ -261,4 +261,4 @@ QDebug operator<<(QDebug debug,  const PhoneCallProtocol &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

@@ -39,7 +39,7 @@ CdnPublicKey::CdnPublicKey(const Null &null) :
 }
 
 CdnPublicKey::~CdnPublicKey() {
-    
+
 }
 
 void CdnPublicKey::setDcId(qint32 dcId) {
@@ -91,7 +91,7 @@ bool CdnPublicKey::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -107,7 +107,7 @@ bool CdnPublicKey::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -123,7 +123,7 @@ QMap<QString, QVariant> CdnPublicKey::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -138,13 +138,13 @@ CdnPublicKey CdnPublicKey::fromMap(const QMap<QString, QVariant> &map) {
             _dcId_var.convert( QVariant::nameToType("qint32") );
             result.setDcId( _dcId_var.value<qint32>() );
         }
-        
+
         QVariant _publicKey_var = map.value("publicKey");
         if( !_publicKey_var.isNull() ) {
             _publicKey_var.convert( QVariant::nameToType("QString") );
             result.setPublicKey( _publicKey_var.value<QString>() );
         }
-        
+
         return result;
     }
     return result;
@@ -190,7 +190,7 @@ QDataStream &operator>>(QDataStream &stream, CdnPublicKey &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const CdnPublicKey &item) {
+/*QDebug operator<<(QDebug debug,  const CdnPublicKey &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.CdnPublicKey(";
@@ -204,4 +204,4 @@ QDebug operator<<(QDebug debug,  const CdnPublicKey &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

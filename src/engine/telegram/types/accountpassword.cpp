@@ -39,7 +39,7 @@ AccountPassword::AccountPassword(const Null &null) :
 }
 
 AccountPassword::~AccountPassword() {
-    
+
 }
 
 void AccountPassword::setCurrentSalt(const QByteArray &currentSalt) {
@@ -121,7 +121,7 @@ bool AccountPassword::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeAccountPassword: {
         m_currentSalt = in->fetchBytes();
         m_newSalt = in->fetchBytes();
@@ -132,7 +132,7 @@ bool AccountPassword::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -148,7 +148,7 @@ bool AccountPassword::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeAccountPassword: {
         out->appendBytes(m_currentSalt);
         out->appendBytes(m_newSalt);
@@ -158,7 +158,7 @@ bool AccountPassword::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -174,7 +174,7 @@ QMap<QString, QVariant> AccountPassword::toMap() const {
         return result;
     }
         break;
-    
+
     case typeAccountPassword: {
         result["classType"] = "AccountPassword::typeAccountPassword";
         if( !m_currentSalt.isEmpty() ) result["currentSalt"] = QVariant::fromValue<QByteArray>(m_currentSalt);
@@ -185,7 +185,7 @@ QMap<QString, QVariant> AccountPassword::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -200,13 +200,13 @@ AccountPassword AccountPassword::fromMap(const QMap<QString, QVariant> &map) {
             _newSalt_var.convert( QVariant::nameToType("QByteArray") );
             result.setNewSalt( _newSalt_var.value<QByteArray>() );
         }
-        
+
         QVariant _emailUnconfirmedPattern_var = map.value("emailUnconfirmedPattern");
         if( !_emailUnconfirmedPattern_var.isNull() ) {
             _emailUnconfirmedPattern_var.convert( QVariant::nameToType("QString") );
             result.setEmailUnconfirmedPattern( _emailUnconfirmedPattern_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "AccountPassword::typeAccountPassword") {
@@ -216,31 +216,31 @@ AccountPassword AccountPassword::fromMap(const QMap<QString, QVariant> &map) {
             _currentSalt_var.convert( QVariant::nameToType("QByteArray") );
             result.setCurrentSalt( _currentSalt_var.value<QByteArray>() );
         }
-        
+
         QVariant _newSalt_var = map.value("newSalt");
         if( !_newSalt_var.isNull() ) {
             _newSalt_var.convert( QVariant::nameToType("QByteArray") );
             result.setNewSalt( _newSalt_var.value<QByteArray>() );
         }
-        
+
         QVariant _hint_var = map.value("hint");
         if( !_hint_var.isNull() ) {
             _hint_var.convert( QVariant::nameToType("QString") );
             result.setHint( _hint_var.value<QString>() );
         }
-        
+
         QVariant _hasRecovery_var = map.value("hasRecovery");
         if( !_hasRecovery_var.isNull() ) {
             _hasRecovery_var.convert( QVariant::nameToType("bool") );
             result.setHasRecovery( _hasRecovery_var.value<bool>() );
         }
-        
+
         QVariant _emailUnconfirmedPattern_var = map.value("emailUnconfirmedPattern");
         if( !_emailUnconfirmedPattern_var.isNull() ) {
             _emailUnconfirmedPattern_var.convert( QVariant::nameToType("QString") );
             result.setEmailUnconfirmedPattern( _emailUnconfirmedPattern_var.value<QString>() );
         }
-        
+
         return result;
     }
     return result;
@@ -311,6 +311,7 @@ QDataStream &operator>>(QDataStream &stream, AccountPassword &item) {
     return stream;
 }
 
+/*
 QDebug operator<<(QDebug debug,  const AccountPassword &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
@@ -333,4 +334,5 @@ QDebug operator<<(QDebug debug,  const AccountPassword &item) {
     debug.nospace() << ")";
     return debug;
 }
+*/
 

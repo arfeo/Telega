@@ -47,7 +47,7 @@ DraftMessage::DraftMessage(const Null &null) :
 }
 
 DraftMessage::~DraftMessage() {
-    
+
 }
 
 void DraftMessage::setDate(qint32 date) {
@@ -140,7 +140,7 @@ bool DraftMessage::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeDraftMessage: {
         m_flags = in->fetchInt();
         if(m_flags & 1<<0) {
@@ -164,7 +164,7 @@ bool DraftMessage::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -178,7 +178,7 @@ bool DraftMessage::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeDraftMessage: {
         out->appendInt(m_flags);
         if(m_flags & 1<<0) {
@@ -196,7 +196,7 @@ bool DraftMessage::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -210,7 +210,7 @@ QMap<QString, QVariant> DraftMessage::toMap() const {
         return result;
     }
         break;
-    
+
     case typeDraftMessage: {
         result["classType"] = "DraftMessage::typeDraftMessage";
         if( noWebpage() ) result["noWebpage"] = QString::number(noWebpage());
@@ -224,7 +224,7 @@ QMap<QString, QVariant> DraftMessage::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -243,19 +243,19 @@ DraftMessage DraftMessage::fromMap(const QMap<QString, QVariant> &map) {
             _noWebpage_var.convert( QVariant::nameToType("bool") );
             result.setNoWebpage( _noWebpage_var.value<bool>() );
         }
-        
+
         QVariant _replyToMsgId_var = map.value("replyToMsgId");
         if( !_replyToMsgId_var.isNull() ) {
             _replyToMsgId_var.convert( QVariant::nameToType("qint32") );
             result.setReplyToMsgId( _replyToMsgId_var.value<qint32>() );
         }
-        
+
         QVariant _message_var = map.value("message");
         if( !_message_var.isNull() ) {
             _message_var.convert( QVariant::nameToType("QString") );
             result.setMessage( _message_var.value<QString>() );
         }
-        
+
         QList<QVariant> map_entities = map["entities"].toList();
         QList<MessageEntity> _entities;
         for(const QVariant &var: map_entities)
@@ -266,7 +266,7 @@ DraftMessage DraftMessage::fromMap(const QMap<QString, QVariant> &map) {
             _date_var.convert( QVariant::nameToType("qint32") );
             result.setDate( _date_var.value<qint32>() );
         }
-        
+
         return result;
     }
     return result;
@@ -287,7 +287,7 @@ QDataStream &operator<<(QDataStream &stream, const DraftMessage &item) {
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case DraftMessage::typeDraftMessageEmpty:
-        
+
         break;
     case DraftMessage::typeDraftMessage:
         stream << item.flags();
@@ -306,7 +306,7 @@ QDataStream &operator>>(QDataStream &stream, DraftMessage &item) {
     item.setClassType(static_cast<DraftMessage::DraftMessageClassType>(type));
     switch(type) {
     case DraftMessage::typeDraftMessageEmpty: {
-        
+
     }
         break;
     case DraftMessage::typeDraftMessage: {
@@ -331,7 +331,7 @@ QDataStream &operator>>(QDataStream &stream, DraftMessage &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const DraftMessage &item) {
+/*QDebug operator<<(QDebug debug,  const DraftMessage &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.DraftMessage(";
@@ -351,4 +351,4 @@ QDebug operator<<(QDebug debug,  const DraftMessage &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

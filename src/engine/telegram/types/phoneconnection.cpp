@@ -43,7 +43,7 @@ PhoneConnection::PhoneConnection(const Null &null) :
 }
 
 PhoneConnection::~PhoneConnection() {
-    
+
 }
 
 void PhoneConnection::setId(qint64 id) {
@@ -128,7 +128,7 @@ bool PhoneConnection::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -147,7 +147,7 @@ bool PhoneConnection::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -166,7 +166,7 @@ QMap<QString, QVariant> PhoneConnection::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -181,31 +181,31 @@ PhoneConnection PhoneConnection::fromMap(const QMap<QString, QVariant> &map) {
             _id_var.convert( QVariant::nameToType("qint64") );
             result.setId( _id_var.value<qint64>() );
         }
-        
+
         QVariant _ip_var = map.value("ip");
         if( !_ip_var.isNull() ) {
             _ip_var.convert( QVariant::nameToType("QString") );
             result.setIp( _ip_var.value<QString>() );
         }
-        
+
         QVariant _ipv6_var = map.value("ipv6");
         if( !_ipv6_var.isNull() ) {
             _ipv6_var.convert( QVariant::nameToType("QString") );
             result.setIpv6( _ipv6_var.value<QString>() );
         }
-        
+
         QVariant _port_var = map.value("port");
         if( !_port_var.isNull() ) {
             _port_var.convert( QVariant::nameToType("qint32") );
             result.setPort( _port_var.value<qint32>() );
         }
-        
+
         QVariant _peerTag_var = map.value("peerTag");
         if( !_peerTag_var.isNull() ) {
             _peerTag_var.convert( QVariant::nameToType("QByteArray") );
             result.setPeerTag( _peerTag_var.value<QByteArray>() );
         }
-        
+
         return result;
     }
     return result;
@@ -263,7 +263,7 @@ QDataStream &operator>>(QDataStream &stream, PhoneConnection &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const PhoneConnection &item) {
+/*QDebug operator<<(QDebug debug,  const PhoneConnection &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.PhoneConnection(";
@@ -280,4 +280,4 @@ QDebug operator<<(QDebug debug,  const PhoneConnection &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

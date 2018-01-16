@@ -51,7 +51,7 @@ Photo::Photo(const Null &null) :
 }
 
 Photo::~Photo() {
-    
+
 }
 
 void Photo::setAccessHash(qint64 accessHash) {
@@ -141,7 +141,7 @@ bool Photo::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typePhoto: {
         m_flags = in->fetchInt();
         m_id = in->fetchLong();
@@ -159,7 +159,7 @@ bool Photo::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -174,7 +174,7 @@ bool Photo::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typePhoto: {
         out->appendInt(m_flags);
         out->appendLong(m_id);
@@ -188,7 +188,7 @@ bool Photo::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -203,7 +203,7 @@ QMap<QString, QVariant> Photo::toMap() const {
         return result;
     }
         break;
-    
+
     case typePhoto: {
         result["classType"] = "Photo::typePhoto";
         if( hasStickers() ) result["hasStickers"] = QString::number(hasStickers());
@@ -217,7 +217,7 @@ QMap<QString, QVariant> Photo::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -232,7 +232,7 @@ Photo Photo::fromMap(const QMap<QString, QVariant> &map) {
             _id_var.convert( QVariant::nameToType("qint64") );
             result.setId( _id_var.value<qint64>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Photo::typePhoto") {
@@ -242,25 +242,25 @@ Photo Photo::fromMap(const QMap<QString, QVariant> &map) {
             _hasStickers_var.convert( QVariant::nameToType("bool") );
             result.setHasStickers( _hasStickers_var.value<bool>() );
         }
-        
+
         QVariant _id_var = map.value("id");
         if( !_id_var.isNull() ) {
             _id_var.convert( QVariant::nameToType("qint64") );
             result.setId( _id_var.value<qint64>() );
         }
-        
+
         QVariant _accessHash_var = map.value("accessHash");
         if( !_accessHash_var.isNull() ) {
             _accessHash_var.convert( QVariant::nameToType("qint64") );
             result.setAccessHash( _accessHash_var.value<qint64>() );
         }
-        
+
         QVariant _date_var = map.value("date");
         if( !_date_var.isNull() ) {
             _date_var.convert( QVariant::nameToType("qint32") );
             result.setDate( _date_var.value<qint32>() );
         }
-        
+
         QList<QVariant> map_sizes = map["sizes"].toList();
         QList<PhotoSize> _sizes;
         for(const QVariant &var: map_sizes)
@@ -332,7 +332,7 @@ QDataStream &operator>>(QDataStream &stream, Photo &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const Photo &item) {
+/*QDebug operator<<(QDebug debug,  const Photo &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.Photo(";
@@ -353,4 +353,4 @@ QDebug operator<<(QDebug debug,  const Photo &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

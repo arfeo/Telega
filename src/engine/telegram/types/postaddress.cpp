@@ -35,7 +35,7 @@ PostAddress::PostAddress(const Null &null) :
 }
 
 PostAddress::~PostAddress() {
-    
+
 }
 
 void PostAddress::setCity(const QString &city) {
@@ -131,7 +131,7 @@ bool PostAddress::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -151,7 +151,7 @@ bool PostAddress::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -171,7 +171,7 @@ QMap<QString, QVariant> PostAddress::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -186,37 +186,37 @@ PostAddress PostAddress::fromMap(const QMap<QString, QVariant> &map) {
             _streetLine1_var.convert( QVariant::nameToType("QString") );
             result.setStreetLine1( _streetLine1_var.value<QString>() );
         }
-        
+
         QVariant _streetLine2_var = map.value("streetLine2");
         if( !_streetLine2_var.isNull() ) {
             _streetLine2_var.convert( QVariant::nameToType("QString") );
             result.setStreetLine2( _streetLine2_var.value<QString>() );
         }
-        
+
         QVariant _city_var = map.value("city");
         if( !_city_var.isNull() ) {
             _city_var.convert( QVariant::nameToType("QString") );
             result.setCity( _city_var.value<QString>() );
         }
-        
+
         QVariant _state_var = map.value("state");
         if( !_state_var.isNull() ) {
             _state_var.convert( QVariant::nameToType("QString") );
             result.setState( _state_var.value<QString>() );
         }
-        
+
         QVariant _countryIso2_var = map.value("countryIso2");
         if( !_countryIso2_var.isNull() ) {
             _countryIso2_var.convert( QVariant::nameToType("QString") );
             result.setCountryIso2( _countryIso2_var.value<QString>() );
         }
-        
+
         QVariant _postCode_var = map.value("postCode");
         if( !_postCode_var.isNull() ) {
             _postCode_var.convert( QVariant::nameToType("QString") );
             result.setPostCode( _postCode_var.value<QString>() );
         }
-        
+
         return result;
     }
     return result;
@@ -278,7 +278,7 @@ QDataStream &operator>>(QDataStream &stream, PostAddress &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const PostAddress &item) {
+/*QDebug operator<<(QDebug debug,  const PostAddress &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.PostAddress(";
@@ -296,4 +296,4 @@ QDebug operator<<(QDebug debug,  const PostAddress &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

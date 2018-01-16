@@ -47,7 +47,7 @@ HighScore::HighScore(const Null &null) :
 }
 
 HighScore::~HighScore() {
-    
+
 }
 
 void HighScore::setPos(qint32 pos) {
@@ -110,7 +110,7 @@ bool HighScore::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -127,7 +127,7 @@ bool HighScore::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -144,7 +144,7 @@ QMap<QString, QVariant> HighScore::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -159,19 +159,19 @@ HighScore HighScore::fromMap(const QMap<QString, QVariant> &map) {
             _pos_var.convert( QVariant::nameToType("qint32") );
             result.setPos( _pos_var.value<qint32>() );
         }
-        
+
         QVariant _userId_var = map.value("userId");
         if( !_userId_var.isNull() ) {
             _userId_var.convert( QVariant::nameToType("qint32") );
             result.setUserId( _userId_var.value<qint32>() );
         }
-        
+
         QVariant _score_var = map.value("score");
         if( !_score_var.isNull() ) {
             _score_var.convert( QVariant::nameToType("qint32") );
             result.setScore( _score_var.value<qint32>() );
         }
-        
+
         return result;
     }
     return result;
@@ -221,7 +221,7 @@ QDataStream &operator>>(QDataStream &stream, HighScore &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const HighScore &item) {
+/*QDebug operator<<(QDebug debug,  const HighScore &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.HighScore(";
@@ -236,4 +236,4 @@ QDebug operator<<(QDebug debug,  const HighScore &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

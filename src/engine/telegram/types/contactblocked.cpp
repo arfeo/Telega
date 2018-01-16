@@ -43,7 +43,7 @@ ContactBlocked::ContactBlocked(const Null &null) :
 }
 
 ContactBlocked::~ContactBlocked() {
-    
+
 }
 
 void ContactBlocked::setDate(qint32 date) {
@@ -95,7 +95,7 @@ bool ContactBlocked::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -111,7 +111,7 @@ bool ContactBlocked::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -127,7 +127,7 @@ QMap<QString, QVariant> ContactBlocked::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -142,13 +142,13 @@ ContactBlocked ContactBlocked::fromMap(const QMap<QString, QVariant> &map) {
             _userId_var.convert( QVariant::nameToType("qint32") );
             result.setUserId( _userId_var.value<qint32>() );
         }
-        
+
         QVariant _date_var = map.value("date");
         if( !_date_var.isNull() ) {
             _date_var.convert( QVariant::nameToType("qint32") );
             result.setDate( _date_var.value<qint32>() );
         }
-        
+
         return result;
     }
     return result;
@@ -194,7 +194,7 @@ QDataStream &operator>>(QDataStream &stream, ContactBlocked &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const ContactBlocked &item) {
+/*QDebug operator<<(QDebug debug,  const ContactBlocked &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.ContactBlocked(";
@@ -208,4 +208,4 @@ QDebug operator<<(QDebug debug,  const ContactBlocked &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

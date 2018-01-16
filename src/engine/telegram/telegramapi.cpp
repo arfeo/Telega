@@ -6,12 +6,9 @@
 #include "telegram/types/types.h"
 #include "telegram/functions/functions.h"
 #include "telegram/coretypes.h"
-
 #include "util/tlvalues.h"
 #include "core/dcprovider.h"
 #include "secret/encrypter.h"
-
-Q_LOGGING_CATEGORY(TG_CORE_API, "tg.core.api")
 
 #define DEBUG_FUNCTION \
     qCDebug(TG_CORE_API) << __LINE__ << __FUNCTION__;
@@ -83,7 +80,7 @@ TelegramApi::TelegramApi(Session *session, Settings *settings, CryptoUtils *cryp
     accountConfirmPhoneMethods.onError = &TelegramApi::onAccountConfirmPhoneError;
     accountGetTmpPasswordMethods.onAnswer = &TelegramApi::onAccountGetTmpPasswordAnswer;
     accountGetTmpPasswordMethods.onError = &TelegramApi::onAccountGetTmpPasswordError;
-    
+
     authCheckPhoneMethods.onAnswer = &TelegramApi::onAuthCheckPhoneAnswer;
     authCheckPhoneMethods.onError = &TelegramApi::onAuthCheckPhoneError;
     authSendCodeMethods.onAnswer = &TelegramApi::onAuthSendCodeAnswer;
@@ -118,12 +115,12 @@ TelegramApi::TelegramApi(Session *session, Settings *settings, CryptoUtils *cryp
     authCancelCodeMethods.onError = &TelegramApi::onAuthCancelCodeError;
     authDropTempAuthKeysMethods.onAnswer = &TelegramApi::onAuthDropTempAuthKeysAnswer;
     authDropTempAuthKeysMethods.onError = &TelegramApi::onAuthDropTempAuthKeysError;
-    
+
     botsSendCustomRequestMethods.onAnswer = &TelegramApi::onBotsSendCustomRequestAnswer;
     botsSendCustomRequestMethods.onError = &TelegramApi::onBotsSendCustomRequestError;
     botsAnswerWebhookJSONQueryMethods.onAnswer = &TelegramApi::onBotsAnswerWebhookJSONQueryAnswer;
     botsAnswerWebhookJSONQueryMethods.onError = &TelegramApi::onBotsAnswerWebhookJSONQueryError;
-    
+
     channelsReadHistoryMethods.onAnswer = &TelegramApi::onChannelsReadHistoryAnswer;
     channelsReadHistoryMethods.onError = &TelegramApi::onChannelsReadHistoryError;
     channelsDeleteMessagesMethods.onAnswer = &TelegramApi::onChannelsDeleteMessagesAnswer;
@@ -180,7 +177,7 @@ TelegramApi::TelegramApi(Session *session, Settings *settings, CryptoUtils *cryp
     channelsEditBannedMethods.onError = &TelegramApi::onChannelsEditBannedError;
     channelsGetAdminLogMethods.onAnswer = &TelegramApi::onChannelsGetAdminLogAnswer;
     channelsGetAdminLogMethods.onError = &TelegramApi::onChannelsGetAdminLogError;
-    
+
     contactsGetStatusesMethods.onAnswer = &TelegramApi::onContactsGetStatusesAnswer;
     contactsGetStatusesMethods.onError = &TelegramApi::onContactsGetStatusesError;
     contactsGetContactsMethods.onAnswer = &TelegramApi::onContactsGetContactsAnswer;
@@ -209,7 +206,7 @@ TelegramApi::TelegramApi(Session *session, Settings *settings, CryptoUtils *cryp
     contactsGetTopPeersMethods.onError = &TelegramApi::onContactsGetTopPeersError;
     contactsResetTopPeerRatingMethods.onAnswer = &TelegramApi::onContactsResetTopPeerRatingAnswer;
     contactsResetTopPeerRatingMethods.onError = &TelegramApi::onContactsResetTopPeerRatingError;
-    
+
     helpGetConfigMethods.onAnswer = &TelegramApi::onHelpGetConfigAnswer;
     helpGetConfigMethods.onError = &TelegramApi::onHelpGetConfigError;
     helpGetNearestDcMethods.onAnswer = &TelegramApi::onHelpGetNearestDcAnswer;
@@ -230,7 +227,7 @@ TelegramApi::TelegramApi(Session *session, Settings *settings, CryptoUtils *cryp
     helpSetBotUpdatesStatusMethods.onError = &TelegramApi::onHelpSetBotUpdatesStatusError;
     helpGetCdnConfigMethods.onAnswer = &TelegramApi::onHelpGetCdnConfigAnswer;
     helpGetCdnConfigMethods.onError = &TelegramApi::onHelpGetCdnConfigError;
-    
+
     langpackGetLangPackMethods.onAnswer = &TelegramApi::onLangpackGetLangPackAnswer;
     langpackGetLangPackMethods.onError = &TelegramApi::onLangpackGetLangPackError;
     langpackGetStringsMethods.onAnswer = &TelegramApi::onLangpackGetStringsAnswer;
@@ -239,7 +236,7 @@ TelegramApi::TelegramApi(Session *session, Settings *settings, CryptoUtils *cryp
     langpackGetDifferenceMethods.onError = &TelegramApi::onLangpackGetDifferenceError;
     langpackGetLanguagesMethods.onAnswer = &TelegramApi::onLangpackGetLanguagesAnswer;
     langpackGetLanguagesMethods.onError = &TelegramApi::onLangpackGetLanguagesError;
-    
+
     messagesGetMessagesMethods.onAnswer = &TelegramApi::onMessagesGetMessagesAnswer;
     messagesGetMessagesMethods.onError = &TelegramApi::onMessagesGetMessagesError;
     messagesGetDialogsMethods.onAnswer = &TelegramApi::onMessagesGetDialogsAnswer;
@@ -412,7 +409,7 @@ TelegramApi::TelegramApi(Session *session, Settings *settings, CryptoUtils *cryp
     messagesSetBotPrecheckoutResultsMethods.onError = &TelegramApi::onMessagesSetBotPrecheckoutResultsError;
     messagesUploadMediaMethods.onAnswer = &TelegramApi::onMessagesUploadMediaAnswer;
     messagesUploadMediaMethods.onError = &TelegramApi::onMessagesUploadMediaError;
-    
+
     paymentsGetPaymentFormMethods.onAnswer = &TelegramApi::onPaymentsGetPaymentFormAnswer;
     paymentsGetPaymentFormMethods.onError = &TelegramApi::onPaymentsGetPaymentFormError;
     paymentsGetPaymentReceiptMethods.onAnswer = &TelegramApi::onPaymentsGetPaymentReceiptAnswer;
@@ -425,7 +422,7 @@ TelegramApi::TelegramApi(Session *session, Settings *settings, CryptoUtils *cryp
     paymentsGetSavedInfoMethods.onError = &TelegramApi::onPaymentsGetSavedInfoError;
     paymentsClearSavedInfoMethods.onAnswer = &TelegramApi::onPaymentsClearSavedInfoAnswer;
     paymentsClearSavedInfoMethods.onError = &TelegramApi::onPaymentsClearSavedInfoError;
-    
+
     phoneGetCallConfigMethods.onAnswer = &TelegramApi::onPhoneGetCallConfigAnswer;
     phoneGetCallConfigMethods.onError = &TelegramApi::onPhoneGetCallConfigError;
     phoneRequestCallMethods.onAnswer = &TelegramApi::onPhoneRequestCallAnswer;
@@ -442,7 +439,7 @@ TelegramApi::TelegramApi(Session *session, Settings *settings, CryptoUtils *cryp
     phoneSetCallRatingMethods.onError = &TelegramApi::onPhoneSetCallRatingError;
     phoneSaveCallDebugMethods.onAnswer = &TelegramApi::onPhoneSaveCallDebugAnswer;
     phoneSaveCallDebugMethods.onError = &TelegramApi::onPhoneSaveCallDebugError;
-    
+
     photosUpdateProfilePhotoMethods.onAnswer = &TelegramApi::onPhotosUpdateProfilePhotoAnswer;
     photosUpdateProfilePhotoMethods.onError = &TelegramApi::onPhotosUpdateProfilePhotoError;
     photosUploadProfilePhotoMethods.onAnswer = &TelegramApi::onPhotosUploadProfilePhotoAnswer;
@@ -451,7 +448,7 @@ TelegramApi::TelegramApi(Session *session, Settings *settings, CryptoUtils *cryp
     photosDeletePhotosMethods.onError = &TelegramApi::onPhotosDeletePhotosError;
     photosGetUserPhotosMethods.onAnswer = &TelegramApi::onPhotosGetUserPhotosAnswer;
     photosGetUserPhotosMethods.onError = &TelegramApi::onPhotosGetUserPhotosError;
-    
+
     stickersCreateStickerSetMethods.onAnswer = &TelegramApi::onStickersCreateStickerSetAnswer;
     stickersCreateStickerSetMethods.onError = &TelegramApi::onStickersCreateStickerSetError;
     stickersRemoveStickerFromSetMethods.onAnswer = &TelegramApi::onStickersRemoveStickerFromSetAnswer;
@@ -460,14 +457,14 @@ TelegramApi::TelegramApi(Session *session, Settings *settings, CryptoUtils *cryp
     stickersChangeStickerPositionMethods.onError = &TelegramApi::onStickersChangeStickerPositionError;
     stickersAddStickerToSetMethods.onAnswer = &TelegramApi::onStickersAddStickerToSetAnswer;
     stickersAddStickerToSetMethods.onError = &TelegramApi::onStickersAddStickerToSetError;
-    
+
     updatesGetStateMethods.onAnswer = &TelegramApi::onUpdatesGetStateAnswer;
     updatesGetStateMethods.onError = &TelegramApi::onUpdatesGetStateError;
     updatesGetDifferenceMethods.onAnswer = &TelegramApi::onUpdatesGetDifferenceAnswer;
     updatesGetDifferenceMethods.onError = &TelegramApi::onUpdatesGetDifferenceError;
     updatesGetChannelDifferenceMethods.onAnswer = &TelegramApi::onUpdatesGetChannelDifferenceAnswer;
     updatesGetChannelDifferenceMethods.onError = &TelegramApi::onUpdatesGetChannelDifferenceError;
-    
+
     uploadSaveFilePartMethods.onAnswer = &TelegramApi::onUploadSaveFilePartAnswer;
     uploadSaveFilePartMethods.onError = &TelegramApi::onUploadSaveFilePartError;
     uploadGetFileMethods.onAnswer = &TelegramApi::onUploadGetFileAnswer;
@@ -480,7 +477,7 @@ TelegramApi::TelegramApi(Session *session, Settings *settings, CryptoUtils *cryp
     uploadGetCdnFileMethods.onError = &TelegramApi::onUploadGetCdnFileError;
     uploadReuploadCdnFileMethods.onAnswer = &TelegramApi::onUploadReuploadCdnFileAnswer;
     uploadReuploadCdnFileMethods.onError = &TelegramApi::onUploadReuploadCdnFileError;
-    
+
     usersGetUsersMethods.onAnswer = &TelegramApi::onUsersGetUsersAnswer;
     usersGetUsersMethods.onError = &TelegramApi::onUsersGetUsersError;
     usersGetFullUserMethods.onAnswer = &TelegramApi::onUsersGetFullUserAnswer;
@@ -494,7 +491,7 @@ TelegramApi::~TelegramApi() {
 qint64 TelegramApi::accountRegisterDevice(qint32 token_type, const QString &token, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Account::registerDevice(&p, token_type, token);
@@ -516,7 +513,7 @@ void TelegramApi::onAccountRegisterDeviceError(Query *q, qint32 errorCode, const
 qint64 TelegramApi::accountUnregisterDevice(qint32 token_type, const QString &token, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Account::unregisterDevice(&p, token_type, token);
@@ -538,7 +535,7 @@ void TelegramApi::onAccountUnregisterDeviceError(Query *q, qint32 errorCode, con
 qint64 TelegramApi::accountUpdateNotifySettings(const InputNotifyPeer &peer, const InputPeerNotifySettings &settings, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Account::updateNotifySettings(&p, peer, settings);
@@ -560,7 +557,7 @@ void TelegramApi::onAccountUpdateNotifySettingsError(Query *q, qint32 errorCode,
 qint64 TelegramApi::accountGetNotifySettings(const InputNotifyPeer &peer, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Account::getNotifySettings(&p, peer);
@@ -585,7 +582,7 @@ void TelegramApi::onAccountGetNotifySettingsError(Query *q, qint32 errorCode, co
 qint64 TelegramApi::accountResetNotifySettings(const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Account::resetNotifySettings(&p);
@@ -607,7 +604,7 @@ void TelegramApi::onAccountResetNotifySettingsError(Query *q, qint32 errorCode, 
 qint64 TelegramApi::accountUpdateProfile(const QString &first_name, const QString &last_name, const QString &about, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Account::updateProfile(&p, first_name, last_name, about);
@@ -632,7 +629,7 @@ void TelegramApi::onAccountUpdateProfileError(Query *q, qint32 errorCode, const 
 qint64 TelegramApi::accountUpdateStatus(bool offline, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Account::updateStatus(&p, offline);
@@ -654,7 +651,7 @@ void TelegramApi::onAccountUpdateStatusError(Query *q, qint32 errorCode, const Q
 qint64 TelegramApi::accountGetWallPapers(const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Account::getWallPapers(&p);
@@ -676,7 +673,7 @@ void TelegramApi::onAccountGetWallPapersError(Query *q, qint32 errorCode, const 
 qint64 TelegramApi::accountReportPeer(const InputPeer &peer, const ReportReason &reason, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Account::reportPeer(&p, peer, reason);
@@ -698,7 +695,7 @@ void TelegramApi::onAccountReportPeerError(Query *q, qint32 errorCode, const QSt
 qint64 TelegramApi::accountCheckUsername(const QString &username, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Account::checkUsername(&p, username);
@@ -720,7 +717,7 @@ void TelegramApi::onAccountCheckUsernameError(Query *q, qint32 errorCode, const 
 qint64 TelegramApi::accountUpdateUsername(const QString &username, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Account::updateUsername(&p, username);
@@ -745,7 +742,7 @@ void TelegramApi::onAccountUpdateUsernameError(Query *q, qint32 errorCode, const
 qint64 TelegramApi::accountGetPrivacy(const InputPrivacyKey &key, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Account::getPrivacy(&p, key);
@@ -770,7 +767,7 @@ void TelegramApi::onAccountGetPrivacyError(Query *q, qint32 errorCode, const QSt
 qint64 TelegramApi::accountSetPrivacy(const InputPrivacyKey &key, const QList<InputPrivacyRule> &rules, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Account::setPrivacy(&p, key, rules);
@@ -795,7 +792,7 @@ void TelegramApi::onAccountSetPrivacyError(Query *q, qint32 errorCode, const QSt
 qint64 TelegramApi::accountDeleteAccount(const QString &reason, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Account::deleteAccount(&p, reason);
@@ -817,7 +814,7 @@ void TelegramApi::onAccountDeleteAccountError(Query *q, qint32 errorCode, const 
 qint64 TelegramApi::accountGetAccountTTL(const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Account::getAccountTTL(&p);
@@ -842,7 +839,7 @@ void TelegramApi::onAccountGetAccountTTLError(Query *q, qint32 errorCode, const 
 qint64 TelegramApi::accountSetAccountTTL(const AccountDaysTTL &ttl, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Account::setAccountTTL(&p, ttl);
@@ -864,7 +861,7 @@ void TelegramApi::onAccountSetAccountTTLError(Query *q, qint32 errorCode, const 
 qint64 TelegramApi::accountSendChangePhoneCode(bool allow_flashcall, const QString &phone_number, bool current_number, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Account::sendChangePhoneCode(&p, allow_flashcall, phone_number, current_number);
@@ -889,7 +886,7 @@ void TelegramApi::onAccountSendChangePhoneCodeError(Query *q, qint32 errorCode, 
 qint64 TelegramApi::accountChangePhone(const QString &phone_number, const QString &phone_code_hash, const QString &phone_code, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Account::changePhone(&p, phone_number, phone_code_hash, phone_code);
@@ -914,7 +911,7 @@ void TelegramApi::onAccountChangePhoneError(Query *q, qint32 errorCode, const QS
 qint64 TelegramApi::accountUpdateDeviceLocked(qint32 period, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Account::updateDeviceLocked(&p, period);
@@ -936,7 +933,7 @@ void TelegramApi::onAccountUpdateDeviceLockedError(Query *q, qint32 errorCode, c
 qint64 TelegramApi::accountGetAuthorizations(const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Account::getAuthorizations(&p);
@@ -961,7 +958,7 @@ void TelegramApi::onAccountGetAuthorizationsError(Query *q, qint32 errorCode, co
 qint64 TelegramApi::accountResetAuthorization(qint64 hash, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Account::resetAuthorization(&p, hash);
@@ -983,7 +980,7 @@ void TelegramApi::onAccountResetAuthorizationError(Query *q, qint32 errorCode, c
 qint64 TelegramApi::accountGetPassword(const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Account::getPassword(&p);
@@ -1008,7 +1005,7 @@ void TelegramApi::onAccountGetPasswordError(Query *q, qint32 errorCode, const QS
 qint64 TelegramApi::accountGetPasswordSettings(const QByteArray &current_password_hash, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Account::getPasswordSettings(&p, current_password_hash);
@@ -1033,7 +1030,7 @@ void TelegramApi::onAccountGetPasswordSettingsError(Query *q, qint32 errorCode, 
 qint64 TelegramApi::accountUpdatePasswordSettings(const QByteArray &current_password_hash, const AccountPasswordInputSettings &new_settings, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Account::updatePasswordSettings(&p, current_password_hash, new_settings);
@@ -1055,7 +1052,7 @@ void TelegramApi::onAccountUpdatePasswordSettingsError(Query *q, qint32 errorCod
 qint64 TelegramApi::accountSendConfirmPhoneCode(bool allow_flashcall, const QString &hash, bool current_number, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Account::sendConfirmPhoneCode(&p, allow_flashcall, hash, current_number);
@@ -1080,7 +1077,7 @@ void TelegramApi::onAccountSendConfirmPhoneCodeError(Query *q, qint32 errorCode,
 qint64 TelegramApi::accountConfirmPhone(const QString &phone_code_hash, const QString &phone_code, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Account::confirmPhone(&p, phone_code_hash, phone_code);
@@ -1102,7 +1099,7 @@ void TelegramApi::onAccountConfirmPhoneError(Query *q, qint32 errorCode, const Q
 qint64 TelegramApi::accountGetTmpPassword(const QByteArray &password_hash, qint32 period, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Account::getTmpPassword(&p, password_hash, period);
@@ -1128,7 +1125,7 @@ void TelegramApi::onAccountGetTmpPasswordError(Query *q, qint32 errorCode, const
 qint64 TelegramApi::authCheckPhone(const QString &phone_number, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Auth::checkPhone(&p, phone_number);
@@ -1153,7 +1150,7 @@ void TelegramApi::onAuthCheckPhoneError(Query *q, qint32 errorCode, const QStrin
 qint64 TelegramApi::authSendCode(bool allow_flashcall, const QString &phone_number, bool current_number, qint32 api_id, const QString &api_hash, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Auth::sendCode(&p, allow_flashcall, phone_number, current_number, api_id, api_hash);
@@ -1178,7 +1175,7 @@ void TelegramApi::onAuthSendCodeError(Query *q, qint32 errorCode, const QString 
 qint64 TelegramApi::authSignUp(const QString &phone_number, const QString &phone_code_hash, const QString &phone_code, const QString &first_name, const QString &last_name, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Auth::signUp(&p, phone_number, phone_code_hash, phone_code, first_name, last_name);
@@ -1203,7 +1200,7 @@ void TelegramApi::onAuthSignUpError(Query *q, qint32 errorCode, const QString &e
 qint64 TelegramApi::authSignIn(const QString &phone_number, const QString &phone_code_hash, const QString &phone_code, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Auth::signIn(&p, phone_number, phone_code_hash, phone_code);
@@ -1228,7 +1225,7 @@ void TelegramApi::onAuthSignInError(Query *q, qint32 errorCode, const QString &e
 qint64 TelegramApi::authLogOut(const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Auth::logOut(&p);
@@ -1250,7 +1247,7 @@ void TelegramApi::onAuthLogOutError(Query *q, qint32 errorCode, const QString &e
 qint64 TelegramApi::authResetAuthorizations(const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Auth::resetAuthorizations(&p);
@@ -1272,7 +1269,7 @@ void TelegramApi::onAuthResetAuthorizationsError(Query *q, qint32 errorCode, con
 qint64 TelegramApi::authSendInvites(const QList<QString> &phone_numbers, const QString &message, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Auth::sendInvites(&p, phone_numbers, message);
@@ -1294,7 +1291,7 @@ void TelegramApi::onAuthSendInvitesError(Query *q, qint32 errorCode, const QStri
 qint64 TelegramApi::authExportAuthorization(qint32 dc_id, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Auth::exportAuthorization(&p, dc_id);
@@ -1319,7 +1316,7 @@ void TelegramApi::onAuthExportAuthorizationError(Query *q, qint32 errorCode, con
 qint64 TelegramApi::authImportAuthorization(qint32 id, const QByteArray &bytes, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Auth::importAuthorization(&p, id, bytes);
@@ -1344,7 +1341,7 @@ void TelegramApi::onAuthImportAuthorizationError(Query *q, qint32 errorCode, con
 qint64 TelegramApi::authBindTempAuthKey(qint64 perm_auth_key_id, qint64 nonce, qint32 expires_at, const QByteArray &encrypted_message, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Auth::bindTempAuthKey(&p, perm_auth_key_id, nonce, expires_at, encrypted_message);
@@ -1366,7 +1363,7 @@ void TelegramApi::onAuthBindTempAuthKeyError(Query *q, qint32 errorCode, const Q
 qint64 TelegramApi::authImportBotAuthorization(qint32 flags, qint32 api_id, const QString &api_hash, const QString &bot_auth_token, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Auth::importBotAuthorization(&p, flags, api_id, api_hash, bot_auth_token);
@@ -1391,7 +1388,7 @@ void TelegramApi::onAuthImportBotAuthorizationError(Query *q, qint32 errorCode, 
 qint64 TelegramApi::authCheckPassword(const QByteArray &password_hash, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Auth::checkPassword(&p, password_hash);
@@ -1416,7 +1413,7 @@ void TelegramApi::onAuthCheckPasswordError(Query *q, qint32 errorCode, const QSt
 qint64 TelegramApi::authRequestPasswordRecovery(const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Auth::requestPasswordRecovery(&p);
@@ -1441,7 +1438,7 @@ void TelegramApi::onAuthRequestPasswordRecoveryError(Query *q, qint32 errorCode,
 qint64 TelegramApi::authRecoverPassword(const QString &code, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Auth::recoverPassword(&p, code);
@@ -1466,7 +1463,7 @@ void TelegramApi::onAuthRecoverPasswordError(Query *q, qint32 errorCode, const Q
 qint64 TelegramApi::authResendCode(const QString &phone_number, const QString &phone_code_hash, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Auth::resendCode(&p, phone_number, phone_code_hash);
@@ -1491,7 +1488,7 @@ void TelegramApi::onAuthResendCodeError(Query *q, qint32 errorCode, const QStrin
 qint64 TelegramApi::authCancelCode(const QString &phone_number, const QString &phone_code_hash, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Auth::cancelCode(&p, phone_number, phone_code_hash);
@@ -1513,7 +1510,7 @@ void TelegramApi::onAuthCancelCodeError(Query *q, qint32 errorCode, const QStrin
 qint64 TelegramApi::authDropTempAuthKeys(const QList<qint64> &except_auth_keys, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Auth::dropTempAuthKeys(&p, except_auth_keys);
@@ -1536,7 +1533,7 @@ void TelegramApi::onAuthDropTempAuthKeysError(Query *q, qint32 errorCode, const 
 qint64 TelegramApi::botsSendCustomRequest(const QString &custom_method, const DataJSON &params, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Bots::sendCustomRequest(&p, custom_method, params);
@@ -1561,7 +1558,7 @@ void TelegramApi::onBotsSendCustomRequestError(Query *q, qint32 errorCode, const
 qint64 TelegramApi::botsAnswerWebhookJSONQuery(qint64 query_id, const DataJSON &data, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Bots::answerWebhookJSONQuery(&p, query_id, data);
@@ -1584,7 +1581,7 @@ void TelegramApi::onBotsAnswerWebhookJSONQueryError(Query *q, qint32 errorCode, 
 qint64 TelegramApi::channelsReadHistory(const InputChannel &channel, qint32 max_id, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Channels::readHistory(&p, channel, max_id);
@@ -1606,7 +1603,7 @@ void TelegramApi::onChannelsReadHistoryError(Query *q, qint32 errorCode, const Q
 qint64 TelegramApi::channelsDeleteMessages(const InputChannel &channel, const QList<qint32> &id, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Channels::deleteMessages(&p, channel, id);
@@ -1631,7 +1628,7 @@ void TelegramApi::onChannelsDeleteMessagesError(Query *q, qint32 errorCode, cons
 qint64 TelegramApi::channelsDeleteUserHistory(const InputChannel &channel, const InputUser &user_id, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Channels::deleteUserHistory(&p, channel, user_id);
@@ -1656,7 +1653,7 @@ void TelegramApi::onChannelsDeleteUserHistoryError(Query *q, qint32 errorCode, c
 qint64 TelegramApi::channelsReportSpam(const InputChannel &channel, const InputUser &user_id, const QList<qint32> &id, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Channels::reportSpam(&p, channel, user_id, id);
@@ -1678,7 +1675,7 @@ void TelegramApi::onChannelsReportSpamError(Query *q, qint32 errorCode, const QS
 qint64 TelegramApi::channelsGetMessages(const InputChannel &channel, const QList<qint32> &id, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Channels::getMessages(&p, channel, id);
@@ -1703,7 +1700,7 @@ void TelegramApi::onChannelsGetMessagesError(Query *q, qint32 errorCode, const Q
 qint64 TelegramApi::channelsGetParticipants(const InputChannel &channel, const ChannelParticipantsFilter &filter, qint32 offset, qint32 limit, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Channels::getParticipants(&p, channel, filter, offset, limit);
@@ -1728,7 +1725,7 @@ void TelegramApi::onChannelsGetParticipantsError(Query *q, qint32 errorCode, con
 qint64 TelegramApi::channelsGetParticipant(const InputChannel &channel, const InputUser &user_id, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Channels::getParticipant(&p, channel, user_id);
@@ -1753,7 +1750,7 @@ void TelegramApi::onChannelsGetParticipantError(Query *q, qint32 errorCode, cons
 qint64 TelegramApi::channelsGetChannels(const QList<InputChannel> &id, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Channels::getChannels(&p, id);
@@ -1778,7 +1775,7 @@ void TelegramApi::onChannelsGetChannelsError(Query *q, qint32 errorCode, const Q
 qint64 TelegramApi::channelsGetFullChannel(const InputChannel &channel, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Channels::getFullChannel(&p, channel);
@@ -1803,7 +1800,7 @@ void TelegramApi::onChannelsGetFullChannelError(Query *q, qint32 errorCode, cons
 qint64 TelegramApi::channelsCreateChannel(bool broadcast, bool megagroup, const QString &title, const QString &about, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Channels::createChannel(&p, broadcast, megagroup, title, about);
@@ -1828,7 +1825,7 @@ void TelegramApi::onChannelsCreateChannelError(Query *q, qint32 errorCode, const
 qint64 TelegramApi::channelsEditAbout(const InputChannel &channel, const QString &about, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Channels::editAbout(&p, channel, about);
@@ -1850,7 +1847,7 @@ void TelegramApi::onChannelsEditAboutError(Query *q, qint32 errorCode, const QSt
 qint64 TelegramApi::channelsEditAdmin(const InputChannel &channel, const InputUser &user_id, const ChannelAdminRights &admin_rights, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Channels::editAdmin(&p, channel, user_id, admin_rights);
@@ -1875,7 +1872,7 @@ void TelegramApi::onChannelsEditAdminError(Query *q, qint32 errorCode, const QSt
 qint64 TelegramApi::channelsEditTitle(const InputChannel &channel, const QString &title, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Channels::editTitle(&p, channel, title);
@@ -1900,7 +1897,7 @@ void TelegramApi::onChannelsEditTitleError(Query *q, qint32 errorCode, const QSt
 qint64 TelegramApi::channelsEditPhoto(const InputChannel &channel, const InputChatPhoto &photo, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Channels::editPhoto(&p, channel, photo);
@@ -1925,7 +1922,7 @@ void TelegramApi::onChannelsEditPhotoError(Query *q, qint32 errorCode, const QSt
 qint64 TelegramApi::channelsCheckUsername(const InputChannel &channel, const QString &username, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Channels::checkUsername(&p, channel, username);
@@ -1947,7 +1944,7 @@ void TelegramApi::onChannelsCheckUsernameError(Query *q, qint32 errorCode, const
 qint64 TelegramApi::channelsUpdateUsername(const InputChannel &channel, const QString &username, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Channels::updateUsername(&p, channel, username);
@@ -1969,7 +1966,7 @@ void TelegramApi::onChannelsUpdateUsernameError(Query *q, qint32 errorCode, cons
 qint64 TelegramApi::channelsJoinChannel(const InputChannel &channel, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Channels::joinChannel(&p, channel);
@@ -1994,7 +1991,7 @@ void TelegramApi::onChannelsJoinChannelError(Query *q, qint32 errorCode, const Q
 qint64 TelegramApi::channelsLeaveChannel(const InputChannel &channel, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Channels::leaveChannel(&p, channel);
@@ -2019,7 +2016,7 @@ void TelegramApi::onChannelsLeaveChannelError(Query *q, qint32 errorCode, const 
 qint64 TelegramApi::channelsInviteToChannel(const InputChannel &channel, const QList<InputUser> &users, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Channels::inviteToChannel(&p, channel, users);
@@ -2044,7 +2041,7 @@ void TelegramApi::onChannelsInviteToChannelError(Query *q, qint32 errorCode, con
 qint64 TelegramApi::channelsExportInvite(const InputChannel &channel, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Channels::exportInvite(&p, channel);
@@ -2069,7 +2066,7 @@ void TelegramApi::onChannelsExportInviteError(Query *q, qint32 errorCode, const 
 qint64 TelegramApi::channelsDeleteChannel(const InputChannel &channel, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Channels::deleteChannel(&p, channel);
@@ -2094,7 +2091,7 @@ void TelegramApi::onChannelsDeleteChannelError(Query *q, qint32 errorCode, const
 qint64 TelegramApi::channelsToggleInvites(const InputChannel &channel, bool enabled, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Channels::toggleInvites(&p, channel, enabled);
@@ -2119,7 +2116,7 @@ void TelegramApi::onChannelsToggleInvitesError(Query *q, qint32 errorCode, const
 qint64 TelegramApi::channelsExportMessageLink(const InputChannel &channel, qint32 id, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Channels::exportMessageLink(&p, channel, id);
@@ -2144,7 +2141,7 @@ void TelegramApi::onChannelsExportMessageLinkError(Query *q, qint32 errorCode, c
 qint64 TelegramApi::channelsToggleSignatures(const InputChannel &channel, bool enabled, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Channels::toggleSignatures(&p, channel, enabled);
@@ -2169,7 +2166,7 @@ void TelegramApi::onChannelsToggleSignaturesError(Query *q, qint32 errorCode, co
 qint64 TelegramApi::channelsUpdatePinnedMessage(bool silent, const InputChannel &channel, qint32 id, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Channels::updatePinnedMessage(&p, silent, channel, id);
@@ -2194,7 +2191,7 @@ void TelegramApi::onChannelsUpdatePinnedMessageError(Query *q, qint32 errorCode,
 qint64 TelegramApi::channelsGetAdminedPublicChannels(const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Channels::getAdminedPublicChannels(&p);
@@ -2219,7 +2216,7 @@ void TelegramApi::onChannelsGetAdminedPublicChannelsError(Query *q, qint32 error
 qint64 TelegramApi::channelsEditBanned(const InputChannel &channel, const InputUser &user_id, const ChannelBannedRights &banned_rights, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Channels::editBanned(&p, channel, user_id, banned_rights);
@@ -2244,7 +2241,7 @@ void TelegramApi::onChannelsEditBannedError(Query *q, qint32 errorCode, const QS
 qint64 TelegramApi::channelsGetAdminLog(const InputChannel &channel, const QString &q, const ChannelAdminLogEventsFilter &events_filter, const QList<InputUser> &admins, qint64 max_id, qint64 min_id, qint32 limit, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Channels::getAdminLog(&p, channel, q, events_filter, admins, max_id, min_id, limit);
@@ -2270,7 +2267,7 @@ void TelegramApi::onChannelsGetAdminLogError(Query *q, qint32 errorCode, const Q
 qint64 TelegramApi::contactsGetStatuses(const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Contacts::getStatuses(&p);
@@ -2292,7 +2289,7 @@ void TelegramApi::onContactsGetStatusesError(Query *q, qint32 errorCode, const Q
 qint64 TelegramApi::contactsGetContacts(const QString &hash, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Contacts::getContacts(&p, hash);
@@ -2317,7 +2314,7 @@ void TelegramApi::onContactsGetContactsError(Query *q, qint32 errorCode, const Q
 qint64 TelegramApi::contactsImportContacts(const QList<InputContact> &contacts, bool replace, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Contacts::importContacts(&p, contacts, replace);
@@ -2342,7 +2339,7 @@ void TelegramApi::onContactsImportContactsError(Query *q, qint32 errorCode, cons
 qint64 TelegramApi::contactsDeleteContact(const InputUser &id, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Contacts::deleteContact(&p, id);
@@ -2367,7 +2364,7 @@ void TelegramApi::onContactsDeleteContactError(Query *q, qint32 errorCode, const
 qint64 TelegramApi::contactsDeleteContacts(const QList<InputUser> &id, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Contacts::deleteContacts(&p, id);
@@ -2389,7 +2386,7 @@ void TelegramApi::onContactsDeleteContactsError(Query *q, qint32 errorCode, cons
 qint64 TelegramApi::contactsBlock(const InputUser &id, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Contacts::block(&p, id);
@@ -2411,7 +2408,7 @@ void TelegramApi::onContactsBlockError(Query *q, qint32 errorCode, const QString
 qint64 TelegramApi::contactsUnblock(const InputUser &id, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Contacts::unblock(&p, id);
@@ -2433,7 +2430,7 @@ void TelegramApi::onContactsUnblockError(Query *q, qint32 errorCode, const QStri
 qint64 TelegramApi::contactsGetBlocked(qint32 offset, qint32 limit, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Contacts::getBlocked(&p, offset, limit);
@@ -2458,7 +2455,7 @@ void TelegramApi::onContactsGetBlockedError(Query *q, qint32 errorCode, const QS
 qint64 TelegramApi::contactsExportCard(const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Contacts::exportCard(&p);
@@ -2480,7 +2477,7 @@ void TelegramApi::onContactsExportCardError(Query *q, qint32 errorCode, const QS
 qint64 TelegramApi::contactsImportCard(const QList<qint32> &export_card, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Contacts::importCard(&p, export_card);
@@ -2505,7 +2502,7 @@ void TelegramApi::onContactsImportCardError(Query *q, qint32 errorCode, const QS
 qint64 TelegramApi::contactsSearch(const QString &q, qint32 limit, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Contacts::search(&p, q, limit);
@@ -2530,7 +2527,7 @@ void TelegramApi::onContactsSearchError(Query *q, qint32 errorCode, const QStrin
 qint64 TelegramApi::contactsResolveUsername(const QString &username, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Contacts::resolveUsername(&p, username);
@@ -2555,7 +2552,7 @@ void TelegramApi::onContactsResolveUsernameError(Query *q, qint32 errorCode, con
 qint64 TelegramApi::contactsGetTopPeers(bool correspondents, bool bots_pm, bool bots_inline, bool phone_calls, bool groups, bool channels, qint32 offset, qint32 limit, qint32 hash, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Contacts::getTopPeers(&p, correspondents, bots_pm, bots_inline, phone_calls, groups, channels, offset, limit, hash);
@@ -2580,7 +2577,7 @@ void TelegramApi::onContactsGetTopPeersError(Query *q, qint32 errorCode, const Q
 qint64 TelegramApi::contactsResetTopPeerRating(const TopPeerCategory &category, const InputPeer &peer, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Contacts::resetTopPeerRating(&p, category, peer);
@@ -2603,7 +2600,7 @@ void TelegramApi::onContactsResetTopPeerRatingError(Query *q, qint32 errorCode, 
 qint64 TelegramApi::helpGetConfig(const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Help::getConfig(&p);
@@ -2628,7 +2625,7 @@ void TelegramApi::onHelpGetConfigError(Query *q, qint32 errorCode, const QString
 qint64 TelegramApi::helpGetNearestDc(const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Help::getNearestDc(&p);
@@ -2653,7 +2650,7 @@ void TelegramApi::onHelpGetNearestDcError(Query *q, qint32 errorCode, const QStr
 qint64 TelegramApi::helpGetAppUpdate(const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Help::getAppUpdate(&p);
@@ -2678,7 +2675,7 @@ void TelegramApi::onHelpGetAppUpdateError(Query *q, qint32 errorCode, const QStr
 qint64 TelegramApi::helpSaveAppLog(const QList<InputAppEvent> &events, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Help::saveAppLog(&p, events);
@@ -2700,7 +2697,7 @@ void TelegramApi::onHelpSaveAppLogError(Query *q, qint32 errorCode, const QStrin
 qint64 TelegramApi::helpGetInviteText(const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Help::getInviteText(&p);
@@ -2725,7 +2722,7 @@ void TelegramApi::onHelpGetInviteTextError(Query *q, qint32 errorCode, const QSt
 qint64 TelegramApi::helpGetSupport(const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Help::getSupport(&p);
@@ -2750,7 +2747,7 @@ void TelegramApi::onHelpGetSupportError(Query *q, qint32 errorCode, const QStrin
 qint64 TelegramApi::helpGetAppChangelog(const QString &prev_app_version, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Help::getAppChangelog(&p, prev_app_version);
@@ -2775,7 +2772,7 @@ void TelegramApi::onHelpGetAppChangelogError(Query *q, qint32 errorCode, const Q
 qint64 TelegramApi::helpGetTermsOfService(const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Help::getTermsOfService(&p);
@@ -2800,7 +2797,7 @@ void TelegramApi::onHelpGetTermsOfServiceError(Query *q, qint32 errorCode, const
 qint64 TelegramApi::helpSetBotUpdatesStatus(qint32 pending_updates_count, const QString &message, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Help::setBotUpdatesStatus(&p, pending_updates_count, message);
@@ -2822,7 +2819,7 @@ void TelegramApi::onHelpSetBotUpdatesStatusError(Query *q, qint32 errorCode, con
 qint64 TelegramApi::helpGetCdnConfig(const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Help::getCdnConfig(&p);
@@ -2848,7 +2845,7 @@ void TelegramApi::onHelpGetCdnConfigError(Query *q, qint32 errorCode, const QStr
 qint64 TelegramApi::langpackGetLangPack(const QString &lang_code, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Langpack::getLangPack(&p, lang_code);
@@ -2873,7 +2870,7 @@ void TelegramApi::onLangpackGetLangPackError(Query *q, qint32 errorCode, const Q
 qint64 TelegramApi::langpackGetStrings(const QString &lang_code, const QList<QString> &keys, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Langpack::getStrings(&p, lang_code, keys);
@@ -2895,7 +2892,7 @@ void TelegramApi::onLangpackGetStringsError(Query *q, qint32 errorCode, const QS
 qint64 TelegramApi::langpackGetDifference(qint32 from_version, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Langpack::getDifference(&p, from_version);
@@ -2920,7 +2917,7 @@ void TelegramApi::onLangpackGetDifferenceError(Query *q, qint32 errorCode, const
 qint64 TelegramApi::langpackGetLanguages(const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Langpack::getLanguages(&p);
@@ -2943,7 +2940,7 @@ void TelegramApi::onLangpackGetLanguagesError(Query *q, qint32 errorCode, const 
 qint64 TelegramApi::messagesGetMessages(const QList<qint32> &id, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::getMessages(&p, id);
@@ -2968,7 +2965,7 @@ void TelegramApi::onMessagesGetMessagesError(Query *q, qint32 errorCode, const Q
 qint64 TelegramApi::messagesGetDialogs(bool exclude_pinned, qint32 offset_date, qint32 offset_id, const InputPeer &offset_peer, qint32 limit, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::getDialogs(&p, exclude_pinned, offset_date, offset_id, offset_peer, limit);
@@ -2993,7 +2990,7 @@ void TelegramApi::onMessagesGetDialogsError(Query *q, qint32 errorCode, const QS
 qint64 TelegramApi::messagesGetHistory(const InputPeer &peer, qint32 offset_id, qint32 offset_date, qint32 add_offset, qint32 limit, qint32 max_id, qint32 min_id, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::getHistory(&p, peer, offset_id, offset_date, add_offset, limit, max_id, min_id);
@@ -3018,7 +3015,7 @@ void TelegramApi::onMessagesGetHistoryError(Query *q, qint32 errorCode, const QS
 qint64 TelegramApi::messagesSearch(const InputPeer &peer, const QString &q, const InputUser &from_id, const MessagesFilter &filter, qint32 min_date, qint32 max_date, qint32 offset, qint32 max_id, qint32 limit, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::search(&p, peer, q, from_id, filter, min_date, max_date, offset, max_id, limit);
@@ -3043,7 +3040,7 @@ void TelegramApi::onMessagesSearchError(Query *q, qint32 errorCode, const QStrin
 qint64 TelegramApi::messagesReadHistory(const InputPeer &peer, qint32 max_id, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::readHistory(&p, peer, max_id);
@@ -3068,7 +3065,7 @@ void TelegramApi::onMessagesReadHistoryError(Query *q, qint32 errorCode, const Q
 qint64 TelegramApi::messagesDeleteHistory(bool just_clear, const InputPeer &peer, qint32 max_id, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::deleteHistory(&p, just_clear, peer, max_id);
@@ -3093,7 +3090,7 @@ void TelegramApi::onMessagesDeleteHistoryError(Query *q, qint32 errorCode, const
 qint64 TelegramApi::messagesDeleteMessages(bool revoke, const QList<qint32> &id, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::deleteMessages(&p, revoke, id);
@@ -3118,7 +3115,7 @@ void TelegramApi::onMessagesDeleteMessagesError(Query *q, qint32 errorCode, cons
 qint64 TelegramApi::messagesReceivedMessages(qint32 max_id, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::receivedMessages(&p, max_id);
@@ -3140,7 +3137,7 @@ void TelegramApi::onMessagesReceivedMessagesError(Query *q, qint32 errorCode, co
 qint64 TelegramApi::messagesSetTyping(const InputPeer &peer, const SendMessageAction &action, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::setTyping(&p, peer, action);
@@ -3162,7 +3159,7 @@ void TelegramApi::onMessagesSetTypingError(Query *q, qint32 errorCode, const QSt
 qint64 TelegramApi::messagesSendMessage(bool no_webpage, bool silent, bool background, bool clear_draft, const InputPeer &peer, qint32 reply_to_msg_id, const QString &message, qint64 random_id, const ReplyMarkup &reply_markup, const QList<MessageEntity> &entities, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::sendMessage(&p, no_webpage, silent, background, clear_draft, peer, reply_to_msg_id, message, random_id, reply_markup, entities);
@@ -3187,7 +3184,7 @@ void TelegramApi::onMessagesSendMessageError(Query *q, qint32 errorCode, const Q
 qint64 TelegramApi::messagesSendMedia(bool silent, bool background, bool clear_draft, const InputPeer &peer, qint32 reply_to_msg_id, const InputMedia &media, qint64 random_id, const ReplyMarkup &reply_markup, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::sendMedia(&p, silent, background, clear_draft, peer, reply_to_msg_id, media, random_id, reply_markup);
@@ -3212,7 +3209,7 @@ void TelegramApi::onMessagesSendMediaError(Query *q, qint32 errorCode, const QSt
 qint64 TelegramApi::messagesForwardMessages(bool silent, bool background, bool with_my_score, const InputPeer &from_peer, const QList<qint32> &id, const QList<qint64> &random_id, const InputPeer &to_peer, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::forwardMessages(&p, silent, background, with_my_score, from_peer, id, random_id, to_peer);
@@ -3237,7 +3234,7 @@ void TelegramApi::onMessagesForwardMessagesError(Query *q, qint32 errorCode, con
 qint64 TelegramApi::messagesReportSpam(const InputPeer &peer, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::reportSpam(&p, peer);
@@ -3259,7 +3256,7 @@ void TelegramApi::onMessagesReportSpamError(Query *q, qint32 errorCode, const QS
 qint64 TelegramApi::messagesHideReportSpam(const InputPeer &peer, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::hideReportSpam(&p, peer);
@@ -3281,7 +3278,7 @@ void TelegramApi::onMessagesHideReportSpamError(Query *q, qint32 errorCode, cons
 qint64 TelegramApi::messagesGetPeerSettings(const InputPeer &peer, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::getPeerSettings(&p, peer);
@@ -3306,7 +3303,7 @@ void TelegramApi::onMessagesGetPeerSettingsError(Query *q, qint32 errorCode, con
 qint64 TelegramApi::messagesGetChats(const QList<qint32> &id, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::getChats(&p, id);
@@ -3331,7 +3328,7 @@ void TelegramApi::onMessagesGetChatsError(Query *q, qint32 errorCode, const QStr
 qint64 TelegramApi::messagesGetFullChat(qint32 chat_id, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::getFullChat(&p, chat_id);
@@ -3356,7 +3353,7 @@ void TelegramApi::onMessagesGetFullChatError(Query *q, qint32 errorCode, const Q
 qint64 TelegramApi::messagesEditChatTitle(qint32 chat_id, const QString &title, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::editChatTitle(&p, chat_id, title);
@@ -3381,7 +3378,7 @@ void TelegramApi::onMessagesEditChatTitleError(Query *q, qint32 errorCode, const
 qint64 TelegramApi::messagesEditChatPhoto(qint32 chat_id, const InputChatPhoto &photo, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::editChatPhoto(&p, chat_id, photo);
@@ -3406,7 +3403,7 @@ void TelegramApi::onMessagesEditChatPhotoError(Query *q, qint32 errorCode, const
 qint64 TelegramApi::messagesAddChatUser(qint32 chat_id, const InputUser &user_id, qint32 fwd_limit, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::addChatUser(&p, chat_id, user_id, fwd_limit);
@@ -3431,7 +3428,7 @@ void TelegramApi::onMessagesAddChatUserError(Query *q, qint32 errorCode, const Q
 qint64 TelegramApi::messagesDeleteChatUser(qint32 chat_id, const InputUser &user_id, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::deleteChatUser(&p, chat_id, user_id);
@@ -3456,7 +3453,7 @@ void TelegramApi::onMessagesDeleteChatUserError(Query *q, qint32 errorCode, cons
 qint64 TelegramApi::messagesCreateChat(const QList<InputUser> &users, const QString &title, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::createChat(&p, users, title);
@@ -3481,7 +3478,7 @@ void TelegramApi::onMessagesCreateChatError(Query *q, qint32 errorCode, const QS
 qint64 TelegramApi::messagesForwardMessage(const InputPeer &peer, qint32 id, qint64 random_id, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::forwardMessage(&p, peer, id, random_id);
@@ -3506,7 +3503,7 @@ void TelegramApi::onMessagesForwardMessageError(Query *q, qint32 errorCode, cons
 qint64 TelegramApi::messagesGetDhConfig(qint32 version, qint32 random_length, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::getDhConfig(&p, version, random_length);
@@ -3531,7 +3528,7 @@ void TelegramApi::onMessagesGetDhConfigError(Query *q, qint32 errorCode, const Q
 qint64 TelegramApi::messagesRequestEncryption(const InputUser &user_id, qint32 random_id, const QByteArray &g_a, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::requestEncryption(&p, user_id, random_id, g_a);
@@ -3556,7 +3553,7 @@ void TelegramApi::onMessagesRequestEncryptionError(Query *q, qint32 errorCode, c
 qint64 TelegramApi::messagesAcceptEncryption(const InputEncryptedChat &peer, const QByteArray &g_b, qint64 key_fingerprint, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::acceptEncryption(&p, peer, g_b, key_fingerprint);
@@ -3581,7 +3578,7 @@ void TelegramApi::onMessagesAcceptEncryptionError(Query *q, qint32 errorCode, co
 qint64 TelegramApi::messagesDiscardEncryption(qint32 chat_id, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::discardEncryption(&p, chat_id);
@@ -3603,7 +3600,7 @@ void TelegramApi::onMessagesDiscardEncryptionError(Query *q, qint32 errorCode, c
 qint64 TelegramApi::messagesSetEncryptedTyping(const InputEncryptedChat &peer, bool typing, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::setEncryptedTyping(&p, peer, typing);
@@ -3625,7 +3622,7 @@ void TelegramApi::onMessagesSetEncryptedTypingError(Query *q, qint32 errorCode, 
 qint64 TelegramApi::messagesReadEncryptedHistory(const InputEncryptedChat &peer, qint32 max_date, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::readEncryptedHistory(&p, peer, max_date);
@@ -3647,7 +3644,7 @@ void TelegramApi::onMessagesReadEncryptedHistoryError(Query *q, qint32 errorCode
 qint64 TelegramApi::messagesSendEncrypted(const InputEncryptedChat &peer, qint64 random_id, const QByteArray &data, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::sendEncrypted(&p, peer, random_id, data);
@@ -3672,7 +3669,7 @@ void TelegramApi::onMessagesSendEncryptedError(Query *q, qint32 errorCode, const
 qint64 TelegramApi::messagesSendEncryptedFile(const InputEncryptedChat &peer, qint64 random_id, const QByteArray &data, const InputEncryptedFile &file, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::sendEncryptedFile(&p, peer, random_id, data, file);
@@ -3697,7 +3694,7 @@ void TelegramApi::onMessagesSendEncryptedFileError(Query *q, qint32 errorCode, c
 qint64 TelegramApi::messagesSendEncryptedService(const InputEncryptedChat &peer, qint64 random_id, const QByteArray &data, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::sendEncryptedService(&p, peer, random_id, data);
@@ -3722,7 +3719,7 @@ void TelegramApi::onMessagesSendEncryptedServiceError(Query *q, qint32 errorCode
 qint64 TelegramApi::messagesReceivedQueue(qint32 max_qts, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::receivedQueue(&p, max_qts);
@@ -3744,7 +3741,7 @@ void TelegramApi::onMessagesReceivedQueueError(Query *q, qint32 errorCode, const
 qint64 TelegramApi::messagesReportEncryptedSpam(const InputEncryptedChat &peer, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::reportEncryptedSpam(&p, peer);
@@ -3766,7 +3763,7 @@ void TelegramApi::onMessagesReportEncryptedSpamError(Query *q, qint32 errorCode,
 qint64 TelegramApi::messagesReadMessageContents(const QList<qint32> &id, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::readMessageContents(&p, id);
@@ -3791,7 +3788,7 @@ void TelegramApi::onMessagesReadMessageContentsError(Query *q, qint32 errorCode,
 qint64 TelegramApi::messagesGetAllStickers(qint32 hash, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::getAllStickers(&p, hash);
@@ -3816,7 +3813,7 @@ void TelegramApi::onMessagesGetAllStickersError(Query *q, qint32 errorCode, cons
 qint64 TelegramApi::messagesGetWebPagePreview(const QString &message, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::getWebPagePreview(&p, message);
@@ -3841,7 +3838,7 @@ void TelegramApi::onMessagesGetWebPagePreviewError(Query *q, qint32 errorCode, c
 qint64 TelegramApi::messagesExportChatInvite(qint32 chat_id, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::exportChatInvite(&p, chat_id);
@@ -3866,7 +3863,7 @@ void TelegramApi::onMessagesExportChatInviteError(Query *q, qint32 errorCode, co
 qint64 TelegramApi::messagesCheckChatInvite(const QString &hash, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::checkChatInvite(&p, hash);
@@ -3891,7 +3888,7 @@ void TelegramApi::onMessagesCheckChatInviteError(Query *q, qint32 errorCode, con
 qint64 TelegramApi::messagesImportChatInvite(const QString &hash, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::importChatInvite(&p, hash);
@@ -3916,7 +3913,7 @@ void TelegramApi::onMessagesImportChatInviteError(Query *q, qint32 errorCode, co
 qint64 TelegramApi::messagesGetStickerSet(const InputStickerSet &stickerset, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::getStickerSet(&p, stickerset);
@@ -3941,7 +3938,7 @@ void TelegramApi::onMessagesGetStickerSetError(Query *q, qint32 errorCode, const
 qint64 TelegramApi::messagesInstallStickerSet(const InputStickerSet &stickerset, bool archived, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::installStickerSet(&p, stickerset, archived);
@@ -3966,7 +3963,7 @@ void TelegramApi::onMessagesInstallStickerSetError(Query *q, qint32 errorCode, c
 qint64 TelegramApi::messagesUninstallStickerSet(const InputStickerSet &stickerset, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::uninstallStickerSet(&p, stickerset);
@@ -3988,7 +3985,7 @@ void TelegramApi::onMessagesUninstallStickerSetError(Query *q, qint32 errorCode,
 qint64 TelegramApi::messagesStartBot(const InputUser &bot, const InputPeer &peer, qint64 random_id, const QString &start_param, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::startBot(&p, bot, peer, random_id, start_param);
@@ -4013,7 +4010,7 @@ void TelegramApi::onMessagesStartBotError(Query *q, qint32 errorCode, const QStr
 qint64 TelegramApi::messagesGetMessagesViews(const InputPeer &peer, const QList<qint32> &id, bool increment, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::getMessagesViews(&p, peer, id, increment);
@@ -4035,7 +4032,7 @@ void TelegramApi::onMessagesGetMessagesViewsError(Query *q, qint32 errorCode, co
 qint64 TelegramApi::messagesToggleChatAdmins(qint32 chat_id, bool enabled, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::toggleChatAdmins(&p, chat_id, enabled);
@@ -4060,7 +4057,7 @@ void TelegramApi::onMessagesToggleChatAdminsError(Query *q, qint32 errorCode, co
 qint64 TelegramApi::messagesEditChatAdmin(qint32 chat_id, const InputUser &user_id, bool is_admin, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::editChatAdmin(&p, chat_id, user_id, is_admin);
@@ -4082,7 +4079,7 @@ void TelegramApi::onMessagesEditChatAdminError(Query *q, qint32 errorCode, const
 qint64 TelegramApi::messagesMigrateChat(qint32 chat_id, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::migrateChat(&p, chat_id);
@@ -4107,7 +4104,7 @@ void TelegramApi::onMessagesMigrateChatError(Query *q, qint32 errorCode, const Q
 qint64 TelegramApi::messagesSearchGlobal(const QString &q, qint32 offset_date, const InputPeer &offset_peer, qint32 offset_id, qint32 limit, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::searchGlobal(&p, q, offset_date, offset_peer, offset_id, limit);
@@ -4132,7 +4129,7 @@ void TelegramApi::onMessagesSearchGlobalError(Query *q, qint32 errorCode, const 
 qint64 TelegramApi::messagesReorderStickerSets(bool masks, const QList<qint64> &order, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::reorderStickerSets(&p, masks, order);
@@ -4154,7 +4151,7 @@ void TelegramApi::onMessagesReorderStickerSetsError(Query *q, qint32 errorCode, 
 qint64 TelegramApi::messagesGetDocumentByHash(const QByteArray &sha256, qint32 size, const QString &mime_type, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::getDocumentByHash(&p, sha256, size, mime_type);
@@ -4179,7 +4176,7 @@ void TelegramApi::onMessagesGetDocumentByHashError(Query *q, qint32 errorCode, c
 qint64 TelegramApi::messagesSearchGifs(const QString &q, qint32 offset, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::searchGifs(&p, q, offset);
@@ -4204,7 +4201,7 @@ void TelegramApi::onMessagesSearchGifsError(Query *q, qint32 errorCode, const QS
 qint64 TelegramApi::messagesGetSavedGifs(qint32 hash, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::getSavedGifs(&p, hash);
@@ -4229,7 +4226,7 @@ void TelegramApi::onMessagesGetSavedGifsError(Query *q, qint32 errorCode, const 
 qint64 TelegramApi::messagesSaveGif(const InputDocument &id, bool unsave, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::saveGif(&p, id, unsave);
@@ -4251,7 +4248,7 @@ void TelegramApi::onMessagesSaveGifError(Query *q, qint32 errorCode, const QStri
 qint64 TelegramApi::messagesGetInlineBotResults(const InputUser &bot, const InputPeer &peer, const InputGeoPoint &geo_point, const QString &query, const QString &offset, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::getInlineBotResults(&p, bot, peer, geo_point, query, offset);
@@ -4276,7 +4273,7 @@ void TelegramApi::onMessagesGetInlineBotResultsError(Query *q, qint32 errorCode,
 qint64 TelegramApi::messagesSetInlineBotResults(bool gallery, bool privateValue, qint64 query_id, const QList<InputBotInlineResult> &results, qint32 cache_time, const QString &next_offset, const InlineBotSwitchPM &switch_pm, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::setInlineBotResults(&p, gallery, privateValue, query_id, results, cache_time, next_offset, switch_pm);
@@ -4298,7 +4295,7 @@ void TelegramApi::onMessagesSetInlineBotResultsError(Query *q, qint32 errorCode,
 qint64 TelegramApi::messagesSendInlineBotResult(bool silent, bool background, bool clear_draft, const InputPeer &peer, qint32 reply_to_msg_id, qint64 random_id, qint64 query_id, const QString &id, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::sendInlineBotResult(&p, silent, background, clear_draft, peer, reply_to_msg_id, random_id, query_id, id);
@@ -4323,7 +4320,7 @@ void TelegramApi::onMessagesSendInlineBotResultError(Query *q, qint32 errorCode,
 qint64 TelegramApi::messagesGetMessageEditData(const InputPeer &peer, qint32 id, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::getMessageEditData(&p, peer, id);
@@ -4348,7 +4345,7 @@ void TelegramApi::onMessagesGetMessageEditDataError(Query *q, qint32 errorCode, 
 qint64 TelegramApi::messagesEditMessage(bool no_webpage, const InputPeer &peer, qint32 id, const QString &message, const ReplyMarkup &reply_markup, const QList<MessageEntity> &entities, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::editMessage(&p, no_webpage, peer, id, message, reply_markup, entities);
@@ -4373,7 +4370,7 @@ void TelegramApi::onMessagesEditMessageError(Query *q, qint32 errorCode, const Q
 qint64 TelegramApi::messagesEditInlineBotMessage(bool no_webpage, const InputBotInlineMessageID &id, const QString &message, const ReplyMarkup &reply_markup, const QList<MessageEntity> &entities, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::editInlineBotMessage(&p, no_webpage, id, message, reply_markup, entities);
@@ -4395,7 +4392,7 @@ void TelegramApi::onMessagesEditInlineBotMessageError(Query *q, qint32 errorCode
 qint64 TelegramApi::messagesGetBotCallbackAnswer(bool game, const InputPeer &peer, qint32 msg_id, const QByteArray &data, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::getBotCallbackAnswer(&p, game, peer, msg_id, data);
@@ -4420,7 +4417,7 @@ void TelegramApi::onMessagesGetBotCallbackAnswerError(Query *q, qint32 errorCode
 qint64 TelegramApi::messagesSetBotCallbackAnswer(bool alert, qint64 query_id, const QString &message, const QString &url, qint32 cache_time, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::setBotCallbackAnswer(&p, alert, query_id, message, url, cache_time);
@@ -4442,7 +4439,7 @@ void TelegramApi::onMessagesSetBotCallbackAnswerError(Query *q, qint32 errorCode
 qint64 TelegramApi::messagesGetPeerDialogs(const QList<InputPeer> &peers, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::getPeerDialogs(&p, peers);
@@ -4467,7 +4464,7 @@ void TelegramApi::onMessagesGetPeerDialogsError(Query *q, qint32 errorCode, cons
 qint64 TelegramApi::messagesSaveDraft(bool no_webpage, qint32 reply_to_msg_id, const InputPeer &peer, const QString &message, const QList<MessageEntity> &entities, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::saveDraft(&p, no_webpage, reply_to_msg_id, peer, message, entities);
@@ -4489,7 +4486,7 @@ void TelegramApi::onMessagesSaveDraftError(Query *q, qint32 errorCode, const QSt
 qint64 TelegramApi::messagesGetAllDrafts(const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::getAllDrafts(&p);
@@ -4514,7 +4511,7 @@ void TelegramApi::onMessagesGetAllDraftsError(Query *q, qint32 errorCode, const 
 qint64 TelegramApi::messagesGetFeaturedStickers(qint32 hash, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::getFeaturedStickers(&p, hash);
@@ -4539,7 +4536,7 @@ void TelegramApi::onMessagesGetFeaturedStickersError(Query *q, qint32 errorCode,
 qint64 TelegramApi::messagesReadFeaturedStickers(const QList<qint64> &id, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::readFeaturedStickers(&p, id);
@@ -4561,7 +4558,7 @@ void TelegramApi::onMessagesReadFeaturedStickersError(Query *q, qint32 errorCode
 qint64 TelegramApi::messagesGetRecentStickers(bool attached, qint32 hash, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::getRecentStickers(&p, attached, hash);
@@ -4586,7 +4583,7 @@ void TelegramApi::onMessagesGetRecentStickersError(Query *q, qint32 errorCode, c
 qint64 TelegramApi::messagesSaveRecentSticker(bool attached, const InputDocument &id, bool unsave, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::saveRecentSticker(&p, attached, id, unsave);
@@ -4608,7 +4605,7 @@ void TelegramApi::onMessagesSaveRecentStickerError(Query *q, qint32 errorCode, c
 qint64 TelegramApi::messagesClearRecentStickers(bool attached, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::clearRecentStickers(&p, attached);
@@ -4630,7 +4627,7 @@ void TelegramApi::onMessagesClearRecentStickersError(Query *q, qint32 errorCode,
 qint64 TelegramApi::messagesGetArchivedStickers(bool masks, qint64 offset_id, qint32 limit, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::getArchivedStickers(&p, masks, offset_id, limit);
@@ -4655,7 +4652,7 @@ void TelegramApi::onMessagesGetArchivedStickersError(Query *q, qint32 errorCode,
 qint64 TelegramApi::messagesGetMaskStickers(qint32 hash, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::getMaskStickers(&p, hash);
@@ -4680,7 +4677,7 @@ void TelegramApi::onMessagesGetMaskStickersError(Query *q, qint32 errorCode, con
 qint64 TelegramApi::messagesGetAttachedStickers(const InputStickeredMedia &media, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::getAttachedStickers(&p, media);
@@ -4702,7 +4699,7 @@ void TelegramApi::onMessagesGetAttachedStickersError(Query *q, qint32 errorCode,
 qint64 TelegramApi::messagesSetGameScore(bool edit_message, bool force, const InputPeer &peer, qint32 id, const InputUser &user_id, qint32 score, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::setGameScore(&p, edit_message, force, peer, id, user_id, score);
@@ -4727,7 +4724,7 @@ void TelegramApi::onMessagesSetGameScoreError(Query *q, qint32 errorCode, const 
 qint64 TelegramApi::messagesSetInlineGameScore(bool edit_message, bool force, const InputBotInlineMessageID &id, const InputUser &user_id, qint32 score, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::setInlineGameScore(&p, edit_message, force, id, user_id, score);
@@ -4749,7 +4746,7 @@ void TelegramApi::onMessagesSetInlineGameScoreError(Query *q, qint32 errorCode, 
 qint64 TelegramApi::messagesGetGameHighScores(const InputPeer &peer, qint32 id, const InputUser &user_id, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::getGameHighScores(&p, peer, id, user_id);
@@ -4774,7 +4771,7 @@ void TelegramApi::onMessagesGetGameHighScoresError(Query *q, qint32 errorCode, c
 qint64 TelegramApi::messagesGetInlineGameHighScores(const InputBotInlineMessageID &id, const InputUser &user_id, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::getInlineGameHighScores(&p, id, user_id);
@@ -4799,7 +4796,7 @@ void TelegramApi::onMessagesGetInlineGameHighScoresError(Query *q, qint32 errorC
 qint64 TelegramApi::messagesGetCommonChats(const InputUser &user_id, qint32 max_id, qint32 limit, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::getCommonChats(&p, user_id, max_id, limit);
@@ -4824,7 +4821,7 @@ void TelegramApi::onMessagesGetCommonChatsError(Query *q, qint32 errorCode, cons
 qint64 TelegramApi::messagesGetAllChats(const QList<qint32> &except_ids, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::getAllChats(&p, except_ids);
@@ -4849,7 +4846,7 @@ void TelegramApi::onMessagesGetAllChatsError(Query *q, qint32 errorCode, const Q
 qint64 TelegramApi::messagesGetWebPage(const QString &url, qint32 hash, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::getWebPage(&p, url, hash);
@@ -4874,7 +4871,7 @@ void TelegramApi::onMessagesGetWebPageError(Query *q, qint32 errorCode, const QS
 qint64 TelegramApi::messagesToggleDialogPin(bool pinned, const InputPeer &peer, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::toggleDialogPin(&p, pinned, peer);
@@ -4896,7 +4893,7 @@ void TelegramApi::onMessagesToggleDialogPinError(Query *q, qint32 errorCode, con
 qint64 TelegramApi::messagesReorderPinnedDialogs(bool force, const QList<InputPeer> &order, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::reorderPinnedDialogs(&p, force, order);
@@ -4918,7 +4915,7 @@ void TelegramApi::onMessagesReorderPinnedDialogsError(Query *q, qint32 errorCode
 qint64 TelegramApi::messagesGetPinnedDialogs(const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::getPinnedDialogs(&p);
@@ -4943,7 +4940,7 @@ void TelegramApi::onMessagesGetPinnedDialogsError(Query *q, qint32 errorCode, co
 qint64 TelegramApi::messagesSetBotShippingResults(qint64 query_id, const QString &error, const QList<ShippingOption> &shipping_options, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::setBotShippingResults(&p, query_id, error, shipping_options);
@@ -4965,7 +4962,7 @@ void TelegramApi::onMessagesSetBotShippingResultsError(Query *q, qint32 errorCod
 qint64 TelegramApi::messagesSetBotPrecheckoutResults(bool success, qint64 query_id, const QString &error, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::setBotPrecheckoutResults(&p, success, query_id, error);
@@ -4987,7 +4984,7 @@ void TelegramApi::onMessagesSetBotPrecheckoutResultsError(Query *q, qint32 error
 qint64 TelegramApi::messagesUploadMedia(const InputPeer &peer, const InputMedia &media, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Messages::uploadMedia(&p, peer, media);
@@ -5013,7 +5010,7 @@ void TelegramApi::onMessagesUploadMediaError(Query *q, qint32 errorCode, const Q
 qint64 TelegramApi::paymentsGetPaymentForm(qint32 msg_id, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Payments::getPaymentForm(&p, msg_id);
@@ -5038,7 +5035,7 @@ void TelegramApi::onPaymentsGetPaymentFormError(Query *q, qint32 errorCode, cons
 qint64 TelegramApi::paymentsGetPaymentReceipt(qint32 msg_id, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Payments::getPaymentReceipt(&p, msg_id);
@@ -5063,7 +5060,7 @@ void TelegramApi::onPaymentsGetPaymentReceiptError(Query *q, qint32 errorCode, c
 qint64 TelegramApi::paymentsValidateRequestedInfo(bool save, qint32 msg_id, const PaymentRequestedInfo &info, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Payments::validateRequestedInfo(&p, save, msg_id, info);
@@ -5088,7 +5085,7 @@ void TelegramApi::onPaymentsValidateRequestedInfoError(Query *q, qint32 errorCod
 qint64 TelegramApi::paymentsSendPaymentForm(qint32 msg_id, const QString &requested_info_id, const QString &shipping_option_id, const InputPaymentCredentials &credentials, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Payments::sendPaymentForm(&p, msg_id, requested_info_id, shipping_option_id, credentials);
@@ -5113,7 +5110,7 @@ void TelegramApi::onPaymentsSendPaymentFormError(Query *q, qint32 errorCode, con
 qint64 TelegramApi::paymentsGetSavedInfo(const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Payments::getSavedInfo(&p);
@@ -5138,7 +5135,7 @@ void TelegramApi::onPaymentsGetSavedInfoError(Query *q, qint32 errorCode, const 
 qint64 TelegramApi::paymentsClearSavedInfo(bool credentials, bool info, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Payments::clearSavedInfo(&p, credentials, info);
@@ -5161,7 +5158,7 @@ void TelegramApi::onPaymentsClearSavedInfoError(Query *q, qint32 errorCode, cons
 qint64 TelegramApi::phoneGetCallConfig(const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Phone::getCallConfig(&p);
@@ -5186,7 +5183,7 @@ void TelegramApi::onPhoneGetCallConfigError(Query *q, qint32 errorCode, const QS
 qint64 TelegramApi::phoneRequestCall(const InputUser &user_id, qint32 random_id, const QByteArray &g_a_hash, const PhoneCallProtocol &protocol, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Phone::requestCall(&p, user_id, random_id, g_a_hash, protocol);
@@ -5211,7 +5208,7 @@ void TelegramApi::onPhoneRequestCallError(Query *q, qint32 errorCode, const QStr
 qint64 TelegramApi::phoneAcceptCall(const InputPhoneCall &peer, const QByteArray &g_b, const PhoneCallProtocol &protocol, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Phone::acceptCall(&p, peer, g_b, protocol);
@@ -5236,7 +5233,7 @@ void TelegramApi::onPhoneAcceptCallError(Query *q, qint32 errorCode, const QStri
 qint64 TelegramApi::phoneConfirmCall(const InputPhoneCall &peer, const QByteArray &g_a, qint64 key_fingerprint, const PhoneCallProtocol &protocol, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Phone::confirmCall(&p, peer, g_a, key_fingerprint, protocol);
@@ -5261,7 +5258,7 @@ void TelegramApi::onPhoneConfirmCallError(Query *q, qint32 errorCode, const QStr
 qint64 TelegramApi::phoneReceivedCall(const InputPhoneCall &peer, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Phone::receivedCall(&p, peer);
@@ -5283,7 +5280,7 @@ void TelegramApi::onPhoneReceivedCallError(Query *q, qint32 errorCode, const QSt
 qint64 TelegramApi::phoneDiscardCall(const InputPhoneCall &peer, qint32 duration, const PhoneCallDiscardReason &reason, qint64 connection_id, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Phone::discardCall(&p, peer, duration, reason, connection_id);
@@ -5308,7 +5305,7 @@ void TelegramApi::onPhoneDiscardCallError(Query *q, qint32 errorCode, const QStr
 qint64 TelegramApi::phoneSetCallRating(const InputPhoneCall &peer, qint32 rating, const QString &comment, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Phone::setCallRating(&p, peer, rating, comment);
@@ -5333,7 +5330,7 @@ void TelegramApi::onPhoneSetCallRatingError(Query *q, qint32 errorCode, const QS
 qint64 TelegramApi::phoneSaveCallDebug(const InputPhoneCall &peer, const DataJSON &debug, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Phone::saveCallDebug(&p, peer, debug);
@@ -5356,7 +5353,7 @@ void TelegramApi::onPhoneSaveCallDebugError(Query *q, qint32 errorCode, const QS
 qint64 TelegramApi::photosUpdateProfilePhoto(const InputPhoto &id, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Photos::updateProfilePhoto(&p, id);
@@ -5381,7 +5378,7 @@ void TelegramApi::onPhotosUpdateProfilePhotoError(Query *q, qint32 errorCode, co
 qint64 TelegramApi::photosUploadProfilePhoto(const InputFile &file, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Photos::uploadProfilePhoto(&p, file);
@@ -5406,7 +5403,7 @@ void TelegramApi::onPhotosUploadProfilePhotoError(Query *q, qint32 errorCode, co
 qint64 TelegramApi::photosDeletePhotos(const QList<InputPhoto> &id, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Photos::deletePhotos(&p, id);
@@ -5428,7 +5425,7 @@ void TelegramApi::onPhotosDeletePhotosError(Query *q, qint32 errorCode, const QS
 qint64 TelegramApi::photosGetUserPhotos(const InputUser &user_id, qint32 offset, qint64 max_id, qint32 limit, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Photos::getUserPhotos(&p, user_id, offset, max_id, limit);
@@ -5454,7 +5451,7 @@ void TelegramApi::onPhotosGetUserPhotosError(Query *q, qint32 errorCode, const Q
 qint64 TelegramApi::stickersCreateStickerSet(bool masks, const InputUser &user_id, const QString &title, const QString &short_name, const QList<InputStickerSetItem> &stickers, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Stickers::createStickerSet(&p, masks, user_id, title, short_name, stickers);
@@ -5479,7 +5476,7 @@ void TelegramApi::onStickersCreateStickerSetError(Query *q, qint32 errorCode, co
 qint64 TelegramApi::stickersRemoveStickerFromSet(const InputDocument &sticker, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Stickers::removeStickerFromSet(&p, sticker);
@@ -5501,7 +5498,7 @@ void TelegramApi::onStickersRemoveStickerFromSetError(Query *q, qint32 errorCode
 qint64 TelegramApi::stickersChangeStickerPosition(const InputDocument &sticker, qint32 position, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Stickers::changeStickerPosition(&p, sticker, position);
@@ -5523,7 +5520,7 @@ void TelegramApi::onStickersChangeStickerPositionError(Query *q, qint32 errorCod
 qint64 TelegramApi::stickersAddStickerToSet(const InputStickerSet &stickerset, const InputStickerSetItem &sticker, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Stickers::addStickerToSet(&p, stickerset, sticker);
@@ -5549,7 +5546,7 @@ void TelegramApi::onStickersAddStickerToSetError(Query *q, qint32 errorCode, con
 qint64 TelegramApi::updatesGetState(const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Updates::getState(&p);
@@ -5574,7 +5571,7 @@ void TelegramApi::onUpdatesGetStateError(Query *q, qint32 errorCode, const QStri
 qint64 TelegramApi::updatesGetDifference(qint32 pts, qint32 pts_total_limit, qint32 date, qint32 qts, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Updates::getDifference(&p, pts, pts_total_limit, date, qts);
@@ -5599,7 +5596,7 @@ void TelegramApi::onUpdatesGetDifferenceError(Query *q, qint32 errorCode, const 
 qint64 TelegramApi::updatesGetChannelDifference(bool force, const InputChannel &channel, const ChannelMessagesFilter &filter, qint32 pts, qint32 limit, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Updates::getChannelDifference(&p, force, channel, filter, pts, limit);
@@ -5625,7 +5622,7 @@ void TelegramApi::onUpdatesGetChannelDifferenceError(Query *q, qint32 errorCode,
 qint64 TelegramApi::uploadSaveFilePart(qint64 file_id, qint32 file_part, const QByteArray &bytes, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Upload::saveFilePart(&p, file_id, file_part, bytes);
@@ -5647,7 +5644,7 @@ void TelegramApi::onUploadSaveFilePartError(Query *q, qint32 errorCode, const QS
 qint64 TelegramApi::uploadGetFile(const InputFileLocation &location, qint32 offset, qint32 limit, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Upload::getFile(&p, location, offset, limit);
@@ -5672,7 +5669,7 @@ void TelegramApi::onUploadGetFileError(Query *q, qint32 errorCode, const QString
 qint64 TelegramApi::uploadSaveBigFilePart(qint64 file_id, qint32 file_part, qint32 file_total_parts, const QByteArray &bytes, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Upload::saveBigFilePart(&p, file_id, file_part, file_total_parts, bytes);
@@ -5694,7 +5691,7 @@ void TelegramApi::onUploadSaveBigFilePartError(Query *q, qint32 errorCode, const
 qint64 TelegramApi::uploadGetWebFile(const InputWebFileLocation &location, qint32 offset, qint32 limit, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Upload::getWebFile(&p, location, offset, limit);
@@ -5719,7 +5716,7 @@ void TelegramApi::onUploadGetWebFileError(Query *q, qint32 errorCode, const QStr
 qint64 TelegramApi::uploadGetCdnFile(const QByteArray &file_token, qint32 offset, qint32 limit, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Upload::getCdnFile(&p, file_token, offset, limit);
@@ -5744,7 +5741,7 @@ void TelegramApi::onUploadGetCdnFileError(Query *q, qint32 errorCode, const QStr
 qint64 TelegramApi::uploadReuploadCdnFile(const QByteArray &file_token, const QByteArray &request_token, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Upload::reuploadCdnFile(&p, file_token, request_token);
@@ -5767,7 +5764,7 @@ void TelegramApi::onUploadReuploadCdnFileError(Query *q, qint32 errorCode, const
 qint64 TelegramApi::usersGetUsers(const QList<InputUser> &id, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Users::getUsers(&p, id);
@@ -5789,7 +5786,7 @@ void TelegramApi::onUsersGetUsersError(Query *q, qint32 errorCode, const QString
 qint64 TelegramApi::usersGetFullUser(const InputUser &id, const QVariant &attachedData, Session *session) {
     if(!session) session = mMainSession;
     CHECK_SESSION(session)
-    DEBUG_FUNCTION
+    //DEBUG_FUNCTION
     OutboundPkt p(mSettings);
     INIT_MAIN_CONNECTION(session)
     Functions::Users::getFullUser(&p, id);

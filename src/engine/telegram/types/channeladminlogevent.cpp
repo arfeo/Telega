@@ -47,7 +47,7 @@ ChannelAdminLogEvent::ChannelAdminLogEvent(const Null &null) :
 }
 
 ChannelAdminLogEvent::~ChannelAdminLogEvent() {
-    
+
 }
 
 void ChannelAdminLogEvent::setAction(const ChannelAdminLogEventAction &action) {
@@ -121,7 +121,7 @@ bool ChannelAdminLogEvent::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -139,7 +139,7 @@ bool ChannelAdminLogEvent::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -157,7 +157,7 @@ QMap<QString, QVariant> ChannelAdminLogEvent::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -172,23 +172,23 @@ ChannelAdminLogEvent ChannelAdminLogEvent::fromMap(const QMap<QString, QVariant>
             _id_var.convert( QVariant::nameToType("qint64") );
             result.setId( _id_var.value<qint64>() );
         }
-        
+
         QVariant _date_var = map.value("date");
         if( !_date_var.isNull() ) {
             _date_var.convert( QVariant::nameToType("qint32") );
             result.setDate( _date_var.value<qint32>() );
         }
-        
+
         QVariant _userId_var = map.value("userId");
         if( !_userId_var.isNull() ) {
             _userId_var.convert( QVariant::nameToType("qint32") );
             result.setUserId( _userId_var.value<qint32>() );
         }
-        
+
         QVariant _action_var = map.value("action");
         if( !_action_var.isNull() )
             result.setAction( ChannelAdminLogEventAction::fromMap(_action_var.toMap()) );
-        
+
         return result;
     }
     return result;
@@ -242,7 +242,7 @@ QDataStream &operator>>(QDataStream &stream, ChannelAdminLogEvent &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const ChannelAdminLogEvent &item) {
+/*QDebug operator<<(QDebug debug,  const ChannelAdminLogEvent &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.ChannelAdminLogEvent(";
@@ -258,4 +258,4 @@ QDebug operator<<(QDebug debug,  const ChannelAdminLogEvent &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

@@ -35,7 +35,7 @@ ContactsTopPeers::ContactsTopPeers(const Null &null) :
 }
 
 ContactsTopPeers::~ContactsTopPeers() {
-    
+
 }
 
 void ContactsTopPeers::setCategories(const QList<TopPeerCategoryPeers> &categories) {
@@ -95,7 +95,7 @@ bool ContactsTopPeers::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeContactsTopPeers: {
         if(in->fetchInt() != (qint32)CoreTypes::typeVector) return false;
         qint32 m_categories_length = in->fetchInt();
@@ -125,7 +125,7 @@ bool ContactsTopPeers::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -139,7 +139,7 @@ bool ContactsTopPeers::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeContactsTopPeers: {
         out->appendInt(CoreTypes::typeVector);
         out->appendInt(m_categories.count());
@@ -159,7 +159,7 @@ bool ContactsTopPeers::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -173,7 +173,7 @@ QMap<QString, QVariant> ContactsTopPeers::toMap() const {
         return result;
     }
         break;
-    
+
     case typeContactsTopPeers: {
         result["classType"] = "ContactsTopPeers::typeContactsTopPeers";
         QList<QVariant> _categories;
@@ -191,7 +191,7 @@ QMap<QString, QVariant> ContactsTopPeers::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -240,7 +240,7 @@ QDataStream &operator<<(QDataStream &stream, const ContactsTopPeers &item) {
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case ContactsTopPeers::typeContactsTopPeersNotModified:
-        
+
         break;
     case ContactsTopPeers::typeContactsTopPeers:
         stream << item.categories();
@@ -257,7 +257,7 @@ QDataStream &operator>>(QDataStream &stream, ContactsTopPeers &item) {
     item.setClassType(static_cast<ContactsTopPeers::ContactsTopPeersClassType>(type));
     switch(type) {
     case ContactsTopPeers::typeContactsTopPeersNotModified: {
-        
+
     }
         break;
     case ContactsTopPeers::typeContactsTopPeers: {
@@ -276,7 +276,7 @@ QDataStream &operator>>(QDataStream &stream, ContactsTopPeers &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const ContactsTopPeers &item) {
+/*QDebug operator<<(QDebug debug,  const ContactsTopPeers &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.ContactsTopPeers(";
@@ -294,4 +294,4 @@ QDebug operator<<(QDebug debug,  const ContactsTopPeers &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

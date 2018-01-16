@@ -39,7 +39,7 @@ ChannelAdminLogEventAction::ChannelAdminLogEventAction(const Null &null) :
 }
 
 ChannelAdminLogEventAction::~ChannelAdminLogEventAction() {
-    
+
 }
 
 void ChannelAdminLogEventAction::setMessage(const Message &message) {
@@ -181,7 +181,7 @@ bool ChannelAdminLogEventAction::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeChannelAdminLogEventActionChangeAbout: {
         m_prevValue = in->fetchQString();
         m_newValueString = in->fetchQString();
@@ -189,7 +189,7 @@ bool ChannelAdminLogEventAction::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeChannelAdminLogEventActionChangeUsername: {
         m_prevValue = in->fetchQString();
         m_newValueString = in->fetchQString();
@@ -197,7 +197,7 @@ bool ChannelAdminLogEventAction::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeChannelAdminLogEventActionChangePhoto: {
         m_prevPhoto.fetch(in);
         m_newPhoto.fetch(in);
@@ -205,28 +205,28 @@ bool ChannelAdminLogEventAction::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeChannelAdminLogEventActionToggleInvites: {
         m_newValueBool = in->fetchBool();
         m_classType = static_cast<ChannelAdminLogEventActionClassType>(x);
         return true;
     }
         break;
-    
+
     case typeChannelAdminLogEventActionToggleSignatures: {
         m_newValueBool = in->fetchBool();
         m_classType = static_cast<ChannelAdminLogEventActionClassType>(x);
         return true;
     }
         break;
-    
+
     case typeChannelAdminLogEventActionUpdatePinned: {
         m_message.fetch(in);
         m_classType = static_cast<ChannelAdminLogEventActionClassType>(x);
         return true;
     }
         break;
-    
+
     case typeChannelAdminLogEventActionEditMessage: {
         m_prevMessage.fetch(in);
         m_newMessage.fetch(in);
@@ -234,33 +234,33 @@ bool ChannelAdminLogEventAction::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeChannelAdminLogEventActionDeleteMessage: {
         m_message.fetch(in);
         m_classType = static_cast<ChannelAdminLogEventActionClassType>(x);
         return true;
     }
         break;
-    
+
     case typeChannelAdminLogEventActionParticipantJoin: {
         m_classType = static_cast<ChannelAdminLogEventActionClassType>(x);
         return true;
     }
         break;
-    
+
     case typeChannelAdminLogEventActionParticipantLeave: {
         m_classType = static_cast<ChannelAdminLogEventActionClassType>(x);
         return true;
     }
         break;
-    
+
     case typeChannelAdminLogEventActionParticipantInvite: {
         m_participant.fetch(in);
         m_classType = static_cast<ChannelAdminLogEventActionClassType>(x);
         return true;
     }
         break;
-    
+
     case typeChannelAdminLogEventActionParticipantToggleBan: {
         m_prevParticipant.fetch(in);
         m_newParticipant.fetch(in);
@@ -268,7 +268,7 @@ bool ChannelAdminLogEventAction::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeChannelAdminLogEventActionParticipantToggleAdmin: {
         m_prevParticipant.fetch(in);
         m_newParticipant.fetch(in);
@@ -276,7 +276,7 @@ bool ChannelAdminLogEventAction::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -292,89 +292,89 @@ bool ChannelAdminLogEventAction::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeChannelAdminLogEventActionChangeAbout: {
         out->appendQString(m_prevValue);
         out->appendQString(m_newValueString);
         return true;
     }
         break;
-    
+
     case typeChannelAdminLogEventActionChangeUsername: {
         out->appendQString(m_prevValue);
         out->appendQString(m_newValueString);
         return true;
     }
         break;
-    
+
     case typeChannelAdminLogEventActionChangePhoto: {
         m_prevPhoto.push(out);
         m_newPhoto.push(out);
         return true;
     }
         break;
-    
+
     case typeChannelAdminLogEventActionToggleInvites: {
         out->appendBool(m_newValueBool);
         return true;
     }
         break;
-    
+
     case typeChannelAdminLogEventActionToggleSignatures: {
         out->appendBool(m_newValueBool);
         return true;
     }
         break;
-    
+
     case typeChannelAdminLogEventActionUpdatePinned: {
         m_message.push(out);
         return true;
     }
         break;
-    
+
     case typeChannelAdminLogEventActionEditMessage: {
         m_prevMessage.push(out);
         m_newMessage.push(out);
         return true;
     }
         break;
-    
+
     case typeChannelAdminLogEventActionDeleteMessage: {
         m_message.push(out);
         return true;
     }
         break;
-    
+
     case typeChannelAdminLogEventActionParticipantJoin: {
         return true;
     }
         break;
-    
+
     case typeChannelAdminLogEventActionParticipantLeave: {
         return true;
     }
         break;
-    
+
     case typeChannelAdminLogEventActionParticipantInvite: {
         m_participant.push(out);
         return true;
     }
         break;
-    
+
     case typeChannelAdminLogEventActionParticipantToggleBan: {
         m_prevParticipant.push(out);
         m_newParticipant.push(out);
         return true;
     }
         break;
-    
+
     case typeChannelAdminLogEventActionParticipantToggleAdmin: {
         m_prevParticipant.push(out);
         m_newParticipant.push(out);
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -390,7 +390,7 @@ QMap<QString, QVariant> ChannelAdminLogEventAction::toMap() const {
         return result;
     }
         break;
-    
+
     case typeChannelAdminLogEventActionChangeAbout: {
         result["classType"] = "ChannelAdminLogEventAction::typeChannelAdminLogEventActionChangeAbout";
         if( !m_prevValue.isEmpty() ) result["prevValue"] = QVariant::fromValue<QString>(m_prevValue);
@@ -398,7 +398,7 @@ QMap<QString, QVariant> ChannelAdminLogEventAction::toMap() const {
         return result;
     }
         break;
-    
+
     case typeChannelAdminLogEventActionChangeUsername: {
         result["classType"] = "ChannelAdminLogEventAction::typeChannelAdminLogEventActionChangeUsername";
         if( !m_prevValue.isEmpty() ) result["prevValue"] = QVariant::fromValue<QString>(m_prevValue);
@@ -406,7 +406,7 @@ QMap<QString, QVariant> ChannelAdminLogEventAction::toMap() const {
         return result;
     }
         break;
-    
+
     case typeChannelAdminLogEventActionChangePhoto: {
         result["classType"] = "ChannelAdminLogEventAction::typeChannelAdminLogEventActionChangePhoto";
         if( !m_prevPhoto.isNull() ) result["prevPhoto"] = m_prevPhoto.toMap();
@@ -414,28 +414,28 @@ QMap<QString, QVariant> ChannelAdminLogEventAction::toMap() const {
         return result;
     }
         break;
-    
+
     case typeChannelAdminLogEventActionToggleInvites: {
         result["classType"] = "ChannelAdminLogEventAction::typeChannelAdminLogEventActionToggleInvites";
         if( newValueBool() ) result["newValueBool"] = QString::number(newValueBool());
         return result;
     }
         break;
-    
+
     case typeChannelAdminLogEventActionToggleSignatures: {
         result["classType"] = "ChannelAdminLogEventAction::typeChannelAdminLogEventActionToggleSignatures";
         if( newValueBool() ) result["newValueBool"] = QString::number(newValueBool());
         return result;
     }
         break;
-    
+
     case typeChannelAdminLogEventActionUpdatePinned: {
         result["classType"] = "ChannelAdminLogEventAction::typeChannelAdminLogEventActionUpdatePinned";
         if( !m_message.isNull() ) result["message"] = m_message.toMap();
         return result;
     }
         break;
-    
+
     case typeChannelAdminLogEventActionEditMessage: {
         result["classType"] = "ChannelAdminLogEventAction::typeChannelAdminLogEventActionEditMessage";
         if( !m_prevMessage.isNull() ) result["prevMessage"] = m_prevMessage.toMap();
@@ -443,33 +443,33 @@ QMap<QString, QVariant> ChannelAdminLogEventAction::toMap() const {
         return result;
     }
         break;
-    
+
     case typeChannelAdminLogEventActionDeleteMessage: {
         result["classType"] = "ChannelAdminLogEventAction::typeChannelAdminLogEventActionDeleteMessage";
         if( !m_message.isNull() ) result["message"] = m_message.toMap();
         return result;
     }
         break;
-    
+
     case typeChannelAdminLogEventActionParticipantJoin: {
         result["classType"] = "ChannelAdminLogEventAction::typeChannelAdminLogEventActionParticipantJoin";
         return result;
     }
         break;
-    
+
     case typeChannelAdminLogEventActionParticipantLeave: {
         result["classType"] = "ChannelAdminLogEventAction::typeChannelAdminLogEventActionParticipantLeave";
         return result;
     }
         break;
-    
+
     case typeChannelAdminLogEventActionParticipantInvite: {
         result["classType"] = "ChannelAdminLogEventAction::typeChannelAdminLogEventActionParticipantInvite";
         if( !m_participant.isNull() ) result["participant"] = m_participant.toMap();
         return result;
     }
         break;
-    
+
     case typeChannelAdminLogEventActionParticipantToggleBan: {
         result["classType"] = "ChannelAdminLogEventAction::typeChannelAdminLogEventActionParticipantToggleBan";
         if( !m_prevParticipant.isNull() ) result["prevParticipant"] = m_prevParticipant.toMap();
@@ -477,7 +477,7 @@ QMap<QString, QVariant> ChannelAdminLogEventAction::toMap() const {
         return result;
     }
         break;
-    
+
     case typeChannelAdminLogEventActionParticipantToggleAdmin: {
         result["classType"] = "ChannelAdminLogEventAction::typeChannelAdminLogEventActionParticipantToggleAdmin";
         if( !m_prevParticipant.isNull() ) result["prevParticipant"] = m_prevParticipant.toMap();
@@ -485,7 +485,7 @@ QMap<QString, QVariant> ChannelAdminLogEventAction::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -500,13 +500,13 @@ ChannelAdminLogEventAction ChannelAdminLogEventAction::fromMap(const QMap<QStrin
             _prevValue_var.convert( QVariant::nameToType("QString") );
             result.setPrevValue( _prevValue_var.value<QString>() );
         }
-        
+
         QVariant _newValueString_var = map.value("newValueString");
         if( !_newValueString_var.isNull() ) {
             _newValueString_var.convert( QVariant::nameToType("QString") );
             result.setNewValueString( _newValueString_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "ChannelAdminLogEventAction::typeChannelAdminLogEventActionChangeAbout") {
@@ -516,13 +516,13 @@ ChannelAdminLogEventAction ChannelAdminLogEventAction::fromMap(const QMap<QStrin
             _prevValue_var.convert( QVariant::nameToType("QString") );
             result.setPrevValue( _prevValue_var.value<QString>() );
         }
-        
+
         QVariant _newValueString_var = map.value("newValueString");
         if( !_newValueString_var.isNull() ) {
             _newValueString_var.convert( QVariant::nameToType("QString") );
             result.setNewValueString( _newValueString_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "ChannelAdminLogEventAction::typeChannelAdminLogEventActionChangeUsername") {
@@ -532,13 +532,13 @@ ChannelAdminLogEventAction ChannelAdminLogEventAction::fromMap(const QMap<QStrin
             _prevValue_var.convert( QVariant::nameToType("QString") );
             result.setPrevValue( _prevValue_var.value<QString>() );
         }
-        
+
         QVariant _newValueString_var = map.value("newValueString");
         if( !_newValueString_var.isNull() ) {
             _newValueString_var.convert( QVariant::nameToType("QString") );
             result.setNewValueString( _newValueString_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "ChannelAdminLogEventAction::typeChannelAdminLogEventActionChangePhoto") {
@@ -546,11 +546,11 @@ ChannelAdminLogEventAction ChannelAdminLogEventAction::fromMap(const QMap<QStrin
         QVariant _prevPhoto_var = map.value("prevPhoto");
         if( !_prevPhoto_var.isNull() )
             result.setPrevPhoto( ChatPhoto::fromMap(_prevPhoto_var.toMap()) );
-        
+
         QVariant _newPhoto_var = map.value("newPhoto");
         if( !_newPhoto_var.isNull() )
             result.setNewPhoto( ChatPhoto::fromMap(_newPhoto_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "ChannelAdminLogEventAction::typeChannelAdminLogEventActionToggleInvites") {
@@ -560,7 +560,7 @@ ChannelAdminLogEventAction ChannelAdminLogEventAction::fromMap(const QMap<QStrin
             _newValueBool_var.convert( QVariant::nameToType("bool") );
             result.setNewValueBool( _newValueBool_var.value<bool>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "ChannelAdminLogEventAction::typeChannelAdminLogEventActionToggleSignatures") {
@@ -570,7 +570,7 @@ ChannelAdminLogEventAction ChannelAdminLogEventAction::fromMap(const QMap<QStrin
             _newValueBool_var.convert( QVariant::nameToType("bool") );
             result.setNewValueBool( _newValueBool_var.value<bool>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "ChannelAdminLogEventAction::typeChannelAdminLogEventActionUpdatePinned") {
@@ -578,7 +578,7 @@ ChannelAdminLogEventAction ChannelAdminLogEventAction::fromMap(const QMap<QStrin
         QVariant _message_var = map.value("message");
         if( !_message_var.isNull() )
             result.setMessage( Message::fromMap(_message_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "ChannelAdminLogEventAction::typeChannelAdminLogEventActionEditMessage") {
@@ -586,11 +586,11 @@ ChannelAdminLogEventAction ChannelAdminLogEventAction::fromMap(const QMap<QStrin
         QVariant _prevMessage_var = map.value("prevMessage");
         if( !_prevMessage_var.isNull() )
             result.setPrevMessage( Message::fromMap(_prevMessage_var.toMap()) );
-        
+
         QVariant _newMessage_var = map.value("newMessage");
         if( !_newMessage_var.isNull() )
             result.setNewMessage( Message::fromMap(_newMessage_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "ChannelAdminLogEventAction::typeChannelAdminLogEventActionDeleteMessage") {
@@ -598,7 +598,7 @@ ChannelAdminLogEventAction ChannelAdminLogEventAction::fromMap(const QMap<QStrin
         QVariant _message_var = map.value("message");
         if( !_message_var.isNull() )
             result.setMessage( Message::fromMap(_message_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "ChannelAdminLogEventAction::typeChannelAdminLogEventActionParticipantJoin") {
@@ -614,7 +614,7 @@ ChannelAdminLogEventAction ChannelAdminLogEventAction::fromMap(const QMap<QStrin
         QVariant _participant_var = map.value("participant");
         if( !_participant_var.isNull() )
             result.setParticipant( ChannelParticipant::fromMap(_participant_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "ChannelAdminLogEventAction::typeChannelAdminLogEventActionParticipantToggleBan") {
@@ -622,11 +622,11 @@ ChannelAdminLogEventAction ChannelAdminLogEventAction::fromMap(const QMap<QStrin
         QVariant _prevParticipant_var = map.value("prevParticipant");
         if( !_prevParticipant_var.isNull() )
             result.setPrevParticipant( ChannelParticipant::fromMap(_prevParticipant_var.toMap()) );
-        
+
         QVariant _newParticipant_var = map.value("newParticipant");
         if( !_newParticipant_var.isNull() )
             result.setNewParticipant( ChannelParticipant::fromMap(_newParticipant_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "ChannelAdminLogEventAction::typeChannelAdminLogEventActionParticipantToggleAdmin") {
@@ -634,11 +634,11 @@ ChannelAdminLogEventAction ChannelAdminLogEventAction::fromMap(const QMap<QStrin
         QVariant _prevParticipant_var = map.value("prevParticipant");
         if( !_prevParticipant_var.isNull() )
             result.setPrevParticipant( ChannelParticipant::fromMap(_prevParticipant_var.toMap()) );
-        
+
         QVariant _newParticipant_var = map.value("newParticipant");
         if( !_newParticipant_var.isNull() )
             result.setNewParticipant( ChannelParticipant::fromMap(_newParticipant_var.toMap()) );
-        
+
         return result;
     }
     return result;
@@ -691,10 +691,10 @@ QDataStream &operator<<(QDataStream &stream, const ChannelAdminLogEventAction &i
         stream << item.message();
         break;
     case ChannelAdminLogEventAction::typeChannelAdminLogEventActionParticipantJoin:
-        
+
         break;
     case ChannelAdminLogEventAction::typeChannelAdminLogEventActionParticipantLeave:
-        
+
         break;
     case ChannelAdminLogEventAction::typeChannelAdminLogEventActionParticipantInvite:
         stream << item.participant();
@@ -786,11 +786,11 @@ QDataStream &operator>>(QDataStream &stream, ChannelAdminLogEventAction &item) {
     }
         break;
     case ChannelAdminLogEventAction::typeChannelAdminLogEventActionParticipantJoin: {
-        
+
     }
         break;
     case ChannelAdminLogEventAction::typeChannelAdminLogEventActionParticipantLeave: {
-        
+
     }
         break;
     case ChannelAdminLogEventAction::typeChannelAdminLogEventActionParticipantInvite: {
@@ -821,7 +821,7 @@ QDataStream &operator>>(QDataStream &stream, ChannelAdminLogEventAction &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const ChannelAdminLogEventAction &item) {
+/*QDebug operator<<(QDebug debug,  const ChannelAdminLogEventAction &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.ChannelAdminLogEventAction(";
@@ -891,4 +891,4 @@ QDebug operator<<(QDebug debug,  const ChannelAdminLogEventAction &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

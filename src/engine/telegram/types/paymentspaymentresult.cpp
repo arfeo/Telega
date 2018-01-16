@@ -35,7 +35,7 @@ PaymentsPaymentResult::PaymentsPaymentResult(const Null &null) :
 }
 
 PaymentsPaymentResult::~PaymentsPaymentResult() {
-    
+
 }
 
 void PaymentsPaymentResult::setUpdates(const UpdatesType &updates) {
@@ -86,14 +86,14 @@ bool PaymentsPaymentResult::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typePaymentsPaymentVerficationNeeded: {
         m_url = in->fetchQString();
         m_classType = static_cast<PaymentsPaymentResultClassType>(x);
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -108,13 +108,13 @@ bool PaymentsPaymentResult::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typePaymentsPaymentVerficationNeeded: {
         out->appendQString(m_url);
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -129,14 +129,14 @@ QMap<QString, QVariant> PaymentsPaymentResult::toMap() const {
         return result;
     }
         break;
-    
+
     case typePaymentsPaymentVerficationNeeded: {
         result["classType"] = "PaymentsPaymentResult::typePaymentsPaymentVerficationNeeded";
         if( !m_url.isEmpty() ) result["url"] = QVariant::fromValue<QString>(m_url);
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -149,7 +149,7 @@ PaymentsPaymentResult PaymentsPaymentResult::fromMap(const QMap<QString, QVarian
         QVariant _updates_var = map.value("updates");
         if( !_updates_var.isNull() )
             result.setUpdates( UpdatesType::fromMap(_updates_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "PaymentsPaymentResult::typePaymentsPaymentVerficationNeeded") {
@@ -159,7 +159,7 @@ PaymentsPaymentResult PaymentsPaymentResult::fromMap(const QMap<QString, QVarian
             _url_var.convert( QVariant::nameToType("QString") );
             result.setUrl( _url_var.value<QString>() );
         }
-        
+
         return result;
     }
     return result;
@@ -210,7 +210,7 @@ QDataStream &operator>>(QDataStream &stream, PaymentsPaymentResult &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const PaymentsPaymentResult &item) {
+/*QDebug operator<<(QDebug debug,  const PaymentsPaymentResult &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.PaymentsPaymentResult(";
@@ -227,4 +227,4 @@ QDebug operator<<(QDebug debug,  const PaymentsPaymentResult &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

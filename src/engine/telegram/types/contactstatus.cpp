@@ -39,7 +39,7 @@ ContactStatus::ContactStatus(const Null &null) :
 }
 
 ContactStatus::~ContactStatus() {
-    
+
 }
 
 void ContactStatus::setStatus(const UserStatus &status) {
@@ -91,7 +91,7 @@ bool ContactStatus::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -107,7 +107,7 @@ bool ContactStatus::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -123,7 +123,7 @@ QMap<QString, QVariant> ContactStatus::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -138,11 +138,11 @@ ContactStatus ContactStatus::fromMap(const QMap<QString, QVariant> &map) {
             _userId_var.convert( QVariant::nameToType("qint32") );
             result.setUserId( _userId_var.value<qint32>() );
         }
-        
+
         QVariant _status_var = map.value("status");
         if( !_status_var.isNull() )
             result.setStatus( UserStatus::fromMap(_status_var.toMap()) );
-        
+
         return result;
     }
     return result;
@@ -188,7 +188,7 @@ QDataStream &operator>>(QDataStream &stream, ContactStatus &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const ContactStatus &item) {
+/*QDebug operator<<(QDebug debug,  const ContactStatus &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.ContactStatus(";
@@ -202,4 +202,4 @@ QDebug operator<<(QDebug debug,  const ContactStatus &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

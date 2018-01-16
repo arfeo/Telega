@@ -43,7 +43,7 @@ ChatInvite::ChatInvite(const Null &null) :
 }
 
 ChatInvite::~ChatInvite() {
-    
+
 }
 
 void ChatInvite::setBroadcast(bool broadcast) {
@@ -172,7 +172,7 @@ bool ChatInvite::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeChatInvite: {
         m_flags = in->fetchInt();
         m_title = in->fetchQString();
@@ -194,7 +194,7 @@ bool ChatInvite::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -209,7 +209,7 @@ bool ChatInvite::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeChatInvite: {
         out->appendInt(m_flags);
         out->appendQString(m_title);
@@ -225,7 +225,7 @@ bool ChatInvite::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -240,7 +240,7 @@ QMap<QString, QVariant> ChatInvite::toMap() const {
         return result;
     }
         break;
-    
+
     case typeChatInvite: {
         result["classType"] = "ChatInvite::typeChatInvite";
         if( channel() ) result["channel"] = QString::number(channel());
@@ -257,7 +257,7 @@ QMap<QString, QVariant> ChatInvite::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -270,7 +270,7 @@ ChatInvite ChatInvite::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _chat_var = map.value("chat");
         if( !_chat_var.isNull() )
             result.setChat( Chat::fromMap(_chat_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "ChatInvite::typeChatInvite") {
@@ -280,41 +280,41 @@ ChatInvite ChatInvite::fromMap(const QMap<QString, QVariant> &map) {
             _channel_var.convert( QVariant::nameToType("bool") );
             result.setChannel( _channel_var.value<bool>() );
         }
-        
+
         QVariant _broadcast_var = map.value("broadcast");
         if( !_broadcast_var.isNull() ) {
             _broadcast_var.convert( QVariant::nameToType("bool") );
             result.setBroadcast( _broadcast_var.value<bool>() );
         }
-        
+
         QVariant _publicValue_var = map.value("publicValue");
         if( !_publicValue_var.isNull() ) {
             _publicValue_var.convert( QVariant::nameToType("bool") );
             result.setPublicValue( _publicValue_var.value<bool>() );
         }
-        
+
         QVariant _megagroup_var = map.value("megagroup");
         if( !_megagroup_var.isNull() ) {
             _megagroup_var.convert( QVariant::nameToType("bool") );
             result.setMegagroup( _megagroup_var.value<bool>() );
         }
-        
+
         QVariant _title_var = map.value("title");
         if( !_title_var.isNull() ) {
             _title_var.convert( QVariant::nameToType("QString") );
             result.setTitle( _title_var.value<QString>() );
         }
-        
+
         QVariant _photo_var = map.value("photo");
         if( !_photo_var.isNull() )
             result.setPhoto( ChatPhoto::fromMap(_photo_var.toMap()) );
-        
+
         QVariant _participantsCount_var = map.value("participantsCount");
         if( !_participantsCount_var.isNull() ) {
             _participantsCount_var.convert( QVariant::nameToType("qint32") );
             result.setParticipantsCount( _participantsCount_var.value<qint32>() );
         }
-        
+
         QList<QVariant> map_participants = map["participants"].toList();
         QList<User> _participants;
         for(const QVariant &var: map_participants)
@@ -386,7 +386,7 @@ QDataStream &operator>>(QDataStream &stream, ChatInvite &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const ChatInvite &item) {
+/*QDebug operator<<(QDebug debug,  const ChatInvite &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.ChatInvite(";
@@ -407,4 +407,4 @@ QDebug operator<<(QDebug debug,  const ChatInvite &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

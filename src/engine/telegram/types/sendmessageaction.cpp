@@ -39,7 +39,7 @@ SendMessageAction::SendMessageAction(const Null &null) :
 }
 
 SendMessageAction::~SendMessageAction() {
-    
+
 }
 
 void SendMessageAction::setProgress(qint32 progress) {
@@ -79,108 +79,108 @@ bool SendMessageAction::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeSendMessageCancelAction: {
         m_classType = static_cast<SendMessageActionClassType>(x);
         return true;
     }
         break;
-    
+
     case typeSendMessageRecordVideoAction: {
         m_classType = static_cast<SendMessageActionClassType>(x);
         return true;
     }
         break;
-    
+
     case typeSendMessageUploadVideoAction: {
         m_progress = in->fetchInt();
         m_classType = static_cast<SendMessageActionClassType>(x);
         return true;
     }
         break;
-    
+
     case typeSendMessageRecordAudioAction: {
         m_classType = static_cast<SendMessageActionClassType>(x);
         return true;
     }
         break;
-    
+
     case typeSendMessageUploadAudioAction: {
         m_progress = in->fetchInt();
         m_classType = static_cast<SendMessageActionClassType>(x);
         return true;
     }
         break;
-    
+
     case typeSendMessageUploadPhotoAction: {
         m_progress = in->fetchInt();
         m_classType = static_cast<SendMessageActionClassType>(x);
         return true;
     }
         break;
-    
+
     case typeSendMessageUploadDocumentAction: {
         m_progress = in->fetchInt();
         m_classType = static_cast<SendMessageActionClassType>(x);
         return true;
     }
         break;
-    
+
     case typeSendMessageGeoLocationAction: {
         m_classType = static_cast<SendMessageActionClassType>(x);
         return true;
     }
         break;
-    
+
     case typeSendMessageChooseContactAction: {
         m_classType = static_cast<SendMessageActionClassType>(x);
         return true;
     }
         break;
-    
+
     case typeSendMessageGamePlayAction: {
         m_classType = static_cast<SendMessageActionClassType>(x);
         return true;
     }
         break;
-    
+
     case typeSendMessageRecordRoundAction: {
         m_classType = static_cast<SendMessageActionClassType>(x);
         return true;
     }
         break;
-    
+
     case typeSendMessageUploadRoundAction: {
         m_progress = in->fetchInt();
         m_classType = static_cast<SendMessageActionClassType>(x);
         return true;
     }
         break;
-    
+
     case typeSendMessageUploadVideoActionSecret17: {
         m_classType = static_cast<SendMessageActionClassType>(x);
         return true;
     }
         break;
-    
+
     case typeSendMessageUploadAudioActionSecret17: {
         m_classType = static_cast<SendMessageActionClassType>(x);
         return true;
     }
         break;
-    
+
     case typeSendMessageUploadPhotoActionSecret17: {
         m_classType = static_cast<SendMessageActionClassType>(x);
         return true;
     }
         break;
-    
+
     case typeSendMessageUploadDocumentActionSecret17: {
         m_classType = static_cast<SendMessageActionClassType>(x);
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -194,92 +194,92 @@ bool SendMessageAction::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeSendMessageCancelAction: {
         return true;
     }
         break;
-    
+
     case typeSendMessageRecordVideoAction: {
         return true;
     }
         break;
-    
+
     case typeSendMessageUploadVideoAction: {
         out->appendInt(m_progress);
         return true;
     }
         break;
-    
+
     case typeSendMessageRecordAudioAction: {
         return true;
     }
         break;
-    
+
     case typeSendMessageUploadAudioAction: {
         out->appendInt(m_progress);
         return true;
     }
         break;
-    
+
     case typeSendMessageUploadPhotoAction: {
         out->appendInt(m_progress);
         return true;
     }
         break;
-    
+
     case typeSendMessageUploadDocumentAction: {
         out->appendInt(m_progress);
         return true;
     }
         break;
-    
+
     case typeSendMessageGeoLocationAction: {
         return true;
     }
         break;
-    
+
     case typeSendMessageChooseContactAction: {
         return true;
     }
         break;
-    
+
     case typeSendMessageGamePlayAction: {
         return true;
     }
         break;
-    
+
     case typeSendMessageRecordRoundAction: {
         return true;
     }
         break;
-    
+
     case typeSendMessageUploadRoundAction: {
         out->appendInt(m_progress);
         return true;
     }
         break;
-    
+
     case typeSendMessageUploadVideoActionSecret17: {
         return true;
     }
         break;
-    
+
     case typeSendMessageUploadAudioActionSecret17: {
         return true;
     }
         break;
-    
+
     case typeSendMessageUploadPhotoActionSecret17: {
         return true;
     }
         break;
-    
+
     case typeSendMessageUploadDocumentActionSecret17: {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -293,108 +293,108 @@ QMap<QString, QVariant> SendMessageAction::toMap() const {
         return result;
     }
         break;
-    
+
     case typeSendMessageCancelAction: {
         result["classType"] = "SendMessageAction::typeSendMessageCancelAction";
         return result;
     }
         break;
-    
+
     case typeSendMessageRecordVideoAction: {
         result["classType"] = "SendMessageAction::typeSendMessageRecordVideoAction";
         return result;
     }
         break;
-    
+
     case typeSendMessageUploadVideoAction: {
         result["classType"] = "SendMessageAction::typeSendMessageUploadVideoAction";
         if( progress() ) result["progress"] = QString::number(progress());
         return result;
     }
         break;
-    
+
     case typeSendMessageRecordAudioAction: {
         result["classType"] = "SendMessageAction::typeSendMessageRecordAudioAction";
         return result;
     }
         break;
-    
+
     case typeSendMessageUploadAudioAction: {
         result["classType"] = "SendMessageAction::typeSendMessageUploadAudioAction";
         if( progress() ) result["progress"] = QString::number(progress());
         return result;
     }
         break;
-    
+
     case typeSendMessageUploadPhotoAction: {
         result["classType"] = "SendMessageAction::typeSendMessageUploadPhotoAction";
         if( progress() ) result["progress"] = QString::number(progress());
         return result;
     }
         break;
-    
+
     case typeSendMessageUploadDocumentAction: {
         result["classType"] = "SendMessageAction::typeSendMessageUploadDocumentAction";
         if( progress() ) result["progress"] = QString::number(progress());
         return result;
     }
         break;
-    
+
     case typeSendMessageGeoLocationAction: {
         result["classType"] = "SendMessageAction::typeSendMessageGeoLocationAction";
         return result;
     }
         break;
-    
+
     case typeSendMessageChooseContactAction: {
         result["classType"] = "SendMessageAction::typeSendMessageChooseContactAction";
         return result;
     }
         break;
-    
+
     case typeSendMessageGamePlayAction: {
         result["classType"] = "SendMessageAction::typeSendMessageGamePlayAction";
         return result;
     }
         break;
-    
+
     case typeSendMessageRecordRoundAction: {
         result["classType"] = "SendMessageAction::typeSendMessageRecordRoundAction";
         return result;
     }
         break;
-    
+
     case typeSendMessageUploadRoundAction: {
         result["classType"] = "SendMessageAction::typeSendMessageUploadRoundAction";
         if( progress() ) result["progress"] = QString::number(progress());
         return result;
     }
         break;
-    
+
     case typeSendMessageUploadVideoActionSecret17: {
         result["classType"] = "SendMessageAction::typeSendMessageUploadVideoActionSecret17";
         return result;
     }
         break;
-    
+
     case typeSendMessageUploadAudioActionSecret17: {
         result["classType"] = "SendMessageAction::typeSendMessageUploadAudioActionSecret17";
         return result;
     }
         break;
-    
+
     case typeSendMessageUploadPhotoActionSecret17: {
         result["classType"] = "SendMessageAction::typeSendMessageUploadPhotoActionSecret17";
         return result;
     }
         break;
-    
+
     case typeSendMessageUploadDocumentActionSecret17: {
         result["classType"] = "SendMessageAction::typeSendMessageUploadDocumentActionSecret17";
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -421,7 +421,7 @@ SendMessageAction SendMessageAction::fromMap(const QMap<QString, QVariant> &map)
             _progress_var.convert( QVariant::nameToType("qint32") );
             result.setProgress( _progress_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "SendMessageAction::typeSendMessageRecordAudioAction") {
@@ -435,7 +435,7 @@ SendMessageAction SendMessageAction::fromMap(const QMap<QString, QVariant> &map)
             _progress_var.convert( QVariant::nameToType("qint32") );
             result.setProgress( _progress_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "SendMessageAction::typeSendMessageUploadPhotoAction") {
@@ -445,7 +445,7 @@ SendMessageAction SendMessageAction::fromMap(const QMap<QString, QVariant> &map)
             _progress_var.convert( QVariant::nameToType("qint32") );
             result.setProgress( _progress_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "SendMessageAction::typeSendMessageUploadDocumentAction") {
@@ -455,7 +455,7 @@ SendMessageAction SendMessageAction::fromMap(const QMap<QString, QVariant> &map)
             _progress_var.convert( QVariant::nameToType("qint32") );
             result.setProgress( _progress_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "SendMessageAction::typeSendMessageGeoLocationAction") {
@@ -481,7 +481,7 @@ SendMessageAction SendMessageAction::fromMap(const QMap<QString, QVariant> &map)
             _progress_var.convert( QVariant::nameToType("qint32") );
             result.setProgress( _progress_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "SendMessageAction::typeSendMessageTypingActionSecret17") {
@@ -542,19 +542,19 @@ QDataStream &operator<<(QDataStream &stream, const SendMessageAction &item) {
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case SendMessageAction::typeSendMessageTypingAction:
-        
+
         break;
     case SendMessageAction::typeSendMessageCancelAction:
-        
+
         break;
     case SendMessageAction::typeSendMessageRecordVideoAction:
-        
+
         break;
     case SendMessageAction::typeSendMessageUploadVideoAction:
         stream << item.progress();
         break;
     case SendMessageAction::typeSendMessageRecordAudioAction:
-        
+
         break;
     case SendMessageAction::typeSendMessageUploadAudioAction:
         stream << item.progress();
@@ -566,31 +566,31 @@ QDataStream &operator<<(QDataStream &stream, const SendMessageAction &item) {
         stream << item.progress();
         break;
     case SendMessageAction::typeSendMessageGeoLocationAction:
-        
+
         break;
     case SendMessageAction::typeSendMessageChooseContactAction:
-        
+
         break;
     case SendMessageAction::typeSendMessageGamePlayAction:
-        
+
         break;
     case SendMessageAction::typeSendMessageRecordRoundAction:
-        
+
         break;
     case SendMessageAction::typeSendMessageUploadRoundAction:
         stream << item.progress();
         break;
     case SendMessageAction::typeSendMessageUploadVideoActionSecret17:
-        
+
         break;
     case SendMessageAction::typeSendMessageUploadAudioActionSecret17:
-        
+
         break;
     case SendMessageAction::typeSendMessageUploadPhotoActionSecret17:
-        
+
         break;
     case SendMessageAction::typeSendMessageUploadDocumentActionSecret17:
-        
+
         break;
     }
     return stream;
@@ -602,15 +602,15 @@ QDataStream &operator>>(QDataStream &stream, SendMessageAction &item) {
     item.setClassType(static_cast<SendMessageAction::SendMessageActionClassType>(type));
     switch(type) {
     case SendMessageAction::typeSendMessageTypingAction: {
-        
+
     }
         break;
     case SendMessageAction::typeSendMessageCancelAction: {
-        
+
     }
         break;
     case SendMessageAction::typeSendMessageRecordVideoAction: {
-        
+
     }
         break;
     case SendMessageAction::typeSendMessageUploadVideoAction: {
@@ -620,7 +620,7 @@ QDataStream &operator>>(QDataStream &stream, SendMessageAction &item) {
     }
         break;
     case SendMessageAction::typeSendMessageRecordAudioAction: {
-        
+
     }
         break;
     case SendMessageAction::typeSendMessageUploadAudioAction: {
@@ -642,19 +642,19 @@ QDataStream &operator>>(QDataStream &stream, SendMessageAction &item) {
     }
         break;
     case SendMessageAction::typeSendMessageGeoLocationAction: {
-        
+
     }
         break;
     case SendMessageAction::typeSendMessageChooseContactAction: {
-        
+
     }
         break;
     case SendMessageAction::typeSendMessageGamePlayAction: {
-        
+
     }
         break;
     case SendMessageAction::typeSendMessageRecordRoundAction: {
-        
+
     }
         break;
     case SendMessageAction::typeSendMessageUploadRoundAction: {
@@ -664,26 +664,26 @@ QDataStream &operator>>(QDataStream &stream, SendMessageAction &item) {
     }
         break;
     case SendMessageAction::typeSendMessageUploadVideoActionSecret17: {
-        
+
     }
         break;
     case SendMessageAction::typeSendMessageUploadAudioActionSecret17: {
-        
+
     }
         break;
     case SendMessageAction::typeSendMessageUploadPhotoActionSecret17: {
-        
+
     }
         break;
     case SendMessageAction::typeSendMessageUploadDocumentActionSecret17: {
-        
+
     }
         break;
     }
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const SendMessageAction &item) {
+/*QDebug operator<<(QDebug debug,  const SendMessageAction &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.SendMessageAction(";
@@ -748,4 +748,4 @@ QDebug operator<<(QDebug debug,  const SendMessageAction &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

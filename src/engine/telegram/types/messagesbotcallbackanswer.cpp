@@ -43,7 +43,7 @@ MessagesBotCallbackAnswer::MessagesBotCallbackAnswer(const Null &null) :
 }
 
 MessagesBotCallbackAnswer::~MessagesBotCallbackAnswer() {
-    
+
 }
 
 void MessagesBotCallbackAnswer::setAlert(bool alert) {
@@ -143,7 +143,7 @@ bool MessagesBotCallbackAnswer::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -165,7 +165,7 @@ bool MessagesBotCallbackAnswer::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -184,7 +184,7 @@ QMap<QString, QVariant> MessagesBotCallbackAnswer::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -199,31 +199,31 @@ MessagesBotCallbackAnswer MessagesBotCallbackAnswer::fromMap(const QMap<QString,
             _alert_var.convert( QVariant::nameToType("bool") );
             result.setAlert( _alert_var.value<bool>() );
         }
-        
+
         QVariant _hasUrl_var = map.value("hasUrl");
         if( !_hasUrl_var.isNull() ) {
             _hasUrl_var.convert( QVariant::nameToType("bool") );
             result.setHasUrl( _hasUrl_var.value<bool>() );
         }
-        
+
         QVariant _message_var = map.value("message");
         if( !_message_var.isNull() ) {
             _message_var.convert( QVariant::nameToType("QString") );
             result.setMessage( _message_var.value<QString>() );
         }
-        
+
         QVariant _url_var = map.value("url");
         if( !_url_var.isNull() ) {
             _url_var.convert( QVariant::nameToType("QString") );
             result.setUrl( _url_var.value<QString>() );
         }
-        
+
         QVariant _cacheTime_var = map.value("cacheTime");
         if( !_cacheTime_var.isNull() ) {
             _cacheTime_var.convert( QVariant::nameToType("qint32") );
             result.setCacheTime( _cacheTime_var.value<qint32>() );
         }
-        
+
         return result;
     }
     return result;
@@ -277,7 +277,7 @@ QDataStream &operator>>(QDataStream &stream, MessagesBotCallbackAnswer &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const MessagesBotCallbackAnswer &item) {
+/*QDebug operator<<(QDebug debug,  const MessagesBotCallbackAnswer &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.MessagesBotCallbackAnswer(";
@@ -293,4 +293,4 @@ QDebug operator<<(QDebug debug,  const MessagesBotCallbackAnswer &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

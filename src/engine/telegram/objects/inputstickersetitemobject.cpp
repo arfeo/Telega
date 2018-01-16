@@ -11,9 +11,9 @@ InputStickerSetItemObject::InputStickerSetItemObject(const InputStickerSetItem &
     m_core(core)
 {
     m_document = new InputDocumentObject(m_core.document(), this);
-    connect(m_document.data(), &InputDocumentObject::coreChanged, this, &InputStickerSetItemObject::coreDocumentChanged);
+    connect(m_document.data(), SIGNAL(coreChanged()), this, SLOT(coreDocumentChanged()));
     m_maskCoords = new MaskCoordsObject(m_core.maskCoords(), this);
-    connect(m_maskCoords.data(), &MaskCoordsObject::coreChanged, this, &InputStickerSetItemObject::coreMaskCoordsChanged);
+    connect(m_maskCoords.data(), SIGNAL(coreChanged()), this, SLOT(coreMaskCoordsChanged()));
 }
 
 InputStickerSetItemObject::InputStickerSetItemObject(QObject *parent) :
@@ -23,9 +23,9 @@ InputStickerSetItemObject::InputStickerSetItemObject(QObject *parent) :
     m_core()
 {
     m_document = new InputDocumentObject(m_core.document(), this);
-    connect(m_document.data(), &InputDocumentObject::coreChanged, this, &InputStickerSetItemObject::coreDocumentChanged);
+    connect(m_document.data(), SIGNAL(coreChanged()), this, SLOT(coreDocumentChanged()));
     m_maskCoords = new MaskCoordsObject(m_core.maskCoords(), this);
-    connect(m_maskCoords.data(), &MaskCoordsObject::coreChanged, this, &InputStickerSetItemObject::coreMaskCoordsChanged);
+    connect(m_maskCoords.data(), SIGNAL(coreChanged()), this, SLOT(coreMaskCoordsChanged()));
 }
 
 InputStickerSetItemObject::~InputStickerSetItemObject() {
@@ -38,7 +38,7 @@ void InputStickerSetItemObject::setDocument(InputDocumentObject* document) {
     if(m_document) {
         m_document->setParent(this);
         m_core.setDocument(m_document->core());
-        connect(m_document.data(), &InputDocumentObject::coreChanged, this, &InputStickerSetItemObject::coreDocumentChanged);
+        connect(m_document.data(), SIGNAL(coreChanged()), this, SLOT(coreDocumentChanged()));
     }
     Q_EMIT documentChanged();
     Q_EMIT coreChanged();
@@ -77,7 +77,7 @@ void InputStickerSetItemObject::setMaskCoords(MaskCoordsObject* maskCoords) {
     if(m_maskCoords) {
         m_maskCoords->setParent(this);
         m_core.setMaskCoords(m_maskCoords->core());
-        connect(m_maskCoords.data(), &MaskCoordsObject::coreChanged, this, &InputStickerSetItemObject::coreMaskCoordsChanged);
+        connect(m_maskCoords.data(), SIGNAL(coreChanged()), this, SLOT(coreMaskCoordsChanged()));
     }
     Q_EMIT maskCoordsChanged();
     Q_EMIT coreChanged();

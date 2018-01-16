@@ -35,7 +35,7 @@ PrivacyKey::PrivacyKey(const Null &null) :
 }
 
 PrivacyKey::~PrivacyKey() {
-    
+
 }
 
 bool PrivacyKey::operator ==(const PrivacyKey &b) const {
@@ -65,19 +65,19 @@ bool PrivacyKey::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typePrivacyKeyChatInvite: {
         m_classType = static_cast<PrivacyKeyClassType>(x);
         return true;
     }
         break;
-    
+
     case typePrivacyKeyPhoneCall: {
         m_classType = static_cast<PrivacyKeyClassType>(x);
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -91,17 +91,17 @@ bool PrivacyKey::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typePrivacyKeyChatInvite: {
         return true;
     }
         break;
-    
+
     case typePrivacyKeyPhoneCall: {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -115,19 +115,19 @@ QMap<QString, QVariant> PrivacyKey::toMap() const {
         return result;
     }
         break;
-    
+
     case typePrivacyKeyChatInvite: {
         result["classType"] = "PrivacyKey::typePrivacyKeyChatInvite";
         return result;
     }
         break;
-    
+
     case typePrivacyKeyPhoneCall: {
         result["classType"] = "PrivacyKey::typePrivacyKeyPhoneCall";
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -165,13 +165,13 @@ QDataStream &operator<<(QDataStream &stream, const PrivacyKey &item) {
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case PrivacyKey::typePrivacyKeyStatusTimestamp:
-        
+
         break;
     case PrivacyKey::typePrivacyKeyChatInvite:
-        
+
         break;
     case PrivacyKey::typePrivacyKeyPhoneCall:
-        
+
         break;
     }
     return stream;
@@ -183,22 +183,22 @@ QDataStream &operator>>(QDataStream &stream, PrivacyKey &item) {
     item.setClassType(static_cast<PrivacyKey::PrivacyKeyClassType>(type));
     switch(type) {
     case PrivacyKey::typePrivacyKeyStatusTimestamp: {
-        
+
     }
         break;
     case PrivacyKey::typePrivacyKeyChatInvite: {
-        
+
     }
         break;
     case PrivacyKey::typePrivacyKeyPhoneCall: {
-        
+
     }
         break;
     }
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const PrivacyKey &item) {
+/*QDebug operator<<(QDebug debug,  const PrivacyKey &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.PrivacyKey(";
@@ -216,4 +216,4 @@ QDebug operator<<(QDebug debug,  const PrivacyKey &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

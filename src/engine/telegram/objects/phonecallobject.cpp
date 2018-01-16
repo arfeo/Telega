@@ -12,11 +12,11 @@ PhoneCallObject::PhoneCallObject(const PhoneCall &core, QObject *parent) :
     m_core(core)
 {
     m_connection = new PhoneConnectionObject(m_core.connection(), this);
-    connect(m_connection.data(), &PhoneConnectionObject::coreChanged, this, &PhoneCallObject::coreConnectionChanged);
+    connect(m_connection.data(), SIGNAL(coreChanged()), this, SLOT(coreConnectionChanged()));
     m_protocol = new PhoneCallProtocolObject(m_core.protocol(), this);
-    connect(m_protocol.data(), &PhoneCallProtocolObject::coreChanged, this, &PhoneCallObject::coreProtocolChanged);
+    connect(m_protocol.data(), SIGNAL(coreChanged()), this, SLOT(coreProtocolChanged()));
     m_reason = new PhoneCallDiscardReasonObject(m_core.reason(), this);
-    connect(m_reason.data(), &PhoneCallDiscardReasonObject::coreChanged, this, &PhoneCallObject::coreReasonChanged);
+    connect(m_reason.data(), SIGNAL(coreChanged()), this, SLOT(coreReasonChanged()));
 }
 
 PhoneCallObject::PhoneCallObject(QObject *parent) :
@@ -27,11 +27,11 @@ PhoneCallObject::PhoneCallObject(QObject *parent) :
     m_core()
 {
     m_connection = new PhoneConnectionObject(m_core.connection(), this);
-    connect(m_connection.data(), &PhoneConnectionObject::coreChanged, this, &PhoneCallObject::coreConnectionChanged);
+    connect(m_connection.data(), SIGNAL(coreChanged()), this, SLOT(coreConnectionChanged()));
     m_protocol = new PhoneCallProtocolObject(m_core.protocol(), this);
-    connect(m_protocol.data(), &PhoneCallProtocolObject::coreChanged, this, &PhoneCallObject::coreProtocolChanged);
+    connect(m_protocol.data(), SIGNAL(coreChanged()), this, SLOT(coreProtocolChanged()));
     m_reason = new PhoneCallDiscardReasonObject(m_core.reason(), this);
-    connect(m_reason.data(), &PhoneCallDiscardReasonObject::coreChanged, this, &PhoneCallObject::coreReasonChanged);
+    connect(m_reason.data(), SIGNAL(coreChanged()), this, SLOT(coreReasonChanged()));
 }
 
 PhoneCallObject::~PhoneCallObject() {
@@ -77,7 +77,7 @@ void PhoneCallObject::setConnection(PhoneConnectionObject* connection) {
     if(m_connection) {
         m_connection->setParent(this);
         m_core.setConnection(m_connection->core());
-        connect(m_connection.data(), &PhoneConnectionObject::coreChanged, this, &PhoneCallObject::coreConnectionChanged);
+        connect(m_connection.data(), SIGNAL(coreChanged()), this, SLOT(coreConnectionChanged()));
     }
     Q_EMIT connectionChanged();
     Q_EMIT coreChanged();
@@ -215,7 +215,7 @@ void PhoneCallObject::setProtocol(PhoneCallProtocolObject* protocol) {
     if(m_protocol) {
         m_protocol->setParent(this);
         m_core.setProtocol(m_protocol->core());
-        connect(m_protocol.data(), &PhoneCallProtocolObject::coreChanged, this, &PhoneCallObject::coreProtocolChanged);
+        connect(m_protocol.data(), SIGNAL(coreChanged()), this, SLOT(coreProtocolChanged()));
     }
     Q_EMIT protocolChanged();
     Q_EMIT coreChanged();
@@ -232,7 +232,7 @@ void PhoneCallObject::setReason(PhoneCallDiscardReasonObject* reason) {
     if(m_reason) {
         m_reason->setParent(this);
         m_core.setReason(m_reason->core());
-        connect(m_reason.data(), &PhoneCallDiscardReasonObject::coreChanged, this, &PhoneCallObject::coreReasonChanged);
+        connect(m_reason.data(), SIGNAL(coreChanged()), this, SLOT(coreReasonChanged()));
     }
     Q_EMIT reasonChanged();
     Q_EMIT coreChanged();

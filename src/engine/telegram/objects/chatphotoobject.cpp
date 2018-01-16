@@ -11,9 +11,9 @@ ChatPhotoObject::ChatPhotoObject(const ChatPhoto &core, QObject *parent) :
     m_core(core)
 {
     m_photoBig = new FileLocationObject(m_core.photoBig(), this);
-    connect(m_photoBig.data(), &FileLocationObject::coreChanged, this, &ChatPhotoObject::corePhotoBigChanged);
+    connect(m_photoBig.data(), SIGNAL(coreChanged()), this, SLOT(corePhotoBigChanged()));
     m_photoSmall = new FileLocationObject(m_core.photoSmall(), this);
-    connect(m_photoSmall.data(), &FileLocationObject::coreChanged, this, &ChatPhotoObject::corePhotoSmallChanged);
+    connect(m_photoSmall.data(), SIGNAL(coreChanged()), this, SLOT(corePhotoSmallChanged()));
 }
 
 ChatPhotoObject::ChatPhotoObject(QObject *parent) :
@@ -23,9 +23,9 @@ ChatPhotoObject::ChatPhotoObject(QObject *parent) :
     m_core()
 {
     m_photoBig = new FileLocationObject(m_core.photoBig(), this);
-    connect(m_photoBig.data(), &FileLocationObject::coreChanged, this, &ChatPhotoObject::corePhotoBigChanged);
+    connect(m_photoBig.data(), SIGNAL(coreChanged()), this, SLOT(corePhotoBigChanged()));
     m_photoSmall = new FileLocationObject(m_core.photoSmall(), this);
-    connect(m_photoSmall.data(), &FileLocationObject::coreChanged, this, &ChatPhotoObject::corePhotoSmallChanged);
+    connect(m_photoSmall.data(), SIGNAL(coreChanged()), this, SLOT(corePhotoSmallChanged()));
 }
 
 ChatPhotoObject::~ChatPhotoObject() {
@@ -38,7 +38,7 @@ void ChatPhotoObject::setPhotoBig(FileLocationObject* photoBig) {
     if(m_photoBig) {
         m_photoBig->setParent(this);
         m_core.setPhotoBig(m_photoBig->core());
-        connect(m_photoBig.data(), &FileLocationObject::coreChanged, this, &ChatPhotoObject::corePhotoBigChanged);
+        connect(m_photoBig.data(), SIGNAL(coreChanged()), this, SLOT(corePhotoBigChanged()));
     }
     Q_EMIT photoBigChanged();
     Q_EMIT coreChanged();
@@ -55,7 +55,7 @@ void ChatPhotoObject::setPhotoSmall(FileLocationObject* photoSmall) {
     if(m_photoSmall) {
         m_photoSmall->setParent(this);
         m_core.setPhotoSmall(m_photoSmall->core());
-        connect(m_photoSmall.data(), &FileLocationObject::coreChanged, this, &ChatPhotoObject::corePhotoSmallChanged);
+        connect(m_photoSmall.data(), SIGNAL(coreChanged()), this, SLOT(corePhotoSmallChanged()));
     }
     Q_EMIT photoSmallChanged();
     Q_EMIT coreChanged();

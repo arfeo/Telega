@@ -43,7 +43,7 @@ ReceivedNotifyMessage::ReceivedNotifyMessage(const Null &null) :
 }
 
 ReceivedNotifyMessage::~ReceivedNotifyMessage() {
-    
+
 }
 
 void ReceivedNotifyMessage::setFlags(qint32 flags) {
@@ -95,7 +95,7 @@ bool ReceivedNotifyMessage::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -111,7 +111,7 @@ bool ReceivedNotifyMessage::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -127,7 +127,7 @@ QMap<QString, QVariant> ReceivedNotifyMessage::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -142,13 +142,13 @@ ReceivedNotifyMessage ReceivedNotifyMessage::fromMap(const QMap<QString, QVarian
             _id_var.convert( QVariant::nameToType("qint32") );
             result.setId( _id_var.value<qint32>() );
         }
-        
+
         QVariant _flags_var = map.value("flags");
         if( !_flags_var.isNull() ) {
             _flags_var.convert( QVariant::nameToType("qint32") );
             result.setFlags( _flags_var.value<qint32>() );
         }
-        
+
         return result;
     }
     return result;
@@ -194,7 +194,7 @@ QDataStream &operator>>(QDataStream &stream, ReceivedNotifyMessage &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const ReceivedNotifyMessage &item) {
+/*QDebug operator<<(QDebug debug,  const ReceivedNotifyMessage &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.ReceivedNotifyMessage(";
@@ -208,4 +208,4 @@ QDebug operator<<(QDebug debug,  const ReceivedNotifyMessage &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

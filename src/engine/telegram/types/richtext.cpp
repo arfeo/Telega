@@ -139,14 +139,14 @@ bool RichText::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeTextPlain: {
         m_textString = in->fetchQString();
         m_classType = static_cast<RichTextClassType>(x);
         return true;
     }
         break;
-    
+
     case typeTextBold: {
         if(!m_textRich) m_textRich = new RichText();
         m_textRich->fetch(in);
@@ -154,7 +154,7 @@ bool RichText::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeTextItalic: {
         if(!m_textRich) m_textRich = new RichText();
         m_textRich->fetch(in);
@@ -162,7 +162,7 @@ bool RichText::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeTextUnderline: {
         if(!m_textRich) m_textRich = new RichText();
         m_textRich->fetch(in);
@@ -170,7 +170,7 @@ bool RichText::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeTextStrike: {
         if(!m_textRich) m_textRich = new RichText();
         m_textRich->fetch(in);
@@ -178,7 +178,7 @@ bool RichText::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeTextFixed: {
         if(!m_textRich) m_textRich = new RichText();
         m_textRich->fetch(in);
@@ -186,7 +186,7 @@ bool RichText::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeTextUrl: {
         if(!m_textRich) m_textRich = new RichText();
         m_textRich->fetch(in);
@@ -196,7 +196,7 @@ bool RichText::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeTextEmail: {
         if(!m_textRich) m_textRich = new RichText();
         m_textRich->fetch(in);
@@ -205,7 +205,7 @@ bool RichText::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeTextConcat: {
         if(in->fetchInt() != (qint32)CoreTypes::typeVector) return false;
         qint32 m_texts_length = in->fetchInt();
@@ -219,7 +219,7 @@ bool RichText::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -233,48 +233,48 @@ bool RichText::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeTextPlain: {
         out->appendQString(m_textString);
         return true;
     }
         break;
-    
+
     case typeTextBold: {
         if(m_textRich) m_textRich->push(out);
         else RichText().push(out);
         return true;
     }
         break;
-    
+
     case typeTextItalic: {
         if(m_textRich) m_textRich->push(out);
         else RichText().push(out);
         return true;
     }
         break;
-    
+
     case typeTextUnderline: {
         if(m_textRich) m_textRich->push(out);
         else RichText().push(out);
         return true;
     }
         break;
-    
+
     case typeTextStrike: {
         if(m_textRich) m_textRich->push(out);
         else RichText().push(out);
         return true;
     }
         break;
-    
+
     case typeTextFixed: {
         if(m_textRich) m_textRich->push(out);
         else RichText().push(out);
         return true;
     }
         break;
-    
+
     case typeTextUrl: {
         if(m_textRich) m_textRich->push(out);
         else RichText().push(out);
@@ -283,7 +283,7 @@ bool RichText::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeTextEmail: {
         if(m_textRich) m_textRich->push(out);
         else RichText().push(out);
@@ -291,7 +291,7 @@ bool RichText::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeTextConcat: {
         out->appendInt(CoreTypes::typeVector);
         out->appendInt(m_texts.count());
@@ -301,7 +301,7 @@ bool RichText::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -315,49 +315,49 @@ QMap<QString, QVariant> RichText::toMap() const {
         return result;
     }
         break;
-    
+
     case typeTextPlain: {
         result["classType"] = "RichText::typeTextPlain";
         if( !m_textString.isEmpty() ) result["textString"] = QVariant::fromValue<QString>(m_textString);
         return result;
     }
         break;
-    
+
     case typeTextBold: {
         result["classType"] = "RichText::typeTextBold";
         result["textRich"] = (m_textRich? *m_textRich : RichText()).toMap();
         return result;
     }
         break;
-    
+
     case typeTextItalic: {
         result["classType"] = "RichText::typeTextItalic";
         result["textRich"] = (m_textRich? *m_textRich : RichText()).toMap();
         return result;
     }
         break;
-    
+
     case typeTextUnderline: {
         result["classType"] = "RichText::typeTextUnderline";
         result["textRich"] = (m_textRich? *m_textRich : RichText()).toMap();
         return result;
     }
         break;
-    
+
     case typeTextStrike: {
         result["classType"] = "RichText::typeTextStrike";
         result["textRich"] = (m_textRich? *m_textRich : RichText()).toMap();
         return result;
     }
         break;
-    
+
     case typeTextFixed: {
         result["classType"] = "RichText::typeTextFixed";
         result["textRich"] = (m_textRich? *m_textRich : RichText()).toMap();
         return result;
     }
         break;
-    
+
     case typeTextUrl: {
         result["classType"] = "RichText::typeTextUrl";
         result["textRich"] = (m_textRich? *m_textRich : RichText()).toMap();
@@ -366,7 +366,7 @@ QMap<QString, QVariant> RichText::toMap() const {
         return result;
     }
         break;
-    
+
     case typeTextEmail: {
         result["classType"] = "RichText::typeTextEmail";
         result["textRich"] = (m_textRich? *m_textRich : RichText()).toMap();
@@ -374,7 +374,7 @@ QMap<QString, QVariant> RichText::toMap() const {
         return result;
     }
         break;
-    
+
     case typeTextConcat: {
         result["classType"] = "RichText::typeTextConcat";
         QList<QVariant> _texts;
@@ -384,7 +384,7 @@ QMap<QString, QVariant> RichText::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -403,7 +403,7 @@ RichText RichText::fromMap(const QMap<QString, QVariant> &map) {
             _textString_var.convert( QVariant::nameToType("QString") );
             result.setTextString( _textString_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "RichText::typeTextBold") {
@@ -411,7 +411,7 @@ RichText RichText::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _textRich_var = map.value("textRich");
         if( !_textRich_var.isNull() )
             result.setTextRich( RichText::fromMap(_textRich_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "RichText::typeTextItalic") {
@@ -419,7 +419,7 @@ RichText RichText::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _textRich_var = map.value("textRich");
         if( !_textRich_var.isNull() )
             result.setTextRich( RichText::fromMap(_textRich_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "RichText::typeTextUnderline") {
@@ -427,7 +427,7 @@ RichText RichText::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _textRich_var = map.value("textRich");
         if( !_textRich_var.isNull() )
             result.setTextRich( RichText::fromMap(_textRich_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "RichText::typeTextStrike") {
@@ -435,7 +435,7 @@ RichText RichText::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _textRich_var = map.value("textRich");
         if( !_textRich_var.isNull() )
             result.setTextRich( RichText::fromMap(_textRich_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "RichText::typeTextFixed") {
@@ -443,7 +443,7 @@ RichText RichText::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _textRich_var = map.value("textRich");
         if( !_textRich_var.isNull() )
             result.setTextRich( RichText::fromMap(_textRich_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "RichText::typeTextUrl") {
@@ -451,19 +451,19 @@ RichText RichText::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _textRich_var = map.value("textRich");
         if( !_textRich_var.isNull() )
             result.setTextRich( RichText::fromMap(_textRich_var.toMap()) );
-        
+
         QVariant _url_var = map.value("url");
         if( !_url_var.isNull() ) {
             _url_var.convert( QVariant::nameToType("QString") );
             result.setUrl( _url_var.value<QString>() );
         }
-        
+
         QVariant _webpageId_var = map.value("webpageId");
         if( !_webpageId_var.isNull() ) {
             _webpageId_var.convert( QVariant::nameToType("qint64") );
             result.setWebpageId( _webpageId_var.value<qint64>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "RichText::typeTextEmail") {
@@ -471,13 +471,13 @@ RichText RichText::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _textRich_var = map.value("textRich");
         if( !_textRich_var.isNull() )
             result.setTextRich( RichText::fromMap(_textRich_var.toMap()) );
-        
+
         QVariant _email_var = map.value("email");
         if( !_email_var.isNull() ) {
             _email_var.convert( QVariant::nameToType("QString") );
             result.setEmail( _email_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "RichText::typeTextConcat") {
@@ -507,7 +507,7 @@ QDataStream &operator<<(QDataStream &stream, const RichText &item) {
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case RichText::typeTextEmpty:
-        
+
         break;
     case RichText::typeTextPlain:
         stream << item.textString();
@@ -549,7 +549,7 @@ QDataStream &operator>>(QDataStream &stream, RichText &item) {
     item.setClassType(static_cast<RichText::RichTextClassType>(type));
     switch(type) {
     case RichText::typeTextEmpty: {
-        
+
     }
         break;
     case RichText::typeTextPlain: {
@@ -619,7 +619,7 @@ QDataStream &operator>>(QDataStream &stream, RichText &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const RichText &item) {
+/*QDebug operator<<(QDebug debug,  const RichText &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.RichText(";
@@ -670,4 +670,4 @@ QDebug operator<<(QDebug debug,  const RichText &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

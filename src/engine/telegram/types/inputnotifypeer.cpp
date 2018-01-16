@@ -35,7 +35,7 @@ InputNotifyPeer::InputNotifyPeer(const Null &null) :
 }
 
 InputNotifyPeer::~InputNotifyPeer() {
-    
+
 }
 
 void InputNotifyPeer::setPeer(const InputPeer &peer) {
@@ -76,25 +76,25 @@ bool InputNotifyPeer::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputNotifyUsers: {
         m_classType = static_cast<InputNotifyPeerClassType>(x);
         return true;
     }
         break;
-    
+
     case typeInputNotifyChats: {
         m_classType = static_cast<InputNotifyPeerClassType>(x);
         return true;
     }
         break;
-    
+
     case typeInputNotifyAll: {
         m_classType = static_cast<InputNotifyPeerClassType>(x);
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -109,22 +109,22 @@ bool InputNotifyPeer::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeInputNotifyUsers: {
         return true;
     }
         break;
-    
+
     case typeInputNotifyChats: {
         return true;
     }
         break;
-    
+
     case typeInputNotifyAll: {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -139,25 +139,25 @@ QMap<QString, QVariant> InputNotifyPeer::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputNotifyUsers: {
         result["classType"] = "InputNotifyPeer::typeInputNotifyUsers";
         return result;
     }
         break;
-    
+
     case typeInputNotifyChats: {
         result["classType"] = "InputNotifyPeer::typeInputNotifyChats";
         return result;
     }
         break;
-    
+
     case typeInputNotifyAll: {
         result["classType"] = "InputNotifyPeer::typeInputNotifyAll";
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -170,7 +170,7 @@ InputNotifyPeer InputNotifyPeer::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _peer_var = map.value("peer");
         if( !_peer_var.isNull() )
             result.setPeer( InputPeer::fromMap(_peer_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "InputNotifyPeer::typeInputNotifyUsers") {
@@ -206,13 +206,13 @@ QDataStream &operator<<(QDataStream &stream, const InputNotifyPeer &item) {
         stream << item.peer();
         break;
     case InputNotifyPeer::typeInputNotifyUsers:
-        
+
         break;
     case InputNotifyPeer::typeInputNotifyChats:
-        
+
         break;
     case InputNotifyPeer::typeInputNotifyAll:
-        
+
         break;
     }
     return stream;
@@ -230,22 +230,22 @@ QDataStream &operator>>(QDataStream &stream, InputNotifyPeer &item) {
     }
         break;
     case InputNotifyPeer::typeInputNotifyUsers: {
-        
+
     }
         break;
     case InputNotifyPeer::typeInputNotifyChats: {
-        
+
     }
         break;
     case InputNotifyPeer::typeInputNotifyAll: {
-        
+
     }
         break;
     }
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const InputNotifyPeer &item) {
+/*QDebug operator<<(QDebug debug,  const InputNotifyPeer &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.InputNotifyPeer(";
@@ -267,4 +267,4 @@ QDebug operator<<(QDebug debug,  const InputNotifyPeer &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

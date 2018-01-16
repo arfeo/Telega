@@ -39,7 +39,7 @@ InputBotInlineMessage::InputBotInlineMessage(const Null &null) :
 }
 
 InputBotInlineMessage::~InputBotInlineMessage() {
-    
+
 }
 
 void InputBotInlineMessage::setAddress(const QString &address) {
@@ -217,7 +217,7 @@ bool InputBotInlineMessage::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputBotInlineMessageText: {
         m_flags = in->fetchInt();
         m_message = in->fetchQString();
@@ -240,7 +240,7 @@ bool InputBotInlineMessage::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputBotInlineMessageMediaGeo: {
         m_flags = in->fetchInt();
         m_geoPoint.fetch(in);
@@ -251,7 +251,7 @@ bool InputBotInlineMessage::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputBotInlineMessageMediaVenue: {
         m_flags = in->fetchInt();
         m_geoPoint.fetch(in);
@@ -266,7 +266,7 @@ bool InputBotInlineMessage::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputBotInlineMessageMediaContact: {
         m_flags = in->fetchInt();
         m_phoneNumber = in->fetchQString();
@@ -279,7 +279,7 @@ bool InputBotInlineMessage::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputBotInlineMessageGame: {
         m_flags = in->fetchInt();
         if(m_flags & 1<<2) {
@@ -289,7 +289,7 @@ bool InputBotInlineMessage::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -308,7 +308,7 @@ bool InputBotInlineMessage::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeInputBotInlineMessageText: {
         out->appendInt(m_flags);
         out->appendQString(m_message);
@@ -325,7 +325,7 @@ bool InputBotInlineMessage::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeInputBotInlineMessageMediaGeo: {
         out->appendInt(m_flags);
         m_geoPoint.push(out);
@@ -335,7 +335,7 @@ bool InputBotInlineMessage::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeInputBotInlineMessageMediaVenue: {
         out->appendInt(m_flags);
         m_geoPoint.push(out);
@@ -349,7 +349,7 @@ bool InputBotInlineMessage::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeInputBotInlineMessageMediaContact: {
         out->appendInt(m_flags);
         out->appendQString(m_phoneNumber);
@@ -361,7 +361,7 @@ bool InputBotInlineMessage::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeInputBotInlineMessageGame: {
         out->appendInt(m_flags);
         if(m_flags & 1<<2) {
@@ -370,7 +370,7 @@ bool InputBotInlineMessage::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -386,7 +386,7 @@ QMap<QString, QVariant> InputBotInlineMessage::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputBotInlineMessageText: {
         result["classType"] = "InputBotInlineMessage::typeInputBotInlineMessageText";
         if( noWebpage() ) result["noWebpage"] = QString::number(noWebpage());
@@ -399,7 +399,7 @@ QMap<QString, QVariant> InputBotInlineMessage::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputBotInlineMessageMediaGeo: {
         result["classType"] = "InputBotInlineMessage::typeInputBotInlineMessageMediaGeo";
         if( !m_geoPoint.isNull() ) result["geoPoint"] = m_geoPoint.toMap();
@@ -407,7 +407,7 @@ QMap<QString, QVariant> InputBotInlineMessage::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputBotInlineMessageMediaVenue: {
         result["classType"] = "InputBotInlineMessage::typeInputBotInlineMessageMediaVenue";
         if( !m_geoPoint.isNull() ) result["geoPoint"] = m_geoPoint.toMap();
@@ -419,7 +419,7 @@ QMap<QString, QVariant> InputBotInlineMessage::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputBotInlineMessageMediaContact: {
         result["classType"] = "InputBotInlineMessage::typeInputBotInlineMessageMediaContact";
         if( !m_phoneNumber.isEmpty() ) result["phoneNumber"] = QVariant::fromValue<QString>(m_phoneNumber);
@@ -429,14 +429,14 @@ QMap<QString, QVariant> InputBotInlineMessage::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputBotInlineMessageGame: {
         result["classType"] = "InputBotInlineMessage::typeInputBotInlineMessageGame";
         if( !m_replyMarkup.isNull() ) result["replyMarkup"] = m_replyMarkup.toMap();
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -451,11 +451,11 @@ InputBotInlineMessage InputBotInlineMessage::fromMap(const QMap<QString, QVarian
             _caption_var.convert( QVariant::nameToType("QString") );
             result.setCaption( _caption_var.value<QString>() );
         }
-        
+
         QVariant _replyMarkup_var = map.value("replyMarkup");
         if( !_replyMarkup_var.isNull() )
             result.setReplyMarkup( ReplyMarkup::fromMap(_replyMarkup_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "InputBotInlineMessage::typeInputBotInlineMessageText") {
@@ -465,13 +465,13 @@ InputBotInlineMessage InputBotInlineMessage::fromMap(const QMap<QString, QVarian
             _noWebpage_var.convert( QVariant::nameToType("bool") );
             result.setNoWebpage( _noWebpage_var.value<bool>() );
         }
-        
+
         QVariant _message_var = map.value("message");
         if( !_message_var.isNull() ) {
             _message_var.convert( QVariant::nameToType("QString") );
             result.setMessage( _message_var.value<QString>() );
         }
-        
+
         QList<QVariant> map_entities = map["entities"].toList();
         QList<MessageEntity> _entities;
         for(const QVariant &var: map_entities)
@@ -480,7 +480,7 @@ InputBotInlineMessage InputBotInlineMessage::fromMap(const QMap<QString, QVarian
         QVariant _replyMarkup_var = map.value("replyMarkup");
         if( !_replyMarkup_var.isNull() )
             result.setReplyMarkup( ReplyMarkup::fromMap(_replyMarkup_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "InputBotInlineMessage::typeInputBotInlineMessageMediaGeo") {
@@ -488,11 +488,11 @@ InputBotInlineMessage InputBotInlineMessage::fromMap(const QMap<QString, QVarian
         QVariant _geoPoint_var = map.value("geoPoint");
         if( !_geoPoint_var.isNull() )
             result.setGeoPoint( InputGeoPoint::fromMap(_geoPoint_var.toMap()) );
-        
+
         QVariant _replyMarkup_var = map.value("replyMarkup");
         if( !_replyMarkup_var.isNull() )
             result.setReplyMarkup( ReplyMarkup::fromMap(_replyMarkup_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "InputBotInlineMessage::typeInputBotInlineMessageMediaVenue") {
@@ -500,35 +500,35 @@ InputBotInlineMessage InputBotInlineMessage::fromMap(const QMap<QString, QVarian
         QVariant _geoPoint_var = map.value("geoPoint");
         if( !_geoPoint_var.isNull() )
             result.setGeoPoint( InputGeoPoint::fromMap(_geoPoint_var.toMap()) );
-        
+
         QVariant _title_var = map.value("title");
         if( !_title_var.isNull() ) {
             _title_var.convert( QVariant::nameToType("QString") );
             result.setTitle( _title_var.value<QString>() );
         }
-        
+
         QVariant _address_var = map.value("address");
         if( !_address_var.isNull() ) {
             _address_var.convert( QVariant::nameToType("QString") );
             result.setAddress( _address_var.value<QString>() );
         }
-        
+
         QVariant _provider_var = map.value("provider");
         if( !_provider_var.isNull() ) {
             _provider_var.convert( QVariant::nameToType("QString") );
             result.setProvider( _provider_var.value<QString>() );
         }
-        
+
         QVariant _venueId_var = map.value("venueId");
         if( !_venueId_var.isNull() ) {
             _venueId_var.convert( QVariant::nameToType("QString") );
             result.setVenueId( _venueId_var.value<QString>() );
         }
-        
+
         QVariant _replyMarkup_var = map.value("replyMarkup");
         if( !_replyMarkup_var.isNull() )
             result.setReplyMarkup( ReplyMarkup::fromMap(_replyMarkup_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "InputBotInlineMessage::typeInputBotInlineMessageMediaContact") {
@@ -538,23 +538,23 @@ InputBotInlineMessage InputBotInlineMessage::fromMap(const QMap<QString, QVarian
             _phoneNumber_var.convert( QVariant::nameToType("QString") );
             result.setPhoneNumber( _phoneNumber_var.value<QString>() );
         }
-        
+
         QVariant _firstName_var = map.value("firstName");
         if( !_firstName_var.isNull() ) {
             _firstName_var.convert( QVariant::nameToType("QString") );
             result.setFirstName( _firstName_var.value<QString>() );
         }
-        
+
         QVariant _lastName_var = map.value("lastName");
         if( !_lastName_var.isNull() ) {
             _lastName_var.convert( QVariant::nameToType("QString") );
             result.setLastName( _lastName_var.value<QString>() );
         }
-        
+
         QVariant _replyMarkup_var = map.value("replyMarkup");
         if( !_replyMarkup_var.isNull() )
             result.setReplyMarkup( ReplyMarkup::fromMap(_replyMarkup_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "InputBotInlineMessage::typeInputBotInlineMessageGame") {
@@ -562,7 +562,7 @@ InputBotInlineMessage InputBotInlineMessage::fromMap(const QMap<QString, QVarian
         QVariant _replyMarkup_var = map.value("replyMarkup");
         if( !_replyMarkup_var.isNull() )
             result.setReplyMarkup( ReplyMarkup::fromMap(_replyMarkup_var.toMap()) );
-        
+
         return result;
     }
     return result;
@@ -721,7 +721,7 @@ QDataStream &operator>>(QDataStream &stream, InputBotInlineMessage &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const InputBotInlineMessage &item) {
+/*QDebug operator<<(QDebug debug,  const InputBotInlineMessage &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.InputBotInlineMessage(";
@@ -772,4 +772,4 @@ QDebug operator<<(QDebug debug,  const InputBotInlineMessage &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

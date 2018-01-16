@@ -55,7 +55,7 @@ PaymentsPaymentReceipt::PaymentsPaymentReceipt(const Null &null) :
 }
 
 PaymentsPaymentReceipt::~PaymentsPaymentReceipt() {
-    
+
 }
 
 void PaymentsPaymentReceipt::setBotId(qint32 botId) {
@@ -221,7 +221,7 @@ bool PaymentsPaymentReceipt::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -254,7 +254,7 @@ bool PaymentsPaymentReceipt::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -281,7 +281,7 @@ QMap<QString, QVariant> PaymentsPaymentReceipt::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -296,49 +296,49 @@ PaymentsPaymentReceipt PaymentsPaymentReceipt::fromMap(const QMap<QString, QVari
             _date_var.convert( QVariant::nameToType("qint32") );
             result.setDate( _date_var.value<qint32>() );
         }
-        
+
         QVariant _botId_var = map.value("botId");
         if( !_botId_var.isNull() ) {
             _botId_var.convert( QVariant::nameToType("qint32") );
             result.setBotId( _botId_var.value<qint32>() );
         }
-        
+
         QVariant _invoice_var = map.value("invoice");
         if( !_invoice_var.isNull() )
             result.setInvoice( Invoice::fromMap(_invoice_var.toMap()) );
-        
+
         QVariant _providerId_var = map.value("providerId");
         if( !_providerId_var.isNull() ) {
             _providerId_var.convert( QVariant::nameToType("qint32") );
             result.setProviderId( _providerId_var.value<qint32>() );
         }
-        
+
         QVariant _info_var = map.value("info");
         if( !_info_var.isNull() )
             result.setInfo( PaymentRequestedInfo::fromMap(_info_var.toMap()) );
-        
+
         QVariant _shipping_var = map.value("shipping");
         if( !_shipping_var.isNull() )
             result.setShipping( ShippingOption::fromMap(_shipping_var.toMap()) );
-        
+
         QVariant _currency_var = map.value("currency");
         if( !_currency_var.isNull() ) {
             _currency_var.convert( QVariant::nameToType("QString") );
             result.setCurrency( _currency_var.value<QString>() );
         }
-        
+
         QVariant _totalAmount_var = map.value("totalAmount");
         if( !_totalAmount_var.isNull() ) {
             _totalAmount_var.convert( QVariant::nameToType("qint64") );
             result.setTotalAmount( _totalAmount_var.value<qint64>() );
         }
-        
+
         QVariant _credentialsTitle_var = map.value("credentialsTitle");
         if( !_credentialsTitle_var.isNull() ) {
             _credentialsTitle_var.convert( QVariant::nameToType("QString") );
             result.setCredentialsTitle( _credentialsTitle_var.value<QString>() );
         }
-        
+
         QList<QVariant> map_users = map["users"].toList();
         QList<User> _users;
         for(const QVariant &var: map_users)
@@ -425,7 +425,7 @@ QDataStream &operator>>(QDataStream &stream, PaymentsPaymentReceipt &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const PaymentsPaymentReceipt &item) {
+/*QDebug operator<<(QDebug debug,  const PaymentsPaymentReceipt &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.PaymentsPaymentReceipt(";
@@ -448,4 +448,4 @@ QDebug operator<<(QDebug debug,  const PaymentsPaymentReceipt &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

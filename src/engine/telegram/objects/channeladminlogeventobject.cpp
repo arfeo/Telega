@@ -10,7 +10,7 @@ ChannelAdminLogEventObject::ChannelAdminLogEventObject(const ChannelAdminLogEven
     m_core(core)
 {
     m_action = new ChannelAdminLogEventActionObject(m_core.action(), this);
-    connect(m_action.data(), &ChannelAdminLogEventActionObject::coreChanged, this, &ChannelAdminLogEventObject::coreActionChanged);
+    connect(m_action.data(), SIGNAL(coreChanged()), this, SLOT(coreActionChanged()));
 }
 
 ChannelAdminLogEventObject::ChannelAdminLogEventObject(QObject *parent) :
@@ -19,7 +19,7 @@ ChannelAdminLogEventObject::ChannelAdminLogEventObject(QObject *parent) :
     m_core()
 {
     m_action = new ChannelAdminLogEventActionObject(m_core.action(), this);
-    connect(m_action.data(), &ChannelAdminLogEventActionObject::coreChanged, this, &ChannelAdminLogEventObject::coreActionChanged);
+    connect(m_action.data(), SIGNAL(coreChanged()), this, SLOT(coreActionChanged()));
 }
 
 ChannelAdminLogEventObject::~ChannelAdminLogEventObject() {
@@ -32,7 +32,7 @@ void ChannelAdminLogEventObject::setAction(ChannelAdminLogEventActionObject* act
     if(m_action) {
         m_action->setParent(this);
         m_core.setAction(m_action->core());
-        connect(m_action.data(), &ChannelAdminLogEventActionObject::coreChanged, this, &ChannelAdminLogEventObject::coreActionChanged);
+        connect(m_action.data(), SIGNAL(coreChanged()), this, SLOT(coreActionChanged()));
     }
     Q_EMIT actionChanged();
     Q_EMIT coreChanged();

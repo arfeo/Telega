@@ -35,7 +35,7 @@ LangPackLanguage::LangPackLanguage(const Null &null) :
 }
 
 LangPackLanguage::~LangPackLanguage() {
-    
+
 }
 
 void LangPackLanguage::setLangCode(const QString &langCode) {
@@ -98,7 +98,7 @@ bool LangPackLanguage::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -115,7 +115,7 @@ bool LangPackLanguage::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -132,7 +132,7 @@ QMap<QString, QVariant> LangPackLanguage::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -147,19 +147,19 @@ LangPackLanguage LangPackLanguage::fromMap(const QMap<QString, QVariant> &map) {
             _name_var.convert( QVariant::nameToType("QString") );
             result.setName( _name_var.value<QString>() );
         }
-        
+
         QVariant _nativeName_var = map.value("nativeName");
         if( !_nativeName_var.isNull() ) {
             _nativeName_var.convert( QVariant::nameToType("QString") );
             result.setNativeName( _nativeName_var.value<QString>() );
         }
-        
+
         QVariant _langCode_var = map.value("langCode");
         if( !_langCode_var.isNull() ) {
             _langCode_var.convert( QVariant::nameToType("QString") );
             result.setLangCode( _langCode_var.value<QString>() );
         }
-        
+
         return result;
     }
     return result;
@@ -209,7 +209,7 @@ QDataStream &operator>>(QDataStream &stream, LangPackLanguage &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const LangPackLanguage &item) {
+/*QDebug operator<<(QDebug debug,  const LangPackLanguage &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.LangPackLanguage(";
@@ -224,4 +224,4 @@ QDebug operator<<(QDebug debug,  const LangPackLanguage &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

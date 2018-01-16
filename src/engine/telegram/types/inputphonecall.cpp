@@ -43,7 +43,7 @@ InputPhoneCall::InputPhoneCall(const Null &null) :
 }
 
 InputPhoneCall::~InputPhoneCall() {
-    
+
 }
 
 void InputPhoneCall::setAccessHash(qint64 accessHash) {
@@ -95,7 +95,7 @@ bool InputPhoneCall::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -111,7 +111,7 @@ bool InputPhoneCall::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -127,7 +127,7 @@ QMap<QString, QVariant> InputPhoneCall::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -142,13 +142,13 @@ InputPhoneCall InputPhoneCall::fromMap(const QMap<QString, QVariant> &map) {
             _id_var.convert( QVariant::nameToType("qint64") );
             result.setId( _id_var.value<qint64>() );
         }
-        
+
         QVariant _accessHash_var = map.value("accessHash");
         if( !_accessHash_var.isNull() ) {
             _accessHash_var.convert( QVariant::nameToType("qint64") );
             result.setAccessHash( _accessHash_var.value<qint64>() );
         }
-        
+
         return result;
     }
     return result;
@@ -194,7 +194,7 @@ QDataStream &operator>>(QDataStream &stream, InputPhoneCall &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const InputPhoneCall &item) {
+/*QDebug operator<<(QDebug debug,  const InputPhoneCall &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.InputPhoneCall(";
@@ -208,4 +208,4 @@ QDebug operator<<(QDebug debug,  const InputPhoneCall &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

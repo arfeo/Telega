@@ -39,7 +39,7 @@ PaymentsSavedInfo::PaymentsSavedInfo(const Null &null) :
 }
 
 PaymentsSavedInfo::~PaymentsSavedInfo() {
-    
+
 }
 
 void PaymentsSavedInfo::setFlags(qint32 flags) {
@@ -104,7 +104,7 @@ bool PaymentsSavedInfo::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -122,7 +122,7 @@ bool PaymentsSavedInfo::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -138,7 +138,7 @@ QMap<QString, QVariant> PaymentsSavedInfo::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -153,11 +153,11 @@ PaymentsSavedInfo PaymentsSavedInfo::fromMap(const QMap<QString, QVariant> &map)
             _hasSavedCredentials_var.convert( QVariant::nameToType("bool") );
             result.setHasSavedCredentials( _hasSavedCredentials_var.value<bool>() );
         }
-        
+
         QVariant _savedInfo_var = map.value("savedInfo");
         if( !_savedInfo_var.isNull() )
             result.setSavedInfo( PaymentRequestedInfo::fromMap(_savedInfo_var.toMap()) );
-        
+
         return result;
     }
     return result;
@@ -203,7 +203,7 @@ QDataStream &operator>>(QDataStream &stream, PaymentsSavedInfo &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const PaymentsSavedInfo &item) {
+/*QDebug operator<<(QDebug debug,  const PaymentsSavedInfo &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.PaymentsSavedInfo(";
@@ -217,4 +217,4 @@ QDebug operator<<(QDebug debug,  const PaymentsSavedInfo &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

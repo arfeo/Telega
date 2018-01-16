@@ -35,7 +35,7 @@ PhotosPhoto::PhotosPhoto(const Null &null) :
 }
 
 PhotosPhoto::~PhotosPhoto() {
-    
+
 }
 
 void PhotosPhoto::setPhoto(const Photo &photo) {
@@ -94,7 +94,7 @@ bool PhotosPhoto::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -114,7 +114,7 @@ bool PhotosPhoto::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -133,7 +133,7 @@ QMap<QString, QVariant> PhotosPhoto::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -146,7 +146,7 @@ PhotosPhoto PhotosPhoto::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _photo_var = map.value("photo");
         if( !_photo_var.isNull() )
             result.setPhoto( Photo::fromMap(_photo_var.toMap()) );
-        
+
         QList<QVariant> map_users = map["users"].toList();
         QList<User> _users;
         for(const QVariant &var: map_users)
@@ -197,7 +197,7 @@ QDataStream &operator>>(QDataStream &stream, PhotosPhoto &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const PhotosPhoto &item) {
+/*QDebug operator<<(QDebug debug,  const PhotosPhoto &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.PhotosPhoto(";
@@ -211,4 +211,4 @@ QDebug operator<<(QDebug debug,  const PhotosPhoto &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

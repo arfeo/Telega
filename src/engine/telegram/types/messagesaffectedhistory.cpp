@@ -47,7 +47,7 @@ MessagesAffectedHistory::MessagesAffectedHistory(const Null &null) :
 }
 
 MessagesAffectedHistory::~MessagesAffectedHistory() {
-    
+
 }
 
 void MessagesAffectedHistory::setOffset(qint32 offset) {
@@ -110,7 +110,7 @@ bool MessagesAffectedHistory::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -127,7 +127,7 @@ bool MessagesAffectedHistory::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -144,7 +144,7 @@ QMap<QString, QVariant> MessagesAffectedHistory::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -159,19 +159,19 @@ MessagesAffectedHistory MessagesAffectedHistory::fromMap(const QMap<QString, QVa
             _pts_var.convert( QVariant::nameToType("qint32") );
             result.setPts( _pts_var.value<qint32>() );
         }
-        
+
         QVariant _ptsCount_var = map.value("ptsCount");
         if( !_ptsCount_var.isNull() ) {
             _ptsCount_var.convert( QVariant::nameToType("qint32") );
             result.setPtsCount( _ptsCount_var.value<qint32>() );
         }
-        
+
         QVariant _offset_var = map.value("offset");
         if( !_offset_var.isNull() ) {
             _offset_var.convert( QVariant::nameToType("qint32") );
             result.setOffset( _offset_var.value<qint32>() );
         }
-        
+
         return result;
     }
     return result;
@@ -221,7 +221,7 @@ QDataStream &operator>>(QDataStream &stream, MessagesAffectedHistory &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const MessagesAffectedHistory &item) {
+/*QDebug operator<<(QDebug debug,  const MessagesAffectedHistory &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.MessagesAffectedHistory(";
@@ -236,4 +236,4 @@ QDebug operator<<(QDebug debug,  const MessagesAffectedHistory &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

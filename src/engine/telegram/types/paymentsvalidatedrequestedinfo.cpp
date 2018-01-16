@@ -39,7 +39,7 @@ PaymentsValidatedRequestedInfo::PaymentsValidatedRequestedInfo(const Null &null)
 }
 
 PaymentsValidatedRequestedInfo::~PaymentsValidatedRequestedInfo() {
-    
+
 }
 
 void PaymentsValidatedRequestedInfo::setFlags(qint32 flags) {
@@ -119,7 +119,7 @@ bool PaymentsValidatedRequestedInfo::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -144,7 +144,7 @@ bool PaymentsValidatedRequestedInfo::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -163,7 +163,7 @@ QMap<QString, QVariant> PaymentsValidatedRequestedInfo::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -178,7 +178,7 @@ PaymentsValidatedRequestedInfo PaymentsValidatedRequestedInfo::fromMap(const QMa
             _id_var.convert( QVariant::nameToType("QString") );
             result.setId( _id_var.value<QString>() );
         }
-        
+
         QList<QVariant> map_shippingOptions = map["shippingOptions"].toList();
         QList<ShippingOption> _shippingOptions;
         for(const QVariant &var: map_shippingOptions)
@@ -233,7 +233,7 @@ QDataStream &operator>>(QDataStream &stream, PaymentsValidatedRequestedInfo &ite
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const PaymentsValidatedRequestedInfo &item) {
+/*QDebug operator<<(QDebug debug,  const PaymentsValidatedRequestedInfo &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.PaymentsValidatedRequestedInfo(";
@@ -248,4 +248,4 @@ QDebug operator<<(QDebug debug,  const PaymentsValidatedRequestedInfo &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

@@ -47,7 +47,7 @@ InputBotInlineMessageID::InputBotInlineMessageID(const Null &null) :
 }
 
 InputBotInlineMessageID::~InputBotInlineMessageID() {
-    
+
 }
 
 void InputBotInlineMessageID::setAccessHash(qint64 accessHash) {
@@ -110,7 +110,7 @@ bool InputBotInlineMessageID::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -127,7 +127,7 @@ bool InputBotInlineMessageID::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -144,7 +144,7 @@ QMap<QString, QVariant> InputBotInlineMessageID::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -159,19 +159,19 @@ InputBotInlineMessageID InputBotInlineMessageID::fromMap(const QMap<QString, QVa
             _dcId_var.convert( QVariant::nameToType("qint32") );
             result.setDcId( _dcId_var.value<qint32>() );
         }
-        
+
         QVariant _id_var = map.value("id");
         if( !_id_var.isNull() ) {
             _id_var.convert( QVariant::nameToType("qint64") );
             result.setId( _id_var.value<qint64>() );
         }
-        
+
         QVariant _accessHash_var = map.value("accessHash");
         if( !_accessHash_var.isNull() ) {
             _accessHash_var.convert( QVariant::nameToType("qint64") );
             result.setAccessHash( _accessHash_var.value<qint64>() );
         }
-        
+
         return result;
     }
     return result;
@@ -221,7 +221,7 @@ QDataStream &operator>>(QDataStream &stream, InputBotInlineMessageID &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const InputBotInlineMessageID &item) {
+/*QDebug operator<<(QDebug debug,  const InputBotInlineMessageID &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.InputBotInlineMessageID(";
@@ -236,4 +236,4 @@ QDebug operator<<(QDebug debug,  const InputBotInlineMessageID &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

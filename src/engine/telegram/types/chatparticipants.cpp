@@ -47,7 +47,7 @@ ChatParticipants::ChatParticipants(const Null &null) :
 }
 
 ChatParticipants::~ChatParticipants() {
-    
+
 }
 
 void ChatParticipants::setChatId(qint32 chatId) {
@@ -134,7 +134,7 @@ bool ChatParticipants::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeChatParticipants: {
         m_chatId = in->fetchInt();
         if(in->fetchInt() != (qint32)CoreTypes::typeVector) return false;
@@ -150,7 +150,7 @@ bool ChatParticipants::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -169,7 +169,7 @@ bool ChatParticipants::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeChatParticipants: {
         out->appendInt(m_chatId);
         out->appendInt(CoreTypes::typeVector);
@@ -181,7 +181,7 @@ bool ChatParticipants::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -197,7 +197,7 @@ QMap<QString, QVariant> ChatParticipants::toMap() const {
         return result;
     }
         break;
-    
+
     case typeChatParticipants: {
         result["classType"] = "ChatParticipants::typeChatParticipants";
         if( chatId() ) result["chatId"] = QString::number(chatId());
@@ -209,7 +209,7 @@ QMap<QString, QVariant> ChatParticipants::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -224,11 +224,11 @@ ChatParticipants ChatParticipants::fromMap(const QMap<QString, QVariant> &map) {
             _chatId_var.convert( QVariant::nameToType("qint32") );
             result.setChatId( _chatId_var.value<qint32>() );
         }
-        
+
         QVariant _selfParticipant_var = map.value("selfParticipant");
         if( !_selfParticipant_var.isNull() )
             result.setSelfParticipant( ChatParticipant::fromMap(_selfParticipant_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "ChatParticipants::typeChatParticipants") {
@@ -238,7 +238,7 @@ ChatParticipants ChatParticipants::fromMap(const QMap<QString, QVariant> &map) {
             _chatId_var.convert( QVariant::nameToType("qint32") );
             result.setChatId( _chatId_var.value<qint32>() );
         }
-        
+
         QList<QVariant> map_participants = map["participants"].toList();
         QList<ChatParticipant> _participants;
         for(const QVariant &var: map_participants)
@@ -249,7 +249,7 @@ ChatParticipants ChatParticipants::fromMap(const QMap<QString, QVariant> &map) {
             _version_var.convert( QVariant::nameToType("qint32") );
             result.setVersion( _version_var.value<qint32>() );
         }
-        
+
         return result;
     }
     return result;
@@ -316,7 +316,7 @@ QDataStream &operator>>(QDataStream &stream, ChatParticipants &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const ChatParticipants &item) {
+/*QDebug operator<<(QDebug debug,  const ChatParticipants &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.ChatParticipants(";
@@ -337,4 +337,4 @@ QDebug operator<<(QDebug debug,  const ChatParticipants &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

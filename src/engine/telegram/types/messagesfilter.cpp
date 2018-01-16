@@ -39,7 +39,7 @@ MessagesFilter::MessagesFilter(const Null &null) :
 }
 
 MessagesFilter::~MessagesFilter() {
-    
+
 }
 
 void MessagesFilter::setFlags(qint32 flags) {
@@ -88,86 +88,86 @@ bool MessagesFilter::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputMessagesFilterPhotos: {
         m_classType = static_cast<MessagesFilterClassType>(x);
         return true;
     }
         break;
-    
+
     case typeInputMessagesFilterVideo: {
         m_classType = static_cast<MessagesFilterClassType>(x);
         return true;
     }
         break;
-    
+
     case typeInputMessagesFilterPhotoVideo: {
         m_classType = static_cast<MessagesFilterClassType>(x);
         return true;
     }
         break;
-    
+
     case typeInputMessagesFilterPhotoVideoDocuments: {
         m_classType = static_cast<MessagesFilterClassType>(x);
         return true;
     }
         break;
-    
+
     case typeInputMessagesFilterDocument: {
         m_classType = static_cast<MessagesFilterClassType>(x);
         return true;
     }
         break;
-    
+
     case typeInputMessagesFilterUrl: {
         m_classType = static_cast<MessagesFilterClassType>(x);
         return true;
     }
         break;
-    
+
     case typeInputMessagesFilterGif: {
         m_classType = static_cast<MessagesFilterClassType>(x);
         return true;
     }
         break;
-    
+
     case typeInputMessagesFilterVoice: {
         m_classType = static_cast<MessagesFilterClassType>(x);
         return true;
     }
         break;
-    
+
     case typeInputMessagesFilterMusic: {
         m_classType = static_cast<MessagesFilterClassType>(x);
         return true;
     }
         break;
-    
+
     case typeInputMessagesFilterChatPhotos: {
         m_classType = static_cast<MessagesFilterClassType>(x);
         return true;
     }
         break;
-    
+
     case typeInputMessagesFilterPhoneCalls: {
         m_flags = in->fetchInt();
         m_classType = static_cast<MessagesFilterClassType>(x);
         return true;
     }
         break;
-    
+
     case typeInputMessagesFilterRoundVoice: {
         m_classType = static_cast<MessagesFilterClassType>(x);
         return true;
     }
         break;
-    
+
     case typeInputMessagesFilterRoundVideo: {
         m_classType = static_cast<MessagesFilterClassType>(x);
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -181,73 +181,73 @@ bool MessagesFilter::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeInputMessagesFilterPhotos: {
         return true;
     }
         break;
-    
+
     case typeInputMessagesFilterVideo: {
         return true;
     }
         break;
-    
+
     case typeInputMessagesFilterPhotoVideo: {
         return true;
     }
         break;
-    
+
     case typeInputMessagesFilterPhotoVideoDocuments: {
         return true;
     }
         break;
-    
+
     case typeInputMessagesFilterDocument: {
         return true;
     }
         break;
-    
+
     case typeInputMessagesFilterUrl: {
         return true;
     }
         break;
-    
+
     case typeInputMessagesFilterGif: {
         return true;
     }
         break;
-    
+
     case typeInputMessagesFilterVoice: {
         return true;
     }
         break;
-    
+
     case typeInputMessagesFilterMusic: {
         return true;
     }
         break;
-    
+
     case typeInputMessagesFilterChatPhotos: {
         return true;
     }
         break;
-    
+
     case typeInputMessagesFilterPhoneCalls: {
         out->appendInt(m_flags);
         return true;
     }
         break;
-    
+
     case typeInputMessagesFilterRoundVoice: {
         return true;
     }
         break;
-    
+
     case typeInputMessagesFilterRoundVideo: {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -261,86 +261,86 @@ QMap<QString, QVariant> MessagesFilter::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputMessagesFilterPhotos: {
         result["classType"] = "MessagesFilter::typeInputMessagesFilterPhotos";
         return result;
     }
         break;
-    
+
     case typeInputMessagesFilterVideo: {
         result["classType"] = "MessagesFilter::typeInputMessagesFilterVideo";
         return result;
     }
         break;
-    
+
     case typeInputMessagesFilterPhotoVideo: {
         result["classType"] = "MessagesFilter::typeInputMessagesFilterPhotoVideo";
         return result;
     }
         break;
-    
+
     case typeInputMessagesFilterPhotoVideoDocuments: {
         result["classType"] = "MessagesFilter::typeInputMessagesFilterPhotoVideoDocuments";
         return result;
     }
         break;
-    
+
     case typeInputMessagesFilterDocument: {
         result["classType"] = "MessagesFilter::typeInputMessagesFilterDocument";
         return result;
     }
         break;
-    
+
     case typeInputMessagesFilterUrl: {
         result["classType"] = "MessagesFilter::typeInputMessagesFilterUrl";
         return result;
     }
         break;
-    
+
     case typeInputMessagesFilterGif: {
         result["classType"] = "MessagesFilter::typeInputMessagesFilterGif";
         return result;
     }
         break;
-    
+
     case typeInputMessagesFilterVoice: {
         result["classType"] = "MessagesFilter::typeInputMessagesFilterVoice";
         return result;
     }
         break;
-    
+
     case typeInputMessagesFilterMusic: {
         result["classType"] = "MessagesFilter::typeInputMessagesFilterMusic";
         return result;
     }
         break;
-    
+
     case typeInputMessagesFilterChatPhotos: {
         result["classType"] = "MessagesFilter::typeInputMessagesFilterChatPhotos";
         return result;
     }
         break;
-    
+
     case typeInputMessagesFilterPhoneCalls: {
         result["classType"] = "MessagesFilter::typeInputMessagesFilterPhoneCalls";
         if( missed() ) result["missed"] = QString::number(missed());
         return result;
     }
         break;
-    
+
     case typeInputMessagesFilterRoundVoice: {
         result["classType"] = "MessagesFilter::typeInputMessagesFilterRoundVoice";
         return result;
     }
         break;
-    
+
     case typeInputMessagesFilterRoundVideo: {
         result["classType"] = "MessagesFilter::typeInputMessagesFilterRoundVideo";
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -399,7 +399,7 @@ MessagesFilter MessagesFilter::fromMap(const QMap<QString, QVariant> &map) {
             _missed_var.convert( QVariant::nameToType("bool") );
             result.setMissed( _missed_var.value<bool>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "MessagesFilter::typeInputMessagesFilterRoundVoice") {
@@ -428,46 +428,46 @@ QDataStream &operator<<(QDataStream &stream, const MessagesFilter &item) {
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case MessagesFilter::typeInputMessagesFilterEmpty:
-        
+
         break;
     case MessagesFilter::typeInputMessagesFilterPhotos:
-        
+
         break;
     case MessagesFilter::typeInputMessagesFilterVideo:
-        
+
         break;
     case MessagesFilter::typeInputMessagesFilterPhotoVideo:
-        
+
         break;
     case MessagesFilter::typeInputMessagesFilterPhotoVideoDocuments:
-        
+
         break;
     case MessagesFilter::typeInputMessagesFilterDocument:
-        
+
         break;
     case MessagesFilter::typeInputMessagesFilterUrl:
-        
+
         break;
     case MessagesFilter::typeInputMessagesFilterGif:
-        
+
         break;
     case MessagesFilter::typeInputMessagesFilterVoice:
-        
+
         break;
     case MessagesFilter::typeInputMessagesFilterMusic:
-        
+
         break;
     case MessagesFilter::typeInputMessagesFilterChatPhotos:
-        
+
         break;
     case MessagesFilter::typeInputMessagesFilterPhoneCalls:
         stream << item.flags();
         break;
     case MessagesFilter::typeInputMessagesFilterRoundVoice:
-        
+
         break;
     case MessagesFilter::typeInputMessagesFilterRoundVideo:
-        
+
         break;
     }
     return stream;
@@ -479,47 +479,47 @@ QDataStream &operator>>(QDataStream &stream, MessagesFilter &item) {
     item.setClassType(static_cast<MessagesFilter::MessagesFilterClassType>(type));
     switch(type) {
     case MessagesFilter::typeInputMessagesFilterEmpty: {
-        
+
     }
         break;
     case MessagesFilter::typeInputMessagesFilterPhotos: {
-        
+
     }
         break;
     case MessagesFilter::typeInputMessagesFilterVideo: {
-        
+
     }
         break;
     case MessagesFilter::typeInputMessagesFilterPhotoVideo: {
-        
+
     }
         break;
     case MessagesFilter::typeInputMessagesFilterPhotoVideoDocuments: {
-        
+
     }
         break;
     case MessagesFilter::typeInputMessagesFilterDocument: {
-        
+
     }
         break;
     case MessagesFilter::typeInputMessagesFilterUrl: {
-        
+
     }
         break;
     case MessagesFilter::typeInputMessagesFilterGif: {
-        
+
     }
         break;
     case MessagesFilter::typeInputMessagesFilterVoice: {
-        
+
     }
         break;
     case MessagesFilter::typeInputMessagesFilterMusic: {
-        
+
     }
         break;
     case MessagesFilter::typeInputMessagesFilterChatPhotos: {
-        
+
     }
         break;
     case MessagesFilter::typeInputMessagesFilterPhoneCalls: {
@@ -529,18 +529,18 @@ QDataStream &operator>>(QDataStream &stream, MessagesFilter &item) {
     }
         break;
     case MessagesFilter::typeInputMessagesFilterRoundVoice: {
-        
+
     }
         break;
     case MessagesFilter::typeInputMessagesFilterRoundVideo: {
-        
+
     }
         break;
     }
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const MessagesFilter &item) {
+/*QDebug operator<<(QDebug debug,  const MessagesFilter &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.MessagesFilter(";
@@ -592,4 +592,4 @@ QDebug operator<<(QDebug debug,  const MessagesFilter &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

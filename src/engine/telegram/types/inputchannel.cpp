@@ -43,7 +43,7 @@ InputChannel::InputChannel(const Null &null) :
 }
 
 InputChannel::~InputChannel() {
-    
+
 }
 
 void InputChannel::setAccessHash(qint64 accessHash) {
@@ -93,7 +93,7 @@ bool InputChannel::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputChannel: {
         m_channelId = in->fetchInt();
         m_accessHash = in->fetchLong();
@@ -101,7 +101,7 @@ bool InputChannel::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -115,14 +115,14 @@ bool InputChannel::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeInputChannel: {
         out->appendInt(m_channelId);
         out->appendLong(m_accessHash);
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -136,7 +136,7 @@ QMap<QString, QVariant> InputChannel::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputChannel: {
         result["classType"] = "InputChannel::typeInputChannel";
         if( channelId() ) result["channelId"] = QString::number(channelId());
@@ -144,7 +144,7 @@ QMap<QString, QVariant> InputChannel::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -163,13 +163,13 @@ InputChannel InputChannel::fromMap(const QMap<QString, QVariant> &map) {
             _channelId_var.convert( QVariant::nameToType("qint32") );
             result.setChannelId( _channelId_var.value<qint32>() );
         }
-        
+
         QVariant _accessHash_var = map.value("accessHash");
         if( !_accessHash_var.isNull() ) {
             _accessHash_var.convert( QVariant::nameToType("qint64") );
             result.setAccessHash( _accessHash_var.value<qint64>() );
         }
-        
+
         return result;
     }
     return result;
@@ -190,7 +190,7 @@ QDataStream &operator<<(QDataStream &stream, const InputChannel &item) {
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case InputChannel::typeInputChannelEmpty:
-        
+
         break;
     case InputChannel::typeInputChannel:
         stream << item.channelId();
@@ -206,7 +206,7 @@ QDataStream &operator>>(QDataStream &stream, InputChannel &item) {
     item.setClassType(static_cast<InputChannel::InputChannelClassType>(type));
     switch(type) {
     case InputChannel::typeInputChannelEmpty: {
-        
+
     }
         break;
     case InputChannel::typeInputChannel: {
@@ -222,7 +222,7 @@ QDataStream &operator>>(QDataStream &stream, InputChannel &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const InputChannel &item) {
+/*QDebug operator<<(QDebug debug,  const InputChannel &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.InputChannel(";
@@ -239,4 +239,4 @@ QDebug operator<<(QDebug debug,  const InputChannel &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

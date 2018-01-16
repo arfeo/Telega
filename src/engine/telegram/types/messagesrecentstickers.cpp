@@ -39,7 +39,7 @@ MessagesRecentStickers::MessagesRecentStickers(const Null &null) :
 }
 
 MessagesRecentStickers::~MessagesRecentStickers() {
-    
+
 }
 
 void MessagesRecentStickers::setHash(qint32 hash) {
@@ -89,7 +89,7 @@ bool MessagesRecentStickers::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeMessagesRecentStickers: {
         m_hash = in->fetchInt();
         if(in->fetchInt() != (qint32)CoreTypes::typeVector) return false;
@@ -104,7 +104,7 @@ bool MessagesRecentStickers::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -118,7 +118,7 @@ bool MessagesRecentStickers::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeMessagesRecentStickers: {
         out->appendInt(m_hash);
         out->appendInt(CoreTypes::typeVector);
@@ -129,7 +129,7 @@ bool MessagesRecentStickers::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -143,7 +143,7 @@ QMap<QString, QVariant> MessagesRecentStickers::toMap() const {
         return result;
     }
         break;
-    
+
     case typeMessagesRecentStickers: {
         result["classType"] = "MessagesRecentStickers::typeMessagesRecentStickers";
         if( hash() ) result["hash"] = QString::number(hash());
@@ -154,7 +154,7 @@ QMap<QString, QVariant> MessagesRecentStickers::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -173,7 +173,7 @@ MessagesRecentStickers MessagesRecentStickers::fromMap(const QMap<QString, QVari
             _hash_var.convert( QVariant::nameToType("qint32") );
             result.setHash( _hash_var.value<qint32>() );
         }
-        
+
         QList<QVariant> map_stickers = map["stickers"].toList();
         QList<Document> _stickers;
         for(const QVariant &var: map_stickers)
@@ -199,7 +199,7 @@ QDataStream &operator<<(QDataStream &stream, const MessagesRecentStickers &item)
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case MessagesRecentStickers::typeMessagesRecentStickersNotModified:
-        
+
         break;
     case MessagesRecentStickers::typeMessagesRecentStickers:
         stream << item.hash();
@@ -215,7 +215,7 @@ QDataStream &operator>>(QDataStream &stream, MessagesRecentStickers &item) {
     item.setClassType(static_cast<MessagesRecentStickers::MessagesRecentStickersClassType>(type));
     switch(type) {
     case MessagesRecentStickers::typeMessagesRecentStickersNotModified: {
-        
+
     }
         break;
     case MessagesRecentStickers::typeMessagesRecentStickers: {
@@ -231,7 +231,7 @@ QDataStream &operator>>(QDataStream &stream, MessagesRecentStickers &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const MessagesRecentStickers &item) {
+/*QDebug operator<<(QDebug debug,  const MessagesRecentStickers &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.MessagesRecentStickers(";
@@ -248,4 +248,4 @@ QDebug operator<<(QDebug debug,  const MessagesRecentStickers &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

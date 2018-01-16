@@ -39,7 +39,7 @@ AuthSentCodeType::AuthSentCodeType(const Null &null) :
 }
 
 AuthSentCodeType::~AuthSentCodeType() {
-    
+
 }
 
 void AuthSentCodeType::setLength(qint32 length) {
@@ -90,28 +90,28 @@ bool AuthSentCodeType::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeAuthSentCodeTypeSms: {
         m_length = in->fetchInt();
         m_classType = static_cast<AuthSentCodeTypeClassType>(x);
         return true;
     }
         break;
-    
+
     case typeAuthSentCodeTypeCall: {
         m_length = in->fetchInt();
         m_classType = static_cast<AuthSentCodeTypeClassType>(x);
         return true;
     }
         break;
-    
+
     case typeAuthSentCodeTypeFlashCall: {
         m_pattern = in->fetchQString();
         m_classType = static_cast<AuthSentCodeTypeClassType>(x);
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -126,25 +126,25 @@ bool AuthSentCodeType::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeAuthSentCodeTypeSms: {
         out->appendInt(m_length);
         return true;
     }
         break;
-    
+
     case typeAuthSentCodeTypeCall: {
         out->appendInt(m_length);
         return true;
     }
         break;
-    
+
     case typeAuthSentCodeTypeFlashCall: {
         out->appendQString(m_pattern);
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -159,28 +159,28 @@ QMap<QString, QVariant> AuthSentCodeType::toMap() const {
         return result;
     }
         break;
-    
+
     case typeAuthSentCodeTypeSms: {
         result["classType"] = "AuthSentCodeType::typeAuthSentCodeTypeSms";
         if( length() ) result["length"] = QString::number(length());
         return result;
     }
         break;
-    
+
     case typeAuthSentCodeTypeCall: {
         result["classType"] = "AuthSentCodeType::typeAuthSentCodeTypeCall";
         if( length() ) result["length"] = QString::number(length());
         return result;
     }
         break;
-    
+
     case typeAuthSentCodeTypeFlashCall: {
         result["classType"] = "AuthSentCodeType::typeAuthSentCodeTypeFlashCall";
         if( !m_pattern.isEmpty() ) result["pattern"] = QVariant::fromValue<QString>(m_pattern);
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -195,7 +195,7 @@ AuthSentCodeType AuthSentCodeType::fromMap(const QMap<QString, QVariant> &map) {
             _length_var.convert( QVariant::nameToType("qint32") );
             result.setLength( _length_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "AuthSentCodeType::typeAuthSentCodeTypeSms") {
@@ -205,7 +205,7 @@ AuthSentCodeType AuthSentCodeType::fromMap(const QMap<QString, QVariant> &map) {
             _length_var.convert( QVariant::nameToType("qint32") );
             result.setLength( _length_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "AuthSentCodeType::typeAuthSentCodeTypeCall") {
@@ -215,7 +215,7 @@ AuthSentCodeType AuthSentCodeType::fromMap(const QMap<QString, QVariant> &map) {
             _length_var.convert( QVariant::nameToType("qint32") );
             result.setLength( _length_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "AuthSentCodeType::typeAuthSentCodeTypeFlashCall") {
@@ -225,7 +225,7 @@ AuthSentCodeType AuthSentCodeType::fromMap(const QMap<QString, QVariant> &map) {
             _pattern_var.convert( QVariant::nameToType("QString") );
             result.setPattern( _pattern_var.value<QString>() );
         }
-        
+
         return result;
     }
     return result;
@@ -294,7 +294,7 @@ QDataStream &operator>>(QDataStream &stream, AuthSentCodeType &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const AuthSentCodeType &item) {
+/*QDebug operator<<(QDebug debug,  const AuthSentCodeType &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.AuthSentCodeType(";
@@ -319,4 +319,4 @@ QDebug operator<<(QDebug debug,  const AuthSentCodeType &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

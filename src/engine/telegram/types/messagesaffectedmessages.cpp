@@ -43,7 +43,7 @@ MessagesAffectedMessages::MessagesAffectedMessages(const Null &null) :
 }
 
 MessagesAffectedMessages::~MessagesAffectedMessages() {
-    
+
 }
 
 void MessagesAffectedMessages::setPts(qint32 pts) {
@@ -95,7 +95,7 @@ bool MessagesAffectedMessages::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -111,7 +111,7 @@ bool MessagesAffectedMessages::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -127,7 +127,7 @@ QMap<QString, QVariant> MessagesAffectedMessages::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -142,13 +142,13 @@ MessagesAffectedMessages MessagesAffectedMessages::fromMap(const QMap<QString, Q
             _pts_var.convert( QVariant::nameToType("qint32") );
             result.setPts( _pts_var.value<qint32>() );
         }
-        
+
         QVariant _ptsCount_var = map.value("ptsCount");
         if( !_ptsCount_var.isNull() ) {
             _ptsCount_var.convert( QVariant::nameToType("qint32") );
             result.setPtsCount( _ptsCount_var.value<qint32>() );
         }
-        
+
         return result;
     }
     return result;
@@ -194,7 +194,7 @@ QDataStream &operator>>(QDataStream &stream, MessagesAffectedMessages &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const MessagesAffectedMessages &item) {
+/*QDebug operator<<(QDebug debug,  const MessagesAffectedMessages &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.MessagesAffectedMessages(";
@@ -208,4 +208,4 @@ QDebug operator<<(QDebug debug,  const MessagesAffectedMessages &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

@@ -10,7 +10,7 @@ PhonePhoneCallObject::PhonePhoneCallObject(const PhonePhoneCall &core, QObject *
     m_core(core)
 {
     m_phoneCall = new PhoneCallObject(m_core.phoneCall(), this);
-    connect(m_phoneCall.data(), &PhoneCallObject::coreChanged, this, &PhonePhoneCallObject::corePhoneCallChanged);
+    connect(m_phoneCall.data(), SIGNAL(coreChanged()), this, SLOT(corePhoneCallChanged()));
 }
 
 PhonePhoneCallObject::PhonePhoneCallObject(QObject *parent) :
@@ -19,7 +19,7 @@ PhonePhoneCallObject::PhonePhoneCallObject(QObject *parent) :
     m_core()
 {
     m_phoneCall = new PhoneCallObject(m_core.phoneCall(), this);
-    connect(m_phoneCall.data(), &PhoneCallObject::coreChanged, this, &PhonePhoneCallObject::corePhoneCallChanged);
+    connect(m_phoneCall.data(), SIGNAL(coreChanged()), this, SLOT(corePhoneCallChanged()));
 }
 
 PhonePhoneCallObject::~PhonePhoneCallObject() {
@@ -32,7 +32,7 @@ void PhonePhoneCallObject::setPhoneCall(PhoneCallObject* phoneCall) {
     if(m_phoneCall) {
         m_phoneCall->setParent(this);
         m_core.setPhoneCall(m_phoneCall->core());
-        connect(m_phoneCall.data(), &PhoneCallObject::coreChanged, this, &PhonePhoneCallObject::corePhoneCallChanged);
+        connect(m_phoneCall.data(), SIGNAL(coreChanged()), this, SLOT(corePhoneCallChanged()));
     }
     Q_EMIT phoneCallChanged();
     Q_EMIT coreChanged();

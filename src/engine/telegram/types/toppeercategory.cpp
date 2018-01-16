@@ -35,7 +35,7 @@ TopPeerCategory::TopPeerCategory(const Null &null) :
 }
 
 TopPeerCategory::~TopPeerCategory() {
-    
+
 }
 
 bool TopPeerCategory::operator ==(const TopPeerCategory &b) const {
@@ -65,37 +65,37 @@ bool TopPeerCategory::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeTopPeerCategoryBotsInline: {
         m_classType = static_cast<TopPeerCategoryClassType>(x);
         return true;
     }
         break;
-    
+
     case typeTopPeerCategoryCorrespondents: {
         m_classType = static_cast<TopPeerCategoryClassType>(x);
         return true;
     }
         break;
-    
+
     case typeTopPeerCategoryGroups: {
         m_classType = static_cast<TopPeerCategoryClassType>(x);
         return true;
     }
         break;
-    
+
     case typeTopPeerCategoryChannels: {
         m_classType = static_cast<TopPeerCategoryClassType>(x);
         return true;
     }
         break;
-    
+
     case typeTopPeerCategoryPhoneCalls: {
         m_classType = static_cast<TopPeerCategoryClassType>(x);
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -109,32 +109,32 @@ bool TopPeerCategory::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeTopPeerCategoryBotsInline: {
         return true;
     }
         break;
-    
+
     case typeTopPeerCategoryCorrespondents: {
         return true;
     }
         break;
-    
+
     case typeTopPeerCategoryGroups: {
         return true;
     }
         break;
-    
+
     case typeTopPeerCategoryChannels: {
         return true;
     }
         break;
-    
+
     case typeTopPeerCategoryPhoneCalls: {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -148,37 +148,37 @@ QMap<QString, QVariant> TopPeerCategory::toMap() const {
         return result;
     }
         break;
-    
+
     case typeTopPeerCategoryBotsInline: {
         result["classType"] = "TopPeerCategory::typeTopPeerCategoryBotsInline";
         return result;
     }
         break;
-    
+
     case typeTopPeerCategoryCorrespondents: {
         result["classType"] = "TopPeerCategory::typeTopPeerCategoryCorrespondents";
         return result;
     }
         break;
-    
+
     case typeTopPeerCategoryGroups: {
         result["classType"] = "TopPeerCategory::typeTopPeerCategoryGroups";
         return result;
     }
         break;
-    
+
     case typeTopPeerCategoryChannels: {
         result["classType"] = "TopPeerCategory::typeTopPeerCategoryChannels";
         return result;
     }
         break;
-    
+
     case typeTopPeerCategoryPhoneCalls: {
         result["classType"] = "TopPeerCategory::typeTopPeerCategoryPhoneCalls";
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -228,22 +228,22 @@ QDataStream &operator<<(QDataStream &stream, const TopPeerCategory &item) {
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case TopPeerCategory::typeTopPeerCategoryBotsPM:
-        
+
         break;
     case TopPeerCategory::typeTopPeerCategoryBotsInline:
-        
+
         break;
     case TopPeerCategory::typeTopPeerCategoryCorrespondents:
-        
+
         break;
     case TopPeerCategory::typeTopPeerCategoryGroups:
-        
+
         break;
     case TopPeerCategory::typeTopPeerCategoryChannels:
-        
+
         break;
     case TopPeerCategory::typeTopPeerCategoryPhoneCalls:
-        
+
         break;
     }
     return stream;
@@ -255,34 +255,34 @@ QDataStream &operator>>(QDataStream &stream, TopPeerCategory &item) {
     item.setClassType(static_cast<TopPeerCategory::TopPeerCategoryClassType>(type));
     switch(type) {
     case TopPeerCategory::typeTopPeerCategoryBotsPM: {
-        
+
     }
         break;
     case TopPeerCategory::typeTopPeerCategoryBotsInline: {
-        
+
     }
         break;
     case TopPeerCategory::typeTopPeerCategoryCorrespondents: {
-        
+
     }
         break;
     case TopPeerCategory::typeTopPeerCategoryGroups: {
-        
+
     }
         break;
     case TopPeerCategory::typeTopPeerCategoryChannels: {
-        
+
     }
         break;
     case TopPeerCategory::typeTopPeerCategoryPhoneCalls: {
-        
+
     }
         break;
     }
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const TopPeerCategory &item) {
+/*QDebug operator<<(QDebug debug,  const TopPeerCategory &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.TopPeerCategory(";
@@ -309,4 +309,4 @@ QDebug operator<<(QDebug debug,  const TopPeerCategory &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

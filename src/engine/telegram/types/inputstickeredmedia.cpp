@@ -35,7 +35,7 @@ InputStickeredMedia::InputStickeredMedia(const Null &null) :
 }
 
 InputStickeredMedia::~InputStickeredMedia() {
-    
+
 }
 
 void InputStickeredMedia::setIdInputDocument(const InputDocument &idInputDocument) {
@@ -86,14 +86,14 @@ bool InputStickeredMedia::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputStickeredMediaDocument: {
         m_idInputDocument.fetch(in);
         m_classType = static_cast<InputStickeredMediaClassType>(x);
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -108,13 +108,13 @@ bool InputStickeredMedia::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeInputStickeredMediaDocument: {
         m_idInputDocument.push(out);
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -129,14 +129,14 @@ QMap<QString, QVariant> InputStickeredMedia::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputStickeredMediaDocument: {
         result["classType"] = "InputStickeredMedia::typeInputStickeredMediaDocument";
         if( !m_idInputDocument.isNull() ) result["idInputDocument"] = m_idInputDocument.toMap();
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -149,7 +149,7 @@ InputStickeredMedia InputStickeredMedia::fromMap(const QMap<QString, QVariant> &
         QVariant _idInputPhoto_var = map.value("idInputPhoto");
         if( !_idInputPhoto_var.isNull() )
             result.setIdInputPhoto( InputPhoto::fromMap(_idInputPhoto_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "InputStickeredMedia::typeInputStickeredMediaDocument") {
@@ -157,7 +157,7 @@ InputStickeredMedia InputStickeredMedia::fromMap(const QMap<QString, QVariant> &
         QVariant _idInputDocument_var = map.value("idInputDocument");
         if( !_idInputDocument_var.isNull() )
             result.setIdInputDocument( InputDocument::fromMap(_idInputDocument_var.toMap()) );
-        
+
         return result;
     }
     return result;
@@ -208,7 +208,7 @@ QDataStream &operator>>(QDataStream &stream, InputStickeredMedia &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const InputStickeredMedia &item) {
+/*QDebug operator<<(QDebug debug,  const InputStickeredMedia &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.InputStickeredMedia(";
@@ -225,4 +225,4 @@ QDebug operator<<(QDebug debug,  const InputStickeredMedia &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

@@ -47,7 +47,7 @@ DcOption::DcOption(const Null &null) :
 }
 
 DcOption::~DcOption() {
-    
+
 }
 
 void DcOption::setCdn(bool cdn) {
@@ -166,7 +166,7 @@ bool DcOption::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -184,7 +184,7 @@ bool DcOption::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -206,7 +206,7 @@ QMap<QString, QVariant> DcOption::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -221,49 +221,49 @@ DcOption DcOption::fromMap(const QMap<QString, QVariant> &map) {
             _ipv6_var.convert( QVariant::nameToType("bool") );
             result.setIpv6( _ipv6_var.value<bool>() );
         }
-        
+
         QVariant _mediaOnly_var = map.value("mediaOnly");
         if( !_mediaOnly_var.isNull() ) {
             _mediaOnly_var.convert( QVariant::nameToType("bool") );
             result.setMediaOnly( _mediaOnly_var.value<bool>() );
         }
-        
+
         QVariant _tcpoOnly_var = map.value("tcpoOnly");
         if( !_tcpoOnly_var.isNull() ) {
             _tcpoOnly_var.convert( QVariant::nameToType("bool") );
             result.setTcpoOnly( _tcpoOnly_var.value<bool>() );
         }
-        
+
         QVariant _cdn_var = map.value("cdn");
         if( !_cdn_var.isNull() ) {
             _cdn_var.convert( QVariant::nameToType("bool") );
             result.setCdn( _cdn_var.value<bool>() );
         }
-        
+
         QVariant _staticValue_var = map.value("staticValue");
         if( !_staticValue_var.isNull() ) {
             _staticValue_var.convert( QVariant::nameToType("bool") );
             result.setStaticValue( _staticValue_var.value<bool>() );
         }
-        
+
         QVariant _id_var = map.value("id");
         if( !_id_var.isNull() ) {
             _id_var.convert( QVariant::nameToType("qint32") );
             result.setId( _id_var.value<qint32>() );
         }
-        
+
         QVariant _ipAddress_var = map.value("ipAddress");
         if( !_ipAddress_var.isNull() ) {
             _ipAddress_var.convert( QVariant::nameToType("QString") );
             result.setIpAddress( _ipAddress_var.value<QString>() );
         }
-        
+
         QVariant _port_var = map.value("port");
         if( !_port_var.isNull() ) {
             _port_var.convert( QVariant::nameToType("qint32") );
             result.setPort( _port_var.value<qint32>() );
         }
-        
+
         return result;
     }
     return result;
@@ -317,7 +317,7 @@ QDataStream &operator>>(QDataStream &stream, DcOption &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const DcOption &item) {
+/*QDebug operator<<(QDebug debug,  const DcOption &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.DcOption(";
@@ -333,4 +333,4 @@ QDebug operator<<(QDebug debug,  const DcOption &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

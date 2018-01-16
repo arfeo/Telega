@@ -51,7 +51,7 @@ DocumentAttribute::DocumentAttribute(const Null &null) :
 }
 
 DocumentAttribute::~DocumentAttribute() {
-    
+
 }
 
 void DocumentAttribute::setAlt(const QString &alt) {
@@ -228,13 +228,13 @@ bool DocumentAttribute::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeDocumentAttributeAnimated: {
         m_classType = static_cast<DocumentAttributeClassType>(x);
         return true;
     }
         break;
-    
+
     case typeDocumentAttributeSticker: {
         m_flags = in->fetchInt();
         m_alt = in->fetchQString();
@@ -246,7 +246,7 @@ bool DocumentAttribute::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeDocumentAttributeVideo: {
         m_flags = in->fetchInt();
         m_duration = in->fetchInt();
@@ -256,7 +256,7 @@ bool DocumentAttribute::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeDocumentAttributeAudio: {
         m_flags = in->fetchInt();
         m_duration = in->fetchInt();
@@ -273,26 +273,26 @@ bool DocumentAttribute::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeDocumentAttributeFilename: {
         m_fileName = in->fetchQString();
         m_classType = static_cast<DocumentAttributeClassType>(x);
         return true;
     }
         break;
-    
+
     case typeDocumentAttributeHasStickers: {
         m_classType = static_cast<DocumentAttributeClassType>(x);
         return true;
     }
         break;
-    
+
     case typeDocumentAttributeStickerSecret23: {
         m_classType = static_cast<DocumentAttributeClassType>(x);
         return true;
     }
         break;
-    
+
     case typeDocumentAttributeVideoSecret23: {
         m_duration = in->fetchInt();
         m_w = in->fetchInt();
@@ -301,14 +301,14 @@ bool DocumentAttribute::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeDocumentAttributeAudioSecret23: {
         m_duration = in->fetchInt();
         m_classType = static_cast<DocumentAttributeClassType>(x);
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -324,12 +324,12 @@ bool DocumentAttribute::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeDocumentAttributeAnimated: {
         return true;
     }
         break;
-    
+
     case typeDocumentAttributeSticker: {
         out->appendInt(m_flags);
         out->appendQString(m_alt);
@@ -340,7 +340,7 @@ bool DocumentAttribute::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeDocumentAttributeVideo: {
         out->appendInt(m_flags);
         out->appendInt(m_duration);
@@ -349,7 +349,7 @@ bool DocumentAttribute::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeDocumentAttributeAudio: {
         out->appendInt(m_flags);
         out->appendInt(m_duration);
@@ -365,23 +365,23 @@ bool DocumentAttribute::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeDocumentAttributeFilename: {
         out->appendQString(m_fileName);
         return true;
     }
         break;
-    
+
     case typeDocumentAttributeHasStickers: {
         return true;
     }
         break;
-    
+
     case typeDocumentAttributeStickerSecret23: {
         return true;
     }
         break;
-    
+
     case typeDocumentAttributeVideoSecret23: {
         out->appendInt(m_duration);
         out->appendInt(m_w);
@@ -389,13 +389,13 @@ bool DocumentAttribute::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeDocumentAttributeAudioSecret23: {
         out->appendInt(m_duration);
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -411,13 +411,13 @@ QMap<QString, QVariant> DocumentAttribute::toMap() const {
         return result;
     }
         break;
-    
+
     case typeDocumentAttributeAnimated: {
         result["classType"] = "DocumentAttribute::typeDocumentAttributeAnimated";
         return result;
     }
         break;
-    
+
     case typeDocumentAttributeSticker: {
         result["classType"] = "DocumentAttribute::typeDocumentAttributeSticker";
         if( mask() ) result["mask"] = QString::number(mask());
@@ -427,7 +427,7 @@ QMap<QString, QVariant> DocumentAttribute::toMap() const {
         return result;
     }
         break;
-    
+
     case typeDocumentAttributeVideo: {
         result["classType"] = "DocumentAttribute::typeDocumentAttributeVideo";
         if( roundMessage() ) result["roundMessage"] = QString::number(roundMessage());
@@ -437,7 +437,7 @@ QMap<QString, QVariant> DocumentAttribute::toMap() const {
         return result;
     }
         break;
-    
+
     case typeDocumentAttributeAudio: {
         result["classType"] = "DocumentAttribute::typeDocumentAttributeAudio";
         if( voice() ) result["voice"] = QString::number(voice());
@@ -448,26 +448,26 @@ QMap<QString, QVariant> DocumentAttribute::toMap() const {
         return result;
     }
         break;
-    
+
     case typeDocumentAttributeFilename: {
         result["classType"] = "DocumentAttribute::typeDocumentAttributeFilename";
         if( !m_fileName.isEmpty() ) result["fileName"] = QVariant::fromValue<QString>(m_fileName);
         return result;
     }
         break;
-    
+
     case typeDocumentAttributeHasStickers: {
         result["classType"] = "DocumentAttribute::typeDocumentAttributeHasStickers";
         return result;
     }
         break;
-    
+
     case typeDocumentAttributeStickerSecret23: {
         result["classType"] = "DocumentAttribute::typeDocumentAttributeStickerSecret23";
         return result;
     }
         break;
-    
+
     case typeDocumentAttributeVideoSecret23: {
         result["classType"] = "DocumentAttribute::typeDocumentAttributeVideoSecret23";
         if( duration() ) result["duration"] = QString::number(duration());
@@ -476,14 +476,14 @@ QMap<QString, QVariant> DocumentAttribute::toMap() const {
         return result;
     }
         break;
-    
+
     case typeDocumentAttributeAudioSecret23: {
         result["classType"] = "DocumentAttribute::typeDocumentAttributeAudioSecret23";
         if( duration() ) result["duration"] = QString::number(duration());
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -498,13 +498,13 @@ DocumentAttribute DocumentAttribute::fromMap(const QMap<QString, QVariant> &map)
             _w_var.convert( QVariant::nameToType("qint32") );
             result.setW( _w_var.value<qint32>() );
         }
-        
+
         QVariant _h_var = map.value("h");
         if( !_h_var.isNull() ) {
             _h_var.convert( QVariant::nameToType("qint32") );
             result.setH( _h_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "DocumentAttribute::typeDocumentAttributeAnimated") {
@@ -518,21 +518,21 @@ DocumentAttribute DocumentAttribute::fromMap(const QMap<QString, QVariant> &map)
             _mask_var.convert( QVariant::nameToType("bool") );
             result.setMask( _mask_var.value<bool>() );
         }
-        
+
         QVariant _alt_var = map.value("alt");
         if( !_alt_var.isNull() ) {
             _alt_var.convert( QVariant::nameToType("QString") );
             result.setAlt( _alt_var.value<QString>() );
         }
-        
+
         QVariant _stickerset_var = map.value("stickerset");
         if( !_stickerset_var.isNull() )
             result.setStickerset( InputStickerSet::fromMap(_stickerset_var.toMap()) );
-        
+
         QVariant _maskCoords_var = map.value("maskCoords");
         if( !_maskCoords_var.isNull() )
             result.setMaskCoords( MaskCoords::fromMap(_maskCoords_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "DocumentAttribute::typeDocumentAttributeVideo") {
@@ -542,25 +542,25 @@ DocumentAttribute DocumentAttribute::fromMap(const QMap<QString, QVariant> &map)
             _roundMessage_var.convert( QVariant::nameToType("bool") );
             result.setRoundMessage( _roundMessage_var.value<bool>() );
         }
-        
+
         QVariant _duration_var = map.value("duration");
         if( !_duration_var.isNull() ) {
             _duration_var.convert( QVariant::nameToType("qint32") );
             result.setDuration( _duration_var.value<qint32>() );
         }
-        
+
         QVariant _w_var = map.value("w");
         if( !_w_var.isNull() ) {
             _w_var.convert( QVariant::nameToType("qint32") );
             result.setW( _w_var.value<qint32>() );
         }
-        
+
         QVariant _h_var = map.value("h");
         if( !_h_var.isNull() ) {
             _h_var.convert( QVariant::nameToType("qint32") );
             result.setH( _h_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "DocumentAttribute::typeDocumentAttributeAudio") {
@@ -570,31 +570,31 @@ DocumentAttribute DocumentAttribute::fromMap(const QMap<QString, QVariant> &map)
             _voice_var.convert( QVariant::nameToType("bool") );
             result.setVoice( _voice_var.value<bool>() );
         }
-        
+
         QVariant _duration_var = map.value("duration");
         if( !_duration_var.isNull() ) {
             _duration_var.convert( QVariant::nameToType("qint32") );
             result.setDuration( _duration_var.value<qint32>() );
         }
-        
+
         QVariant _title_var = map.value("title");
         if( !_title_var.isNull() ) {
             _title_var.convert( QVariant::nameToType("QString") );
             result.setTitle( _title_var.value<QString>() );
         }
-        
+
         QVariant _performer_var = map.value("performer");
         if( !_performer_var.isNull() ) {
             _performer_var.convert( QVariant::nameToType("QString") );
             result.setPerformer( _performer_var.value<QString>() );
         }
-        
+
         QVariant _waveform_var = map.value("waveform");
         if( !_waveform_var.isNull() ) {
             _waveform_var.convert( QVariant::nameToType("QByteArray") );
             result.setWaveform( _waveform_var.value<QByteArray>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "DocumentAttribute::typeDocumentAttributeFilename") {
@@ -604,7 +604,7 @@ DocumentAttribute DocumentAttribute::fromMap(const QMap<QString, QVariant> &map)
             _fileName_var.convert( QVariant::nameToType("QString") );
             result.setFileName( _fileName_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "DocumentAttribute::typeDocumentAttributeHasStickers") {
@@ -618,13 +618,13 @@ DocumentAttribute DocumentAttribute::fromMap(const QMap<QString, QVariant> &map)
             _w_var.convert( QVariant::nameToType("qint32") );
             result.setW( _w_var.value<qint32>() );
         }
-        
+
         QVariant _h_var = map.value("h");
         if( !_h_var.isNull() ) {
             _h_var.convert( QVariant::nameToType("qint32") );
             result.setH( _h_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "DocumentAttribute::typeDocumentAttributeAnimatedSecret23") {
@@ -642,19 +642,19 @@ DocumentAttribute DocumentAttribute::fromMap(const QMap<QString, QVariant> &map)
             _duration_var.convert( QVariant::nameToType("qint32") );
             result.setDuration( _duration_var.value<qint32>() );
         }
-        
+
         QVariant _w_var = map.value("w");
         if( !_w_var.isNull() ) {
             _w_var.convert( QVariant::nameToType("qint32") );
             result.setW( _w_var.value<qint32>() );
         }
-        
+
         QVariant _h_var = map.value("h");
         if( !_h_var.isNull() ) {
             _h_var.convert( QVariant::nameToType("qint32") );
             result.setH( _h_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "DocumentAttribute::typeDocumentAttributeAudioSecret23") {
@@ -664,7 +664,7 @@ DocumentAttribute DocumentAttribute::fromMap(const QMap<QString, QVariant> &map)
             _duration_var.convert( QVariant::nameToType("qint32") );
             result.setDuration( _duration_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "DocumentAttribute::typeDocumentAttributeFilenameSecret23") {
@@ -674,7 +674,7 @@ DocumentAttribute DocumentAttribute::fromMap(const QMap<QString, QVariant> &map)
             _fileName_var.convert( QVariant::nameToType("QString") );
             result.setFileName( _fileName_var.value<QString>() );
         }
-        
+
         return result;
     }
     return result;
@@ -699,7 +699,7 @@ QDataStream &operator<<(QDataStream &stream, const DocumentAttribute &item) {
         stream << item.h();
         break;
     case DocumentAttribute::typeDocumentAttributeAnimated:
-        
+
         break;
     case DocumentAttribute::typeDocumentAttributeSticker:
         stream << item.flags();
@@ -724,10 +724,10 @@ QDataStream &operator<<(QDataStream &stream, const DocumentAttribute &item) {
         stream << item.fileName();
         break;
     case DocumentAttribute::typeDocumentAttributeHasStickers:
-        
+
         break;
     case DocumentAttribute::typeDocumentAttributeStickerSecret23:
-        
+
         break;
     case DocumentAttribute::typeDocumentAttributeVideoSecret23:
         stream << item.duration();
@@ -756,7 +756,7 @@ QDataStream &operator>>(QDataStream &stream, DocumentAttribute &item) {
     }
         break;
     case DocumentAttribute::typeDocumentAttributeAnimated: {
-        
+
     }
         break;
     case DocumentAttribute::typeDocumentAttributeSticker: {
@@ -814,11 +814,11 @@ QDataStream &operator>>(QDataStream &stream, DocumentAttribute &item) {
     }
         break;
     case DocumentAttribute::typeDocumentAttributeHasStickers: {
-        
+
     }
         break;
     case DocumentAttribute::typeDocumentAttributeStickerSecret23: {
-        
+
     }
         break;
     case DocumentAttribute::typeDocumentAttributeVideoSecret23: {
@@ -843,7 +843,7 @@ QDataStream &operator>>(QDataStream &stream, DocumentAttribute &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const DocumentAttribute &item) {
+/*QDebug operator<<(QDebug debug,  const DocumentAttribute &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.DocumentAttribute(";
@@ -902,4 +902,4 @@ QDebug operator<<(QDebug debug,  const DocumentAttribute &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

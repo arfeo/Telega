@@ -39,7 +39,7 @@ TopPeerCategoryPeers::TopPeerCategoryPeers(const Null &null) :
 }
 
 TopPeerCategoryPeers::~TopPeerCategoryPeers() {
-    
+
 }
 
 void TopPeerCategoryPeers::setCategory(const TopPeerCategory &category) {
@@ -109,7 +109,7 @@ bool TopPeerCategoryPeers::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -130,7 +130,7 @@ bool TopPeerCategoryPeers::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -150,7 +150,7 @@ QMap<QString, QVariant> TopPeerCategoryPeers::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -163,13 +163,13 @@ TopPeerCategoryPeers TopPeerCategoryPeers::fromMap(const QMap<QString, QVariant>
         QVariant _category_var = map.value("category");
         if( !_category_var.isNull() )
             result.setCategory( TopPeerCategory::fromMap(_category_var.toMap()) );
-        
+
         QVariant _count_var = map.value("count");
         if( !_count_var.isNull() ) {
             _count_var.convert( QVariant::nameToType("qint32") );
             result.setCount( _count_var.value<qint32>() );
         }
-        
+
         QList<QVariant> map_peers = map["peers"].toList();
         QList<TopPeer> _peers;
         for(const QVariant &var: map_peers)
@@ -224,7 +224,7 @@ QDataStream &operator>>(QDataStream &stream, TopPeerCategoryPeers &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const TopPeerCategoryPeers &item) {
+/*QDebug operator<<(QDebug debug,  const TopPeerCategoryPeers &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.TopPeerCategoryPeers(";
@@ -239,4 +239,4 @@ QDebug operator<<(QDebug debug,  const TopPeerCategoryPeers &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

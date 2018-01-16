@@ -39,7 +39,7 @@ LangPackString::LangPackString(const Null &null) :
 }
 
 LangPackString::~LangPackString() {
-    
+
 }
 
 void LangPackString::setFewValue(const QString &fewValue) {
@@ -171,7 +171,7 @@ bool LangPackString::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeLangPackStringPluralized: {
         m_flags = in->fetchInt();
         m_key = in->fetchQString();
@@ -195,14 +195,14 @@ bool LangPackString::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeLangPackStringDeleted: {
         m_key = in->fetchQString();
         m_classType = static_cast<LangPackStringClassType>(x);
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -218,7 +218,7 @@ bool LangPackString::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeLangPackStringPluralized: {
         out->appendInt(m_flags);
         out->appendQString(m_key);
@@ -241,13 +241,13 @@ bool LangPackString::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeLangPackStringDeleted: {
         out->appendQString(m_key);
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -263,7 +263,7 @@ QMap<QString, QVariant> LangPackString::toMap() const {
         return result;
     }
         break;
-    
+
     case typeLangPackStringPluralized: {
         result["classType"] = "LangPackString::typeLangPackStringPluralized";
         if( !m_key.isEmpty() ) result["key"] = QVariant::fromValue<QString>(m_key);
@@ -276,14 +276,14 @@ QMap<QString, QVariant> LangPackString::toMap() const {
         return result;
     }
         break;
-    
+
     case typeLangPackStringDeleted: {
         result["classType"] = "LangPackString::typeLangPackStringDeleted";
         if( !m_key.isEmpty() ) result["key"] = QVariant::fromValue<QString>(m_key);
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -298,13 +298,13 @@ LangPackString LangPackString::fromMap(const QMap<QString, QVariant> &map) {
             _key_var.convert( QVariant::nameToType("QString") );
             result.setKey( _key_var.value<QString>() );
         }
-        
+
         QVariant _value_var = map.value("value");
         if( !_value_var.isNull() ) {
             _value_var.convert( QVariant::nameToType("QString") );
             result.setValue( _value_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "LangPackString::typeLangPackStringPluralized") {
@@ -314,43 +314,43 @@ LangPackString LangPackString::fromMap(const QMap<QString, QVariant> &map) {
             _key_var.convert( QVariant::nameToType("QString") );
             result.setKey( _key_var.value<QString>() );
         }
-        
+
         QVariant _zeroValue_var = map.value("zeroValue");
         if( !_zeroValue_var.isNull() ) {
             _zeroValue_var.convert( QVariant::nameToType("QString") );
             result.setZeroValue( _zeroValue_var.value<QString>() );
         }
-        
+
         QVariant _oneValue_var = map.value("oneValue");
         if( !_oneValue_var.isNull() ) {
             _oneValue_var.convert( QVariant::nameToType("QString") );
             result.setOneValue( _oneValue_var.value<QString>() );
         }
-        
+
         QVariant _twoValue_var = map.value("twoValue");
         if( !_twoValue_var.isNull() ) {
             _twoValue_var.convert( QVariant::nameToType("QString") );
             result.setTwoValue( _twoValue_var.value<QString>() );
         }
-        
+
         QVariant _fewValue_var = map.value("fewValue");
         if( !_fewValue_var.isNull() ) {
             _fewValue_var.convert( QVariant::nameToType("QString") );
             result.setFewValue( _fewValue_var.value<QString>() );
         }
-        
+
         QVariant _manyValue_var = map.value("manyValue");
         if( !_manyValue_var.isNull() ) {
             _manyValue_var.convert( QVariant::nameToType("QString") );
             result.setManyValue( _manyValue_var.value<QString>() );
         }
-        
+
         QVariant _otherValue_var = map.value("otherValue");
         if( !_otherValue_var.isNull() ) {
             _otherValue_var.convert( QVariant::nameToType("QString") );
             result.setOtherValue( _otherValue_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "LangPackString::typeLangPackStringDeleted") {
@@ -360,7 +360,7 @@ LangPackString LangPackString::fromMap(const QMap<QString, QVariant> &map) {
             _key_var.convert( QVariant::nameToType("QString") );
             result.setKey( _key_var.value<QString>() );
         }
-        
+
         return result;
     }
     return result;
@@ -452,7 +452,7 @@ QDataStream &operator>>(QDataStream &stream, LangPackString &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const LangPackString &item) {
+/*QDebug operator<<(QDebug debug,  const LangPackString &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.LangPackString(";
@@ -481,4 +481,4 @@ QDebug operator<<(QDebug debug,  const LangPackString &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

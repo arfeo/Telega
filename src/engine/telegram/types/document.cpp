@@ -59,7 +59,7 @@ Document::Document(const Null &null) :
 }
 
 Document::~Document() {
-    
+
 }
 
 void Document::setAccessHash(qint64 accessHash) {
@@ -180,7 +180,7 @@ bool Document::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeDocument: {
         m_id = in->fetchLong();
         m_accessHash = in->fetchLong();
@@ -202,7 +202,7 @@ bool Document::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -217,7 +217,7 @@ bool Document::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeDocument: {
         out->appendLong(m_id);
         out->appendLong(m_accessHash);
@@ -235,7 +235,7 @@ bool Document::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -250,7 +250,7 @@ QMap<QString, QVariant> Document::toMap() const {
         return result;
     }
         break;
-    
+
     case typeDocument: {
         result["classType"] = "Document::typeDocument";
         if( id() ) result["id"] = QString::number(id());
@@ -268,7 +268,7 @@ QMap<QString, QVariant> Document::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -283,7 +283,7 @@ Document Document::fromMap(const QMap<QString, QVariant> &map) {
             _id_var.convert( QVariant::nameToType("qint64") );
             result.setId( _id_var.value<qint64>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Document::typeDocument") {
@@ -293,47 +293,47 @@ Document Document::fromMap(const QMap<QString, QVariant> &map) {
             _id_var.convert( QVariant::nameToType("qint64") );
             result.setId( _id_var.value<qint64>() );
         }
-        
+
         QVariant _accessHash_var = map.value("accessHash");
         if( !_accessHash_var.isNull() ) {
             _accessHash_var.convert( QVariant::nameToType("qint64") );
             result.setAccessHash( _accessHash_var.value<qint64>() );
         }
-        
+
         QVariant _date_var = map.value("date");
         if( !_date_var.isNull() ) {
             _date_var.convert( QVariant::nameToType("qint32") );
             result.setDate( _date_var.value<qint32>() );
         }
-        
+
         QVariant _mimeType_var = map.value("mimeType");
         if( !_mimeType_var.isNull() ) {
             _mimeType_var.convert( QVariant::nameToType("QString") );
             result.setMimeType( _mimeType_var.value<QString>() );
         }
-        
+
         QVariant _size_var = map.value("size");
         if( !_size_var.isNull() ) {
             _size_var.convert( QVariant::nameToType("qint32") );
             result.setSize( _size_var.value<qint32>() );
         }
-        
+
         QVariant _thumb_var = map.value("thumb");
         if( !_thumb_var.isNull() )
             result.setThumb( PhotoSize::fromMap(_thumb_var.toMap()) );
-        
+
         QVariant _dcId_var = map.value("dcId");
         if( !_dcId_var.isNull() ) {
             _dcId_var.convert( QVariant::nameToType("qint32") );
             result.setDcId( _dcId_var.value<qint32>() );
         }
-        
+
         QVariant _version_var = map.value("version");
         if( !_version_var.isNull() ) {
             _version_var.convert( QVariant::nameToType("qint32") );
             result.setVersion( _version_var.value<qint32>() );
         }
-        
+
         QList<QVariant> map_attributes = map["attributes"].toList();
         QList<DocumentAttribute> _attributes;
         for(const QVariant &var: map_attributes)
@@ -421,7 +421,7 @@ QDataStream &operator>>(QDataStream &stream, Document &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const Document &item) {
+/*QDebug operator<<(QDebug debug,  const Document &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.Document(";
@@ -446,4 +446,4 @@ QDebug operator<<(QDebug debug,  const Document &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

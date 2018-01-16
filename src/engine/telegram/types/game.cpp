@@ -47,7 +47,7 @@ Game::Game(const Null &null) :
 }
 
 Game::~Game() {
-    
+
 }
 
 void Game::setAccessHash(qint64 accessHash) {
@@ -169,7 +169,7 @@ bool Game::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -193,7 +193,7 @@ bool Game::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -214,7 +214,7 @@ QMap<QString, QVariant> Game::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -229,39 +229,39 @@ Game Game::fromMap(const QMap<QString, QVariant> &map) {
             _id_var.convert( QVariant::nameToType("qint64") );
             result.setId( _id_var.value<qint64>() );
         }
-        
+
         QVariant _accessHash_var = map.value("accessHash");
         if( !_accessHash_var.isNull() ) {
             _accessHash_var.convert( QVariant::nameToType("qint64") );
             result.setAccessHash( _accessHash_var.value<qint64>() );
         }
-        
+
         QVariant _shortName_var = map.value("shortName");
         if( !_shortName_var.isNull() ) {
             _shortName_var.convert( QVariant::nameToType("QString") );
             result.setShortName( _shortName_var.value<QString>() );
         }
-        
+
         QVariant _title_var = map.value("title");
         if( !_title_var.isNull() ) {
             _title_var.convert( QVariant::nameToType("QString") );
             result.setTitle( _title_var.value<QString>() );
         }
-        
+
         QVariant _description_var = map.value("description");
         if( !_description_var.isNull() ) {
             _description_var.convert( QVariant::nameToType("QString") );
             result.setDescription( _description_var.value<QString>() );
         }
-        
+
         QVariant _photo_var = map.value("photo");
         if( !_photo_var.isNull() )
             result.setPhoto( Photo::fromMap(_photo_var.toMap()) );
-        
+
         QVariant _document_var = map.value("document");
         if( !_document_var.isNull() )
             result.setDocument( Document::fromMap(_document_var.toMap()) );
-        
+
         return result;
     }
     return result;
@@ -331,7 +331,7 @@ QDataStream &operator>>(QDataStream &stream, Game &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const Game &item) {
+/*QDebug operator<<(QDebug debug,  const Game &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.Game(";
@@ -351,4 +351,4 @@ QDebug operator<<(QDebug debug,  const Game &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

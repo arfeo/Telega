@@ -59,7 +59,7 @@ EncryptedChat::EncryptedChat(const Null &null) :
 }
 
 EncryptedChat::~EncryptedChat() {
-    
+
 }
 
 void EncryptedChat::setAccessHash(qint64 accessHash) {
@@ -170,7 +170,7 @@ bool EncryptedChat::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeEncryptedChatWaiting: {
         m_id = in->fetchInt();
         m_accessHash = in->fetchLong();
@@ -181,7 +181,7 @@ bool EncryptedChat::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeEncryptedChatRequested: {
         m_id = in->fetchInt();
         m_accessHash = in->fetchLong();
@@ -193,7 +193,7 @@ bool EncryptedChat::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeEncryptedChat: {
         m_id = in->fetchInt();
         m_accessHash = in->fetchLong();
@@ -206,14 +206,14 @@ bool EncryptedChat::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeEncryptedChatDiscarded: {
         m_id = in->fetchInt();
         m_classType = static_cast<EncryptedChatClassType>(x);
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -228,7 +228,7 @@ bool EncryptedChat::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeEncryptedChatWaiting: {
         out->appendInt(m_id);
         out->appendLong(m_accessHash);
@@ -238,7 +238,7 @@ bool EncryptedChat::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeEncryptedChatRequested: {
         out->appendInt(m_id);
         out->appendLong(m_accessHash);
@@ -249,7 +249,7 @@ bool EncryptedChat::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeEncryptedChat: {
         out->appendInt(m_id);
         out->appendLong(m_accessHash);
@@ -261,13 +261,13 @@ bool EncryptedChat::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeEncryptedChatDiscarded: {
         out->appendInt(m_id);
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -282,7 +282,7 @@ QMap<QString, QVariant> EncryptedChat::toMap() const {
         return result;
     }
         break;
-    
+
     case typeEncryptedChatWaiting: {
         result["classType"] = "EncryptedChat::typeEncryptedChatWaiting";
         if( id() ) result["id"] = QString::number(id());
@@ -293,7 +293,7 @@ QMap<QString, QVariant> EncryptedChat::toMap() const {
         return result;
     }
         break;
-    
+
     case typeEncryptedChatRequested: {
         result["classType"] = "EncryptedChat::typeEncryptedChatRequested";
         if( id() ) result["id"] = QString::number(id());
@@ -305,7 +305,7 @@ QMap<QString, QVariant> EncryptedChat::toMap() const {
         return result;
     }
         break;
-    
+
     case typeEncryptedChat: {
         result["classType"] = "EncryptedChat::typeEncryptedChat";
         if( id() ) result["id"] = QString::number(id());
@@ -318,14 +318,14 @@ QMap<QString, QVariant> EncryptedChat::toMap() const {
         return result;
     }
         break;
-    
+
     case typeEncryptedChatDiscarded: {
         result["classType"] = "EncryptedChat::typeEncryptedChatDiscarded";
         if( id() ) result["id"] = QString::number(id());
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -340,7 +340,7 @@ EncryptedChat EncryptedChat::fromMap(const QMap<QString, QVariant> &map) {
             _id_var.convert( QVariant::nameToType("qint32") );
             result.setId( _id_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "EncryptedChat::typeEncryptedChatWaiting") {
@@ -350,31 +350,31 @@ EncryptedChat EncryptedChat::fromMap(const QMap<QString, QVariant> &map) {
             _id_var.convert( QVariant::nameToType("qint32") );
             result.setId( _id_var.value<qint32>() );
         }
-        
+
         QVariant _accessHash_var = map.value("accessHash");
         if( !_accessHash_var.isNull() ) {
             _accessHash_var.convert( QVariant::nameToType("qint64") );
             result.setAccessHash( _accessHash_var.value<qint64>() );
         }
-        
+
         QVariant _date_var = map.value("date");
         if( !_date_var.isNull() ) {
             _date_var.convert( QVariant::nameToType("qint32") );
             result.setDate( _date_var.value<qint32>() );
         }
-        
+
         QVariant _adminId_var = map.value("adminId");
         if( !_adminId_var.isNull() ) {
             _adminId_var.convert( QVariant::nameToType("qint32") );
             result.setAdminId( _adminId_var.value<qint32>() );
         }
-        
+
         QVariant _participantId_var = map.value("participantId");
         if( !_participantId_var.isNull() ) {
             _participantId_var.convert( QVariant::nameToType("qint32") );
             result.setParticipantId( _participantId_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "EncryptedChat::typeEncryptedChatRequested") {
@@ -384,37 +384,37 @@ EncryptedChat EncryptedChat::fromMap(const QMap<QString, QVariant> &map) {
             _id_var.convert( QVariant::nameToType("qint32") );
             result.setId( _id_var.value<qint32>() );
         }
-        
+
         QVariant _accessHash_var = map.value("accessHash");
         if( !_accessHash_var.isNull() ) {
             _accessHash_var.convert( QVariant::nameToType("qint64") );
             result.setAccessHash( _accessHash_var.value<qint64>() );
         }
-        
+
         QVariant _date_var = map.value("date");
         if( !_date_var.isNull() ) {
             _date_var.convert( QVariant::nameToType("qint32") );
             result.setDate( _date_var.value<qint32>() );
         }
-        
+
         QVariant _adminId_var = map.value("adminId");
         if( !_adminId_var.isNull() ) {
             _adminId_var.convert( QVariant::nameToType("qint32") );
             result.setAdminId( _adminId_var.value<qint32>() );
         }
-        
+
         QVariant _participantId_var = map.value("participantId");
         if( !_participantId_var.isNull() ) {
             _participantId_var.convert( QVariant::nameToType("qint32") );
             result.setParticipantId( _participantId_var.value<qint32>() );
         }
-        
+
         QVariant _gA_var = map.value("gA");
         if( !_gA_var.isNull() ) {
             _gA_var.convert( QVariant::nameToType("QByteArray") );
             result.setGA( _gA_var.value<QByteArray>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "EncryptedChat::typeEncryptedChat") {
@@ -424,43 +424,43 @@ EncryptedChat EncryptedChat::fromMap(const QMap<QString, QVariant> &map) {
             _id_var.convert( QVariant::nameToType("qint32") );
             result.setId( _id_var.value<qint32>() );
         }
-        
+
         QVariant _accessHash_var = map.value("accessHash");
         if( !_accessHash_var.isNull() ) {
             _accessHash_var.convert( QVariant::nameToType("qint64") );
             result.setAccessHash( _accessHash_var.value<qint64>() );
         }
-        
+
         QVariant _date_var = map.value("date");
         if( !_date_var.isNull() ) {
             _date_var.convert( QVariant::nameToType("qint32") );
             result.setDate( _date_var.value<qint32>() );
         }
-        
+
         QVariant _adminId_var = map.value("adminId");
         if( !_adminId_var.isNull() ) {
             _adminId_var.convert( QVariant::nameToType("qint32") );
             result.setAdminId( _adminId_var.value<qint32>() );
         }
-        
+
         QVariant _participantId_var = map.value("participantId");
         if( !_participantId_var.isNull() ) {
             _participantId_var.convert( QVariant::nameToType("qint32") );
             result.setParticipantId( _participantId_var.value<qint32>() );
         }
-        
+
         QVariant _gAOrB_var = map.value("gAOrB");
         if( !_gAOrB_var.isNull() ) {
             _gAOrB_var.convert( QVariant::nameToType("QByteArray") );
             result.setGAOrB( _gAOrB_var.value<QByteArray>() );
         }
-        
+
         QVariant _keyFingerprint_var = map.value("keyFingerprint");
         if( !_keyFingerprint_var.isNull() ) {
             _keyFingerprint_var.convert( QVariant::nameToType("qint64") );
             result.setKeyFingerprint( _keyFingerprint_var.value<qint64>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "EncryptedChat::typeEncryptedChatDiscarded") {
@@ -470,7 +470,7 @@ EncryptedChat EncryptedChat::fromMap(const QMap<QString, QVariant> &map) {
             _id_var.convert( QVariant::nameToType("qint32") );
             result.setId( _id_var.value<qint32>() );
         }
-        
+
         return result;
     }
     return result;
@@ -608,7 +608,7 @@ QDataStream &operator>>(QDataStream &stream, EncryptedChat &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const EncryptedChat &item) {
+/*QDebug operator<<(QDebug debug,  const EncryptedChat &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.EncryptedChat(";
@@ -652,4 +652,4 @@ QDebug operator<<(QDebug debug,  const EncryptedChat &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

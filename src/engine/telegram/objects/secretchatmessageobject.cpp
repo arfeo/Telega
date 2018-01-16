@@ -11,9 +11,9 @@ SecretChatMessageObject::SecretChatMessageObject(const SecretChatMessage &core, 
     m_core(core)
 {
     m_attachment = new EncryptedFileObject(m_core.attachment(), this);
-    connect(m_attachment.data(), &EncryptedFileObject::coreChanged, this, &SecretChatMessageObject::coreAttachmentChanged);
+    connect(m_attachment.data(), SIGNAL(coreChanged()), this, SLOT(coreAttachmentChanged()));
     m_decryptedMessage = new DecryptedMessageObject(m_core.decryptedMessage(), this);
-    connect(m_decryptedMessage.data(), &DecryptedMessageObject::coreChanged, this, &SecretChatMessageObject::coreDecryptedMessageChanged);
+    connect(m_decryptedMessage.data(), SIGNAL(coreChanged()), this, SLOT(coreDecryptedMessageChanged()));
 }
 
 SecretChatMessageObject::SecretChatMessageObject(QObject *parent) :
@@ -23,9 +23,9 @@ SecretChatMessageObject::SecretChatMessageObject(QObject *parent) :
     m_core()
 {
     m_attachment = new EncryptedFileObject(m_core.attachment(), this);
-    connect(m_attachment.data(), &EncryptedFileObject::coreChanged, this, &SecretChatMessageObject::coreAttachmentChanged);
+    connect(m_attachment.data(), SIGNAL(coreChanged()), this, SLOT(coreAttachmentChanged()));
     m_decryptedMessage = new DecryptedMessageObject(m_core.decryptedMessage(), this);
-    connect(m_decryptedMessage.data(), &DecryptedMessageObject::coreChanged, this, &SecretChatMessageObject::coreDecryptedMessageChanged);
+    connect(m_decryptedMessage.data(), SIGNAL(coreChanged()), this, SLOT(coreDecryptedMessageChanged()));
 }
 
 SecretChatMessageObject::~SecretChatMessageObject() {
@@ -38,7 +38,7 @@ void SecretChatMessageObject::setAttachment(EncryptedFileObject* attachment) {
     if(m_attachment) {
         m_attachment->setParent(this);
         m_core.setAttachment(m_attachment->core());
-        connect(m_attachment.data(), &EncryptedFileObject::coreChanged, this, &SecretChatMessageObject::coreAttachmentChanged);
+        connect(m_attachment.data(), SIGNAL(coreChanged()), this, SLOT(coreAttachmentChanged()));
     }
     Q_EMIT attachmentChanged();
     Q_EMIT coreChanged();
@@ -77,7 +77,7 @@ void SecretChatMessageObject::setDecryptedMessage(DecryptedMessageObject* decryp
     if(m_decryptedMessage) {
         m_decryptedMessage->setParent(this);
         m_core.setDecryptedMessage(m_decryptedMessage->core());
-        connect(m_decryptedMessage.data(), &DecryptedMessageObject::coreChanged, this, &SecretChatMessageObject::coreDecryptedMessageChanged);
+        connect(m_decryptedMessage.data(), SIGNAL(coreChanged()), this, SLOT(coreDecryptedMessageChanged()));
     }
     Q_EMIT decryptedMessageChanged();
     Q_EMIT coreChanged();

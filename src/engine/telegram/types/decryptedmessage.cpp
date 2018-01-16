@@ -43,7 +43,7 @@ DecryptedMessage::DecryptedMessage(const Null &null) :
 }
 
 DecryptedMessage::~DecryptedMessage() {
-    
+
 }
 
 void DecryptedMessage::setAction(const DecryptedMessageAction &action) {
@@ -137,7 +137,7 @@ bool DecryptedMessage::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageServiceSecret8: {
         m_randomId = in->fetchLong();
         m_randomBytes = in->fetchBytes();
@@ -146,7 +146,7 @@ bool DecryptedMessage::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageSecret17: {
         m_randomId = in->fetchLong();
         m_ttl = in->fetchInt();
@@ -156,7 +156,7 @@ bool DecryptedMessage::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageServiceSecret17: {
         m_randomId = in->fetchLong();
         m_action.fetch(in);
@@ -164,7 +164,7 @@ bool DecryptedMessage::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -182,7 +182,7 @@ bool DecryptedMessage::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageServiceSecret8: {
         out->appendLong(m_randomId);
         out->appendBytes(m_randomBytes);
@@ -190,7 +190,7 @@ bool DecryptedMessage::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageSecret17: {
         out->appendLong(m_randomId);
         out->appendInt(m_ttl);
@@ -199,14 +199,14 @@ bool DecryptedMessage::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeDecryptedMessageServiceSecret17: {
         out->appendLong(m_randomId);
         m_action.push(out);
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -224,7 +224,7 @@ QMap<QString, QVariant> DecryptedMessage::toMap() const {
         return result;
     }
         break;
-    
+
     case typeDecryptedMessageServiceSecret8: {
         result["classType"] = "DecryptedMessage::typeDecryptedMessageServiceSecret8";
         if( randomId() ) result["randomId"] = QString::number(randomId());
@@ -233,7 +233,7 @@ QMap<QString, QVariant> DecryptedMessage::toMap() const {
         return result;
     }
         break;
-    
+
     case typeDecryptedMessageSecret17: {
         result["classType"] = "DecryptedMessage::typeDecryptedMessageSecret17";
         if( randomId() ) result["randomId"] = QString::number(randomId());
@@ -243,7 +243,7 @@ QMap<QString, QVariant> DecryptedMessage::toMap() const {
         return result;
     }
         break;
-    
+
     case typeDecryptedMessageServiceSecret17: {
         result["classType"] = "DecryptedMessage::typeDecryptedMessageServiceSecret17";
         if( randomId() ) result["randomId"] = QString::number(randomId());
@@ -251,7 +251,7 @@ QMap<QString, QVariant> DecryptedMessage::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -266,23 +266,23 @@ DecryptedMessage DecryptedMessage::fromMap(const QMap<QString, QVariant> &map) {
             _randomId_var.convert( QVariant::nameToType("qint64") );
             result.setRandomId( _randomId_var.value<qint64>() );
         }
-        
+
         QVariant _randomBytes_var = map.value("randomBytes");
         if( !_randomBytes_var.isNull() ) {
             _randomBytes_var.convert( QVariant::nameToType("QByteArray") );
             result.setRandomBytes( _randomBytes_var.value<QByteArray>() );
         }
-        
+
         QVariant _message_var = map.value("message");
         if( !_message_var.isNull() ) {
             _message_var.convert( QVariant::nameToType("QString") );
             result.setMessage( _message_var.value<QString>() );
         }
-        
+
         QVariant _media_var = map.value("media");
         if( !_media_var.isNull() )
             result.setMedia( DecryptedMessageMedia::fromMap(_media_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "DecryptedMessage::typeDecryptedMessageServiceSecret8") {
@@ -292,17 +292,17 @@ DecryptedMessage DecryptedMessage::fromMap(const QMap<QString, QVariant> &map) {
             _randomId_var.convert( QVariant::nameToType("qint64") );
             result.setRandomId( _randomId_var.value<qint64>() );
         }
-        
+
         QVariant _randomBytes_var = map.value("randomBytes");
         if( !_randomBytes_var.isNull() ) {
             _randomBytes_var.convert( QVariant::nameToType("QByteArray") );
             result.setRandomBytes( _randomBytes_var.value<QByteArray>() );
         }
-        
+
         QVariant _action_var = map.value("action");
         if( !_action_var.isNull() )
             result.setAction( DecryptedMessageAction::fromMap(_action_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "DecryptedMessage::typeDecryptedMessageSecret17") {
@@ -312,23 +312,23 @@ DecryptedMessage DecryptedMessage::fromMap(const QMap<QString, QVariant> &map) {
             _randomId_var.convert( QVariant::nameToType("qint64") );
             result.setRandomId( _randomId_var.value<qint64>() );
         }
-        
+
         QVariant _ttl_var = map.value("ttl");
         if( !_ttl_var.isNull() ) {
             _ttl_var.convert( QVariant::nameToType("qint32") );
             result.setTtl( _ttl_var.value<qint32>() );
         }
-        
+
         QVariant _message_var = map.value("message");
         if( !_message_var.isNull() ) {
             _message_var.convert( QVariant::nameToType("QString") );
             result.setMessage( _message_var.value<QString>() );
         }
-        
+
         QVariant _media_var = map.value("media");
         if( !_media_var.isNull() )
             result.setMedia( DecryptedMessageMedia::fromMap(_media_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "DecryptedMessage::typeDecryptedMessageServiceSecret17") {
@@ -338,11 +338,11 @@ DecryptedMessage DecryptedMessage::fromMap(const QMap<QString, QVariant> &map) {
             _randomId_var.convert( QVariant::nameToType("qint64") );
             result.setRandomId( _randomId_var.value<qint64>() );
         }
-        
+
         QVariant _action_var = map.value("action");
         if( !_action_var.isNull() )
             result.setAction( DecryptedMessageAction::fromMap(_action_var.toMap()) );
-        
+
         return result;
     }
     return result;
@@ -447,7 +447,7 @@ QDataStream &operator>>(QDataStream &stream, DecryptedMessage &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const DecryptedMessage &item) {
+/*QDebug operator<<(QDebug debug,  const DecryptedMessage &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.DecryptedMessage(";
@@ -481,4 +481,4 @@ QDebug operator<<(QDebug debug,  const DecryptedMessage &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

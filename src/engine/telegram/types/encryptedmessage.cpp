@@ -47,7 +47,7 @@ EncryptedMessage::EncryptedMessage(const Null &null) :
 }
 
 EncryptedMessage::~EncryptedMessage() {
-    
+
 }
 
 void EncryptedMessage::setBytes(const QByteArray &bytes) {
@@ -132,7 +132,7 @@ bool EncryptedMessage::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeEncryptedMessageService: {
         m_randomId = in->fetchLong();
         m_chatId = in->fetchInt();
@@ -142,7 +142,7 @@ bool EncryptedMessage::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -161,7 +161,7 @@ bool EncryptedMessage::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeEncryptedMessageService: {
         out->appendLong(m_randomId);
         out->appendInt(m_chatId);
@@ -170,7 +170,7 @@ bool EncryptedMessage::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -189,7 +189,7 @@ QMap<QString, QVariant> EncryptedMessage::toMap() const {
         return result;
     }
         break;
-    
+
     case typeEncryptedMessageService: {
         result["classType"] = "EncryptedMessage::typeEncryptedMessageService";
         if( randomId() ) result["randomId"] = QString::number(randomId());
@@ -199,7 +199,7 @@ QMap<QString, QVariant> EncryptedMessage::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -214,29 +214,29 @@ EncryptedMessage EncryptedMessage::fromMap(const QMap<QString, QVariant> &map) {
             _randomId_var.convert( QVariant::nameToType("qint64") );
             result.setRandomId( _randomId_var.value<qint64>() );
         }
-        
+
         QVariant _chatId_var = map.value("chatId");
         if( !_chatId_var.isNull() ) {
             _chatId_var.convert( QVariant::nameToType("qint32") );
             result.setChatId( _chatId_var.value<qint32>() );
         }
-        
+
         QVariant _date_var = map.value("date");
         if( !_date_var.isNull() ) {
             _date_var.convert( QVariant::nameToType("qint32") );
             result.setDate( _date_var.value<qint32>() );
         }
-        
+
         QVariant _bytes_var = map.value("bytes");
         if( !_bytes_var.isNull() ) {
             _bytes_var.convert( QVariant::nameToType("QByteArray") );
             result.setBytes( _bytes_var.value<QByteArray>() );
         }
-        
+
         QVariant _file_var = map.value("file");
         if( !_file_var.isNull() )
             result.setFile( EncryptedFile::fromMap(_file_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "EncryptedMessage::typeEncryptedMessageService") {
@@ -246,25 +246,25 @@ EncryptedMessage EncryptedMessage::fromMap(const QMap<QString, QVariant> &map) {
             _randomId_var.convert( QVariant::nameToType("qint64") );
             result.setRandomId( _randomId_var.value<qint64>() );
         }
-        
+
         QVariant _chatId_var = map.value("chatId");
         if( !_chatId_var.isNull() ) {
             _chatId_var.convert( QVariant::nameToType("qint32") );
             result.setChatId( _chatId_var.value<qint32>() );
         }
-        
+
         QVariant _date_var = map.value("date");
         if( !_date_var.isNull() ) {
             _date_var.convert( QVariant::nameToType("qint32") );
             result.setDate( _date_var.value<qint32>() );
         }
-        
+
         QVariant _bytes_var = map.value("bytes");
         if( !_bytes_var.isNull() ) {
             _bytes_var.convert( QVariant::nameToType("QByteArray") );
             result.setBytes( _bytes_var.value<QByteArray>() );
         }
-        
+
         return result;
     }
     return result;
@@ -343,7 +343,7 @@ QDataStream &operator>>(QDataStream &stream, EncryptedMessage &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const EncryptedMessage &item) {
+/*QDebug operator<<(QDebug debug,  const EncryptedMessage &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.EncryptedMessage(";
@@ -367,4 +367,4 @@ QDebug operator<<(QDebug debug,  const EncryptedMessage &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

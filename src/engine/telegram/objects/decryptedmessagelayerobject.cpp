@@ -10,7 +10,7 @@ DecryptedMessageLayerObject::DecryptedMessageLayerObject(const DecryptedMessageL
     m_core(core)
 {
     m_message = new DecryptedMessageObject(m_core.message(), this);
-    connect(m_message.data(), &DecryptedMessageObject::coreChanged, this, &DecryptedMessageLayerObject::coreMessageChanged);
+    connect(m_message.data(), SIGNAL(coreChanged()), this, SLOT(coreMessageChanged()));
 }
 
 DecryptedMessageLayerObject::DecryptedMessageLayerObject(QObject *parent) :
@@ -19,7 +19,7 @@ DecryptedMessageLayerObject::DecryptedMessageLayerObject(QObject *parent) :
     m_core()
 {
     m_message = new DecryptedMessageObject(m_core.message(), this);
-    connect(m_message.data(), &DecryptedMessageObject::coreChanged, this, &DecryptedMessageLayerObject::coreMessageChanged);
+    connect(m_message.data(), SIGNAL(coreChanged()), this, SLOT(coreMessageChanged()));
 }
 
 DecryptedMessageLayerObject::~DecryptedMessageLayerObject() {
@@ -54,7 +54,7 @@ void DecryptedMessageLayerObject::setMessage(DecryptedMessageObject* message) {
     if(m_message) {
         m_message->setParent(this);
         m_core.setMessage(m_message->core());
-        connect(m_message.data(), &DecryptedMessageObject::coreChanged, this, &DecryptedMessageLayerObject::coreMessageChanged);
+        connect(m_message.data(), SIGNAL(coreChanged()), this, SLOT(coreMessageChanged()));
     }
     Q_EMIT messageChanged();
     Q_EMIT coreChanged();

@@ -55,7 +55,7 @@ EncryptedFile::EncryptedFile(const Null &null) :
 }
 
 EncryptedFile::~EncryptedFile() {
-    
+
 }
 
 void EncryptedFile::setAccessHash(qint64 accessHash) {
@@ -135,7 +135,7 @@ bool EncryptedFile::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeEncryptedFile: {
         m_id = in->fetchLong();
         m_accessHash = in->fetchLong();
@@ -146,7 +146,7 @@ bool EncryptedFile::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -160,7 +160,7 @@ bool EncryptedFile::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeEncryptedFile: {
         out->appendLong(m_id);
         out->appendLong(m_accessHash);
@@ -170,7 +170,7 @@ bool EncryptedFile::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -184,7 +184,7 @@ QMap<QString, QVariant> EncryptedFile::toMap() const {
         return result;
     }
         break;
-    
+
     case typeEncryptedFile: {
         result["classType"] = "EncryptedFile::typeEncryptedFile";
         if( id() ) result["id"] = QString::number(id());
@@ -195,7 +195,7 @@ QMap<QString, QVariant> EncryptedFile::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -214,31 +214,31 @@ EncryptedFile EncryptedFile::fromMap(const QMap<QString, QVariant> &map) {
             _id_var.convert( QVariant::nameToType("qint64") );
             result.setId( _id_var.value<qint64>() );
         }
-        
+
         QVariant _accessHash_var = map.value("accessHash");
         if( !_accessHash_var.isNull() ) {
             _accessHash_var.convert( QVariant::nameToType("qint64") );
             result.setAccessHash( _accessHash_var.value<qint64>() );
         }
-        
+
         QVariant _size_var = map.value("size");
         if( !_size_var.isNull() ) {
             _size_var.convert( QVariant::nameToType("qint32") );
             result.setSize( _size_var.value<qint32>() );
         }
-        
+
         QVariant _dcId_var = map.value("dcId");
         if( !_dcId_var.isNull() ) {
             _dcId_var.convert( QVariant::nameToType("qint32") );
             result.setDcId( _dcId_var.value<qint32>() );
         }
-        
+
         QVariant _keyFingerprint_var = map.value("keyFingerprint");
         if( !_keyFingerprint_var.isNull() ) {
             _keyFingerprint_var.convert( QVariant::nameToType("qint32") );
             result.setKeyFingerprint( _keyFingerprint_var.value<qint32>() );
         }
-        
+
         return result;
     }
     return result;
@@ -259,7 +259,7 @@ QDataStream &operator<<(QDataStream &stream, const EncryptedFile &item) {
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case EncryptedFile::typeEncryptedFileEmpty:
-        
+
         break;
     case EncryptedFile::typeEncryptedFile:
         stream << item.id();
@@ -278,7 +278,7 @@ QDataStream &operator>>(QDataStream &stream, EncryptedFile &item) {
     item.setClassType(static_cast<EncryptedFile::EncryptedFileClassType>(type));
     switch(type) {
     case EncryptedFile::typeEncryptedFileEmpty: {
-        
+
     }
         break;
     case EncryptedFile::typeEncryptedFile: {
@@ -303,7 +303,7 @@ QDataStream &operator>>(QDataStream &stream, EncryptedFile &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const EncryptedFile &item) {
+/*QDebug operator<<(QDebug debug,  const EncryptedFile &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.EncryptedFile(";
@@ -323,4 +323,4 @@ QDebug operator<<(QDebug debug,  const EncryptedFile &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

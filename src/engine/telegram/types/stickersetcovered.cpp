@@ -35,7 +35,7 @@ StickerSetCovered::StickerSetCovered(const Null &null) :
 }
 
 StickerSetCovered::~StickerSetCovered() {
-    
+
 }
 
 void StickerSetCovered::setCover(const Document &cover) {
@@ -97,7 +97,7 @@ bool StickerSetCovered::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeStickerSetMultiCovered: {
         m_set.fetch(in);
         if(in->fetchInt() != (qint32)CoreTypes::typeVector) return false;
@@ -112,7 +112,7 @@ bool StickerSetCovered::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -128,7 +128,7 @@ bool StickerSetCovered::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeStickerSetMultiCovered: {
         m_set.push(out);
         out->appendInt(CoreTypes::typeVector);
@@ -139,7 +139,7 @@ bool StickerSetCovered::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -155,7 +155,7 @@ QMap<QString, QVariant> StickerSetCovered::toMap() const {
         return result;
     }
         break;
-    
+
     case typeStickerSetMultiCovered: {
         result["classType"] = "StickerSetCovered::typeStickerSetMultiCovered";
         if( !m_set.isNull() ) result["set"] = m_set.toMap();
@@ -166,7 +166,7 @@ QMap<QString, QVariant> StickerSetCovered::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -179,11 +179,11 @@ StickerSetCovered StickerSetCovered::fromMap(const QMap<QString, QVariant> &map)
         QVariant _set_var = map.value("set");
         if( !_set_var.isNull() )
             result.setSet( StickerSet::fromMap(_set_var.toMap()) );
-        
+
         QVariant _cover_var = map.value("cover");
         if( !_cover_var.isNull() )
             result.setCover( Document::fromMap(_cover_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "StickerSetCovered::typeStickerSetMultiCovered") {
@@ -191,7 +191,7 @@ StickerSetCovered StickerSetCovered::fromMap(const QMap<QString, QVariant> &map)
         QVariant _set_var = map.value("set");
         if( !_set_var.isNull() )
             result.setSet( StickerSet::fromMap(_set_var.toMap()) );
-        
+
         QList<QVariant> map_covers = map["covers"].toList();
         QList<Document> _covers;
         for(const QVariant &var: map_covers)
@@ -255,7 +255,7 @@ QDataStream &operator>>(QDataStream &stream, StickerSetCovered &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const StickerSetCovered &item) {
+/*QDebug operator<<(QDebug debug,  const StickerSetCovered &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.StickerSetCovered(";
@@ -274,4 +274,4 @@ QDebug operator<<(QDebug debug,  const StickerSetCovered &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

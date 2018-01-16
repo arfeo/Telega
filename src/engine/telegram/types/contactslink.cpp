@@ -35,7 +35,7 @@ ContactsLink::ContactsLink(const Null &null) :
 }
 
 ContactsLink::~ContactsLink() {
-    
+
 }
 
 void ContactsLink::setForeignLink(const ContactLink &foreignLink) {
@@ -98,7 +98,7 @@ bool ContactsLink::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -115,7 +115,7 @@ bool ContactsLink::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -132,7 +132,7 @@ QMap<QString, QVariant> ContactsLink::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -145,15 +145,15 @@ ContactsLink ContactsLink::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _myLink_var = map.value("myLink");
         if( !_myLink_var.isNull() )
             result.setMyLink( ContactLink::fromMap(_myLink_var.toMap()) );
-        
+
         QVariant _foreignLink_var = map.value("foreignLink");
         if( !_foreignLink_var.isNull() )
             result.setForeignLink( ContactLink::fromMap(_foreignLink_var.toMap()) );
-        
+
         QVariant _user_var = map.value("user");
         if( !_user_var.isNull() )
             result.setUser( User::fromMap(_user_var.toMap()) );
-        
+
         return result;
     }
     return result;
@@ -203,7 +203,7 @@ QDataStream &operator>>(QDataStream &stream, ContactsLink &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const ContactsLink &item) {
+/*QDebug operator<<(QDebug debug,  const ContactsLink &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.ContactsLink(";
@@ -218,4 +218,4 @@ QDebug operator<<(QDebug debug,  const ContactsLink &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

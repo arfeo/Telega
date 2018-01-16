@@ -39,7 +39,7 @@ MessagesMessageEditData::MessagesMessageEditData(const Null &null) :
 }
 
 MessagesMessageEditData::~MessagesMessageEditData() {
-    
+
 }
 
 void MessagesMessageEditData::setCaption(bool caption) {
@@ -89,7 +89,7 @@ bool MessagesMessageEditData::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -104,7 +104,7 @@ bool MessagesMessageEditData::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -119,7 +119,7 @@ QMap<QString, QVariant> MessagesMessageEditData::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -134,7 +134,7 @@ MessagesMessageEditData MessagesMessageEditData::fromMap(const QMap<QString, QVa
             _caption_var.convert( QVariant::nameToType("bool") );
             result.setCaption( _caption_var.value<bool>() );
         }
-        
+
         return result;
     }
     return result;
@@ -176,7 +176,7 @@ QDataStream &operator>>(QDataStream &stream, MessagesMessageEditData &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const MessagesMessageEditData &item) {
+/*QDebug operator<<(QDebug debug,  const MessagesMessageEditData &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.MessagesMessageEditData(";
@@ -189,4 +189,4 @@ QDebug operator<<(QDebug debug,  const MessagesMessageEditData &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

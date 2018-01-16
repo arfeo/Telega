@@ -59,7 +59,7 @@ InputFileLocation::InputFileLocation(const Null &null) :
 }
 
 InputFileLocation::~InputFileLocation() {
-    
+
 }
 
 void InputFileLocation::setAccessHash(qint64 accessHash) {
@@ -152,7 +152,7 @@ bool InputFileLocation::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputEncryptedFileLocation: {
         m_id = in->fetchLong();
         m_accessHash = in->fetchLong();
@@ -160,7 +160,7 @@ bool InputFileLocation::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputDocumentFileLocation: {
         m_id = in->fetchLong();
         m_accessHash = in->fetchLong();
@@ -169,7 +169,7 @@ bool InputFileLocation::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -186,14 +186,14 @@ bool InputFileLocation::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeInputEncryptedFileLocation: {
         out->appendLong(m_id);
         out->appendLong(m_accessHash);
         return true;
     }
         break;
-    
+
     case typeInputDocumentFileLocation: {
         out->appendLong(m_id);
         out->appendLong(m_accessHash);
@@ -201,7 +201,7 @@ bool InputFileLocation::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -218,7 +218,7 @@ QMap<QString, QVariant> InputFileLocation::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputEncryptedFileLocation: {
         result["classType"] = "InputFileLocation::typeInputEncryptedFileLocation";
         if( id() ) result["id"] = QString::number(id());
@@ -226,7 +226,7 @@ QMap<QString, QVariant> InputFileLocation::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputDocumentFileLocation: {
         result["classType"] = "InputFileLocation::typeInputDocumentFileLocation";
         if( id() ) result["id"] = QString::number(id());
@@ -235,7 +235,7 @@ QMap<QString, QVariant> InputFileLocation::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -250,19 +250,19 @@ InputFileLocation InputFileLocation::fromMap(const QMap<QString, QVariant> &map)
             _volumeId_var.convert( QVariant::nameToType("qint64") );
             result.setVolumeId( _volumeId_var.value<qint64>() );
         }
-        
+
         QVariant _localId_var = map.value("localId");
         if( !_localId_var.isNull() ) {
             _localId_var.convert( QVariant::nameToType("qint32") );
             result.setLocalId( _localId_var.value<qint32>() );
         }
-        
+
         QVariant _secret_var = map.value("secret");
         if( !_secret_var.isNull() ) {
             _secret_var.convert( QVariant::nameToType("qint64") );
             result.setSecret( _secret_var.value<qint64>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "InputFileLocation::typeInputEncryptedFileLocation") {
@@ -272,13 +272,13 @@ InputFileLocation InputFileLocation::fromMap(const QMap<QString, QVariant> &map)
             _id_var.convert( QVariant::nameToType("qint64") );
             result.setId( _id_var.value<qint64>() );
         }
-        
+
         QVariant _accessHash_var = map.value("accessHash");
         if( !_accessHash_var.isNull() ) {
             _accessHash_var.convert( QVariant::nameToType("qint64") );
             result.setAccessHash( _accessHash_var.value<qint64>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "InputFileLocation::typeInputDocumentFileLocation") {
@@ -288,19 +288,19 @@ InputFileLocation InputFileLocation::fromMap(const QMap<QString, QVariant> &map)
             _id_var.convert( QVariant::nameToType("qint64") );
             result.setId( _id_var.value<qint64>() );
         }
-        
+
         QVariant _accessHash_var = map.value("accessHash");
         if( !_accessHash_var.isNull() ) {
             _accessHash_var.convert( QVariant::nameToType("qint64") );
             result.setAccessHash( _accessHash_var.value<qint64>() );
         }
-        
+
         QVariant _version_var = map.value("version");
         if( !_version_var.isNull() ) {
             _version_var.convert( QVariant::nameToType("qint32") );
             result.setVersion( _version_var.value<qint32>() );
         }
-        
+
         return result;
     }
     return result;
@@ -380,7 +380,7 @@ QDataStream &operator>>(QDataStream &stream, InputFileLocation &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const InputFileLocation &item) {
+/*QDebug operator<<(QDebug debug,  const InputFileLocation &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.InputFileLocation(";
@@ -406,4 +406,4 @@ QDebug operator<<(QDebug debug,  const InputFileLocation &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

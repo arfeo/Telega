@@ -10,7 +10,7 @@ MessagesPeerDialogsObject::MessagesPeerDialogsObject(const MessagesPeerDialogs &
     m_core(core)
 {
     m_state = new UpdatesStateObject(m_core.state(), this);
-    connect(m_state.data(), &UpdatesStateObject::coreChanged, this, &MessagesPeerDialogsObject::coreStateChanged);
+    connect(m_state.data(), SIGNAL(coreChanged()), this, SLOT(coreStateChanged()));
 }
 
 MessagesPeerDialogsObject::MessagesPeerDialogsObject(QObject *parent) :
@@ -19,7 +19,7 @@ MessagesPeerDialogsObject::MessagesPeerDialogsObject(QObject *parent) :
     m_core()
 {
     m_state = new UpdatesStateObject(m_core.state(), this);
-    connect(m_state.data(), &UpdatesStateObject::coreChanged, this, &MessagesPeerDialogsObject::coreStateChanged);
+    connect(m_state.data(), SIGNAL(coreChanged()), this, SLOT(coreStateChanged()));
 }
 
 MessagesPeerDialogsObject::~MessagesPeerDialogsObject() {
@@ -65,7 +65,7 @@ void MessagesPeerDialogsObject::setState(UpdatesStateObject* state) {
     if(m_state) {
         m_state->setParent(this);
         m_core.setState(m_state->core());
-        connect(m_state.data(), &UpdatesStateObject::coreChanged, this, &MessagesPeerDialogsObject::coreStateChanged);
+        connect(m_state.data(), SIGNAL(coreChanged()), this, SLOT(coreStateChanged()));
     }
     Q_EMIT stateChanged();
     Q_EMIT coreChanged();

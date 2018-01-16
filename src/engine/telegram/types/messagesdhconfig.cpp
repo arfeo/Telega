@@ -43,7 +43,7 @@ MessagesDhConfig::MessagesDhConfig(const Null &null) :
 }
 
 MessagesDhConfig::~MessagesDhConfig() {
-    
+
 }
 
 void MessagesDhConfig::setG(qint32 g) {
@@ -114,7 +114,7 @@ bool MessagesDhConfig::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeMessagesDhConfig: {
         m_g = in->fetchInt();
         m_p = in->fetchBytes();
@@ -124,7 +124,7 @@ bool MessagesDhConfig::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -139,7 +139,7 @@ bool MessagesDhConfig::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeMessagesDhConfig: {
         out->appendInt(m_g);
         out->appendBytes(m_p);
@@ -148,7 +148,7 @@ bool MessagesDhConfig::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -163,7 +163,7 @@ QMap<QString, QVariant> MessagesDhConfig::toMap() const {
         return result;
     }
         break;
-    
+
     case typeMessagesDhConfig: {
         result["classType"] = "MessagesDhConfig::typeMessagesDhConfig";
         if( g() ) result["g"] = QString::number(g());
@@ -173,7 +173,7 @@ QMap<QString, QVariant> MessagesDhConfig::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -188,7 +188,7 @@ MessagesDhConfig MessagesDhConfig::fromMap(const QMap<QString, QVariant> &map) {
             _random_var.convert( QVariant::nameToType("QByteArray") );
             result.setRandom( _random_var.value<QByteArray>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "MessagesDhConfig::typeMessagesDhConfig") {
@@ -198,25 +198,25 @@ MessagesDhConfig MessagesDhConfig::fromMap(const QMap<QString, QVariant> &map) {
             _g_var.convert( QVariant::nameToType("qint32") );
             result.setG( _g_var.value<qint32>() );
         }
-        
+
         QVariant _p_var = map.value("p");
         if( !_p_var.isNull() ) {
             _p_var.convert( QVariant::nameToType("QByteArray") );
             result.setP( _p_var.value<QByteArray>() );
         }
-        
+
         QVariant _version_var = map.value("version");
         if( !_version_var.isNull() ) {
             _version_var.convert( QVariant::nameToType("qint32") );
             result.setVersion( _version_var.value<qint32>() );
         }
-        
+
         QVariant _random_var = map.value("random");
         if( !_random_var.isNull() ) {
             _random_var.convert( QVariant::nameToType("QByteArray") );
             result.setRandom( _random_var.value<QByteArray>() );
         }
-        
+
         return result;
     }
     return result;
@@ -279,7 +279,7 @@ QDataStream &operator>>(QDataStream &stream, MessagesDhConfig &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const MessagesDhConfig &item) {
+/*QDebug operator<<(QDebug debug,  const MessagesDhConfig &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.MessagesDhConfig(";
@@ -299,4 +299,4 @@ QDebug operator<<(QDebug debug,  const MessagesDhConfig &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

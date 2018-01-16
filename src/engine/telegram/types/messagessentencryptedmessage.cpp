@@ -39,7 +39,7 @@ MessagesSentEncryptedMessage::MessagesSentEncryptedMessage(const Null &null) :
 }
 
 MessagesSentEncryptedMessage::~MessagesSentEncryptedMessage() {
-    
+
 }
 
 void MessagesSentEncryptedMessage::setDate(qint32 date) {
@@ -90,7 +90,7 @@ bool MessagesSentEncryptedMessage::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeMessagesSentEncryptedFile: {
         m_date = in->fetchInt();
         m_file.fetch(in);
@@ -98,7 +98,7 @@ bool MessagesSentEncryptedMessage::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -113,14 +113,14 @@ bool MessagesSentEncryptedMessage::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeMessagesSentEncryptedFile: {
         out->appendInt(m_date);
         m_file.push(out);
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -135,7 +135,7 @@ QMap<QString, QVariant> MessagesSentEncryptedMessage::toMap() const {
         return result;
     }
         break;
-    
+
     case typeMessagesSentEncryptedFile: {
         result["classType"] = "MessagesSentEncryptedMessage::typeMessagesSentEncryptedFile";
         if( date() ) result["date"] = QString::number(date());
@@ -143,7 +143,7 @@ QMap<QString, QVariant> MessagesSentEncryptedMessage::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -158,7 +158,7 @@ MessagesSentEncryptedMessage MessagesSentEncryptedMessage::fromMap(const QMap<QS
             _date_var.convert( QVariant::nameToType("qint32") );
             result.setDate( _date_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "MessagesSentEncryptedMessage::typeMessagesSentEncryptedFile") {
@@ -168,11 +168,11 @@ MessagesSentEncryptedMessage MessagesSentEncryptedMessage::fromMap(const QMap<QS
             _date_var.convert( QVariant::nameToType("qint32") );
             result.setDate( _date_var.value<qint32>() );
         }
-        
+
         QVariant _file_var = map.value("file");
         if( !_file_var.isNull() )
             result.setFile( EncryptedFile::fromMap(_file_var.toMap()) );
-        
+
         return result;
     }
     return result;
@@ -227,7 +227,7 @@ QDataStream &operator>>(QDataStream &stream, MessagesSentEncryptedMessage &item)
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const MessagesSentEncryptedMessage &item) {
+/*QDebug operator<<(QDebug debug,  const MessagesSentEncryptedMessage &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.MessagesSentEncryptedMessage(";
@@ -245,4 +245,4 @@ QDebug operator<<(QDebug debug,  const MessagesSentEncryptedMessage &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

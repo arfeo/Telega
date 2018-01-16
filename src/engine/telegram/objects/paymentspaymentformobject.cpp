@@ -13,13 +13,13 @@ PaymentsPaymentFormObject::PaymentsPaymentFormObject(const PaymentsPaymentForm &
     m_core(core)
 {
     m_invoice = new InvoiceObject(m_core.invoice(), this);
-    connect(m_invoice.data(), &InvoiceObject::coreChanged, this, &PaymentsPaymentFormObject::coreInvoiceChanged);
+    connect(m_invoice.data(), SIGNAL(coreChanged()), this, SLOT(coreInvoiceChanged()));
     m_nativeParams = new DataJSONObject(m_core.nativeParams(), this);
-    connect(m_nativeParams.data(), &DataJSONObject::coreChanged, this, &PaymentsPaymentFormObject::coreNativeParamsChanged);
+    connect(m_nativeParams.data(), SIGNAL(coreChanged()), this, SLOT(coreNativeParamsChanged()));
     m_savedCredentials = new PaymentSavedCredentialsObject(m_core.savedCredentials(), this);
-    connect(m_savedCredentials.data(), &PaymentSavedCredentialsObject::coreChanged, this, &PaymentsPaymentFormObject::coreSavedCredentialsChanged);
+    connect(m_savedCredentials.data(), SIGNAL(coreChanged()), this, SLOT(coreSavedCredentialsChanged()));
     m_savedInfo = new PaymentRequestedInfoObject(m_core.savedInfo(), this);
-    connect(m_savedInfo.data(), &PaymentRequestedInfoObject::coreChanged, this, &PaymentsPaymentFormObject::coreSavedInfoChanged);
+    connect(m_savedInfo.data(), SIGNAL(coreChanged()), this, SLOT(coreSavedInfoChanged()));
 }
 
 PaymentsPaymentFormObject::PaymentsPaymentFormObject(QObject *parent) :
@@ -31,13 +31,13 @@ PaymentsPaymentFormObject::PaymentsPaymentFormObject(QObject *parent) :
     m_core()
 {
     m_invoice = new InvoiceObject(m_core.invoice(), this);
-    connect(m_invoice.data(), &InvoiceObject::coreChanged, this, &PaymentsPaymentFormObject::coreInvoiceChanged);
+    connect(m_invoice.data(), SIGNAL(coreChanged()), this, SLOT(coreInvoiceChanged()));
     m_nativeParams = new DataJSONObject(m_core.nativeParams(), this);
-    connect(m_nativeParams.data(), &DataJSONObject::coreChanged, this, &PaymentsPaymentFormObject::coreNativeParamsChanged);
+    connect(m_nativeParams.data(), SIGNAL(coreChanged()), this, SLOT(coreNativeParamsChanged()));
     m_savedCredentials = new PaymentSavedCredentialsObject(m_core.savedCredentials(), this);
-    connect(m_savedCredentials.data(), &PaymentSavedCredentialsObject::coreChanged, this, &PaymentsPaymentFormObject::coreSavedCredentialsChanged);
+    connect(m_savedCredentials.data(), SIGNAL(coreChanged()), this, SLOT(coreSavedCredentialsChanged()));
     m_savedInfo = new PaymentRequestedInfoObject(m_core.savedInfo(), this);
-    connect(m_savedInfo.data(), &PaymentRequestedInfoObject::coreChanged, this, &PaymentsPaymentFormObject::coreSavedInfoChanged);
+    connect(m_savedInfo.data(), SIGNAL(coreChanged()), this, SLOT(coreSavedInfoChanged()));
 }
 
 PaymentsPaymentFormObject::~PaymentsPaymentFormObject() {
@@ -83,7 +83,7 @@ void PaymentsPaymentFormObject::setInvoice(InvoiceObject* invoice) {
     if(m_invoice) {
         m_invoice->setParent(this);
         m_core.setInvoice(m_invoice->core());
-        connect(m_invoice.data(), &InvoiceObject::coreChanged, this, &PaymentsPaymentFormObject::coreInvoiceChanged);
+        connect(m_invoice.data(), SIGNAL(coreChanged()), this, SLOT(coreInvoiceChanged()));
     }
     Q_EMIT invoiceChanged();
     Q_EMIT coreChanged();
@@ -100,7 +100,7 @@ void PaymentsPaymentFormObject::setNativeParams(DataJSONObject* nativeParams) {
     if(m_nativeParams) {
         m_nativeParams->setParent(this);
         m_core.setNativeParams(m_nativeParams->core());
-        connect(m_nativeParams.data(), &DataJSONObject::coreChanged, this, &PaymentsPaymentFormObject::coreNativeParamsChanged);
+        connect(m_nativeParams.data(), SIGNAL(coreChanged()), this, SLOT(coreNativeParamsChanged()));
     }
     Q_EMIT nativeParamsChanged();
     Q_EMIT coreChanged();
@@ -150,7 +150,7 @@ void PaymentsPaymentFormObject::setSavedCredentials(PaymentSavedCredentialsObjec
     if(m_savedCredentials) {
         m_savedCredentials->setParent(this);
         m_core.setSavedCredentials(m_savedCredentials->core());
-        connect(m_savedCredentials.data(), &PaymentSavedCredentialsObject::coreChanged, this, &PaymentsPaymentFormObject::coreSavedCredentialsChanged);
+        connect(m_savedCredentials.data(), SIGNAL(coreChanged()), this, SLOT(coreSavedCredentialsChanged()));
     }
     Q_EMIT savedCredentialsChanged();
     Q_EMIT coreChanged();
@@ -167,7 +167,7 @@ void PaymentsPaymentFormObject::setSavedInfo(PaymentRequestedInfoObject* savedIn
     if(m_savedInfo) {
         m_savedInfo->setParent(this);
         m_core.setSavedInfo(m_savedInfo->core());
-        connect(m_savedInfo.data(), &PaymentRequestedInfoObject::coreChanged, this, &PaymentsPaymentFormObject::coreSavedInfoChanged);
+        connect(m_savedInfo.data(), SIGNAL(coreChanged()), this, SLOT(coreSavedInfoChanged()));
     }
     Q_EMIT savedInfoChanged();
     Q_EMIT coreChanged();

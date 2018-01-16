@@ -83,7 +83,7 @@ ChatFull::ChatFull(const Null &null) :
 }
 
 ChatFull::~ChatFull() {
-    
+
 }
 
 void ChatFull::setAbout(const QString &about) {
@@ -338,7 +338,7 @@ bool ChatFull::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeChannelFull: {
         m_flags = in->fetchInt();
         m_id = in->fetchInt();
@@ -382,7 +382,7 @@ bool ChatFull::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -406,7 +406,7 @@ bool ChatFull::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeChannelFull: {
         out->appendInt(m_flags);
         out->appendInt(m_id);
@@ -446,7 +446,7 @@ bool ChatFull::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -469,7 +469,7 @@ QMap<QString, QVariant> ChatFull::toMap() const {
         return result;
     }
         break;
-    
+
     case typeChannelFull: {
         result["classType"] = "ChatFull::typeChannelFull";
         if( canViewParticipants() ) result["canViewParticipants"] = QString::number(canViewParticipants());
@@ -496,7 +496,7 @@ QMap<QString, QVariant> ChatFull::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -511,23 +511,23 @@ ChatFull ChatFull::fromMap(const QMap<QString, QVariant> &map) {
             _id_var.convert( QVariant::nameToType("qint32") );
             result.setId( _id_var.value<qint32>() );
         }
-        
+
         QVariant _participants_var = map.value("participants");
         if( !_participants_var.isNull() )
             result.setParticipants( ChatParticipants::fromMap(_participants_var.toMap()) );
-        
+
         QVariant _chatPhoto_var = map.value("chatPhoto");
         if( !_chatPhoto_var.isNull() )
             result.setChatPhoto( Photo::fromMap(_chatPhoto_var.toMap()) );
-        
+
         QVariant _notifySettings_var = map.value("notifySettings");
         if( !_notifySettings_var.isNull() )
             result.setNotifySettings( PeerNotifySettings::fromMap(_notifySettings_var.toMap()) );
-        
+
         QVariant _exportedInvite_var = map.value("exportedInvite");
         if( !_exportedInvite_var.isNull() )
             result.setExportedInvite( ExportedChatInvite::fromMap(_exportedInvite_var.toMap()) );
-        
+
         QList<QVariant> map_botInfo = map["botInfo"].toList();
         QList<BotInfo> _botInfo;
         for(const QVariant &var: map_botInfo)
@@ -542,79 +542,79 @@ ChatFull ChatFull::fromMap(const QMap<QString, QVariant> &map) {
             _canViewParticipants_var.convert( QVariant::nameToType("bool") );
             result.setCanViewParticipants( _canViewParticipants_var.value<bool>() );
         }
-        
+
         QVariant _canSetUsername_var = map.value("canSetUsername");
         if( !_canSetUsername_var.isNull() ) {
             _canSetUsername_var.convert( QVariant::nameToType("bool") );
             result.setCanSetUsername( _canSetUsername_var.value<bool>() );
         }
-        
+
         QVariant _id_var = map.value("id");
         if( !_id_var.isNull() ) {
             _id_var.convert( QVariant::nameToType("qint32") );
             result.setId( _id_var.value<qint32>() );
         }
-        
+
         QVariant _about_var = map.value("about");
         if( !_about_var.isNull() ) {
             _about_var.convert( QVariant::nameToType("QString") );
             result.setAbout( _about_var.value<QString>() );
         }
-        
+
         QVariant _participantsCount_var = map.value("participantsCount");
         if( !_participantsCount_var.isNull() ) {
             _participantsCount_var.convert( QVariant::nameToType("qint32") );
             result.setParticipantsCount( _participantsCount_var.value<qint32>() );
         }
-        
+
         QVariant _adminsCount_var = map.value("adminsCount");
         if( !_adminsCount_var.isNull() ) {
             _adminsCount_var.convert( QVariant::nameToType("qint32") );
             result.setAdminsCount( _adminsCount_var.value<qint32>() );
         }
-        
+
         QVariant _kickedCount_var = map.value("kickedCount");
         if( !_kickedCount_var.isNull() ) {
             _kickedCount_var.convert( QVariant::nameToType("qint32") );
             result.setKickedCount( _kickedCount_var.value<qint32>() );
         }
-        
+
         QVariant _bannedCount_var = map.value("bannedCount");
         if( !_bannedCount_var.isNull() ) {
             _bannedCount_var.convert( QVariant::nameToType("qint32") );
             result.setBannedCount( _bannedCount_var.value<qint32>() );
         }
-        
+
         QVariant _readInboxMaxId_var = map.value("readInboxMaxId");
         if( !_readInboxMaxId_var.isNull() ) {
             _readInboxMaxId_var.convert( QVariant::nameToType("qint32") );
             result.setReadInboxMaxId( _readInboxMaxId_var.value<qint32>() );
         }
-        
+
         QVariant _readOutboxMaxId_var = map.value("readOutboxMaxId");
         if( !_readOutboxMaxId_var.isNull() ) {
             _readOutboxMaxId_var.convert( QVariant::nameToType("qint32") );
             result.setReadOutboxMaxId( _readOutboxMaxId_var.value<qint32>() );
         }
-        
+
         QVariant _unreadCount_var = map.value("unreadCount");
         if( !_unreadCount_var.isNull() ) {
             _unreadCount_var.convert( QVariant::nameToType("qint32") );
             result.setUnreadCount( _unreadCount_var.value<qint32>() );
         }
-        
+
         QVariant _chatPhoto_var = map.value("chatPhoto");
         if( !_chatPhoto_var.isNull() )
             result.setChatPhoto( Photo::fromMap(_chatPhoto_var.toMap()) );
-        
+
         QVariant _notifySettings_var = map.value("notifySettings");
         if( !_notifySettings_var.isNull() )
             result.setNotifySettings( PeerNotifySettings::fromMap(_notifySettings_var.toMap()) );
-        
+
         QVariant _exportedInvite_var = map.value("exportedInvite");
         if( !_exportedInvite_var.isNull() )
             result.setExportedInvite( ExportedChatInvite::fromMap(_exportedInvite_var.toMap()) );
-        
+
         QList<QVariant> map_botInfo = map["botInfo"].toList();
         QList<BotInfo> _botInfo;
         for(const QVariant &var: map_botInfo)
@@ -625,19 +625,19 @@ ChatFull ChatFull::fromMap(const QMap<QString, QVariant> &map) {
             _migratedFromChatId_var.convert( QVariant::nameToType("qint32") );
             result.setMigratedFromChatId( _migratedFromChatId_var.value<qint32>() );
         }
-        
+
         QVariant _migratedFromMaxId_var = map.value("migratedFromMaxId");
         if( !_migratedFromMaxId_var.isNull() ) {
             _migratedFromMaxId_var.convert( QVariant::nameToType("qint32") );
             result.setMigratedFromMaxId( _migratedFromMaxId_var.value<qint32>() );
         }
-        
+
         QVariant _pinnedMsgId_var = map.value("pinnedMsgId");
         if( !_pinnedMsgId_var.isNull() ) {
             _pinnedMsgId_var.convert( QVariant::nameToType("qint32") );
             result.setPinnedMsgId( _pinnedMsgId_var.value<qint32>() );
         }
-        
+
         return result;
     }
     return result;
@@ -772,7 +772,7 @@ QDataStream &operator>>(QDataStream &stream, ChatFull &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const ChatFull &item) {
+/*QDebug operator<<(QDebug debug,  const ChatFull &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.ChatFull(";
@@ -810,4 +810,4 @@ QDebug operator<<(QDebug debug,  const ChatFull &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

@@ -10,7 +10,7 @@ UploadFileObject::UploadFileObject(const UploadFile &core, QObject *parent) :
     m_core(core)
 {
     m_type = new StorageFileTypeObject(m_core.type(), this);
-    connect(m_type.data(), &StorageFileTypeObject::coreChanged, this, &UploadFileObject::coreTypeChanged);
+    connect(m_type.data(), SIGNAL(coreChanged()), this, SLOT(coreTypeChanged()));
 }
 
 UploadFileObject::UploadFileObject(QObject *parent) :
@@ -19,7 +19,7 @@ UploadFileObject::UploadFileObject(QObject *parent) :
     m_core()
 {
     m_type = new StorageFileTypeObject(m_core.type(), this);
-    connect(m_type.data(), &StorageFileTypeObject::coreChanged, this, &UploadFileObject::coreTypeChanged);
+    connect(m_type.data(), SIGNAL(coreChanged()), this, SLOT(coreTypeChanged()));
 }
 
 UploadFileObject::~UploadFileObject() {
@@ -98,7 +98,7 @@ void UploadFileObject::setType(StorageFileTypeObject* type) {
     if(m_type) {
         m_type->setParent(this);
         m_core.setType(m_type->core());
-        connect(m_type.data(), &StorageFileTypeObject::coreChanged, this, &UploadFileObject::coreTypeChanged);
+        connect(m_type.data(), SIGNAL(coreChanged()), this, SLOT(coreTypeChanged()));
     }
     Q_EMIT typeChanged();
     Q_EMIT coreChanged();

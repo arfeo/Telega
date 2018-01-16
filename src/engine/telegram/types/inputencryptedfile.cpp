@@ -51,7 +51,7 @@ InputEncryptedFile::InputEncryptedFile(const Null &null) :
 }
 
 InputEncryptedFile::~InputEncryptedFile() {
-    
+
 }
 
 void InputEncryptedFile::setAccessHash(qint64 accessHash) {
@@ -131,7 +131,7 @@ bool InputEncryptedFile::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputEncryptedFileUploaded: {
         m_id = in->fetchLong();
         m_parts = in->fetchInt();
@@ -141,7 +141,7 @@ bool InputEncryptedFile::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputEncryptedFile: {
         m_id = in->fetchLong();
         m_accessHash = in->fetchLong();
@@ -149,7 +149,7 @@ bool InputEncryptedFile::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputEncryptedFileBigUploaded: {
         m_id = in->fetchLong();
         m_parts = in->fetchInt();
@@ -158,7 +158,7 @@ bool InputEncryptedFile::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -172,7 +172,7 @@ bool InputEncryptedFile::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeInputEncryptedFileUploaded: {
         out->appendLong(m_id);
         out->appendInt(m_parts);
@@ -181,14 +181,14 @@ bool InputEncryptedFile::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeInputEncryptedFile: {
         out->appendLong(m_id);
         out->appendLong(m_accessHash);
         return true;
     }
         break;
-    
+
     case typeInputEncryptedFileBigUploaded: {
         out->appendLong(m_id);
         out->appendInt(m_parts);
@@ -196,7 +196,7 @@ bool InputEncryptedFile::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -210,7 +210,7 @@ QMap<QString, QVariant> InputEncryptedFile::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputEncryptedFileUploaded: {
         result["classType"] = "InputEncryptedFile::typeInputEncryptedFileUploaded";
         if( id() ) result["id"] = QString::number(id());
@@ -220,7 +220,7 @@ QMap<QString, QVariant> InputEncryptedFile::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputEncryptedFile: {
         result["classType"] = "InputEncryptedFile::typeInputEncryptedFile";
         if( id() ) result["id"] = QString::number(id());
@@ -228,7 +228,7 @@ QMap<QString, QVariant> InputEncryptedFile::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputEncryptedFileBigUploaded: {
         result["classType"] = "InputEncryptedFile::typeInputEncryptedFileBigUploaded";
         if( id() ) result["id"] = QString::number(id());
@@ -237,7 +237,7 @@ QMap<QString, QVariant> InputEncryptedFile::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -256,25 +256,25 @@ InputEncryptedFile InputEncryptedFile::fromMap(const QMap<QString, QVariant> &ma
             _id_var.convert( QVariant::nameToType("qint64") );
             result.setId( _id_var.value<qint64>() );
         }
-        
+
         QVariant _parts_var = map.value("parts");
         if( !_parts_var.isNull() ) {
             _parts_var.convert( QVariant::nameToType("qint32") );
             result.setParts( _parts_var.value<qint32>() );
         }
-        
+
         QVariant _md5Checksum_var = map.value("md5Checksum");
         if( !_md5Checksum_var.isNull() ) {
             _md5Checksum_var.convert( QVariant::nameToType("QString") );
             result.setMd5Checksum( _md5Checksum_var.value<QString>() );
         }
-        
+
         QVariant _keyFingerprint_var = map.value("keyFingerprint");
         if( !_keyFingerprint_var.isNull() ) {
             _keyFingerprint_var.convert( QVariant::nameToType("qint32") );
             result.setKeyFingerprint( _keyFingerprint_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "InputEncryptedFile::typeInputEncryptedFile") {
@@ -284,13 +284,13 @@ InputEncryptedFile InputEncryptedFile::fromMap(const QMap<QString, QVariant> &ma
             _id_var.convert( QVariant::nameToType("qint64") );
             result.setId( _id_var.value<qint64>() );
         }
-        
+
         QVariant _accessHash_var = map.value("accessHash");
         if( !_accessHash_var.isNull() ) {
             _accessHash_var.convert( QVariant::nameToType("qint64") );
             result.setAccessHash( _accessHash_var.value<qint64>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "InputEncryptedFile::typeInputEncryptedFileBigUploaded") {
@@ -300,19 +300,19 @@ InputEncryptedFile InputEncryptedFile::fromMap(const QMap<QString, QVariant> &ma
             _id_var.convert( QVariant::nameToType("qint64") );
             result.setId( _id_var.value<qint64>() );
         }
-        
+
         QVariant _parts_var = map.value("parts");
         if( !_parts_var.isNull() ) {
             _parts_var.convert( QVariant::nameToType("qint32") );
             result.setParts( _parts_var.value<qint32>() );
         }
-        
+
         QVariant _keyFingerprint_var = map.value("keyFingerprint");
         if( !_keyFingerprint_var.isNull() ) {
             _keyFingerprint_var.convert( QVariant::nameToType("qint32") );
             result.setKeyFingerprint( _keyFingerprint_var.value<qint32>() );
         }
-        
+
         return result;
     }
     return result;
@@ -333,7 +333,7 @@ QDataStream &operator<<(QDataStream &stream, const InputEncryptedFile &item) {
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case InputEncryptedFile::typeInputEncryptedFileEmpty:
-        
+
         break;
     case InputEncryptedFile::typeInputEncryptedFileUploaded:
         stream << item.id();
@@ -360,7 +360,7 @@ QDataStream &operator>>(QDataStream &stream, InputEncryptedFile &item) {
     item.setClassType(static_cast<InputEncryptedFile::InputEncryptedFileClassType>(type));
     switch(type) {
     case InputEncryptedFile::typeInputEncryptedFileEmpty: {
-        
+
     }
         break;
     case InputEncryptedFile::typeInputEncryptedFileUploaded: {
@@ -403,7 +403,7 @@ QDataStream &operator>>(QDataStream &stream, InputEncryptedFile &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const InputEncryptedFile &item) {
+/*QDebug operator<<(QDebug debug,  const InputEncryptedFile &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.InputEncryptedFile(";
@@ -433,4 +433,4 @@ QDebug operator<<(QDebug debug,  const InputEncryptedFile &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

@@ -39,7 +39,7 @@ InputWebDocument::InputWebDocument(const Null &null) :
 }
 
 InputWebDocument::~InputWebDocument() {
-    
+
 }
 
 void InputWebDocument::setAttributes(const QList<DocumentAttribute> &attributes) {
@@ -120,7 +120,7 @@ bool InputWebDocument::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -142,7 +142,7 @@ bool InputWebDocument::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -163,7 +163,7 @@ QMap<QString, QVariant> InputWebDocument::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -178,19 +178,19 @@ InputWebDocument InputWebDocument::fromMap(const QMap<QString, QVariant> &map) {
             _url_var.convert( QVariant::nameToType("QString") );
             result.setUrl( _url_var.value<QString>() );
         }
-        
+
         QVariant _size_var = map.value("size");
         if( !_size_var.isNull() ) {
             _size_var.convert( QVariant::nameToType("qint32") );
             result.setSize( _size_var.value<qint32>() );
         }
-        
+
         QVariant _mimeType_var = map.value("mimeType");
         if( !_mimeType_var.isNull() ) {
             _mimeType_var.convert( QVariant::nameToType("QString") );
             result.setMimeType( _mimeType_var.value<QString>() );
         }
-        
+
         QList<QVariant> map_attributes = map["attributes"].toList();
         QList<DocumentAttribute> _attributes;
         for(const QVariant &var: map_attributes)
@@ -249,7 +249,7 @@ QDataStream &operator>>(QDataStream &stream, InputWebDocument &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const InputWebDocument &item) {
+/*QDebug operator<<(QDebug debug,  const InputWebDocument &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.InputWebDocument(";
@@ -265,4 +265,4 @@ QDebug operator<<(QDebug debug,  const InputWebDocument &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

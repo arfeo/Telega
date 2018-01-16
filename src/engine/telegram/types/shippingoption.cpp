@@ -35,7 +35,7 @@ ShippingOption::ShippingOption(const Null &null) :
 }
 
 ShippingOption::~ShippingOption() {
-    
+
 }
 
 void ShippingOption::setId(const QString &id) {
@@ -105,7 +105,7 @@ bool ShippingOption::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -126,7 +126,7 @@ bool ShippingOption::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -146,7 +146,7 @@ QMap<QString, QVariant> ShippingOption::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -161,13 +161,13 @@ ShippingOption ShippingOption::fromMap(const QMap<QString, QVariant> &map) {
             _id_var.convert( QVariant::nameToType("QString") );
             result.setId( _id_var.value<QString>() );
         }
-        
+
         QVariant _title_var = map.value("title");
         if( !_title_var.isNull() ) {
             _title_var.convert( QVariant::nameToType("QString") );
             result.setTitle( _title_var.value<QString>() );
         }
-        
+
         QList<QVariant> map_prices = map["prices"].toList();
         QList<LabeledPrice> _prices;
         for(const QVariant &var: map_prices)
@@ -222,7 +222,7 @@ QDataStream &operator>>(QDataStream &stream, ShippingOption &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const ShippingOption &item) {
+/*QDebug operator<<(QDebug debug,  const ShippingOption &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.ShippingOption(";
@@ -237,4 +237,4 @@ QDebug operator<<(QDebug debug,  const ShippingOption &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

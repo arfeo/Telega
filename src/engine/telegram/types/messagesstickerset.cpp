@@ -35,7 +35,7 @@ MessagesStickerSet::MessagesStickerSet(const Null &null) :
 }
 
 MessagesStickerSet::~MessagesStickerSet() {
-    
+
 }
 
 void MessagesStickerSet::setDocuments(const QList<Document> &documents) {
@@ -112,7 +112,7 @@ bool MessagesStickerSet::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -137,7 +137,7 @@ bool MessagesStickerSet::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -160,7 +160,7 @@ QMap<QString, QVariant> MessagesStickerSet::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -173,7 +173,7 @@ MessagesStickerSet MessagesStickerSet::fromMap(const QMap<QString, QVariant> &ma
         QVariant _set_var = map.value("set");
         if( !_set_var.isNull() )
             result.setSet( StickerSet::fromMap(_set_var.toMap()) );
-        
+
         QList<QVariant> map_packs = map["packs"].toList();
         QList<StickerPack> _packs;
         for(const QVariant &var: map_packs)
@@ -233,7 +233,7 @@ QDataStream &operator>>(QDataStream &stream, MessagesStickerSet &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const MessagesStickerSet &item) {
+/*QDebug operator<<(QDebug debug,  const MessagesStickerSet &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.MessagesStickerSet(";
@@ -248,4 +248,4 @@ QDebug operator<<(QDebug debug,  const MessagesStickerSet &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

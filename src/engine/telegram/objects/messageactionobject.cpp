@@ -13,13 +13,13 @@ MessageActionObject::MessageActionObject(const MessageAction &core, QObject *par
     m_core(core)
 {
     m_charge = new PaymentChargeObject(m_core.charge(), this);
-    connect(m_charge.data(), &PaymentChargeObject::coreChanged, this, &MessageActionObject::coreChargeChanged);
+    connect(m_charge.data(), SIGNAL(coreChanged()), this, SLOT(coreChargeChanged()));
     m_info = new PaymentRequestedInfoObject(m_core.info(), this);
-    connect(m_info.data(), &PaymentRequestedInfoObject::coreChanged, this, &MessageActionObject::coreInfoChanged);
+    connect(m_info.data(), SIGNAL(coreChanged()), this, SLOT(coreInfoChanged()));
     m_photo = new PhotoObject(m_core.photo(), this);
-    connect(m_photo.data(), &PhotoObject::coreChanged, this, &MessageActionObject::corePhotoChanged);
+    connect(m_photo.data(), SIGNAL(coreChanged()), this, SLOT(corePhotoChanged()));
     m_reason = new PhoneCallDiscardReasonObject(m_core.reason(), this);
-    connect(m_reason.data(), &PhoneCallDiscardReasonObject::coreChanged, this, &MessageActionObject::coreReasonChanged);
+    connect(m_reason.data(), SIGNAL(coreChanged()), this, SLOT(coreReasonChanged()));
 }
 
 MessageActionObject::MessageActionObject(QObject *parent) :
@@ -31,13 +31,13 @@ MessageActionObject::MessageActionObject(QObject *parent) :
     m_core()
 {
     m_charge = new PaymentChargeObject(m_core.charge(), this);
-    connect(m_charge.data(), &PaymentChargeObject::coreChanged, this, &MessageActionObject::coreChargeChanged);
+    connect(m_charge.data(), SIGNAL(coreChanged()), this, SLOT(coreChargeChanged()));
     m_info = new PaymentRequestedInfoObject(m_core.info(), this);
-    connect(m_info.data(), &PaymentRequestedInfoObject::coreChanged, this, &MessageActionObject::coreInfoChanged);
+    connect(m_info.data(), SIGNAL(coreChanged()), this, SLOT(coreInfoChanged()));
     m_photo = new PhotoObject(m_core.photo(), this);
-    connect(m_photo.data(), &PhotoObject::coreChanged, this, &MessageActionObject::corePhotoChanged);
+    connect(m_photo.data(), SIGNAL(coreChanged()), this, SLOT(corePhotoChanged()));
     m_reason = new PhoneCallDiscardReasonObject(m_core.reason(), this);
-    connect(m_reason.data(), &PhoneCallDiscardReasonObject::coreChanged, this, &MessageActionObject::coreReasonChanged);
+    connect(m_reason.data(), SIGNAL(coreChanged()), this, SLOT(coreReasonChanged()));
 }
 
 MessageActionObject::~MessageActionObject() {
@@ -72,7 +72,7 @@ void MessageActionObject::setCharge(PaymentChargeObject* charge) {
     if(m_charge) {
         m_charge->setParent(this);
         m_core.setCharge(m_charge->core());
-        connect(m_charge.data(), &PaymentChargeObject::coreChanged, this, &MessageActionObject::coreChargeChanged);
+        connect(m_charge.data(), SIGNAL(coreChanged()), this, SLOT(coreChargeChanged()));
     }
     Q_EMIT chargeChanged();
     Q_EMIT coreChanged();
@@ -144,7 +144,7 @@ void MessageActionObject::setInfo(PaymentRequestedInfoObject* info) {
     if(m_info) {
         m_info->setParent(this);
         m_core.setInfo(m_info->core());
-        connect(m_info.data(), &PaymentRequestedInfoObject::coreChanged, this, &MessageActionObject::coreInfoChanged);
+        connect(m_info.data(), SIGNAL(coreChanged()), this, SLOT(coreInfoChanged()));
     }
     Q_EMIT infoChanged();
     Q_EMIT coreChanged();
@@ -183,7 +183,7 @@ void MessageActionObject::setPhoto(PhotoObject* photo) {
     if(m_photo) {
         m_photo->setParent(this);
         m_core.setPhoto(m_photo->core());
-        connect(m_photo.data(), &PhotoObject::coreChanged, this, &MessageActionObject::corePhotoChanged);
+        connect(m_photo.data(), SIGNAL(coreChanged()), this, SLOT(corePhotoChanged()));
     }
     Q_EMIT photoChanged();
     Q_EMIT coreChanged();
@@ -200,7 +200,7 @@ void MessageActionObject::setReason(PhoneCallDiscardReasonObject* reason) {
     if(m_reason) {
         m_reason->setParent(this);
         m_core.setReason(m_reason->core());
-        connect(m_reason.data(), &PhoneCallDiscardReasonObject::coreChanged, this, &MessageActionObject::coreReasonChanged);
+        connect(m_reason.data(), SIGNAL(coreChanged()), this, SLOT(coreReasonChanged()));
     }
     Q_EMIT reasonChanged();
     Q_EMIT coreChanged();

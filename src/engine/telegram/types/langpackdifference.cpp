@@ -43,7 +43,7 @@ LangPackDifference::LangPackDifference(const Null &null) :
 }
 
 LangPackDifference::~LangPackDifference() {
-    
+
 }
 
 void LangPackDifference::setFromVersion(qint32 fromVersion) {
@@ -124,7 +124,7 @@ bool LangPackDifference::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -146,7 +146,7 @@ bool LangPackDifference::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -167,7 +167,7 @@ QMap<QString, QVariant> LangPackDifference::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -182,19 +182,19 @@ LangPackDifference LangPackDifference::fromMap(const QMap<QString, QVariant> &ma
             _langCode_var.convert( QVariant::nameToType("QString") );
             result.setLangCode( _langCode_var.value<QString>() );
         }
-        
+
         QVariant _fromVersion_var = map.value("fromVersion");
         if( !_fromVersion_var.isNull() ) {
             _fromVersion_var.convert( QVariant::nameToType("qint32") );
             result.setFromVersion( _fromVersion_var.value<qint32>() );
         }
-        
+
         QVariant _version_var = map.value("version");
         if( !_version_var.isNull() ) {
             _version_var.convert( QVariant::nameToType("qint32") );
             result.setVersion( _version_var.value<qint32>() );
         }
-        
+
         QList<QVariant> map_strings = map["strings"].toList();
         QList<LangPackString> _strings;
         for(const QVariant &var: map_strings)
@@ -253,7 +253,7 @@ QDataStream &operator>>(QDataStream &stream, LangPackDifference &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const LangPackDifference &item) {
+/*QDebug operator<<(QDebug debug,  const LangPackDifference &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.LangPackDifference(";
@@ -269,4 +269,4 @@ QDebug operator<<(QDebug debug,  const LangPackDifference &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

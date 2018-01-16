@@ -47,7 +47,7 @@ Peer::Peer(const Null &null) :
 }
 
 Peer::~Peer() {
-    
+
 }
 
 void Peer::setChannelId(qint32 channelId) {
@@ -108,21 +108,21 @@ bool Peer::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typePeerChat: {
         m_chatId = in->fetchInt();
         m_classType = static_cast<PeerClassType>(x);
         return true;
     }
         break;
-    
+
     case typePeerChannel: {
         m_channelId = in->fetchInt();
         m_classType = static_cast<PeerClassType>(x);
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -137,19 +137,19 @@ bool Peer::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typePeerChat: {
         out->appendInt(m_chatId);
         return true;
     }
         break;
-    
+
     case typePeerChannel: {
         out->appendInt(m_channelId);
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -164,21 +164,21 @@ QMap<QString, QVariant> Peer::toMap() const {
         return result;
     }
         break;
-    
+
     case typePeerChat: {
         result["classType"] = "Peer::typePeerChat";
         if( chatId() ) result["chatId"] = QString::number(chatId());
         return result;
     }
         break;
-    
+
     case typePeerChannel: {
         result["classType"] = "Peer::typePeerChannel";
         if( channelId() ) result["channelId"] = QString::number(channelId());
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -193,7 +193,7 @@ Peer Peer::fromMap(const QMap<QString, QVariant> &map) {
             _userId_var.convert( QVariant::nameToType("qint32") );
             result.setUserId( _userId_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Peer::typePeerChat") {
@@ -203,7 +203,7 @@ Peer Peer::fromMap(const QMap<QString, QVariant> &map) {
             _chatId_var.convert( QVariant::nameToType("qint32") );
             result.setChatId( _chatId_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "Peer::typePeerChannel") {
@@ -213,7 +213,7 @@ Peer Peer::fromMap(const QMap<QString, QVariant> &map) {
             _channelId_var.convert( QVariant::nameToType("qint32") );
             result.setChannelId( _channelId_var.value<qint32>() );
         }
-        
+
         return result;
     }
     return result;
@@ -273,7 +273,7 @@ QDataStream &operator>>(QDataStream &stream, Peer &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const Peer &item) {
+/*QDebug operator<<(QDebug debug,  const Peer &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.Peer(";
@@ -294,4 +294,4 @@ QDebug operator<<(QDebug debug,  const Peer &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

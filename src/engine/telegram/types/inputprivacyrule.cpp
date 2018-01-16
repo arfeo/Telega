@@ -35,7 +35,7 @@ InputPrivacyRule::InputPrivacyRule(const Null &null) :
 }
 
 InputPrivacyRule::~InputPrivacyRule() {
-    
+
 }
 
 void InputPrivacyRule::setUsers(const QList<InputUser> &users) {
@@ -75,13 +75,13 @@ bool InputPrivacyRule::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputPrivacyValueAllowAll: {
         m_classType = static_cast<InputPrivacyRuleClassType>(x);
         return true;
     }
         break;
-    
+
     case typeInputPrivacyValueAllowUsers: {
         if(in->fetchInt() != (qint32)CoreTypes::typeVector) return false;
         qint32 m_users_length = in->fetchInt();
@@ -95,19 +95,19 @@ bool InputPrivacyRule::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputPrivacyValueDisallowContacts: {
         m_classType = static_cast<InputPrivacyRuleClassType>(x);
         return true;
     }
         break;
-    
+
     case typeInputPrivacyValueDisallowAll: {
         m_classType = static_cast<InputPrivacyRuleClassType>(x);
         return true;
     }
         break;
-    
+
     case typeInputPrivacyValueDisallowUsers: {
         if(in->fetchInt() != (qint32)CoreTypes::typeVector) return false;
         qint32 m_users_length = in->fetchInt();
@@ -121,7 +121,7 @@ bool InputPrivacyRule::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -135,12 +135,12 @@ bool InputPrivacyRule::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeInputPrivacyValueAllowAll: {
         return true;
     }
         break;
-    
+
     case typeInputPrivacyValueAllowUsers: {
         out->appendInt(CoreTypes::typeVector);
         out->appendInt(m_users.count());
@@ -150,17 +150,17 @@ bool InputPrivacyRule::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeInputPrivacyValueDisallowContacts: {
         return true;
     }
         break;
-    
+
     case typeInputPrivacyValueDisallowAll: {
         return true;
     }
         break;
-    
+
     case typeInputPrivacyValueDisallowUsers: {
         out->appendInt(CoreTypes::typeVector);
         out->appendInt(m_users.count());
@@ -170,7 +170,7 @@ bool InputPrivacyRule::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -184,13 +184,13 @@ QMap<QString, QVariant> InputPrivacyRule::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputPrivacyValueAllowAll: {
         result["classType"] = "InputPrivacyRule::typeInputPrivacyValueAllowAll";
         return result;
     }
         break;
-    
+
     case typeInputPrivacyValueAllowUsers: {
         result["classType"] = "InputPrivacyRule::typeInputPrivacyValueAllowUsers";
         QList<QVariant> _users;
@@ -200,19 +200,19 @@ QMap<QString, QVariant> InputPrivacyRule::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputPrivacyValueDisallowContacts: {
         result["classType"] = "InputPrivacyRule::typeInputPrivacyValueDisallowContacts";
         return result;
     }
         break;
-    
+
     case typeInputPrivacyValueDisallowAll: {
         result["classType"] = "InputPrivacyRule::typeInputPrivacyValueDisallowAll";
         return result;
     }
         break;
-    
+
     case typeInputPrivacyValueDisallowUsers: {
         result["classType"] = "InputPrivacyRule::typeInputPrivacyValueDisallowUsers";
         QList<QVariant> _users;
@@ -222,7 +222,7 @@ QMap<QString, QVariant> InputPrivacyRule::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -282,19 +282,19 @@ QDataStream &operator<<(QDataStream &stream, const InputPrivacyRule &item) {
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case InputPrivacyRule::typeInputPrivacyValueAllowContacts:
-        
+
         break;
     case InputPrivacyRule::typeInputPrivacyValueAllowAll:
-        
+
         break;
     case InputPrivacyRule::typeInputPrivacyValueAllowUsers:
         stream << item.users();
         break;
     case InputPrivacyRule::typeInputPrivacyValueDisallowContacts:
-        
+
         break;
     case InputPrivacyRule::typeInputPrivacyValueDisallowAll:
-        
+
         break;
     case InputPrivacyRule::typeInputPrivacyValueDisallowUsers:
         stream << item.users();
@@ -309,11 +309,11 @@ QDataStream &operator>>(QDataStream &stream, InputPrivacyRule &item) {
     item.setClassType(static_cast<InputPrivacyRule::InputPrivacyRuleClassType>(type));
     switch(type) {
     case InputPrivacyRule::typeInputPrivacyValueAllowContacts: {
-        
+
     }
         break;
     case InputPrivacyRule::typeInputPrivacyValueAllowAll: {
-        
+
     }
         break;
     case InputPrivacyRule::typeInputPrivacyValueAllowUsers: {
@@ -323,11 +323,11 @@ QDataStream &operator>>(QDataStream &stream, InputPrivacyRule &item) {
     }
         break;
     case InputPrivacyRule::typeInputPrivacyValueDisallowContacts: {
-        
+
     }
         break;
     case InputPrivacyRule::typeInputPrivacyValueDisallowAll: {
-        
+
     }
         break;
     case InputPrivacyRule::typeInputPrivacyValueDisallowUsers: {
@@ -340,7 +340,7 @@ QDataStream &operator>>(QDataStream &stream, InputPrivacyRule &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const InputPrivacyRule &item) {
+/*QDebug operator<<(QDebug debug,  const InputPrivacyRule &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.InputPrivacyRule(";
@@ -369,4 +369,4 @@ QDebug operator<<(QDebug debug,  const InputPrivacyRule &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

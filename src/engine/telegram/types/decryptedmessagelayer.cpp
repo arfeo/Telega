@@ -47,7 +47,7 @@ DecryptedMessageLayer::DecryptedMessageLayer(const Null &null) :
 }
 
 DecryptedMessageLayer::~DecryptedMessageLayer() {
-    
+
 }
 
 void DecryptedMessageLayer::setInSeqNo(qint32 inSeqNo) {
@@ -132,7 +132,7 @@ bool DecryptedMessageLayer::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -151,7 +151,7 @@ bool DecryptedMessageLayer::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -170,7 +170,7 @@ QMap<QString, QVariant> DecryptedMessageLayer::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -185,29 +185,29 @@ DecryptedMessageLayer DecryptedMessageLayer::fromMap(const QMap<QString, QVarian
             _randomBytes_var.convert( QVariant::nameToType("QByteArray") );
             result.setRandomBytes( _randomBytes_var.value<QByteArray>() );
         }
-        
+
         QVariant _layer_var = map.value("layer");
         if( !_layer_var.isNull() ) {
             _layer_var.convert( QVariant::nameToType("qint32") );
             result.setLayer( _layer_var.value<qint32>() );
         }
-        
+
         QVariant _inSeqNo_var = map.value("inSeqNo");
         if( !_inSeqNo_var.isNull() ) {
             _inSeqNo_var.convert( QVariant::nameToType("qint32") );
             result.setInSeqNo( _inSeqNo_var.value<qint32>() );
         }
-        
+
         QVariant _outSeqNo_var = map.value("outSeqNo");
         if( !_outSeqNo_var.isNull() ) {
             _outSeqNo_var.convert( QVariant::nameToType("qint32") );
             result.setOutSeqNo( _outSeqNo_var.value<qint32>() );
         }
-        
+
         QVariant _message_var = map.value("message");
         if( !_message_var.isNull() )
             result.setMessage( DecryptedMessage::fromMap(_message_var.toMap()) );
-        
+
         return result;
     }
     return result;
@@ -265,7 +265,7 @@ QDataStream &operator>>(QDataStream &stream, DecryptedMessageLayer &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const DecryptedMessageLayer &item) {
+/*QDebug operator<<(QDebug debug,  const DecryptedMessageLayer &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.DecryptedMessageLayer(";
@@ -282,4 +282,4 @@ QDebug operator<<(QDebug debug,  const DecryptedMessageLayer &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

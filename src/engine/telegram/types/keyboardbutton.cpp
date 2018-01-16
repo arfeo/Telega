@@ -39,7 +39,7 @@ KeyboardButton::KeyboardButton(const Null &null) :
 }
 
 KeyboardButton::~KeyboardButton() {
-    
+
 }
 
 void KeyboardButton::setData(const QByteArray &data) {
@@ -129,7 +129,7 @@ bool KeyboardButton::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeKeyboardButtonUrl: {
         m_text = in->fetchQString();
         m_url = in->fetchQString();
@@ -137,7 +137,7 @@ bool KeyboardButton::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeKeyboardButtonCallback: {
         m_text = in->fetchQString();
         m_data = in->fetchBytes();
@@ -145,21 +145,21 @@ bool KeyboardButton::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeKeyboardButtonRequestPhone: {
         m_text = in->fetchQString();
         m_classType = static_cast<KeyboardButtonClassType>(x);
         return true;
     }
         break;
-    
+
     case typeKeyboardButtonRequestGeoLocation: {
         m_text = in->fetchQString();
         m_classType = static_cast<KeyboardButtonClassType>(x);
         return true;
     }
         break;
-    
+
     case typeKeyboardButtonSwitchInline: {
         m_flags = in->fetchInt();
         m_text = in->fetchQString();
@@ -168,21 +168,21 @@ bool KeyboardButton::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeKeyboardButtonGame: {
         m_text = in->fetchQString();
         m_classType = static_cast<KeyboardButtonClassType>(x);
         return true;
     }
         break;
-    
+
     case typeKeyboardButtonBuy: {
         m_text = in->fetchQString();
         m_classType = static_cast<KeyboardButtonClassType>(x);
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -197,33 +197,33 @@ bool KeyboardButton::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeKeyboardButtonUrl: {
         out->appendQString(m_text);
         out->appendQString(m_url);
         return true;
     }
         break;
-    
+
     case typeKeyboardButtonCallback: {
         out->appendQString(m_text);
         out->appendBytes(m_data);
         return true;
     }
         break;
-    
+
     case typeKeyboardButtonRequestPhone: {
         out->appendQString(m_text);
         return true;
     }
         break;
-    
+
     case typeKeyboardButtonRequestGeoLocation: {
         out->appendQString(m_text);
         return true;
     }
         break;
-    
+
     case typeKeyboardButtonSwitchInline: {
         out->appendInt(m_flags);
         out->appendQString(m_text);
@@ -231,19 +231,19 @@ bool KeyboardButton::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeKeyboardButtonGame: {
         out->appendQString(m_text);
         return true;
     }
         break;
-    
+
     case typeKeyboardButtonBuy: {
         out->appendQString(m_text);
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -258,7 +258,7 @@ QMap<QString, QVariant> KeyboardButton::toMap() const {
         return result;
     }
         break;
-    
+
     case typeKeyboardButtonUrl: {
         result["classType"] = "KeyboardButton::typeKeyboardButtonUrl";
         if( !m_text.isEmpty() ) result["text"] = QVariant::fromValue<QString>(m_text);
@@ -266,7 +266,7 @@ QMap<QString, QVariant> KeyboardButton::toMap() const {
         return result;
     }
         break;
-    
+
     case typeKeyboardButtonCallback: {
         result["classType"] = "KeyboardButton::typeKeyboardButtonCallback";
         if( !m_text.isEmpty() ) result["text"] = QVariant::fromValue<QString>(m_text);
@@ -274,21 +274,21 @@ QMap<QString, QVariant> KeyboardButton::toMap() const {
         return result;
     }
         break;
-    
+
     case typeKeyboardButtonRequestPhone: {
         result["classType"] = "KeyboardButton::typeKeyboardButtonRequestPhone";
         if( !m_text.isEmpty() ) result["text"] = QVariant::fromValue<QString>(m_text);
         return result;
     }
         break;
-    
+
     case typeKeyboardButtonRequestGeoLocation: {
         result["classType"] = "KeyboardButton::typeKeyboardButtonRequestGeoLocation";
         if( !m_text.isEmpty() ) result["text"] = QVariant::fromValue<QString>(m_text);
         return result;
     }
         break;
-    
+
     case typeKeyboardButtonSwitchInline: {
         result["classType"] = "KeyboardButton::typeKeyboardButtonSwitchInline";
         if( samePeer() ) result["samePeer"] = QString::number(samePeer());
@@ -297,21 +297,21 @@ QMap<QString, QVariant> KeyboardButton::toMap() const {
         return result;
     }
         break;
-    
+
     case typeKeyboardButtonGame: {
         result["classType"] = "KeyboardButton::typeKeyboardButtonGame";
         if( !m_text.isEmpty() ) result["text"] = QVariant::fromValue<QString>(m_text);
         return result;
     }
         break;
-    
+
     case typeKeyboardButtonBuy: {
         result["classType"] = "KeyboardButton::typeKeyboardButtonBuy";
         if( !m_text.isEmpty() ) result["text"] = QVariant::fromValue<QString>(m_text);
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -326,7 +326,7 @@ KeyboardButton KeyboardButton::fromMap(const QMap<QString, QVariant> &map) {
             _text_var.convert( QVariant::nameToType("QString") );
             result.setText( _text_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "KeyboardButton::typeKeyboardButtonUrl") {
@@ -336,13 +336,13 @@ KeyboardButton KeyboardButton::fromMap(const QMap<QString, QVariant> &map) {
             _text_var.convert( QVariant::nameToType("QString") );
             result.setText( _text_var.value<QString>() );
         }
-        
+
         QVariant _url_var = map.value("url");
         if( !_url_var.isNull() ) {
             _url_var.convert( QVariant::nameToType("QString") );
             result.setUrl( _url_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "KeyboardButton::typeKeyboardButtonCallback") {
@@ -352,13 +352,13 @@ KeyboardButton KeyboardButton::fromMap(const QMap<QString, QVariant> &map) {
             _text_var.convert( QVariant::nameToType("QString") );
             result.setText( _text_var.value<QString>() );
         }
-        
+
         QVariant _data_var = map.value("data");
         if( !_data_var.isNull() ) {
             _data_var.convert( QVariant::nameToType("QByteArray") );
             result.setData( _data_var.value<QByteArray>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "KeyboardButton::typeKeyboardButtonRequestPhone") {
@@ -368,7 +368,7 @@ KeyboardButton KeyboardButton::fromMap(const QMap<QString, QVariant> &map) {
             _text_var.convert( QVariant::nameToType("QString") );
             result.setText( _text_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "KeyboardButton::typeKeyboardButtonRequestGeoLocation") {
@@ -378,7 +378,7 @@ KeyboardButton KeyboardButton::fromMap(const QMap<QString, QVariant> &map) {
             _text_var.convert( QVariant::nameToType("QString") );
             result.setText( _text_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "KeyboardButton::typeKeyboardButtonSwitchInline") {
@@ -388,19 +388,19 @@ KeyboardButton KeyboardButton::fromMap(const QMap<QString, QVariant> &map) {
             _samePeer_var.convert( QVariant::nameToType("bool") );
             result.setSamePeer( _samePeer_var.value<bool>() );
         }
-        
+
         QVariant _text_var = map.value("text");
         if( !_text_var.isNull() ) {
             _text_var.convert( QVariant::nameToType("QString") );
             result.setText( _text_var.value<QString>() );
         }
-        
+
         QVariant _query_var = map.value("query");
         if( !_query_var.isNull() ) {
             _query_var.convert( QVariant::nameToType("QString") );
             result.setQuery( _query_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "KeyboardButton::typeKeyboardButtonGame") {
@@ -410,7 +410,7 @@ KeyboardButton KeyboardButton::fromMap(const QMap<QString, QVariant> &map) {
             _text_var.convert( QVariant::nameToType("QString") );
             result.setText( _text_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "KeyboardButton::typeKeyboardButtonBuy") {
@@ -420,7 +420,7 @@ KeyboardButton KeyboardButton::fromMap(const QMap<QString, QVariant> &map) {
             _text_var.convert( QVariant::nameToType("QString") );
             result.setText( _text_var.value<QString>() );
         }
-        
+
         return result;
     }
     return result;
@@ -541,7 +541,7 @@ QDataStream &operator>>(QDataStream &stream, KeyboardButton &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const KeyboardButton &item) {
+/*QDebug operator<<(QDebug debug,  const KeyboardButton &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.KeyboardButton(";
@@ -586,4 +586,4 @@ QDebug operator<<(QDebug debug,  const KeyboardButton &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

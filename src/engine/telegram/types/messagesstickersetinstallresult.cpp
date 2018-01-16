@@ -35,7 +35,7 @@ MessagesStickerSetInstallResult::MessagesStickerSetInstallResult(const Null &nul
 }
 
 MessagesStickerSetInstallResult::~MessagesStickerSetInstallResult() {
-    
+
 }
 
 void MessagesStickerSetInstallResult::setSets(const QList<StickerSetCovered> &sets) {
@@ -75,7 +75,7 @@ bool MessagesStickerSetInstallResult::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeMessagesStickerSetInstallResultArchive: {
         if(in->fetchInt() != (qint32)CoreTypes::typeVector) return false;
         qint32 m_sets_length = in->fetchInt();
@@ -89,7 +89,7 @@ bool MessagesStickerSetInstallResult::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -103,7 +103,7 @@ bool MessagesStickerSetInstallResult::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeMessagesStickerSetInstallResultArchive: {
         out->appendInt(CoreTypes::typeVector);
         out->appendInt(m_sets.count());
@@ -113,7 +113,7 @@ bool MessagesStickerSetInstallResult::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -127,7 +127,7 @@ QMap<QString, QVariant> MessagesStickerSetInstallResult::toMap() const {
         return result;
     }
         break;
-    
+
     case typeMessagesStickerSetInstallResultArchive: {
         result["classType"] = "MessagesStickerSetInstallResult::typeMessagesStickerSetInstallResultArchive";
         QList<QVariant> _sets;
@@ -137,7 +137,7 @@ QMap<QString, QVariant> MessagesStickerSetInstallResult::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -176,7 +176,7 @@ QDataStream &operator<<(QDataStream &stream, const MessagesStickerSetInstallResu
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case MessagesStickerSetInstallResult::typeMessagesStickerSetInstallResultSuccess:
-        
+
         break;
     case MessagesStickerSetInstallResult::typeMessagesStickerSetInstallResultArchive:
         stream << item.sets();
@@ -191,7 +191,7 @@ QDataStream &operator>>(QDataStream &stream, MessagesStickerSetInstallResult &it
     item.setClassType(static_cast<MessagesStickerSetInstallResult::MessagesStickerSetInstallResultClassType>(type));
     switch(type) {
     case MessagesStickerSetInstallResult::typeMessagesStickerSetInstallResultSuccess: {
-        
+
     }
         break;
     case MessagesStickerSetInstallResult::typeMessagesStickerSetInstallResultArchive: {
@@ -204,7 +204,7 @@ QDataStream &operator>>(QDataStream &stream, MessagesStickerSetInstallResult &it
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const MessagesStickerSetInstallResult &item) {
+/*QDebug operator<<(QDebug debug,  const MessagesStickerSetInstallResult &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.MessagesStickerSetInstallResult(";
@@ -220,4 +220,4 @@ QDebug operator<<(QDebug debug,  const MessagesStickerSetInstallResult &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

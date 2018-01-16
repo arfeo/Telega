@@ -10,7 +10,7 @@ MessagesSentEncryptedMessageObject::MessagesSentEncryptedMessageObject(const Mes
     m_core(core)
 {
     m_file = new EncryptedFileObject(m_core.file(), this);
-    connect(m_file.data(), &EncryptedFileObject::coreChanged, this, &MessagesSentEncryptedMessageObject::coreFileChanged);
+    connect(m_file.data(), SIGNAL(coreChanged()), this, SLOT(coreFileChanged()));
 }
 
 MessagesSentEncryptedMessageObject::MessagesSentEncryptedMessageObject(QObject *parent) :
@@ -19,7 +19,7 @@ MessagesSentEncryptedMessageObject::MessagesSentEncryptedMessageObject(QObject *
     m_core()
 {
     m_file = new EncryptedFileObject(m_core.file(), this);
-    connect(m_file.data(), &EncryptedFileObject::coreChanged, this, &MessagesSentEncryptedMessageObject::coreFileChanged);
+    connect(m_file.data(), SIGNAL(coreChanged()), this, SLOT(coreFileChanged()));
 }
 
 MessagesSentEncryptedMessageObject::~MessagesSentEncryptedMessageObject() {
@@ -43,7 +43,7 @@ void MessagesSentEncryptedMessageObject::setFile(EncryptedFileObject* file) {
     if(m_file) {
         m_file->setParent(this);
         m_core.setFile(m_file->core());
-        connect(m_file.data(), &EncryptedFileObject::coreChanged, this, &MessagesSentEncryptedMessageObject::coreFileChanged);
+        connect(m_file.data(), SIGNAL(coreChanged()), this, SLOT(coreFileChanged()));
     }
     Q_EMIT fileChanged();
     Q_EMIT coreChanged();

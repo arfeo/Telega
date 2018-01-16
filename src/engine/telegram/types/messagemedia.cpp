@@ -51,7 +51,7 @@ MessageMedia::MessageMedia(const Null &null) :
 }
 
 MessageMedia::~MessageMedia() {
-    
+
 }
 
 void MessageMedia::setAddress(const QString &address) {
@@ -313,7 +313,7 @@ bool MessageMedia::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeMessageMediaPhoto: {
         m_photo.fetch(in);
         m_caption = in->fetchQString();
@@ -321,14 +321,14 @@ bool MessageMedia::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeMessageMediaGeo: {
         m_geo.fetch(in);
         m_classType = static_cast<MessageMediaClassType>(x);
         return true;
     }
         break;
-    
+
     case typeMessageMediaContact: {
         m_phoneNumber = in->fetchQString();
         m_firstName = in->fetchQString();
@@ -338,13 +338,13 @@ bool MessageMedia::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeMessageMediaUnsupported: {
         m_classType = static_cast<MessageMediaClassType>(x);
         return true;
     }
         break;
-    
+
     case typeMessageMediaDocument: {
         m_document.fetch(in);
         m_caption = in->fetchQString();
@@ -352,14 +352,14 @@ bool MessageMedia::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeMessageMediaWebPage: {
         m_webpage.fetch(in);
         m_classType = static_cast<MessageMediaClassType>(x);
         return true;
     }
         break;
-    
+
     case typeMessageMediaVenue: {
         m_geo.fetch(in);
         m_title = in->fetchQString();
@@ -370,14 +370,14 @@ bool MessageMedia::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeMessageMediaGame: {
         m_game.fetch(in);
         m_classType = static_cast<MessageMediaClassType>(x);
         return true;
     }
         break;
-    
+
     case typeMessageMediaInvoice: {
         m_flags = in->fetchInt();
         m_title = in->fetchQString();
@@ -395,7 +395,7 @@ bool MessageMedia::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -409,20 +409,20 @@ bool MessageMedia::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeMessageMediaPhoto: {
         m_photo.push(out);
         out->appendQString(m_caption);
         return true;
     }
         break;
-    
+
     case typeMessageMediaGeo: {
         m_geo.push(out);
         return true;
     }
         break;
-    
+
     case typeMessageMediaContact: {
         out->appendQString(m_phoneNumber);
         out->appendQString(m_firstName);
@@ -431,25 +431,25 @@ bool MessageMedia::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeMessageMediaUnsupported: {
         return true;
     }
         break;
-    
+
     case typeMessageMediaDocument: {
         m_document.push(out);
         out->appendQString(m_caption);
         return true;
     }
         break;
-    
+
     case typeMessageMediaWebPage: {
         m_webpage.push(out);
         return true;
     }
         break;
-    
+
     case typeMessageMediaVenue: {
         m_geo.push(out);
         out->appendQString(m_title);
@@ -459,13 +459,13 @@ bool MessageMedia::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeMessageMediaGame: {
         m_game.push(out);
         return true;
     }
         break;
-    
+
     case typeMessageMediaInvoice: {
         out->appendInt(m_flags);
         out->appendQString(m_title);
@@ -482,7 +482,7 @@ bool MessageMedia::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -496,7 +496,7 @@ QMap<QString, QVariant> MessageMedia::toMap() const {
         return result;
     }
         break;
-    
+
     case typeMessageMediaPhoto: {
         result["classType"] = "MessageMedia::typeMessageMediaPhoto";
         if( !m_photo.isNull() ) result["photo"] = m_photo.toMap();
@@ -504,14 +504,14 @@ QMap<QString, QVariant> MessageMedia::toMap() const {
         return result;
     }
         break;
-    
+
     case typeMessageMediaGeo: {
         result["classType"] = "MessageMedia::typeMessageMediaGeo";
         if( !m_geo.isNull() ) result["geo"] = m_geo.toMap();
         return result;
     }
         break;
-    
+
     case typeMessageMediaContact: {
         result["classType"] = "MessageMedia::typeMessageMediaContact";
         if( !m_phoneNumber.isEmpty() ) result["phoneNumber"] = QVariant::fromValue<QString>(m_phoneNumber);
@@ -521,13 +521,13 @@ QMap<QString, QVariant> MessageMedia::toMap() const {
         return result;
     }
         break;
-    
+
     case typeMessageMediaUnsupported: {
         result["classType"] = "MessageMedia::typeMessageMediaUnsupported";
         return result;
     }
         break;
-    
+
     case typeMessageMediaDocument: {
         result["classType"] = "MessageMedia::typeMessageMediaDocument";
         if( !m_document.isNull() ) result["document"] = m_document.toMap();
@@ -535,14 +535,14 @@ QMap<QString, QVariant> MessageMedia::toMap() const {
         return result;
     }
         break;
-    
+
     case typeMessageMediaWebPage: {
         result["classType"] = "MessageMedia::typeMessageMediaWebPage";
         if( !m_webpage.isNull() ) result["webpage"] = m_webpage.toMap();
         return result;
     }
         break;
-    
+
     case typeMessageMediaVenue: {
         result["classType"] = "MessageMedia::typeMessageMediaVenue";
         if( !m_geo.isNull() ) result["geo"] = m_geo.toMap();
@@ -553,14 +553,14 @@ QMap<QString, QVariant> MessageMedia::toMap() const {
         return result;
     }
         break;
-    
+
     case typeMessageMediaGame: {
         result["classType"] = "MessageMedia::typeMessageMediaGame";
         if( !m_game.isNull() ) result["game"] = m_game.toMap();
         return result;
     }
         break;
-    
+
     case typeMessageMediaInvoice: {
         result["classType"] = "MessageMedia::typeMessageMediaInvoice";
         if( shippingAddressRequested() ) result["shippingAddressRequested"] = QString::number(shippingAddressRequested());
@@ -575,7 +575,7 @@ QMap<QString, QVariant> MessageMedia::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -592,13 +592,13 @@ MessageMedia MessageMedia::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _photo_var = map.value("photo");
         if( !_photo_var.isNull() )
             result.setPhoto( Photo::fromMap(_photo_var.toMap()) );
-        
+
         QVariant _caption_var = map.value("caption");
         if( !_caption_var.isNull() ) {
             _caption_var.convert( QVariant::nameToType("QString") );
             result.setCaption( _caption_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "MessageMedia::typeMessageMediaGeo") {
@@ -606,7 +606,7 @@ MessageMedia MessageMedia::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _geo_var = map.value("geo");
         if( !_geo_var.isNull() )
             result.setGeo( GeoPoint::fromMap(_geo_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "MessageMedia::typeMessageMediaContact") {
@@ -616,25 +616,25 @@ MessageMedia MessageMedia::fromMap(const QMap<QString, QVariant> &map) {
             _phoneNumber_var.convert( QVariant::nameToType("QString") );
             result.setPhoneNumber( _phoneNumber_var.value<QString>() );
         }
-        
+
         QVariant _firstName_var = map.value("firstName");
         if( !_firstName_var.isNull() ) {
             _firstName_var.convert( QVariant::nameToType("QString") );
             result.setFirstName( _firstName_var.value<QString>() );
         }
-        
+
         QVariant _lastName_var = map.value("lastName");
         if( !_lastName_var.isNull() ) {
             _lastName_var.convert( QVariant::nameToType("QString") );
             result.setLastName( _lastName_var.value<QString>() );
         }
-        
+
         QVariant _userId_var = map.value("userId");
         if( !_userId_var.isNull() ) {
             _userId_var.convert( QVariant::nameToType("qint32") );
             result.setUserId( _userId_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "MessageMedia::typeMessageMediaUnsupported") {
@@ -646,13 +646,13 @@ MessageMedia MessageMedia::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _document_var = map.value("document");
         if( !_document_var.isNull() )
             result.setDocument( Document::fromMap(_document_var.toMap()) );
-        
+
         QVariant _caption_var = map.value("caption");
         if( !_caption_var.isNull() ) {
             _caption_var.convert( QVariant::nameToType("QString") );
             result.setCaption( _caption_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "MessageMedia::typeMessageMediaWebPage") {
@@ -660,7 +660,7 @@ MessageMedia MessageMedia::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _webpage_var = map.value("webpage");
         if( !_webpage_var.isNull() )
             result.setWebpage( WebPage::fromMap(_webpage_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "MessageMedia::typeMessageMediaVenue") {
@@ -668,31 +668,31 @@ MessageMedia MessageMedia::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _geo_var = map.value("geo");
         if( !_geo_var.isNull() )
             result.setGeo( GeoPoint::fromMap(_geo_var.toMap()) );
-        
+
         QVariant _title_var = map.value("title");
         if( !_title_var.isNull() ) {
             _title_var.convert( QVariant::nameToType("QString") );
             result.setTitle( _title_var.value<QString>() );
         }
-        
+
         QVariant _address_var = map.value("address");
         if( !_address_var.isNull() ) {
             _address_var.convert( QVariant::nameToType("QString") );
             result.setAddress( _address_var.value<QString>() );
         }
-        
+
         QVariant _provider_var = map.value("provider");
         if( !_provider_var.isNull() ) {
             _provider_var.convert( QVariant::nameToType("QString") );
             result.setProvider( _provider_var.value<QString>() );
         }
-        
+
         QVariant _venueId_var = map.value("venueId");
         if( !_venueId_var.isNull() ) {
             _venueId_var.convert( QVariant::nameToType("QString") );
             result.setVenueId( _venueId_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "MessageMedia::typeMessageMediaGame") {
@@ -700,7 +700,7 @@ MessageMedia MessageMedia::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _game_var = map.value("game");
         if( !_game_var.isNull() )
             result.setGame( Game::fromMap(_game_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "MessageMedia::typeMessageMediaInvoice") {
@@ -710,53 +710,53 @@ MessageMedia MessageMedia::fromMap(const QMap<QString, QVariant> &map) {
             _shippingAddressRequested_var.convert( QVariant::nameToType("bool") );
             result.setShippingAddressRequested( _shippingAddressRequested_var.value<bool>() );
         }
-        
+
         QVariant _test_var = map.value("test");
         if( !_test_var.isNull() ) {
             _test_var.convert( QVariant::nameToType("bool") );
             result.setTest( _test_var.value<bool>() );
         }
-        
+
         QVariant _title_var = map.value("title");
         if( !_title_var.isNull() ) {
             _title_var.convert( QVariant::nameToType("QString") );
             result.setTitle( _title_var.value<QString>() );
         }
-        
+
         QVariant _description_var = map.value("description");
         if( !_description_var.isNull() ) {
             _description_var.convert( QVariant::nameToType("QString") );
             result.setDescription( _description_var.value<QString>() );
         }
-        
+
         QVariant _photoWebDocument_var = map.value("photoWebDocument");
         if( !_photoWebDocument_var.isNull() )
             result.setPhotoWebDocument( WebDocument::fromMap(_photoWebDocument_var.toMap()) );
-        
+
         QVariant _receiptMsgId_var = map.value("receiptMsgId");
         if( !_receiptMsgId_var.isNull() ) {
             _receiptMsgId_var.convert( QVariant::nameToType("qint32") );
             result.setReceiptMsgId( _receiptMsgId_var.value<qint32>() );
         }
-        
+
         QVariant _currency_var = map.value("currency");
         if( !_currency_var.isNull() ) {
             _currency_var.convert( QVariant::nameToType("QString") );
             result.setCurrency( _currency_var.value<QString>() );
         }
-        
+
         QVariant _totalAmount_var = map.value("totalAmount");
         if( !_totalAmount_var.isNull() ) {
             _totalAmount_var.convert( QVariant::nameToType("qint64") );
             result.setTotalAmount( _totalAmount_var.value<qint64>() );
         }
-        
+
         QVariant _startParam_var = map.value("startParam");
         if( !_startParam_var.isNull() ) {
             _startParam_var.convert( QVariant::nameToType("QString") );
             result.setStartParam( _startParam_var.value<QString>() );
         }
-        
+
         return result;
     }
     return result;
@@ -777,7 +777,7 @@ QDataStream &operator<<(QDataStream &stream, const MessageMedia &item) {
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case MessageMedia::typeMessageMediaEmpty:
-        
+
         break;
     case MessageMedia::typeMessageMediaPhoto:
         stream << item.photo();
@@ -793,7 +793,7 @@ QDataStream &operator<<(QDataStream &stream, const MessageMedia &item) {
         stream << item.userId();
         break;
     case MessageMedia::typeMessageMediaUnsupported:
-        
+
         break;
     case MessageMedia::typeMessageMediaDocument:
         stream << item.document();
@@ -832,7 +832,7 @@ QDataStream &operator>>(QDataStream &stream, MessageMedia &item) {
     item.setClassType(static_cast<MessageMedia::MessageMediaClassType>(type));
     switch(type) {
     case MessageMedia::typeMessageMediaEmpty: {
-        
+
     }
         break;
     case MessageMedia::typeMessageMediaPhoto: {
@@ -866,7 +866,7 @@ QDataStream &operator>>(QDataStream &stream, MessageMedia &item) {
     }
         break;
     case MessageMedia::typeMessageMediaUnsupported: {
-        
+
     }
         break;
     case MessageMedia::typeMessageMediaDocument: {
@@ -939,7 +939,7 @@ QDataStream &operator>>(QDataStream &stream, MessageMedia &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const MessageMedia &item) {
+/*QDebug operator<<(QDebug debug,  const MessageMedia &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.MessageMedia(";
@@ -1002,4 +1002,4 @@ QDebug operator<<(QDebug debug,  const MessageMedia &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

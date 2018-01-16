@@ -59,7 +59,7 @@ Dialog::Dialog(const Null &null) :
 }
 
 Dialog::~Dialog() {
-    
+
 }
 
 void Dialog::setDraft(const DraftMessage &draft) {
@@ -205,7 +205,7 @@ bool Dialog::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -232,7 +232,7 @@ bool Dialog::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -255,7 +255,7 @@ QMap<QString, QVariant> Dialog::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -270,49 +270,49 @@ Dialog Dialog::fromMap(const QMap<QString, QVariant> &map) {
             _pinned_var.convert( QVariant::nameToType("bool") );
             result.setPinned( _pinned_var.value<bool>() );
         }
-        
+
         QVariant _peer_var = map.value("peer");
         if( !_peer_var.isNull() )
             result.setPeer( Peer::fromMap(_peer_var.toMap()) );
-        
+
         QVariant _topMessage_var = map.value("topMessage");
         if( !_topMessage_var.isNull() ) {
             _topMessage_var.convert( QVariant::nameToType("qint32") );
             result.setTopMessage( _topMessage_var.value<qint32>() );
         }
-        
+
         QVariant _readInboxMaxId_var = map.value("readInboxMaxId");
         if( !_readInboxMaxId_var.isNull() ) {
             _readInboxMaxId_var.convert( QVariant::nameToType("qint32") );
             result.setReadInboxMaxId( _readInboxMaxId_var.value<qint32>() );
         }
-        
+
         QVariant _readOutboxMaxId_var = map.value("readOutboxMaxId");
         if( !_readOutboxMaxId_var.isNull() ) {
             _readOutboxMaxId_var.convert( QVariant::nameToType("qint32") );
             result.setReadOutboxMaxId( _readOutboxMaxId_var.value<qint32>() );
         }
-        
+
         QVariant _unreadCount_var = map.value("unreadCount");
         if( !_unreadCount_var.isNull() ) {
             _unreadCount_var.convert( QVariant::nameToType("qint32") );
             result.setUnreadCount( _unreadCount_var.value<qint32>() );
         }
-        
+
         QVariant _notifySettings_var = map.value("notifySettings");
         if( !_notifySettings_var.isNull() )
             result.setNotifySettings( PeerNotifySettings::fromMap(_notifySettings_var.toMap()) );
-        
+
         QVariant _pts_var = map.value("pts");
         if( !_pts_var.isNull() ) {
             _pts_var.convert( QVariant::nameToType("qint32") );
             result.setPts( _pts_var.value<qint32>() );
         }
-        
+
         QVariant _draft_var = map.value("draft");
         if( !_draft_var.isNull() )
             result.setDraft( DraftMessage::fromMap(_draft_var.toMap()) );
-        
+
         return result;
     }
     return result;
@@ -386,7 +386,7 @@ QDataStream &operator>>(QDataStream &stream, Dialog &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const Dialog &item) {
+/*QDebug operator<<(QDebug debug,  const Dialog &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.Dialog(";
@@ -407,4 +407,4 @@ QDebug operator<<(QDebug debug,  const Dialog &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

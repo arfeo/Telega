@@ -11,9 +11,9 @@ ChannelParticipantObject::ChannelParticipantObject(const ChannelParticipant &cor
     m_core(core)
 {
     m_adminRights = new ChannelAdminRightsObject(m_core.adminRights(), this);
-    connect(m_adminRights.data(), &ChannelAdminRightsObject::coreChanged, this, &ChannelParticipantObject::coreAdminRightsChanged);
+    connect(m_adminRights.data(), SIGNAL(coreChanged()), this, SLOT(coreAdminRightsChanged()));
     m_bannedRights = new ChannelBannedRightsObject(m_core.bannedRights(), this);
-    connect(m_bannedRights.data(), &ChannelBannedRightsObject::coreChanged, this, &ChannelParticipantObject::coreBannedRightsChanged);
+    connect(m_bannedRights.data(), SIGNAL(coreChanged()), this, SLOT(coreBannedRightsChanged()));
 }
 
 ChannelParticipantObject::ChannelParticipantObject(QObject *parent) :
@@ -23,9 +23,9 @@ ChannelParticipantObject::ChannelParticipantObject(QObject *parent) :
     m_core()
 {
     m_adminRights = new ChannelAdminRightsObject(m_core.adminRights(), this);
-    connect(m_adminRights.data(), &ChannelAdminRightsObject::coreChanged, this, &ChannelParticipantObject::coreAdminRightsChanged);
+    connect(m_adminRights.data(), SIGNAL(coreChanged()), this, SLOT(coreAdminRightsChanged()));
     m_bannedRights = new ChannelBannedRightsObject(m_core.bannedRights(), this);
-    connect(m_bannedRights.data(), &ChannelBannedRightsObject::coreChanged, this, &ChannelParticipantObject::coreBannedRightsChanged);
+    connect(m_bannedRights.data(), SIGNAL(coreChanged()), this, SLOT(coreBannedRightsChanged()));
 }
 
 ChannelParticipantObject::~ChannelParticipantObject() {
@@ -38,7 +38,7 @@ void ChannelParticipantObject::setAdminRights(ChannelAdminRightsObject* adminRig
     if(m_adminRights) {
         m_adminRights->setParent(this);
         m_core.setAdminRights(m_adminRights->core());
-        connect(m_adminRights.data(), &ChannelAdminRightsObject::coreChanged, this, &ChannelParticipantObject::coreAdminRightsChanged);
+        connect(m_adminRights.data(), SIGNAL(coreChanged()), this, SLOT(coreAdminRightsChanged()));
     }
     Q_EMIT adminRightsChanged();
     Q_EMIT coreChanged();
@@ -55,7 +55,7 @@ void ChannelParticipantObject::setBannedRights(ChannelBannedRightsObject* banned
     if(m_bannedRights) {
         m_bannedRights->setParent(this);
         m_core.setBannedRights(m_bannedRights->core());
-        connect(m_bannedRights.data(), &ChannelBannedRightsObject::coreChanged, this, &ChannelParticipantObject::coreBannedRightsChanged);
+        connect(m_bannedRights.data(), SIGNAL(coreChanged()), this, SLOT(coreBannedRightsChanged()));
     }
     Q_EMIT bannedRightsChanged();
     Q_EMIT coreChanged();

@@ -39,7 +39,7 @@ ChannelMessagesFilter::ChannelMessagesFilter(const Null &null) :
 }
 
 ChannelMessagesFilter::~ChannelMessagesFilter() {
-    
+
 }
 
 void ChannelMessagesFilter::setExcludeNewMessages(bool excludeNewMessages) {
@@ -98,7 +98,7 @@ bool ChannelMessagesFilter::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeChannelMessagesFilter: {
         m_flags = in->fetchInt();
         if(in->fetchInt() != (qint32)CoreTypes::typeVector) return false;
@@ -113,7 +113,7 @@ bool ChannelMessagesFilter::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -127,7 +127,7 @@ bool ChannelMessagesFilter::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeChannelMessagesFilter: {
         out->appendInt(m_flags);
         out->appendInt(CoreTypes::typeVector);
@@ -138,7 +138,7 @@ bool ChannelMessagesFilter::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -152,7 +152,7 @@ QMap<QString, QVariant> ChannelMessagesFilter::toMap() const {
         return result;
     }
         break;
-    
+
     case typeChannelMessagesFilter: {
         result["classType"] = "ChannelMessagesFilter::typeChannelMessagesFilter";
         if( excludeNewMessages() ) result["excludeNewMessages"] = QString::number(excludeNewMessages());
@@ -163,7 +163,7 @@ QMap<QString, QVariant> ChannelMessagesFilter::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -182,7 +182,7 @@ ChannelMessagesFilter ChannelMessagesFilter::fromMap(const QMap<QString, QVarian
             _excludeNewMessages_var.convert( QVariant::nameToType("bool") );
             result.setExcludeNewMessages( _excludeNewMessages_var.value<bool>() );
         }
-        
+
         QList<QVariant> map_ranges = map["ranges"].toList();
         QList<MessageRange> _ranges;
         for(const QVariant &var: map_ranges)
@@ -208,7 +208,7 @@ QDataStream &operator<<(QDataStream &stream, const ChannelMessagesFilter &item) 
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case ChannelMessagesFilter::typeChannelMessagesFilterEmpty:
-        
+
         break;
     case ChannelMessagesFilter::typeChannelMessagesFilter:
         stream << item.flags();
@@ -224,7 +224,7 @@ QDataStream &operator>>(QDataStream &stream, ChannelMessagesFilter &item) {
     item.setClassType(static_cast<ChannelMessagesFilter::ChannelMessagesFilterClassType>(type));
     switch(type) {
     case ChannelMessagesFilter::typeChannelMessagesFilterEmpty: {
-        
+
     }
         break;
     case ChannelMessagesFilter::typeChannelMessagesFilter: {
@@ -240,7 +240,7 @@ QDataStream &operator>>(QDataStream &stream, ChannelMessagesFilter &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const ChannelMessagesFilter &item) {
+/*QDebug operator<<(QDebug debug,  const ChannelMessagesFilter &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.ChannelMessagesFilter(";
@@ -257,4 +257,4 @@ QDebug operator<<(QDebug debug,  const ChannelMessagesFilter &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

@@ -39,7 +39,7 @@ Invoice::Invoice(const Null &null) :
 }
 
 Invoice::~Invoice() {
-    
+
 }
 
 void Invoice::setCurrency(const QString &currency) {
@@ -163,7 +163,7 @@ bool Invoice::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -184,7 +184,7 @@ bool Invoice::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -209,7 +209,7 @@ QMap<QString, QVariant> Invoice::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -224,43 +224,43 @@ Invoice Invoice::fromMap(const QMap<QString, QVariant> &map) {
             _test_var.convert( QVariant::nameToType("bool") );
             result.setTest( _test_var.value<bool>() );
         }
-        
+
         QVariant _nameRequested_var = map.value("nameRequested");
         if( !_nameRequested_var.isNull() ) {
             _nameRequested_var.convert( QVariant::nameToType("bool") );
             result.setNameRequested( _nameRequested_var.value<bool>() );
         }
-        
+
         QVariant _phoneRequested_var = map.value("phoneRequested");
         if( !_phoneRequested_var.isNull() ) {
             _phoneRequested_var.convert( QVariant::nameToType("bool") );
             result.setPhoneRequested( _phoneRequested_var.value<bool>() );
         }
-        
+
         QVariant _emailRequested_var = map.value("emailRequested");
         if( !_emailRequested_var.isNull() ) {
             _emailRequested_var.convert( QVariant::nameToType("bool") );
             result.setEmailRequested( _emailRequested_var.value<bool>() );
         }
-        
+
         QVariant _shippingAddressRequested_var = map.value("shippingAddressRequested");
         if( !_shippingAddressRequested_var.isNull() ) {
             _shippingAddressRequested_var.convert( QVariant::nameToType("bool") );
             result.setShippingAddressRequested( _shippingAddressRequested_var.value<bool>() );
         }
-        
+
         QVariant _flexible_var = map.value("flexible");
         if( !_flexible_var.isNull() ) {
             _flexible_var.convert( QVariant::nameToType("bool") );
             result.setFlexible( _flexible_var.value<bool>() );
         }
-        
+
         QVariant _currency_var = map.value("currency");
         if( !_currency_var.isNull() ) {
             _currency_var.convert( QVariant::nameToType("QString") );
             result.setCurrency( _currency_var.value<QString>() );
         }
-        
+
         QList<QVariant> map_prices = map["prices"].toList();
         QList<LabeledPrice> _prices;
         for(const QVariant &var: map_prices)
@@ -315,7 +315,7 @@ QDataStream &operator>>(QDataStream &stream, Invoice &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const Invoice &item) {
+/*QDebug operator<<(QDebug debug,  const Invoice &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.Invoice(";
@@ -330,4 +330,4 @@ QDebug operator<<(QDebug debug,  const Invoice &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

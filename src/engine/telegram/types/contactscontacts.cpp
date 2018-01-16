@@ -35,7 +35,7 @@ ContactsContacts::ContactsContacts(const Null &null) :
 }
 
 ContactsContacts::~ContactsContacts() {
-    
+
 }
 
 void ContactsContacts::setContacts(const QList<Contact> &contacts) {
@@ -85,7 +85,7 @@ bool ContactsContacts::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeContactsContacts: {
         if(in->fetchInt() != (qint32)CoreTypes::typeVector) return false;
         qint32 m_contacts_length = in->fetchInt();
@@ -107,7 +107,7 @@ bool ContactsContacts::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -121,7 +121,7 @@ bool ContactsContacts::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeContactsContacts: {
         out->appendInt(CoreTypes::typeVector);
         out->appendInt(m_contacts.count());
@@ -136,7 +136,7 @@ bool ContactsContacts::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -150,7 +150,7 @@ QMap<QString, QVariant> ContactsContacts::toMap() const {
         return result;
     }
         break;
-    
+
     case typeContactsContacts: {
         result["classType"] = "ContactsContacts::typeContactsContacts";
         QList<QVariant> _contacts;
@@ -164,7 +164,7 @@ QMap<QString, QVariant> ContactsContacts::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -208,7 +208,7 @@ QDataStream &operator<<(QDataStream &stream, const ContactsContacts &item) {
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case ContactsContacts::typeContactsContactsNotModified:
-        
+
         break;
     case ContactsContacts::typeContactsContacts:
         stream << item.contacts();
@@ -224,7 +224,7 @@ QDataStream &operator>>(QDataStream &stream, ContactsContacts &item) {
     item.setClassType(static_cast<ContactsContacts::ContactsContactsClassType>(type));
     switch(type) {
     case ContactsContacts::typeContactsContactsNotModified: {
-        
+
     }
         break;
     case ContactsContacts::typeContactsContacts: {
@@ -240,7 +240,7 @@ QDataStream &operator>>(QDataStream &stream, ContactsContacts &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const ContactsContacts &item) {
+/*QDebug operator<<(QDebug debug,  const ContactsContacts &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.ContactsContacts(";
@@ -257,4 +257,4 @@ QDebug operator<<(QDebug debug,  const ContactsContacts &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

@@ -35,7 +35,7 @@ InputChatPhoto::InputChatPhoto(const Null &null) :
 }
 
 InputChatPhoto::~InputChatPhoto() {
-    
+
 }
 
 void InputChatPhoto::setFile(const InputFile &file) {
@@ -85,21 +85,21 @@ bool InputChatPhoto::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputChatUploadedPhoto: {
         m_file.fetch(in);
         m_classType = static_cast<InputChatPhotoClassType>(x);
         return true;
     }
         break;
-    
+
     case typeInputChatPhoto: {
         m_id.fetch(in);
         m_classType = static_cast<InputChatPhotoClassType>(x);
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -113,19 +113,19 @@ bool InputChatPhoto::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeInputChatUploadedPhoto: {
         m_file.push(out);
         return true;
     }
         break;
-    
+
     case typeInputChatPhoto: {
         m_id.push(out);
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -139,21 +139,21 @@ QMap<QString, QVariant> InputChatPhoto::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputChatUploadedPhoto: {
         result["classType"] = "InputChatPhoto::typeInputChatUploadedPhoto";
         if( !m_file.isNull() ) result["file"] = m_file.toMap();
         return result;
     }
         break;
-    
+
     case typeInputChatPhoto: {
         result["classType"] = "InputChatPhoto::typeInputChatPhoto";
         if( !m_id.isNull() ) result["id"] = m_id.toMap();
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -170,7 +170,7 @@ InputChatPhoto InputChatPhoto::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _file_var = map.value("file");
         if( !_file_var.isNull() )
             result.setFile( InputFile::fromMap(_file_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "InputChatPhoto::typeInputChatPhoto") {
@@ -178,7 +178,7 @@ InputChatPhoto InputChatPhoto::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _id_var = map.value("id");
         if( !_id_var.isNull() )
             result.setId( InputPhoto::fromMap(_id_var.toMap()) );
-        
+
         return result;
     }
     return result;
@@ -199,7 +199,7 @@ QDataStream &operator<<(QDataStream &stream, const InputChatPhoto &item) {
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case InputChatPhoto::typeInputChatPhotoEmpty:
-        
+
         break;
     case InputChatPhoto::typeInputChatUploadedPhoto:
         stream << item.file();
@@ -217,7 +217,7 @@ QDataStream &operator>>(QDataStream &stream, InputChatPhoto &item) {
     item.setClassType(static_cast<InputChatPhoto::InputChatPhotoClassType>(type));
     switch(type) {
     case InputChatPhoto::typeInputChatPhotoEmpty: {
-        
+
     }
         break;
     case InputChatPhoto::typeInputChatUploadedPhoto: {
@@ -236,7 +236,7 @@ QDataStream &operator>>(QDataStream &stream, InputChatPhoto &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const InputChatPhoto &item) {
+/*QDebug operator<<(QDebug debug,  const InputChatPhoto &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.InputChatPhoto(";
@@ -256,4 +256,4 @@ QDebug operator<<(QDebug debug,  const InputChatPhoto &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

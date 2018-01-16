@@ -1261,8 +1261,8 @@ protected:
     }*/
 
 private:
-    class CallbackStore;
-    QHash<qint64, CallbackStore> mCallbacks;
+    //class CallbackStore;
+    //QHash<qint64, CallbackStore> mCallbacks;
     QHash<qint64, QVariantHash> mRecallArgs;
     QVariantHash mLastArgs;
     QHash<qint64, qint32> mTimer;

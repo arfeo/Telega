@@ -39,7 +39,7 @@ MessagesArchivedStickers::MessagesArchivedStickers(const Null &null) :
 }
 
 MessagesArchivedStickers::~MessagesArchivedStickers() {
-    
+
 }
 
 void MessagesArchivedStickers::setCount(qint32 count) {
@@ -98,7 +98,7 @@ bool MessagesArchivedStickers::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -118,7 +118,7 @@ bool MessagesArchivedStickers::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -137,7 +137,7 @@ QMap<QString, QVariant> MessagesArchivedStickers::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -152,7 +152,7 @@ MessagesArchivedStickers MessagesArchivedStickers::fromMap(const QMap<QString, Q
             _count_var.convert( QVariant::nameToType("qint32") );
             result.setCount( _count_var.value<qint32>() );
         }
-        
+
         QList<QVariant> map_sets = map["sets"].toList();
         QList<StickerSetCovered> _sets;
         for(const QVariant &var: map_sets)
@@ -203,7 +203,7 @@ QDataStream &operator>>(QDataStream &stream, MessagesArchivedStickers &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const MessagesArchivedStickers &item) {
+/*QDebug operator<<(QDebug debug,  const MessagesArchivedStickers &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.MessagesArchivedStickers(";
@@ -217,4 +217,4 @@ QDebug operator<<(QDebug debug,  const MessagesArchivedStickers &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

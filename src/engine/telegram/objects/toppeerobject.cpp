@@ -10,7 +10,7 @@ TopPeerObject::TopPeerObject(const TopPeer &core, QObject *parent) :
     m_core(core)
 {
     m_peer = new PeerObject(m_core.peer(), this);
-    connect(m_peer.data(), &PeerObject::coreChanged, this, &TopPeerObject::corePeerChanged);
+    connect(m_peer.data(), SIGNAL(coreChanged()), this, SLOT(corePeerChanged()));
 }
 
 TopPeerObject::TopPeerObject(QObject *parent) :
@@ -19,7 +19,7 @@ TopPeerObject::TopPeerObject(QObject *parent) :
     m_core()
 {
     m_peer = new PeerObject(m_core.peer(), this);
-    connect(m_peer.data(), &PeerObject::coreChanged, this, &TopPeerObject::corePeerChanged);
+    connect(m_peer.data(), SIGNAL(coreChanged()), this, SLOT(corePeerChanged()));
 }
 
 TopPeerObject::~TopPeerObject() {
@@ -32,7 +32,7 @@ void TopPeerObject::setPeer(PeerObject* peer) {
     if(m_peer) {
         m_peer->setParent(this);
         m_core.setPeer(m_peer->core());
-        connect(m_peer.data(), &PeerObject::coreChanged, this, &TopPeerObject::corePeerChanged);
+        connect(m_peer.data(), SIGNAL(coreChanged()), this, SLOT(corePeerChanged()));
     }
     Q_EMIT peerChanged();
     Q_EMIT coreChanged();

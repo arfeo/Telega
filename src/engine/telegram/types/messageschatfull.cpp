@@ -35,7 +35,7 @@ MessagesChatFull::MessagesChatFull(const Null &null) :
 }
 
 MessagesChatFull::~MessagesChatFull() {
-    
+
 }
 
 void MessagesChatFull::setChats(const QList<Chat> &chats) {
@@ -112,7 +112,7 @@ bool MessagesChatFull::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -137,7 +137,7 @@ bool MessagesChatFull::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -160,7 +160,7 @@ QMap<QString, QVariant> MessagesChatFull::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -173,7 +173,7 @@ MessagesChatFull MessagesChatFull::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _fullChat_var = map.value("fullChat");
         if( !_fullChat_var.isNull() )
             result.setFullChat( ChatFull::fromMap(_fullChat_var.toMap()) );
-        
+
         QList<QVariant> map_chats = map["chats"].toList();
         QList<Chat> _chats;
         for(const QVariant &var: map_chats)
@@ -233,7 +233,7 @@ QDataStream &operator>>(QDataStream &stream, MessagesChatFull &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const MessagesChatFull &item) {
+/*QDebug operator<<(QDebug debug,  const MessagesChatFull &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.MessagesChatFull(";
@@ -248,4 +248,4 @@ QDebug operator<<(QDebug debug,  const MessagesChatFull &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

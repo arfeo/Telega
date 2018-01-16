@@ -39,7 +39,7 @@ InputPaymentCredentials::InputPaymentCredentials(const Null &null) :
 }
 
 InputPaymentCredentials::~InputPaymentCredentials() {
-    
+
 }
 
 void InputPaymentCredentials::setData(const DataJSON &data) {
@@ -120,7 +120,7 @@ bool InputPaymentCredentials::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputPaymentCredentials: {
         m_flags = in->fetchInt();
         m_data.fetch(in);
@@ -128,7 +128,7 @@ bool InputPaymentCredentials::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -144,14 +144,14 @@ bool InputPaymentCredentials::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeInputPaymentCredentials: {
         out->appendInt(m_flags);
         m_data.push(out);
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -167,7 +167,7 @@ QMap<QString, QVariant> InputPaymentCredentials::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputPaymentCredentials: {
         result["classType"] = "InputPaymentCredentials::typeInputPaymentCredentials";
         if( save() ) result["save"] = QString::number(save());
@@ -175,7 +175,7 @@ QMap<QString, QVariant> InputPaymentCredentials::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -190,13 +190,13 @@ InputPaymentCredentials InputPaymentCredentials::fromMap(const QMap<QString, QVa
             _id_var.convert( QVariant::nameToType("QString") );
             result.setId( _id_var.value<QString>() );
         }
-        
+
         QVariant _tmpPassword_var = map.value("tmpPassword");
         if( !_tmpPassword_var.isNull() ) {
             _tmpPassword_var.convert( QVariant::nameToType("QByteArray") );
             result.setTmpPassword( _tmpPassword_var.value<QByteArray>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "InputPaymentCredentials::typeInputPaymentCredentials") {
@@ -206,11 +206,11 @@ InputPaymentCredentials InputPaymentCredentials::fromMap(const QMap<QString, QVa
             _save_var.convert( QVariant::nameToType("bool") );
             result.setSave( _save_var.value<bool>() );
         }
-        
+
         QVariant _data_var = map.value("data");
         if( !_data_var.isNull() )
             result.setData( DataJSON::fromMap(_data_var.toMap()) );
-        
+
         return result;
     }
     return result;
@@ -269,7 +269,7 @@ QDataStream &operator>>(QDataStream &stream, InputPaymentCredentials &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const InputPaymentCredentials &item) {
+/*QDebug operator<<(QDebug debug,  const InputPaymentCredentials &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.InputPaymentCredentials(";
@@ -288,4 +288,4 @@ QDebug operator<<(QDebug debug,  const InputPaymentCredentials &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

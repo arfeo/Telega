@@ -43,7 +43,7 @@ ChannelBannedRights::ChannelBannedRights(const Null &null) :
 }
 
 ChannelBannedRights::~ChannelBannedRights() {
-    
+
 }
 
 void ChannelBannedRights::setEmbedLinks(bool embedLinks) {
@@ -167,7 +167,7 @@ bool ChannelBannedRights::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -183,7 +183,7 @@ bool ChannelBannedRights::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -206,7 +206,7 @@ QMap<QString, QVariant> ChannelBannedRights::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -221,55 +221,55 @@ ChannelBannedRights ChannelBannedRights::fromMap(const QMap<QString, QVariant> &
             _viewMessages_var.convert( QVariant::nameToType("bool") );
             result.setViewMessages( _viewMessages_var.value<bool>() );
         }
-        
+
         QVariant _sendMessages_var = map.value("sendMessages");
         if( !_sendMessages_var.isNull() ) {
             _sendMessages_var.convert( QVariant::nameToType("bool") );
             result.setSendMessages( _sendMessages_var.value<bool>() );
         }
-        
+
         QVariant _sendMedia_var = map.value("sendMedia");
         if( !_sendMedia_var.isNull() ) {
             _sendMedia_var.convert( QVariant::nameToType("bool") );
             result.setSendMedia( _sendMedia_var.value<bool>() );
         }
-        
+
         QVariant _sendStickers_var = map.value("sendStickers");
         if( !_sendStickers_var.isNull() ) {
             _sendStickers_var.convert( QVariant::nameToType("bool") );
             result.setSendStickers( _sendStickers_var.value<bool>() );
         }
-        
+
         QVariant _sendGifs_var = map.value("sendGifs");
         if( !_sendGifs_var.isNull() ) {
             _sendGifs_var.convert( QVariant::nameToType("bool") );
             result.setSendGifs( _sendGifs_var.value<bool>() );
         }
-        
+
         QVariant _sendGames_var = map.value("sendGames");
         if( !_sendGames_var.isNull() ) {
             _sendGames_var.convert( QVariant::nameToType("bool") );
             result.setSendGames( _sendGames_var.value<bool>() );
         }
-        
+
         QVariant _sendInline_var = map.value("sendInline");
         if( !_sendInline_var.isNull() ) {
             _sendInline_var.convert( QVariant::nameToType("bool") );
             result.setSendInline( _sendInline_var.value<bool>() );
         }
-        
+
         QVariant _embedLinks_var = map.value("embedLinks");
         if( !_embedLinks_var.isNull() ) {
             _embedLinks_var.convert( QVariant::nameToType("bool") );
             result.setEmbedLinks( _embedLinks_var.value<bool>() );
         }
-        
+
         QVariant _untilDate_var = map.value("untilDate");
         if( !_untilDate_var.isNull() ) {
             _untilDate_var.convert( QVariant::nameToType("qint32") );
             result.setUntilDate( _untilDate_var.value<qint32>() );
         }
-        
+
         return result;
     }
     return result;
@@ -315,7 +315,7 @@ QDataStream &operator>>(QDataStream &stream, ChannelBannedRights &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const ChannelBannedRights &item) {
+/*QDebug operator<<(QDebug debug,  const ChannelBannedRights &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.ChannelBannedRights(";
@@ -329,4 +329,4 @@ QDebug operator<<(QDebug debug,  const ChannelBannedRights &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

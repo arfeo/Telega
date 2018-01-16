@@ -35,7 +35,7 @@ HelpTermsOfService::HelpTermsOfService(const Null &null) :
 }
 
 HelpTermsOfService::~HelpTermsOfService() {
-    
+
 }
 
 void HelpTermsOfService::setText(const QString &text) {
@@ -76,7 +76,7 @@ bool HelpTermsOfService::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -91,7 +91,7 @@ bool HelpTermsOfService::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -106,7 +106,7 @@ QMap<QString, QVariant> HelpTermsOfService::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -121,7 +121,7 @@ HelpTermsOfService HelpTermsOfService::fromMap(const QMap<QString, QVariant> &ma
             _text_var.convert( QVariant::nameToType("QString") );
             result.setText( _text_var.value<QString>() );
         }
-        
+
         return result;
     }
     return result;
@@ -163,7 +163,7 @@ QDataStream &operator>>(QDataStream &stream, HelpTermsOfService &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const HelpTermsOfService &item) {
+/*QDebug operator<<(QDebug debug,  const HelpTermsOfService &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.HelpTermsOfService(";
@@ -176,4 +176,4 @@ QDebug operator<<(QDebug debug,  const HelpTermsOfService &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

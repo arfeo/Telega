@@ -35,7 +35,7 @@ HelpInviteText::HelpInviteText(const Null &null) :
 }
 
 HelpInviteText::~HelpInviteText() {
-    
+
 }
 
 void HelpInviteText::setMessage(const QString &message) {
@@ -76,7 +76,7 @@ bool HelpInviteText::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -91,7 +91,7 @@ bool HelpInviteText::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -106,7 +106,7 @@ QMap<QString, QVariant> HelpInviteText::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -121,7 +121,7 @@ HelpInviteText HelpInviteText::fromMap(const QMap<QString, QVariant> &map) {
             _message_var.convert( QVariant::nameToType("QString") );
             result.setMessage( _message_var.value<QString>() );
         }
-        
+
         return result;
     }
     return result;
@@ -163,7 +163,7 @@ QDataStream &operator>>(QDataStream &stream, HelpInviteText &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const HelpInviteText &item) {
+/*QDebug operator<<(QDebug debug,  const HelpInviteText &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.HelpInviteText(";
@@ -176,4 +176,4 @@ QDebug operator<<(QDebug debug,  const HelpInviteText &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

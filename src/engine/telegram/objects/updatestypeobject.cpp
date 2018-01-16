@@ -12,11 +12,11 @@ UpdatesTypeObject::UpdatesTypeObject(const UpdatesType &core, QObject *parent) :
     m_core(core)
 {
     m_fwdFrom = new MessageFwdHeaderObject(m_core.fwdFrom(), this);
-    connect(m_fwdFrom.data(), &MessageFwdHeaderObject::coreChanged, this, &UpdatesTypeObject::coreFwdFromChanged);
+    connect(m_fwdFrom.data(), SIGNAL(coreChanged()), this, SLOT(coreFwdFromChanged()));
     m_media = new MessageMediaObject(m_core.media(), this);
-    connect(m_media.data(), &MessageMediaObject::coreChanged, this, &UpdatesTypeObject::coreMediaChanged);
+    connect(m_media.data(), SIGNAL(coreChanged()), this, SLOT(coreMediaChanged()));
     m_update = new UpdateObject(m_core.update(), this);
-    connect(m_update.data(), &UpdateObject::coreChanged, this, &UpdatesTypeObject::coreUpdateChanged);
+    connect(m_update.data(), SIGNAL(coreChanged()), this, SLOT(coreUpdateChanged()));
 }
 
 UpdatesTypeObject::UpdatesTypeObject(QObject *parent) :
@@ -27,11 +27,11 @@ UpdatesTypeObject::UpdatesTypeObject(QObject *parent) :
     m_core()
 {
     m_fwdFrom = new MessageFwdHeaderObject(m_core.fwdFrom(), this);
-    connect(m_fwdFrom.data(), &MessageFwdHeaderObject::coreChanged, this, &UpdatesTypeObject::coreFwdFromChanged);
+    connect(m_fwdFrom.data(), SIGNAL(coreChanged()), this, SLOT(coreFwdFromChanged()));
     m_media = new MessageMediaObject(m_core.media(), this);
-    connect(m_media.data(), &MessageMediaObject::coreChanged, this, &UpdatesTypeObject::coreMediaChanged);
+    connect(m_media.data(), SIGNAL(coreChanged()), this, SLOT(coreMediaChanged()));
     m_update = new UpdateObject(m_core.update(), this);
-    connect(m_update.data(), &UpdateObject::coreChanged, this, &UpdatesTypeObject::coreUpdateChanged);
+    connect(m_update.data(), SIGNAL(coreChanged()), this, SLOT(coreUpdateChanged()));
 }
 
 UpdatesTypeObject::~UpdatesTypeObject() {
@@ -110,7 +110,7 @@ void UpdatesTypeObject::setFwdFrom(MessageFwdHeaderObject* fwdFrom) {
     if(m_fwdFrom) {
         m_fwdFrom->setParent(this);
         m_core.setFwdFrom(m_fwdFrom->core());
-        connect(m_fwdFrom.data(), &MessageFwdHeaderObject::coreChanged, this, &UpdatesTypeObject::coreFwdFromChanged);
+        connect(m_fwdFrom.data(), SIGNAL(coreChanged()), this, SLOT(coreFwdFromChanged()));
     }
     Q_EMIT fwdFromChanged();
     Q_EMIT coreChanged();
@@ -138,7 +138,7 @@ void UpdatesTypeObject::setMedia(MessageMediaObject* media) {
     if(m_media) {
         m_media->setParent(this);
         m_core.setMedia(m_media->core());
-        connect(m_media.data(), &MessageMediaObject::coreChanged, this, &UpdatesTypeObject::coreMediaChanged);
+        connect(m_media.data(), SIGNAL(coreChanged()), this, SLOT(coreMediaChanged()));
     }
     Q_EMIT mediaChanged();
     Q_EMIT coreChanged();
@@ -265,7 +265,7 @@ void UpdatesTypeObject::setUpdate(UpdateObject* update) {
     if(m_update) {
         m_update->setParent(this);
         m_core.setUpdate(m_update->core());
-        connect(m_update.data(), &UpdateObject::coreChanged, this, &UpdatesTypeObject::coreUpdateChanged);
+        connect(m_update.data(), SIGNAL(coreChanged()), this, SLOT(coreUpdateChanged()));
     }
     Q_EMIT updateChanged();
     Q_EMIT coreChanged();

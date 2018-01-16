@@ -10,7 +10,7 @@ PaymentsSavedInfoObject::PaymentsSavedInfoObject(const PaymentsSavedInfo &core, 
     m_core(core)
 {
     m_savedInfo = new PaymentRequestedInfoObject(m_core.savedInfo(), this);
-    connect(m_savedInfo.data(), &PaymentRequestedInfoObject::coreChanged, this, &PaymentsSavedInfoObject::coreSavedInfoChanged);
+    connect(m_savedInfo.data(), SIGNAL(coreChanged()), this, SLOT(coreSavedInfoChanged()));
 }
 
 PaymentsSavedInfoObject::PaymentsSavedInfoObject(QObject *parent) :
@@ -19,7 +19,7 @@ PaymentsSavedInfoObject::PaymentsSavedInfoObject(QObject *parent) :
     m_core()
 {
     m_savedInfo = new PaymentRequestedInfoObject(m_core.savedInfo(), this);
-    connect(m_savedInfo.data(), &PaymentRequestedInfoObject::coreChanged, this, &PaymentsSavedInfoObject::coreSavedInfoChanged);
+    connect(m_savedInfo.data(), SIGNAL(coreChanged()), this, SLOT(coreSavedInfoChanged()));
 }
 
 PaymentsSavedInfoObject::~PaymentsSavedInfoObject() {
@@ -54,7 +54,7 @@ void PaymentsSavedInfoObject::setSavedInfo(PaymentRequestedInfoObject* savedInfo
     if(m_savedInfo) {
         m_savedInfo->setParent(this);
         m_core.setSavedInfo(m_savedInfo->core());
-        connect(m_savedInfo.data(), &PaymentRequestedInfoObject::coreChanged, this, &PaymentsSavedInfoObject::coreSavedInfoChanged);
+        connect(m_savedInfo.data(), SIGNAL(coreChanged()), this, SLOT(coreSavedInfoChanged()));
     }
     Q_EMIT savedInfoChanged();
     Q_EMIT coreChanged();

@@ -39,7 +39,7 @@ MessagesFoundGifs::MessagesFoundGifs(const Null &null) :
 }
 
 MessagesFoundGifs::~MessagesFoundGifs() {
-    
+
 }
 
 void MessagesFoundGifs::setNextOffset(qint32 nextOffset) {
@@ -98,7 +98,7 @@ bool MessagesFoundGifs::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -118,7 +118,7 @@ bool MessagesFoundGifs::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -137,7 +137,7 @@ QMap<QString, QVariant> MessagesFoundGifs::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -152,7 +152,7 @@ MessagesFoundGifs MessagesFoundGifs::fromMap(const QMap<QString, QVariant> &map)
             _nextOffset_var.convert( QVariant::nameToType("qint32") );
             result.setNextOffset( _nextOffset_var.value<qint32>() );
         }
-        
+
         QList<QVariant> map_results = map["results"].toList();
         QList<FoundGif> _results;
         for(const QVariant &var: map_results)
@@ -203,7 +203,7 @@ QDataStream &operator>>(QDataStream &stream, MessagesFoundGifs &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const MessagesFoundGifs &item) {
+/*QDebug operator<<(QDebug debug,  const MessagesFoundGifs &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.MessagesFoundGifs(";
@@ -217,4 +217,4 @@ QDebug operator<<(QDebug debug,  const MessagesFoundGifs &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

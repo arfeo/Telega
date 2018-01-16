@@ -59,7 +59,7 @@ ChannelParticipant::ChannelParticipant(const Null &null) :
 }
 
 ChannelParticipant::~ChannelParticipant() {
-    
+
 }
 
 void ChannelParticipant::setAdminRights(const ChannelAdminRights &adminRights) {
@@ -189,7 +189,7 @@ bool ChannelParticipant::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeChannelParticipantSelf: {
         m_userId = in->fetchInt();
         m_inviterId = in->fetchInt();
@@ -198,14 +198,14 @@ bool ChannelParticipant::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeChannelParticipantCreator: {
         m_userId = in->fetchInt();
         m_classType = static_cast<ChannelParticipantClassType>(x);
         return true;
     }
         break;
-    
+
     case typeChannelParticipantAdmin: {
         m_flags = in->fetchInt();
         m_userId = in->fetchInt();
@@ -217,7 +217,7 @@ bool ChannelParticipant::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeChannelParticipantBanned: {
         m_flags = in->fetchInt();
         m_userId = in->fetchInt();
@@ -228,7 +228,7 @@ bool ChannelParticipant::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -244,7 +244,7 @@ bool ChannelParticipant::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeChannelParticipantSelf: {
         out->appendInt(m_userId);
         out->appendInt(m_inviterId);
@@ -252,13 +252,13 @@ bool ChannelParticipant::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeChannelParticipantCreator: {
         out->appendInt(m_userId);
         return true;
     }
         break;
-    
+
     case typeChannelParticipantAdmin: {
         out->appendInt(m_flags);
         out->appendInt(m_userId);
@@ -269,7 +269,7 @@ bool ChannelParticipant::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeChannelParticipantBanned: {
         out->appendInt(m_flags);
         out->appendInt(m_userId);
@@ -279,7 +279,7 @@ bool ChannelParticipant::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -295,7 +295,7 @@ QMap<QString, QVariant> ChannelParticipant::toMap() const {
         return result;
     }
         break;
-    
+
     case typeChannelParticipantSelf: {
         result["classType"] = "ChannelParticipant::typeChannelParticipantSelf";
         if( userId() ) result["userId"] = QString::number(userId());
@@ -304,14 +304,14 @@ QMap<QString, QVariant> ChannelParticipant::toMap() const {
         return result;
     }
         break;
-    
+
     case typeChannelParticipantCreator: {
         result["classType"] = "ChannelParticipant::typeChannelParticipantCreator";
         if( userId() ) result["userId"] = QString::number(userId());
         return result;
     }
         break;
-    
+
     case typeChannelParticipantAdmin: {
         result["classType"] = "ChannelParticipant::typeChannelParticipantAdmin";
         if( canEdit() ) result["canEdit"] = QString::number(canEdit());
@@ -323,7 +323,7 @@ QMap<QString, QVariant> ChannelParticipant::toMap() const {
         return result;
     }
         break;
-    
+
     case typeChannelParticipantBanned: {
         result["classType"] = "ChannelParticipant::typeChannelParticipantBanned";
         if( left() ) result["left"] = QString::number(left());
@@ -334,7 +334,7 @@ QMap<QString, QVariant> ChannelParticipant::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -349,13 +349,13 @@ ChannelParticipant ChannelParticipant::fromMap(const QMap<QString, QVariant> &ma
             _userId_var.convert( QVariant::nameToType("qint32") );
             result.setUserId( _userId_var.value<qint32>() );
         }
-        
+
         QVariant _date_var = map.value("date");
         if( !_date_var.isNull() ) {
             _date_var.convert( QVariant::nameToType("qint32") );
             result.setDate( _date_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "ChannelParticipant::typeChannelParticipantSelf") {
@@ -365,19 +365,19 @@ ChannelParticipant ChannelParticipant::fromMap(const QMap<QString, QVariant> &ma
             _userId_var.convert( QVariant::nameToType("qint32") );
             result.setUserId( _userId_var.value<qint32>() );
         }
-        
+
         QVariant _inviterId_var = map.value("inviterId");
         if( !_inviterId_var.isNull() ) {
             _inviterId_var.convert( QVariant::nameToType("qint32") );
             result.setInviterId( _inviterId_var.value<qint32>() );
         }
-        
+
         QVariant _date_var = map.value("date");
         if( !_date_var.isNull() ) {
             _date_var.convert( QVariant::nameToType("qint32") );
             result.setDate( _date_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "ChannelParticipant::typeChannelParticipantCreator") {
@@ -387,7 +387,7 @@ ChannelParticipant ChannelParticipant::fromMap(const QMap<QString, QVariant> &ma
             _userId_var.convert( QVariant::nameToType("qint32") );
             result.setUserId( _userId_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "ChannelParticipant::typeChannelParticipantAdmin") {
@@ -397,35 +397,35 @@ ChannelParticipant ChannelParticipant::fromMap(const QMap<QString, QVariant> &ma
             _canEdit_var.convert( QVariant::nameToType("bool") );
             result.setCanEdit( _canEdit_var.value<bool>() );
         }
-        
+
         QVariant _userId_var = map.value("userId");
         if( !_userId_var.isNull() ) {
             _userId_var.convert( QVariant::nameToType("qint32") );
             result.setUserId( _userId_var.value<qint32>() );
         }
-        
+
         QVariant _inviterId_var = map.value("inviterId");
         if( !_inviterId_var.isNull() ) {
             _inviterId_var.convert( QVariant::nameToType("qint32") );
             result.setInviterId( _inviterId_var.value<qint32>() );
         }
-        
+
         QVariant _promotedBy_var = map.value("promotedBy");
         if( !_promotedBy_var.isNull() ) {
             _promotedBy_var.convert( QVariant::nameToType("qint32") );
             result.setPromotedBy( _promotedBy_var.value<qint32>() );
         }
-        
+
         QVariant _date_var = map.value("date");
         if( !_date_var.isNull() ) {
             _date_var.convert( QVariant::nameToType("qint32") );
             result.setDate( _date_var.value<qint32>() );
         }
-        
+
         QVariant _adminRights_var = map.value("adminRights");
         if( !_adminRights_var.isNull() )
             result.setAdminRights( ChannelAdminRights::fromMap(_adminRights_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "ChannelParticipant::typeChannelParticipantBanned") {
@@ -435,29 +435,29 @@ ChannelParticipant ChannelParticipant::fromMap(const QMap<QString, QVariant> &ma
             _left_var.convert( QVariant::nameToType("bool") );
             result.setLeft( _left_var.value<bool>() );
         }
-        
+
         QVariant _userId_var = map.value("userId");
         if( !_userId_var.isNull() ) {
             _userId_var.convert( QVariant::nameToType("qint32") );
             result.setUserId( _userId_var.value<qint32>() );
         }
-        
+
         QVariant _kickedBy_var = map.value("kickedBy");
         if( !_kickedBy_var.isNull() ) {
             _kickedBy_var.convert( QVariant::nameToType("qint32") );
             result.setKickedBy( _kickedBy_var.value<qint32>() );
         }
-        
+
         QVariant _date_var = map.value("date");
         if( !_date_var.isNull() ) {
             _date_var.convert( QVariant::nameToType("qint32") );
             result.setDate( _date_var.value<qint32>() );
         }
-        
+
         QVariant _bannedRights_var = map.value("bannedRights");
         if( !_bannedRights_var.isNull() )
             result.setBannedRights( ChannelBannedRights::fromMap(_bannedRights_var.toMap()) );
-        
+
         return result;
     }
     return result;
@@ -583,7 +583,7 @@ QDataStream &operator>>(QDataStream &stream, ChannelParticipant &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const ChannelParticipant &item) {
+/*QDebug operator<<(QDebug debug,  const ChannelParticipant &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.ChannelParticipant(";
@@ -624,4 +624,4 @@ QDebug operator<<(QDebug debug,  const ChannelParticipant &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

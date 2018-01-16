@@ -35,7 +35,7 @@ PaymentCharge::PaymentCharge(const Null &null) :
 }
 
 PaymentCharge::~PaymentCharge() {
-    
+
 }
 
 void PaymentCharge::setId(const QString &id) {
@@ -87,7 +87,7 @@ bool PaymentCharge::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -103,7 +103,7 @@ bool PaymentCharge::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -119,7 +119,7 @@ QMap<QString, QVariant> PaymentCharge::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -134,13 +134,13 @@ PaymentCharge PaymentCharge::fromMap(const QMap<QString, QVariant> &map) {
             _id_var.convert( QVariant::nameToType("QString") );
             result.setId( _id_var.value<QString>() );
         }
-        
+
         QVariant _providerChargeId_var = map.value("providerChargeId");
         if( !_providerChargeId_var.isNull() ) {
             _providerChargeId_var.convert( QVariant::nameToType("QString") );
             result.setProviderChargeId( _providerChargeId_var.value<QString>() );
         }
-        
+
         return result;
     }
     return result;
@@ -186,7 +186,7 @@ QDataStream &operator>>(QDataStream &stream, PaymentCharge &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const PaymentCharge &item) {
+/*QDebug operator<<(QDebug debug,  const PaymentCharge &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.PaymentCharge(";
@@ -200,4 +200,4 @@ QDebug operator<<(QDebug debug,  const PaymentCharge &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

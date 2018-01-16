@@ -35,7 +35,7 @@ ChannelsAdminLogResults::ChannelsAdminLogResults(const Null &null) :
 }
 
 ChannelsAdminLogResults::~ChannelsAdminLogResults() {
-    
+
 }
 
 void ChannelsAdminLogResults::setChats(const QList<Chat> &chats) {
@@ -119,7 +119,7 @@ bool ChannelsAdminLogResults::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -148,7 +148,7 @@ bool ChannelsAdminLogResults::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -174,7 +174,7 @@ QMap<QString, QVariant> ChannelsAdminLogResults::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -248,7 +248,7 @@ QDataStream &operator>>(QDataStream &stream, ChannelsAdminLogResults &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const ChannelsAdminLogResults &item) {
+/*QDebug operator<<(QDebug debug,  const ChannelsAdminLogResults &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.ChannelsAdminLogResults(";
@@ -263,4 +263,4 @@ QDebug operator<<(QDebug debug,  const ChannelsAdminLogResults &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

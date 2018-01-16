@@ -43,7 +43,7 @@ PeerNotifySettings::PeerNotifySettings(const Null &null) :
 }
 
 PeerNotifySettings::~PeerNotifySettings() {
-    
+
 }
 
 void PeerNotifySettings::setFlags(qint32 flags) {
@@ -121,7 +121,7 @@ bool PeerNotifySettings::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typePeerNotifySettings: {
         m_flags = in->fetchInt();
         m_muteUntil = in->fetchInt();
@@ -130,7 +130,7 @@ bool PeerNotifySettings::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -144,7 +144,7 @@ bool PeerNotifySettings::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typePeerNotifySettings: {
         out->appendInt(m_flags);
         out->appendInt(m_muteUntil);
@@ -152,7 +152,7 @@ bool PeerNotifySettings::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -166,7 +166,7 @@ QMap<QString, QVariant> PeerNotifySettings::toMap() const {
         return result;
     }
         break;
-    
+
     case typePeerNotifySettings: {
         result["classType"] = "PeerNotifySettings::typePeerNotifySettings";
         if( showPreviews() ) result["showPreviews"] = QString::number(showPreviews());
@@ -176,7 +176,7 @@ QMap<QString, QVariant> PeerNotifySettings::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -195,25 +195,25 @@ PeerNotifySettings PeerNotifySettings::fromMap(const QMap<QString, QVariant> &ma
             _showPreviews_var.convert( QVariant::nameToType("bool") );
             result.setShowPreviews( _showPreviews_var.value<bool>() );
         }
-        
+
         QVariant _silent_var = map.value("silent");
         if( !_silent_var.isNull() ) {
             _silent_var.convert( QVariant::nameToType("bool") );
             result.setSilent( _silent_var.value<bool>() );
         }
-        
+
         QVariant _muteUntil_var = map.value("muteUntil");
         if( !_muteUntil_var.isNull() ) {
             _muteUntil_var.convert( QVariant::nameToType("qint32") );
             result.setMuteUntil( _muteUntil_var.value<qint32>() );
         }
-        
+
         QVariant _sound_var = map.value("sound");
         if( !_sound_var.isNull() ) {
             _sound_var.convert( QVariant::nameToType("QString") );
             result.setSound( _sound_var.value<QString>() );
         }
-        
+
         return result;
     }
     return result;
@@ -234,7 +234,7 @@ QDataStream &operator<<(QDataStream &stream, const PeerNotifySettings &item) {
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case PeerNotifySettings::typePeerNotifySettingsEmpty:
-        
+
         break;
     case PeerNotifySettings::typePeerNotifySettings:
         stream << item.flags();
@@ -251,7 +251,7 @@ QDataStream &operator>>(QDataStream &stream, PeerNotifySettings &item) {
     item.setClassType(static_cast<PeerNotifySettings::PeerNotifySettingsClassType>(type));
     switch(type) {
     case PeerNotifySettings::typePeerNotifySettingsEmpty: {
-        
+
     }
         break;
     case PeerNotifySettings::typePeerNotifySettings: {
@@ -270,7 +270,7 @@ QDataStream &operator>>(QDataStream &stream, PeerNotifySettings &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const PeerNotifySettings &item) {
+/*QDebug operator<<(QDebug debug,  const PeerNotifySettings &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.PeerNotifySettings(";
@@ -288,4 +288,4 @@ QDebug operator<<(QDebug debug,  const PeerNotifySettings &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

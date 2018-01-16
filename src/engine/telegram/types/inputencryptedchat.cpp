@@ -43,7 +43,7 @@ InputEncryptedChat::InputEncryptedChat(const Null &null) :
 }
 
 InputEncryptedChat::~InputEncryptedChat() {
-    
+
 }
 
 void InputEncryptedChat::setAccessHash(qint64 accessHash) {
@@ -95,7 +95,7 @@ bool InputEncryptedChat::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -111,7 +111,7 @@ bool InputEncryptedChat::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -127,7 +127,7 @@ QMap<QString, QVariant> InputEncryptedChat::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -142,13 +142,13 @@ InputEncryptedChat InputEncryptedChat::fromMap(const QMap<QString, QVariant> &ma
             _chatId_var.convert( QVariant::nameToType("qint32") );
             result.setChatId( _chatId_var.value<qint32>() );
         }
-        
+
         QVariant _accessHash_var = map.value("accessHash");
         if( !_accessHash_var.isNull() ) {
             _accessHash_var.convert( QVariant::nameToType("qint64") );
             result.setAccessHash( _accessHash_var.value<qint64>() );
         }
-        
+
         return result;
     }
     return result;
@@ -194,7 +194,7 @@ QDataStream &operator>>(QDataStream &stream, InputEncryptedChat &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const InputEncryptedChat &item) {
+/*QDebug operator<<(QDebug debug,  const InputEncryptedChat &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.InputEncryptedChat(";
@@ -208,4 +208,4 @@ QDebug operator<<(QDebug debug,  const InputEncryptedChat &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

@@ -39,7 +39,7 @@ AccountTmpPassword::AccountTmpPassword(const Null &null) :
 }
 
 AccountTmpPassword::~AccountTmpPassword() {
-    
+
 }
 
 void AccountTmpPassword::setTmpPassword(const QByteArray &tmpPassword) {
@@ -91,7 +91,7 @@ bool AccountTmpPassword::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -107,7 +107,7 @@ bool AccountTmpPassword::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -123,7 +123,7 @@ QMap<QString, QVariant> AccountTmpPassword::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -138,13 +138,13 @@ AccountTmpPassword AccountTmpPassword::fromMap(const QMap<QString, QVariant> &ma
             _tmpPassword_var.convert( QVariant::nameToType("QByteArray") );
             result.setTmpPassword( _tmpPassword_var.value<QByteArray>() );
         }
-        
+
         QVariant _validUntil_var = map.value("validUntil");
         if( !_validUntil_var.isNull() ) {
             _validUntil_var.convert( QVariant::nameToType("qint32") );
             result.setValidUntil( _validUntil_var.value<qint32>() );
         }
-        
+
         return result;
     }
     return result;
@@ -190,6 +190,7 @@ QDataStream &operator>>(QDataStream &stream, AccountTmpPassword &item) {
     return stream;
 }
 
+/*
 QDebug operator<<(QDebug debug,  const AccountTmpPassword &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
@@ -204,4 +205,4 @@ QDebug operator<<(QDebug debug,  const AccountTmpPassword &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

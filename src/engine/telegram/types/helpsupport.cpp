@@ -35,7 +35,7 @@ HelpSupport::HelpSupport(const Null &null) :
 }
 
 HelpSupport::~HelpSupport() {
-    
+
 }
 
 void HelpSupport::setPhoneNumber(const QString &phoneNumber) {
@@ -87,7 +87,7 @@ bool HelpSupport::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -103,7 +103,7 @@ bool HelpSupport::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -119,7 +119,7 @@ QMap<QString, QVariant> HelpSupport::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -134,11 +134,11 @@ HelpSupport HelpSupport::fromMap(const QMap<QString, QVariant> &map) {
             _phoneNumber_var.convert( QVariant::nameToType("QString") );
             result.setPhoneNumber( _phoneNumber_var.value<QString>() );
         }
-        
+
         QVariant _user_var = map.value("user");
         if( !_user_var.isNull() )
             result.setUser( User::fromMap(_user_var.toMap()) );
-        
+
         return result;
     }
     return result;
@@ -184,7 +184,7 @@ QDataStream &operator>>(QDataStream &stream, HelpSupport &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const HelpSupport &item) {
+/*QDebug operator<<(QDebug debug,  const HelpSupport &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.HelpSupport(";
@@ -198,4 +198,4 @@ QDebug operator<<(QDebug debug,  const HelpSupport &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

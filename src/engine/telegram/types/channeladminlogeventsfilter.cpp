@@ -39,7 +39,7 @@ ChannelAdminLogEventsFilter::ChannelAdminLogEventsFilter(const Null &null) :
 }
 
 ChannelAdminLogEventsFilter::~ChannelAdminLogEventsFilter() {
-    
+
 }
 
 void ChannelAdminLogEventsFilter::setBan(bool ban) {
@@ -206,7 +206,7 @@ bool ChannelAdminLogEventsFilter::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -221,7 +221,7 @@ bool ChannelAdminLogEventsFilter::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -249,7 +249,7 @@ QMap<QString, QVariant> ChannelAdminLogEventsFilter::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -264,85 +264,85 @@ ChannelAdminLogEventsFilter ChannelAdminLogEventsFilter::fromMap(const QMap<QStr
             _join_var.convert( QVariant::nameToType("bool") );
             result.setJoin( _join_var.value<bool>() );
         }
-        
+
         QVariant _leave_var = map.value("leave");
         if( !_leave_var.isNull() ) {
             _leave_var.convert( QVariant::nameToType("bool") );
             result.setLeave( _leave_var.value<bool>() );
         }
-        
+
         QVariant _invite_var = map.value("invite");
         if( !_invite_var.isNull() ) {
             _invite_var.convert( QVariant::nameToType("bool") );
             result.setInvite( _invite_var.value<bool>() );
         }
-        
+
         QVariant _ban_var = map.value("ban");
         if( !_ban_var.isNull() ) {
             _ban_var.convert( QVariant::nameToType("bool") );
             result.setBan( _ban_var.value<bool>() );
         }
-        
+
         QVariant _unban_var = map.value("unban");
         if( !_unban_var.isNull() ) {
             _unban_var.convert( QVariant::nameToType("bool") );
             result.setUnban( _unban_var.value<bool>() );
         }
-        
+
         QVariant _kick_var = map.value("kick");
         if( !_kick_var.isNull() ) {
             _kick_var.convert( QVariant::nameToType("bool") );
             result.setKick( _kick_var.value<bool>() );
         }
-        
+
         QVariant _unkick_var = map.value("unkick");
         if( !_unkick_var.isNull() ) {
             _unkick_var.convert( QVariant::nameToType("bool") );
             result.setUnkick( _unkick_var.value<bool>() );
         }
-        
+
         QVariant _promote_var = map.value("promote");
         if( !_promote_var.isNull() ) {
             _promote_var.convert( QVariant::nameToType("bool") );
             result.setPromote( _promote_var.value<bool>() );
         }
-        
+
         QVariant _demote_var = map.value("demote");
         if( !_demote_var.isNull() ) {
             _demote_var.convert( QVariant::nameToType("bool") );
             result.setDemote( _demote_var.value<bool>() );
         }
-        
+
         QVariant _info_var = map.value("info");
         if( !_info_var.isNull() ) {
             _info_var.convert( QVariant::nameToType("bool") );
             result.setInfo( _info_var.value<bool>() );
         }
-        
+
         QVariant _settings_var = map.value("settings");
         if( !_settings_var.isNull() ) {
             _settings_var.convert( QVariant::nameToType("bool") );
             result.setSettings( _settings_var.value<bool>() );
         }
-        
+
         QVariant _pinned_var = map.value("pinned");
         if( !_pinned_var.isNull() ) {
             _pinned_var.convert( QVariant::nameToType("bool") );
             result.setPinned( _pinned_var.value<bool>() );
         }
-        
+
         QVariant _edit_var = map.value("edit");
         if( !_edit_var.isNull() ) {
             _edit_var.convert( QVariant::nameToType("bool") );
             result.setEdit( _edit_var.value<bool>() );
         }
-        
+
         QVariant _deleteValue_var = map.value("deleteValue");
         if( !_deleteValue_var.isNull() ) {
             _deleteValue_var.convert( QVariant::nameToType("bool") );
             result.setDeleteValue( _deleteValue_var.value<bool>() );
         }
-        
+
         return result;
     }
     return result;
@@ -384,7 +384,7 @@ QDataStream &operator>>(QDataStream &stream, ChannelAdminLogEventsFilter &item) 
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const ChannelAdminLogEventsFilter &item) {
+/*QDebug operator<<(QDebug debug,  const ChannelAdminLogEventsFilter &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.ChannelAdminLogEventsFilter(";
@@ -397,4 +397,4 @@ QDebug operator<<(QDebug debug,  const ChannelAdminLogEventsFilter &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

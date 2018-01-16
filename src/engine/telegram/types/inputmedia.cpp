@@ -39,7 +39,7 @@ InputMedia::InputMedia(const Null &null) :
 }
 
 InputMedia::~InputMedia() {
-    
+
 }
 
 void InputMedia::setAddress(const QString &address) {
@@ -323,7 +323,7 @@ bool InputMedia::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputMediaUploadedPhoto: {
         m_flags = in->fetchInt();
         m_file.fetch(in);
@@ -344,7 +344,7 @@ bool InputMedia::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputMediaPhoto: {
         m_idInputPhoto.fetch(in);
         m_caption = in->fetchQString();
@@ -352,14 +352,14 @@ bool InputMedia::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputMediaGeoPoint: {
         m_geoPoint.fetch(in);
         m_classType = static_cast<InputMediaClassType>(x);
         return true;
     }
         break;
-    
+
     case typeInputMediaContact: {
         m_phoneNumber = in->fetchQString();
         m_firstName = in->fetchQString();
@@ -368,7 +368,7 @@ bool InputMedia::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputMediaUploadedDocument: {
         m_flags = in->fetchInt();
         m_file.fetch(in);
@@ -398,7 +398,7 @@ bool InputMedia::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputMediaUploadedThumbDocument: {
         m_flags = in->fetchInt();
         m_file.fetch(in);
@@ -429,7 +429,7 @@ bool InputMedia::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputMediaDocument: {
         m_idInputDocument.fetch(in);
         m_caption = in->fetchQString();
@@ -437,7 +437,7 @@ bool InputMedia::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputMediaVenue: {
         m_geoPoint.fetch(in);
         m_title = in->fetchQString();
@@ -448,7 +448,7 @@ bool InputMedia::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputMediaGifExternal: {
         m_url = in->fetchQString();
         m_q = in->fetchQString();
@@ -456,7 +456,7 @@ bool InputMedia::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputMediaPhotoExternal: {
         m_url = in->fetchQString();
         m_caption = in->fetchQString();
@@ -464,7 +464,7 @@ bool InputMedia::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputMediaDocumentExternal: {
         m_url = in->fetchQString();
         m_caption = in->fetchQString();
@@ -472,14 +472,14 @@ bool InputMedia::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputMediaGame: {
         m_idInputGame.fetch(in);
         m_classType = static_cast<InputMediaClassType>(x);
         return true;
     }
         break;
-    
+
     case typeInputMediaInvoice: {
         m_flags = in->fetchInt();
         m_title = in->fetchQString();
@@ -495,7 +495,7 @@ bool InputMedia::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -509,7 +509,7 @@ bool InputMedia::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeInputMediaUploadedPhoto: {
         out->appendInt(m_flags);
         m_file.push(out);
@@ -524,20 +524,20 @@ bool InputMedia::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeInputMediaPhoto: {
         m_idInputPhoto.push(out);
         out->appendQString(m_caption);
         return true;
     }
         break;
-    
+
     case typeInputMediaGeoPoint: {
         m_geoPoint.push(out);
         return true;
     }
         break;
-    
+
     case typeInputMediaContact: {
         out->appendQString(m_phoneNumber);
         out->appendQString(m_firstName);
@@ -545,7 +545,7 @@ bool InputMedia::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeInputMediaUploadedDocument: {
         out->appendInt(m_flags);
         m_file.push(out);
@@ -566,7 +566,7 @@ bool InputMedia::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeInputMediaUploadedThumbDocument: {
         out->appendInt(m_flags);
         m_file.push(out);
@@ -588,14 +588,14 @@ bool InputMedia::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeInputMediaDocument: {
         m_idInputDocument.push(out);
         out->appendQString(m_caption);
         return true;
     }
         break;
-    
+
     case typeInputMediaVenue: {
         m_geoPoint.push(out);
         out->appendQString(m_title);
@@ -605,34 +605,34 @@ bool InputMedia::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeInputMediaGifExternal: {
         out->appendQString(m_url);
         out->appendQString(m_q);
         return true;
     }
         break;
-    
+
     case typeInputMediaPhotoExternal: {
         out->appendQString(m_url);
         out->appendQString(m_caption);
         return true;
     }
         break;
-    
+
     case typeInputMediaDocumentExternal: {
         out->appendQString(m_url);
         out->appendQString(m_caption);
         return true;
     }
         break;
-    
+
     case typeInputMediaGame: {
         m_idInputGame.push(out);
         return true;
     }
         break;
-    
+
     case typeInputMediaInvoice: {
         out->appendInt(m_flags);
         out->appendQString(m_title);
@@ -647,7 +647,7 @@ bool InputMedia::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -661,7 +661,7 @@ QMap<QString, QVariant> InputMedia::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputMediaUploadedPhoto: {
         result["classType"] = "InputMedia::typeInputMediaUploadedPhoto";
         if( !m_file.isNull() ) result["file"] = m_file.toMap();
@@ -673,7 +673,7 @@ QMap<QString, QVariant> InputMedia::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputMediaPhoto: {
         result["classType"] = "InputMedia::typeInputMediaPhoto";
         if( !m_idInputPhoto.isNull() ) result["idInputPhoto"] = m_idInputPhoto.toMap();
@@ -681,14 +681,14 @@ QMap<QString, QVariant> InputMedia::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputMediaGeoPoint: {
         result["classType"] = "InputMedia::typeInputMediaGeoPoint";
         if( !m_geoPoint.isNull() ) result["geoPoint"] = m_geoPoint.toMap();
         return result;
     }
         break;
-    
+
     case typeInputMediaContact: {
         result["classType"] = "InputMedia::typeInputMediaContact";
         if( !m_phoneNumber.isEmpty() ) result["phoneNumber"] = QVariant::fromValue<QString>(m_phoneNumber);
@@ -697,7 +697,7 @@ QMap<QString, QVariant> InputMedia::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputMediaUploadedDocument: {
         result["classType"] = "InputMedia::typeInputMediaUploadedDocument";
         if( !m_file.isNull() ) result["file"] = m_file.toMap();
@@ -714,7 +714,7 @@ QMap<QString, QVariant> InputMedia::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputMediaUploadedThumbDocument: {
         result["classType"] = "InputMedia::typeInputMediaUploadedThumbDocument";
         if( !m_file.isNull() ) result["file"] = m_file.toMap();
@@ -732,7 +732,7 @@ QMap<QString, QVariant> InputMedia::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputMediaDocument: {
         result["classType"] = "InputMedia::typeInputMediaDocument";
         if( !m_idInputDocument.isNull() ) result["idInputDocument"] = m_idInputDocument.toMap();
@@ -740,7 +740,7 @@ QMap<QString, QVariant> InputMedia::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputMediaVenue: {
         result["classType"] = "InputMedia::typeInputMediaVenue";
         if( !m_geoPoint.isNull() ) result["geoPoint"] = m_geoPoint.toMap();
@@ -751,7 +751,7 @@ QMap<QString, QVariant> InputMedia::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputMediaGifExternal: {
         result["classType"] = "InputMedia::typeInputMediaGifExternal";
         if( !m_url.isEmpty() ) result["url"] = QVariant::fromValue<QString>(m_url);
@@ -759,7 +759,7 @@ QMap<QString, QVariant> InputMedia::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputMediaPhotoExternal: {
         result["classType"] = "InputMedia::typeInputMediaPhotoExternal";
         if( !m_url.isEmpty() ) result["url"] = QVariant::fromValue<QString>(m_url);
@@ -767,7 +767,7 @@ QMap<QString, QVariant> InputMedia::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputMediaDocumentExternal: {
         result["classType"] = "InputMedia::typeInputMediaDocumentExternal";
         if( !m_url.isEmpty() ) result["url"] = QVariant::fromValue<QString>(m_url);
@@ -775,14 +775,14 @@ QMap<QString, QVariant> InputMedia::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputMediaGame: {
         result["classType"] = "InputMedia::typeInputMediaGame";
         if( !m_idInputGame.isNull() ) result["idInputGame"] = m_idInputGame.toMap();
         return result;
     }
         break;
-    
+
     case typeInputMediaInvoice: {
         result["classType"] = "InputMedia::typeInputMediaInvoice";
         if( !m_title.isEmpty() ) result["title"] = QVariant::fromValue<QString>(m_title);
@@ -795,7 +795,7 @@ QMap<QString, QVariant> InputMedia::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -812,13 +812,13 @@ InputMedia InputMedia::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _file_var = map.value("file");
         if( !_file_var.isNull() )
             result.setFile( InputFile::fromMap(_file_var.toMap()) );
-        
+
         QVariant _caption_var = map.value("caption");
         if( !_caption_var.isNull() ) {
             _caption_var.convert( QVariant::nameToType("QString") );
             result.setCaption( _caption_var.value<QString>() );
         }
-        
+
         QList<QVariant> map_stickers = map["stickers"].toList();
         QList<InputDocument> _stickers;
         for(const QVariant &var: map_stickers)
@@ -831,13 +831,13 @@ InputMedia InputMedia::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _idInputPhoto_var = map.value("idInputPhoto");
         if( !_idInputPhoto_var.isNull() )
             result.setIdInputPhoto( InputPhoto::fromMap(_idInputPhoto_var.toMap()) );
-        
+
         QVariant _caption_var = map.value("caption");
         if( !_caption_var.isNull() ) {
             _caption_var.convert( QVariant::nameToType("QString") );
             result.setCaption( _caption_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "InputMedia::typeInputMediaGeoPoint") {
@@ -845,7 +845,7 @@ InputMedia InputMedia::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _geoPoint_var = map.value("geoPoint");
         if( !_geoPoint_var.isNull() )
             result.setGeoPoint( InputGeoPoint::fromMap(_geoPoint_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "InputMedia::typeInputMediaContact") {
@@ -855,19 +855,19 @@ InputMedia InputMedia::fromMap(const QMap<QString, QVariant> &map) {
             _phoneNumber_var.convert( QVariant::nameToType("QString") );
             result.setPhoneNumber( _phoneNumber_var.value<QString>() );
         }
-        
+
         QVariant _firstName_var = map.value("firstName");
         if( !_firstName_var.isNull() ) {
             _firstName_var.convert( QVariant::nameToType("QString") );
             result.setFirstName( _firstName_var.value<QString>() );
         }
-        
+
         QVariant _lastName_var = map.value("lastName");
         if( !_lastName_var.isNull() ) {
             _lastName_var.convert( QVariant::nameToType("QString") );
             result.setLastName( _lastName_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "InputMedia::typeInputMediaUploadedDocument") {
@@ -875,13 +875,13 @@ InputMedia InputMedia::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _file_var = map.value("file");
         if( !_file_var.isNull() )
             result.setFile( InputFile::fromMap(_file_var.toMap()) );
-        
+
         QVariant _mimeType_var = map.value("mimeType");
         if( !_mimeType_var.isNull() ) {
             _mimeType_var.convert( QVariant::nameToType("QString") );
             result.setMimeType( _mimeType_var.value<QString>() );
         }
-        
+
         QList<QVariant> map_attributes = map["attributes"].toList();
         QList<DocumentAttribute> _attributes;
         for(const QVariant &var: map_attributes)
@@ -892,7 +892,7 @@ InputMedia InputMedia::fromMap(const QMap<QString, QVariant> &map) {
             _caption_var.convert( QVariant::nameToType("QString") );
             result.setCaption( _caption_var.value<QString>() );
         }
-        
+
         QList<QVariant> map_stickers = map["stickers"].toList();
         QList<InputDocument> _stickers;
         for(const QVariant &var: map_stickers)
@@ -905,17 +905,17 @@ InputMedia InputMedia::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _file_var = map.value("file");
         if( !_file_var.isNull() )
             result.setFile( InputFile::fromMap(_file_var.toMap()) );
-        
+
         QVariant _thumb_var = map.value("thumb");
         if( !_thumb_var.isNull() )
             result.setThumb( InputFile::fromMap(_thumb_var.toMap()) );
-        
+
         QVariant _mimeType_var = map.value("mimeType");
         if( !_mimeType_var.isNull() ) {
             _mimeType_var.convert( QVariant::nameToType("QString") );
             result.setMimeType( _mimeType_var.value<QString>() );
         }
-        
+
         QList<QVariant> map_attributes = map["attributes"].toList();
         QList<DocumentAttribute> _attributes;
         for(const QVariant &var: map_attributes)
@@ -926,7 +926,7 @@ InputMedia InputMedia::fromMap(const QMap<QString, QVariant> &map) {
             _caption_var.convert( QVariant::nameToType("QString") );
             result.setCaption( _caption_var.value<QString>() );
         }
-        
+
         QList<QVariant> map_stickers = map["stickers"].toList();
         QList<InputDocument> _stickers;
         for(const QVariant &var: map_stickers)
@@ -939,13 +939,13 @@ InputMedia InputMedia::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _idInputDocument_var = map.value("idInputDocument");
         if( !_idInputDocument_var.isNull() )
             result.setIdInputDocument( InputDocument::fromMap(_idInputDocument_var.toMap()) );
-        
+
         QVariant _caption_var = map.value("caption");
         if( !_caption_var.isNull() ) {
             _caption_var.convert( QVariant::nameToType("QString") );
             result.setCaption( _caption_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "InputMedia::typeInputMediaVenue") {
@@ -953,31 +953,31 @@ InputMedia InputMedia::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _geoPoint_var = map.value("geoPoint");
         if( !_geoPoint_var.isNull() )
             result.setGeoPoint( InputGeoPoint::fromMap(_geoPoint_var.toMap()) );
-        
+
         QVariant _title_var = map.value("title");
         if( !_title_var.isNull() ) {
             _title_var.convert( QVariant::nameToType("QString") );
             result.setTitle( _title_var.value<QString>() );
         }
-        
+
         QVariant _address_var = map.value("address");
         if( !_address_var.isNull() ) {
             _address_var.convert( QVariant::nameToType("QString") );
             result.setAddress( _address_var.value<QString>() );
         }
-        
+
         QVariant _provider_var = map.value("provider");
         if( !_provider_var.isNull() ) {
             _provider_var.convert( QVariant::nameToType("QString") );
             result.setProvider( _provider_var.value<QString>() );
         }
-        
+
         QVariant _venueId_var = map.value("venueId");
         if( !_venueId_var.isNull() ) {
             _venueId_var.convert( QVariant::nameToType("QString") );
             result.setVenueId( _venueId_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "InputMedia::typeInputMediaGifExternal") {
@@ -987,13 +987,13 @@ InputMedia InputMedia::fromMap(const QMap<QString, QVariant> &map) {
             _url_var.convert( QVariant::nameToType("QString") );
             result.setUrl( _url_var.value<QString>() );
         }
-        
+
         QVariant _q_var = map.value("q");
         if( !_q_var.isNull() ) {
             _q_var.convert( QVariant::nameToType("QString") );
             result.setQ( _q_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "InputMedia::typeInputMediaPhotoExternal") {
@@ -1003,13 +1003,13 @@ InputMedia InputMedia::fromMap(const QMap<QString, QVariant> &map) {
             _url_var.convert( QVariant::nameToType("QString") );
             result.setUrl( _url_var.value<QString>() );
         }
-        
+
         QVariant _caption_var = map.value("caption");
         if( !_caption_var.isNull() ) {
             _caption_var.convert( QVariant::nameToType("QString") );
             result.setCaption( _caption_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "InputMedia::typeInputMediaDocumentExternal") {
@@ -1019,13 +1019,13 @@ InputMedia InputMedia::fromMap(const QMap<QString, QVariant> &map) {
             _url_var.convert( QVariant::nameToType("QString") );
             result.setUrl( _url_var.value<QString>() );
         }
-        
+
         QVariant _caption_var = map.value("caption");
         if( !_caption_var.isNull() ) {
             _caption_var.convert( QVariant::nameToType("QString") );
             result.setCaption( _caption_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "InputMedia::typeInputMediaGame") {
@@ -1033,7 +1033,7 @@ InputMedia InputMedia::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _idInputGame_var = map.value("idInputGame");
         if( !_idInputGame_var.isNull() )
             result.setIdInputGame( InputGame::fromMap(_idInputGame_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "InputMedia::typeInputMediaInvoice") {
@@ -1043,39 +1043,39 @@ InputMedia InputMedia::fromMap(const QMap<QString, QVariant> &map) {
             _title_var.convert( QVariant::nameToType("QString") );
             result.setTitle( _title_var.value<QString>() );
         }
-        
+
         QVariant _description_var = map.value("description");
         if( !_description_var.isNull() ) {
             _description_var.convert( QVariant::nameToType("QString") );
             result.setDescription( _description_var.value<QString>() );
         }
-        
+
         QVariant _photo_var = map.value("photo");
         if( !_photo_var.isNull() )
             result.setPhoto( InputWebDocument::fromMap(_photo_var.toMap()) );
-        
+
         QVariant _invoice_var = map.value("invoice");
         if( !_invoice_var.isNull() )
             result.setInvoice( Invoice::fromMap(_invoice_var.toMap()) );
-        
+
         QVariant _payload_var = map.value("payload");
         if( !_payload_var.isNull() ) {
             _payload_var.convert( QVariant::nameToType("QByteArray") );
             result.setPayload( _payload_var.value<QByteArray>() );
         }
-        
+
         QVariant _provider_var = map.value("provider");
         if( !_provider_var.isNull() ) {
             _provider_var.convert( QVariant::nameToType("QString") );
             result.setProvider( _provider_var.value<QString>() );
         }
-        
+
         QVariant _startParam_var = map.value("startParam");
         if( !_startParam_var.isNull() ) {
             _startParam_var.convert( QVariant::nameToType("QString") );
             result.setStartParam( _startParam_var.value<QString>() );
         }
-        
+
         return result;
     }
     return result;
@@ -1096,7 +1096,7 @@ QDataStream &operator<<(QDataStream &stream, const InputMedia &item) {
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case InputMedia::typeInputMediaEmpty:
-        
+
         break;
     case InputMedia::typeInputMediaUploadedPhoto:
         stream << item.flags();
@@ -1179,7 +1179,7 @@ QDataStream &operator>>(QDataStream &stream, InputMedia &item) {
     item.setClassType(static_cast<InputMedia::InputMediaClassType>(type));
     switch(type) {
     case InputMedia::typeInputMediaEmpty: {
-        
+
     }
         break;
     case InputMedia::typeInputMediaUploadedPhoto: {
@@ -1360,7 +1360,7 @@ QDataStream &operator>>(QDataStream &stream, InputMedia &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const InputMedia &item) {
+/*QDebug operator<<(QDebug debug,  const InputMedia &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.InputMedia(";
@@ -1456,4 +1456,4 @@ QDebug operator<<(QDebug debug,  const InputMedia &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

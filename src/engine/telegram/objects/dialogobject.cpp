@@ -12,11 +12,11 @@ DialogObject::DialogObject(const Dialog &core, QObject *parent) :
     m_core(core)
 {
     m_draft = new DraftMessageObject(m_core.draft(), this);
-    connect(m_draft.data(), &DraftMessageObject::coreChanged, this, &DialogObject::coreDraftChanged);
+    connect(m_draft.data(), SIGNAL(coreChanged()), this, SLOT(coreDraftChanged()));
     m_notifySettings = new PeerNotifySettingsObject(m_core.notifySettings(), this);
-    connect(m_notifySettings.data(), &PeerNotifySettingsObject::coreChanged, this, &DialogObject::coreNotifySettingsChanged);
+    connect(m_notifySettings.data(), SIGNAL(coreChanged()), this, SLOT(coreNotifySettingsChanged()));
     m_peer = new PeerObject(m_core.peer(), this);
-    connect(m_peer.data(), &PeerObject::coreChanged, this, &DialogObject::corePeerChanged);
+    connect(m_peer.data(), SIGNAL(coreChanged()), this, SLOT(corePeerChanged()));
 }
 
 DialogObject::DialogObject(QObject *parent) :
@@ -27,11 +27,11 @@ DialogObject::DialogObject(QObject *parent) :
     m_core()
 {
     m_draft = new DraftMessageObject(m_core.draft(), this);
-    connect(m_draft.data(), &DraftMessageObject::coreChanged, this, &DialogObject::coreDraftChanged);
+    connect(m_draft.data(), SIGNAL(coreChanged()), this, SLOT(coreDraftChanged()));
     m_notifySettings = new PeerNotifySettingsObject(m_core.notifySettings(), this);
-    connect(m_notifySettings.data(), &PeerNotifySettingsObject::coreChanged, this, &DialogObject::coreNotifySettingsChanged);
+    connect(m_notifySettings.data(), SIGNAL(coreChanged()), this, SLOT(coreNotifySettingsChanged()));
     m_peer = new PeerObject(m_core.peer(), this);
-    connect(m_peer.data(), &PeerObject::coreChanged, this, &DialogObject::corePeerChanged);
+    connect(m_peer.data(), SIGNAL(coreChanged()), this, SLOT(corePeerChanged()));
 }
 
 DialogObject::~DialogObject() {
@@ -44,7 +44,7 @@ void DialogObject::setDraft(DraftMessageObject* draft) {
     if(m_draft) {
         m_draft->setParent(this);
         m_core.setDraft(m_draft->core());
-        connect(m_draft.data(), &DraftMessageObject::coreChanged, this, &DialogObject::coreDraftChanged);
+        connect(m_draft.data(), SIGNAL(coreChanged()), this, SLOT(coreDraftChanged()));
     }
     Q_EMIT draftChanged();
     Q_EMIT coreChanged();
@@ -72,7 +72,7 @@ void DialogObject::setNotifySettings(PeerNotifySettingsObject* notifySettings) {
     if(m_notifySettings) {
         m_notifySettings->setParent(this);
         m_core.setNotifySettings(m_notifySettings->core());
-        connect(m_notifySettings.data(), &PeerNotifySettingsObject::coreChanged, this, &DialogObject::coreNotifySettingsChanged);
+        connect(m_notifySettings.data(), SIGNAL(coreChanged()), this, SLOT(coreNotifySettingsChanged()));
     }
     Q_EMIT notifySettingsChanged();
     Q_EMIT coreChanged();
@@ -89,7 +89,7 @@ void DialogObject::setPeer(PeerObject* peer) {
     if(m_peer) {
         m_peer->setParent(this);
         m_core.setPeer(m_peer->core());
-        connect(m_peer.data(), &PeerObject::coreChanged, this, &DialogObject::corePeerChanged);
+        connect(m_peer.data(), SIGNAL(coreChanged()), this, SLOT(corePeerChanged()));
     }
     Q_EMIT peerChanged();
     Q_EMIT coreChanged();

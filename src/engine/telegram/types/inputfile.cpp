@@ -43,7 +43,7 @@ InputFile::InputFile(const Null &null) :
 }
 
 InputFile::~InputFile() {
-    
+
 }
 
 void InputFile::setId(qint64 id) {
@@ -117,7 +117,7 @@ bool InputFile::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeInputFileBig: {
         m_id = in->fetchLong();
         m_parts = in->fetchInt();
@@ -126,7 +126,7 @@ bool InputFile::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -144,7 +144,7 @@ bool InputFile::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeInputFileBig: {
         out->appendLong(m_id);
         out->appendInt(m_parts);
@@ -152,7 +152,7 @@ bool InputFile::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -170,7 +170,7 @@ QMap<QString, QVariant> InputFile::toMap() const {
         return result;
     }
         break;
-    
+
     case typeInputFileBig: {
         result["classType"] = "InputFile::typeInputFileBig";
         if( id() ) result["id"] = QString::number(id());
@@ -179,7 +179,7 @@ QMap<QString, QVariant> InputFile::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -194,25 +194,25 @@ InputFile InputFile::fromMap(const QMap<QString, QVariant> &map) {
             _id_var.convert( QVariant::nameToType("qint64") );
             result.setId( _id_var.value<qint64>() );
         }
-        
+
         QVariant _parts_var = map.value("parts");
         if( !_parts_var.isNull() ) {
             _parts_var.convert( QVariant::nameToType("qint32") );
             result.setParts( _parts_var.value<qint32>() );
         }
-        
+
         QVariant _name_var = map.value("name");
         if( !_name_var.isNull() ) {
             _name_var.convert( QVariant::nameToType("QString") );
             result.setName( _name_var.value<QString>() );
         }
-        
+
         QVariant _md5Checksum_var = map.value("md5Checksum");
         if( !_md5Checksum_var.isNull() ) {
             _md5Checksum_var.convert( QVariant::nameToType("QString") );
             result.setMd5Checksum( _md5Checksum_var.value<QString>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "InputFile::typeInputFileBig") {
@@ -222,19 +222,19 @@ InputFile InputFile::fromMap(const QMap<QString, QVariant> &map) {
             _id_var.convert( QVariant::nameToType("qint64") );
             result.setId( _id_var.value<qint64>() );
         }
-        
+
         QVariant _parts_var = map.value("parts");
         if( !_parts_var.isNull() ) {
             _parts_var.convert( QVariant::nameToType("qint32") );
             result.setParts( _parts_var.value<qint32>() );
         }
-        
+
         QVariant _name_var = map.value("name");
         if( !_name_var.isNull() ) {
             _name_var.convert( QVariant::nameToType("QString") );
             result.setName( _name_var.value<QString>() );
         }
-        
+
         return result;
     }
     return result;
@@ -305,7 +305,7 @@ QDataStream &operator>>(QDataStream &stream, InputFile &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const InputFile &item) {
+/*QDebug operator<<(QDebug debug,  const InputFile &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.InputFile(";
@@ -327,4 +327,4 @@ QDebug operator<<(QDebug debug,  const InputFile &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

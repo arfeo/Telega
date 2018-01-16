@@ -35,7 +35,7 @@ MessagesPeerDialogs::MessagesPeerDialogs(const Null &null) :
 }
 
 MessagesPeerDialogs::~MessagesPeerDialogs() {
-    
+
 }
 
 void MessagesPeerDialogs::setChats(const QList<Chat> &chats) {
@@ -148,7 +148,7 @@ bool MessagesPeerDialogs::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -183,7 +183,7 @@ bool MessagesPeerDialogs::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -214,7 +214,7 @@ QMap<QString, QVariant> MessagesPeerDialogs::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -247,7 +247,7 @@ MessagesPeerDialogs MessagesPeerDialogs::fromMap(const QMap<QString, QVariant> &
         QVariant _state_var = map.value("state");
         if( !_state_var.isNull() )
             result.setState( UpdatesState::fromMap(_state_var.toMap()) );
-        
+
         return result;
     }
     return result;
@@ -305,7 +305,7 @@ QDataStream &operator>>(QDataStream &stream, MessagesPeerDialogs &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const MessagesPeerDialogs &item) {
+/*QDebug operator<<(QDebug debug,  const MessagesPeerDialogs &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.MessagesPeerDialogs(";
@@ -322,4 +322,4 @@ QDebug operator<<(QDebug debug,  const MessagesPeerDialogs &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

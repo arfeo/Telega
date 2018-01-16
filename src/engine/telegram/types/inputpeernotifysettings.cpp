@@ -43,7 +43,7 @@ InputPeerNotifySettings::InputPeerNotifySettings(const Null &null) :
 }
 
 InputPeerNotifySettings::~InputPeerNotifySettings() {
-    
+
 }
 
 void InputPeerNotifySettings::setFlags(qint32 flags) {
@@ -124,7 +124,7 @@ bool InputPeerNotifySettings::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -141,7 +141,7 @@ bool InputPeerNotifySettings::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -159,7 +159,7 @@ QMap<QString, QVariant> InputPeerNotifySettings::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -174,25 +174,25 @@ InputPeerNotifySettings InputPeerNotifySettings::fromMap(const QMap<QString, QVa
             _showPreviews_var.convert( QVariant::nameToType("bool") );
             result.setShowPreviews( _showPreviews_var.value<bool>() );
         }
-        
+
         QVariant _silent_var = map.value("silent");
         if( !_silent_var.isNull() ) {
             _silent_var.convert( QVariant::nameToType("bool") );
             result.setSilent( _silent_var.value<bool>() );
         }
-        
+
         QVariant _muteUntil_var = map.value("muteUntil");
         if( !_muteUntil_var.isNull() ) {
             _muteUntil_var.convert( QVariant::nameToType("qint32") );
             result.setMuteUntil( _muteUntil_var.value<qint32>() );
         }
-        
+
         QVariant _sound_var = map.value("sound");
         if( !_sound_var.isNull() ) {
             _sound_var.convert( QVariant::nameToType("QString") );
             result.setSound( _sound_var.value<QString>() );
         }
-        
+
         return result;
     }
     return result;
@@ -242,7 +242,7 @@ QDataStream &operator>>(QDataStream &stream, InputPeerNotifySettings &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const InputPeerNotifySettings &item) {
+/*QDebug operator<<(QDebug debug,  const InputPeerNotifySettings &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.InputPeerNotifySettings(";
@@ -257,4 +257,4 @@ QDebug operator<<(QDebug debug,  const InputPeerNotifySettings &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

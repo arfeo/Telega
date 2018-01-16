@@ -39,7 +39,7 @@ ReplyMarkup::ReplyMarkup(const Null &null) :
 }
 
 ReplyMarkup::~ReplyMarkup() {
-    
+
 }
 
 void ReplyMarkup::setFlags(qint32 flags) {
@@ -117,14 +117,14 @@ bool ReplyMarkup::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeReplyKeyboardForceReply: {
         m_flags = in->fetchInt();
         m_classType = static_cast<ReplyMarkupClassType>(x);
         return true;
     }
         break;
-    
+
     case typeReplyKeyboardMarkup: {
         m_flags = in->fetchInt();
         if(in->fetchInt() != (qint32)CoreTypes::typeVector) return false;
@@ -139,7 +139,7 @@ bool ReplyMarkup::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeReplyInlineMarkup: {
         if(in->fetchInt() != (qint32)CoreTypes::typeVector) return false;
         qint32 m_rows_length = in->fetchInt();
@@ -153,7 +153,7 @@ bool ReplyMarkup::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -168,13 +168,13 @@ bool ReplyMarkup::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeReplyKeyboardForceReply: {
         out->appendInt(m_flags);
         return true;
     }
         break;
-    
+
     case typeReplyKeyboardMarkup: {
         out->appendInt(m_flags);
         out->appendInt(CoreTypes::typeVector);
@@ -185,7 +185,7 @@ bool ReplyMarkup::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeReplyInlineMarkup: {
         out->appendInt(CoreTypes::typeVector);
         out->appendInt(m_rows.count());
@@ -195,7 +195,7 @@ bool ReplyMarkup::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -210,7 +210,7 @@ QMap<QString, QVariant> ReplyMarkup::toMap() const {
         return result;
     }
         break;
-    
+
     case typeReplyKeyboardForceReply: {
         result["classType"] = "ReplyMarkup::typeReplyKeyboardForceReply";
         if( singleUse() ) result["singleUse"] = QString::number(singleUse());
@@ -218,7 +218,7 @@ QMap<QString, QVariant> ReplyMarkup::toMap() const {
         return result;
     }
         break;
-    
+
     case typeReplyKeyboardMarkup: {
         result["classType"] = "ReplyMarkup::typeReplyKeyboardMarkup";
         if( resize() ) result["resize"] = QString::number(resize());
@@ -231,7 +231,7 @@ QMap<QString, QVariant> ReplyMarkup::toMap() const {
         return result;
     }
         break;
-    
+
     case typeReplyInlineMarkup: {
         result["classType"] = "ReplyMarkup::typeReplyInlineMarkup";
         QList<QVariant> _rows;
@@ -241,7 +241,7 @@ QMap<QString, QVariant> ReplyMarkup::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -256,7 +256,7 @@ ReplyMarkup ReplyMarkup::fromMap(const QMap<QString, QVariant> &map) {
             _selective_var.convert( QVariant::nameToType("bool") );
             result.setSelective( _selective_var.value<bool>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "ReplyMarkup::typeReplyKeyboardForceReply") {
@@ -266,13 +266,13 @@ ReplyMarkup ReplyMarkup::fromMap(const QMap<QString, QVariant> &map) {
             _singleUse_var.convert( QVariant::nameToType("bool") );
             result.setSingleUse( _singleUse_var.value<bool>() );
         }
-        
+
         QVariant _selective_var = map.value("selective");
         if( !_selective_var.isNull() ) {
             _selective_var.convert( QVariant::nameToType("bool") );
             result.setSelective( _selective_var.value<bool>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "ReplyMarkup::typeReplyKeyboardMarkup") {
@@ -282,19 +282,19 @@ ReplyMarkup ReplyMarkup::fromMap(const QMap<QString, QVariant> &map) {
             _resize_var.convert( QVariant::nameToType("bool") );
             result.setResize( _resize_var.value<bool>() );
         }
-        
+
         QVariant _singleUse_var = map.value("singleUse");
         if( !_singleUse_var.isNull() ) {
             _singleUse_var.convert( QVariant::nameToType("bool") );
             result.setSingleUse( _singleUse_var.value<bool>() );
         }
-        
+
         QVariant _selective_var = map.value("selective");
         if( !_selective_var.isNull() ) {
             _selective_var.convert( QVariant::nameToType("bool") );
             result.setSelective( _selective_var.value<bool>() );
         }
-        
+
         QList<QVariant> map_rows = map["rows"].toList();
         QList<KeyboardButtonRow> _rows;
         for(const QVariant &var: map_rows)
@@ -381,7 +381,7 @@ QDataStream &operator>>(QDataStream &stream, ReplyMarkup &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const ReplyMarkup &item) {
+/*QDebug operator<<(QDebug debug,  const ReplyMarkup &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.ReplyMarkup(";
@@ -407,4 +407,4 @@ QDebug operator<<(QDebug debug,  const ReplyMarkup &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

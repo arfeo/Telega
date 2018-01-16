@@ -35,7 +35,7 @@ ContactsImportedContacts::ContactsImportedContacts(const Null &null) :
 }
 
 ContactsImportedContacts::~ContactsImportedContacts() {
-    
+
 }
 
 void ContactsImportedContacts::setImported(const QList<ImportedContact> &imported) {
@@ -119,7 +119,7 @@ bool ContactsImportedContacts::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -148,7 +148,7 @@ bool ContactsImportedContacts::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -174,7 +174,7 @@ QMap<QString, QVariant> ContactsImportedContacts::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -248,7 +248,7 @@ QDataStream &operator>>(QDataStream &stream, ContactsImportedContacts &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const ContactsImportedContacts &item) {
+/*QDebug operator<<(QDebug debug,  const ContactsImportedContacts &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.ContactsImportedContacts(";
@@ -263,4 +263,4 @@ QDebug operator<<(QDebug debug,  const ContactsImportedContacts &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

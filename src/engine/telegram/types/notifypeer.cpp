@@ -35,7 +35,7 @@ NotifyPeer::NotifyPeer(const Null &null) :
 }
 
 NotifyPeer::~NotifyPeer() {
-    
+
 }
 
 void NotifyPeer::setPeer(const Peer &peer) {
@@ -76,25 +76,25 @@ bool NotifyPeer::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeNotifyUsers: {
         m_classType = static_cast<NotifyPeerClassType>(x);
         return true;
     }
         break;
-    
+
     case typeNotifyChats: {
         m_classType = static_cast<NotifyPeerClassType>(x);
         return true;
     }
         break;
-    
+
     case typeNotifyAll: {
         m_classType = static_cast<NotifyPeerClassType>(x);
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -109,22 +109,22 @@ bool NotifyPeer::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeNotifyUsers: {
         return true;
     }
         break;
-    
+
     case typeNotifyChats: {
         return true;
     }
         break;
-    
+
     case typeNotifyAll: {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -139,25 +139,25 @@ QMap<QString, QVariant> NotifyPeer::toMap() const {
         return result;
     }
         break;
-    
+
     case typeNotifyUsers: {
         result["classType"] = "NotifyPeer::typeNotifyUsers";
         return result;
     }
         break;
-    
+
     case typeNotifyChats: {
         result["classType"] = "NotifyPeer::typeNotifyChats";
         return result;
     }
         break;
-    
+
     case typeNotifyAll: {
         result["classType"] = "NotifyPeer::typeNotifyAll";
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -170,7 +170,7 @@ NotifyPeer NotifyPeer::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _peer_var = map.value("peer");
         if( !_peer_var.isNull() )
             result.setPeer( Peer::fromMap(_peer_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "NotifyPeer::typeNotifyUsers") {
@@ -206,13 +206,13 @@ QDataStream &operator<<(QDataStream &stream, const NotifyPeer &item) {
         stream << item.peer();
         break;
     case NotifyPeer::typeNotifyUsers:
-        
+
         break;
     case NotifyPeer::typeNotifyChats:
-        
+
         break;
     case NotifyPeer::typeNotifyAll:
-        
+
         break;
     }
     return stream;
@@ -230,22 +230,22 @@ QDataStream &operator>>(QDataStream &stream, NotifyPeer &item) {
     }
         break;
     case NotifyPeer::typeNotifyUsers: {
-        
+
     }
         break;
     case NotifyPeer::typeNotifyChats: {
-        
+
     }
         break;
     case NotifyPeer::typeNotifyAll: {
-        
+
     }
         break;
     }
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const NotifyPeer &item) {
+/*QDebug operator<<(QDebug debug,  const NotifyPeer &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.NotifyPeer(";
@@ -267,4 +267,4 @@ QDebug operator<<(QDebug debug,  const NotifyPeer &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

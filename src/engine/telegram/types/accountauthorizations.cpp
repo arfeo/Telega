@@ -35,7 +35,7 @@ AccountAuthorizations::AccountAuthorizations(const Null &null) :
 }
 
 AccountAuthorizations::~AccountAuthorizations() {
-    
+
 }
 
 void AccountAuthorizations::setAuthorizations(const QList<Authorization> &authorizations) {
@@ -83,7 +83,7 @@ bool AccountAuthorizations::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -102,7 +102,7 @@ bool AccountAuthorizations::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -120,7 +120,7 @@ QMap<QString, QVariant> AccountAuthorizations::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -176,6 +176,7 @@ QDataStream &operator>>(QDataStream &stream, AccountAuthorizations &item) {
     return stream;
 }
 
+/*
 QDebug operator<<(QDebug debug,  const AccountAuthorizations &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
@@ -189,4 +190,5 @@ QDebug operator<<(QDebug debug,  const AccountAuthorizations &item) {
     debug.nospace() << ")";
     return debug;
 }
+*/
 
