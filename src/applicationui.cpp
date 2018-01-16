@@ -58,23 +58,23 @@ ApplicationUI::ApplicationUI() :
         m_invokeManager(new InvokeManager(this)),
         db(new Database(this))
 {
-
-    // prepare the localization
+    // Prepare the localization
     if (!QObject::connect(m_localeHandler, SIGNAL(systemLanguageChanged()), this,
             SLOT(onSystemLanguageChanged()))) {
         qWarning() << "Recovering from a failed connect()";
     }
     onSystemLanguageChanged();
+
     connect(m_localeHandler, SIGNAL(systemLanguageChanged()), SLOT(onSystemLanguageChanged()));
-//    connect(udp, SIGNAL(receivedData(QString)), this, SLOT(sendping()));
+    //connect(udp, SIGNAL(receivedData(QString)), this, SLOT(sendping()));
     connect(&mDcProvider, SIGNAL(authTransferCompleted()), this, SLOT(onauthTransferCompleted()));
     connect(&mDcProvider, SIGNAL(dcProviderReady()), this, SIGNAL(onDcProviderReady()));
-//     Set created root object as the application scene
+
     db->initDatabase();
     loggedIn = init();
 
     // Create scene document from main.qml asset, the parent is set
-    // to ensure the document gets destroyed properly at shut down.
+    // to ensure the document gets destroyed properly at shut down
     QmlDocument *qml = QmlDocument::create("asset:///main.qml").parent(this);
     qml->setContextProperty("_telega", this);
 
@@ -85,9 +85,7 @@ ApplicationUI::ApplicationUI() :
     // Create root object for the UI
     AbstractPane *root = qml->createRootObject<AbstractPane>();
 
-    // Set created root object as the application scene
     Application::instance()->setScene(root);
-
 }
 
 ApplicationUI::~ApplicationUI()
@@ -122,18 +120,15 @@ void ApplicationUI::onSystemLanguageChanged()
 QString ApplicationUI::getAppSettings(const QString &objectName, const QString &defaultValue)
 {
     QSettings settings;
-
     if(settings.value(objectName).isNull()) {
         return defaultValue;
     }
-
     return settings.value(objectName).toString();
 }
 
 void ApplicationUI::setAppSettings(const QString &objectName, const QString &optionValue)
 {
     QSettings settings;
-
     settings.setValue(objectName, optionValue);
     settings.sync();
 }
@@ -157,9 +152,8 @@ bool ApplicationUI::init()
     mDcProvider.initialize();
     QList<DC *> dcsList = mDcProvider.getDcs();
 
-    qDebug() << dcsList;
-
     connect(&mDcProvider, SIGNAL(dcProviderReady()), this, SLOT(keyloaded()));
+
     //Q_FOREACH (DC *dc, dcsList) {
     //    changeServer(s->workingDcNum()-1);
     //}

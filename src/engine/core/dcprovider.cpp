@@ -34,7 +34,7 @@ DcProvider::DcProvider() :
 
 DcProvider::~DcProvider()
 {
-   clean();
+    clean();
 }
 
 void DcProvider::clean()
@@ -63,7 +63,6 @@ void DcProvider::clean()
         mApi->deleteLater();
         mApi = 0;
     }
-    qDebug() << "mDcs.count(): " << mDcs.count();
     mDcs.clear();
     mDcAuths.clear();
     mTransferSessions.clear();
@@ -85,33 +84,33 @@ DC *DcProvider::getWorkingDc() const
 void DcProvider::initialize()
 {
     clean();
+
     /**
-      1.- Read settings (dcsList and working dc num)
-      2.- Fullfill m_dcs map with dcsList
-      3.- Connect to working dc
-      4.- Ask for config when working dc is connected
-      5.- Connect to the rest of the dcs received in config
+      1. - Read settings (dcsList and working dc num)
+      2. - Fullfill m_dcs map with dcsList
+      3. - Connect to working dc
+      4. - Ask for config when working dc is connected
+      5. - Connect to the rest of the dcs received in config
       */
-    // 1.- Get the settings dcs, fullfill m_dcs map and current dc num
+
+    // 1. - Get the settings dcs, fullfill m_dcs map and current dc num
     Settings *s = Settings::getInstance();
-    qDebug() << "dc list getting warning up";
     QList<DC *> dcsList = s->dcsList();
-    qDebug() << "dc list is getting poluted" << s->workingDcNum();
-    Q_FOREACH (DC *dc, dcsList) {
+    qDebug() << "Populating DC list" << s->workingDcNum();
+    Q_FOREACH(DC *dc, dcsList) {
         qDebug()<< "DC list status of servers" << dc->state();
         mDcs.insert(dc->id(), dc);
     }
-    qDebug() << "Active DC" << s->workingDcNum();
-//     2.- connect to working DC
-// If this is the initial configuration, if will be executed
-//    s->setWorkingDcNum(1);
-    if ( dcsList.count() == 0 ) {
-         qDebug() << "If dcId == 1, it's the default one, so call default host and port";
-        if (!mDcs.value(1, 0)) {
+    qDebug() << "Active DCs:" << s->workingDcNum();
+    // 2. - connect to working DC
+    //s->setWorkingDcNum(1);
+    if(dcsList.count() == 0) { // If this is the initial configuration...
+        qDebug() << "If dcId == 1, it's the default one, so call default host and port";
+        if(!mDcs.value(1, 0)) {
             mDcs[1] = new DC(1);
         }
-        qDebug() << "If Dc are NUll, Populate DC with default server settings";
-        if (mDcs[1]->state() < DC::authKeyCreated) {
+        qDebug() << "If DCs are null, populate DC list with default server settings";
+        if(mDcs[1]->state() < DC::authKeyCreated) {
             qDebug() << "Creating a new DC with IP" << TELEGRAM_SERVER_HOST << "@ port" << TELEGRAM_SERVER_PORT;
             mDcs[1]->setHost(TELEGRAM_SERVER_HOST);
             mDcs[1]->setPort(TELEGRAM_SERVER_PORT);
@@ -125,8 +124,9 @@ void DcProvider::initialize()
         }
     }
     else {
-        qDebug() << "In any other case, the host and port have been retrieved from auth file settings and the DC object is already created";
-        if (mDcs[s->workingDcNum()]->state() < DC::authKeyCreated) {
+        qDebug() << "In any other case, the host and port have been retrieved "
+                "from auth file settings and the DC object is already created";
+        if(mDcs[s->workingDcNum()]->state() < DC::authKeyCreated) {
             DCAuth *dcAuth = new DCAuth(mDcs[s->workingDcNum()]);
             mDcAuths.insert(s->workingDcNum(), dcAuth);
             connect(dcAuth, SIGNAL(fatalError()), this, SLOT(logOut()));

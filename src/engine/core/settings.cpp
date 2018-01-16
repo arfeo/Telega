@@ -37,7 +37,7 @@ Settings::Settings() :
 
 Settings::~Settings()
 {
-    if (m_pubKey) {
+    if(m_pubKey) {
         delete m_pubKey;
     }
 }
@@ -54,7 +54,7 @@ bool Settings::loadSettings()
     m_pubKey = Utils::rsaLoadPublicKey();
     m_pkFingerprint = Utils::computeRSAFingerprint(m_pubKey);
     readAuthFile();
-//    readSecretFile();
+    //readSecretFile();
     return true;
 }
 
@@ -74,7 +74,7 @@ void Settings::writeAuthFile()
         settings.setValue(ST_HOST, m_dcsList[i]->host());
         settings.setValue(ST_PORT, m_dcsList[i]->port());
         settings.setValue(ST_DC_STATE, m_dcsList[i]->state());
-//        qDebug() <<  "Auth Key is been Created for host : " << m_dcsList[i]->host() << m_dcsList[i]->authKeyId() << m_dcsList[i]->authKey();
+        qDebug() <<  "Auth Key is been Created for host : " << m_dcsList[i]->host() << m_dcsList[i]->authKeyId() << m_dcsList[i]->authKey();
         if (m_dcsList[i]->authKeyId()) {
             settings.setValue(ST_AUTH_KEY_ID, m_dcsList[i]->authKeyId());
             QByteArray baToSave(m_dcsList[i]->authKey(), SHARED_KEY_LENGTH);
@@ -98,11 +98,12 @@ void Settings::readAuthFile()
     settings.beginGroup(ST_PRODUCTION);
     m_workingDcNum = settings.value(ST_WORKING_DC_NUM, 1).toInt();
     m_ourId = settings.value(ST_OUR_ID).toInt();
-     qDebug() << "workingDcNum:" << m_workingDcNum;
-    // read all dcs
+    qDebug() << "workingDcNum:" << m_workingDcNum;
+
+    // Read all DCs
     m_dcsList.clear();
     qint32 n = settings.beginReadArray(ST_DCS_ARRAY);
-    for (qint32 i = 0; i < n; i++) {
+    for(qint32 i = 0; i < n; i++) {
         settings.setArrayIndex(i);
         qint32 dcNum = settings.value(ST_DC_NUM).toInt();
         DC* dc = new DC(dcNum);
@@ -133,15 +134,15 @@ bool Settings::removeAuthFile()
     QFile authFile("data/auth");
     if (authFile.exists()) {
         if (authFile.remove()) {
-            // qCDebug(TG_INIT_SETTINGS) << "Auth file has been reset";
+            qDebug() << "Auth file has been reset";
             return true;
         } else {
-            // qCDebug(TG_INIT_SETTINGS) << "An error has happened when trying to remove auth file";
+            qDebug() << "An error has happened when trying to remove auth file";
         }
     }
     return false;
 }
-//
+
 //void Settings::readSecretFile()
 //{
 //    QSettings settings(m_secretChatFilename, QSettings::IniFormat);
@@ -212,4 +213,3 @@ bool Settings::removeAuthFile()
 //    }
 //    settings.endArray();
 //}
-//

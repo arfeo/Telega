@@ -48,12 +48,11 @@ DC *DCAuth::dc()
 
 void DCAuth::createAuthKey()
 {
-    if (m_dc) {
-        if (0 < DC::authKeyCreated) {
-            qDebug () << "calling to host";
+    if(m_dc) {
+        if(0 < DC::authKeyCreated) {
             connectToServer();
         } else {
-            // in this case, the key is already created, so dc is ready
+            // In this case, the key is already created, so dc is ready
             Q_EMIT dcReady(m_dc);
         }
     } else {

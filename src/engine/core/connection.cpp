@@ -72,7 +72,7 @@ qint64 Connection::writeOut(const void *data, qint64 length)
 {
     if (!length) { return 0; }
     Q_ASSERT(length > 0);
-//    qDebug() << (const char *)data;
+    // qDebug() << (const char *)data;
     return write((const char *)data, length);
 }
 
@@ -119,11 +119,10 @@ void Connection::connectToServer()
     Q_ASSERT(m_port);
     connect(this, SIGNAL(connected()), SLOT(onConnected()), Qt::UniqueConnection);
     connect(this, SIGNAL(readyRead()), SLOT(onReadyRead()), Qt::UniqueConnection);
-    // Reconnect if false
-//    connect(this, SIGNAL(error(QAbstractSocket::SocketError)), SLOT(onError(QAbstractSocket::SocketError)), Qt::UniqueConnection);
+    //connect(this, SIGNAL(error(QAbstractSocket::SocketError)), SLOT(onError(QAbstractSocket::SocketError)), Qt::UniqueConnection);
+    qDebug() << "Connecting to server...";
     qDebug() << "m_host:" << m_host;
     qDebug() << "m_port:" << m_port;
-    qDebug() << "Connecting to server...";
     connectToHost(m_host, m_port);
 }
 
@@ -169,11 +168,11 @@ void Connection::onConnected()
 
 void Connection::onReadyRead()
 {
-    while (bytesAvailable()) {
-        if (!mOpLength) {
-            // calculate length, read first byte
+    while(bytesAvailable()) {
+        if(!mOpLength) {
+            // Calculate length, read first byte
             qint32 readed = readIn(&mOpLength, 1);
-            if (mOpLength == 0x7f) {
+            if(mOpLength == 0x7f) {
                 readed = readIn(&mOpLength, 3);
             }
             mOpLength *= 4;
@@ -181,9 +180,9 @@ void Connection::onReadyRead()
         QByteArray buffer = readIn(mOpLength - mBuffer.length());
         qint32 opReaded = buffer.length() + mBuffer.length();
         if (opReaded == mOpLength) {
-            //process request
+            // Process request
             mBuffer.append(buffer);
-            qDebug() << mBuffer.toHex();
+            qDebug() << "mBuffer.toHex():" << mBuffer.toHex();
             QMetaObject::invokeMethod(this, "processRpcAnswer", Qt::QueuedConnection, Q_ARG(QByteArray, mBuffer));
             mOpLength = 0;
             mBuffer.clear();
