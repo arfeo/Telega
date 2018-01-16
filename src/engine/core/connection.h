@@ -26,25 +26,24 @@
 
 #include <QtNetwork/QTcpSocket>
 #include "endpoint.h"
-#include "constants.h"
-#include "asserter.h"
+#include "util/constants.h"
+#include "util/asserter.h"
 
-class Connection :
-        public QTcpSocket,
-        public Endpoint
+class Connection : public QTcpSocket, public Endpoint
 {
-
     Q_OBJECT
-
 public:
-    explicit Connection(const QString &host = "", qint32 port = -1, QObject *parent = 0);
-    ~Connection();
-    void connectToServer();
+    explicit Connection(const QString &host = QString::null, qint32 port = -1, QObject *parent = 0);
+    virtual ~Connection();
 
 Q_SIGNALS:
     void fatalError();
 
+public Q_SLOTS:
+    void connectToServer();
+
 protected:
+    void setupSocket();
     qint64 writeOut(const void *data, qint64 length);
     QByteArray readAll();
     QByteArray readIn(qint32 len);
@@ -52,19 +51,19 @@ protected:
     qint32 peekIn(void *data, qint32 len);
     virtual void processRpcAnswer(QByteArray response) = 0;
     virtual void processConnected() = 0;
-    void timerEvent(QTimerEvent *event);
+
     Asserter mAsserter;
 
 private:
-    qint32 mReconnectTimerId;
     QByteArray mBuffer;
     qint32 mOpLength;
-    void stopReconnecting();
 
 protected Q_SLOTS:
     void onConnected();
+    void onDisconnected();
     void onReadyRead();
     void onError(QAbstractSocket::SocketError error);
+    void onStateChanged(QAbstractSocket::SocketState);
 };
 
 #endif // CONNECTION_H

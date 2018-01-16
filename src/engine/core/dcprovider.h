@@ -21,44 +21,36 @@
 #ifndef DCPROVIDER_H
 #define DCPROVIDER_H
 
+#include <QObject>
 #include "dc.h"
 #include "dcauth.h"
-#include "api.h"
-class Api;
-class Session;
+#include "telegram/telegramapi.h"
 
-class DcProvider :
-        public QObject
+class DcProvider : public QObject
 {
-
     Q_OBJECT
-
 public:
-    DcProvider();
-    ~DcProvider();
+    DcProvider(Settings *settings, CryptoUtils *crypto);
+    virtual ~DcProvider();
+
     void initialize();
     DC *getDc(qint32 dcNum) const;
     DC *getWorkingDc() const;
     QList<DC *> getDcs() const;
-    Api *getApi() const;
+    TelegramApi *getApi() const;
     void transferAuth();
 
 Q_SIGNALS:
-
     // emitted when provider has shared key created, now or previously, for all DCs
     void dcProviderReady();
-
     // emitted when provider detects there is a shared key for working dc but user is not yet authenticated in it
     void authNeeded();
-    void chatview();
-
     // emitted when provider finish transfering the user authentication data to all DCs. At this point the api
     // is ready for using any of its methods in any DC
     void authTransferCompleted();
 
-    void error(qint64 id, qint32 errorCode, QString errorText);
+    void error(qint64 id, qint32 errorCode, const QString &errorText, const QString &functionName);
     void fatalError();
-    void ondcproviderready();
 
 public Q_SLOTS:
     void logOut();
@@ -66,38 +58,45 @@ public Q_SLOTS:
 private:
     void processDcReady(DC *dc);
     void clean();
+
     QMap<qint32, DC *> mDcs;
     QMap<qint32, DCAuth *> mDcAuths;
+    Settings *mSettings;
+    CryptoUtils *mCrypto;
 
-    // Api instance for "internal" operations (config, getNearestDc, etc...). This object could be received
+    //api instance for "internal" operations (config, getNearestDc, etc...). This object could be received
     // from outside, as parameter, when completed external public layer
-    Api *mApi;
+    TelegramApi *mApi;
 
-    // Counter of the dc's pending to be authenticated. When this counter is zero, all available DCs are
+    // counter of the dc's pending to be authenticated. When this counter is zero, all available DCs are
     // authenticated and a signal dcProviderReady() is emitted
-    qint32 mPendingDcs;
+    QHash<qint32, bool> mPendingDcs;
 
-    // This list is filled with a session to every dc receiving auth transfer in transferAuth() operation.
+    // this list is filled with a session to every dc receiving auth transfer in transferAuth() operation.
     // Working session exports auth bytes and then is taken the first session in this list for the import.
     // When the list is empty, all the
     // an element is deleted until leave it empty. When it happens, all dcs have the auth transferred.
     QList<Session *> mTransferSessions;
     qint32 mPendingTransferSessions;
 
-    // Main session. The one linked to working dc. Must be stored mean transferring auth to other dcs because
+    // main session. The one linked to working dc. Must be stored mean transferring auth to other dcs because
     // is the reference for exporting data to any dc transfer auth receipt
     Session *mWorkingDcSession;
+
+    // In order to map getConfigRequests and sessions
+    QMap<qint64, Session*> mGetConfigRequests;
+    bool mConfigReceived;
+
 
 private Q_SLOTS:
     void onDcReady(DC *dc);
     void onDcAuthDisconnected();
     void onApiReady(DC*);
-    void onApiError();
-    void onConfigReceived(qint64 msgId, qint32 date, bool testMode, qint32 thisDc, const QList<DcOption> &dcOptions, qint32 chatMaxSize, qint32 broadcastMaxSize);
+    void onApiError(QAbstractSocket::SocketError error);
+    void onConfigReceived(qint64 msgId, const Config &config);
     void onTransferSessionReady(DC*);
-    void onAuthExportedAuthorization(qint64, qint32 ourId, const QByteArray &bytes);
-    void onAuthImportedAuthorization(qint64, qint32 expires, const User &);
-
+    void onAuthExportedAuthorization(qint64, const AuthExportedAuthorization &result);
+    void onAuthImportedAuthorization(qint64, const AuthAuthorization &result);
 };
 
 #endif // DCPROVIDER_H

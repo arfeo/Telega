@@ -27,12 +27,10 @@
 #include "inboundpkt.h"
 #include "connection.h"
 #include "settings.h"
-#include "cryptoutils.h"
+#include "util/cryptoutils.h"
 
-class DC :
-        public Endpoint
+class DC : public Endpoint
 {
-
 public:
     enum DcState {
         error = -1,
@@ -43,13 +41,16 @@ public:
         authKeyCreated,
         userSignedIn
     };
+
     explicit DC(qint32 dcNum) :
         m_id(dcNum),
         m_state(init),
         m_authKeyId(0),
         m_expires(0),
         m_serverSalt(0),
-        m_timeSyncFactor(0) {}
+        mTimeDifference(0),
+        m_mediaOnly(false) {}
+
     inline qint32 id() { return m_id; }
     inline void setState(DcState dcState) { m_state = dcState; }
     inline DcState state() { return m_state; }
@@ -58,26 +59,31 @@ public:
     inline qint64 authKeyId() { return m_authKeyId; }
     inline void setAuthKeyId(qint64 authkeyId) { this->m_authKeyId = authkeyId; }
     inline char *authKey() { return m_authKey; }
-    inline double timeSyncFactor() { return m_timeSyncFactor; }
-    inline void setTimeSyncFactor(qint32 timeSyncFactor) { m_timeSyncFactor = timeSyncFactor; }
+    inline double timeDifference() { return mTimeDifference; }
+    inline void setTimeDifference(qint32 timeDifference) { mTimeDifference = timeDifference; }
     inline qint32 expires() { return m_expires; }
     inline void setExpires(qint32 expires) { m_expires = expires; }
+    inline bool mediaOnly() const { return m_mediaOnly; }
+    inline void setMediaOnly(bool mediaOnly) { m_mediaOnly = mediaOnly; }
 
 private:
 
     // dc metadata
     qint32 m_id;
     DcState m_state;
-
     // auth members
     qint64 m_authKeyId;
     char m_authKey[SHARED_KEY_LENGTH];
     qint32 m_expires; // date the authorization expires
-
     // to be used during session
     qint64 m_serverSalt;
-    qint32 m_timeSyncFactor; // difference between client and server time
+    qint32 mTimeDifference; // difference between client and server time
 
+    bool m_mediaOnly;
 };
 
 #endif // NETWORKMGR_H
+
+
+
+
