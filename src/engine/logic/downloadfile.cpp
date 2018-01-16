@@ -21,59 +21,78 @@
 #include "downloadfile.h"
 
 DownloadFile::DownloadFile(Session *session, InputFileLocation fileLocation, qint32 expectedSize, QObject *parent) :
-    File(session, 0, parent),
-    m_fileLocation(fileLocation),
-    m_offset(0),
-    m_mtime(0),
-    m_expectedSize(expectedSize),
-    m_partId(0){
+        File(session, 0, parent),
+        m_fileLocation(fileLocation),
+        m_offset(0),
+        m_mtime(0),
+        m_expectedSize(expectedSize),
+        m_partId(0)
+{
+    // ..
 }
 
-DownloadFile::~DownloadFile() {
+DownloadFile::~DownloadFile()
+{
+    // ..
 }
 
-QByteArray DownloadFile::bytes() const {
+QByteArray DownloadFile::bytes() const
+{
     return m_bytes;
 }
 
-void DownloadFile::appendBytes(const QByteArray &bytes) {
+void DownloadFile::appendBytes(const QByteArray &bytes)
+{
     m_bytes.append(bytes);
     m_offset += bytes.length();
 }
 
-qint32 DownloadFile::offset() const {
+qint32 DownloadFile::offset() const
+{
     return m_offset;
 }
 
-void DownloadFile::setOffset(qint32 offset) {
+void DownloadFile::setOffset(qint32 offset)
+{
     m_offset = offset;
 }
 
-qint32 DownloadFile::mtime() const  {
+qint32 DownloadFile::mtime() const
+{
     return m_mtime;
 }
-void DownloadFile::setMtime(qint32 mtime) {
+
+void DownloadFile::setMtime(qint32 mtime)
+{
     m_mtime = mtime;
 }
 
-InputFileLocation DownloadFile::fileLocation() const {
+InputFileLocation DownloadFile::fileLocation() const
+{
     return m_fileLocation;
 }
 
-qint32 DownloadFile::expectedSize() const {
+qint32 DownloadFile::expectedSize() const
+{
     return m_expectedSize;
 }
 
-qint32 DownloadFile::partId() const {
+qint32 DownloadFile::partId() const
+{
     return m_partId;
 }
 
-void DownloadFile::incrementPartId() {
+void DownloadFile::incrementPartId()
+{
     m_partId++;
 }
-QString DownloadFile::filename() {
+
+QString DownloadFile::filename()
+{
    return m_filename;
 }
-QString DownloadFile::type() {
+
+QString DownloadFile::type()
+{
     return m_type;
 }

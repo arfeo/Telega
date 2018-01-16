@@ -36,15 +36,18 @@ DCAuth::DCAuth(DC *dc, QObject *parent) :
     // ..
 }
 
-DCAuth::~DCAuth() {
+DCAuth::~DCAuth()
+{
     // ..
 }
 
-DC *DCAuth::dc() {
+DC *DCAuth::dc()
+{
     return m_dc;
 }
 
-void DCAuth::createAuthKey() {
+void DCAuth::createAuthKey()
+{
     if (m_dc) {
         if (0 < DC::authKeyCreated) {
             qDebug () << "calling to host";
@@ -58,7 +61,8 @@ void DCAuth::createAuthKey() {
     }
 }
 
-void DCAuth::processConnected() {
+void DCAuth::processConnected()
+{
     // depending on the state init shared key creatug()ion or set the DC as ready
     qDebug() << "Connection state: " << m_dc->state();
     qDebug() << DC::authKeyCreated<<DC::init << DC::userSignedIn;
@@ -76,15 +80,14 @@ void DCAuth::processConnected() {
     }
 }
 
-void DCAuth::processResPQAnswer(const InboundPkt &inboundPkt) {
+void DCAuth::processResPQAnswer(const InboundPkt &inboundPkt)
+{
     qDebug() << "Responce for PQ request";
     qDebug() << "Processing PQ";
     qint32 len = inboundPkt.length();
     const char* buffer = inboundPkt.buffer();
     qint32 i;
-
     qDebug() << "processResPQAnswer(), len=" << len;
-
     mAsserter.check(len >= 76);
     mAsserter.check(!*(qint64 *) buffer);
     mAsserter.check(*(qint32 *) (buffer + 16) == len - 20);
@@ -99,12 +102,9 @@ void DCAuth::processResPQAnswer(const InboundPkt &inboundPkt) {
     for (i = 0; i < clen; i++) {
         what = (what << 8) + (uchar)*from++;
     }
-
     while (((quint64)from) & 3) ++from;
-
     uint p1 = 0, p2 = 0;
     qDebug() << what << "received";
-
     qint32 it = 0;
     quint64 g = 0;
     for (i = 0; i < 3 || it < 10; i++) {
@@ -141,16 +141,13 @@ void DCAuth::processResPQAnswer(const InboundPkt &inboundPkt) {
         }
         if (g > 1 && g < what) break;
     }
-
     mAsserter.check(g > 1 && g < what);
     p1 = g;
     p2 = what / g;
     if (p1 > p2) {
         uint t = p1; p1 = p2; p2 = t;
     }
-
     qDebug() << " Found p=" << p1 << ",q=" << p2 << ", " << it << "iterations";
-
     mAsserter.check(*(qint32 *) (from) == TL_Vector);
     qint32 fingerprints_num = *(qint32 *)(from + 4);
     mAsserter.check(fingerprints_num >= 1 && fingerprints_num <= 64 && len == fingerprints_num * 8 + 8 + (from - buffer));
@@ -166,12 +163,11 @@ void DCAuth::processResPQAnswer(const InboundPkt &inboundPkt) {
 //        exit (2);
 //    }
 
-    // create inner part (P_Q_inner_data)
+    // Create inner part (P_Q_inner_data)
     OutboundPkt *p = new OutboundPkt();
     p->forwardPtr(5);
     p->appendInt(TL_PQInnerData);
     p->appendCString(buffer + 57, clen);
-
     if (p1 < 256) {
         clen = 1;
     } else if (p1 < 65536) {
@@ -184,7 +180,6 @@ void DCAuth::processResPQAnswer(const InboundPkt &inboundPkt) {
     p1 = __builtin_bswap32 (p1);
     p->appendCString((char *)&p1 + 4 - clen, clen);
     p1 = __builtin_bswap32 (p1);
-
     if (p2 < 256) {
         clen = 1;
     } else if (p2 < 65536) {
@@ -197,22 +192,19 @@ void DCAuth::processResPQAnswer(const InboundPkt &inboundPkt) {
     p2 = __builtin_bswap32 (p2);
     p->appendCString((char *)&p2 + 4 - clen, clen);
     p2 = __builtin_bswap32 (p2);
-
     p->appendInts((qint32 *) m_nonce, 4);
     p->appendInts((qint32 *) m_serverNonce, 4);
     Utils::randomBytes(m_newNonce, 32);
     p->appendInts((qint32 *) m_newNonce, 8);
     SHA1 ((uchar *) (p->buffer() + 5), (p->length() - 5) * 4, (uchar *) p->buffer());
-
     qint32 encryptBuffer[ENCRYPT_BUFFER_INTS];
     qint32 l = CryptoUtils::getInstance()->encryptPacketBuffer(*p, encryptBuffer);
 
-    // Req DH params
+    // Reqd DH params
     p->clearPacket();
     p->appendInt(TL_ReqDHParams);
     p->appendInts((qint32 *) m_nonce, 4);
     p->appendInts((qint32 *) m_serverNonce, 4);
-
     if (p1 < 256) {
         clen = 1;
     } else if (p1 < 65536) {
@@ -237,10 +229,8 @@ void DCAuth::processResPQAnswer(const InboundPkt &inboundPkt) {
     p2 = __builtin_bswap32 (p2);
     p->appendCString((char *)&p2 + 4 - clen, clen);
     p2 = __builtin_bswap32 (p2);
-
     p->appendLong(Settings::getInstance()->pkFingerprint());
     p->appendCString((char *) encryptBuffer, l);
-
     m_dc->setState(DC::reqDHSent);
     qDebug() << "--------------------------- ";
     qDebug()<< "Reqesting for DH";
@@ -248,35 +238,30 @@ void DCAuth::processResPQAnswer(const InboundPkt &inboundPkt) {
     delete p;
 }
 
-void DCAuth::processDHAnswer(InboundPkt &inboundPkt) {
+void DCAuth::processDHAnswer(InboundPkt &inboundPkt)
+{
     qDebug() << "Repsonce for DH ";
     qDebug()<< "Processing DH packet ";
     const char *buffer = inboundPkt.buffer();
     qint32 len = inboundPkt.length();
 //    // qCDebug(TG_AUTH_DCAUTH) << "processDHAnswer(), len=" <<  len;
-
     mAsserter.check(len >= 116);
     mAsserter.check(!*(qint64 *) buffer);
     mAsserter.check(*(qint32 *) (buffer + 16) == len - 20);
     mAsserter.check(!(len & 3));
     mAsserter.check(*(qint32 *) (buffer + 20) == (qint32)TL_ServerDHParamsOK);
-
     mAsserter.check(!memcmp (buffer + 24, m_nonce, 16));
     mAsserter.check(!memcmp (buffer + 40, m_serverNonce, 16));
     CryptoUtils::getInstance()->initAESUnAuth (m_serverNonce, m_newNonce, AES_DECRYPT);
-
     inboundPkt.setInPtr((qint32 *)(buffer + 56));
     inboundPkt.setInEnd((qint32 *)(buffer + len));
     qint32 l = inboundPkt.prefetchStrlen();
-
-
     mAsserter.check(l > 0);
     qint32 decryptBuffer[DECRYPT_BUFFER_INTS];
     l = CryptoUtils::getInstance()->padAESDecrypt(inboundPkt.fetchStr(l), l, (char *)decryptBuffer, DECRYPT_BUFFER_INTS * 4 -16);
     mAsserter.check(inboundPkt.inPtr() == inboundPkt.inEnd());
     mAsserter.check(l >= 60);
     mAsserter.check(decryptBuffer[5] == (qint32)TL_ServerDHInnerData);
-
     mAsserter.check(!memcmp (decryptBuffer + 6, m_nonce, 16));
     mAsserter.check(!memcmp (decryptBuffer + 10, m_serverNonce, 16));
     qint32 g = decryptBuffer[14];
@@ -293,9 +278,9 @@ void DCAuth::processDHAnswer(InboundPkt &inboundPkt) {
     mAsserter.check(CryptoUtils::getInstance()->checkDHParams (&dh_prime, g) >= 0);
     static char sha1Buffer[20];
     SHA1 ((uchar *) decryptBuffer + 20, (inboundPkt.inPtr() - decryptBuffer - 5) * 4, (uchar *) sha1Buffer);
-
 //    !memcmp (decryptBuffer, sha1Buffer, 20);
     mAsserter.check((char *) inboundPkt.inEnd() - (char *) inboundPkt.inPtr() < 16);
+
     // Calculate time sync factor
     qint32 clientTime = QDateTime::currentDateTime().toTime_t();
     m_dc->setTimeSyncFactor(clientTime - serverTime);
@@ -338,7 +323,6 @@ void DCAuth::processDHAnswer(InboundPkt &inboundPkt) {
     outboundPkt->appendInts((qint32 *)m_nonce, 4);
     outboundPkt->appendInts((qint32 *)m_serverNonce, 4);
     outboundPkt->appendCString((char *)encryptBuffer, l);
-
     m_dc->setState(DC::clientDHSent);
     qDebug() << "--------------------------- ";
     qDebug() << "Requesting for CLient DH";
@@ -346,12 +330,12 @@ void DCAuth::processDHAnswer(InboundPkt &inboundPkt) {
     delete outboundPkt;
 }
 
-void DCAuth::processAuthComplete(InboundPkt &inboundPkt) {
+void DCAuth::processAuthComplete(InboundPkt &inboundPkt)
+{
     qDebug() << "Response from Client DH";
     const char *buffer = inboundPkt.buffer();
     qint32 len = inboundPkt.length();
 //    // qCDebug(TG_AUTH_DCAUTH) << "processAuthComplete(), len=" <<  len;
-
     mAsserter.check(len == 72);
     mAsserter.check(!*(qint64 *) buffer);
     mAsserter.check(*(qint32 *) (buffer + 16) == len - 20);
@@ -363,33 +347,26 @@ void DCAuth::processAuthComplete(InboundPkt &inboundPkt) {
     //uchar tmp[44], sha1Buffer[20];
     memcpy (tmp, m_newNonce, 32);
     tmp[32] = 1;
-
     SHA1 ((uchar*)m_dc->authKey(), 256, sha1Buffer);
     m_dc->setAuthKeyId(*(qint64 *)(sha1Buffer + 12));
-
     memcpy (tmp + 33, sha1Buffer, 8);
     SHA1 (tmp, 41, sha1Buffer);
     mAsserter.check(!memcmp (buffer + 56, sha1Buffer + 4, 16)); // XXX failed once!
     m_dc->setServerSalt(*(qint64 *)m_serverNonce ^ *(qint64 *)m_newNonce);
     m_dc->setState(DC::authKeyCreated);
-
-  qDebug() << "Created Auth shared key for DC" << m_dc->id() << "Host" <<  m_dc->host() <<  "auth_key_id =" << m_dc->authKeyId();
-  qDebug() << "*****************************************";
+    qDebug() << "Created Auth shared key for DC" << m_dc->id() << "Host" <<  m_dc->host() <<  "auth_key_id =" << m_dc->authKeyId();
+    qDebug() << "*****************************************";
     Q_EMIT dcReady(m_dc);
-
 }
 
-void DCAuth::processRpcAnswer(QByteArray response) {
-
+void DCAuth::processRpcAnswer(QByteArray response)
+{
     qint32 op;
     peekIn(&op, 4);
     qint32 len = response.length();
-
 //    qDebug() << "connection #" << socketDescriptor() << "received rpc answer" << op << "with" << len << "content bytes";
-
     const InboundPkt *p = new InboundPkt(response.data(), len);
     InboundPkt p1= *p;
-
     switch (m_dc->state()) {
     case DC::reqPQSent:
         processResPQAnswer(*p);
@@ -409,9 +386,8 @@ void DCAuth::processRpcAnswer(QByteArray response) {
     }
 }
 
-
-
-void DCAuth::sendReqPQPacket() {
+void DCAuth::sendReqPQPacket()
+{
     qDebug() << " --------------------------- ";
     qDebug() << "Sending reuest for PQ Packet";
     //    Creates random Number for server of 16 bytes
@@ -419,7 +395,6 @@ void DCAuth::sendReqPQPacket() {
     OutboundPkt *obp = new OutboundPkt();
     obp->appendInt(TL_ReqPQ);
     obp->appendInts((qint32 *)m_nonce, 4);
-
     rpcSendPacket(*obp);
 //
     delete obp;
@@ -427,8 +402,8 @@ void DCAuth::sendReqPQPacket() {
     m_dc->setState(DC::reqPQSent);
 }
 
-void DCAuth::rpcSendPacket(OutboundPkt &packet) {
-
+void DCAuth::rpcSendPacket(OutboundPkt &packet)
+{
     qint32 written;
     Q_UNUSED(written);
     UnencryptedMsgHeader unencMsgHeader;
@@ -458,5 +433,3 @@ void DCAuth::rpcSendPacket(OutboundPkt &packet) {
 //    qDebug()<<"rpcSendPacket sent successfully";
 //    qCDebug(TG_AUTH_DCAUTH) << "packet sent";
 }
-
-

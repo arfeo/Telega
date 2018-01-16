@@ -24,7 +24,7 @@
 AbstractApi::AbstractApi(Session *session, QObject *parent) :
         SessionManager(session, parent)
 {
-    // connect responses and updates signals in main session
+    // Connect responses and updates signals in main session
     connectResponsesSignals(mMainSession);
     connectUpdatesSignals(mMainSession);
 }

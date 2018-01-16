@@ -20,79 +20,89 @@
  */
 
 #include "outboundpkt.h"
-
 #include <sys/utsname.h>
 #include <qdebug.h>
 #include "utils.h"
 #include "tlvalues.h"
 
-
-
-OutboundPkt::OutboundPkt() {
+OutboundPkt::OutboundPkt()
+{
     m_packetBuffer = __buffer + 16;
     clearPacket();
 }
 
-qint32 OutboundPkt::length() const {
+qint32 OutboundPkt::length() const
+{
     return m_packetPtr - m_packetBuffer;
 }
 
-qint32 *OutboundPkt::buffer() {
+qint32 *OutboundPkt::buffer()
+{
     return m_packetBuffer;
 }
 
-void OutboundPkt::clearPacket() {
+void OutboundPkt::clearPacket()
+{
     m_packetPtr = m_packetBuffer;
 }
 
-void OutboundPkt::forwardPtr(qint32 positions) {
+void OutboundPkt::forwardPtr(qint32 positions)
+{
     m_packetPtr += positions;
 }
 
-void OutboundPkt::appendBignum(BIGNUM *n) {
+void OutboundPkt::appendBignum(BIGNUM *n)
+{
     qint32 l = Utils::serializeBignum(n, (char *)m_packetPtr, (PACKET_BUFFER_SIZE - (m_packetPtr - m_packetBuffer)) * 4);
     Q_ASSERT(l > 0);
     m_packetPtr += l >> 2;
 }
 
-void OutboundPkt::appendLong(qint64 x) {
+void OutboundPkt::appendLong(qint64 x)
+{
     Q_ASSERT(m_packetPtr + 2 <= m_packetBuffer + PACKET_BUFFER_SIZE);
 //    qCDebug(TG_NET_APPEND) << "appendLong()" << QString::number(x) << " (" << "0x" + QString::number(x,16) << ")";;
     *(qint64 *)m_packetPtr = x;
     m_packetPtr += 2;
 }
 
-void OutboundPkt::appendBytes(const QByteArray &byteArray) {
+void OutboundPkt::appendBytes(const QByteArray &byteArray)
+{
     appendCString(byteArray.data(), byteArray.size());
 }
 
-void OutboundPkt::appendData(const void *data, qint32 len) {
+void OutboundPkt::appendData(const void *data, qint32 len)
+{
     Q_ASSERT(len >= 0 && len < (1 << 24) && !(len & 3));
     Q_ASSERT((char *) m_packetPtr + len + 8 < (char *) (m_packetBuffer + PACKET_BUFFER_SIZE));
     memcpy (m_packetPtr, data, len);
     m_packetPtr += len >> 2;
 }
 
-void OutboundPkt::appendInts (const qint32 *what, qint32 len) {
+void OutboundPkt::appendInts (const qint32 *what, qint32 len)
+{
     Q_ASSERT(m_packetPtr + len <= m_packetBuffer + PACKET_BUFFER_SIZE);
     memcpy (m_packetPtr, what, len * 4);
     m_packetPtr += len;
 }
 
-void OutboundPkt::appendInt (qint32 x) {
+void OutboundPkt::appendInt (qint32 x)
+{
 //    qDebug() << "appendInt()" << QString::number(x) << " (" << "0x" + QString::number(x,16) << ")" << m_packetPtr + 1 << m_packetBuffer + PACKET_BUFFER_SIZE;
     Q_ASSERT(m_packetPtr + 1 <= m_packetBuffer + PACKET_BUFFER_SIZE);
     *m_packetPtr++ = x;
 }
 
-void OutboundPkt::appendDouble(double d) {
+void OutboundPkt::appendDouble(double d)
+{
 //    qDebug() << "appendInt()" << QString::number(d);
     Q_ASSERT(m_packetPtr + 2 <= m_packetBuffer + PACKET_BUFFER_SIZE);
     *(double *)m_packetPtr = d;
     m_packetPtr += 2;
 }
 
-void OutboundPkt::appendCString(const char *str, qint32 len) {
+void OutboundPkt::appendCString(const char *str, qint32 len)
+{
     Q_ASSERT(len >= 0 && len < (1 << 24));
     Q_ASSERT((char *) m_packetPtr + len + 8 < (char *) (m_packetBuffer + PACKET_BUFFER_SIZE));
     char *dest = (char *) m_packetPtr;
@@ -110,29 +120,34 @@ void OutboundPkt::appendCString(const char *str, qint32 len) {
     m_packetPtr = (qint32 *) dest;
 }
 
-void OutboundPkt::appendString (const char *str) {
+void OutboundPkt::appendString (const char *str)
+{
     appendCString(str, strlen(str));
 }
 
-void OutboundPkt::appendQString (const QString &string) {
+void OutboundPkt::appendQString (const QString &string)
+{
 //    qCDebug(TG_NET_APPEND) << "appendQString()" << string;
     QByteArray bytes = string.toUtf8();
     appendCString(bytes.data(), bytes.length());
 }
 
-void OutboundPkt::appendRandom(qint32 n) {
+void OutboundPkt::appendRandom(qint32 n)
+{
     Q_ASSERT(n <= 32);
     static char buf[32];
     Utils::randomBytes(buf, n);
     appendCString(buf, n);
 }
 
-void OutboundPkt::appendBool(bool b) {
+void OutboundPkt::appendBool(bool b)
+{
 //    qCDebug(TG_NET_APPEND) << "appendBool()" << b;
     b ? appendInt(TL_BoolTrue) : appendInt(TL_BoolFalse);
 }
 
-void OutboundPkt::appendInputPeer(const InputPeer &peer) {
+void OutboundPkt::appendInputPeer(const InputPeer &peer)
+{
     appendInt((qint32)peer.classType());
     if (peer.classType() == InputPeer::typeInputPeerContact || peer.classType() == InputPeer::typeInputPeerForeign) {
         appendInt(peer.userId());
@@ -144,7 +159,8 @@ void OutboundPkt::appendInputPeer(const InputPeer &peer) {
     }
 }
 
-void OutboundPkt::appendInputUser(const InputUser &user) {
+void OutboundPkt::appendInputUser(const InputUser &user)
+{
     appendInt((qint32)user.classType());
     if (user.classType() == InputUser::typeInputUserContact || user.classType() == InputUser::typeInputUserForeign) {
         appendInt(user.userId());
@@ -154,7 +170,8 @@ void OutboundPkt::appendInputUser(const InputUser &user) {
     }
 }
 
-void OutboundPkt::appendInputContact(const InputContact &contact) {
+void OutboundPkt::appendInputContact(const InputContact &contact)
+{
     appendInt((qint32)contact.classType());
     appendLong(contact.clientId());
     appendQString(contact.phone());
@@ -162,11 +179,13 @@ void OutboundPkt::appendInputContact(const InputContact &contact) {
     appendQString(contact.lastName());
 }
 
-void OutboundPkt::appendMessagesFilter(const MessagesFilter &filter) {
+void OutboundPkt::appendMessagesFilter(const MessagesFilter &filter)
+{
     appendInt(filter.classType());
 }
 
-void OutboundPkt::appendInputMedia(const InputMedia &media) {
+void OutboundPkt::appendInputMedia(const InputMedia &media)
+{
     InputMedia::InputMediaType x = media.classType();
     appendInt(x);
     switch (x) {
@@ -229,7 +248,8 @@ void OutboundPkt::appendInputMedia(const InputMedia &media) {
     }
 }
 
-void OutboundPkt::appendInputFile(const InputFile &file) {
+void OutboundPkt::appendInputFile(const InputFile &file)
+{
     appendInt(file.classType());
     appendLong(file.id());
     appendInt(file.parts());
@@ -239,7 +259,8 @@ void OutboundPkt::appendInputFile(const InputFile &file) {
     }
 }
 
-void OutboundPkt::appendInputAudio(const InputAudio &audio) {
+void OutboundPkt::appendInputAudio(const InputAudio &audio)
+{
     appendInt(audio.classType());
     if (audio.classType() == InputAudio::typeInputAudio) {
         appendLong(audio.id());
@@ -247,7 +268,8 @@ void OutboundPkt::appendInputAudio(const InputAudio &audio) {
     }
 }
 
-void OutboundPkt::appendInputVideo(const InputVideo &video) {
+void OutboundPkt::appendInputVideo(const InputVideo &video)
+{
     appendInt(video.classType());
     if (video.classType() == InputVideo::typeInputVideo) {
         appendLong(video.id());
@@ -255,7 +277,8 @@ void OutboundPkt::appendInputVideo(const InputVideo &video) {
     }
 }
 
-void OutboundPkt::appendInputDocument(const InputDocument &document) {
+void OutboundPkt::appendInputDocument(const InputDocument &document)
+{
     appendInt(document.classType());
     if (document.classType() == InputDocument::typeInputDocument) {
         appendLong(document.id());
@@ -263,7 +286,8 @@ void OutboundPkt::appendInputDocument(const InputDocument &document) {
     }
 }
 
-void OutboundPkt::appendInputPhoto(const InputPhoto &photo) {
+void OutboundPkt::appendInputPhoto(const InputPhoto &photo)
+{
     appendInt(photo.classType());
     if (photo.classType() == InputPhoto::typeInputPhoto) {
         appendLong(photo.id());
@@ -271,7 +295,8 @@ void OutboundPkt::appendInputPhoto(const InputPhoto &photo) {
     }
 }
 
-void OutboundPkt::appendInputGeoPoint(const InputGeoPoint &geo) {
+void OutboundPkt::appendInputGeoPoint(const InputGeoPoint &geo)
+{
     appendInt(geo.classType());
     if (geo.classType() == InputGeoPoint::typeInputGeoPoint) {
         appendDouble(geo.lat());
@@ -279,7 +304,8 @@ void OutboundPkt::appendInputGeoPoint(const InputGeoPoint &geo) {
     }
 }
 
-void OutboundPkt::appendInputFileLocation(const InputFileLocation &location) {
+void OutboundPkt::appendInputFileLocation(const InputFileLocation &location)
+{
     appendInt(location.classType());
     if (location.classType() == InputFileLocation::typeInputFileLocation) {
         appendLong(location.volumeId());
@@ -291,7 +317,8 @@ void OutboundPkt::appendInputFileLocation(const InputFileLocation &location) {
     }
 }
 
-void OutboundPkt::appendInputChatPhoto(const InputChatPhoto &photo) {
+void OutboundPkt::appendInputChatPhoto(const InputChatPhoto &photo)
+{
     appendInt(photo.classType());
     if (photo.classType() != InputChatPhoto::typeInputChatPhotoEmpty) {
         if (photo.classType() == InputChatPhoto::typeInputChatUploadedPhoto) {
@@ -303,7 +330,8 @@ void OutboundPkt::appendInputChatPhoto(const InputChatPhoto &photo) {
     }
 }
 
-void OutboundPkt::appendInputPhotoCrop(const InputPhotoCrop &crop) {
+void OutboundPkt::appendInputPhotoCrop(const InputPhotoCrop &crop)
+{
     appendInt(crop.classType());
     if (crop.classType() == InputPhotoCrop::typeInputPhotoCrop) {
         appendDouble(crop.cropLeft());
@@ -312,7 +340,8 @@ void OutboundPkt::appendInputPhotoCrop(const InputPhotoCrop &crop) {
     }
 }
 
-void OutboundPkt::appendInputNotifyPeer(const InputNotifyPeer &peer) {
+void OutboundPkt::appendInputNotifyPeer(const InputNotifyPeer &peer)
+{
     appendInt(peer.classType());
     if (peer.classType() == InputNotifyPeer::typeInputNotifyPeer) {
         appendInputPeer(peer.peer());
@@ -321,13 +350,15 @@ void OutboundPkt::appendInputNotifyPeer(const InputNotifyPeer &peer) {
     }
 }
 
-void OutboundPkt::appendInputGeoChat(const InputGeoChat &geoChat) {
+void OutboundPkt::appendInputGeoChat(const InputGeoChat &geoChat)
+{
     appendInt(geoChat.classType());
     appendInt(geoChat.chatId());
     appendLong(geoChat.accessHash());
 }
 
-void OutboundPkt::appendInputPeerNotifySettings(const InputPeerNotifySettings &settings) {
+void OutboundPkt::appendInputPeerNotifySettings(const InputPeerNotifySettings &settings)
+{
     appendInt(settings.classType());
     appendInt(settings.muteUntil());
     appendQString(settings.sound());
@@ -335,13 +366,15 @@ void OutboundPkt::appendInputPeerNotifySettings(const InputPeerNotifySettings &s
     appendInt(settings.eventsMask());
 }
 
-void OutboundPkt::appendInputEncryptedChat(const InputEncryptedChat &inputEncryptedChat) {
+void OutboundPkt::appendInputEncryptedChat(const InputEncryptedChat &inputEncryptedChat)
+{
     appendInt(inputEncryptedChat.classType());
     appendInt(inputEncryptedChat.chatId());
     appendLong(inputEncryptedChat.accessHash());
 }
 
-void OutboundPkt::appendInputEncryptedFile(const InputEncryptedFile &file) {
+void OutboundPkt::appendInputEncryptedFile(const InputEncryptedFile &file)
+{
     appendInt((qint32)file.classType());
     if (file.classType() != InputEncryptedFile::typeInputEncryptedFileEmpty) {
         appendLong(file.id());
@@ -357,7 +390,8 @@ void OutboundPkt::appendInputEncryptedFile(const InputEncryptedFile &file) {
     }
 }
 
-void OutboundPkt::initConnection() {
+void OutboundPkt::initConnection()
+{
     appendInt(TL_InvokeWithLayer18);
     appendInt(TL_InitConnection);
     appendInt(APP_ID);

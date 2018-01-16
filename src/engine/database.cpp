@@ -4,26 +4,26 @@
  *  Created on: 17-Dec-2014
  *      Author: perl
  */
+
 #include "database.hpp"
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
 #include <QtSql/QSqlRecord>
 #include <QtSql/QSqlError>
-
 #include <QtSql/QtSql>
 #include <QDate>
 #include <QDebug>
 #include <QObject>
 #include <bb/cascades/GroupDataModel>
 #include <bb/cascades/ArrayDataModel>
-
+#include <bb/data/SqlDataAccess>
 //#include "chatdatamodel.h"
 
-#include <bb/data/SqlDataAccess>
 using namespace bb::cascades;
 using namespace bb::data;
 
 //class bb::cascades::GroupDataModel;
+
 Database::Database(QObject *parent) :
         QObject(parent),
         DB_PATH("./data/Telega.db"),
@@ -33,8 +33,9 @@ Database::Database(QObject *parent) :
     qDebug() << "this is the DB" << DB_PATH;
 }
 
+// Call this method with the name of the database with
 bool Database::initDatabase()
-{ //call this method with the name of the database with
+{
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(DB_PATH);
     qDebug() << db.isValid();
@@ -71,7 +72,9 @@ bool Database::initDatabase()
     } else
         return false;
 }
-bool Database :: updateContacts(QVariantMap data){
+
+bool Database :: updateContacts(QVariantMap data)
+{
     QSqlQuery query;
     query.prepare("update contacts set latestmessage =:latestmessage , messagetime = :messagetime where id =:id ");
     query.bindValue(":latestmessage",data.value("latestmessage"));
@@ -96,7 +99,6 @@ void Database::myContacts()
     }
 }
 
-
 QVariantList Database::getLatestChatModel(QString type)
 {
     QString q;
@@ -118,8 +120,6 @@ QVariantList Database::getLatestChatModel(QString type)
     return list.value<QVariantList>();
 }
 
-
-
 QString Database::getUserDetails(QString UserId)
 {
     QSqlQuery query("select firstname,lastname,ID from contacts where id = " + UserId);
@@ -130,9 +130,9 @@ QString Database::getUserDetails(QString UserId)
     QString firstname = "firstname";
     return firstname;
 }
+
 void Database::updateLocation(int uid, QString loc)
 {
-
     const QString sqlCommand = "UPDATE contacts "
             "    SET location = :location"
             "    WHERE id = :id";
@@ -146,6 +146,7 @@ void Database::updateLocation(int uid, QString loc)
     } else
         qDebug() << "updation is false";
 }
+
 bool Database::insertMessage(QVariantMap message)
 {
     QSqlQuery query;
@@ -170,7 +171,6 @@ bool Database::insertMessage(QVariantMap message)
 
 bool Database::insertAttachments(QVariantMap attach)
 {
-
     QSqlQuery query;
     query.prepare(
             "INSERT INTO attachments (id,mediaId,date,dcId,accessHash,fileName,mimeType,latitude,longitude,duration) "
@@ -208,12 +208,11 @@ QVariantList Database::getMessagesModel(int uid,int offset, QString type)
     query.append(QString::number(offset));
     qDebug() << query;
     QVariant list = sqlda->execute(query);
-
-     return list.value<QVariantList>();
+    return list.value<QVariantList>();
 }
+
 GroupDataModel* Database::getLive(int uid,int offset,QString type)
 {
-
     GroupDataModel *model = new GroupDataModel(QStringList());
     QString query = "select * from messagesTab where (fromId = \"";
     query.append(QString::number(uid));
@@ -232,46 +231,54 @@ GroupDataModel* Database::getLive(int uid,int offset,QString type)
     return model;
 }
 
-QSqlQuery Database::executeQuery(QString qstring){
+QSqlQuery Database::executeQuery(QString qstring)
+{
     QSqlQuery query(qstring);
     return query;
 }
 
-QVariant Database::executeSqlQuery(QString query,QVariantMap bind){
+QVariant Database::executeSqlQuery(QString query,QVariantMap bind)
+{
      QVariant var = sqlda->execute(query,bind);
-
      return var;
 }
 
-bool Database::insertQuery(QString query,QVariantMap bind){
+bool Database::insertQuery(QString query,QVariantMap bind)
+{
     sqlda->execute(query,bind);
     return sqlda->hasError();
 }
-int Database::getTableSize(QString tabname){
+
+int Database::getTableSize(QString tabname)
+{
     QSqlQuery q;
-     q.prepare(QString("SELECT COUNT (*) FROM %1").arg(tabname));
-     if(q.exec()){
-         int rows= 0;
-              if (q.next()) {
-                     rows= q.value(0).toInt();
-              }
-              return rows;
-     }
-     else qDebug()<<q.lastError();
-};
-int Database::getTableSizeByQuery(QString query){
-    QSqlQuery q;
-     q.prepare(query);
-     if(q.exec()){
-         int rows= 0;
-              if (q.next()) {
-                     rows= q.value(0).toInt();
-              }
-              return rows;
-     }
-     else qDebug()<<q.lastError();
+    q.prepare(QString("SELECT COUNT (*) FROM %1").arg(tabname));
+    if(q.exec()){
+     int rows= 0;
+          if (q.next()) {
+                 rows= q.value(0).toInt();
+          }
+          return rows;
+    }
+    else qDebug()<<q.lastError();
 }
-QVariantMap Database::getMessageById(int id){
+
+int Database::getTableSizeByQuery(QString query)
+{
+    QSqlQuery q;
+    q.prepare(query);
+    if(q.exec()){
+     int rows= 0;
+          if (q.next()) {
+                 rows= q.value(0).toInt();
+          }
+          return rows;
+    }
+    else qDebug()<<q.lastError();
+}
+
+QVariantMap Database::getMessageById(int id)
+{
     QVariantMap d;
     d.insert("id",id);
     QString q = "select * from messagesTab where id = :id";
@@ -279,9 +286,7 @@ QVariantMap Database::getMessageById(int id){
     QVariantList infomess = mess.value<QVariantList>();
     QVariant ke = infomess.value(0);
     QVariantMap k = ke.value<QVariantMap>();
-
     return k;
-
 }
 
 void Database::clearContactHistory(qint32 id, QString type)
@@ -293,6 +298,7 @@ void Database::clearContactHistory(qint32 id, QString type)
     executeSqlQuery("delete from messagesTab where (fromId = :fromId or toId = :toId) and type = :type",contactValues);
 
 }
+
 GroupDataModel * Database::getQueryModel(QString query)
 {
     GroupDataModel *model = new GroupDataModel(QStringList());
@@ -300,32 +306,30 @@ GroupDataModel * Database::getQueryModel(QString query)
     model->insertList(data.value<QVariantList>());
     return model;
 }
+
 QVariant Database::getQueryVariant(QString query)
 {
-
     QVariant data = sqlda->execute(query);
     return data;
 }
 
 QVariantMap Database::getQueryMap(QString query)
 {
-
     QVariant data = sqlda->execute(query);
     QVariantMap map = data.toMap();
     return map;
 }
 
-int Database::getFavCount(){
+int Database::getFavCount()
+{
     QSqlQuery q;
-     q.prepare(QString("SELECT COUNT (*) FROM contacts where favourite = \"true\""));
-     if(q.exec()){
-         int rows= 0;
-              if (q.next()) {
-                     rows= q.value(0).toInt();
-              }
-              return rows;
-     }
-     else qDebug()<<q.lastError();
+    q.prepare(QString("SELECT COUNT (*) FROM contacts where favourite = \"true\""));
+    if(q.exec()){
+     int rows= 0;
+          if (q.next()) {
+                 rows= q.value(0).toInt();
+          }
+          return rows;
+    }
+    else qDebug()<<q.lastError();
 };
-//
-

@@ -17,12 +17,16 @@
  *      Roberto Mier
  *      Tiago Herrmann
  */
+
 #include "asserter.h"
 
 Asserter::Asserter(QObject *parent) :
-    QObject(parent) {
+        QObject(parent)
+{
+    // ..
 }
 
-void Asserter::check(bool condition) {
+void Asserter::check(bool condition)
+{
     if (!condition) Q_EMIT fatalError();
 }

@@ -42,7 +42,6 @@
 #include <QFile>
 #include <qdir.h>
 #include <QtCore/QByteArray>
-
 #include <QtDeclarative/qdeclarativedebug.h>
 #include <unistd.h>
 #include "engine/dumper.h"
@@ -139,7 +138,8 @@ void ApplicationUI::setAppSettings(const QString &objectName, const QString &opt
     settings.sync();
 }
 
-bool ApplicationUI::checkLogin() {
+bool ApplicationUI::checkLogin()
+{
     return loggedIn;
 }
 
@@ -156,6 +156,9 @@ bool ApplicationUI::init()
     s->loadSettings();
     mDcProvider.initialize();
     QList<DC *> dcsList = mDcProvider.getDcs();
+
+    qDebug() << dcsList;
+
     connect(&mDcProvider, SIGNAL(dcProviderReady()), this, SLOT(keyloaded()));
     //Q_FOREACH (DC *dc, dcsList) {
     //    changeServer(s->workingDcNum()-1);
@@ -448,34 +451,32 @@ void ApplicationUI::onContactsContacts(qint64 msgId, const QList<Contact> &conta
     m_cachedUsers = users;
     QVariantMap map;
     Q_FOREACH(User user, m_cachedUsers ) {
-    idtoname.insert(QString::number(user.id()),user.firstName());
-    map["id"] = user.id();
-    map["firstname"] = user.firstName();
-    map["lastname"]=user.lastName();
-    map["phone"] = user.phone();
-    map["type"] = "contact";
-    map["wasonline"] = user.status().wasOnline();
-    QString qstring = "insert into contacts(id,firstname,lastname,phone,type,wasonline)values(:id,:firstname,:lastname,:phone,:type,:wasonline)";
-    bool isdataInserted = db->insertQuery(qstring,map);
-    if(user.photo().photoId()) {
-        QFile ffile("./data/" +QString::number(user.photo().photoId())+".jpeg");
-        if(ffile.exists())
-        {
-            QVariantMap m_map;
-            m_map.insert("id",user.id());
-            m_map.insert("photoid",user.photo().photoId());
-            db->insertQuery("update contacts set photoid = :photoid where id = :id",m_map);
-            Q_EMIT userprofile(user.id(),user.photo().photoId());
-        }
-        else
-        {
-            DownloadImageThumb("userprofile",user.photo().photoId(),user.photo().photoSmall(),user.id(),user.accessHash());
+        idtoname.insert(QString::number(user.id()),user.firstName());
+        map["id"] = user.id();
+        map["firstname"] = user.firstName();
+        map["lastname"]=user.lastName();
+        map["phone"] = user.phone();
+        map["type"] = "contact";
+        map["wasonline"] = user.status().wasOnline();
+        QString qstring = "insert into contacts(id,firstname,lastname,phone,type,wasonline)values(:id,:firstname,:lastname,:phone,:type,:wasonline)";
+        bool isdataInserted = db->insertQuery(qstring,map);
+        if(user.photo().photoId()) {
+            QFile ffile("./data/" +QString::number(user.photo().photoId())+".jpeg");
+            if(ffile.exists())
+            {
+                QVariantMap m_map;
+                m_map.insert("id",user.id());
+                m_map.insert("photoid",user.photo().photoId());
+                db->insertQuery("update contacts set photoid = :photoid where id = :id",m_map);
+                Q_EMIT userprofile(user.id(),user.photo().photoId());
+            }
+            else
+            {
+                DownloadImageThumb("userprofile",user.photo().photoId(),user.photo().photoSmall(),user.id(),user.accessHash());
+            }
         }
     }
-}
-
-Q_EMIT
-    reloadContacts();
+    Q_EMIT reloadContacts();
 }
 
 void ApplicationUI::DownloadImageThumb(QString type, qint64 photoid, FileLocation ps,
@@ -496,7 +497,6 @@ void ApplicationUI::DownloadImageThumb(QString type, qint64 photoid, FileLocatio
     db->insertQuery("update contacts set photoid = :photoid where id = :id", m_map);
     mapper.insert("msgid", msg);
     mapper.insert("type", type);
-
     db->insertQuery("insert into attachments( id,messageid,type )values(:id,:msgid,:type)", mapper);
 }
 
@@ -629,7 +629,6 @@ void ApplicationUI::onUsersGetUsersAnswer(qint64 id, const QList<User> users)
 void ApplicationUI::onMessagesGetDialogsAnswer(qint64 id, QList<Dialog> dialogs,
         QList<Message> messages, QList<Chat> chats, QList<User> users)
 {
-
     qDebug() << "messagesGetDialogsAnswer SIGNAL received, id:" << id;
     qDebug() << "dialogs:" << dialogs.size();
     qDebug() << "last messages from dialogs:" << messages.size();
@@ -2337,13 +2336,11 @@ void ApplicationUI::getIdByPhotoId(qint64 id)
     QVariant v;
     QString q = "select id from contacts where photoid = \"" + QString::number(id) + "\"";
     int count = db->getTableSizeByQuery("select count(*) from contacts where photoid = \"" + QString::number(id) + "\"");
-
     QSqlQuery query = db->executeQuery(q);
     int fiel =  query.record().indexOf("id");
     while(query.next()) {
         v = query.value(fiel);
     }
-
     Q_EMIT userprofile(v.value<qint32>(),id);
 }
 
@@ -2356,6 +2353,5 @@ void  ApplicationUI::getmessageofimage(qint64 id) {
     while(query.next()) {
         v = query.value(fiel);
     }
-
     Q_EMIT userprofile(v.value<qint32>(),id);
 }

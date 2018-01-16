@@ -19,20 +19,19 @@
  */
 
 #include "uploadfile.h"
-
 #include <QFileInfo>
 
 UploadFile::UploadFile(Session *session, UploadFile::FileType fileType, const QByteArray &buffer, QObject *parent) :
-    File(session, buffer.size(), parent),
-    m_fileType(fileType),
-    m_relatedFileId(0),
-    m_name(""),
-    m_bytes(buffer),
-    m_filePath(""),
-    m_nParts(0),
-    m_currentPart(0),
-    m_uploadedParts(0),
-    m_krypt(QCryptographicHash::Md5)
+        File(session, buffer.size(), parent),
+        m_fileType(fileType),
+        m_relatedFileId(0),
+        m_name(""),
+        m_bytes(buffer),
+        m_filePath(""),
+        m_nParts(0),
+        m_currentPart(0),
+        m_uploadedParts(0),
+        m_krypt(QCryptographicHash::Md5)
 {
     // calculate number of parts to be uploaded
     m_nParts = m_length / BLOCK;
@@ -40,28 +39,32 @@ UploadFile::UploadFile(Session *session, UploadFile::FileType fileType, const QB
 }
 
 UploadFile::UploadFile(Session *session, UploadFile::FileType fileType, const QString &filePath, QObject *parent) :
-    File(session, QFileInfo(filePath).size(), parent),
-    m_fileType(fileType),
-    m_relatedFileId(0),
-    m_name(QFileInfo(filePath).fileName()),
-    m_filePath(filePath),
-    m_nParts(0),
-    m_currentPart(0),
-    m_uploadedParts(0),
-    m_ioDevice(filePath),
-    m_krypt(QCryptographicHash::Md5)
+        File(session, QFileInfo(filePath).size(), parent),
+        m_fileType(fileType),
+        m_relatedFileId(0),
+        m_name(QFileInfo(filePath).fileName()),
+        m_filePath(filePath),
+        m_nParts(0),
+        m_currentPart(0),
+        m_uploadedParts(0),
+        m_ioDevice(filePath),
+        m_krypt(QCryptographicHash::Md5)
 {
-    // open file
+    // Open file
     openIODevice();
-    // calculate number of parts to be uploaded
+
+    // Calculate number of parts to be uploaded
     m_nParts = m_length / BLOCK;
     if (m_length % BLOCK > 0) m_nParts++;
 }
 
-UploadFile::~UploadFile() {
+UploadFile::~UploadFile()
+{
+    // ..
 }
 
-void UploadFile::openIODevice() {
+void UploadFile::openIODevice()
+{
     if (m_ioDevice.open(QIODevice::ReadOnly)) {
         // get file size with file open
         m_length = m_ioDevice.size();
@@ -70,14 +73,16 @@ void UploadFile::openIODevice() {
     }
 }
 
-bool UploadFile::hasMoreParts() const {
+bool UploadFile::hasMoreParts() const
+{
     return m_currentPart < m_nParts;
 }
 
-QByteArray UploadFile::nextPart() {
+QByteArray UploadFile::nextPart()
+{
     QByteArray partBytes(BLOCK, Qt::Uninitialized); //XXX take a look if this initialization results in some failure with final block
 
-    //let's see if the file content is loaded or a filepath is set
+    // Let's see if the file content is loaded or a filepath is set
     if (!m_bytes.isEmpty()) {
         qint32 k = 0;
         if (m_currentPart < m_nParts -1) {
@@ -96,7 +101,7 @@ QByteArray UploadFile::nextPart() {
             }
         }
     } else {
-        // in this case we're reading an open file from a local path
+        // In this case we're reading an open file from a local path
         if (m_ioDevice.isOpen()) {
             m_ioDevice.seek(m_currentPart * BLOCK); //set offset
             partBytes = m_ioDevice.read(BLOCK);
@@ -108,15 +113,18 @@ QByteArray UploadFile::nextPart() {
         }
     }
     m_currentPart++;
-    // add the new data to cryptographic hash before return it
+
+    // Add the new data to cryptographic hash before return it
     m_krypt.addData(partBytes, partBytes.length());
     return partBytes;
 }
 
-void UploadFile::increaseUploadedParts() {
+void UploadFile::increaseUploadedParts()
+{
     m_uploadedParts++;
 }
 
-QByteArray UploadFile::md5() {
+QByteArray UploadFile::md5()
+{
     return m_krypt.result();
 }

@@ -2,17 +2,17 @@
 #include <QDebug>
 #include <QDateTime>
 
-void Dumper::dumpUser(const User &user, bool full) {
+void Dumper::dumpUser(const User &user, bool full)
+{
     qDebug() << "#User";
     switch(user.classType()) {
-    case User::typeUserEmpty: qDebug() << "type: empty"; break;
-    case User::typeUserSelf: qDebug() << "type: self"; break;
-    case User::typeUserContact: qDebug() << "type: contact"; break;
-    case User::typeUserRequest: qDebug() << "type: request"; break;
-    case User::typeUserForeign: qDebug() << "type: foreign"; break;
-    case User::typeUserDeleted: qDebug() << "type: deleted"; break;
+        case User::typeUserEmpty: qDebug() << "type: empty"; break;
+        case User::typeUserSelf: qDebug() << "type: self"; break;
+        case User::typeUserContact: qDebug() << "type: contact"; break;
+        case User::typeUserRequest: qDebug() << "type: request"; break;
+        case User::typeUserForeign: qDebug() << "type: foreign"; break;
+        case User::typeUserDeleted: qDebug() << "type: deleted"; break;
     }
-
     Q_ASSERT(user.id());
     qDebug() << "id:" << user.id();
     if (user.classType() != User::typeUserEmpty) {
@@ -35,7 +35,8 @@ void Dumper::dumpUser(const User &user, bool full) {
     }
 }
 
-void Dumper::dumpUserProfilePhoto(const UserProfilePhoto &photo) {
+void Dumper::dumpUserProfilePhoto(const UserProfilePhoto &photo)
+{
     qDebug() << "#UserProfilePhoto";
     if (photo.classType() == UserProfilePhoto::typeUserProfilePhoto) {
         Q_ASSERT(photo.photoId());
@@ -47,7 +48,8 @@ void Dumper::dumpUserProfilePhoto(const UserProfilePhoto &photo) {
     }
 }
 
-void Dumper::dumpFileLocation(const FileLocation &location) {
+void Dumper::dumpFileLocation(const FileLocation &location)
+{
     QString dumpStr = "#FileLocation:";
     if (location.classType() == FileLocation::typeFileLocation) {
         Q_ASSERT(location.dcId());
@@ -62,7 +64,8 @@ void Dumper::dumpFileLocation(const FileLocation &location) {
     qDebug() << dumpStr;
 }
 
-void Dumper::dumpUserStatus(const UserStatus &status) {
+void Dumper::dumpUserStatus(const UserStatus &status)
+{
     qDebug() << "#UserStatus";
     switch (status.classType()) {
     case UserStatus::typeUserStatusEmpty:
@@ -78,37 +81,42 @@ void Dumper::dumpUserStatus(const UserStatus &status) {
     }
 }
 
-void Dumper::dumpContactsLink(const ContactsLink &link) {
+void Dumper::dumpContactsLink(const ContactsLink &link)
+{
     qDebug() << "#ContactsLink";
     dumpContactsMyLink(link.myLink());
     dumpContactsForeignLink(link.foreignLink());
     dumpUser(link.user());
 }
 
-void Dumper::dumpContactsMyLink(const ContactsMyLink &myLink) {
+void Dumper::dumpContactsMyLink(const ContactsMyLink &myLink)
+{
     qDebug() << "#ContactsMyLink";
     switch(myLink.classType()) {
-    case ContactsMyLink::typeContactsMyLinkEmpty: qDebug() << "type: empty"; break;
-    case ContactsMyLink::typeContactsMyLinkRequested: qDebug() << "type: requested; contact:" << myLink.contact(); break;
-    case ContactsMyLink::typeContactsMyLinkContact: qDebug() << "type: contact"; break;
+        case ContactsMyLink::typeContactsMyLinkEmpty: qDebug() << "type: empty"; break;
+        case ContactsMyLink::typeContactsMyLinkRequested: qDebug() << "type: requested; contact:" << myLink.contact(); break;
+        case ContactsMyLink::typeContactsMyLinkContact: qDebug() << "type: contact"; break;
     }
 }
 
-void Dumper::dumpContactsForeignLink(const ContactsForeignLink &foreignLink) {
+void Dumper::dumpContactsForeignLink(const ContactsForeignLink &foreignLink)
+{
     qDebug() << "#ContactsForeignLink";
     switch(foreignLink.classType()) {
-    case ContactsForeignLink::typeContactsForeignLinkUnknown: qDebug() << "type: unknown"; break;
-    case ContactsForeignLink::typeContactsForeignLinkRequested: qDebug() << "type: requested; hasPhone:" << foreignLink.hasPhone(); break;
-    case ContactsForeignLink::typeContactsForeignLinkMutual: qDebug() << "type: mutual"; break;
+        case ContactsForeignLink::typeContactsForeignLinkUnknown: qDebug() << "type: unknown"; break;
+        case ContactsForeignLink::typeContactsForeignLinkRequested: qDebug() << "type: requested; hasPhone:" << foreignLink.hasPhone(); break;
+        case ContactsForeignLink::typeContactsForeignLinkMutual: qDebug() << "type: mutual"; break;
     }
 }
 
-QString Dumper::unixTimeToDate(uint unixTime) {
+QString Dumper::unixTimeToDate(uint unixTime)
+{
     QDateTime timestamp = QDateTime::fromTime_t(unixTime);
     return "(" + QString::number(unixTime) + ") " + timestamp.toString(Qt::SystemLocaleDate);
 }
 
-void Dumper::dumpPhoto(const Photo &photo) {
+void Dumper::dumpPhoto(const Photo &photo)
+{
     qDebug() << "#Photo";
     qDebug() << "id:" << photo.id();
     if (photo.classType() == Photo::typePhoto) {
@@ -126,13 +134,15 @@ void Dumper::dumpPhoto(const Photo &photo) {
     }
 }
 
-void Dumper::dumpGeoPoint(const GeoPoint &geo) {
+void Dumper::dumpGeoPoint(const GeoPoint &geo)
+{
     if (geo.classType() == GeoPoint::typeGeoPoint) {
         qDebug() << "longitude =" << geo.longitude() << " ,latitude =" << geo.lat();
     }
 }
 
-void Dumper::dumpPhotoSize(const PhotoSize &photoSize) {
+void Dumper::dumpPhotoSize(const PhotoSize &photoSize)
+{
     qDebug() << "#PhotoSize";
     qDebug() << "type:" << photoSize.type();
     if (photoSize.classType() != PhotoSize::typePhotoSizeEmpty) {
@@ -147,7 +157,8 @@ void Dumper::dumpPhotoSize(const PhotoSize &photoSize) {
     }
 }
 
-void Dumper::dumpPeerNotifySettings(const PeerNotifySettings &notifySettings) {
+void Dumper::dumpPeerNotifySettings(const PeerNotifySettings &notifySettings)
+{
     qDebug() << "#PeerNotifySettings";
     if (notifySettings.classType() == PeerNotifySettings::typePeerNotifySettings) {
         qDebug() << "muteUntil:" << notifySettings.muteUntil();
@@ -157,13 +168,15 @@ void Dumper::dumpPeerNotifySettings(const PeerNotifySettings &notifySettings) {
     }
 }
 
-void Dumper::dumpContact(const Contact &contact) {
+void Dumper::dumpContact(const Contact &contact)
+{
     qDebug() << "#Contact";
     qDebug() << "userId:" << contact.userId();
     qDebug() << "mutual:" << contact.mutual();
 }
 
-void Dumper::dumpDialog(const Dialog &dialog) {
+void Dumper::dumpDialog(const Dialog &dialog)
+{
     qDebug() << "#Dialog";
     dumpPeer(dialog.peer());
     qDebug() << "topMessage:" << dialog.topMessage();
@@ -171,7 +184,8 @@ void Dumper::dumpDialog(const Dialog &dialog) {
     dumpPeerNotifySettings(dialog.notifySettings());
 }
 
-void Dumper::dumpPeer(const Peer &peer) {
+void Dumper::dumpPeer(const Peer &peer)
+{
     if (peer.classType() == Peer::typePeerUser) {
         qDebug() << "userId:" << peer.userId();
     } else {
@@ -179,7 +193,8 @@ void Dumper::dumpPeer(const Peer &peer) {
     }
 }
 
-void Dumper::dumpMessage(const Message &message) {
+void Dumper::dumpMessage(const Message &message)
+{
     qDebug() << "#Message:";
     if (message.classType() != Message::typeMessageEmpty) {
         if (message.classType() == Message::typeMessageForwarded) {
@@ -202,73 +217,74 @@ void Dumper::dumpMessage(const Message &message) {
     }
 }
 
-void Dumper::dumpMessageAction(const MessageAction &ma) {
+void Dumper::dumpMessageAction(const MessageAction &ma)
+{
     qDebug() << "#MessageAction:";
     switch (ma.classType()) {
-    case MessageAction::typeMessageActionEmpty: qDebug() << "action: empty"; break;
-    case MessageAction::typeMessageActionChatCreate: qDebug() << "action: create chat"; break;
-    case MessageAction::typeMessageActionChatEditTitle: qDebug() << "action: edit chat title"; break;
-    case MessageAction::typeMessageActionChatEditPhoto: qDebug() << "action: edit chat photo"; break;
-    case MessageAction::typeMessageActionChatDeletePhoto: qDebug() << "action: delete chat photo"; break;
-    case MessageAction::typeMessageActionChatAddUser: qDebug() << "action: add user to chat"; break;
-    case MessageAction::typeMessageActionChatDeleteUser: qDebug() << "action: delete user from chat"; break;
-    case MessageAction::typeMessageActionGeoChatCreate: qDebug() << "action: create geochat"; break;
-    case MessageAction::typeMessageActionGeoChatCheckin: qDebug() << "action: registrar geochat"; break;
+        case MessageAction::typeMessageActionEmpty: qDebug() << "action: empty"; break;
+        case MessageAction::typeMessageActionChatCreate: qDebug() << "action: create chat"; break;
+        case MessageAction::typeMessageActionChatEditTitle: qDebug() << "action: edit chat title"; break;
+        case MessageAction::typeMessageActionChatEditPhoto: qDebug() << "action: edit chat photo"; break;
+        case MessageAction::typeMessageActionChatDeletePhoto: qDebug() << "action: delete chat photo"; break;
+        case MessageAction::typeMessageActionChatAddUser: qDebug() << "action: add user to chat"; break;
+        case MessageAction::typeMessageActionChatDeleteUser: qDebug() << "action: delete user from chat"; break;
+        case MessageAction::typeMessageActionGeoChatCreate: qDebug() << "action: create geochat"; break;
+        case MessageAction::typeMessageActionGeoChatCheckin: qDebug() << "action: registrar geochat"; break;
     }
-
-    if (ma.classType() == MessageAction::typeMessageActionChatCreate ||
+    if(ma.classType() == MessageAction::typeMessageActionChatCreate ||
             ma.classType() == MessageAction::typeMessageActionChatEditTitle ||
             ma.classType() == MessageAction::typeMessageActionGeoChatCreate) {
         qDebug() << "title:" << ma.title();
-    } else if (ma.classType() == MessageAction::typeMessageActionChatAddUser ||
+    } else if(ma.classType() == MessageAction::typeMessageActionChatAddUser ||
                ma.classType() == MessageAction::typeMessageActionChatDeleteUser) {
         qDebug() << "userId:" << ma.userId();
-    } else if (ma.classType() == MessageAction::typeMessageActionChatEditPhoto) {
+    } else if(ma.classType() == MessageAction::typeMessageActionChatEditPhoto) {
         dumpPhoto(ma.photo());
     }
-    // second parameter
-    if (ma.classType() == MessageAction::typeMessageActionChatCreate) {
+    if(ma.classType() == MessageAction::typeMessageActionChatCreate) {
         Q_FOREACH(qint32 userId, ma.users()) {
             qDebug() << "userId:" << userId;
         }
-    } else if (ma.classType() == MessageAction::typeMessageActionGeoChatCreate) {
+    } else if(ma.classType() == MessageAction::typeMessageActionGeoChatCreate) {
         qDebug() << "address:" << ma.address();
     }
 }
 
-void Dumper::dumpMessageMedia(const MessageMedia &mm) {
+void Dumper::dumpMessageMedia(const MessageMedia &mm)
+{
     qDebug() << "#MessageMedia:";
     switch (mm.classType()) {
-    case MessageMedia::typeMessageMediaEmpty:
-        break;
-    case MessageMedia::typeMessageMediaPhoto:
-        dumpPhoto(mm.photo());
-        break;
-    case MessageMedia::typeMessageMediaVideo:
-        dumpVideo(mm.video());
-        break;
-    case MessageMedia::typeMessageMediaGeo:
-        dumpGeoPoint(mm.geo());
-        break;
-    case MessageMedia::typeMessageMediaContact:
-        qDebug() << "phoneNumber:" << mm.phoneNumber();
-        qDebug() << "firstName:" << mm.firstName();
-        qDebug() << "lastName:" << mm.lastName();
-        qDebug() << "userId:" << mm.userId();
-        break;
-    case MessageMedia::typeMessageMediaUnsupported:
-        qDebug() << "bytes:" << mm.bytes().toHex();
-        break;
-    case MessageMedia::typeMessageMediaDocument:
-        dumpDocument(mm.document());
-        break;
-    case MessageMedia::typeMessageMediaAudio:
-        dumpAudio(mm.audio());
-        break;
+        case MessageMedia::typeMessageMediaEmpty:
+            break;
+        case MessageMedia::typeMessageMediaPhoto:
+            dumpPhoto(mm.photo());
+            break;
+        case MessageMedia::typeMessageMediaVideo:
+            dumpVideo(mm.video());
+            break;
+        case MessageMedia::typeMessageMediaGeo:
+            dumpGeoPoint(mm.geo());
+            break;
+        case MessageMedia::typeMessageMediaContact:
+            qDebug() << "phoneNumber:" << mm.phoneNumber();
+            qDebug() << "firstName:" << mm.firstName();
+            qDebug() << "lastName:" << mm.lastName();
+            qDebug() << "userId:" << mm.userId();
+            break;
+        case MessageMedia::typeMessageMediaUnsupported:
+            qDebug() << "bytes:" << mm.bytes().toHex();
+            break;
+        case MessageMedia::typeMessageMediaDocument:
+            dumpDocument(mm.document());
+            break;
+        case MessageMedia::typeMessageMediaAudio:
+            dumpAudio(mm.audio());
+            break;
     }
 }
 
-void Dumper::dumpVideo(const Video &video) {
+void Dumper::dumpVideo(const Video &video)
+{
     qDebug() << "#Video:";
     qDebug() << "id:" << video.id();
     if (video.classType() == Video::typeVideo) {
@@ -287,7 +303,8 @@ void Dumper::dumpVideo(const Video &video) {
     }
 }
 
-void Dumper::dumpAudio(const Audio &audio) {
+void Dumper::dumpAudio(const Audio &audio)
+{
     qDebug() << "#Audio:";
     qDebug() << "id:" << audio.id();
     if (audio.classType() == Audio::typeAudio) {
@@ -301,7 +318,8 @@ void Dumper::dumpAudio(const Audio &audio) {
     }
 }
 
-void Dumper::dumpDocument(const Document &doc) {
+void Dumper::dumpDocument(const Document &doc)
+{
     qDebug() << "#Document:";
     qDebug() << "id:" << doc.id();
     if (doc.classType() == Document::typeDocument) {
@@ -317,25 +335,29 @@ void Dumper::dumpDocument(const Document &doc) {
     }
 }
 
-void Dumper::dumpContactStatus(const ContactStatus &status) {
+void Dumper::dumpContactStatus(const ContactStatus &status)
+{
     qDebug() << "#ContactStatus";
     qDebug() << "userId:" << status.userId();
     qDebug() << "expires:" << Dumper::unixTimeToDate(status.expires());
 }
 
-void Dumper::dumpImportedContact(const ImportedContact &imported) {
+void Dumper::dumpImportedContact(const ImportedContact &imported)
+{
     qDebug() << "#ImportedContact";
     qDebug() << "userId:" << imported.userId();
     qDebug() << "clientId:" << imported.clientId();
 }
 
-void Dumper::dumpContactBlocked(const ContactBlocked &blocked) {
+void Dumper::dumpContactBlocked(const ContactBlocked &blocked)
+{
     qDebug() << "#ContactBlocked";
     qDebug() << "userId:" << blocked.userId();
     qDebug() << "date:" << Dumper::unixTimeToDate(blocked.date());
 }
 
-void Dumper::dumpUpdate(const Update &update) {
+void Dumper::dumpUpdate(const Update &update)
+{
     qDebug() << "#Update";
     Update::UpdateType x = update.classType();
     Q_ASSERT(x == Update::typeUpdateNewMessage ||
@@ -365,142 +387,143 @@ void Dumper::dumpUpdate(const Update &update) {
              x == Update::typeUpdateNotifySettings);
 
     switch (x) {
-    case Update::typeUpdateNewMessage:
-        qDebug() << "type: new message";
-        dumpMessage(update.message());
-        qDebug() << "pts: " << update.pts();
-        break;
-    case Update::typeUpdateMessageID:
-        qDebug() << "type: messageId";
-        qDebug() << "id:" << update.id();
-        qDebug() << "randomId:" << update.randomId();
-        break;
-    case Update::typeUpdateReadMessages: {
-        qDebug() << "type: read messages";
-        QList<qint32> messages = update.messages();
-        Q_FOREACH (qint32 msgId, messages) {
-            qDebug() << "msgId:" << msgId;
+        case Update::typeUpdateNewMessage:
+            qDebug() << "type: new message";
+            dumpMessage(update.message());
+            qDebug() << "pts: " << update.pts();
+            break;
+        case Update::typeUpdateMessageID:
+            qDebug() << "type: messageId";
+            qDebug() << "id:" << update.id();
+            qDebug() << "randomId:" << update.randomId();
+            break;
+        case Update::typeUpdateReadMessages: {
+            qDebug() << "type: read messages";
+            QList<qint32> messages = update.messages();
+            Q_FOREACH (qint32 msgId, messages) {
+                qDebug() << "msgId:" << msgId;
+            }
+            qDebug() << "pts: " << update.pts();
+            break;
         }
-        qDebug() << "pts: " << update.pts();
-        break;
-    }
-    case Update::typeUpdateDeleteMessages: {
-        qDebug() << "type: delete messages";
-        QList<qint32> messages = update.messages();
-        Q_FOREACH (qint32 msgId, messages) {
-            qDebug() << "msgId:" << msgId;
+        case Update::typeUpdateDeleteMessages: {
+            qDebug() << "type: delete messages";
+            QList<qint32> messages = update.messages();
+            Q_FOREACH (qint32 msgId, messages) {
+                qDebug() << "msgId:" << msgId;
+            }
+            qDebug() << "pts: " << update.pts();
+            break;
         }
-        qDebug() << "pts: " << update.pts();
-        break;
-    }
-    case Update::typeUpdateRestoreMessages: {
-        qDebug() << "type: restore messages";
-        QList<qint32> messages = update.messages();
-        Q_FOREACH (qint32 msgId, messages) {
-            qDebug() << "msgId:" << msgId;
+        case Update::typeUpdateRestoreMessages: {
+            qDebug() << "type: restore messages";
+            QList<qint32> messages = update.messages();
+            Q_FOREACH (qint32 msgId, messages) {
+                qDebug() << "msgId:" << msgId;
+            }
+            qDebug() << "pts: " << update.pts();
+            break;
         }
-        qDebug() << "pts: " << update.pts();
-        break;
-    }
-    case Update::typeUpdateUserTyping:
-        qDebug() << "type: user typing";
-        qDebug() << "userId:" << update.userId();
-        break;
-    case Update::typeUpdateChatUserTyping:
-        qDebug() << "type: chat user typing";
-        qDebug() << "chatId:" << update.chatId();
-        qDebug() << "userId:" << update.userId();
-        break;
-    case Update::typeUpdateChatParticipants:
-        qDebug() << "type: chat participants";
-        Q_FOREACH (ChatParticipant cp, update.participants().participants()) {
-            dumpChatParticipant(cp);
+        case Update::typeUpdateUserTyping:
+            qDebug() << "type: user typing";
+            qDebug() << "userId:" << update.userId();
+            break;
+        case Update::typeUpdateChatUserTyping:
+            qDebug() << "type: chat user typing";
+            qDebug() << "chatId:" << update.chatId();
+            qDebug() << "userId:" << update.userId();
+            break;
+        case Update::typeUpdateChatParticipants:
+            qDebug() << "type: chat participants";
+            Q_FOREACH (ChatParticipant cp, update.participants().participants()) {
+                dumpChatParticipant(cp);
+            }
+            break;
+        case Update::typeUpdateUserStatus:
+            qDebug() << "type: user status";
+            qDebug() << "userId:" << update.userId();
+            dumpUserStatus(update.status());
+            break;
+        case Update::typeUpdateUserName:
+            qDebug() << "type: user name";
+            qDebug() << "userId:" << update.userId();
+            qDebug() << "firstName:" << update.firstName();
+            qDebug() << "lastName:" << update.lastName();
+            break;
+        case Update::typeUpdateUserPhoto:
+            qDebug() << "type: user photo";
+            qDebug() << "userId:" << update.userId();
+            qDebug() << "date:" << unixTimeToDate(update.date());
+            dumpUserProfilePhoto(update.photo());
+            qDebug() << "previous:" << update.previous();
+            break;
+        case Update::typeUpdateContactRegistered:
+            qDebug() << "type: contact registered";
+            qDebug() << "userId:" << update.userId();
+            qDebug() << "date:" << unixTimeToDate(update.date());
+            break;
+        case Update::typeUpdateContactLink:
+            qDebug() << "type: contact link";
+            qDebug() << "userId:" << update.userId();
+            dumpContactsMyLink(update.myLink());
+            dumpContactsForeignLink(update.foreignLink());
+            break;
+        case Update::typeUpdateActivation:
+            qDebug() << "type: activation";
+            qDebug() << "userId:" << update.userId();
+            break;
+        case Update::typeUpdateNewAuthorization:
+            qDebug() << "type: new authorization";
+            qDebug() << "authKeyId:" << update.authKeyId();
+            qDebug() << "date:" << unixTimeToDate(update.date());
+            qDebug() << "device:" << update.device();
+            qDebug() << "location:" << update.location();
+            break;
+        case Update::typeUpdateNewGeoChatMessage:
+            qDebug() << "type: new geo chat message";
+            dumpGeoChatMessage(update.geoChatMessage());
+            break;
+            //XXX HERE must be the cases for encrypted messages when implemented
+        case Update::typeUpdateChatParticipantAdd:
+            qDebug() << "type: add chat participant";
+            qDebug() << "chatId:" << update.chatId();
+            qDebug() << "userId:" << update.userId();
+            qDebug() << "inviterId:" << update.inviterId();
+            qDebug() << "version:" << update.version();
+            break;
+        case Update::typeUpdateChatParticipantDelete:
+            qDebug() << "type: delete chat participant";
+            qDebug() << "chatId:" << update.chatId();
+            qDebug() << "userId:" << update.userId();
+            qDebug() << "version:" << update.version();
+            break;
+        case Update::typeUpdateDcOptions: {
+            qDebug() << "type: dc options";
+            QList<DcOption> dcOptions = update.dcOptions();
+            Q_FOREACH (DcOption dcOption, dcOptions) {
+                dumpDcOption(dcOption);
+            }
+            break;
         }
-        break;
-    case Update::typeUpdateUserStatus:
-        qDebug() << "type: user status";
-        qDebug() << "userId:" << update.userId();
-        dumpUserStatus(update.status());
-        break;
-    case Update::typeUpdateUserName:
-        qDebug() << "type: user name";
-        qDebug() << "userId:" << update.userId();
-        qDebug() << "firstName:" << update.firstName();
-        qDebug() << "lastName:" << update.lastName();
-        break;
-    case Update::typeUpdateUserPhoto:
-        qDebug() << "type: user photo";
-        qDebug() << "userId:" << update.userId();
-        qDebug() << "date:" << unixTimeToDate(update.date());
-        dumpUserProfilePhoto(update.photo());
-        qDebug() << "previous:" << update.previous();
-        break;
-    case Update::typeUpdateContactRegistered:
-        qDebug() << "type: contact registered";
-        qDebug() << "userId:" << update.userId();
-        qDebug() << "date:" << unixTimeToDate(update.date());
-        break;
-    case Update::typeUpdateContactLink:
-        qDebug() << "type: contact link";
-        qDebug() << "userId:" << update.userId();
-        dumpContactsMyLink(update.myLink());
-        dumpContactsForeignLink(update.foreignLink());
-        break;
-    case Update::typeUpdateActivation:
-        qDebug() << "type: activation";
-        qDebug() << "userId:" << update.userId();
-        break;
-    case Update::typeUpdateNewAuthorization:
-        qDebug() << "type: new authorization";
-        qDebug() << "authKeyId:" << update.authKeyId();
-        qDebug() << "date:" << unixTimeToDate(update.date());
-        qDebug() << "device:" << update.device();
-        qDebug() << "location:" << update.location();
-        break;
-    case Update::typeUpdateNewGeoChatMessage:
-        qDebug() << "type: new geo chat message";
-        dumpGeoChatMessage(update.geoChatMessage());
-        break;
-        //XXX HERE must be the cases for encrypted messages when implemented
-    case Update::typeUpdateChatParticipantAdd:
-        qDebug() << "type: add chat participant";
-        qDebug() << "chatId:" << update.chatId();
-        qDebug() << "userId:" << update.userId();
-        qDebug() << "inviterId:" << update.inviterId();
-        qDebug() << "version:" << update.version();
-        break;
-    case Update::typeUpdateChatParticipantDelete:
-        qDebug() << "type: delete chat participant";
-        qDebug() << "chatId:" << update.chatId();
-        qDebug() << "userId:" << update.userId();
-        qDebug() << "version:" << update.version();
-        break;
-    case Update::typeUpdateDcOptions: {
-        qDebug() << "type: dc options";
-        QList<DcOption> dcOptions = update.dcOptions();
-        Q_FOREACH (DcOption dcOption, dcOptions) {
-            dumpDcOption(dcOption);
-        }
-        break;
-    }
-    case Update::typeUpdateUserBlocked:
-        qDebug() << "type: user blocked";
-        qDebug() << "userId:" << update.userId();
-        qDebug() << "blocked:" << update.blocked();
-        break;
-    case Update::typeUpdateNotifySettings:
-        qDebug() << "type: notify settings";
-        dumpNotifyPeer(update.peer());
-        dumpPeerNotifySettings(update.notifySettings());
-        break;
-    default:
-        qDebug() << "Update received in a not contemplated option";
-        break;
+        case Update::typeUpdateUserBlocked:
+            qDebug() << "type: user blocked";
+            qDebug() << "userId:" << update.userId();
+            qDebug() << "blocked:" << update.blocked();
+            break;
+        case Update::typeUpdateNotifySettings:
+            qDebug() << "type: notify settings";
+            dumpNotifyPeer(update.peer());
+            dumpPeerNotifySettings(update.notifySettings());
+            break;
+        default:
+            qDebug() << "Update received in a not contemplated option";
+            break;
     }
 
 }
 
-void Dumper::dumpNotifyPeer(const NotifyPeer &notifyPeer) {
+void Dumper::dumpNotifyPeer(const NotifyPeer &notifyPeer)
+{
     qDebug() << "#NotifyPeer";
     switch (notifyPeer.classType()) {
     case NotifyPeer::typeNotifyPeer: qDebug() << "type: notifyPeer"; dumpPeer(notifyPeer.peer()); break;
@@ -510,14 +533,16 @@ void Dumper::dumpNotifyPeer(const NotifyPeer &notifyPeer) {
     }
 }
 
-void Dumper::dumpChatParticipant(const ChatParticipant &p) {
+void Dumper::dumpChatParticipant(const ChatParticipant &p)
+{
     qDebug() << "#ChatParticipant";
     qDebug() << "userId:" << p.userId();
     qDebug() << "inviterId:" << p.inviterId();
     qDebug() << "date:" << unixTimeToDate(p.date());
 }
 
-void Dumper::dumpGeoChatMessage(const GeoChatMessage &msg) {
+void Dumper::dumpGeoChatMessage(const GeoChatMessage &msg)
+{
     qDebug() << "#GeoChatMessage";
     qDebug() << "chatId:" << msg.chatId();
     qDebug() << "id:" << msg.id();
@@ -536,7 +561,8 @@ void Dumper::dumpGeoChatMessage(const GeoChatMessage &msg) {
     }
 }
 
-void Dumper::dumpDcOption(const DcOption &dcOption) {
+void Dumper::dumpDcOption(const DcOption &dcOption)
+{
     qDebug() << "#DcOption:";
     qDebug() << "id:" << dcOption.id();
     qDebug() << "hostname:" << dcOption.hostname();
@@ -544,7 +570,8 @@ void Dumper::dumpDcOption(const DcOption &dcOption) {
     qDebug() << "port:" << dcOption.port();
 }
 
-void Dumper::dumpChat(const Chat &chat) {
+void Dumper::dumpChat(const Chat &chat)
+{
     qDebug() << "#Chat";
     qDebug() << "chatId:" << chat.id();
     Chat::ChatType x = chat.classType();
@@ -574,15 +601,17 @@ void Dumper::dumpChat(const Chat &chat) {
     }
 }
 
-void Dumper::dumpChatPhoto(const ChatPhoto &chatPhoto) {
+void Dumper::dumpChatPhoto(const ChatPhoto &chatPhoto)
+{
     qDebug() << "#ChatPhoto";
-    if (chatPhoto.classType() == ChatPhoto::typeChatPhoto) {
+    if(chatPhoto.classType() == ChatPhoto::typeChatPhoto) {
         dumpFileLocation(chatPhoto.photoSmall());
         dumpFileLocation(chatPhoto.photoBig());
     }
 }
 
-void Dumper::dumpStatedMessage(const Message &message, const QList<Chat> &chats, const QList<User> &users, const QList<ContactsLink> &links, qint32 pts, qint32 seq) {
+void Dumper::dumpStatedMessage(const Message &message, const QList<Chat> &chats, const QList<User> &users, const QList<ContactsLink> &links, qint32 pts, qint32 seq)
+{
     Dumper::dumpMessage(message);
     qDebug() << "Chats:";
     Q_FOREACH (Chat chat, chats) {
@@ -603,7 +632,8 @@ void Dumper::dumpStatedMessage(const Message &message, const QList<Chat> &chats,
     qDebug() << "seq:" << seq;
 }
 
-void Dumper::dumpStatedMessages(const QList<Message> &messages, const QList<Chat> &chats, const QList<User> &users, const QList<ContactsLink> &links, qint32 pts, qint32 seq) {
+void Dumper::dumpStatedMessages(const QList<Message> &messages, const QList<Chat> &chats, const QList<User> &users, const QList<ContactsLink> &links, qint32 pts, qint32 seq)
+{
     qDebug() << "Messages:";
     Q_FOREACH (Message message, messages) {
         Dumper::dumpMessage(message);
@@ -628,7 +658,8 @@ void Dumper::dumpStatedMessages(const QList<Message> &messages, const QList<Chat
     qDebug() << "seq:" << seq;
 }
 
-void Dumper::dumpChatParticipants(const ChatParticipants &cps) {
+void Dumper::dumpChatParticipants(const ChatParticipants &cps)
+{
     qDebug() << "#ChatParticipants";
     qDebug() << "chatId:" << cps.chatId();
     if (cps.classType() == ChatParticipants::typeChatParticipants) {
@@ -642,7 +673,8 @@ void Dumper::dumpChatParticipants(const ChatParticipants &cps) {
     }
 }
 
-void Dumper::dumpChatFull(const ChatFull &chat) {
+void Dumper::dumpChatFull(const ChatFull &chat)
+{
     qDebug() << "#ChatFull";
     qDebug() << "chatFullId:" << chat.id();
     dumpChatParticipants(chat.participants());
@@ -650,7 +682,8 @@ void Dumper::dumpChatFull(const ChatFull &chat) {
     dumpPeerNotifySettings(chat.notifySettings());
 }
 
-void Dumper::dumpEncryptedMessage(const EncryptedMessage &msg) {
+void Dumper::dumpEncryptedMessage(const EncryptedMessage &msg)
+{
     qDebug() << "#EncryptedMessage";
     qDebug() << "randomId:" << msg.randomId();
     qDebug() << "chatId:" << msg.chatId();
@@ -661,7 +694,8 @@ void Dumper::dumpEncryptedMessage(const EncryptedMessage &msg) {
     }
 }
 
-void Dumper::dumpEncryptedFile(const EncryptedFile &file) {
+void Dumper::dumpEncryptedFile(const EncryptedFile &file)
+{
     qDebug() << "#EncryptedFile";
     if (file.classType() == EncryptedFile::typeEncryptedFile) {
         qDebug() << "id:" << file.id();
@@ -672,7 +706,8 @@ void Dumper::dumpEncryptedFile(const EncryptedFile &file) {
     }
 }
 
-void Dumper::dumpUpdatesState(const UpdatesState &update) {
+void Dumper::dumpUpdatesState(const UpdatesState &update)
+{
     qDebug() << "#UpdatesState";
     qDebug() << "pts:" << update.pts();
     qDebug() << "qts:" << update.qts();
@@ -681,7 +716,8 @@ void Dumper::dumpUpdatesState(const UpdatesState &update) {
     qDebug() << "unreadCount:" << update.unreadCount();
 }
 
-void Dumper::dumpWallPaper(const WallPaper &wallPaper) {
+void Dumper::dumpWallPaper(const WallPaper &wallPaper)
+{
     qDebug() << "#WallPaper";
     qDebug() << "id:" << wallPaper.id();
     qDebug() << "title:" << wallPaper.title();
@@ -695,17 +731,18 @@ void Dumper::dumpWallPaper(const WallPaper &wallPaper) {
     qDebug() << "color:" << wallPaper.color();
 }
 
-void Dumper::dumpStorageFileType(const StorageFileType &type) {
+void Dumper::dumpStorageFileType(const StorageFileType &type)
+{
     switch (type.classType()) {
-    case StorageFileType::typeStorageFileUnknown: qDebug() << "file type: unknown"; break;
-    case StorageFileType::typeStorageFileJpeg: qDebug() << "file type: jpeg"; break;
-    case StorageFileType::typeStorageFileGif: qDebug() << "file type: gif"; break;
-    case StorageFileType::typeStorageFilePng: qDebug() << "file type: png"; break;
-    case StorageFileType::typeStorageFilePdf: qDebug() << "file type: pdf"; break;
-    case StorageFileType::typeStorageFileMp3: qDebug() << "file type: mp3"; break;
-    case StorageFileType::typeStorageFileMov: qDebug() << "file type: mov"; break;
-    case StorageFileType::typeStorageFilePartial: qDebug() << "file type: partial"; break;
-    case StorageFileType::typeStorageFileMp4: qDebug() << "file type: mp4"; break;
-    case StorageFileType::typeStorageFileWebp: qDebug() << "file type: webp"; break;
+        case StorageFileType::typeStorageFileUnknown: qDebug() << "file type: unknown"; break;
+        case StorageFileType::typeStorageFileJpeg: qDebug() << "file type: jpeg"; break;
+        case StorageFileType::typeStorageFileGif: qDebug() << "file type: gif"; break;
+        case StorageFileType::typeStorageFilePng: qDebug() << "file type: png"; break;
+        case StorageFileType::typeStorageFilePdf: qDebug() << "file type: pdf"; break;
+        case StorageFileType::typeStorageFileMp3: qDebug() << "file type: mp3"; break;
+        case StorageFileType::typeStorageFileMov: qDebug() << "file type: mov"; break;
+        case StorageFileType::typeStorageFilePartial: qDebug() << "file type: partial"; break;
+        case StorageFileType::typeStorageFileMp4: qDebug() << "file type: mp4"; break;
+        case StorageFileType::typeStorageFileWebp: qDebug() << "file type: webp"; break;
     }
 }

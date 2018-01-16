@@ -34,11 +34,13 @@
 using namespace bb::device;
 
 Utils::Utils(QObject *parent) :
-    QObject(parent)
+        QObject(parent)
 {
+    // ..
 }
 
-qint32 Utils::randomBytes(void *buffer, qint32 count) {
+qint32 Utils::randomBytes(void *buffer, qint32 count)
+{
     qint32 returnValue = RAND_bytes ((uchar *)buffer, count);
     if (returnValue < 0) {
         returnValue = RAND_pseudo_bytes ((uchar *)buffer, count);
@@ -46,7 +48,8 @@ qint32 Utils::randomBytes(void *buffer, qint32 count) {
     return returnValue;
 }
 
-qint32 Utils::serializeBignum(BIGNUM *b, char *buffer, qint32 maxlen) {
+qint32 Utils::serializeBignum(BIGNUM *b, char *buffer, qint32 maxlen)
+{
     qint32 itslen = BN_num_bytes (b);
     qint32 reqlen;
     if (itslen < 254) {
@@ -75,7 +78,8 @@ qint32 Utils::serializeBignum(BIGNUM *b, char *buffer, qint32 maxlen) {
     return reqlen;
 }
 
-double Utils::getUTime(qint32 clockId) {
+double Utils::getUTime(qint32 clockId)
+{
     struct timespec T;
     qint32 success = clock_gettime(clockId, &T);
     Q_UNUSED(success);
@@ -84,34 +88,36 @@ double Utils::getUTime(qint32 clockId) {
     return res;
 }
 
-quint64 Utils::gcd(quint64 a, quint64 b) {
-  return b ? gcd (b, a % b) : a;
+quint64 Utils::gcd(quint64 a, quint64 b)
+{
+    return b ? gcd (b, a % b) : a;
 }
 
-qint32 Utils::check_g (uchar p[256], BIGNUM *g) {
+qint32 Utils::check_g (uchar p[256], BIGNUM *g)
+{
     static uchar s[256];
     memset (s, 0, 256);
     Q_ASSERT(BN_num_bytes (g) <= 256);
     BN_bn2bin (g, s);
     qint32 ok = 0;
     qint32 i;
-    for (i = 0; i < 64; i++) {
+    for(i = 0; i < 64; i++) {
         if (s[i]) {
             ok = 1;
             break;
         }
     }
-    if (!ok) { return -1; }
+    if(!ok) { return -1; }
     ok = 0;
-    for (i = 0; i < 64; i++) {
+    for(i = 0; i < 64; i++) {
         if (s[255 - i]) {
             ok = 1;
             break;
         }
     }
-    if (!ok) { return -1; }
+    if(!ok) { return -1; }
     ok = 0;
-    for (i = 0; i < 64; i++) {
+    for(i = 0; i < 64; i++) {
         if (s[i] < p[i]) {
             ok = 1;
             break;
@@ -120,11 +126,12 @@ qint32 Utils::check_g (uchar p[256], BIGNUM *g) {
             return -1;
         }
     }
-    if (!ok) { return -1; }
+    if(!ok) { return -1; }
     return 0;
 }
 
-qint32 Utils::check_g_bn (BIGNUM *p, BIGNUM *g) {
+qint32 Utils::check_g_bn (BIGNUM *p, BIGNUM *g)
+{
     static uchar s[256];
     memset (s, 0, 256);
     Q_ASSERT(BN_num_bytes (p) <= 256);
@@ -132,27 +139,31 @@ qint32 Utils::check_g_bn (BIGNUM *p, BIGNUM *g) {
     return check_g (s, g);
 }
 
-void Utils::ensurePtr(void *p) {
-    if (p == NULL) {
+void Utils::ensurePtr(void *p)
+{
+    if(p == NULL) {
         qFatal("Out of memory");
         exit (1);
     }
 }
 
-void Utils::ensure (qint32 r) {
-  if (!r) {
-    ERR_print_errors_fp (stderr);
-    Q_ASSERT(0);
-  }
+void Utils::ensure (qint32 r)
+{
+    if(!r) {
+        ERR_print_errors_fp (stderr);
+        Q_ASSERT(0);
+    }
 }
 
-void Utils::freeSecure(void *ptr, qint32 size) {
-    if (!ptr) return;
+void Utils::freeSecure(void *ptr, qint32 size)
+{
+    if(!ptr) return;
     memset (ptr, 0, size);
     free (ptr);
 }
 
-RSA *Utils::rsaLoadPublicKey() {
+RSA *Utils::rsaLoadPublicKey()
+{
     QString publicKeyName = "tg.pub";
     RSA *pubKey = NULL;
     FILE *f = fopen ("app/native/assets/tg.pub", "r");
@@ -170,7 +181,8 @@ RSA *Utils::rsaLoadPublicKey() {
     return pubKey;
 }
 
-qint64 Utils::computeRSAFingerprint(RSA *key) {
+qint64 Utils::computeRSAFingerprint(RSA *key)
+{
     static char tempbuff[4096];
     static uchar sha[20];
     Q_ASSERT(key->n && key->e);
@@ -182,25 +194,27 @@ qint64 Utils::computeRSAFingerprint(RSA *key) {
     return *(qint64 *)(sha + 12);
 }
 
-void *Utils::talloc(size_t size) {
-#ifdef DEBUG
-  total_allocated_bytes += size;
-  void *p = malloc (size + RES_PRE + RES_AFTER);
-  ensurePtr (p);
-  *(qint32 *)p = size ^ 0xbedabeda;
-  *(qint32 *)(p + 4) = size;
-  *(qint32 *)(p + RES_PRE + size) = size ^ 0x7bed7bed;
-  *(qint32 *)(p + RES_AFTER + 4 + size) = usedBlocks;
-  blocks[usedBlocks ++] = p;
-  return p + 8;
-#else
-  void *p = malloc (size);
-  ensurePtr (p);
-  return p;
-#endif
+void *Utils::talloc(size_t size)
+{
+    #ifdef DEBUG
+        total_allocated_bytes += size;
+        void *p = malloc (size + RES_PRE + RES_AFTER);
+        ensurePtr (p);
+        *(qint32 *)p = size ^ 0xbedabeda;
+        *(qint32 *)(p + 4) = size;
+        *(qint32 *)(p + RES_PRE + size) = size ^ 0x7bed7bed;
+        *(qint32 *)(p + RES_AFTER + 4 + size) = usedBlocks;
+        blocks[usedBlocks ++] = p;
+        return p + 8;
+    #else
+        void *p = malloc (size);
+        ensurePtr (p);
+        return p;
+    #endif
 }
 
-qint32 Utils::tinflate(void *input, qint32 ilen, void *output, qint32 olen) {
+qint32 Utils::tinflate(void *input, qint32 ilen, void *output, qint32 olen)
+{
     z_stream strm;
     memset(&strm, 0, sizeof (strm));
     qint32 inflateResult = inflateInit2(&strm, 16 + MAX_WBITS);
@@ -218,11 +232,13 @@ qint32 Utils::tinflate(void *input, qint32 ilen, void *output, qint32 olen) {
     return totalOut;
 }
 
-QString Utils::toHex(qint32 x) {
+QString Utils::toHex(qint32 x)
+{
     return "0x" + QString::number(static_cast<quint32>(x), 16);
 }
 
-QString Utils::toHex(void *buffer, qint32 size) {
+QString Utils::toHex(void *buffer, qint32 size)
+{
     QByteArray array((char *)buffer, size);
     QByteArray hexArray = array.toHex();
     QString sb;
@@ -243,11 +259,13 @@ QString Utils::toHex(void *buffer, qint32 size) {
     return sb;
 }
 
-BIGNUM *Utils::padBytesAndGetBignum(const QByteArray &gAOrB) {
-    // padding of B (gAOrB) to have exactly 256 bytes
+BIGNUM *Utils::padBytesAndGetBignum(const QByteArray &gAOrB)
+{
+    // Padding of B (gAOrB) to have exactly 256 bytes
     uchar paddedGAOrB[256];
     qint32 length = gAOrB.length();
-    // check that size of
+
+    // Check that size of
     uchar *rawGAOrB = (uchar *)gAOrB.data();
     if (length < 256) {
       memcpy (paddedGAOrB + 256 - length, rawGAOrB, length);
@@ -259,46 +277,50 @@ BIGNUM *Utils::padBytesAndGetBignum(const QByteArray &gAOrB) {
     return bigNumGAOrB;
 }
 
-BIGNUM *Utils::bytesToBignum(const QByteArray &bytes) {
+BIGNUM *Utils::bytesToBignum(const QByteArray &bytes)
+{
     uchar *data = (uchar *)bytes.data();
     qint32 length = bytes.length();
     BIGNUM *bignum = BN_bin2bn(data, length, 0);
     return bignum;
 }
 
-QByteArray Utils::bignumToBytes(BIGNUM *bignum) {
+QByteArray Utils::bignumToBytes(BIGNUM *bignum)
+{
     qint32 length = BN_num_bytes(bignum);
     uchar data[length];
     BN_bn2bin(bignum, data);
     return QByteArray((char *)data, length);
 }
 
-qint64 Utils::getKeyFingerprint(uchar *sharedKey) {
+qint64 Utils::getKeyFingerprint(uchar *sharedKey)
+{
     uchar shaBuffer[20];
     SHA1(sharedKey, 256, shaBuffer);
     qint64 keyFingerprint = *(qint64 *)(shaBuffer + 12);
     return keyFingerprint;
 }
 
-QString Utils::getDeviceModel() {
+QString Utils::getDeviceModel()
+{
 //    mHardwareInfo = new ;
 //    HardwareInfo info;
-
 //   qDebug()<< "the device name  is ::\n" << info.deviceName()<< "imei number \n" << info.imei()<<"the model name "<<info.modelName();
-
     return QString("Expert");
 }
 
-QString Utils::getSystemVersion() {
-
+QString Utils::getSystemVersion()
+{
     return QString("BB10");
 }
 
-QString Utils::getAppVersion() {
+QString Utils::getAppVersion()
+{
     return TELEGA_VERSION " (build " TELEGA_BUILD ")";
 }
 
-QString Utils::parsePhoneNumberDigits(const QString &phoneNumber) {
+QString Utils::parsePhoneNumberDigits(const QString &phoneNumber)
+{
     // Only allowing + and [0..9] chars
     QString filteredChars;
 

@@ -1,19 +1,16 @@
 #include "VirtualKeyboardHandler.hpp"
 #include <bps/event.h>
 #include "bps/virtualkeyboard.h"
-
 #include <bb/device/HardwareInfo>
-
 #include <QObject>
 #include <QDebug>
 
 VirtualKeyboardHandler::VirtualKeyboardHandler() :
-    pHeight(0),
-    pVisible(false),
-    pIsPhysicalKeyboardDevice(false)
+        pHeight(0),
+        pVisible(false),
+        pIsPhysicalKeyboardDevice(false)
 {
     subscribe(virtualkeyboard_get_domain());
-
     if (bps_initialize() == BPS_SUCCESS) {
         if (virtualkeyboard_request_events(0) != BPS_SUCCESS) {
             qWarning("BPS: Failed to register for virtual keyboard events");

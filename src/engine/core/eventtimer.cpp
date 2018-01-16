@@ -22,13 +22,14 @@
 #include <QDebug> //remove when not needed
 
 EventTimer::EventTimer(qint64 msgId, qint32 timeout, QObject *parent) :
-    QTimer(parent), m_msgId(msgId) {
-
+        QTimer(parent), m_msgId(msgId)
+{
     this->setSingleShot(true);
     this->setInterval(timeout);
     connect(this, SIGNAL(timeout()), this, SLOT(onTimeout()));
 }
 
-void EventTimer::onTimeout() {
+void EventTimer::onTimeout()
+{
     Q_EMIT timerTimeout(m_msgId);
 }

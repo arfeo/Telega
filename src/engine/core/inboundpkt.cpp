@@ -20,47 +20,53 @@
  */
 
 #include "inboundpkt.h"
-
 #include <QDebug>
 #include "utils.h"
 #include "tlvalues.h"
 
-
-
-InboundPkt::InboundPkt(char *buffer, qint32 length) {
+InboundPkt::InboundPkt(char *buffer, qint32 length)
+{
     this->m_buffer = buffer;
     this->m_length = length;
 }
 
-const char *InboundPkt::buffer() const{
+const char *InboundPkt::buffer() const
+{
     return m_buffer;
 }
 
-qint32 InboundPkt::length() const {
+qint32 InboundPkt::length() const
+{
     return m_length;
 }
 
-void InboundPkt::setInPtr(qint32 *inPtr) {
+void InboundPkt::setInPtr(qint32 *inPtr)
+{
     this->m_inPtr = inPtr;
 }
 
-void InboundPkt::setInEnd(qint32 *inEnd) {
+void InboundPkt::setInEnd(qint32 *inEnd)
+{
     this->m_inEnd = inEnd;
 }
 
-qint32 *InboundPkt::inPtr() {
+qint32 *InboundPkt::inPtr()
+{
     return m_inPtr;
 }
 
-qint32 *InboundPkt::inEnd() {
+qint32 *InboundPkt::inEnd()
+{
     return m_inEnd;
 }
 
-void InboundPkt::forwardInPtr(qint32 positions) {
+void InboundPkt::forwardInPtr(qint32 positions)
+{
     m_inPtr += positions;
 }
 
-qint32 InboundPkt::prefetchStrlen() {
+qint32 InboundPkt::prefetchStrlen()
+{
     if (m_inPtr >= m_inEnd) {
         return -1;
     }
@@ -76,25 +82,29 @@ qint32 InboundPkt::prefetchStrlen() {
     }
 }
 
-qint32 InboundPkt::prefetchInt() {
-  Q_ASSERT(m_inPtr < m_inEnd);
-  return *(m_inPtr);
+qint32 InboundPkt::prefetchInt()
+{
+    Q_ASSERT(m_inPtr < m_inEnd);
+    return *(m_inPtr);
 }
 
-qint32 InboundPkt::fetchInt() {
+qint32 InboundPkt::fetchInt()
+{
     Q_ASSERT(m_inPtr + 1 <= m_inEnd);
 //    qDebug() << "fetchInt()" << *m_inPtr << " (" << Utils::toHex(*m_inPtr) << ")";
     return *(m_inPtr ++);
 }
 
-bool InboundPkt::fetchBool() {
+bool InboundPkt::fetchBool()
+{
     Q_ASSERT(m_inPtr + 1 <= m_inEnd);
     ASSERT(*(m_inPtr) == (qint32)TL_BoolTrue || *(m_inPtr) == (qint32)TL_BoolFalse);
 //    qCDebug(TG_NET_FETCH) << "fetchBool()" << (*(m_inPtr) == (qint32)TL_BoolTrue) << " (" << Utils::toHex(*m_inPtr) << ")";
     return *(m_inPtr++) == (qint32)TL_BoolTrue;
 }
 
-qint64 InboundPkt::fetchLong() {
+qint64 InboundPkt::fetchLong()
+{
     Q_ASSERT(m_inPtr + 2 <= m_inEnd);
     qint64 r = *(qint64 *)m_inPtr;
 //    qDebug() << "fetchLong()" <<  r ;
@@ -102,7 +112,8 @@ qint64 InboundPkt::fetchLong() {
     return r;
 }
 
-qint32 *InboundPkt::fetchInts(qint32 count) {
+qint32 *InboundPkt::fetchInts(qint32 count)
+{
     Q_ASSERT(m_inPtr + count <= m_inEnd);
     qint32 *data = (qint32 *)Utils::talloc(4 * count);
     memcpy (data, m_inPtr, 4 * count);
@@ -110,16 +121,17 @@ qint32 *InboundPkt::fetchInts(qint32 count) {
     return data;
 }
 
-double InboundPkt::fetchDouble() {
+double InboundPkt::fetchDouble()
+{
     Q_ASSERT(m_inPtr + 2 <= m_inEnd);
     double r = *(double *)m_inPtr;
     m_inPtr += 2;
     return r;
 }
 
-char *InboundPkt::fetchStr(qint32 len) {
+char *InboundPkt::fetchStr(qint32 len)
+{
     Q_ASSERT(len >= 0);
-
     char *str;
     if (len < 254) {
         str = (char *)m_inPtr + 1;
@@ -132,20 +144,23 @@ char *InboundPkt::fetchStr(qint32 len) {
     return str;
 }
 
-QString InboundPkt::fetchQString() {
+QString InboundPkt::fetchQString()
+{
     qint32 l = prefetchStrlen();
 //    qDebug() << "Qstring " << QString::fromUtf8(fetchStr(l),l);
     return QString::fromUtf8(fetchStr(l),l);
 }
 
-QByteArray InboundPkt::fetchBytes() {
+QByteArray InboundPkt::fetchBytes()
+{
     qint32 l = prefetchStrlen();
     char *bytes = fetchStr(l);
     // http://qt-project.org/doc/qt-4.8/qbytearray.html#fromRawData
     return QByteArray::fromRawData(bytes, l);
 }
 
-qint32 InboundPkt::fetchBignum (BIGNUM *x) {
+qint32 InboundPkt::fetchBignum (BIGNUM *x)
+{
     qint32 l = prefetchStrlen();
     if (l < 0) {
         return l;
@@ -157,25 +172,26 @@ qint32 InboundPkt::fetchBignum (BIGNUM *x) {
     return l;
 }
 
-qint32 InboundPkt::fetchDate() {
+qint32 InboundPkt::fetchDate()
+{
   qint32 p = fetchInt ();
   // TODO must we take account about last_date ??
   return p;
 }
 
-DcOption InboundPkt::fetchDcOption() {
+DcOption InboundPkt::fetchDcOption()
+{
     DcOption dcOption;
-
     ASSERT(fetchInt() == DcOption::typeDcOption);
     dcOption.setId(fetchInt());
     dcOption.setHostname(fetchQString());
     dcOption.setIpAddress(fetchQString());
     dcOption.setPort(fetchInt());
-
     return dcOption;
 }
 
-User InboundPkt::fetchUser() {
+User InboundPkt::fetchUser()
+{
     qint32 x = fetchInt();
     ASSERT(x == (qint32)User::typeUserEmpty ||
              x == (qint32)User::typeUserSelf ||
@@ -205,7 +221,8 @@ User InboundPkt::fetchUser() {
     return user;
 }
 
-UserProfilePhoto InboundPkt::fetchUserProfilePhoto() {
+UserProfilePhoto InboundPkt::fetchUserProfilePhoto()
+{
     qint32 x = fetchInt();
     ASSERT(x == (qint32)UserProfilePhoto::typeUserProfilePhotoEmpty || x == (qint32)UserProfilePhoto::typeUserProfilePhoto);
     UserProfilePhoto upp((UserProfilePhoto::UserProfilePhotoType)x);
@@ -217,7 +234,8 @@ UserProfilePhoto InboundPkt::fetchUserProfilePhoto() {
     return upp;
 }
 
-FileLocation InboundPkt::fetchFileLocation() {
+FileLocation InboundPkt::fetchFileLocation()
+{
     qint32 x = fetchInt();
     ASSERT(x == (qint32)FileLocation::typeFileLocationUnavailable || x == (qint32)FileLocation::typeFileLocation);
     FileLocation fl((FileLocation::FileLocationType)x);
@@ -230,7 +248,8 @@ FileLocation InboundPkt::fetchFileLocation() {
     return fl;
 }
 
-UserStatus InboundPkt::fetchUserStatus() {
+UserStatus InboundPkt::fetchUserStatus()
+{
     qint32 x = fetchInt();
     ASSERT(x == (qint32)UserStatus::typeUserStatusEmpty || x == (qint32)UserStatus::typeUserStatusOnline || x == (qint32)UserStatus::typeUserStatusOffline);
     UserStatus us((UserStatus::UserStatusType)x);
@@ -243,7 +262,8 @@ UserStatus InboundPkt::fetchUserStatus() {
     return us;
 }
 
-Chat InboundPkt::fetchChat() {
+Chat InboundPkt::fetchChat()
+{
     qint32 x = fetchInt();
     ASSERT(x == (qint32)Chat::typeChatEmpty || x == (qint32)Chat::typeChat || x == (qint32)Chat::typeChatForbidden || x == (qint32)Chat::typeGeoChat);
     Chat chat((Chat::ChatType)x);
@@ -275,7 +295,8 @@ Chat InboundPkt::fetchChat() {
     return chat;
 }
 
-GeoPoint InboundPkt::fetchGeoPoint() {
+GeoPoint InboundPkt::fetchGeoPoint()
+{
     qint32 x = fetchInt();
     ASSERT(x == (qint32)GeoPoint::typeGeoPointEmpty || x == (qint32)GeoPoint::typeGeoPoint);
     GeoPoint geoPoint((GeoPoint::GeoPointType)x);
@@ -286,7 +307,8 @@ GeoPoint InboundPkt::fetchGeoPoint() {
     return geoPoint;
 }
 
-ChatPhoto InboundPkt::fetchChatPhoto() {
+ChatPhoto InboundPkt::fetchChatPhoto()
+{
     qint32 x = fetchInt();
     ASSERT(x == (qint32)ChatPhoto::typeChatPhotoEmpty || x == (qint32)ChatPhoto::typeChatPhoto);
     ChatPhoto chatPhoto((ChatPhoto::ChatPhotoType)x);
@@ -297,7 +319,8 @@ ChatPhoto InboundPkt::fetchChatPhoto() {
     return chatPhoto;
 }
 
-Dialog InboundPkt::fetchDialog() {
+Dialog InboundPkt::fetchDialog()
+{
     ASSERT(fetchInt() == (qint32)Dialog::typeDialog);
     Dialog d;
     d.setPeer(fetchPeer());
@@ -307,7 +330,8 @@ Dialog InboundPkt::fetchDialog() {
     return d;
 }
 
-Peer InboundPkt::fetchPeer() {
+Peer InboundPkt::fetchPeer()
+{
     qint32 x = fetchInt();
     ASSERT(x == (qint32)Peer::typePeerUser || x == (qint32)Peer::typePeerChat);
     Peer peer((Peer::PeerType)x);
@@ -320,7 +344,8 @@ Peer InboundPkt::fetchPeer() {
     return peer;
 }
 
-PeerNotifySettings InboundPkt::fetchPeerNotifySetting() {
+PeerNotifySettings InboundPkt::fetchPeerNotifySetting()
+{
     qint32 x = fetchInt();
     ASSERT(x == (qint32)PeerNotifySettings::typePeerNotifySettingsEmpty || x == (qint32)PeerNotifySettings::typePeerNotifySettings);
     PeerNotifySettings pns((PeerNotifySettings::PeerNotifySettingsType)x);
@@ -333,7 +358,8 @@ PeerNotifySettings InboundPkt::fetchPeerNotifySetting() {
     return pns;
 }
 
-Message InboundPkt::fetchMessage() {
+Message InboundPkt::fetchMessage()
+{
     qint32 x = fetchInt();
     ASSERT(x == (qint32)Message::typeMessageEmpty || x == (qint32)Message::typeMessage || x == (qint32)Message::typeMessageForwarded || x == (qint32)Message::typeMessageService);
     Message message((Message::MessageType)x);
@@ -358,7 +384,8 @@ Message InboundPkt::fetchMessage() {
     return message;
 }
 
-MessageAction InboundPkt::fetchMessageAction() {
+MessageAction InboundPkt::fetchMessageAction()
+{
     qint32 x = fetchInt();
     ASSERT(x == (qint32)MessageAction::typeMessageActionEmpty ||
              x == (qint32)MessageAction::typeMessageActionChatCreate ||
@@ -397,7 +424,8 @@ MessageAction InboundPkt::fetchMessageAction() {
     return messageAction;
 }
 
-Photo InboundPkt::fetchPhoto() {
+Photo InboundPkt::fetchPhoto()
+{
     qint32 x = fetchInt();
     ASSERT(x == (qint32)Photo::typePhotoEmpty || x == (qint32)Photo::typePhoto);
     Photo photo((Photo::PhotoType)x);
@@ -419,7 +447,8 @@ Photo InboundPkt::fetchPhoto() {
     return photo;
 }
 
-PhotoSize InboundPkt::fetchPhotoSize() {
+PhotoSize InboundPkt::fetchPhotoSize()
+{
     qint32 x = fetchInt();
     ASSERT(x == (qint32)PhotoSize::typePhotoSizeEmpty || x == (qint32)PhotoSize::typePhotoSize || x == (qint32)PhotoSize::typePhotoCachedSize);
     PhotoSize ps((PhotoSize::PhotoSizeType)x);
@@ -437,7 +466,8 @@ PhotoSize InboundPkt::fetchPhotoSize() {
     return ps;
 }
 
-MessageMedia InboundPkt::fetchMessageMedia() {
+MessageMedia InboundPkt::fetchMessageMedia()
+{
     qint32 x = fetchInt();
     ASSERT(x == (qint32)MessageMedia::typeMessageMediaEmpty ||
              x == (qint32)MessageMedia::typeMessageMediaPhoto ||
@@ -477,7 +507,8 @@ MessageMedia InboundPkt::fetchMessageMedia() {
     return media;
 }
 
-Video InboundPkt::fetchVideo() {
+Video InboundPkt::fetchVideo()
+{
     qint32 x = fetchInt();
     ASSERT(x == (qint32)Video::typeVideoEmpty || x == (qint32)Video::typeVideo);
     Video video((Video::VideoType)x);
@@ -498,7 +529,8 @@ Video InboundPkt::fetchVideo() {
     return video;
 }
 
-Document InboundPkt::fetchDocument() {
+Document InboundPkt::fetchDocument()
+{
     qint32 x = fetchInt();
     ASSERT(x == (qint32)Document::typeDocumentEmpty || x == (qint32)Document::typeDocument);
     Document doc((Document::DocumentType)x);
@@ -516,7 +548,8 @@ Document InboundPkt::fetchDocument() {
     return doc;
 }
 
-Audio InboundPkt::fetchAudio() {
+Audio InboundPkt::fetchAudio()
+{
     qint32 x = fetchInt();
     ASSERT(x == (qint32)Audio::typeAudioEmpty || x == (qint32)Audio::typeAudio);
     Audio audio((Audio::AudioType)x);
@@ -533,7 +566,8 @@ Audio InboundPkt::fetchAudio() {
     return audio;
 }
 
-ChatParticipant InboundPkt::fetchChatParticipant() {
+ChatParticipant InboundPkt::fetchChatParticipant()
+{
     ASSERT(fetchInt() == (qint32)ChatParticipant::typeChatParticipant);
     ChatParticipant cp;
     cp.setUserId(fetchInt());
@@ -542,7 +576,8 @@ ChatParticipant InboundPkt::fetchChatParticipant() {
     return cp;
 }
 
-ChatParticipants InboundPkt::fetchChatParticipants() {
+ChatParticipants InboundPkt::fetchChatParticipants()
+{
     qint32 x = fetchInt();
     ASSERT(x == (qint32)ChatParticipants::typeChatParticipantsForbidden || x == (qint32)ChatParticipants::typeChatParticipants);
     ChatParticipants cps((ChatParticipants::ChatParticipantsType)x);
@@ -561,7 +596,8 @@ ChatParticipants InboundPkt::fetchChatParticipants() {
     return cps;
 }
 
-ContactsMyLink InboundPkt::fetchContactsMyLink() {
+ContactsMyLink InboundPkt::fetchContactsMyLink()
+{
     qint32 x = fetchInt();
     ASSERT(x == (qint32)ContactsMyLink::typeContactsMyLinkEmpty ||
              x == (qint32)ContactsMyLink::typeContactsMyLinkRequested ||
@@ -573,7 +609,8 @@ ContactsMyLink InboundPkt::fetchContactsMyLink() {
     return myLink;
 }
 
-ContactsForeignLink InboundPkt::fetchContactsForeignLink() {
+ContactsForeignLink InboundPkt::fetchContactsForeignLink()
+{
     qint32 x = fetchInt();
     ASSERT(x == (qint32)ContactsForeignLink::typeContactsForeignLinkUnknown ||
              x == (qint32)ContactsForeignLink::typeContactsForeignLinkRequested ||
@@ -585,7 +622,8 @@ ContactsForeignLink InboundPkt::fetchContactsForeignLink() {
     return foreignLink;
 }
 
-GeoChatMessage InboundPkt::fetchGeoChatMessage() {
+GeoChatMessage InboundPkt::fetchGeoChatMessage()
+{
     qint32 x = fetchInt();
     ASSERT(x == (qint32)GeoChatMessage::typeGeoChatMessageEmpty ||
              x == (qint32)GeoChatMessage::typeGeoChatMessage ||
@@ -606,7 +644,8 @@ GeoChatMessage InboundPkt::fetchGeoChatMessage() {
     return msg;
 }
 
-Contact InboundPkt::fetchContact() {
+Contact InboundPkt::fetchContact()
+{
     ASSERT(fetchInt() == (qint32)Contact::typeContact);
     Contact c;
     c.setUserId(fetchInt());
@@ -614,7 +653,8 @@ Contact InboundPkt::fetchContact() {
     return c;
 }
 
-Update InboundPkt::fetchUpdate() {
+Update InboundPkt::fetchUpdate()
+{
     qint32 x = fetchInt();
     ASSERT(x == (qint32)Update::typeUpdateNewMessage ||
              x == (qint32)Update::typeUpdateMessageID ||
@@ -762,7 +802,8 @@ Update InboundPkt::fetchUpdate() {
     return update;
 }
 
-NotifyPeer InboundPkt::fetchNotifyPeer() {
+NotifyPeer InboundPkt::fetchNotifyPeer()
+{
     qint32 x = fetchInt();
     ASSERT(x == (qint32)NotifyPeer::typeNotifyPeer ||
              x == (qint32)NotifyPeer::typeNotifyUsers ||
@@ -775,7 +816,8 @@ NotifyPeer InboundPkt::fetchNotifyPeer() {
     return notifyPeer;
 }
 
-ContactsLink InboundPkt::fetchContactsLink() {
+ContactsLink InboundPkt::fetchContactsLink()
+{
     ASSERT(fetchInt() == (qint32)ContactsLink::typeContactsLink);
     ContactsLink link;
     link.setMyLink(fetchContactsMyLink());
@@ -784,7 +826,8 @@ ContactsLink InboundPkt::fetchContactsLink() {
     return link;
 }
 
-ContactStatus InboundPkt::fetchContactStatus() {
+ContactStatus InboundPkt::fetchContactStatus()
+{
     ASSERT(fetchInt() == (qint32)ContactStatus::typeContactStatus);
     ContactStatus status;
     status.setUserId(fetchInt());
@@ -792,7 +835,8 @@ ContactStatus InboundPkt::fetchContactStatus() {
     return status;
 }
 
-ImportedContact InboundPkt::fetchImportedContact() {
+ImportedContact InboundPkt::fetchImportedContact()
+{
     ASSERT(fetchInt() == (qint32)ImportedContact::typeImportedContact);
     ImportedContact ic;
     ic.setUserId(fetchInt());
@@ -800,7 +844,8 @@ ImportedContact InboundPkt::fetchImportedContact() {
     return ic;
 }
 
-ContactBlocked InboundPkt::fetchContactBlocked() {
+ContactBlocked InboundPkt::fetchContactBlocked()
+{
     ASSERT(fetchInt() == (qint32)ContactBlocked::typeContactBlocked);
     ContactBlocked cb;
     cb.setUserId(fetchInt());
@@ -808,7 +853,8 @@ ContactBlocked InboundPkt::fetchContactBlocked() {
     return cb;
 }
 
-StorageFileType InboundPkt::fetchStorageFileType() {
+StorageFileType InboundPkt::fetchStorageFileType()
+{
     qint32 x = fetchInt();
     ASSERT(x == (qint32)StorageFileType::typeStorageFileUnknown ||
              x == (qint32)StorageFileType::typeStorageFileJpeg ||
@@ -824,7 +870,8 @@ StorageFileType InboundPkt::fetchStorageFileType() {
     return sft;
 }
 
-ChatFull InboundPkt::fetchChatFull() {
+ChatFull InboundPkt::fetchChatFull()
+{
     ASSERT(fetchInt() == (qint32)ChatFull::typeChatFull);
     ChatFull c;
     c.setId(fetchInt());
@@ -834,7 +881,8 @@ ChatFull InboundPkt::fetchChatFull() {
     return c;
 }
 
-EncryptedMessage InboundPkt::fetchEncryptedMessage() {
+EncryptedMessage InboundPkt::fetchEncryptedMessage()
+{
     qint32 x = fetchInt();
     ASSERT(x == (qint32)EncryptedMessage::typeEncryptedMessage || x == (qint32)EncryptedMessage::typeEncryptedMessageService);
     EncryptedMessage msg((EncryptedMessage::EncryptedMessageType)x);
@@ -848,7 +896,8 @@ EncryptedMessage InboundPkt::fetchEncryptedMessage() {
     return msg;
 }
 
-EncryptedFile InboundPkt::fetchEncryptedFile() {
+EncryptedFile InboundPkt::fetchEncryptedFile()
+{
     qint32 x = fetchInt();
     ASSERT(x == (qint32)EncryptedFile::typeEncryptedFileEmpty || x == (qint32)EncryptedFile::typeEncryptedFile);
     EncryptedFile f((EncryptedFile::EncryptedFileType)x);
@@ -862,9 +911,8 @@ EncryptedFile InboundPkt::fetchEncryptedFile() {
     return f;
 }
 
-
-
-UpdatesState InboundPkt::fetchUpdatesState() {
+UpdatesState InboundPkt::fetchUpdatesState()
+{
     ASSERT(fetchInt() == (qint32)TL_UpdatesState);
     UpdatesState us;
     us.setPts(fetchInt());
@@ -875,7 +923,8 @@ UpdatesState InboundPkt::fetchUpdatesState() {
     return us;
 }
 
-EncryptedChat InboundPkt::fetchEncryptedChat() {
+EncryptedChat InboundPkt::fetchEncryptedChat()
+{
     qint32 x = fetchInt();
     ASSERT(x == (qint32)EncryptedChat::typeEncryptedChatEmpty ||
            x == (qint32)EncryptedChat::typeEncryptedChatWaiting ||

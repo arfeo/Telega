@@ -35,18 +35,21 @@ Settings::Settings() :
     // ..
 }
 
-Settings::~Settings() {
+Settings::~Settings()
+{
     if (m_pubKey) {
         delete m_pubKey;
     }
 }
 
-Settings* Settings::getInstance() {
+Settings* Settings::getInstance()
+{
     static Settings *instance = new Settings;
     return instance;
 }
 
-bool Settings::loadSettings() {
+bool Settings::loadSettings()
+{
     qDebug() << "Entered Load Settings";
     m_pubKey = Utils::rsaLoadPublicKey();
     m_pkFingerprint = Utils::computeRSAFingerprint(m_pubKey);
@@ -55,10 +58,10 @@ bool Settings::loadSettings() {
     return true;
 }
 
-void Settings::writeAuthFile() {
+void Settings::writeAuthFile()
+{
     qDebug() << "---------------------";
     qDebug() << "Write Mode : Started" ;
-
     QSettings settings("data/auth", QSettings::IniFormat);
     settings.beginGroup(ST_PRODUCTION);
     settings.setValue(ST_WORKING_DC_NUM, m_workingDcNum);
@@ -87,7 +90,8 @@ void Settings::writeAuthFile() {
     qDebug() << "---------------------";
 }
 
-void Settings::readAuthFile() {
+void Settings::readAuthFile()
+{
     qDebug() << " ---------------- " ;
     qDebug() << "Read Mode : Started" ;
     QSettings settings("data/auth", QSettings::IniFormat);
@@ -98,7 +102,6 @@ void Settings::readAuthFile() {
     // read all dcs
     m_dcsList.clear();
     qint32 n = settings.beginReadArray(ST_DCS_ARRAY);
-
     for (qint32 i = 0; i < n; i++) {
         settings.setArrayIndex(i);
         qint32 dcNum = settings.value(ST_DC_NUM).toInt();
@@ -118,7 +121,6 @@ void Settings::readAuthFile() {
         dc->setServerSalt(settings.value(ST_SERVER_SALT, 0).toLongLong());
         dc->setExpires(settings.value(ST_EXPIRES).toInt());
         m_dcsList.insert(dcNum, dc);
-
     }
     settings.endArray();
     settings.endGroup();
@@ -126,7 +128,8 @@ void Settings::readAuthFile() {
     qDebug() << " ---------------- " ;
 }
 
-bool Settings::removeAuthFile() {
+bool Settings::removeAuthFile()
+{
     QFile authFile("data/auth");
     if (authFile.exists()) {
         if (authFile.remove()) {
@@ -139,7 +142,8 @@ bool Settings::removeAuthFile() {
     return false;
 }
 //
-//void Settings::readSecretFile() {
+//void Settings::readSecretFile()
+//{
 //    QSettings settings(m_secretChatFilename, QSettings::IniFormat);
 //    mVersion = settings.value(ST_VERSION, 0).toInt();
 //    mG = settings.value(ST_G, 0).toInt();
@@ -183,7 +187,8 @@ bool Settings::removeAuthFile() {
 //}
 //
 //
-//void Settings::writeSecretFile() {
+//void Settings::writeSecretFile()
+//{
 //    QSettings settings(m_secretChatFilename, QSettings::IniFormat);
 //    settings.clear();
 //    settings.setValue(ST_VERSION, mVersion);

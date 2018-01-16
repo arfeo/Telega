@@ -21,12 +21,14 @@
 #include "sessionmanager.h"
 
 SessionManager::SessionManager(Session *session, QObject *parent) :
-    QObject(parent), mMainSession(session) {
+        QObject(parent), mMainSession(session)
+{
     connect(mMainSession, SIGNAL(sessionReady(DC*)), this, SIGNAL(mainSessionReady()), Qt::UniqueConnection);
     connect(mMainSession, SIGNAL(sessionClosed(qint64)), this, SIGNAL(mainSessionClosed()), Qt::UniqueConnection);
 }
 
-SessionManager::~SessionManager() {
+SessionManager::~SessionManager()
+{
     if (mMainSession) {
         mMainSession->close();
     }
@@ -37,24 +39,23 @@ SessionManager::~SessionManager() {
     }
 }
 
-Session *SessionManager::fileSession(DC *dc) {
+Session *SessionManager::fileSession(DC *dc)
+{
     Session *session;
     qint32 &resourcesAtDc = mDcResourceCounts[dc->id()];
-
     if (!resourcesAtDc) {
         session = createFileSession(dc);
     } else {
         qint64 sessionId = mDcSessionIds.value(dc->id());
         session = mFileSessions.value(sessionId);
     }
-
     resourcesAtDc++;
     // qCDebug(TG_NET_SESSION) << "session resources at DC" << dc->id() << resourcesAtDc;
-
     return session;
 }
 
-Session *SessionManager::createFileSession(DC *dc) {
+Session *SessionManager::createFileSession(DC *dc)
+{
     Session *session = createSession(dc);
     mFileSessions.insert(session->sessionId(), session);
     mDcSessionIds.insert(dc->id(), session->sessionId());
@@ -62,19 +63,20 @@ Session *SessionManager::createFileSession(DC *dc) {
     return session;
 }
 
-Session *SessionManager::createSession(DC *dc) {
+Session *SessionManager::createSession(DC *dc)
+{
     Session *session = new Session(dc, this);
     connect(session, SIGNAL(sessionClosed(qint64)), SLOT(onSessionClosed(qint64)));
     connectResponsesSignals(session);
     return session;
 }
 
-void SessionManager::onSessionReleased(qint64 sessionId) {
+void SessionManager::onSessionReleased(qint64 sessionId)
+{
     Session *session = mFileSessions.value(sessionId, 0);
     if (session) {
         qint32 &resourcesAtDc = mDcResourceCounts[session->dc()->id()];
         resourcesAtDc--;
-
         if (!resourcesAtDc) {
             session->close();
             qint32 dcId = session->dc()->id();
@@ -87,7 +89,8 @@ void SessionManager::onSessionReleased(qint64 sessionId) {
     }
 }
 
-void SessionManager::onSessionClosed(qint64 sessionId) {
+void SessionManager::onSessionClosed(qint64 sessionId)
+{
     Session *session = mFileSessions.take(sessionId);
     if (session) {
         session->deleteLater();
@@ -96,15 +99,18 @@ void SessionManager::onSessionClosed(qint64 sessionId) {
     }
 }
 
-Session *SessionManager::mainSession() {
+Session *SessionManager::mainSession()
+{
     return mMainSession;
 }
 
-void SessionManager::setMainSession(Session *session) {
+void SessionManager::setMainSession(Session *session)
+{
     mMainSession = session;
 }
 
-void SessionManager::changeMainSessionToDc(DC *dc) {
+void SessionManager::changeMainSessionToDc(DC *dc)
+{
     // remove current main session that is connected to a wrong dc
     if (mMainSession) {
         mMainSession->close();
@@ -118,7 +124,8 @@ void SessionManager::changeMainSessionToDc(DC *dc) {
     mMainSession->connectToServer();
 }
 
-void SessionManager::createMainSessionToDc(DC *dc) {
+void SessionManager::createMainSessionToDc(DC *dc)
+{
     // create session and connect to dc
     mMainSession = createSession(dc);
     qDebug() << "Creating Mains Session to DC";
@@ -128,7 +135,8 @@ void SessionManager::createMainSessionToDc(DC *dc) {
     mMainSession->connectToServer();
 }
 
-void SessionManager::resetFileSessions() {
+void SessionManager::resetFileSessions()
+{
     Q_FOREACH (Session *session, mFileSessions) {
         if (session) {
             session->close();

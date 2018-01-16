@@ -62,14 +62,17 @@ public:
     OpType opType() const { return m_type; }
 
 private:
-    // sendMedia operation attributes
+
+    // SendMedia operation attributes
     InputPeer m_peer;
     InputMedia m_inputMedia;
     qint64 mRandomId;
-    // editChatPhoto operation attributes
+
+    // EditChatPhoto operation attributes
     qint32 m_chatId;
     InputChatPhoto m_inputChatPhoto;
-    // uploadProfilePhoto operation attributes
+
+    // UploadProfilePhoto operation attributes
     QString m_caption;
     InputGeoPoint m_geoPoint;
     InputPhotoCrop m_crop;
