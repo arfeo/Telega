@@ -25,19 +25,17 @@
 
 class InputPeerNotifySettings
 {
-public:
 
+public:
     enum InputPeerNotifySettingsType {
        typeInputPeerNotifySettings = 0x46a2ce98
     };
-
     InputPeerNotifySettings() :
         m_muteUntil(0),
         m_eventsMask(0),
         m_sound(""),
         m_showPreviews(false),
         m_classType(typeInputPeerNotifySettings) {}
-
     void setMuteUntil(qint32 muteUntil) {
         m_muteUntil = muteUntil;
     }
@@ -75,5 +73,7 @@ private:
     QString m_sound;
     bool m_showPreviews;
     InputPeerNotifySettingsType m_classType;
+
 };
+
 #endif // INPUTPEERNOTIFYSETTINGS_H

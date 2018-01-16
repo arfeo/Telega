@@ -25,17 +25,15 @@
 
 class InputEncryptedChat
 {
-public:
 
+public:
     enum InputEncryptedChatType {
        typeInputEncryptedChat = 0xf141b5e1
     };
-
     InputEncryptedChat() :
         m_chatId(0),
         m_accessHash(0),
         m_classType(typeInputEncryptedChat) {}
-
     void setChatId(qint32 chatId) {
         m_chatId = chatId;
     }
@@ -59,5 +57,7 @@ private:
     qint32 m_chatId;
     qint64 m_accessHash;
     InputEncryptedChatType m_classType;
+
 };
+
 #endif // INPUTENCRYPTEDCHAT_H

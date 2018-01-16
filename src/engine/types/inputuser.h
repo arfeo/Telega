@@ -25,20 +25,18 @@
 
 class InputUser
 {
-public:
 
+public:
     enum InputUserType {
        typeInputUserEmpty = 0xb98886cf,
        typeInputUserContact = 0x86e94f65,
        typeInputUserSelf = 0xf7c1b13f,
        typeInputUserForeign = 0x655e74ff
     };
-
     InputUser(InputUserType classType = typeInputUserEmpty) :
         m_userId(0),
         m_accessHash(0),
         m_classType(classType) {}
-
     void setUserId(qint32 userId) {
         m_userId = userId;
     }
@@ -62,5 +60,7 @@ private:
     qint32 m_userId;
     qint64 m_accessHash;
     InputUserType m_classType;
+
 };
+
 #endif // INPUTUSER_H

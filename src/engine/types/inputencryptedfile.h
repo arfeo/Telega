@@ -25,15 +25,14 @@
 
 class InputEncryptedFile
 {
-public:
 
+public:
     enum InputEncryptedFileType {
        typeInputEncryptedFileUploaded = 0x64bd0306,
        typeInputEncryptedFileBigUploaded = 0x2dc173c8,
        typeInputEncryptedFileEmpty = 0x1837c364,
        typeInputEncryptedFile = 0x5a17b5e5
     };
-
     InputEncryptedFile(InputEncryptedFileType classType) :
         m_md5Checksum(""),
         m_parts(0),
@@ -41,7 +40,6 @@ public:
         m_keyFingerprint(0),
         m_accessHash(0),
         m_classType(classType) {}
-
     void setId(qint64 id) {
         m_id = id;
     }
@@ -86,5 +84,7 @@ private:
     qint32 m_keyFingerprint;
     qint64 m_accessHash;
     InputEncryptedFileType m_classType;
+
 };
+
 #endif // INPUTENCRYPTEDFILE_H

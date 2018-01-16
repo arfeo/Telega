@@ -25,19 +25,17 @@
 
 class InputContact
 {
-public:
 
+public:
     enum InputContactType {
        typeInputPhoneContact = 0xf392b7f4
     };
-
     InputContact() :
         m_firstName(""),
         m_phone(""),
         m_clientId(0),
         m_lastName(""),
         m_classType(typeInputPhoneContact) {}
-
     void setClientId(qint64 clientId) {
         m_clientId = clientId;
     }
@@ -75,5 +73,7 @@ private:
     qint64 m_clientId;
     QString m_lastName;
     InputContactType m_classType;
+
 };
+
 #endif // INPUTCONTACT_H

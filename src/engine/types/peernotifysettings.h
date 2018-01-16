@@ -25,20 +25,18 @@
 
 class PeerNotifySettings
 {
-public:
 
+public:
     enum PeerNotifySettingsType {
        typePeerNotifySettings = 0x8d5e11ee,
        typePeerNotifySettingsEmpty = 0x70a68512
     };
-
     PeerNotifySettings(PeerNotifySettingsType classType = typePeerNotifySettingsEmpty) :
         m_muteUntil(0),
         m_eventsMask(0),
         m_sound(""),
         m_showPreviews(false),
         m_classType(classType) {}
-
     void setMuteUntil(qint32 muteUntil) {
         m_muteUntil = muteUntil;
     }
@@ -76,5 +74,7 @@ private:
     QString m_sound;
     bool m_showPreviews;
     PeerNotifySettingsType m_classType;
+
 };
+
 #endif // PEERNOTIFYSETTINGS_H

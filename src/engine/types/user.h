@@ -27,8 +27,8 @@
 
 class User
 {
-public:
 
+public:
     enum UserType {
        typeUserSelf = 0x720535ec,
        typeUserContact = 0xf2fb8319,
@@ -37,7 +37,6 @@ public:
        typeUserEmpty = 0x200250ba,
        typeUserRequest = 0x22e8ceb0
     };
-
     User(UserType classType = typeUserEmpty) :
         m_id(0),
         m_accessHash(0),
@@ -48,7 +47,6 @@ public:
         m_status(UserStatus::typeUserStatusEmpty),
         m_lastName(""),
         m_classType(classType) {}
-
     void setId(qint32 id) {
         m_id = id;
     }
@@ -121,5 +119,7 @@ private:
     QString m_lastName;
     QString mUsername;
     UserType m_classType;
+
 };
+
 #endif // USER_H

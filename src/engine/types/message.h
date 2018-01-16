@@ -27,15 +27,14 @@
 
 class Message
 {
-public:
 
+public:
     enum MessageType {
        typeMessageEmpty = 0x83e5de54,
        typeMessageService = 0x9f8d60bb,
        typeMessage = 0x22eb6aba,
        typeMessageForwarded = 0x5f46804
     };
-
     Message() :
         m_id(0),
         m_toId(Peer::typePeerUser),
@@ -49,8 +48,6 @@ public:
         m_fwdFromId(0),
         m_message(""),
         m_classType(typeMessageEmpty) {}
-
-
     Message(MessageType classType) :
         m_id(0),
         m_toId(Peer::typePeerUser),
@@ -64,7 +61,6 @@ public:
         m_fwdFromId(0),
         m_message(""),
         m_classType(classType) {}
-
     void setId(qint32 id) {
         m_id = id;
     }
@@ -151,5 +147,7 @@ private:
     qint32 m_fwdFromId;
     QString m_message;
     MessageType m_classType;
+
 };
+
 #endif // MESSAGE_H

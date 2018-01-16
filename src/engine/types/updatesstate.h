@@ -25,12 +25,11 @@
 
 class UpdatesState
 {
-public:
 
+public:
     enum UpdatesStateType {
        typeUpdatesState = 0xa56c2a3e
     };
-
     UpdatesState() :
         m_seq(0),
         m_pts(0),
@@ -38,7 +37,6 @@ public:
         m_date(0),
         m_unreadCount(0),
         m_classType(typeUpdatesState) {}
-
     void setPts(qint32 pts) {
         m_pts = pts;
     }
@@ -83,5 +81,7 @@ private:
     qint32 m_date;
     qint32 m_unreadCount;
     UpdatesStateType m_classType;
+
 };
+
 #endif // UPDATESSTATE_H

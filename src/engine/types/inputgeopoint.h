@@ -20,20 +20,19 @@
 
 #ifndef INPUTGEOPOINT_H
 #define INPUTGEOPOINT_H
+
 class InputGeoPoint
 {
-public:
 
+public:
     enum InputGeoPointType {
        typeInputGeoPointEmpty = 0xe4c123d6,
        typeInputGeoPoint = 0xf3b7acc9
     };
-
     InputGeoPoint(InputGeoPointType classType) :
         m_longitude(0.0),
         m_lat(0.0),
         m_classType(classType) {}
-
     void setLat(double lat) { m_lat = lat; }
     double lat() const { return m_lat; }
     void setLongitude(double longitude) { m_longitude = longitude; }
@@ -45,5 +44,6 @@ private:
     double m_longitude;
     double m_lat;
     InputGeoPointType m_classType;
+
 };
 #endif // INPUTGEOPOINT_H

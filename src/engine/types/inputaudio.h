@@ -25,18 +25,16 @@
 
 class InputAudio
 {
-public:
 
+public:
     enum InputAudioType {
        typeInputAudio = 0x77d440ff,
        typeInputAudioEmpty = 0xd95adc84
     };
-
     InputAudio(InputAudioType classType) :
         m_id(0),
         m_accessHash(0),
         m_classType(classType) {}
-
     void setId(qint64 id) {
         m_id = id;
     }
@@ -60,5 +58,7 @@ private:
     qint64 m_id;
     qint64 m_accessHash;
     InputAudioType m_classType;
+
 };
+
 #endif // INPUTAUDIO_H

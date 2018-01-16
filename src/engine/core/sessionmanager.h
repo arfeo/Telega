@@ -26,13 +26,15 @@
 #include "session.h"
 #include "dc.h"
 
-class SessionManager : public QObject
+class SessionManager :
+        public QObject
 {
+
     Q_OBJECT
+
 public:
     explicit SessionManager(Session *session, QObject *parent = 0);
     ~SessionManager();
-
     void createMainSessionToDc(DC *dc);
     void changeMainSessionToDc(DC *dc);
     Session *mainSession();
@@ -47,22 +49,25 @@ Q_SIGNALS:
 
 protected:
     Session *mMainSession;
+
     // sessionId -> Session object
     QMap<qint64, Session *> mFileSessions;
+
     // dcId -> sessionId
     QMap<qint32, qint64> mDcSessionIds;
+
     // dcId -> 'resources using' count (files being downloading using this session)
     QMap<qint32, qint32> mDcResourceCounts;
 
     Session *createSession(DC *dc);
     Session *createFileSession(DC *dc);
-
     virtual void connectResponsesSignals(Session *session) = 0;
     virtual void connectUpdatesSignals(Session *session) = 0;
 
 private Q_SLOTS:
     void onSessionReleased(qint64 sessionId);
     void onSessionClosed(qint64 sessionId);
+
 };
 
 #endif // SESSIONMANAGER_H

@@ -25,18 +25,16 @@
 
 class ChatPhoto
 {
-public:
 
+public:
     enum ChatPhotoType {
        typeChatPhoto = 0x6153276a,
        typeChatPhotoEmpty = 0x37c1011c
     };
-
     ChatPhoto(ChatPhotoType classType) :
         m_photoBig(FileLocation::typeFileLocationUnavailable),
         m_photoSmall(FileLocation::typeFileLocationUnavailable),
         m_classType(classType) {}
-
     void setPhotoSmall(FileLocation photoSmall) {
         m_photoSmall = photoSmall;
     }
@@ -60,5 +58,7 @@ private:
     FileLocation m_photoBig;
     FileLocation m_photoSmall;
     ChatPhotoType m_classType;
+
 };
+
 #endif // CHATPHOTO_H

@@ -24,9 +24,12 @@
 #include "dc.h"
 #include <QTimer>
 
-class EventTimer : public QTimer
+class EventTimer :
+        public QTimer
 {
+
     Q_OBJECT
+
 public:
     explicit EventTimer(qint64 msgId, qint32 timeout, QObject *parent = 0);
 
@@ -38,6 +41,7 @@ private:
 
 private Q_SLOTS:
     void onTimeout();
+
 };
 
 #endif // ACKTIMER_H

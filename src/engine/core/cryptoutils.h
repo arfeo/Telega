@@ -24,29 +24,27 @@
 
 #include <QObject>
 #include "outboundpkt.h"
-
 #include <openssl/bn.h>
 #include <openssl/aes.h>
 
-class CryptoUtils : public QObject
+class CryptoUtils :
+        public QObject
 {
+
     Q_OBJECT
+
 public:
     static CryptoUtils *getInstance();
-
     qint32 encryptPacketBuffer(OutboundPkt &p, void *encryptBuffer);
     qint32 encryptPacketBufferAESUnAuth(const char serverNonce[16], const char hiddenClientNonce[32], OutboundPkt &p, void *encryptBuffer);
     qint32 padRsaEncrypt(char *from, qint32 from_len, char *to, qint32 size, BIGNUM *N, BIGNUM *E);
-
     void initAESAuth (char authKey[192], char msgKey[16], qint32 encrypt);
     void initAESUnAuth(const char serverNonce[16], const char hiddenClientNonce[32], qint32 encrypt);
     qint32 padAESDecrypt(const char *from, qint32 fromLen, char *to, qint32 size);
     qint32 padAESEncrypt(const char *from, qint32 fromLen, char *to, qint32 size);
-
     qint32 checkPrime(BIGNUM *p);
     qint32 checkDHParams(BIGNUM *p, qint32 g);
     qint32 checkCalculatedParams(const BIGNUM *gAOrB, const BIGNUM *g, const BIGNUM *p);
-
     qint32 BNModExp(BIGNUM *r, const BIGNUM *a, const BIGNUM *p, const BIGNUM *m);
 
 private:
@@ -54,12 +52,11 @@ private:
     ~CryptoUtils();
     CryptoUtils(const CryptoUtils &);
     CryptoUtils &operator=(const CryptoUtils &);
-
     static CryptoUtils *m_instance;
-
     BN_CTX *BN_ctx;
     uchar aes_key_raw[32], aes_iv[32];
     AES_KEY aes_key;
+
 };
 
 #endif // CRYPTOUTILS_H

@@ -25,13 +25,12 @@
 
 class Audio
 {
-public:
 
+public:
     enum AudioType {
        typeAudio = 0xc7ac6496,
        typeAudioEmpty = 0x586988d8
     };
-
     Audio(AudioType classType) :
         m_id(0),
         m_dcId(0),
@@ -42,7 +41,6 @@ public:
         m_accessHash(0),
         m_userId(0),
         m_classType(classType) {}
-
     void setId(qint64 id) {
         m_id = id;
     }
@@ -108,5 +106,7 @@ private:
     qint64 m_accessHash;
     qint32 m_userId;
     AudioType m_classType;
+
 };
+
 #endif // AUDIO_H

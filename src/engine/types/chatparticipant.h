@@ -25,18 +25,16 @@
 
 class ChatParticipant
 {
-public:
 
+public:
     enum ChatParticipantType {
        typeChatParticipant = 0xc8d7493e
     };
-
     ChatParticipant() :
         m_userId(0),
         m_date(0),
         m_inviterId(0),
         m_classType(typeChatParticipant) {}
-
     void setUserId(qint32 userId) {
         m_userId = userId;
     }
@@ -67,5 +65,7 @@ private:
     qint32 m_date;
     qint32 m_inviterId;
     ChatParticipantType m_classType;
+
 };
+
 #endif // CHATPARTICIPANT_H

@@ -31,8 +31,8 @@
 
 class MessageMedia
 {
-public:
 
+public:
     enum MessageMediaType {
        typeMessageMediaDocument = 0x2fda2204,
        typeMessageMediaContact = 0x5e7d2f39,
@@ -43,7 +43,6 @@ public:
        typeMessageMediaPhoto = 0xc8c45a2a,
        typeMessageMediaGeo = 0x56e0d474
     };
-
     MessageMedia(MessageMediaType classType) :
         m_audio(Audio::typeAudioEmpty),
         m_lastName(""),
@@ -56,7 +55,6 @@ public:
         m_userId(0),
         m_video(Video::typeVideoEmpty),
         m_classType(classType) {}
-
     void setDocument(Document document) {
         m_document = document;
     }
@@ -136,5 +134,7 @@ private:
     qint32 m_userId;
     Video m_video;
     MessageMediaType m_classType;
+
 };
+
 #endif // MESSAGEMEDIA_H

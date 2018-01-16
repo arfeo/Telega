@@ -25,13 +25,12 @@
 
 class Video
 {
-public:
 
+public:
     enum VideoType {
        typeVideoEmpty = 0xc10658a8,
        typeVideo = 0x388fa391
     };
-
     Video(VideoType classType) :
         m_id(0),
         m_dcId(0),
@@ -46,7 +45,6 @@ public:
         m_userId(0),
         m_w(0),
         m_classType(classType) {}
-
     void setId(qint64 id) {
         m_id = id;
     }
@@ -140,5 +138,7 @@ private:
     qint32 m_userId;
     qint32 m_w;
     VideoType m_classType;
+
 };
+
 #endif // VIDEO_H

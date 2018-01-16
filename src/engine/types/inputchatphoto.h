@@ -27,20 +27,18 @@
 
 class InputChatPhoto
 {
-public:
 
+public:
     enum InputChatPhotoType {
        typeInputChatPhoto = 0xb2e1bf08,
        typeInputChatUploadedPhoto = 0x94254732,
        typeInputChatPhotoEmpty = 0x1ca48f57
     };
-
     InputChatPhoto(InputChatPhotoType classType) :
         m_file(InputFile::typeInputFile),
         m_id(InputPhoto::typeInputPhotoEmpty),
         m_crop(InputPhotoCrop::typeInputPhotoCropAuto),
         m_classType(classType) {}
-
     void setId(InputPhoto id) {
         m_id = id;
     }
@@ -71,5 +69,7 @@ private:
     InputPhoto m_id;
     InputPhotoCrop m_crop;
     InputChatPhotoType m_classType;
+
 };
+
 #endif // INPUTCHATPHOTO_H

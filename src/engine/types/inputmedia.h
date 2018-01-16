@@ -30,8 +30,8 @@
 
 class InputMedia
 {
-public:
 
+public:
     enum InputMediaType {
        typeInputMediaUploadedDocument = 0x34e794bd,
        typeInputMediaVideo = 0x7f023ae6,
@@ -47,7 +47,6 @@ public:
        typeInputMediaContact = 0xa6e45987,
        typeInputMediaAudio = 0x89938781
     };
-
     InputMedia(InputMediaType classType) :
         m_audioId(InputAudio::typeInputAudioEmpty),
         m_photoId(InputPhoto::typeInputPhotoEmpty),
@@ -65,7 +64,6 @@ public:
         m_w(0),
         m_lastName(""),
         m_classType(classType) {}
-
     void setFile(InputFile file) { m_file = file; }
     InputFile file() const { return m_file; }
     void setFileName(const QString & fileName) { m_fileName = fileName; }
@@ -116,5 +114,7 @@ private:
     qint32 m_w;
     QString m_lastName;
     InputMediaType m_classType;
+
 };
+
 #endif // INPUTMEDIA_H

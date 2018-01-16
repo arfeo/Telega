@@ -25,8 +25,8 @@
 
 class InputFileLocation
 {
-public:
 
+public:
     enum InputFileLocationType {
        typeInputVideoFileLocation = 0x3d0364ec,
        typeInputEncryptedFileLocation = 0xf5235d55,
@@ -34,7 +34,6 @@ public:
        typeInputAudioFileLocation = 0x74dc404d,
        typeInputDocumentFileLocation = 0x4e45abe9
     };
-
     InputFileLocation(InputFileLocationType classType) :
         m_id(0),
         m_secret(0),
@@ -42,7 +41,6 @@ public:
         m_accessHash(0),
         m_volumeId(0),
         m_classType(classType) {}
-
     void setId(qint64 id) {
         m_id = id;
     }
@@ -87,5 +85,7 @@ private:
     qint64 m_accessHash;
     qint64 m_volumeId;
     InputFileLocationType m_classType;
+
 };
+
 #endif // INPUTFILELOCATION_H

@@ -26,13 +26,12 @@
 
 class EncryptedMessage
 {
-public:
 
+public:
     enum EncryptedMessageType {
        typeEncryptedMessageService = 0x23734b06,
        typeEncryptedMessage = 0xed18c118
     };
-
     EncryptedMessage(EncryptedMessageType classType = typeEncryptedMessage) :
         mChatId(0),
         mDate(0),
@@ -40,7 +39,6 @@ public:
         mFile(EncryptedFile::typeEncryptedFileEmpty),
         mBytes(""),
         mClassType(classType) {}
-
     void setRandomId(qint64 randomId) {
         mRandomId = randomId;
     }
@@ -85,5 +83,7 @@ private:
     EncryptedFile mFile;
     QByteArray mBytes;
     EncryptedMessageType mClassType;
+
 };
+
 #endif // ENCRYPTEDMESSAGE_H

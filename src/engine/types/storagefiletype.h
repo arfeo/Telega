@@ -20,10 +20,11 @@
 
 #ifndef STORAGEFILETYPE_H
 #define STORAGEFILETYPE_H
+
 class StorageFileType
 {
-public:
 
+public:
     enum StorageFileTypeType {
        typeStorageFileMov = 0x4b09ebbc,
        typeStorageFilePartial = 0x40bc6f52,
@@ -36,10 +37,8 @@ public:
        typeStorageFileMp3 = 0x528a0677,
        typeStorageFileWebp = 0x1081464c
     };
-
     StorageFileType() : m_classType(typeStorageFileUnknown) {}
     StorageFileType(StorageFileTypeType classType) : m_classType(classType) {}
-
     void setClassType(StorageFileTypeType classType) {
         m_classType = classType;
     }
@@ -49,5 +48,7 @@ public:
 
 private:
     StorageFileTypeType m_classType;
+
 };
+
 #endif // STORAGEFILETYPE_H

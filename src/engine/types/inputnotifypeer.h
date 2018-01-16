@@ -26,8 +26,8 @@
 
 class InputNotifyPeer
 {
-public:
 
+public:
     enum InputNotifyPeerType {
        typeInputNotifyChats = 0x4a95e84e,
        typeInputNotifyUsers = 0x193b4417,
@@ -35,11 +35,9 @@ public:
        typeInputNotifyPeer = 0xb8bc5b0c,
        typeInputNotifyGeoChatPeer = 0x4d8ddec8
     };
-
     InputNotifyPeer(InputNotifyPeerType classType) :
         m_peer(InputPeer::typeInputPeerEmpty),
         m_classType(classType) {}
-
     void setPeer(InputPeer peer) {
         m_peer = peer;
     }
@@ -63,5 +61,7 @@ private:
     InputPeer m_peer;
     InputGeoChat m_geoChatPeer;
     InputNotifyPeerType m_classType;
+
 };
+
 #endif // INPUTNOTIFYPEER_H

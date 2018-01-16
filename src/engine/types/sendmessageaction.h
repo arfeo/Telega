@@ -1,10 +1,10 @@
 #ifndef SENDMESSAGEACTION_H
 #define SENDMESSAGEACTION_H
 
-class SendMessageAction {
+class SendMessageAction
+{
 
 public:
-
     enum SendMessageActionType {
         typeSendMessageTypingAction = 0x16bf744e,
         typeSendMessageCancelAction = 0xfd5ec8f5,
@@ -17,11 +17,8 @@ public:
         typeSendMessageGeoLocationAction = 0x176f8ba1,
         typeSendMessageChooseContactAction = 0x628cbc6f
     };
-
     SendMessageAction(SendMessageActionType classType = typeSendMessageCancelAction) :
-        mClassType(classType) {
-    }
-
+        mClassType(classType) {}
     void setClassType(SendMessageActionType classType) {
         mClassType = classType;
     }
@@ -31,6 +28,7 @@ public:
 
 private:
     SendMessageActionType mClassType;
+
 };
 
 #endif // SENDMESSAGEACTION_H

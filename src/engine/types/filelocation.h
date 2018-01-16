@@ -25,20 +25,18 @@
 
 class FileLocation
 {
+
 public:
     enum FileLocationType {
        typeFileLocation = 0x53d69076,
        typeFileLocationUnavailable = 0x7c596b46
     };
-
     FileLocation() :
         m_localId(0),
         m_secret(0),
         m_dcId(0),
         m_volumeId(0),
-        m_classType(typeFileLocationUnavailable) {
-    }
-
+        m_classType(typeFileLocationUnavailable) {}
     FileLocation(FileLocationType classType) :
         m_localId(0),
         m_secret(0),
@@ -46,7 +44,6 @@ public:
         m_volumeId(0) {
         m_classType = classType;
     }
-
     void setDcId(qint32 dcId) {
         m_dcId = dcId;
     }
@@ -84,5 +81,7 @@ private:
     qint32 m_dcId;
     qint64 m_volumeId;
     FileLocationType m_classType;
+
 };
+
 #endif // FILELOCATION_H

@@ -25,8 +25,8 @@
 
 class InputPeer
 {
-public:
 
+public:
     enum InputPeerType {
        typeInputPeerForeign = 0x9b447325,
        typeInputPeerSelf = 0x7da07ec9,
@@ -34,13 +34,11 @@ public:
        typeInputPeerEmpty = 0x7f3b18ea,
        typeInputPeerChat = 0x179be863
     };
-
     InputPeer(InputPeerType classType = typeInputPeerEmpty) :
         m_chatId(0),
         m_userId(0),
         m_accessHash(0),
         m_classType(classType) {}
-
     void setUserId(qint32 userId) {
         m_userId = userId;
     }
@@ -71,6 +69,7 @@ private:
     qint32 m_userId;
     qint64 m_accessHash;
     InputPeerType m_classType;
+
 };
 
 #endif // INPUTPEER_H

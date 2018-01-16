@@ -20,20 +20,19 @@
 
 #ifndef GEOPOINT_H
 #define GEOPOINT_H
+
 class GeoPoint
 {
-public:
 
+public:
     enum GeoPointType {
        typeGeoPoint = 0x2049d70c,
        typeGeoPointEmpty = 0x1117dd5f
     };
-
     GeoPoint(GeoPointType classType) :
         m_longitude(0.0),
         m_lat(0.0),
         m_classType(classType) {}
-
     void setLongitude(double longitude) {
         m_longitude = longitude;
     }
@@ -57,5 +56,7 @@ private:
     double m_longitude;
     double m_lat;
     GeoPointType m_classType;
+
 };
+
 #endif // GEOPOINT_H

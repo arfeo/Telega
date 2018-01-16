@@ -26,14 +26,13 @@
 
 class GeoChatMessage
 {
-public:
 
+public:
     enum GeoChatMessageType {
        typeGeoChatMessage = 0x4505f8e1,
        typeGeoChatMessageService = 0xd34fa24e,
        typeGeoChatMessageEmpty = 0x60311a9b
     };
-
     GeoChatMessage(GeoChatMessageType classType) :
         m_id(0),
         m_action(MessageAction::typeMessageActionEmpty),
@@ -43,7 +42,6 @@ public:
         m_chatId(0),
         m_message(""),
         m_classType(classType) {}
-
     void setChatId(qint32 chatId) {
         m_chatId = chatId;
     }
@@ -102,5 +100,7 @@ private:
     qint32 m_chatId;
     QString m_message;
     GeoChatMessageType m_classType;
+
 };
+
 #endif // GEOCHATMESSAGE_H

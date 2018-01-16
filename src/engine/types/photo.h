@@ -26,13 +26,12 @@
 
 class Photo
 {
-public:
 
+public:
     enum PhotoType {
        typePhoto = 0x22b56751,
        typePhotoEmpty = 0x2331b22d
     };
-
     Photo(PhotoType classType = typePhotoEmpty) :
         m_id(0),
         m_caption(""),
@@ -41,7 +40,6 @@ public:
         m_accessHash(0),
         m_userId(0),
         m_classType(classType) {}
-
     void setId(qint64 id) {
         m_id = id;
     }
@@ -100,5 +98,7 @@ private:
     qint64 m_accessHash;
     qint32 m_userId;
     PhotoType m_classType;
+
 };
+
 #endif // PHOTO_H

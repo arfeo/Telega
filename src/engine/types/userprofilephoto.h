@@ -25,20 +25,18 @@
 
 class UserProfilePhoto
 {
-public:
 
+public:
     enum UserProfilePhotoType {
        typeUserProfilePhoto = 0xd559d8c8,
        typeUserProfilePhotoEmpty = 0x4f11bae1
     };
-
     UserProfilePhoto(UserProfilePhotoType classType) :
         m_photoId(0),
         m_photoBig(FileLocation::typeFileLocationUnavailable),
         m_photoSmall(FileLocation::typeFileLocationUnavailable) {
         m_classType = classType;
     }
-
     void setPhotoId(qint64 photoId) {
         m_photoId = photoId;
     }
@@ -69,5 +67,7 @@ private:
     FileLocation m_photoBig;
     FileLocation m_photoSmall;
     UserProfilePhotoType m_classType;
+
 };
+
 #endif // USERPROFILEPHOTO_H

@@ -26,20 +26,18 @@
 
 class WallPaper
 {
-public:
 
+public:
     enum WallPaperType {
        typeWallPaper = 0xccb03657,
        typeWallPaperSolid = 0x63117f24
     };
-
     WallPaper(WallPaperType classType) :
         m_bgColor(0),
         m_color(0),
         m_id(0),
         m_title(""),
         m_classType(classType) {}
-
     void setId(qint32 id) {
         m_id = id;
     }
@@ -84,5 +82,7 @@ private:
     QString m_title;
     QList<PhotoSize> m_sizes;
     WallPaperType m_classType;
+
 };
+
 #endif // WALLPAPER_H

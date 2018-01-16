@@ -25,14 +25,13 @@
 
 class PhotoSize
 {
-public:
 
+public:
     enum PhotoSizeType {
        typePhotoCachedSize = 0xe9a734fa,
        typePhotoSizeEmpty = 0xe17e23c,
        typePhotoSize = 0x77bfb61b
     };
-
     PhotoSize(PhotoSizeType classType = typePhotoSizeEmpty) :
         m_h(0),
         m_type(""),
@@ -41,7 +40,6 @@ public:
         m_size(0),
         m_w(0),
         m_classType(classType) {}
-
     void setType(const QString & type) {
         m_type = type;
     }
@@ -93,5 +91,7 @@ private:
     qint32 m_size;
     qint32 m_w;
     PhotoSizeType m_classType;
+
 };
+
 #endif // PHOTOSIZE_H

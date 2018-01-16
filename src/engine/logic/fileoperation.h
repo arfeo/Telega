@@ -28,13 +28,13 @@
 
 class FileOperation
 {
+
 public:
     enum OpType {
         sendMedia,
         editChatPhoto,
         uploadProfilePhoto
     };
-
     FileOperation(OpType opType) :
         m_peer(InputPeer::typeInputPeerEmpty),
         m_inputMedia(InputMedia::typeInputMediaEmpty),
@@ -43,7 +43,6 @@ public:
         m_geoPoint(InputGeoPoint::typeInputGeoPointEmpty),
         m_crop(InputPhotoCrop::typeInputPhotoCropAuto),
         m_type(opType) {}
-
     InputPeer peer() const { return m_peer; }
     void setInputPeer(const InputPeer &peer) { m_peer = peer; }
     InputMedia inputMedia() const { return m_inputMedia; }
@@ -75,6 +74,7 @@ private:
     InputGeoPoint m_geoPoint;
     InputPhotoCrop m_crop;
     OpType m_type;
+
 };
 
 #endif // FILEOPERATION_H

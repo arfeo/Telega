@@ -27,19 +27,17 @@
 
 class ChatFull
 {
-public:
 
+public:
     enum ChatFullType {
        typeChatFull = 0x630e61be
     };
-
     ChatFull() :
         m_participants(ChatParticipants::typeChatParticipants),
         m_chatPhoto(Photo::typePhotoEmpty),
         m_id(0),
         m_notifySettings(PeerNotifySettings::typePeerNotifySettingsEmpty),
         m_classType(typeChatFull) {}
-
     void setId(qint32 id) {
         m_id = id;
     }
@@ -77,5 +75,7 @@ private:
     qint32 m_id;
     PeerNotifySettings m_notifySettings;
     ChatFullType m_classType;
+
 };
+
 #endif // CHATFULL_H

@@ -25,17 +25,15 @@
 
 class ContactStatus
 {
-public:
 
+public:
     enum ContactStatusType {
        typeContactStatus = 0xaa77b873
     };
-
     ContactStatus() :
         m_userId(0),
         m_expires(0),
         m_classType(typeContactStatus) {}
-
     void setUserId(qint32 userId) {
         m_userId = userId;
     }
@@ -59,5 +57,7 @@ private:
     qint32 m_userId;
     qint32 m_expires;
     ContactStatusType m_classType;
+
 };
+
 #endif // CONTACTSTATUS_H

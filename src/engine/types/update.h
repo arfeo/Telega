@@ -36,8 +36,8 @@
 
 class Update
 {
-public:
 
+public:
     enum UpdateType {
        typeUpdateInvalid = 0,
        typeUpdateUserStatus = 0x1bfbd823,
@@ -66,7 +66,6 @@ public:
        typeUpdateChatParticipants = 0x7761198,
        typeUpdateNewGeoChatMessage = 0x5a68e3f7
     };
-
     Update(UpdateType classType = typeUpdateInvalid) :
         mId(0),
         mPrevious(false),
@@ -97,7 +96,6 @@ public:
         mPeer(NotifyPeer::typeNotifyAll),
         mBlocked(false),
         mClassType(classType) {}
-
     void setUserId(qint32 userId) {
         mUserId = userId;
     }
@@ -317,5 +315,7 @@ private:
     NotifyPeer mPeer;
     bool mBlocked;
     UpdateType mClassType;
+
 };
+
 #endif // UPDATE_H

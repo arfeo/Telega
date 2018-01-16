@@ -25,17 +25,15 @@
 
 class ChatLocated
 {
-public:
 
+public:
     enum ChatLocatedType {
        typeChatLocated = 0x3631cf4c
     };
-
     ChatLocated() :
         m_chatId(0),
         m_distance(0),
         m_classType(typeChatLocated) {}
-
     void setChatId(qint32 chatId) {
         m_chatId = chatId;
     }
@@ -59,5 +57,7 @@ private:
     qint32 m_chatId;
     qint32 m_distance;
     ChatLocatedType m_classType;
+
 };
+
 #endif // CHATLOCATED_H

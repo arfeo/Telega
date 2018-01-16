@@ -25,19 +25,17 @@
 
 class NotifyPeer
 {
-public:
 
+public:
     enum NotifyPeerType {
        typeNotifyAll = 0x74d07c60,
        typeNotifyPeer = 0x9fd40bd8,
        typeNotifyUsers = 0xb4c83b4c,
        typeNotifyChats = 0xc007cec3
     };
-
     NotifyPeer(NotifyPeerType classType) :
         m_peer(Peer::typePeerUser),
         m_classType(classType) {}
-
     void setPeer(Peer peer) {
         m_peer = peer;
     }
@@ -54,5 +52,7 @@ public:
 private:
     Peer m_peer;
     NotifyPeerType m_classType;
+
 };
+
 #endif // NOTIFYPEER_H

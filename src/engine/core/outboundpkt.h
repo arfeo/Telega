@@ -24,7 +24,6 @@
 
 #include <QObject>
 #include <QByteArray>
-
 #include <openssl/bn.h>
 #include "constants.h"
 #include "settings.h"
@@ -48,17 +47,14 @@
 #include "../types/inputencryptedchat.h"
 #include "../types/inputencryptedfile.h"
 
-
-
 class OutboundPkt
 {
+
 public:
     OutboundPkt();
-
     void clearPacket();
     void forwardPtr(qint32 positions);
     void initConnection();
-
     void appendInts(const qint32 *what, qint32 len);
     void appendInt(qint32 x);
     void appendLong(qint64 x);
@@ -71,7 +67,6 @@ public:
     void appendQString (const QString &string);
     void appendRandom(qint32 n);
     void appendBool(bool b);
-
     void appendInputPeer(const InputPeer &peer);
     void appendInputUser(const InputUser &user);
     void appendInputContact(const InputContact &contact);
@@ -87,7 +82,6 @@ public:
     void appendInputPhoto(const InputPhoto &photo);
     void appendInputEncryptedChat(const InputEncryptedChat &inputEncryptedChat);
     void appendInputEncryptedFile(const InputEncryptedFile &inputEncryptedFile);
-
     qint32 length() const;
     qint32 *buffer();
 
@@ -95,11 +89,11 @@ protected:
     qint32 *m_packetPtr;
     qint32 __buffer[PACKET_BUFFER_SIZE];
     qint32 *m_packetBuffer;
-
     void appendInputAudio(const InputAudio &audio);
     void appendInputVideo(const InputVideo &video);
     void appendInputDocument(const InputDocument &document);
     void appendInputGeoChat(const InputGeoChat &geoChat);
+
 };
 
 #endif // OUTBOUNDPKT_H

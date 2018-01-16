@@ -53,7 +53,8 @@
 #include <QList>
 #include <QStringList>
 
-class Api : public AbstractApi
+class Api :
+        public AbstractApi
 {
 
     Q_OBJECT
@@ -436,6 +437,7 @@ private:
     void onAuthSignUpError(Query *q, qint32 errorCode, const QString &errorText);
     void onUploadGetFileError(Query *q, qint32 errorCode, const QString &errorText);
     void onAuthSendCodeError(Query *q, qint32 errorCode, const QString &errorText);
+
 };
 
 #endif // API_H

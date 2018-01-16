@@ -26,19 +26,17 @@
 
 class Dialog
 {
-public:
 
+public:
     enum DialogType {
        typeDialog = 0xab3a99ac
     };
-
     Dialog() :
         m_peer(Peer::typePeerUser),
         m_notifySettings(PeerNotifySettings::typePeerNotifySettingsEmpty),
         m_topMessage(0),
         m_unreadCount(0),
         m_classType(typeDialog) {}
-
     void setPeer(Peer peer) {
         m_peer = peer;
     }
@@ -76,5 +74,7 @@ private:
     qint32 m_topMessage;
     qint32 m_unreadCount;
     DialogType m_classType;
+
 };
+
 #endif // DIALOG_H

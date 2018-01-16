@@ -29,8 +29,10 @@
 #include "settings.h"
 #include "cryptoutils.h"
 
-class DC : public Endpoint
+class DC :
+        public Endpoint
 {
+
 public:
     enum DcState {
         error = -1,
@@ -41,7 +43,6 @@ public:
         authKeyCreated,
         userSignedIn
     };
-
     explicit DC(qint32 dcNum) :
         m_id(dcNum),
         m_state(init),
@@ -49,7 +50,6 @@ public:
         m_expires(0),
         m_serverSalt(0),
         m_timeSyncFactor(0) {}
-
     inline qint32 id() { return m_id; }
     inline void setState(DcState dcState) { m_state = dcState; }
     inline DcState state() { return m_state; }
@@ -68,10 +68,12 @@ private:
     // dc metadata
     qint32 m_id;
     DcState m_state;
+
     // auth members
     qint64 m_authKeyId;
     char m_authKey[SHARED_KEY_LENGTH];
     qint32 m_expires; // date the authorization expires
+
     // to be used during session
     qint64 m_serverSalt;
     qint32 m_timeSyncFactor; // difference between client and server time

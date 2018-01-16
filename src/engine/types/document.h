@@ -25,13 +25,12 @@
 
 class Document
 {
-public:
 
+public:
     enum DocumentType {
        typeDocument = 0x9efc6326,
        typeDocumentEmpty = 0x36f8c871
     };
-
     Document(DocumentType classType) :
         m_id(0),
         m_dcId(0),
@@ -43,7 +42,6 @@ public:
         m_userId(0),
         m_size(0),
         m_classType(classType) {}
-
     void setId(qint64 id) {
         m_id = id;
     }
@@ -116,5 +114,7 @@ private:
     qint32 m_userId;
     qint32 m_size;
     DocumentType m_classType;
+
 };
+
 #endif // DOCUMENT_H

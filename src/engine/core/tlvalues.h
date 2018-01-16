@@ -22,6 +22,7 @@
 #define TLVALUES_H
 
 enum TLValues {
+
     // https://core.telegram.org/mtproto/auth_key
     TL_ReqPQ = 0x60469778,
     TL_ResPQ = 0x05162463,
@@ -435,6 +436,7 @@ enum TLValues {
     TL_InitConnection = 0x69796de9,
     TL_HelpGetSupport = 0x9cdf08cd,
     TL_InvokeWithLayer18 = 0x2b9b08fa
+
 };
 
 #endif // TLVALUES_H

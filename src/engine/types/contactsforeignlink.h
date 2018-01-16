@@ -20,16 +20,16 @@
 
 #ifndef CONTACTSFOREIGNLINK_H
 #define CONTACTSFOREIGNLINK_H
+
 class ContactsForeignLink
 {
-public:
 
+public:
     enum ContactsForeignLinkType {
        typeContactsForeignLinkMutual = 0x1bea8ce1,
        typeContactsForeignLinkRequested = 0xa7801f47,
        typeContactsForeignLinkUnknown = 0x133421f8
     };
-
     ContactsForeignLink(ContactsForeignLinkType classType = typeContactsForeignLinkUnknown) :
         m_hasPhone(false),
         m_classType(classType) {}
@@ -50,5 +50,7 @@ public:
 private:
     bool m_hasPhone;
     ContactsForeignLinkType m_classType;
+
 };
+
 #endif // CONTACTSFOREIGNLINK_H

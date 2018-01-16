@@ -25,17 +25,15 @@
 
 class ImportedContact
 {
-public:
 
+public:
     enum ImportedContactType {
        typeImportedContact = 0xd0028438
     };
-
     ImportedContact() :
         m_userId(0),
         m_clientId(0),
         m_classType(typeImportedContact) {}
-
     void setUserId(qint32 userId) {
         m_userId = userId;
     }
@@ -59,5 +57,7 @@ private:
     qint32 m_userId;
     qint64 m_clientId;
     ImportedContactType m_classType;
+
 };
+
 #endif // IMPORTEDCONTACT_H

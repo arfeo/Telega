@@ -26,8 +26,8 @@
 
 class DecryptedMessageAction
 {
-public:
 
+public:
     enum DecryptedMessageActionType {
         typeDecryptedMessageActionSetMessageTTL = 0xa1733aec,
         typeDecryptedMessageActionDeleteMessages = 0x65614304,
@@ -38,14 +38,12 @@ public:
         typeDecryptedMessageActionNotifyLayer = 0xf3048883,
         typeDecryptedMessageActionTyping = 0xccb27641
     };
-
     DecryptedMessageAction(DecryptedMessageActionType classType = typeDecryptedMessageActionNotifyLayer) :
         mLayer(0),
         mTtlSeconds(0),
         mStartSeqNo(0),
         mEndSeqNo(0),
         mClassType(classType) {}
-
     void setLayer(qint32 layer) {
         mLayer = layer;
     }
@@ -97,5 +95,7 @@ private:
     qint32 mEndSeqNo;
     SendMessageAction mAction;
     DecryptedMessageActionType mClassType;
+
 };
+
 #endif // DECRYPTEDMESSAGEACTION_H

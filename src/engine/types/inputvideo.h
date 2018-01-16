@@ -25,18 +25,16 @@
 
 class InputVideo
 {
-public:
 
+public:
     enum InputVideoType {
        typeInputVideoEmpty = 0x5508ec75,
        typeInputVideo = 0xee579652
     };
-
     InputVideo(InputVideoType classType) :
         m_id(0),
         m_accessHash(0),
         m_classType(classType) {}
-
     void setId(qint64 id) {
         m_id = id;
     }
@@ -60,5 +58,7 @@ private:
     qint64 m_id;
     qint64 m_accessHash;
     InputVideoType m_classType;
+
 };
+
 #endif // INPUTVIDEO_H

@@ -28,9 +28,12 @@
 #include "session.h"
 #include "sessionmanager.h"
 
-class AbstractApi : public SessionManager
+class AbstractApi :
+        public SessionManager
 {
+
     Q_OBJECT
+
 public:
     explicit AbstractApi(Session *session, QObject *parent = 0);
     ~AbstractApi();
@@ -55,6 +58,7 @@ private:
 private Q_SLOTS:
     void onResultReceived(Query *q, InboundPkt &inboundPkt);
     void onErrorReceived(Query *q, qint32 errorCode, QString errorText);
+
 };
 
 #endif // ABSTRACTAPI_H

@@ -20,10 +20,11 @@
 
 #ifndef MESSAGESFILTER_H
 #define MESSAGESFILTER_H
+
 class MessagesFilter
 {
-public:
 
+public:
     enum MessagesFilterType {
        typeInputMessagesFilterPhotos = 0x9609a51c,
        typeInputMessagesFilterVideo = 0x9fc00e65,
@@ -32,7 +33,6 @@ public:
        typeInputMessagesFilterPhotoVideo = 0x56e9f0e4,
        typeInputMessagesFilterAudio = 0xcfc87522
     };
-
     MessagesFilter(MessagesFilterType classType) :
         m_classType(classType) {}
 
@@ -45,5 +45,6 @@ public:
 
 private:
     MessagesFilterType m_classType;
+
 };
 #endif // MESSAGESFILTER_H

@@ -20,21 +20,20 @@
 
 #ifndef INPUTPHOTOCROP_H
 #define INPUTPHOTOCROP_H
+
 class InputPhotoCrop
 {
-public:
 
+public:
     enum InputPhotoCropType {
        typeInputPhotoCropAuto = 0xade6b004,
        typeInputPhotoCrop = 0xd9915325
     };
-
     InputPhotoCrop(InputPhotoCropType classType) :
         m_cropTop(0.0),
         m_cropLeft(0.0),
         m_cropWidth(0.0),
         m_classType(classType) {}
-
     void setCropLeft(double cropLeft) {
         m_cropLeft = cropLeft;
     }
@@ -65,5 +64,7 @@ private:
     double m_cropLeft;
     double m_cropWidth;
     InputPhotoCropType m_classType;
+
 };
+
 #endif // INPUTPHOTOCROP_H

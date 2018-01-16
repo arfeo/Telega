@@ -25,17 +25,15 @@
 
 class ContactBlocked
 {
-public:
 
+public:
     enum ContactBlockedType {
        typeContactBlocked = 0x561bc879
     };
-
     ContactBlocked() :
         m_userId(0),
         m_date(0),
         m_classType(typeContactBlocked) {}
-
     void setUserId(qint32 userId) {
         m_userId = userId;
     }
@@ -59,5 +57,7 @@ private:
     qint32 m_userId;
     qint32 m_date;
     ContactBlockedType m_classType;
+
 };
+
 #endif // CONTACTBLOCKED_H

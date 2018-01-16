@@ -25,17 +25,15 @@
 
 class InputGeoChat
 {
-public:
 
+public:
     enum InputGeoChatType {
        typeInputGeoChat = 0x74d456fa
     };
-
     InputGeoChat() :
         m_chatId(0),
         m_accessHash(0),
         m_classType(typeInputGeoChat) {}
-
     void setChatId(qint32 chatId) {
         m_chatId = chatId;
     }
@@ -59,5 +57,7 @@ private:
     qint32 m_chatId;
     qint64 m_accessHash;
     InputGeoChatType m_classType;
+
 };
+
 #endif // INPUTGEOCHAT_H

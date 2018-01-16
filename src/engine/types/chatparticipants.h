@@ -26,19 +26,17 @@
 
 class ChatParticipants
 {
-public:
 
+public:
     enum ChatParticipantsType {
        typeChatParticipants = 0x7841b415,
        typeChatParticipantsForbidden = 0xfd2bb8a
     };
-
     ChatParticipants(ChatParticipantsType classType) :
         m_chatId(0),
         m_version(0),
         m_adminId(0),
         m_classType(classType) {}
-
     void setChatId(qint32 chatId) {
         m_chatId = chatId;
     }
@@ -76,5 +74,7 @@ private:
     qint32 m_version;
     qint32 m_adminId;
     ChatParticipantsType m_classType;
+
 };
+
 #endif // CHATPARTICIPANTS_H

@@ -25,8 +25,8 @@
 
 class EncryptedChat
 {
-public:
 
+public:
     enum EncryptedChatType {
        typeEncryptedChatWaiting = 0x3bf703dc,
        typeEncryptedChatRequested = 0xc878527e,
@@ -34,7 +34,6 @@ public:
        typeEncryptedChatDiscarded = 0x13d6dd27,
        typeEncryptedChat = 0xfa56ce36
     };
-
     EncryptedChat(EncryptedChatType classType = typeEncryptedChatEmpty) :
         mId(0),
         mGA(""),
@@ -45,7 +44,6 @@ public:
         mGAOrB(""),
         mParticipantId(0),
         mClassType(classType) {}
-
     void setId(qint32 id) {
         mId = id;
     }
@@ -111,5 +109,7 @@ private:
     QByteArray mGAOrB;
     qint32 mParticipantId;
     EncryptedChatType mClassType;
+
 };
+
 #endif // ENCRYPTEDCHAT_H

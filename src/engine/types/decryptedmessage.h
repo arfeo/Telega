@@ -25,21 +25,19 @@
 
 class DecryptedMessage
 {
-public:
 
+public:
     enum DecryptedMessageType {
         typeDecryptedMessage_level8 = 0x1f814f1f,
         typeDecryptedMessageService_level8 = 0xaa48327d,
         typeDecryptedMessage = 0x204d3878,
         typeDecryptedMessageService = 0x73164160
     };
-
     DecryptedMessage(DecryptedMessageType classType = typeDecryptedMessage) :
         mRandomId(0),
         mTtl(0),
         mMessage(""),
         mClassType(classType) {}
-
     qint64 randomId() const { return mRandomId; }
     qint32 ttl() const { return mTtl; }
     QByteArray randomBytes() const { return mRandomBytes; }
@@ -63,6 +61,7 @@ private:
     DecryptedMessageMedia mMedia;
     DecryptedMessageAction mAction;
     DecryptedMessageType mClassType;
+
 };
 
 #endif // DECRYPTEDMESSAGE_H

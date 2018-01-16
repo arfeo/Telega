@@ -26,13 +26,16 @@
 #include "connection.h"
 #include "asserter.h"
 
-class DCAuth : public Connection,public OutboundPkt
+class DCAuth :
+        public Connection,
+        public OutboundPkt
 {
+
     Q_OBJECT
+
 public:
     explicit DCAuth(DC *dc, QObject *parent = 0);
     ~DCAuth();
-
     void createAuthKey();
     DC *dc();
 
@@ -45,25 +48,20 @@ private:
         qint64 outMsgId;
         qint32 msgLength;
     };
-
     char m_nonce[16];
     char m_newNonce[32];
     char m_serverNonce[16];
-
     DC *m_dc;
-
-    // dc auth methodsDCAuth
     void sendReqPQPacket();
     void processResPQAnswer (const InboundPkt &inboundPkt);
     void processDHAnswer(InboundPkt &inboundPkt);
     void processAuthComplete(InboundPkt &inboundPkt);
-    // generic send and receive method
     void rpcSendPacket(OutboundPkt &outboundPkt);
-
     void processConnected();
 
 protected Q_SLOTS:
     void processRpcAnswer(QByteArray response);
+
 };
 
 #endif // DCAUTH_H

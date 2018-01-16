@@ -13,26 +13,30 @@
 #include <bb/cascades/ArrayDataModel>
 #include <QtSql/QSqlQuery>
 //#include "chatdatamodel.h"
- class bb::cascades::GroupDataModel;
- class bb::cascades::ArrayDataModel;
 
- class SqlDataAcces;
- using namespace bb::data;
-class Database:public QObject{
+using namespace bb::data;
+
+class bb::cascades::GroupDataModel;
+class bb::cascades::ArrayDataModel;
+class SqlDataAcces;
+
+class Database :
+        public QObject
+{
+
     Q_OBJECT
+
 public:
     int state;
     QString DB_PATH;
     Database(QObject *parent);
-    virtual
-    bool initDatabase();
+    virtual bool initDatabase();
     void myContacts();
     void updateLocation(int uid,QString loc);
     bool insertMessage(QVariantMap message);
     bool insertAttachments(QVariantMap attach);
     bool updateContacts(QVariantMap data);
     bool insertQuery(QString query,QVariantMap bind);
-
     QString getUserDetails(QString UserId);
     QSqlQuery executeQuery(QString qstring);
     QVariant executeSqlQuery(QString query,QVariantMap bind);
@@ -47,12 +51,10 @@ public:
     int getTableSizeByQuery(QString query);
     int getFavCount();
     QVariantMap getMessageById(int id);
+
 private:
     SqlDataAccess *sqlda;
 
 };
-
-
-
 
 #endif /* DATABASE_HPP_ */

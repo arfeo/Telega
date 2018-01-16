@@ -25,18 +25,16 @@
 
 class InputDocument
 {
-public:
 
+public:
     enum InputDocumentType {
        typeInputDocumentEmpty = 0x72f0eaae,
        typeInputDocument = 0x18798952
     };
-
     InputDocument(InputDocumentType classType) :
         m_id(0),
         m_accessHash(0),
         m_classType(classType) {}
-
     void setId(qint64 id) {
         m_id = id;
     }
@@ -60,5 +58,7 @@ private:
     qint64 m_id;
     qint64 m_accessHash;
     InputDocumentType m_classType;
+
 };
+
 #endif // INPUTDOCUMENT_H

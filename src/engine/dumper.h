@@ -4,9 +4,12 @@
 #include <QObject>
 #include "types/types.h"
 
-class Dumper : public QObject
+class Dumper :
+        public QObject
 {
+
     Q_OBJECT
+
 public:
     static void dumpUser(const User &user, bool full = true);
     static void dumpContactsLink(const ContactsLink &link);
@@ -31,7 +34,6 @@ public:
     static void dumpUserProfilePhoto(const UserProfilePhoto &photo);
     static void dumpStorageFileType(const StorageFileType &type);
     static void dumpMessageMedia(const MessageMedia &mm);
-
     static QString unixTimeToDate(uint unixTime);
 
 private:
@@ -51,6 +53,7 @@ private:
     static void dumpChatPhoto(const ChatPhoto &ChatPhoto);
     static void dumpChatParticipants(const ChatParticipants &cps);
     static void dumpEncryptedFile(const EncryptedFile &file);
+
 };
 
 #endif // DUMPER_H

@@ -25,17 +25,15 @@
 
 class Contact
 {
-public:
 
+public:
     enum ContactType {
        typeContact = 0xf911c994
     };
-
     Contact() :
         m_userId(0),
         m_mutual(false),
         m_classType(typeContact) {}
-
     void setUserId(qint32 userId) {
         m_userId = userId;
     }
@@ -59,5 +57,7 @@ private:
     qint32 m_userId;
     bool m_mutual;
     ContactType m_classType;
+
 };
+
 #endif // CONTACT_H

@@ -25,18 +25,16 @@
 
 class InputPhoto
 {
-public:
 
+public:
     enum InputPhotoType {
        typeInputPhoto = 0xfb95c6c4,
        typeInputPhotoEmpty = 0x1cd7bf0d
     };
-
     InputPhoto(InputPhotoType classType) :
         m_id(0),
         m_accessHash(0),
         m_classType(classType) {}
-
     void setId(qint64 id) {
         m_id = id;
     }
@@ -60,5 +58,7 @@ private:
     qint64 m_id;
     qint64 m_accessHash;
     InputPhotoType m_classType;
+
 };
+
 #endif // INPUTPHOTO_H

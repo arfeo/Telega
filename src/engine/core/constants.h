@@ -31,6 +31,7 @@
 #define TELEGRAM_SERVER_HOST "149.154.167.40"
 #define TELEGRAM_SERVER_TEST_HOST "149.154.167.50"
 #define TELEGRAM_SERVER_PORT 443
+
 #define APP_HASH "255a0340af74254c1b3a2d0a62de0373"
 #define APP_ID 120542
 
@@ -38,17 +39,13 @@
 #define TELEGA_VERSION "0.1"
 
 #define MAX_RESPONSE_SIZE (1L << 24)
-
 #define MAX_MESSAGE_INTS 1048576
-
 #define MAX_PENDING_ACKS 16
-
 #define MAX_PACKED_SIZE (1 << 24)
+#define MAX_QUERY_RESENDS 10
 
 #define ACK_TIMEOUT 6000 //1 sec in original
 #define QUERY_TIMEOUT 30000 // 60 secs
-
-#define MAX_QUERY_RESENDS 10
 
 #define LANG_CODE "en"
 

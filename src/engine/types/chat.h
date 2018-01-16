@@ -26,15 +26,14 @@
 
 class Chat
 {
-public:
 
+public:
     enum ChatType {
        typeChatEmpty = 0x9ba2d800,
        typeChatForbidden = 0xfb0ccc41,
        typeGeoChat = 0x75eaea5a,
        typeChat = 0x6e9c9bc7
     };
-
     Chat(ChatType classType) :
         m_participantsCount(0),
         m_id(0),
@@ -49,7 +48,6 @@ public:
         m_checkedIn(false),
         m_left(false),
         m_classType(classType) {}
-
     void setId(qint32 id) {
         m_id = id;
     }
@@ -143,5 +141,7 @@ private:
     bool m_checkedIn;
     bool m_left;
     ChatType m_classType;
+
 };
+
 #endif // CHAT_H

@@ -25,8 +25,8 @@
 
 class MessageAction
 {
-public:
 
+public:
     enum MessageActionType {
        typeMessageActionEmpty = 0xb6aef7b0,
        typeMessageActionChatDeletePhoto = 0x95e3fbef,
@@ -38,14 +38,12 @@ public:
        typeMessageActionChatAddUser = 0x5e3cfc4b,
        typeMessageActionGeoChatCheckin = 0xc7d53de
     };
-
     MessageAction(MessageActionType classType = typeMessageActionEmpty) :
         m_address(""),
         m_userId(0),
         m_photo(Photo::typePhotoEmpty),
         m_title(""),
         m_classType(classType) {}
-
     void setTitle(const QString & title) {
         m_title = title;
     }
@@ -90,5 +88,7 @@ private:
     QString m_title;
     QList<qint32> m_users;
     MessageActionType m_classType;
+
 };
+
 #endif // MESSAGEACTION_H

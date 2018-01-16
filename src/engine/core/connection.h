@@ -24,22 +24,21 @@
 
 #define MAX_RESPONSE_SIZE (1L << 24)
 
-
 #include <QtNetwork/QTcpSocket>
 #include "endpoint.h"
-
 #include "constants.h"
 #include "asserter.h"
 
-
-
-class Connection : public QTcpSocket, public Endpoint
+class Connection :
+        public QTcpSocket,
+        public Endpoint
 {
+
     Q_OBJECT
+
 public:
     explicit Connection(const QString &host = "", qint32 port = -1, QObject *parent = 0);
     ~Connection();
-
     void connectToServer();
 
 Q_SIGNALS:
@@ -53,16 +52,13 @@ protected:
     qint32 peekIn(void *data, qint32 len);
     virtual void processRpcAnswer(QByteArray response) = 0;
     virtual void processConnected() = 0;
-
     void timerEvent(QTimerEvent *event);
-
     Asserter mAsserter;
 
 private:
     qint32 mReconnectTimerId;
     QByteArray mBuffer;
     qint32 mOpLength;
-
     void stopReconnecting();
 
 protected Q_SLOTS:

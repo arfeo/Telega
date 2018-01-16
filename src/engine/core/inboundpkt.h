@@ -59,9 +59,9 @@
 
 class InboundPkt
 {
+
 public:
     explicit InboundPkt(char* buffer, qint32 len);
-
     const char *buffer() const;
     qint32 length() const;
     void setInPtr(qint32 *inPtr);
@@ -69,7 +69,6 @@ public:
     qint32 *inPtr();
     qint32 *inEnd();
     void forwardInPtr(qint32 positions);
-
     qint32 prefetchInt();
     qint32 fetchInt();
     bool fetchBool();
@@ -82,7 +81,6 @@ public:
     QString fetchQString();
     qint32 fetchBignum (BIGNUM *x);
     qint32 fetchDate();
-
     DcOption fetchDcOption();
     User fetchUser();
     Chat fetchChat();
@@ -103,7 +101,6 @@ public:
     ChatFull fetchChatFull();
     EncryptedMessage fetchEncryptedMessage();
     UpdatesState fetchUpdatesState();
-
     UserProfilePhoto fetchUserProfilePhoto();
     EncryptedChat fetchEncryptedChat();
     EncryptedFile fetchEncryptedFile();
@@ -111,10 +108,8 @@ public:
 protected:
     char *m_buffer;
     qint32 m_length;
-
     qint32 *m_inPtr;
     qint32 *m_inEnd;
-
     FileLocation fetchFileLocation();
     UserStatus fetchUserStatus();
     GeoPoint fetchGeoPoint();
@@ -129,6 +124,7 @@ protected:
     ChatParticipants fetchChatParticipants();
     GeoChatMessage fetchGeoChatMessage();
     NotifyPeer fetchNotifyPeer();
+
 };
 
 #endif // INBOUNDPKT_H

@@ -22,10 +22,10 @@
 
 #include <QByteArray>
 
-class DecryptedMessageMedia {
+class DecryptedMessageMedia
+{
 
 public:
-
     enum DecryptedMessageMediaType {
         typeDecryptedMessageMediaEmpty = 0x89f5c4a,
         typeDecryptedMessageMediaPhoto = 0x32798a8c,
@@ -37,7 +37,6 @@ public:
         typeDecryptedMessageMediaVideo = 0x524a415d,
         typeDecryptedMessageMediaAudio = 0x57e0a9cb
     };
-
     DecryptedMessageMedia(DecryptedMessageMediaType classType = typeDecryptedMessageMediaEmpty) :
         mClassType(classType),
         mThumbW(0),
@@ -53,9 +52,7 @@ public:
         mLastName(""),
         mUserId(0),
         mFileName(""),
-        mMimeType("") {
-    }
-
+        mMimeType("") {}
     QByteArray thumb() const { return mThumb; }
     qint32 thumbW() const { return mThumbW; }
     qint32 thumbH() const { return mThumbH; }
@@ -112,6 +109,7 @@ private:
     QString mFileName;
     QString mMimeType;
     DecryptedMessageMediaType mClassType;
+
 };
 
 #endif // DECRYPTEDMESSAGEMEDIA_H

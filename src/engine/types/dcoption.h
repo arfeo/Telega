@@ -25,20 +25,18 @@
 
 class DcOption
 {
+
 public:
     enum DcOptionType {
        typeDcOption = 0x2ec2a43c
     };
-
     DcOption() :
         m_hostname(""),
         m_id(0),
         m_ipAddress(""),
         m_port(0),
         m_classType(typeDcOption) {}
-
     ~DcOption() {}
-
     void setId(qint32 id) {
         m_id = id;
     }
@@ -76,5 +74,7 @@ private:
     QString m_ipAddress;
     qint32 m_port;
     DcOptionType m_classType;
+
 };
+
 #endif // DCOPTION_H

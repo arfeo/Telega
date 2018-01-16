@@ -20,20 +20,19 @@
 
 #ifndef CONTACTSMYLINK_H
 #define CONTACTSMYLINK_H
+
 class ContactsMyLink
 {
-public:
 
+public:
     enum ContactsMyLinkType {
        typeContactsMyLinkRequested = 0x6c69efee,
        typeContactsMyLinkContact = 0xc240ebd9,
        typeContactsMyLinkEmpty = 0xd22a1c60
     };
-
     ContactsMyLink(ContactsMyLinkType classType = typeContactsMyLinkEmpty) :
         m_contact(0),
         m_classType(classType) {}
-
     void setContact(bool contact) {
         m_contact = contact;
     }
@@ -50,5 +49,7 @@ public:
 private:
     bool m_contact;
     ContactsMyLinkType m_classType;
+
 };
+
 #endif // CONTACTSMYLINK_H

@@ -27,20 +27,17 @@
 
 class ContactsLink
 {
-public:
 
+public:
     enum ContactsLinkType {
        typeContactsLink = 0xeccea3f5
     };
-
     ContactsLink() :
         m_foreignLink(ContactsForeignLink::typeContactsForeignLinkUnknown),
         m_myLink(ContactsMyLink::typeContactsMyLinkEmpty),
         m_user(User::typeUserEmpty),
         m_classType(typeContactsLink) {}
-
     ~ContactsLink() {}
-
     void setMyLink(ContactsMyLink myLink) {
         m_myLink = myLink;
     }
@@ -71,5 +68,7 @@ private:
     ContactsMyLink m_myLink;
     User m_user;
     ContactsLinkType m_classType;
+
 };
+
 #endif // CONTACTSLINK_H

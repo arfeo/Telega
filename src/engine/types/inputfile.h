@@ -25,20 +25,18 @@
 
 class InputFile
 {
-public:
 
+public:
     enum InputFileType {
        typeInputFileBig = 0xfa4f0bb5,
        typeInputFile = 0xf52ff27f
     };
-
     InputFile(InputFileType classType) :
         m_md5Checksum(""),
         m_parts(0),
         m_id(0),
         m_name(""),
         m_classType(classType) {}
-
     void setId(qint64 id) {
         m_id = id;
     }
@@ -76,5 +74,7 @@ private:
     qint64 m_id;
     QString m_name;
     InputFileType m_classType;
+
 };
+
 #endif // INPUTFILE_H

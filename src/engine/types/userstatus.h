@@ -25,19 +25,17 @@
 
 class UserStatus
 {
-public:
 
+public:
     enum UserStatusType {
        typeUserStatusOffline = 0x8c703f,
        typeUserStatusEmpty = 0x9d05049,
        typeUserStatusOnline = 0xedb93949
     };
-
     UserStatus(UserStatusType classType) :
         m_wasOnline(0),
         m_expires(0),
         m_classType(classType) {}
-
     void setWasOnline(qint32 wasOnline) {
         m_wasOnline = wasOnline;
     }
@@ -61,5 +59,7 @@ private:
     qint32 m_wasOnline;
     qint32 m_expires;
     UserStatusType m_classType;
+
 };
+
 #endif // USERSTATUS_H

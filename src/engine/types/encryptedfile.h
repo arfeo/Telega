@@ -25,13 +25,12 @@
 
 class EncryptedFile
 {
-public:
 
+public:
     enum EncryptedFileType {
        typeEncryptedFileEmpty = 0xc21f497e,
        typeEncryptedFile = 0x4a70994c
     };
-
     EncryptedFile(EncryptedFileType classType = typeEncryptedFileEmpty) :
         mDcId(0),
         mId(0),
@@ -39,7 +38,6 @@ public:
         mSize(0),
         mAccessHash(0),
         mClassType(classType) {}
-
     void setId(qint64 id) {
         mId = id;
     }
@@ -84,5 +82,7 @@ private:
     qint32 mSize;
     qint64 mAccessHash;
     EncryptedFileType mClassType;
+
 };
+
 #endif // ENCRYPTEDFILE_H

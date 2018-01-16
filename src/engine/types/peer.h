@@ -25,18 +25,16 @@
 
 class Peer
 {
-public:
 
+public:
     enum PeerType {
        typePeerUser = 0x9db1bc6d,
        typePeerChat = 0xbad0e5bb
     };
-
     Peer(PeerType classType) :
         m_chatId(0),
         m_userId(0),
         m_classType(classType) {}
-
     void setUserId(qint32 userId) {
         m_userId = userId;
     }
@@ -60,5 +58,7 @@ private:
     qint32 m_chatId;
     qint32 m_userId;
     PeerType m_classType;
+
 };
+
 #endif // PEER_H

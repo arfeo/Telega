@@ -29,13 +29,15 @@
 #include <QTimerEvent>
 #include <QVariant>
 
-class Query : public QObject
+class Query :
+        public QObject
 {
+
     Q_OBJECT
+
 public:
     explicit Query(QObject *parent = 0);
     ~Query();
-
     qint64 msgId() { return m_msgId; }
     void setMsgId(qint64 msgId) { m_msgId = msgId; }
     qint32 dataLength() { return m_dataLength; }
@@ -66,6 +68,7 @@ private:
     bool m_acked;
     QVariant mExtra;
     qint32 m_resends;
+
 };
 
 #endif // QUERY_H
