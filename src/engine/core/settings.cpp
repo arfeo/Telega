@@ -29,8 +29,6 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-
-
 Settings::Settings() :
         m_pubKey(0)
 {

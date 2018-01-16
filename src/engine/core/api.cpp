@@ -368,7 +368,7 @@ qint64 Api::authSignIn(const QString &phoneNumber, const QString &phoneCodeHash,
     p->appendQString(phoneNumber);
     p->appendQString(phoneCodeHash);
     p->appendQString(phoneCode);
-    qint64 ret =  mMainSession->sendQuery(*p, &authSignInMethods);
+    qint64 ret = mMainSession->sendQuery(*p, &authSignInMethods);
     delete p;
     return ret;
 }

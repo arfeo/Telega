@@ -544,7 +544,7 @@ qint64 Session::sendQuery(OutboundPkt &outboundPkt, QueryMethods *methods, QVari
     Q_ASSERT (m_dc->authKeyId());
     qint32 *data = outboundPkt.buffer();
     qint32 ints = outboundPkt.length();
-//    qDebug() << "Sending query of size" << 4 * ints << "to DC" << m_dc->id() << "at" << peerName() << ":" << peerPort() << "by session" << QString::number(m_sessionId, 16);
+    qDebug() << "Sending query of size" << 4 * ints << "to DC" << m_dc->id() << "at" << peerName() << ":" << peerPort() << "by session" << QString::number(m_sessionId, 16);
 
     Query *q = new Query(this);
     q->setData(data, ints);

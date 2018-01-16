@@ -111,9 +111,9 @@ void DcProvider::initialize() {
         }
         qDebug() << "If Dc are NUll, Populate DC with default server settings";
         if (mDcs[1]->state() < DC::authKeyCreated) {
-            qDebug() << "Creating a new DC with IP 149.154.167.40:443";
-            mDcs[1]->setHost("149.154.167.40");
-            mDcs[1]->setPort(443);
+            qDebug() << "Creating a new DC with IP" << TELEGRAM_SERVER_HOST << "@ port" << TELEGRAM_SERVER_PORT;
+            mDcs[1]->setHost(TELEGRAM_SERVER_HOST);
+            mDcs[1]->setPort(TELEGRAM_SERVER_PORT);
             DCAuth *dcAuth = new DCAuth(mDcs[1], this);
             mDcAuths.insert(1, dcAuth);
             connect(dcAuth, SIGNAL(fatalError()), this, SLOT(logOut()));

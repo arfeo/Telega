@@ -20,7 +20,6 @@
  */
 
 #include "dcauth.h"
-
 #include "openssl/sha.h"
 #include "utils.h"
 #include "outboundpkt.h"
@@ -29,7 +28,6 @@
 #include <QDateTime>
 #include "inboundpkt.h"
 #include <cmath>
-
 
 DCAuth::DCAuth(DC *dc, QObject *parent) :
         Connection(dc->host(), dc->port(), parent),

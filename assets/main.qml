@@ -22,7 +22,7 @@ TabbedPane {
     id: mainTab
     objectName: "mainTab"
     
-    property string loggedIn: _telega.checkLogin()
+    property bool loggedIn: _telega.checkLogin()
     property bool loggedOut: false
     property string currentPage: ""
     property string currentChat: ""
@@ -231,7 +231,8 @@ TabbedPane {
     
     onCreationCompleted: {
         Application.setCover(multiCover)
-        setAppTabs((mainTab.loggedIn != "true") ? "start" : "main")
+        setAppTabs((!mainTab.loggedIn) ? "start" : "main")
+        _telega.onDcProviderReady.connect()
     }
     
     // -----------------------
@@ -243,7 +244,7 @@ TabbedPane {
         switch(n) {
             
             case "start":
-                mainTab.loggedIn = "false"
+                mainTab.loggedIn = false
                 mainTab.add(startMessagingTab)
                 mainTab.remove(chatsListTab)
                 mainTab.remove(contactsListTab)
@@ -253,7 +254,7 @@ TabbedPane {
                 break
             
             case "main":
-                mainTab.loggedIn = "true"
+                mainTab.loggedIn = true
                 mainTab.remove(startMessagingTab)
                 mainTab.add(chatsListTab)
                 mainTab.add(contactsListTab)

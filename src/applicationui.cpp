@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Arfeo.net.
+ * Copyright (c) 2017-2018 Arfeo.net.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -139,18 +139,15 @@ void ApplicationUI::setAppSettings(const QString &objectName, const QString &opt
     settings.sync();
 }
 
-QString ApplicationUI::checkLogin() {
-    return loggedIn ? "true" : "false";
+bool ApplicationUI::checkLogin() {
+    return loggedIn;
 }
-
-
 
 /**
  *
  * ~~~ ENGINE ~~~
  *
  */
-
 
 bool ApplicationUI::init()
 {
@@ -161,7 +158,7 @@ bool ApplicationUI::init()
     QList<DC *> dcsList = mDcProvider.getDcs();
     connect(&mDcProvider, SIGNAL(dcProviderReady()), this, SLOT(keyloaded()));
     //Q_FOREACH (DC *dc, dcsList) {
-    //    changeServer(s->workingDcNum()-1 );
+    //    changeServer(s->workingDcNum()-1);
     //}
 
     switch (dcsList.value(Settings::getInstance()->workingDcNum() - 1)->state()) {
@@ -178,7 +175,6 @@ bool ApplicationUI::init()
     }
 
     return result;
-
 }
 
 void ApplicationUI::onAuthSignInError(qint64 msgid, qint32 errcode, QString errtext)
@@ -188,7 +184,6 @@ void ApplicationUI::onAuthSignInError(qint64 msgid, qint32 errcode, QString errt
 
 void ApplicationUI::changeServer(qint16 number)
 {
-
     QList<DC *> dcsList = mDcProvider.getDcs();
     Session *session = new Session(dcsList[number], this);
     mApi = new Api(session, this);
@@ -221,7 +216,6 @@ void ApplicationUI::changeServer(qint16 number)
             this,
             SLOT(
                     onMessagesGetHistoryMessageSlice(qint64,qint32,QList<Message>,QList<Chat>,QList<User>)));
-
     connect(mApi,
             SIGNAL(messagesDialogs(qint64,QList<Dialog>,QList<Message>,QList<Chat>,QList<User>)),
             this,
@@ -246,7 +240,6 @@ void ApplicationUI::changeServer(qint16 number)
             this,
             SIGNAL(
                     onMessagesGetHistoryMessageSlice(qint64,qint32,QList<Message>,QList<Chat>,QList<User>)));
-
     connect(mApi,
             SIGNAL(updatesCombined(QList<Update>,QList<User>,QList<Chat>,qint32,qint32,qint32)),
             this,
@@ -266,7 +259,6 @@ void ApplicationUI::changeServer(qint16 number)
             this,
             SIGNAL(
                     messagesSendMessageAnswer(qint64,qint32,qint32,qint32,qint32,QList<ContactsLink>)));
-
     connect(mApi, SIGNAL(contactsBlockResult(qint64,bool)), this,
             SLOT(contactsUnBlockAnswer(qint64,bool)));
     connect(mApi, SIGNAL(contactsBlocked(qint64,QList<ContactBlocked>,QList<User>)), this,
@@ -346,11 +338,9 @@ void ApplicationUI::changeServer(qint16 number)
 
 void ApplicationUI::switchDC(QString number)
 {
-
 //    qDebug() << number;
     Settings::getInstance()->setWorkingDcNum(qint32(number.toInt()));
     Settings::getInstance()->writeAuthFile();
-
 //    changeServer(number.toInt()-1 );
 }
 
@@ -366,18 +356,18 @@ void ApplicationUI::onAuthSendCodeError(qint64 msgid, qint32 code, QString codet
             Q_EMIT invalidphone(codetext);
             break;
         }
-
     }
 }
+
 void ApplicationUI::dcchange(QString codetext)
 {
-
     qint32 newDc = codetext.mid(codetext.lastIndexOf("_") + 1).toInt();
     qDebug() << "migrated to dc" << newDc;
     Settings::getInstance()->setWorkingDcNum(newDc);
     DC *dc = mDcProvider.getDc(newDc);
     mApi->changeMainSessionToDc(dc);
 }
+
 void ApplicationUI::onserverready()
 {
     DC *dc = mDcProvider.getWorkingDc();
@@ -386,7 +376,6 @@ void ApplicationUI::onserverready()
         getLatestMessages();
         getcontacts();
     }
-
 }
 
 void ApplicationUI::authSendCode(QString ph)
@@ -401,23 +390,28 @@ void ApplicationUI::onauthSentCode(qint64 msg, bool regresp, QString hashs)
     reg = regresp;
     emit qmlgethashpane(hash, reg);
 }
+
 void ApplicationUI::onauthTransferCompleted()
 {
     qDebug() << "authtransfer";
     Q_EMIT checkserver();
 }
+
 bool ApplicationUI::isUserReg()
 {
     bool reg;
 }
+
 void ApplicationUI::authUser(QString code)
 {
     mApi->authSignIn(phone, hash, code);
 }
+
 void ApplicationUI::authUserSignIn(QString first, QString last, QString code)
 {
     mApi->authSignUp(phone, hash, code, first, last);
 }
+
 void ApplicationUI::onUserAuthorized(qint64, qint32 expires)
 {
     // change state of current dc
@@ -453,7 +447,7 @@ void ApplicationUI::onContactsContacts(qint64 msgId, const QList<Contact> &conta
     m_cachedContacts = contacts;
     m_cachedUsers = users;
     QVariantMap map;
-    Q_FOREACH(User user, m_cachedUsers ){
+    Q_FOREACH(User user, m_cachedUsers ) {
     idtoname.insert(QString::number(user.id()),user.firstName());
     map["id"] = user.id();
     map["firstname"] = user.firstName();
@@ -483,6 +477,7 @@ void ApplicationUI::onContactsContacts(qint64 msgId, const QList<Contact> &conta
 Q_EMIT
     reloadContacts();
 }
+
 void ApplicationUI::DownloadImageThumb(QString type, qint64 photoid, FileLocation ps,
         qint32 clientid, qint64 accesshash)
 {
@@ -504,6 +499,7 @@ void ApplicationUI::DownloadImageThumb(QString type, qint64 photoid, FileLocatio
 
     db->insertQuery("insert into attachments( id,messageid,type )values(:id,:msgid,:type)", mapper);
 }
+
 void ApplicationUI::getCurrentUser()
 {
     qint64 d = 0;
@@ -536,14 +532,15 @@ qint32 ApplicationUI::workingdc()
 
 QVariantList ApplicationUI::getMessagesModel(qint32 id, int offset, QString type)
 {
-
     return db->getMessagesModel(id, offset, type);
 }
+
 void ApplicationUI::userdetails(QString userid)
 {
     qDebug() << userid;
 //    emit getuserdetails(db->getUserDetails(userid));
 }
+
 void ApplicationUI::settyping(QString userid, bool check)
 {
     mApi->messagesSetTyping(askForInputPeer(userid, "contact"), check);
@@ -554,6 +551,7 @@ void ApplicationUI::onMessagesGetHistoryMessages(qint64 id, const QList<Message>
 {
     onMessagesGetHistoryAnswer(id, messages.size(), messages, chats, users);
 }
+
 void ApplicationUI::onMessagesGetHistoryMessageSlice(qint64 id, qint32 count,
         const QList<Message> &messages, const QList<Chat> &chats, const QList<User> &users)
 {
@@ -586,46 +584,46 @@ void ApplicationUI::getLatestMessages()
 void ApplicationUI::onUsersGetUsersAnswer(qint64 id, const QList<User> users)
 {
     qDebug() << "usersGetUsersAnswer SIGNAL received, id:" << id;
-    Q_FOREACH (User user, users){
-    Dumper::dumpUser(user);
-    if( User::typeUserSelf == user.classType() ) {
-        currentUser.userid = user.id();
-        currentUser.firstName = user.firstName();
-        currentUser.lastName = user.lastName();
-        currentUser.phoneNumber = user.phone();
-        currentUser.username = user.username();
-        Q_EMIT accountUserInfo(currentUser.firstName ,currentUser.lastName, currentUser.phoneNumber , currentUser.username ,currentUser.userid);
+    Q_FOREACH (User user, users) {
+        Dumper::dumpUser(user);
+        if( User::typeUserSelf == user.classType() ) {
+            currentUser.userid = user.id();
+            currentUser.firstName = user.firstName();
+            currentUser.lastName = user.lastName();
+            currentUser.phoneNumber = user.phone();
+            currentUser.username = user.username();
+            Q_EMIT accountUserInfo(currentUser.firstName ,currentUser.lastName, currentUser.phoneNumber , currentUser.username ,currentUser.userid);
 
-        QVariantMap map;
-        qint64 userpid = user.photo().photoId();
-        QFile photofile(QString("./data/"+QString::number(userpid)+".jpeg"));
-        if(photofile.exists()) {
-            qDebug()<< "checking the photo file if loop";
-            Q_EMIT profileimage(userpid);
-        }
-        else
-        {
-            qDebug()<< "checking the photo file else loop";
-            InputFileLocation location(InputFileLocation::typeInputFileLocation);
-            FileLocation ps = user.photo().photoSmall();
-            location.setVolumeId(ps.volumeId());
-            location.setSecret(ps.secret());
-            location.setLocalId(ps.localId());
-            location.setAccessHash(user.accessHash());
-            Dumper::dumpUserProfilePhoto(user.photo());
-            qint64 msg = uploadGetFile(location,0,user.photo().photoSmall().dcId());
-            map.insert("id",user.photo().photoId());
-            qDebug()<<"user photo id "<<user.photo().photoId() << " ===="<<msg;
-            db->insertQuery("delete from settings where type='userphotoid'",QVariantMap());
-            db->insertQuery("insert into settings(type,value)values('userphotoid',:id)",map);
-            db->insertQuery("delete from attachments where type='userphotomsgid'",QVariantMap());
-            map.insert("msg",msg);
-            db->insertQuery("insert into attachments(id,type,messageid)values(:id,'userphotomsgid',:msg)",map);
-            foreach(QString key,map.keys())
-            qDebug()<<key<<map.value(key);
+            QVariantMap map;
+            qint64 userpid = user.photo().photoId();
+            QFile photofile(QString("./data/"+QString::number(userpid)+".jpeg"));
+            if(photofile.exists()) {
+                qDebug()<< "checking the photo file if loop";
+                Q_EMIT profileimage(userpid);
+            }
+            else
+            {
+                qDebug()<< "checking the photo file else loop";
+                InputFileLocation location(InputFileLocation::typeInputFileLocation);
+                FileLocation ps = user.photo().photoSmall();
+                location.setVolumeId(ps.volumeId());
+                location.setSecret(ps.secret());
+                location.setLocalId(ps.localId());
+                location.setAccessHash(user.accessHash());
+                Dumper::dumpUserProfilePhoto(user.photo());
+                qint64 msg = uploadGetFile(location,0,user.photo().photoSmall().dcId());
+                map.insert("id",user.photo().photoId());
+                qDebug()<<"user photo id "<<user.photo().photoId() << " ===="<<msg;
+                db->insertQuery("delete from settings where type='userphotoid'",QVariantMap());
+                db->insertQuery("insert into settings(type,value)values('userphotoid',:id)",map);
+                db->insertQuery("delete from attachments where type='userphotomsgid'",QVariantMap());
+                map.insert("msg",msg);
+                db->insertQuery("insert into attachments(id,type,messageid)values(:id,'userphotomsgid',:msg)",map);
+                foreach(QString key,map.keys())
+                qDebug()<<key<<map.value(key);
+            }
         }
     }
-}
 }
 
 void ApplicationUI::onMessagesGetDialogsAnswer(qint64 id, QList<Dialog> dialogs,
@@ -752,6 +750,7 @@ InputPeer ApplicationUI::askForInputPeer(QString userid, QString sType)
     }
     return peer;
 }
+
 //TODO Foregin User Bu
 InputUser ApplicationUI::askForInputUser(QString sType, qint64 id)
 {
@@ -824,31 +823,32 @@ void ApplicationUI::onUpdateShort(const Update &update, qint32 date)
 void ApplicationUI::onUpdatesCombined(const QList<Update> &updates, const QList<User> &users,
         const QList<Chat> &chats, qint32 date, qint32 seqStart, qint32 seq)
 {
-    Q_FOREACH (Update update, updates){
-    liveUpdate(update);
-}
-qDebug() << "Users:";
-Q_FOREACH (User user, users) {
-    Dumper::dumpUser(user);
-}
+    Q_FOREACH (Update update, updates) {
+        liveUpdate(update);
+    }
+    qDebug() << "Users:";
+    Q_FOREACH (User user, users) {
+        Dumper::dumpUser(user);
+    }
 }
 
 void ApplicationUI::onUpdates(const QList<Update> &udts, const QList<User> &users,
         const QList<Chat> &chats, qint32 date, qint32 seq)
 {
     qDebug() << "updates SIGNAL received" << "date:" << Dumper::unixTimeToDate(date);
-    Q_FOREACH (Update update, udts){
-    liveUpdate(update);
-}
+    Q_FOREACH (Update update, udts) {
+        liveUpdate(update);
+    }
     qDebug() << "Users:";
-    Q_FOREACH (User user, users){
-    Dumper::dumpUser(user);
-}
+    Q_FOREACH (User user, users) {
+        Dumper::dumpUser(user);
+    }
     qDebug() << "Chats:";
-    Q_FOREACH (Chat chat, chats){
-    Q_EMIT loadGroupInfo(chat.title(),chat.participantsCount(),chat.id(),chat.left());
+    Q_FOREACH (Chat chat, chats) {
+        Q_EMIT loadGroupInfo(chat.title(),chat.participantsCount(),chat.id(),chat.left());
+    }
 }
-}
+
 void ApplicationUI::dumpTable(QString tablename)
 {
     qDebug() << "dumping the table in dumpTable";
@@ -863,25 +863,25 @@ void ApplicationUI::dumpTable(QString tablename)
             qDebug() << data.value(i).toString();
         }
     }
-
 }
 
 void ApplicationUI::setPopUserId(int id)
 {
     popuserid = id;
-//    qDebug() << "Settings popUserID" << id;
+    qDebug() << "Settings popUserID" << id;
 }
 int ApplicationUI::getPopUserId()
 {
-//    qDebug() << "Gettings popUserID" << popuserid;
+    qDebug() << "Gettings popUserID" << popuserid;
     return popuserid;
 }
 
 void ApplicationUI::setPopGroupId(int id)
 {
     popgroupid = id;
-//    qDebug() << "Settings popUserID" << id;
+    qDebug() << "Settings popUserID" << id;
 }
+
 int ApplicationUI::getPopGroupId()
 {
 //    qDebug() << "Gettings popUserID" << popuserid;
@@ -893,12 +893,14 @@ void ApplicationUI::sendMessage(QString msg, qint64 data)
     InputPeer peer = askForInputPeer(QString::number(popuserid), "contact");
     mApi->messagesSendMessage(peer, msg, data);
 }
+
 void ApplicationUI::sendMessageChat(QString msg, qint64 data)
 {
     InputPeer peer = askForInputPeer(QString::number(popgroupid), "chat");
     qDebug() << peer.chatId();
     mApi->messagesSendMessage(peer, msg, data);
 }
+
 void ApplicationUI::sendTyping(QString m, bool k)
 {
     InputPeer peer = askForInputPeer(m, "contact");
@@ -909,7 +911,7 @@ void ApplicationUI::liveUpdate(const Update &update)
 {
 
     Update::UpdateType x = update.classType();
-//    qDebug() << "#Update" << x << update.message().message() ;
+    qDebug() << "#Update" << x << update.message().message() ;
     Q_ASSERT(
             x == Update::typeUpdateNewMessage || x == Update::typeUpdateMessageID
                     || x == Update::typeUpdateReadMessages || x == Update::typeUpdateDeleteMessages
@@ -944,7 +946,7 @@ void ApplicationUI::liveUpdate(const Update &update)
         }
         case Update::typeUpdateReadMessages: {
             QList<qint32> messages = update.messages();
-            Q_FOREACH (qint32 msgId, messages){
+            Q_FOREACH (qint32 msgId, messages) {
             QVariantMap map;
             map.insert("id",msgId);
             map.insert("read",1);
@@ -956,7 +958,7 @@ void ApplicationUI::liveUpdate(const Update &update)
         case Update::typeUpdateDeleteMessages: {
             QList<qint32> messages = update.messages();
             qDebug() << "Delete messages " << messages.size();
-            Q_FOREACH (qint32 msgId, messages){
+            Q_FOREACH (qint32 msgId, messages) {
             Q_EMIT livechatdeletemessage(db->getMessageById(msgId));
             deleteMessage(msgId);
         }
@@ -965,7 +967,7 @@ void ApplicationUI::liveUpdate(const Update &update)
         case Update::typeUpdateRestoreMessages: {
             qDebug() << "type: restore messages";
             QList<qint32> messages = update.messages();
-            Q_FOREACH (qint32 msgId, messages){
+            Q_FOREACH (qint32 msgId, messages) {
             qDebug() << "msgId:" << msgId;
         }
             qDebug() << "pts: " << update.pts();
@@ -983,7 +985,7 @@ void ApplicationUI::liveUpdate(const Update &update)
             break;
         case Update::typeUpdateChatParticipants:
             qDebug() << "type: chat participants";
-            Q_FOREACH (ChatParticipant cp, update.participants().participants()){
+            Q_FOREACH (ChatParticipant cp, update.participants().participants()) {
             qDebug() << cp.inviterId() << cp.userId();
         }
         getLatestMessages();
@@ -1004,7 +1006,7 @@ void ApplicationUI::liveUpdate(const Update &update)
         case Update::typeUpdateContactRegistered:
         qDebug() << "type: contact registered";
         qDebug() << "userId:" << update.userId();
-//           qDebug() << "date:" << unixTimeToDate(update.date());
+        //qDebug() << "date:" << unixTimeToDate(update.date());
         break;
         case Update::typeUpdateContactLink:
         deletecontactlocal(update.userId());
@@ -1017,7 +1019,7 @@ void ApplicationUI::liveUpdate(const Update &update)
         case Update::typeUpdateNewAuthorization:
         qDebug() << "type: new authorization";
         qDebug() << "authKeyId:" << update.authKeyId();
-//           qDebug() << "date:" << unixTimeToDate(update.date());
+        //qDebug() << "date:" << unixTimeToDate(update.date());
         qDebug() << "device:" << update.device();
         qDebug() << "location:" << update.location();
         break;
@@ -1284,21 +1286,22 @@ void ApplicationUI::insertMessage(const Message &message)
 //    if (m.toId().userId() == 0 && m.toId().chatId() == 0) {
 //
 //    }
-//    else if(m.fromId()==currentUser.userid){
+//    else if(m.fromId()==currentUser.userid) {
 //
-//    }else if(m.toId().chatId()>0){
+//    }else if(m.toId().chatId()>0) {
 //
 //     }
 }
+
 void ApplicationUI::onMessagesSendMessageAnswer(qint64 id, qint32 messageId, qint32 date,
         qint32 pts, qint32 seq, const QList<ContactsLink> &links)
 {
-    Q_FOREACH (ContactsLink link, links){
-    Dumper::dumpContactsLink(link);
-}
-QList<qint32> msg;
-msg << messageId;
-mApi->messagesGetMessages(msg);
+    Q_FOREACH (ContactsLink link, links) {
+        Dumper::dumpContactsLink(link);
+    }
+    QList<qint32> msg;
+    msg << messageId;
+    mApi->messagesGetMessages(msg);
 }
 
 void ApplicationUI::onMessagesSentMessage(qint64 id, qint32 msgId, qint32 date, qint32 pts,
@@ -1346,6 +1349,7 @@ bool ApplicationUI::deleteMessage(int id)
 //    Q_EMIT deleteAccountLive(id);
     return !db->insertQuery(del, map);
 }
+
 bool ApplicationUI::addToFavourites(qint32 id)
 {
     int num = db->getFavCount();
@@ -1362,6 +1366,7 @@ bool ApplicationUI::addToFavourites(qint32 id)
         return false;
     }
 }
+
 GroupDataModel * ApplicationUI::getFavContactsModel()
 {
     QString favquery = "select * from contacts where favourite = \"true\"";
@@ -1398,10 +1403,12 @@ void ApplicationUI::blockUserContact(qint64 id)
     mApi->contactsBlock(user);
 
 }
+
 void ApplicationUI::onContactsBlockAnswer(bool test)
 {
     qDebug() << "User Been deleted" << test;
 }
+
 void ApplicationUI::unBlockContact(qint64 id)
 {
     InputUser user = askForInputUser("contact", id);
@@ -1420,7 +1427,6 @@ void ApplicationUI::copyText(QByteArray text)
 
 void ApplicationUI::forwardMessage(qint32 msgid, qint32 userid, qint32 rand, QString type)
 {
-
     InputPeer user = askForInputPeer(QString::number(userid), type);
     mApi->messagesForwardMessage(user, msgid, rand);
 }
@@ -1443,15 +1449,18 @@ GroupDataModel* ApplicationUI::getContactsNamesModel(QString type)
     contactsmodel->insertList(favcontacts.value<QVariantList>());
     return contactsmodel;
 }
+
 qint32 ApplicationUI::getStashFwdMessage()
 {
     return stashfwdmessage;
 
 }
+
 void ApplicationUI::stashFwdMessage(qint32 msgid)
 {
     stashfwdmessage = msgid;
 }
+
 void ApplicationUI::flushStashFwdMessage()
 {
     stashfwdmessage = 0;
@@ -1466,18 +1475,19 @@ void ApplicationUI::listofblockedUsers()
 {
     mApi->contactsGetBlocked(0, 50);
 }
+
 void ApplicationUI::onContactsBlocked(qint64 id, const QList<ContactBlocked> &blocked,
         const QList<User> &users)
 {
     QVariantList list;
-    Q_FOREACH(User item, users){
-    qDebug() << item.firstName() << item.id();
-    QVariantMap map;
-    map["firstName"] = item.firstName();
-    map["id"] = item.id();
-    map["lastName"] = item.lastName();
-    list <<map;
-}
+    Q_FOREACH(User item, users) {
+        qDebug() << item.firstName() << item.id();
+        QVariantMap map;
+        map["firstName"] = item.firstName();
+        map["id"] = item.id();
+        map["lastName"] = item.lastName();
+        list <<map;
+    }
     GroupDataModel* blockedContactsModel = new GroupDataModel();
     blockedContactsModel->insertList(list);
     Q_EMIT loadBlockedUsers(blockedContactsModel);
@@ -1492,12 +1502,11 @@ void ApplicationUI::contactsUnBlockAnswer(qint64 id, bool ok)
 void ApplicationUI::createGroup(QString title, QVariant id)
 {
     QList<InputUser> list;
-    Q_FOREACH(QVariant ids, id.toList()){
-    bool ok = true;
-
-    InputUser user = askForInputUser("contact", ids.toInt(&ok) );
-    list << user;
-}
+    Q_FOREACH(QVariant ids, id.toList()) {
+        bool ok = true;
+        InputUser user = askForInputUser("contact", ids.toInt(&ok) );
+        list << user;
+    }
     mApi->messagesCreateChat(list, title);
 }
 
@@ -1510,14 +1519,12 @@ void ApplicationUI::addGroupMember(qint32 id, qint32 limit)
     m.setFromId(popgroupid);
     m.setMessage("user added");
     m.setUnread(1);
-
     m.setDate(QDateTime::currentDateTime().toTime_t());
     Peer peer(Peer::typePeerChat);
     peer.setChatId(popgroupid);
     m.setToId(peer);
     insertMessage(m);
     Q_EMIT updatemessage(db->getMessageById(m.id()));
-
 }
 
 void ApplicationUI::onMessagesAddChatUserStatedMessage(qint64 id, Message message,
@@ -1529,6 +1536,7 @@ void ApplicationUI::onMessagesAddChatUserStatedMessage(qint64 id, Message messag
     qDebug() << chatid;
     mApi->messagesGetFullChat(chatid);
 }
+
 void ApplicationUI::leaveGroup(qint32 id)
 {
     InputUser user = askForInputUser("self", currentUser.userid);
@@ -1543,6 +1551,7 @@ void ApplicationUI::deleteGroup(qint32 id)
     db->insertQuery("delete from contacts where id=:id", map);
     Q_EMIT deleteliveuser(id);
 }
+
 void ApplicationUI::getGroupMembers(qint32 id)
 {
     mApi->messagesGetFullChat(id);
@@ -1552,26 +1561,26 @@ void ApplicationUI::onMessagesGetFullChatAnswer(qint64 id, const ChatFull &fullC
         const QList<Chat> &chats, const QList<User> &users)
 {
     QVariantList list;
-    Q_FOREACH(User item, users){
-    qDebug() << item.firstName() << item.id() << item.lastName();
-    QVariantMap map;
-    map["firstName"] = item.firstName();
-    map["id"] = item.id();
-    map["lastName"] = item.lastName();
-    list <<map;
-}
+    Q_FOREACH(User item, users) {
+        qDebug() << item.firstName() << item.id() << item.lastName();
+        QVariantMap map;
+        map["firstName"] = item.firstName();
+        map["id"] = item.id();
+        map["lastName"] = item.lastName();
+        list <<map;
+    }
     QString chattitle;
     qint32 part;
     qint32 grpid;
     bool active;
 
-    Q_FOREACH(Chat chat, chats ){
-    qDebug() << chat.title();
-    chattitle = chat.title();
-    part = chat.participantsCount();
-    grpid = chat.id();
-    active = chat.left();
-}
+    Q_FOREACH(Chat chat, chats ) {
+        qDebug() << chat.title();
+        chattitle = chat.title();
+        part = chat.participantsCount();
+        grpid = chat.id();
+        active = chat.left();
+    }
     GroupDataModel* blockedContactsModel = new GroupDataModel();
     blockedContactsModel->insertList(list);
     Q_EMIT loadGroupMembers(blockedContactsModel);
@@ -1593,16 +1602,15 @@ void ApplicationUI::removeGroupMember(qint32 groupid, qint32 id)
     m.setToId(peer);
     insertMessage(m);
     Q_EMIT updatemessage(db->getMessageById(m.id()));
-
 }
 
 void ApplicationUI::onMessagesDeleteChatUserStatedMessage(qint64 msgId, Message message,
         QList<Chat> chats, QList<User> users, qint32 pts, qint32 seq)
 {
     qint32 chatid;
-    Q_FOREACH(Chat chat, chats ){
-    chatid = chat.id();
-}
+    Q_FOREACH(Chat chat, chats ) {
+        chatid = chat.id();
+    }
     getGroupMembers(chatid);
 
 }
@@ -1613,6 +1621,7 @@ void ApplicationUI::getGroupInfo(qint32 id)
     chatids << id;
     mApi->messagesGetChats(chatids);
 }
+
 void ApplicationUI::messagesGetChatsAnswer(qint64 id, const QList<Chat> &chats,
         const QList<User> &users)
 {
@@ -1620,13 +1629,12 @@ void ApplicationUI::messagesGetChatsAnswer(qint64 id, const QList<Chat> &chats,
     qint32 part;
     qint32 grpid;
     bool active;
-    Q_FOREACH(Chat chat, chats ){
-    chattitle = chat.title();
-    part = chat.participantsCount();
-    active = chat.left();
-}
-Q_EMIT
-    loadGroupInfo(chattitle, part, grpid, active);
+    Q_FOREACH(Chat chat, chats ) {
+        chattitle = chat.title();
+        part = chat.participantsCount();
+        active = chat.left();
+    }
+    Q_EMIT loadGroupInfo(chattitle, part, grpid, active);
 }
 
 void ApplicationUI::saveGroupInfo(QString title)
@@ -1643,17 +1651,17 @@ void ApplicationUI::onMessagesEditChatTitleStatedMessage(qint64, Message, QList<
 bool ApplicationUI::createBroadCast(QString title, QVariant info, qint32 random)
 {
     bool ok = true;
-    Q_FOREACH(QVariant ids, info.toList()){
-    QVariantMap map;
-    map.insert("broadcastid", random);
-    map.insert("userid", ids.toInt(&ok));
-    int usercheck = random + ids.toInt(&ok);
-    map.insert("usercheck", usercheck);
-    bool brod =
-    db->insertQuery(
-            "insert into broadCast( broadcastid, userid, usercheck)values( :broadcastid, :userid, :usercheck)",
-            map);
-}
+    Q_FOREACH(QVariant ids, info.toList()) {
+        QVariantMap map;
+        map.insert("broadcastid", random);
+        map.insert("userid", ids.toInt(&ok));
+        int usercheck = random + ids.toInt(&ok);
+        map.insert("usercheck", usercheck);
+        bool brod =
+        db->insertQuery(
+                "insert into broadCast( broadcastid, userid, usercheck)values( :broadcastid, :userid, :usercheck)",
+                map);
+    }
     QVariantMap cmap;
     cmap["id"] = random;
     cmap["messagetime"] = QDateTime::currentDateTime().toTime_t();
@@ -1671,7 +1679,7 @@ bool ApplicationUI::createBroadCast(QString title, QVariant info, qint32 random)
     } else
         return false;
 }
-//
+
 bool ApplicationUI::addBroadCastMember(qint32 bid, qint32 id)
 {
     QVariantMap map;
@@ -1687,6 +1695,7 @@ bool ApplicationUI::addBroadCastMember(qint32 bid, qint32 id)
     return !brod;
 
 }
+
 bool ApplicationUI::removeBroadCastMember(qint32 bid, qint32 id)
 {
     QVariantMap map;
@@ -1698,6 +1707,7 @@ bool ApplicationUI::removeBroadCastMember(qint32 bid, qint32 id)
     return !exe;
 
 }
+
 GroupDataModel* ApplicationUI::getBroadCastMembers(qint32 bid)
 {
     QVariantMap map;
@@ -1714,7 +1724,7 @@ GroupDataModel* ApplicationUI::getBroadCastMembers(qint32 bid)
     qDebug() << "Broast Members List" << modelg->size();
     return modelg;
 }
-//
+
 bool ApplicationUI::removeBroadCast(qint32 bid)
 {
     QVariantMap map;
@@ -1729,14 +1739,17 @@ bool ApplicationUI::removeBroadCast(qint32 bid)
     } else
         return false;
 }
+
 int ApplicationUI::getPopBroadCastId()
 {
     return popbroadcastid;
 }
+
 void ApplicationUI::setPopBroadCastId(int bid)
 {
     popbroadcastid = bid;
 }
+
 void ApplicationUI::clearBroadCastHistory(qint32 bid)
 {
     QVariantMap map;
@@ -1761,10 +1774,10 @@ void ApplicationUI::sendMessageBroadCast(qint32 id, QString text, int random)
     QVariant data = db->executeSqlQuery("select userid from broadCast where broadcastid = :id",
             map);
     QVariantList list = data.value<QVariantList>();
-    Q_FOREACH(QVariant var,list){
-    QVariantMap mapp = var.value<QVariantMap>();
-    contacts << askForInputUser("contact",mapp.value("userid").toInt());
-}
+    Q_FOREACH(QVariant var,list) {
+        QVariantMap mapp = var.value<QVariantMap>();
+        contacts << askForInputUser("contact",mapp.value("userid").toInt());
+    }
     InputMedia inputMedia(InputMedia::typeInputMediaEmpty);
     mApi->messagesSendBroadcast(contacts, text, inputMedia);
     QVariantMap cmap;
@@ -1787,7 +1800,6 @@ void ApplicationUI::sendMessageBroadCast(qint32 id, QString text, int random)
     db->insertQuery(
             "insert into messagesTab(id,out,date,fromId,toId,message,read,type)values(:id,:out,:date,:fromId,:toId,:message,:read,:type)",
             msgmap);
-
 }
 
 QVariantList ApplicationUI::liveChat(qint32 uid, qint32 offset, QString type)
@@ -1799,11 +1811,9 @@ QVariantList ApplicationUI::liveChat(qint32 uid, qint32 offset, QString type)
     map["type"] = type;
     QVariant data = db->executeSqlQuery(
             "select * from messagesTab where fromId = :uid and id > :msgid and type = :type", map);
-
     QVariantList umap = data.value<QVariantList>();
     qDebug() << "the data" << umap.size();
     return umap;
-
 }
 
 void ApplicationUI::deleteContact(qint32 userid)
@@ -1824,6 +1834,7 @@ void ApplicationUI::contactsDeleteContactAnswer(qint64 msg, ContactsMyLink local
 {
     Q_EMIT contactDeleteoOnServer(true);
 }
+
 void ApplicationUI::boolcheck()
 {
     Q_EMIT contactDeleteoOnServer(true);
@@ -1843,6 +1854,7 @@ void ApplicationUI::AccountupdateProfile(QString first, QString last)
     mApi->accountUpdateProfile(first, last);
 
 }
+
 void ApplicationUI::accountUpdateProfileAnswer(qint64 id, User user)
 {
     Q_EMIT accountUserInfo(user.firstName(), user.lastName(), user.phone(), user.username(),
@@ -1879,6 +1891,7 @@ QVariantList ApplicationUI::searchFilterChatModel(QString type, QString search)
     model->insert(0, list.value<QVariantList>());
     return list.value<QVariantList>();
 }
+
 void ApplicationUI::alert(QString message)
 {
     SystemToast *toast = new SystemToast(this);
@@ -1935,13 +1948,13 @@ void ApplicationUI::SaveSettings(QString name, QString base)
     else
         setSettings(name, base);
 }
+
 QVariant ApplicationUI::getSettings(QString type)
 {
     QVariantMap map;
     map["type"] = type;
     QVariant var = db->executeSqlQuery("select * from settings where type = :type", map);
     return var;
-
 }
 void ApplicationUI::setSettings(QString name, QString base)
 {
@@ -1990,10 +2003,10 @@ void ApplicationUI::onUploadGetFileSessionCreated()
 {
     Session *session = qobject_cast<Session *>(sender());
     QList<DownloadFile *> sessionInitialFiles = mInitialDownloadsMap.take(session->sessionId());
-    Q_FOREACH (DownloadFile *f, sessionInitialFiles){
-    qint64 msgId = mApi->uploadGetFile(session, f->fileLocation());
-    mDownloadsMap.insert(msgId, f);
-}
+    Q_FOREACH (DownloadFile *f, sessionInitialFiles) {
+        qint64 msgId = mApi->uploadGetFile(session, f->fileLocation());
+        mDownloadsMap.insert(msgId, f);
+    }
 }
 
 void ApplicationUI::onUploadGetFileAnswer(qint64 msgId, StorageFileType type, qint32 mtime,
@@ -2154,7 +2167,7 @@ void ApplicationUI::onUploadGetFileAnswer(qint64 id, StorageFileType type, qint3
                     << "filepath\n" << m_downloadFile.fileName();
             getIdByPhotoId(did);
         }
-        else if(type == "messageimage"){
+        else if(type == "messageimage") {
             getmessageofimage(did);
         }
     }
@@ -2184,19 +2197,19 @@ void ApplicationUI::onMessagesSearchAnswer(qint64 id, const QList<Message> &mess
         mentionedChats.insert(chats.at(i).id(), &(chats.at(i)));
     }
 
-    Q_FOREACH (Message m, messages){
-    const User *u = mentionedUsers.value(m.fromId());
-    QString from = u->firstName() + " " + u->lastName();
-    QString to;
-    if (m.toId().classType() == Peer::typePeerUser) {
-        const User *u = mentionedUsers.value(m.toId().userId());
-        to = u->firstName() + " " + u->lastName();
-    } else {
-        const Chat *c = mentionedChats.value(m.toId().chatId());
-        to = c->title();
+    Q_FOREACH (Message m, messages) {
+        const User *u = mentionedUsers.value(m.fromId());
+        QString from = u->firstName() + " " + u->lastName();
+        QString to;
+        if (m.toId().classType() == Peer::typePeerUser) {
+            const User *u = mentionedUsers.value(m.toId().userId());
+            to = u->firstName() + " " + u->lastName();
+        } else {
+            const Chat *c = mentionedChats.value(m.toId().chatId());
+            to = c->title();
+        }
+        qDebug() << "msgId:" << m.id() << "-" << from << " -> " << to << ":" << m.message();
     }
-    qDebug() << "msgId:" << m.id() << "-" << from << " -> " << to << ":" << m.message();
-}
 }
 
 void ApplicationUI::onMessagesForwardMsgStatedMessage(qint64 id, const Message &message,
@@ -2213,6 +2226,7 @@ void ApplicationUI::setCheckInitial(qint32 id)
     map["id"] = id;
     db->executeSqlQuery("update contacts set init = :init where id = :id", map);
 }
+
 void ApplicationUI::setinitfalse(qint32 id)
 {
     QVariantMap map;
@@ -2221,6 +2235,7 @@ void ApplicationUI::setinitfalse(qint32 id)
     db->insertQuery("delete from messagesTab where ((fromId = :id or toId=:id) and type='chat')",
             map);
 }
+
 QString ApplicationUI::getThemeSettings()
 {
     QString themequery = "select * from settings where type = 'theme'";
@@ -2233,15 +2248,14 @@ QString ApplicationUI::getThemeSettings()
     }
     return theme;
 }
+
 void ApplicationUI::setThemeColorVariable(QString str)
 {
-
     themecolorvariable = str;
-
 }
+
 QString ApplicationUI::getThemeColorVariable()
 {
-
     QString themequery = "select * from settings where type = 'themecolor'";
     QSqlQuery themedata = db->executeQuery(themequery);
     QString theme;
@@ -2250,12 +2264,13 @@ QString ApplicationUI::getThemeColorVariable()
         theme = themedata.value(fieldNo).toString();
     }
     return theme;
-
 }
+
 QVariantMap ApplicationUI::getidtousers()
 {
     return idtoname;
 }
+
 bool ApplicationUI::updateBroadCast(int id, QString name)
 {
     QVariantMap map;
@@ -2306,7 +2321,7 @@ void ApplicationUI::importContacts()
 //    LoadContacts lc;
 //    QVariantList list = lc.loadContacts();
 //    qDebug()<<"this is the list size"<<list.size();
-//    foreach(QVariant var,list){
+//    foreach(QVariant var,list) {
 //        QVariantMap map = var.value<QVariantMap>();
 //           InputContact ic;
 //           ic.setClientId(map.value("id").toInt());
@@ -2316,6 +2331,7 @@ void ApplicationUI::importContacts()
 //           inputcontactlist << ic;
 //       }
 }
+
 void ApplicationUI::getIdByPhotoId(qint64 id)
 {
     QVariant v;
@@ -2324,19 +2340,20 @@ void ApplicationUI::getIdByPhotoId(qint64 id)
 
     QSqlQuery query = db->executeQuery(q);
     int fiel =  query.record().indexOf("id");
-    while(query.next()){
+    while(query.next()) {
         v = query.value(fiel);
     }
 
     Q_EMIT userprofile(v.value<qint32>(),id);
 }
-void  ApplicationUI::getmessageofimage(qint64 id){
+
+void  ApplicationUI::getmessageofimage(qint64 id) {
     QVariant v;
     QString q = "select id from messagesTab where messageid = \"" + QString::number(id) + "\"";
 
     QSqlQuery query = db->executeQuery(q);
     int fiel =  query.record().indexOf("id");
-    while(query.next()){
+    while(query.next()) {
         v = query.value(fiel);
     }
 

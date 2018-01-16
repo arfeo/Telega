@@ -24,6 +24,7 @@
 #include <sys/socket.h>
 #include <netinet/tcp.h>
 #include <netinet/in.h>
+#include <QAbstractSocket>
 
 Connection::Connection(const QString &host, qint32 port, QObject *parent) :
         QTcpSocket(parent),
@@ -86,8 +87,9 @@ void Connection::connectToServer() {
     connect(this, SIGNAL(readyRead()), SLOT(onReadyRead()), Qt::UniqueConnection);
     // Reconnect if false
 //    connect(this, SIGNAL(error(QAbstractSocket::SocketError)), SLOT(onError(QAbstractSocket::SocketError)), Qt::UniqueConnection);
-    qDebug() << m_host;
-    qDebug() << m_port;
+    qDebug() << "m_host:" << m_host;
+    qDebug() << "m_port:" << m_port;
+    qDebug() << "Connecting to server...";
     connectToHost(m_host, m_port);
 }
 

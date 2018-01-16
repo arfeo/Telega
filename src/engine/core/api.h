@@ -53,11 +53,11 @@
 #include <QList>
 #include <QStringList>
 
-
-
 class Api : public AbstractApi
 {
+
     Q_OBJECT
+
 public:
     explicit Api(Session *session, QObject *parent = 0);
 
@@ -76,6 +76,7 @@ public:
     qint64 authResetAuthorizations();
     qint64 authExportAuthorization(qint32 dcId);
     qint64 authImportAuthorization(qint32 id, const QByteArray &bytes);
+
     // Notifications / settings
     qint64 accountRegisterDevice(qint32 tokenType, const QString &token, const QString &deviceModel, const QString &systemVersion, const QString &appVersion, bool appSandbox, const QString &langCode);
     qint64 accountUnregisterDevice(qint32 tokenType, const QString &token);
@@ -87,20 +88,24 @@ public:
     qint64 accountGetWallPapers();
     qint64 photosUploadProfilePhoto(const InputFile &file, const QString &caption, const InputGeoPoint &geoPoint, const InputPhotoCrop &crop);
     qint64 photosUpdateProfilePhoto(const InputPhoto &id, const InputPhotoCrop &crop);
+
     // Users
     qint64 usersGetUsers(const QList<InputUser> &users);
     qint64 usersGetFullUser(const InputUser &user);
     qint64 photosGetUserPhotos(const InputUser &user, qint32 offset = 0, qint32 maxId = 0, qint32 limit = 0);
+
     // Contacts
     qint64 contactsGetStatuses();
     qint64 contactsGetContacts(const QString &hash);
     qint64 contactsImportContacts(const QList<InputContact> contacts, bool replace);
     qint64 contactsDeleteContact(const InputUser &id);
     qint64 contactsDeleteContacts(const QList<InputUser> &ids);
+
     // Blacklist
     qint64 contactsBlock(const InputUser &id);
     qint64 contactsUnblock(const InputUser &id);
     qint64 contactsGetBlocked(qint32 offset = 0, qint32 limit = 0);
+
     // Messages
     qint64 messagesSendMessage(const InputPeer &peer, const QString &message, qint64 randomId);
     qint64 messagesSendMedia(const InputPeer &peer, const InputMedia &media, qint64 randomId);
@@ -108,7 +113,6 @@ public:
     qint64 messagesGetDialogs(qint32 offset = 0, qint32 maxId = 0, qint32 limit = 0);
     qint64 messagesGetHistory(const InputPeer &peer, qint32 offset = 0, qint32 maxId = 0, qint32 limit = 0);
     qint64 messagesGetLatestMessage(const InputPeer &peer, qint32 offset = 0, qint32 maxId = 0, qint32 limit = 0);
-
     qint64 messagesSearch(const InputPeer &peer, const QString &q, const MessagesFilter &filter, qint32 minDate = 0, qint32 maxDate = 0, qint32 offset = 0, qint32 maxId = 0, qint32 limit = 0);
     qint64 messagesReadHistory(const InputPeer &peer, qint32 maxId = 0, qint32 offset = 0);
     qint64 messagesDeleteHistory(const InputPeer &peer, qint32 offset = 0);
@@ -118,6 +122,7 @@ public:
     qint64 messagesForwardMessage(const InputPeer &peer, qint32 id, qint64 randomId);
     qint64 messagesForwardMessages(const InputPeer &peer, const QList<qint32> &ids);
     qint64 messagesSendBroadcast(const QList<InputUser> &contacts, const QString &message, const InputMedia &media);
+
     // Chats
     qint64 messagesGetChats(const QList<qint32> chatIds);
     qint64 messagesGetFullChat(qint32 chatId);
@@ -126,6 +131,7 @@ public:
     qint64 messagesAddChatUser(qint32 chatId, const InputUser &user, qint32 fwdLimit = 0);
     qint64 messagesDeleteChatUser(qint32 chatId, const InputUser &user);
     qint64 messagesCreateChat(const QList<InputUser> &users, const QString &title);
+
     // Secret chats
     qint64 messagesGetDhConfig(qint32 version, qint32 randomLength);
     qint64 messagesRequestEncryption(const InputUser &user, qint32 randomId, QByteArray g_a);
@@ -137,15 +143,19 @@ public:
     qint64 messagesSendEncryptedFile(const InputEncryptedChat &inputEncryptedChat, qint64 randomId, QByteArray data, const InputEncryptedFile &file);
     qint64 messagesSendEncryptedService(const InputEncryptedChat &inputEncryptedChat, qint64 randomId, QByteArray data);
     qint64 messagesReceivedQueue(qint32 maxQts);
+
     // Updates
     qint64 updatesGetState();
     qint64 updatesGetDifference(qint32 pts, qint32 date, qint32 qts);
+
     // Files
     qint64 uploadSaveFilePart(Session *session, qint64 fileId, qint32 filePart, const QByteArray &bytes);
     qint64 uploadSaveBigFilePart(Session *session, qint64 fileId, qint32 filePart, qint32 fileTotalParts, const QByteArray &bytes);
     qint64 uploadGetFile(Session *session, const InputFileLocation &location, qint32 offset = 0, qint32 limit = BLOCK);
     qint64 messagesGetMessages(const QList<int>&);
+
 Q_SIGNALS:
+
     //# Answers
     // Registration / authorization
     void config(qint64 msgId, qint32 date, bool testMode, qint32 thisDc, const QList<DcOption> &dcOptions, qint32 chatMaxSize, qint32 broadcastMaxSize);
@@ -173,11 +183,13 @@ Q_SIGNALS:
     void accountGetWallPapersResult(qint64 msgId, QList<WallPaper> wallpapers);
     void photosPhoto(qint64 msgId, Photo photo, QList<User> users);
     void photosUserProfilePhoto(qint64 msgId, UserProfilePhoto photo);
+
     // Users
     void usersGetUsersResult(qint64 msgId, QList<User> users);
     void userFull(qint64 msgId, User user, ContactsLink link, Photo profilePhoto, PeerNotifySettings notifySettings, bool blocked, QString realFirstName, QString realLastName);
     void photosPhotos(qint64 msgId, QList<Photo> photos, QList<User> users);
     void photosPhotosSlice(qint64 msgId, qint32 count, QList<Photo> photos, QList<User> users);
+
     // Contacts
     void contactsGetStatusesResult(qint64 msgId, QList<ContactStatus> statuses);
     void contactsContacts(qint64 msgId, QList<Contact> contacts, QList<User> users);
@@ -185,11 +197,13 @@ Q_SIGNALS:
     void contactsImportedContacts(qint64 msgId, QList<ImportedContact> imported, QList<qint64> retryContacts, QList<User> users);
     void contactsDeleteContactLink(qint64 msgId, ContactsMyLink myLink, ContactsForeignLink foreignLink, User user);
     void contactsDeleteContactsResult(qint64 msgId, bool ok);
+
     // Blacklist
     void contactsBlockResult(qint64 msgId, bool ok);
     void contactsUnblockResult(qint64 msgId, bool ok);
     void contactsBlocked(qint64 msgId, QList<ContactBlocked> blocked, QList<User> users);
     void contactsBlockedSlice(qint64 msgId, qint32 count, QList<ContactBlocked> blocked, QList<User> users);
+
     // Messages
     void messagesGetLatestMessage(qint64, QList<Message>&, QList<Chat>&, QList<User>&);
     void messagesSentMessage(qint64 msgId, qint32 id, qint32 date, qint32 pts, qint32 seq);
@@ -216,6 +230,7 @@ Q_SIGNALS:
     void messagesForwardMsgsStatedMessagesLinks(qint64 msgId, QList<Message> messages, QList<Chat> chats, QList<User> users, QList<ContactsLink> links, qint32 pts, qint32 seq);
     void messagesSendBroadcastStatedMessages(qint64 msgId, QList<Message> messages, QList<Chat> chats, QList<User> users);
     void messagesSendBroadcastStatedMessagesLinks(qint64 msgId, QList<Message> messages, QList<Chat> chats, QList<User> users, QList<ContactsLink> links);
+
     // Chats
     void messagesChats(qint64 msgId, QList<Chat> chats, QList<User> users);
     void messagesChatFull(qint64 msgId, ChatFull fullChat, QList<Chat> chats, QList<User> users);
@@ -229,6 +244,7 @@ Q_SIGNALS:
     void messagesDeleteChatUserStatedMessageLink(qint64 msgId, Message message, QList<Chat> chats, QList<User> users, QList<ContactsLink> links, qint32 pts, qint32 seq);
     void messagesCreateChatStatedMessage(qint64 msgId, Message message, QList<Chat> chats, QList<User> users, qint32 pts, qint32 seq);
     void messagesCreateChatStatedMessageLink(qint64 msgId, Message message, QList<Chat> chats, QList<User> users, QList<ContactsLink> links, qint32 pts, qint32 seq);
+
     // Secret chats
     void messagesDhConfig(qint64 msgId, qint32 g, QByteArray p, qint32 version, QByteArray random);
     void messagesDhConfigNotModified(qint64 msgId, QByteArray random);
@@ -245,18 +261,20 @@ Q_SIGNALS:
     void messagesSendEncryptedServiceSentEncryptedFile(qint64 msgId, qint32 date, const EncryptedFile &file);
     void messagesSentEncryptedService(qint64 msgId, qint32 date);
     void messagesReceivedQueueResult(qint64 msgId, const QList<qint64> &randomIds);
+
     // Updates
     void updatesState(qint64 msgId, qint32 pts, qint32 qts, qint32 date, qint32 seq, qint32 unreadCount);
     void updatesDifferenceEmpty(qint64 msgId, qint32 date, qint32 seq);
     void updatesDifference(qint64 msgId, QList<Message> messsages, QList<EncryptedMessage> newEncryptedMessages, QList<Update> otherUpdates, QList<Chat> &chats, QList<User> &users, UpdatesState state);
     void updatesDifferenceSlice(qint64 msgId, QList<Message> messsages, QList<EncryptedMessage> newEncryptedMessages, QList<Update> otherUpdates, QList<Chat> &chats, QList<User> &users, UpdatesState intermediateState);
+
     // Files
     void uploadSaveFilePartResult(qint64 msgId, qint64 fileId, bool ok);
     void uploadSaveBigFilePartResult(qint64 msgId, qint64 fileId, bool ok);
     void uploadFile(qint64 msgId, StorageFileType type, qint32 mtime, QByteArray bytes);
-    //errors
-    void error(qint64 msgId, qint32 errorCode, QString errorText);
 
+    // Errors
+    void error(qint64 msgId, qint32 errorCode, QString errorText);
     void errorRetry(qint64 msgId, qint32 errorCode, QString errorText);
     void authSendCodeError(qint64 msgId, qint32 errorCode, QString errorText);
     void authSignInError(qint64 msgId, qint32 errorCode, QString errorText);
@@ -337,14 +355,13 @@ private:
     QueryMethods uploadSaveBigFilePartMethods;
     QueryMethods uploadGetFileMethods;
 
-    //answers
+    // Answers
     void sendpingAnswer(Query *p, InboundPkt &inboundPkt);
     void onHelpGetConfigAnswer(Query *q, InboundPkt &inboundPkt);
     void onHelpGetInviteTextAnswer(Query *q, InboundPkt &inboundPkt);
     void onAuthCheckPhoneAnswer(Query *q, InboundPkt &inboundPkt);
     void onAuthSendCallAnswer(Query *q, InboundPkt &inboundPkt);
     void onAuthSendCodeAnswer(Query *q, InboundPkt &inboundPkt);
-
     void onAuthSignInAnswer(Query *q, InboundPkt &inboundPkt);
     void onAuthSignUpAnswer(Query *q, InboundPkt &inboundPkt);
     void onAuthLogOutAnswer(Query *q, InboundPkt &inboundPkt);
@@ -412,7 +429,7 @@ private:
     void onUploadSaveBigFilePartAnswer(Query *q, InboundPkt &inboundPkt);
     void onUploadGetFileAnswer(Query *q, InboundPkt &inboundPkt);
 
-    //errors
+    // Errors
     void onError(Query *q, qint32 errorCode, const QString &errorText);
     void onErrorRetry(Query *q, qint32 errorCode, const QString &errorText);
     void onAuthSignInError(Query *q, qint32 errorCode, const QString &errorText);

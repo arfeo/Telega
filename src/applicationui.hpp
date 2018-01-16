@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Arfeo.net.
+ * Copyright (c) 2017-2018 Arfeo.net.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 #ifndef ApplicationUI_HPP_
 #define ApplicationUI_HPP_
+
 #include <QObject>
 #include <QMap>
 #include "engine/types/types.h"
@@ -25,7 +26,6 @@
 #include <QtCore/QByteArray>
 #include <QtSql/QSqlQuery>
 #include <QtSql/QSqlRecord>
-
 #include "engine/database.hpp"
 #include "engine/types/contact.h"
 #include "engine/types/user.h"
@@ -35,6 +35,7 @@
 #include "engine/logic/fileoperation.h"
 #include "engine/logic/downloadfile.h"
 //#include "chatdatamodel.h"
+
 namespace bb
 {
     namespace cascades
@@ -55,18 +56,14 @@ class InvokeManger;
 class QByteArray;
 class QSqlQuery;
 class Update;
-class bb::cascades::ArrayDataModel;
-class bb::cascades::GroupDataModel;
-/*!
- * @brief Application UI object
- *
- * Use this object to create and init app UI, to create context objects, to register the new meta types etc.
- */
 class UdpModule;
 class Database;
+
 class ApplicationUI: public QObject
 {
+
     Q_OBJECT
+
 public:
     typedef struct{
             int userid;
@@ -75,28 +72,28 @@ public:
             QString photoLocation;
             QString phoneNumber;
             QString username;
-        }currentuser;
-        QVariantMap idtoname;
+    } currentuser;
+    QVariantMap idtoname;
     QString phone;
-        QString hash;
-        qint32 stashfwdmessage;
-        QString themecolorvariable;
-        bool reg;
-        int popuserid;
-        int popgroupid;
-        int popbroadcastid;
+    QString hash;
+    qint32 stashfwdmessage;
+    QString themecolorvariable;
+    bool reg;
+    int popuserid;
+    int popgroupid;
+    int popbroadcastid;
     currentuser currentUser;
     ApplicationUI();
     Database *db;
     bool loggedIn;
     QString m_videoFilePath;
-        QString m_videoThumbPath;
-        QString m_audioFilePath;
-        QString m_photoFilePath;
-        QString m_docFilePath;
-        QString m_docThumbPath;
-        QFile m_downloadFile;
-        qint64 m_downloadFileExpectedLength;
+    QString m_videoThumbPath;
+    QString m_audioFilePath;
+    QString m_photoFilePath;
+    QString m_docFilePath;
+    QString m_docThumbPath;
+    QFile m_downloadFile;
+    qint64 m_downloadFileExpectedLength;
     virtual ~ApplicationUI();
 
     DcProvider mDcProvider;
@@ -108,119 +105,118 @@ public:
     QVariantList mem;
 
     Q_INVOKABLE QString getAppSettings(const QString&, const QString&);
-        Q_INVOKABLE void setAppSettings(const QString&, const QString&);
-        Q_INVOKABLE bool init();
-        Q_INVOKABLE QString checkLogin();
-        Q_INVOKABLE void changeServer( qint16 number );
-        Q_INVOKABLE qint32 workingdc();
+    Q_INVOKABLE void setAppSettings(const QString&, const QString&);
+    Q_INVOKABLE bool init();
+    Q_INVOKABLE bool checkLogin();
+    Q_INVOKABLE void changeServer( qint16 number );
+    Q_INVOKABLE qint32 workingdc();
 
-        //Auths
-        Q_INVOKABLE void authSendCode( QString ph);
-        Q_INVOKABLE void authUser(QString code);
-        Q_INVOKABLE bool isUserReg();
-        Q_INVOKABLE void authUserSignIn(QString first, QString last, QString code);
-        Q_INVOKABLE void logout();
-        Q_INVOKABLE void getcontacts();
-        Q_INVOKABLE void sendping();
+    //Auths
+    Q_INVOKABLE void authSendCode(QString ph);
+    Q_INVOKABLE void authUser(QString code);
+    Q_INVOKABLE bool isUserReg();
+    Q_INVOKABLE void authUserSignIn(QString first, QString last, QString code);
+    Q_INVOKABLE void logout();
+    Q_INVOKABLE void getcontacts();
+    Q_INVOKABLE void sendping();
 
-        // Models
-        Q_INVOKABLE bool addToFavourites(qint32 id);
-        Q_INVOKABLE bool deleteFavContacts(qint32 id);
-        Q_INVOKABLE bb::cascades::GroupDataModel* getFavContactsModel();
-        Q_INVOKABLE bb::cascades::GroupDataModel* getContactsNamesModel(QString);
-        Q_INVOKABLE QVariantList searchFilterChatModel(QString type,QString search);
+    // Models
+    Q_INVOKABLE bool addToFavourites(qint32 id);
+    Q_INVOKABLE bool deleteFavContacts(qint32 id);
+    Q_INVOKABLE bb::cascades::GroupDataModel* getFavContactsModel();
+    Q_INVOKABLE bb::cascades::GroupDataModel* getContactsNamesModel(QString);
+    Q_INVOKABLE QVariantList searchFilterChatModel(QString type,QString search);
 
-        // User
-        Q_INVOKABLE void getCurrentUser();
-        Q_INVOKABLE void fetchUserDetails();
+    // User
+    Q_INVOKABLE void getCurrentUser();
+    Q_INVOKABLE void fetchUserDetails();
 
-        // Contacts
-        Q_INVOKABLE QVariantList getContactsmodal(QString);
-        Q_INVOKABLE void getmessages(qint32,QString,qint32);
-        Q_INVOKABLE void clearContactHistory(qint32,QString);
-        Q_INVOKABLE void listofblockedUsers();
-        Q_INVOKABLE void blockUserContact(qint64 id);
-        Q_INVOKABLE void unBlockContact(qint64 id);
-        Q_INVOKABLE void importContacts();
+    // Contacts
+    Q_INVOKABLE QVariantList getContactsmodal(QString);
+    Q_INVOKABLE void getmessages(qint32,QString,qint32);
+    Q_INVOKABLE void clearContactHistory(qint32,QString);
+    Q_INVOKABLE void listofblockedUsers();
+    Q_INVOKABLE void blockUserContact(qint64 id);
+    Q_INVOKABLE void unBlockContact(qint64 id);
+    Q_INVOKABLE void importContacts();
 
-        // Broadcast
-        Q_INVOKABLE bool createBroadCast( QString title, QVariant id,qint32 random);
-        Q_INVOKABLE bool addBroadCastMember(qint32 bid, qint32 id);
-        Q_INVOKABLE bool removeBroadCastMember(qint32 bid, qint32 id);
-        Q_INVOKABLE bool removeBroadCast(qint32 bid);
-        Q_INVOKABLE void setPopBroadCastId(int);
-        Q_INVOKABLE int getPopBroadCastId();
-        Q_INVOKABLE void clearBroadCastHistory(qint32);
-        Q_INVOKABLE QVariant getContactInfo(qint32 id);
-        Q_INVOKABLE bb::cascades::GroupDataModel* getBroadCastMembers(qint32 bid);
-        Q_INVOKABLE QVariantList liveChat(qint32, qint32, QString);
-        Q_INVOKABLE bool contactSaveInfo(QString );
-        Q_INVOKABLE bool updateBroadCast(qint32 id,QString name);
-        Q_INVOKABLE void userdetails(QString userid);
-        Q_INVOKABLE void settyping(QString userid, bool check);
-        Q_INVOKABLE QVariantList getMessagesModel( qint32,int,QString);
-        Q_INVOKABLE void getLatestMessages();
-        Q_INVOKABLE void flushTable(QString);
-        Q_INVOKABLE void sendTyping(QString,bool);
-        Q_INVOKABLE void sendMessage(QString,qint64);
-        Q_INVOKABLE void sendMessageChat(QString,qint64);
-        Q_INVOKABLE void forwardMessage(qint32, qint32 ,qint32,QString);
-        Q_INVOKABLE void copyText(QByteArray text);
-        Q_INVOKABLE void setPopUserId(int);
-        Q_INVOKABLE int getPopUserId();
-        Q_INVOKABLE bool deleteMessage(int);
-        Q_INVOKABLE void setPopGroupId(int);
-        Q_INVOKABLE int getPopGroupId();
-        Q_INVOKABLE bool updateGroupSettings(int id,QString name);
-        Q_INVOKABLE bool updateContactSettings(int id,QString name);
-        Q_INVOKABLE void stashFwdMessage(qint32);
-        Q_INVOKABLE qint32 getStashFwdMessage();
-        Q_INVOKABLE void flushStashFwdMessage();
-        Q_INVOKABLE void leaveGroup(qint32 id);
-        Q_INVOKABLE void getGroupMembers(qint32 id);
-        Q_INVOKABLE void removeGroupMember(qint32 groupid, qint32 id);
-        Q_INVOKABLE void createGroup(QString, QVariant);
-        Q_INVOKABLE void addGroupMember(qint32,qint32);
-        Q_INVOKABLE void getGroupInfo(qint32 id);
-        Q_INVOKABLE void saveGroupInfo(QString);
-        Q_INVOKABLE void dumpTable(QString tablename);
-        Q_INVOKABLE void sendMessageBroadCast(qint32 id, QString text,int random);
-        Q_INVOKABLE void deleteContact(qint32 userid);
-        Q_INVOKABLE void deletecontactlocal(qint32 popuserid);
-        Q_INVOKABLE void boolcheck();
-        Q_INVOKABLE void AccountupdateProfile(QString first, QString last);
-        Q_INVOKABLE void alert(QString);
-        Q_INVOKABLE void markReadMessages(qint32, qint32 , QString);
-        Q_INVOKABLE void chatCatchUp(QString, qint32,QString);
-        Q_INVOKABLE void SaveSettings(QString, QString);
-        Q_INVOKABLE QVariant getSettings(QString);
-        Q_INVOKABLE void setSettings(QString, QString);
-        Q_INVOKABLE void searchMessage(QString);
-        Q_INVOKABLE void setCheckInitial(qint32);
-        Q_INVOKABLE void setinitfalse(qint32 id);
-        Q_INVOKABLE QString getThemeSettings();
-        Q_INVOKABLE void setThemeColorVariable(QString str);
-        Q_INVOKABLE QString getThemeColorVariable();
-        Q_INVOKABLE QVariantMap getidtousers();
-        Q_INVOKABLE void deleteGroup(qint32 id);
-        Q_INVOKABLE QVariant getMessageContacts(int id);
-        void getIdByPhotoId(qint64 id);
-        void getmessageofimage(qint64 id);
-        void closeconnection();
-        void switchDC(QString number);
-        void dcchange(QString codetext);
-        void onMessagesGetHistoryAnswer(qint64 id, qint32 count, const QList<Message> &messages, const QList<Chat> &chats, const QList<User> &users);
-        void insertMessage(const Message &message);
-        qint64 uploadGetFile(const InputFileLocation &file, qint32 fileSize, qint32 dc);
-        qint64 uploadCancelFile(qint64 fileId);
-        void DownloadImageThumb(QString,qint64,FileLocation, qint32, qint64);
+    // Broadcast
+    Q_INVOKABLE bool createBroadCast( QString title, QVariant id,qint32 random);
+    Q_INVOKABLE bool addBroadCastMember(qint32 bid, qint32 id);
+    Q_INVOKABLE bool removeBroadCastMember(qint32 bid, qint32 id);
+    Q_INVOKABLE bool removeBroadCast(qint32 bid);
+    Q_INVOKABLE void setPopBroadCastId(int);
+    Q_INVOKABLE int getPopBroadCastId();
+    Q_INVOKABLE void clearBroadCastHistory(qint32);
+    Q_INVOKABLE QVariant getContactInfo(qint32 id);
+    Q_INVOKABLE bb::cascades::GroupDataModel* getBroadCastMembers(qint32 bid);
+    Q_INVOKABLE QVariantList liveChat(qint32, qint32, QString);
+    Q_INVOKABLE bool contactSaveInfo(QString );
+    Q_INVOKABLE bool updateBroadCast(qint32 id,QString name);
+    Q_INVOKABLE void userdetails(QString userid);
+    Q_INVOKABLE void settyping(QString userid, bool check);
+    Q_INVOKABLE QVariantList getMessagesModel( qint32,int,QString);
+    Q_INVOKABLE void getLatestMessages();
+    Q_INVOKABLE void flushTable(QString);
+    Q_INVOKABLE void sendTyping(QString,bool);
+    Q_INVOKABLE void sendMessage(QString,qint64);
+    Q_INVOKABLE void sendMessageChat(QString,qint64);
+    Q_INVOKABLE void forwardMessage(qint32, qint32 ,qint32,QString);
+    Q_INVOKABLE void copyText(QByteArray text);
+    Q_INVOKABLE void setPopUserId(int);
+    Q_INVOKABLE int getPopUserId();
+    Q_INVOKABLE bool deleteMessage(int);
+    Q_INVOKABLE void setPopGroupId(int);
+    Q_INVOKABLE int getPopGroupId();
+    Q_INVOKABLE bool updateGroupSettings(int id,QString name);
+    Q_INVOKABLE bool updateContactSettings(int id,QString name);
+    Q_INVOKABLE void stashFwdMessage(qint32);
+    Q_INVOKABLE qint32 getStashFwdMessage();
+    Q_INVOKABLE void flushStashFwdMessage();
+    Q_INVOKABLE void leaveGroup(qint32 id);
+    Q_INVOKABLE void getGroupMembers(qint32 id);
+    Q_INVOKABLE void removeGroupMember(qint32 groupid, qint32 id);
+    Q_INVOKABLE void createGroup(QString, QVariant);
+    Q_INVOKABLE void addGroupMember(qint32,qint32);
+    Q_INVOKABLE void getGroupInfo(qint32 id);
+    Q_INVOKABLE void saveGroupInfo(QString);
+    Q_INVOKABLE void dumpTable(QString tablename);
+    Q_INVOKABLE void sendMessageBroadCast(qint32 id, QString text,int random);
+    Q_INVOKABLE void deleteContact(qint32 userid);
+    Q_INVOKABLE void deletecontactlocal(qint32 popuserid);
+    Q_INVOKABLE void boolcheck();
+    Q_INVOKABLE void AccountupdateProfile(QString first, QString last);
+    Q_INVOKABLE void alert(QString);
+    Q_INVOKABLE void markReadMessages(qint32, qint32 , QString);
+    Q_INVOKABLE void chatCatchUp(QString, qint32,QString);
+    Q_INVOKABLE void SaveSettings(QString, QString);
+    Q_INVOKABLE QVariant getSettings(QString);
+    Q_INVOKABLE void setSettings(QString, QString);
+    Q_INVOKABLE void searchMessage(QString);
+    Q_INVOKABLE void setCheckInitial(qint32);
+    Q_INVOKABLE void setinitfalse(qint32 id);
+    Q_INVOKABLE QString getThemeSettings();
+    Q_INVOKABLE void setThemeColorVariable(QString str);
+    Q_INVOKABLE QString getThemeColorVariable();
+    Q_INVOKABLE QVariantMap getidtousers();
+    Q_INVOKABLE void deleteGroup(qint32 id);
+    Q_INVOKABLE QVariant getMessageContacts(int id);
+    void getIdByPhotoId(qint64 id);
+    void getmessageofimage(qint64 id);
+    void closeconnection();
+    void switchDC(QString number);
+    void dcchange(QString codetext);
+    void onMessagesGetHistoryAnswer(qint64 id, qint32 count, const QList<Message> &messages, const QList<Chat> &chats, const QList<User> &users);
+    void insertMessage(const Message &message);
+    qint64 uploadGetFile(const InputFileLocation &file, qint32 fileSize, qint32 dc);
+    qint64 uploadCancelFile(qint64 fileId);
+    void DownloadImageThumb(QString,qint64,FileLocation, qint32, qint64);
 
-    private slots:
+private slots:
     void onSystemLanguageChanged();
     void keyloaded();
 
-
-    signals:
+signals:
     void invalidphone(QString);
     void movingdcinit();
     void qmlgethashpane( QString ,bool);
@@ -262,7 +258,6 @@ public:
     void onDcProviderReady();
 
 private:
-
     QTranslator* m_translator;
     bb::cascades::LocaleHandler* m_localeHandler;
     bb::system::InvokeManager* m_invokeManager;

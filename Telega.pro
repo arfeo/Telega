@@ -1,6 +1,8 @@
 APP_NAME = Telega
 
-CONFIG += qt warn_on cascades10
+QT += network
+
+CONFIG += qt warn_on cascades10 c++11
 
 include(config.pri)
 

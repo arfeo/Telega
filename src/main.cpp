@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Arfeo.net.
+ * Copyright (c) 2017-2018 Arfeo.net.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,10 +26,7 @@ using namespace bb::cascades;
 
 Q_DECL_EXPORT int main(int argc, char **argv)
 {
-
     Application app(argc, argv);
     ApplicationUI appui;
-
     return Application::exec();
-
 }

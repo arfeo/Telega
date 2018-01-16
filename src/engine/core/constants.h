@@ -22,21 +22,20 @@
 #define CONSTANTS_H
 
 // macro to assert conditions as in debug as in release mode
-#define ASSERT(cond) ((!(cond)) ? qt_assert(#cond,__FILE__,__LINE__) : qt_noop())
+#define ASSERT(cond) ((!(cond)) ? qt_assert(#cond, __FILE__, __LINE__) : qt_noop())
 
 #define PACKET_BUFFER_SIZE (16384 * 100 + 16)
 #define ENCRYPT_BUFFER_INTS 16384
 #define DECRYPT_BUFFER_INTS 16384
 
-#define LIBQTELEGRAM_SERVER "149.154.167.40"
-#define LIBQTELEGRAM_SERVER_TEST "149.154.167.50"
-// These are the the original
+#define TELEGRAM_SERVER_HOST "149.154.167.40"
+#define TELEGRAM_SERVER_TEST_HOST "149.154.167.50"
+#define TELEGRAM_SERVER_PORT 443
 #define APP_HASH "255a0340af74254c1b3a2d0a62de0373"
 #define APP_ID 120542
 
-
-#define LIBQTELEGRAM_BUILD "01"
-#define LIBQTELEGRAM_VERSION "0.1"
+#define TELEGA_BUILD "01"
+#define TELEGA_VERSION "0.1"
 
 #define MAX_RESPONSE_SIZE (1L << 24)
 
