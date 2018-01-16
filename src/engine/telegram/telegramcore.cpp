@@ -19,685 +19,685 @@ void TelegramCore::setApi(TelegramApi *api)
 
     connect(api, &TelegramApi::accountRegisterDeviceAnswer, this, &TelegramCore::onAccountRegisterDeviceAnswer);
     connect(api, &TelegramApi::accountRegisterDeviceError, this, &TelegramCore::onAccountRegisterDeviceError);
-    
+
     connect(api, &TelegramApi::accountUnregisterDeviceAnswer, this, &TelegramCore::onAccountUnregisterDeviceAnswer);
     connect(api, &TelegramApi::accountUnregisterDeviceError, this, &TelegramCore::onAccountUnregisterDeviceError);
-    
+
     connect(api, &TelegramApi::accountUpdateNotifySettingsAnswer, this, &TelegramCore::onAccountUpdateNotifySettingsAnswer);
     connect(api, &TelegramApi::accountUpdateNotifySettingsError, this, &TelegramCore::onAccountUpdateNotifySettingsError);
-    
+
     connect(api, &TelegramApi::accountGetNotifySettingsAnswer, this, &TelegramCore::onAccountGetNotifySettingsAnswer);
     connect(api, &TelegramApi::accountGetNotifySettingsError, this, &TelegramCore::onAccountGetNotifySettingsError);
-    
+
     connect(api, &TelegramApi::accountResetNotifySettingsAnswer, this, &TelegramCore::onAccountResetNotifySettingsAnswer);
     connect(api, &TelegramApi::accountResetNotifySettingsError, this, &TelegramCore::onAccountResetNotifySettingsError);
-    
+
     connect(api, &TelegramApi::accountUpdateProfileAnswer, this, &TelegramCore::onAccountUpdateProfileAnswer);
     connect(api, &TelegramApi::accountUpdateProfileError, this, &TelegramCore::onAccountUpdateProfileError);
-    
+
     connect(api, &TelegramApi::accountUpdateStatusAnswer, this, &TelegramCore::onAccountUpdateStatusAnswer);
     connect(api, &TelegramApi::accountUpdateStatusError, this, &TelegramCore::onAccountUpdateStatusError);
-    
+
     connect(api, &TelegramApi::accountGetWallPapersAnswer, this, &TelegramCore::onAccountGetWallPapersAnswer);
     connect(api, &TelegramApi::accountGetWallPapersError, this, &TelegramCore::onAccountGetWallPapersError);
-    
+
     connect(api, &TelegramApi::accountReportPeerAnswer, this, &TelegramCore::onAccountReportPeerAnswer);
     connect(api, &TelegramApi::accountReportPeerError, this, &TelegramCore::onAccountReportPeerError);
-    
+
     connect(api, &TelegramApi::accountCheckUsernameAnswer, this, &TelegramCore::onAccountCheckUsernameAnswer);
     connect(api, &TelegramApi::accountCheckUsernameError, this, &TelegramCore::onAccountCheckUsernameError);
-    
+
     connect(api, &TelegramApi::accountUpdateUsernameAnswer, this, &TelegramCore::onAccountUpdateUsernameAnswer);
     connect(api, &TelegramApi::accountUpdateUsernameError, this, &TelegramCore::onAccountUpdateUsernameError);
-    
+
     connect(api, &TelegramApi::accountGetPrivacyAnswer, this, &TelegramCore::onAccountGetPrivacyAnswer);
     connect(api, &TelegramApi::accountGetPrivacyError, this, &TelegramCore::onAccountGetPrivacyError);
-    
+
     connect(api, &TelegramApi::accountSetPrivacyAnswer, this, &TelegramCore::onAccountSetPrivacyAnswer);
     connect(api, &TelegramApi::accountSetPrivacyError, this, &TelegramCore::onAccountSetPrivacyError);
-    
+
     connect(api, &TelegramApi::accountDeleteAccountAnswer, this, &TelegramCore::onAccountDeleteAccountAnswer);
     connect(api, &TelegramApi::accountDeleteAccountError, this, &TelegramCore::onAccountDeleteAccountError);
-    
+
     connect(api, &TelegramApi::accountGetAccountTTLAnswer, this, &TelegramCore::onAccountGetAccountTTLAnswer);
     connect(api, &TelegramApi::accountGetAccountTTLError, this, &TelegramCore::onAccountGetAccountTTLError);
-    
+
     connect(api, &TelegramApi::accountSetAccountTTLAnswer, this, &TelegramCore::onAccountSetAccountTTLAnswer);
     connect(api, &TelegramApi::accountSetAccountTTLError, this, &TelegramCore::onAccountSetAccountTTLError);
-    
+
     connect(api, &TelegramApi::accountSendChangePhoneCodeAnswer, this, &TelegramCore::onAccountSendChangePhoneCodeAnswer);
     connect(api, &TelegramApi::accountSendChangePhoneCodeError, this, &TelegramCore::onAccountSendChangePhoneCodeError);
-    
+
     connect(api, &TelegramApi::accountChangePhoneAnswer, this, &TelegramCore::onAccountChangePhoneAnswer);
     connect(api, &TelegramApi::accountChangePhoneError, this, &TelegramCore::onAccountChangePhoneError);
-    
+
     connect(api, &TelegramApi::accountUpdateDeviceLockedAnswer, this, &TelegramCore::onAccountUpdateDeviceLockedAnswer);
     connect(api, &TelegramApi::accountUpdateDeviceLockedError, this, &TelegramCore::onAccountUpdateDeviceLockedError);
-    
+
     connect(api, &TelegramApi::accountGetAuthorizationsAnswer, this, &TelegramCore::onAccountGetAuthorizationsAnswer);
     connect(api, &TelegramApi::accountGetAuthorizationsError, this, &TelegramCore::onAccountGetAuthorizationsError);
-    
+
     connect(api, &TelegramApi::accountResetAuthorizationAnswer, this, &TelegramCore::onAccountResetAuthorizationAnswer);
     connect(api, &TelegramApi::accountResetAuthorizationError, this, &TelegramCore::onAccountResetAuthorizationError);
-    
+
     connect(api, &TelegramApi::accountGetPasswordAnswer, this, &TelegramCore::onAccountGetPasswordAnswer);
     connect(api, &TelegramApi::accountGetPasswordError, this, &TelegramCore::onAccountGetPasswordError);
-    
+
     connect(api, &TelegramApi::accountGetPasswordSettingsAnswer, this, &TelegramCore::onAccountGetPasswordSettingsAnswer);
     connect(api, &TelegramApi::accountGetPasswordSettingsError, this, &TelegramCore::onAccountGetPasswordSettingsError);
-    
+
     connect(api, &TelegramApi::accountUpdatePasswordSettingsAnswer, this, &TelegramCore::onAccountUpdatePasswordSettingsAnswer);
     connect(api, &TelegramApi::accountUpdatePasswordSettingsError, this, &TelegramCore::onAccountUpdatePasswordSettingsError);
-    
+
     connect(api, &TelegramApi::accountSendConfirmPhoneCodeAnswer, this, &TelegramCore::onAccountSendConfirmPhoneCodeAnswer);
     connect(api, &TelegramApi::accountSendConfirmPhoneCodeError, this, &TelegramCore::onAccountSendConfirmPhoneCodeError);
-    
+
     connect(api, &TelegramApi::accountConfirmPhoneAnswer, this, &TelegramCore::onAccountConfirmPhoneAnswer);
     connect(api, &TelegramApi::accountConfirmPhoneError, this, &TelegramCore::onAccountConfirmPhoneError);
-    
+
     connect(api, &TelegramApi::accountGetTmpPasswordAnswer, this, &TelegramCore::onAccountGetTmpPasswordAnswer);
     connect(api, &TelegramApi::accountGetTmpPasswordError, this, &TelegramCore::onAccountGetTmpPasswordError);
-    
-    
+
+
     connect(api, &TelegramApi::authCheckPhoneAnswer, this, &TelegramCore::onAuthCheckPhoneAnswer);
     connect(api, &TelegramApi::authCheckPhoneError, this, &TelegramCore::onAuthCheckPhoneError);
-    
+
     connect(api, &TelegramApi::authSendCodeAnswer, this, &TelegramCore::onAuthSendCodeAnswer);
     connect(api, &TelegramApi::authSendCodeError, this, &TelegramCore::onAuthSendCodeError);
-    
+
     connect(api, &TelegramApi::authSignUpAnswer, this, &TelegramCore::onAuthSignUpAnswer);
     connect(api, &TelegramApi::authSignUpError, this, &TelegramCore::onAuthSignUpError);
-    
+
     connect(api, &TelegramApi::authSignInAnswer, this, &TelegramCore::onAuthSignInAnswer);
     connect(api, &TelegramApi::authSignInError, this, &TelegramCore::onAuthSignInError);
-    
+
     connect(api, &TelegramApi::authLogOutAnswer, this, &TelegramCore::onAuthLogOutAnswer);
     connect(api, &TelegramApi::authLogOutError, this, &TelegramCore::onAuthLogOutError);
-    
+
     connect(api, &TelegramApi::authResetAuthorizationsAnswer, this, &TelegramCore::onAuthResetAuthorizationsAnswer);
     connect(api, &TelegramApi::authResetAuthorizationsError, this, &TelegramCore::onAuthResetAuthorizationsError);
-    
+
     connect(api, &TelegramApi::authSendInvitesAnswer, this, &TelegramCore::onAuthSendInvitesAnswer);
     connect(api, &TelegramApi::authSendInvitesError, this, &TelegramCore::onAuthSendInvitesError);
-    
+
     connect(api, &TelegramApi::authExportAuthorizationAnswer, this, &TelegramCore::onAuthExportAuthorizationAnswer);
     connect(api, &TelegramApi::authExportAuthorizationError, this, &TelegramCore::onAuthExportAuthorizationError);
-    
+
     connect(api, &TelegramApi::authImportAuthorizationAnswer, this, &TelegramCore::onAuthImportAuthorizationAnswer);
     connect(api, &TelegramApi::authImportAuthorizationError, this, &TelegramCore::onAuthImportAuthorizationError);
-    
+
     connect(api, &TelegramApi::authBindTempAuthKeyAnswer, this, &TelegramCore::onAuthBindTempAuthKeyAnswer);
     connect(api, &TelegramApi::authBindTempAuthKeyError, this, &TelegramCore::onAuthBindTempAuthKeyError);
-    
+
     connect(api, &TelegramApi::authImportBotAuthorizationAnswer, this, &TelegramCore::onAuthImportBotAuthorizationAnswer);
     connect(api, &TelegramApi::authImportBotAuthorizationError, this, &TelegramCore::onAuthImportBotAuthorizationError);
-    
+
     connect(api, &TelegramApi::authCheckPasswordAnswer, this, &TelegramCore::onAuthCheckPasswordAnswer);
     connect(api, &TelegramApi::authCheckPasswordError, this, &TelegramCore::onAuthCheckPasswordError);
-    
+
     connect(api, &TelegramApi::authRequestPasswordRecoveryAnswer, this, &TelegramCore::onAuthRequestPasswordRecoveryAnswer);
     connect(api, &TelegramApi::authRequestPasswordRecoveryError, this, &TelegramCore::onAuthRequestPasswordRecoveryError);
-    
+
     connect(api, &TelegramApi::authRecoverPasswordAnswer, this, &TelegramCore::onAuthRecoverPasswordAnswer);
     connect(api, &TelegramApi::authRecoverPasswordError, this, &TelegramCore::onAuthRecoverPasswordError);
-    
+
     connect(api, &TelegramApi::authResendCodeAnswer, this, &TelegramCore::onAuthResendCodeAnswer);
     connect(api, &TelegramApi::authResendCodeError, this, &TelegramCore::onAuthResendCodeError);
-    
+
     connect(api, &TelegramApi::authCancelCodeAnswer, this, &TelegramCore::onAuthCancelCodeAnswer);
     connect(api, &TelegramApi::authCancelCodeError, this, &TelegramCore::onAuthCancelCodeError);
-    
+
     connect(api, &TelegramApi::authDropTempAuthKeysAnswer, this, &TelegramCore::onAuthDropTempAuthKeysAnswer);
     connect(api, &TelegramApi::authDropTempAuthKeysError, this, &TelegramCore::onAuthDropTempAuthKeysError);
-    
-    
+
+
     connect(api, &TelegramApi::botsSendCustomRequestAnswer, this, &TelegramCore::onBotsSendCustomRequestAnswer);
     connect(api, &TelegramApi::botsSendCustomRequestError, this, &TelegramCore::onBotsSendCustomRequestError);
-    
+
     connect(api, &TelegramApi::botsAnswerWebhookJSONQueryAnswer, this, &TelegramCore::onBotsAnswerWebhookJSONQueryAnswer);
     connect(api, &TelegramApi::botsAnswerWebhookJSONQueryError, this, &TelegramCore::onBotsAnswerWebhookJSONQueryError);
-    
-    
+
+
     connect(api, &TelegramApi::channelsReadHistoryAnswer, this, &TelegramCore::onChannelsReadHistoryAnswer);
     connect(api, &TelegramApi::channelsReadHistoryError, this, &TelegramCore::onChannelsReadHistoryError);
-    
+
     connect(api, &TelegramApi::channelsDeleteMessagesAnswer, this, &TelegramCore::onChannelsDeleteMessagesAnswer);
     connect(api, &TelegramApi::channelsDeleteMessagesError, this, &TelegramCore::onChannelsDeleteMessagesError);
-    
+
     connect(api, &TelegramApi::channelsDeleteUserHistoryAnswer, this, &TelegramCore::onChannelsDeleteUserHistoryAnswer);
     connect(api, &TelegramApi::channelsDeleteUserHistoryError, this, &TelegramCore::onChannelsDeleteUserHistoryError);
-    
+
     connect(api, &TelegramApi::channelsReportSpamAnswer, this, &TelegramCore::onChannelsReportSpamAnswer);
     connect(api, &TelegramApi::channelsReportSpamError, this, &TelegramCore::onChannelsReportSpamError);
-    
+
     connect(api, &TelegramApi::channelsGetMessagesAnswer, this, &TelegramCore::onChannelsGetMessagesAnswer);
     connect(api, &TelegramApi::channelsGetMessagesError, this, &TelegramCore::onChannelsGetMessagesError);
-    
+
     connect(api, &TelegramApi::channelsGetParticipantsAnswer, this, &TelegramCore::onChannelsGetParticipantsAnswer);
     connect(api, &TelegramApi::channelsGetParticipantsError, this, &TelegramCore::onChannelsGetParticipantsError);
-    
+
     connect(api, &TelegramApi::channelsGetParticipantAnswer, this, &TelegramCore::onChannelsGetParticipantAnswer);
     connect(api, &TelegramApi::channelsGetParticipantError, this, &TelegramCore::onChannelsGetParticipantError);
-    
+
     connect(api, &TelegramApi::channelsGetChannelsAnswer, this, &TelegramCore::onChannelsGetChannelsAnswer);
     connect(api, &TelegramApi::channelsGetChannelsError, this, &TelegramCore::onChannelsGetChannelsError);
-    
+
     connect(api, &TelegramApi::channelsGetFullChannelAnswer, this, &TelegramCore::onChannelsGetFullChannelAnswer);
     connect(api, &TelegramApi::channelsGetFullChannelError, this, &TelegramCore::onChannelsGetFullChannelError);
-    
+
     connect(api, &TelegramApi::channelsCreateChannelAnswer, this, &TelegramCore::onChannelsCreateChannelAnswer);
     connect(api, &TelegramApi::channelsCreateChannelError, this, &TelegramCore::onChannelsCreateChannelError);
-    
+
     connect(api, &TelegramApi::channelsEditAboutAnswer, this, &TelegramCore::onChannelsEditAboutAnswer);
     connect(api, &TelegramApi::channelsEditAboutError, this, &TelegramCore::onChannelsEditAboutError);
-    
+
     connect(api, &TelegramApi::channelsEditAdminAnswer, this, &TelegramCore::onChannelsEditAdminAnswer);
     connect(api, &TelegramApi::channelsEditAdminError, this, &TelegramCore::onChannelsEditAdminError);
-    
+
     connect(api, &TelegramApi::channelsEditTitleAnswer, this, &TelegramCore::onChannelsEditTitleAnswer);
     connect(api, &TelegramApi::channelsEditTitleError, this, &TelegramCore::onChannelsEditTitleError);
-    
+
     connect(api, &TelegramApi::channelsEditPhotoAnswer, this, &TelegramCore::onChannelsEditPhotoAnswer);
     connect(api, &TelegramApi::channelsEditPhotoError, this, &TelegramCore::onChannelsEditPhotoError);
-    
+
     connect(api, &TelegramApi::channelsCheckUsernameAnswer, this, &TelegramCore::onChannelsCheckUsernameAnswer);
     connect(api, &TelegramApi::channelsCheckUsernameError, this, &TelegramCore::onChannelsCheckUsernameError);
-    
+
     connect(api, &TelegramApi::channelsUpdateUsernameAnswer, this, &TelegramCore::onChannelsUpdateUsernameAnswer);
     connect(api, &TelegramApi::channelsUpdateUsernameError, this, &TelegramCore::onChannelsUpdateUsernameError);
-    
+
     connect(api, &TelegramApi::channelsJoinChannelAnswer, this, &TelegramCore::onChannelsJoinChannelAnswer);
     connect(api, &TelegramApi::channelsJoinChannelError, this, &TelegramCore::onChannelsJoinChannelError);
-    
+
     connect(api, &TelegramApi::channelsLeaveChannelAnswer, this, &TelegramCore::onChannelsLeaveChannelAnswer);
     connect(api, &TelegramApi::channelsLeaveChannelError, this, &TelegramCore::onChannelsLeaveChannelError);
-    
+
     connect(api, &TelegramApi::channelsInviteToChannelAnswer, this, &TelegramCore::onChannelsInviteToChannelAnswer);
     connect(api, &TelegramApi::channelsInviteToChannelError, this, &TelegramCore::onChannelsInviteToChannelError);
-    
+
     connect(api, &TelegramApi::channelsExportInviteAnswer, this, &TelegramCore::onChannelsExportInviteAnswer);
     connect(api, &TelegramApi::channelsExportInviteError, this, &TelegramCore::onChannelsExportInviteError);
-    
+
     connect(api, &TelegramApi::channelsDeleteChannelAnswer, this, &TelegramCore::onChannelsDeleteChannelAnswer);
     connect(api, &TelegramApi::channelsDeleteChannelError, this, &TelegramCore::onChannelsDeleteChannelError);
-    
+
     connect(api, &TelegramApi::channelsToggleInvitesAnswer, this, &TelegramCore::onChannelsToggleInvitesAnswer);
     connect(api, &TelegramApi::channelsToggleInvitesError, this, &TelegramCore::onChannelsToggleInvitesError);
-    
+
     connect(api, &TelegramApi::channelsExportMessageLinkAnswer, this, &TelegramCore::onChannelsExportMessageLinkAnswer);
     connect(api, &TelegramApi::channelsExportMessageLinkError, this, &TelegramCore::onChannelsExportMessageLinkError);
-    
+
     connect(api, &TelegramApi::channelsToggleSignaturesAnswer, this, &TelegramCore::onChannelsToggleSignaturesAnswer);
     connect(api, &TelegramApi::channelsToggleSignaturesError, this, &TelegramCore::onChannelsToggleSignaturesError);
-    
+
     connect(api, &TelegramApi::channelsUpdatePinnedMessageAnswer, this, &TelegramCore::onChannelsUpdatePinnedMessageAnswer);
     connect(api, &TelegramApi::channelsUpdatePinnedMessageError, this, &TelegramCore::onChannelsUpdatePinnedMessageError);
-    
+
     connect(api, &TelegramApi::channelsGetAdminedPublicChannelsAnswer, this, &TelegramCore::onChannelsGetAdminedPublicChannelsAnswer);
     connect(api, &TelegramApi::channelsGetAdminedPublicChannelsError, this, &TelegramCore::onChannelsGetAdminedPublicChannelsError);
-    
+
     connect(api, &TelegramApi::channelsEditBannedAnswer, this, &TelegramCore::onChannelsEditBannedAnswer);
     connect(api, &TelegramApi::channelsEditBannedError, this, &TelegramCore::onChannelsEditBannedError);
-    
+
     connect(api, &TelegramApi::channelsGetAdminLogAnswer, this, &TelegramCore::onChannelsGetAdminLogAnswer);
     connect(api, &TelegramApi::channelsGetAdminLogError, this, &TelegramCore::onChannelsGetAdminLogError);
-    
-    
+
+
     connect(api, &TelegramApi::contactsGetStatusesAnswer, this, &TelegramCore::onContactsGetStatusesAnswer);
     connect(api, &TelegramApi::contactsGetStatusesError, this, &TelegramCore::onContactsGetStatusesError);
-    
+
     connect(api, &TelegramApi::contactsGetContactsAnswer, this, &TelegramCore::onContactsGetContactsAnswer);
     connect(api, &TelegramApi::contactsGetContactsError, this, &TelegramCore::onContactsGetContactsError);
-    
+
     connect(api, &TelegramApi::contactsImportContactsAnswer, this, &TelegramCore::onContactsImportContactsAnswer);
     connect(api, &TelegramApi::contactsImportContactsError, this, &TelegramCore::onContactsImportContactsError);
-    
+
     connect(api, &TelegramApi::contactsDeleteContactAnswer, this, &TelegramCore::onContactsDeleteContactAnswer);
     connect(api, &TelegramApi::contactsDeleteContactError, this, &TelegramCore::onContactsDeleteContactError);
-    
+
     connect(api, &TelegramApi::contactsDeleteContactsAnswer, this, &TelegramCore::onContactsDeleteContactsAnswer);
     connect(api, &TelegramApi::contactsDeleteContactsError, this, &TelegramCore::onContactsDeleteContactsError);
-    
+
     connect(api, &TelegramApi::contactsBlockAnswer, this, &TelegramCore::onContactsBlockAnswer);
     connect(api, &TelegramApi::contactsBlockError, this, &TelegramCore::onContactsBlockError);
-    
+
     connect(api, &TelegramApi::contactsUnblockAnswer, this, &TelegramCore::onContactsUnblockAnswer);
     connect(api, &TelegramApi::contactsUnblockError, this, &TelegramCore::onContactsUnblockError);
-    
+
     connect(api, &TelegramApi::contactsGetBlockedAnswer, this, &TelegramCore::onContactsGetBlockedAnswer);
     connect(api, &TelegramApi::contactsGetBlockedError, this, &TelegramCore::onContactsGetBlockedError);
-    
+
     connect(api, &TelegramApi::contactsExportCardAnswer, this, &TelegramCore::onContactsExportCardAnswer);
     connect(api, &TelegramApi::contactsExportCardError, this, &TelegramCore::onContactsExportCardError);
-    
+
     connect(api, &TelegramApi::contactsImportCardAnswer, this, &TelegramCore::onContactsImportCardAnswer);
     connect(api, &TelegramApi::contactsImportCardError, this, &TelegramCore::onContactsImportCardError);
-    
+
     connect(api, &TelegramApi::contactsSearchAnswer, this, &TelegramCore::onContactsSearchAnswer);
     connect(api, &TelegramApi::contactsSearchError, this, &TelegramCore::onContactsSearchError);
-    
+
     connect(api, &TelegramApi::contactsResolveUsernameAnswer, this, &TelegramCore::onContactsResolveUsernameAnswer);
     connect(api, &TelegramApi::contactsResolveUsernameError, this, &TelegramCore::onContactsResolveUsernameError);
-    
+
     connect(api, &TelegramApi::contactsGetTopPeersAnswer, this, &TelegramCore::onContactsGetTopPeersAnswer);
     connect(api, &TelegramApi::contactsGetTopPeersError, this, &TelegramCore::onContactsGetTopPeersError);
-    
+
     connect(api, &TelegramApi::contactsResetTopPeerRatingAnswer, this, &TelegramCore::onContactsResetTopPeerRatingAnswer);
     connect(api, &TelegramApi::contactsResetTopPeerRatingError, this, &TelegramCore::onContactsResetTopPeerRatingError);
-    
-    
+
+
     connect(api, &TelegramApi::helpGetConfigAnswer, this, &TelegramCore::onHelpGetConfigAnswer);
     connect(api, &TelegramApi::helpGetConfigError, this, &TelegramCore::onHelpGetConfigError);
-    
+
     connect(api, &TelegramApi::helpGetNearestDcAnswer, this, &TelegramCore::onHelpGetNearestDcAnswer);
     connect(api, &TelegramApi::helpGetNearestDcError, this, &TelegramCore::onHelpGetNearestDcError);
-    
+
     connect(api, &TelegramApi::helpGetAppUpdateAnswer, this, &TelegramCore::onHelpGetAppUpdateAnswer);
     connect(api, &TelegramApi::helpGetAppUpdateError, this, &TelegramCore::onHelpGetAppUpdateError);
-    
+
     connect(api, &TelegramApi::helpSaveAppLogAnswer, this, &TelegramCore::onHelpSaveAppLogAnswer);
     connect(api, &TelegramApi::helpSaveAppLogError, this, &TelegramCore::onHelpSaveAppLogError);
-    
+
     connect(api, &TelegramApi::helpGetInviteTextAnswer, this, &TelegramCore::onHelpGetInviteTextAnswer);
     connect(api, &TelegramApi::helpGetInviteTextError, this, &TelegramCore::onHelpGetInviteTextError);
-    
+
     connect(api, &TelegramApi::helpGetSupportAnswer, this, &TelegramCore::onHelpGetSupportAnswer);
     connect(api, &TelegramApi::helpGetSupportError, this, &TelegramCore::onHelpGetSupportError);
-    
+
     connect(api, &TelegramApi::helpGetAppChangelogAnswer, this, &TelegramCore::onHelpGetAppChangelogAnswer);
     connect(api, &TelegramApi::helpGetAppChangelogError, this, &TelegramCore::onHelpGetAppChangelogError);
-    
+
     connect(api, &TelegramApi::helpGetTermsOfServiceAnswer, this, &TelegramCore::onHelpGetTermsOfServiceAnswer);
     connect(api, &TelegramApi::helpGetTermsOfServiceError, this, &TelegramCore::onHelpGetTermsOfServiceError);
-    
+
     connect(api, &TelegramApi::helpSetBotUpdatesStatusAnswer, this, &TelegramCore::onHelpSetBotUpdatesStatusAnswer);
     connect(api, &TelegramApi::helpSetBotUpdatesStatusError, this, &TelegramCore::onHelpSetBotUpdatesStatusError);
-    
+
     connect(api, &TelegramApi::helpGetCdnConfigAnswer, this, &TelegramCore::onHelpGetCdnConfigAnswer);
     connect(api, &TelegramApi::helpGetCdnConfigError, this, &TelegramCore::onHelpGetCdnConfigError);
-    
-    
+
+
     connect(api, &TelegramApi::langpackGetLangPackAnswer, this, &TelegramCore::onLangpackGetLangPackAnswer);
     connect(api, &TelegramApi::langpackGetLangPackError, this, &TelegramCore::onLangpackGetLangPackError);
-    
+
     connect(api, &TelegramApi::langpackGetStringsAnswer, this, &TelegramCore::onLangpackGetStringsAnswer);
     connect(api, &TelegramApi::langpackGetStringsError, this, &TelegramCore::onLangpackGetStringsError);
-    
+
     connect(api, &TelegramApi::langpackGetDifferenceAnswer, this, &TelegramCore::onLangpackGetDifferenceAnswer);
     connect(api, &TelegramApi::langpackGetDifferenceError, this, &TelegramCore::onLangpackGetDifferenceError);
-    
+
     connect(api, &TelegramApi::langpackGetLanguagesAnswer, this, &TelegramCore::onLangpackGetLanguagesAnswer);
     connect(api, &TelegramApi::langpackGetLanguagesError, this, &TelegramCore::onLangpackGetLanguagesError);
-    
-    
+
+
     connect(api, &TelegramApi::messagesGetMessagesAnswer, this, &TelegramCore::onMessagesGetMessagesAnswer);
     connect(api, &TelegramApi::messagesGetMessagesError, this, &TelegramCore::onMessagesGetMessagesError);
-    
+
     connect(api, &TelegramApi::messagesGetDialogsAnswer, this, &TelegramCore::onMessagesGetDialogsAnswer);
     connect(api, &TelegramApi::messagesGetDialogsError, this, &TelegramCore::onMessagesGetDialogsError);
-    
+
     connect(api, &TelegramApi::messagesGetHistoryAnswer, this, &TelegramCore::onMessagesGetHistoryAnswer);
     connect(api, &TelegramApi::messagesGetHistoryError, this, &TelegramCore::onMessagesGetHistoryError);
-    
+
     connect(api, &TelegramApi::messagesSearchAnswer, this, &TelegramCore::onMessagesSearchAnswer);
     connect(api, &TelegramApi::messagesSearchError, this, &TelegramCore::onMessagesSearchError);
-    
+
     connect(api, &TelegramApi::messagesReadHistoryAnswer, this, &TelegramCore::onMessagesReadHistoryAnswer);
     connect(api, &TelegramApi::messagesReadHistoryError, this, &TelegramCore::onMessagesReadHistoryError);
-    
+
     connect(api, &TelegramApi::messagesDeleteHistoryAnswer, this, &TelegramCore::onMessagesDeleteHistoryAnswer);
     connect(api, &TelegramApi::messagesDeleteHistoryError, this, &TelegramCore::onMessagesDeleteHistoryError);
-    
+
     connect(api, &TelegramApi::messagesDeleteMessagesAnswer, this, &TelegramCore::onMessagesDeleteMessagesAnswer);
     connect(api, &TelegramApi::messagesDeleteMessagesError, this, &TelegramCore::onMessagesDeleteMessagesError);
-    
+
     connect(api, &TelegramApi::messagesReceivedMessagesAnswer, this, &TelegramCore::onMessagesReceivedMessagesAnswer);
     connect(api, &TelegramApi::messagesReceivedMessagesError, this, &TelegramCore::onMessagesReceivedMessagesError);
-    
+
     connect(api, &TelegramApi::messagesSetTypingAnswer, this, &TelegramCore::onMessagesSetTypingAnswer);
     connect(api, &TelegramApi::messagesSetTypingError, this, &TelegramCore::onMessagesSetTypingError);
-    
+
     connect(api, &TelegramApi::messagesSendMessageAnswer, this, &TelegramCore::onMessagesSendMessageAnswer);
     connect(api, &TelegramApi::messagesSendMessageError, this, &TelegramCore::onMessagesSendMessageError);
-    
+
     connect(api, &TelegramApi::messagesSendMediaAnswer, this, &TelegramCore::onMessagesSendMediaAnswer);
     connect(api, &TelegramApi::messagesSendMediaError, this, &TelegramCore::onMessagesSendMediaError);
-    
+
     connect(api, &TelegramApi::messagesForwardMessagesAnswer, this, &TelegramCore::onMessagesForwardMessagesAnswer);
     connect(api, &TelegramApi::messagesForwardMessagesError, this, &TelegramCore::onMessagesForwardMessagesError);
-    
+
     connect(api, &TelegramApi::messagesReportSpamAnswer, this, &TelegramCore::onMessagesReportSpamAnswer);
     connect(api, &TelegramApi::messagesReportSpamError, this, &TelegramCore::onMessagesReportSpamError);
-    
+
     connect(api, &TelegramApi::messagesHideReportSpamAnswer, this, &TelegramCore::onMessagesHideReportSpamAnswer);
     connect(api, &TelegramApi::messagesHideReportSpamError, this, &TelegramCore::onMessagesHideReportSpamError);
-    
+
     connect(api, &TelegramApi::messagesGetPeerSettingsAnswer, this, &TelegramCore::onMessagesGetPeerSettingsAnswer);
     connect(api, &TelegramApi::messagesGetPeerSettingsError, this, &TelegramCore::onMessagesGetPeerSettingsError);
-    
+
     connect(api, &TelegramApi::messagesGetChatsAnswer, this, &TelegramCore::onMessagesGetChatsAnswer);
     connect(api, &TelegramApi::messagesGetChatsError, this, &TelegramCore::onMessagesGetChatsError);
-    
+
     connect(api, &TelegramApi::messagesGetFullChatAnswer, this, &TelegramCore::onMessagesGetFullChatAnswer);
     connect(api, &TelegramApi::messagesGetFullChatError, this, &TelegramCore::onMessagesGetFullChatError);
-    
+
     connect(api, &TelegramApi::messagesEditChatTitleAnswer, this, &TelegramCore::onMessagesEditChatTitleAnswer);
     connect(api, &TelegramApi::messagesEditChatTitleError, this, &TelegramCore::onMessagesEditChatTitleError);
-    
+
     connect(api, &TelegramApi::messagesEditChatPhotoAnswer, this, &TelegramCore::onMessagesEditChatPhotoAnswer);
     connect(api, &TelegramApi::messagesEditChatPhotoError, this, &TelegramCore::onMessagesEditChatPhotoError);
-    
+
     connect(api, &TelegramApi::messagesAddChatUserAnswer, this, &TelegramCore::onMessagesAddChatUserAnswer);
     connect(api, &TelegramApi::messagesAddChatUserError, this, &TelegramCore::onMessagesAddChatUserError);
-    
+
     connect(api, &TelegramApi::messagesDeleteChatUserAnswer, this, &TelegramCore::onMessagesDeleteChatUserAnswer);
     connect(api, &TelegramApi::messagesDeleteChatUserError, this, &TelegramCore::onMessagesDeleteChatUserError);
-    
+
     connect(api, &TelegramApi::messagesCreateChatAnswer, this, &TelegramCore::onMessagesCreateChatAnswer);
     connect(api, &TelegramApi::messagesCreateChatError, this, &TelegramCore::onMessagesCreateChatError);
-    
+
     connect(api, &TelegramApi::messagesForwardMessageAnswer, this, &TelegramCore::onMessagesForwardMessageAnswer);
     connect(api, &TelegramApi::messagesForwardMessageError, this, &TelegramCore::onMessagesForwardMessageError);
-    
+
     connect(api, &TelegramApi::messagesGetDhConfigAnswer, this, &TelegramCore::onMessagesGetDhConfigAnswer);
     connect(api, &TelegramApi::messagesGetDhConfigError, this, &TelegramCore::onMessagesGetDhConfigError);
-    
+
     connect(api, &TelegramApi::messagesRequestEncryptionAnswer, this, &TelegramCore::onMessagesRequestEncryptionAnswer);
     connect(api, &TelegramApi::messagesRequestEncryptionError, this, &TelegramCore::onMessagesRequestEncryptionError);
-    
+
     connect(api, &TelegramApi::messagesAcceptEncryptionAnswer, this, &TelegramCore::onMessagesAcceptEncryptionAnswer);
     connect(api, &TelegramApi::messagesAcceptEncryptionError, this, &TelegramCore::onMessagesAcceptEncryptionError);
-    
+
     connect(api, &TelegramApi::messagesDiscardEncryptionAnswer, this, &TelegramCore::onMessagesDiscardEncryptionAnswer);
     connect(api, &TelegramApi::messagesDiscardEncryptionError, this, &TelegramCore::onMessagesDiscardEncryptionError);
-    
+
     connect(api, &TelegramApi::messagesSetEncryptedTypingAnswer, this, &TelegramCore::onMessagesSetEncryptedTypingAnswer);
     connect(api, &TelegramApi::messagesSetEncryptedTypingError, this, &TelegramCore::onMessagesSetEncryptedTypingError);
-    
+
     connect(api, &TelegramApi::messagesReadEncryptedHistoryAnswer, this, &TelegramCore::onMessagesReadEncryptedHistoryAnswer);
     connect(api, &TelegramApi::messagesReadEncryptedHistoryError, this, &TelegramCore::onMessagesReadEncryptedHistoryError);
-    
+
     connect(api, &TelegramApi::messagesSendEncryptedAnswer, this, &TelegramCore::onMessagesSendEncryptedAnswer);
     connect(api, &TelegramApi::messagesSendEncryptedError, this, &TelegramCore::onMessagesSendEncryptedError);
-    
+
     connect(api, &TelegramApi::messagesSendEncryptedFileAnswer, this, &TelegramCore::onMessagesSendEncryptedFileAnswer);
     connect(api, &TelegramApi::messagesSendEncryptedFileError, this, &TelegramCore::onMessagesSendEncryptedFileError);
-    
+
     connect(api, &TelegramApi::messagesSendEncryptedServiceAnswer, this, &TelegramCore::onMessagesSendEncryptedServiceAnswer);
     connect(api, &TelegramApi::messagesSendEncryptedServiceError, this, &TelegramCore::onMessagesSendEncryptedServiceError);
-    
+
     connect(api, &TelegramApi::messagesReceivedQueueAnswer, this, &TelegramCore::onMessagesReceivedQueueAnswer);
     connect(api, &TelegramApi::messagesReceivedQueueError, this, &TelegramCore::onMessagesReceivedQueueError);
-    
+
     connect(api, &TelegramApi::messagesReportEncryptedSpamAnswer, this, &TelegramCore::onMessagesReportEncryptedSpamAnswer);
     connect(api, &TelegramApi::messagesReportEncryptedSpamError, this, &TelegramCore::onMessagesReportEncryptedSpamError);
-    
+
     connect(api, &TelegramApi::messagesReadMessageContentsAnswer, this, &TelegramCore::onMessagesReadMessageContentsAnswer);
     connect(api, &TelegramApi::messagesReadMessageContentsError, this, &TelegramCore::onMessagesReadMessageContentsError);
-    
+
     connect(api, &TelegramApi::messagesGetAllStickersAnswer, this, &TelegramCore::onMessagesGetAllStickersAnswer);
     connect(api, &TelegramApi::messagesGetAllStickersError, this, &TelegramCore::onMessagesGetAllStickersError);
-    
+
     connect(api, &TelegramApi::messagesGetWebPagePreviewAnswer, this, &TelegramCore::onMessagesGetWebPagePreviewAnswer);
     connect(api, &TelegramApi::messagesGetWebPagePreviewError, this, &TelegramCore::onMessagesGetWebPagePreviewError);
-    
+
     connect(api, &TelegramApi::messagesExportChatInviteAnswer, this, &TelegramCore::onMessagesExportChatInviteAnswer);
     connect(api, &TelegramApi::messagesExportChatInviteError, this, &TelegramCore::onMessagesExportChatInviteError);
-    
+
     connect(api, &TelegramApi::messagesCheckChatInviteAnswer, this, &TelegramCore::onMessagesCheckChatInviteAnswer);
     connect(api, &TelegramApi::messagesCheckChatInviteError, this, &TelegramCore::onMessagesCheckChatInviteError);
-    
+
     connect(api, &TelegramApi::messagesImportChatInviteAnswer, this, &TelegramCore::onMessagesImportChatInviteAnswer);
     connect(api, &TelegramApi::messagesImportChatInviteError, this, &TelegramCore::onMessagesImportChatInviteError);
-    
+
     connect(api, &TelegramApi::messagesGetStickerSetAnswer, this, &TelegramCore::onMessagesGetStickerSetAnswer);
     connect(api, &TelegramApi::messagesGetStickerSetError, this, &TelegramCore::onMessagesGetStickerSetError);
-    
+
     connect(api, &TelegramApi::messagesInstallStickerSetAnswer, this, &TelegramCore::onMessagesInstallStickerSetAnswer);
     connect(api, &TelegramApi::messagesInstallStickerSetError, this, &TelegramCore::onMessagesInstallStickerSetError);
-    
+
     connect(api, &TelegramApi::messagesUninstallStickerSetAnswer, this, &TelegramCore::onMessagesUninstallStickerSetAnswer);
     connect(api, &TelegramApi::messagesUninstallStickerSetError, this, &TelegramCore::onMessagesUninstallStickerSetError);
-    
+
     connect(api, &TelegramApi::messagesStartBotAnswer, this, &TelegramCore::onMessagesStartBotAnswer);
     connect(api, &TelegramApi::messagesStartBotError, this, &TelegramCore::onMessagesStartBotError);
-    
+
     connect(api, &TelegramApi::messagesGetMessagesViewsAnswer, this, &TelegramCore::onMessagesGetMessagesViewsAnswer);
     connect(api, &TelegramApi::messagesGetMessagesViewsError, this, &TelegramCore::onMessagesGetMessagesViewsError);
-    
+
     connect(api, &TelegramApi::messagesToggleChatAdminsAnswer, this, &TelegramCore::onMessagesToggleChatAdminsAnswer);
     connect(api, &TelegramApi::messagesToggleChatAdminsError, this, &TelegramCore::onMessagesToggleChatAdminsError);
-    
+
     connect(api, &TelegramApi::messagesEditChatAdminAnswer, this, &TelegramCore::onMessagesEditChatAdminAnswer);
     connect(api, &TelegramApi::messagesEditChatAdminError, this, &TelegramCore::onMessagesEditChatAdminError);
-    
+
     connect(api, &TelegramApi::messagesMigrateChatAnswer, this, &TelegramCore::onMessagesMigrateChatAnswer);
     connect(api, &TelegramApi::messagesMigrateChatError, this, &TelegramCore::onMessagesMigrateChatError);
-    
+
     connect(api, &TelegramApi::messagesSearchGlobalAnswer, this, &TelegramCore::onMessagesSearchGlobalAnswer);
     connect(api, &TelegramApi::messagesSearchGlobalError, this, &TelegramCore::onMessagesSearchGlobalError);
-    
+
     connect(api, &TelegramApi::messagesReorderStickerSetsAnswer, this, &TelegramCore::onMessagesReorderStickerSetsAnswer);
     connect(api, &TelegramApi::messagesReorderStickerSetsError, this, &TelegramCore::onMessagesReorderStickerSetsError);
-    
+
     connect(api, &TelegramApi::messagesGetDocumentByHashAnswer, this, &TelegramCore::onMessagesGetDocumentByHashAnswer);
     connect(api, &TelegramApi::messagesGetDocumentByHashError, this, &TelegramCore::onMessagesGetDocumentByHashError);
-    
+
     connect(api, &TelegramApi::messagesSearchGifsAnswer, this, &TelegramCore::onMessagesSearchGifsAnswer);
     connect(api, &TelegramApi::messagesSearchGifsError, this, &TelegramCore::onMessagesSearchGifsError);
-    
+
     connect(api, &TelegramApi::messagesGetSavedGifsAnswer, this, &TelegramCore::onMessagesGetSavedGifsAnswer);
     connect(api, &TelegramApi::messagesGetSavedGifsError, this, &TelegramCore::onMessagesGetSavedGifsError);
-    
+
     connect(api, &TelegramApi::messagesSaveGifAnswer, this, &TelegramCore::onMessagesSaveGifAnswer);
     connect(api, &TelegramApi::messagesSaveGifError, this, &TelegramCore::onMessagesSaveGifError);
-    
+
     connect(api, &TelegramApi::messagesGetInlineBotResultsAnswer, this, &TelegramCore::onMessagesGetInlineBotResultsAnswer);
     connect(api, &TelegramApi::messagesGetInlineBotResultsError, this, &TelegramCore::onMessagesGetInlineBotResultsError);
-    
+
     connect(api, &TelegramApi::messagesSetInlineBotResultsAnswer, this, &TelegramCore::onMessagesSetInlineBotResultsAnswer);
     connect(api, &TelegramApi::messagesSetInlineBotResultsError, this, &TelegramCore::onMessagesSetInlineBotResultsError);
-    
+
     connect(api, &TelegramApi::messagesSendInlineBotResultAnswer, this, &TelegramCore::onMessagesSendInlineBotResultAnswer);
     connect(api, &TelegramApi::messagesSendInlineBotResultError, this, &TelegramCore::onMessagesSendInlineBotResultError);
-    
+
     connect(api, &TelegramApi::messagesGetMessageEditDataAnswer, this, &TelegramCore::onMessagesGetMessageEditDataAnswer);
     connect(api, &TelegramApi::messagesGetMessageEditDataError, this, &TelegramCore::onMessagesGetMessageEditDataError);
-    
+
     connect(api, &TelegramApi::messagesEditMessageAnswer, this, &TelegramCore::onMessagesEditMessageAnswer);
     connect(api, &TelegramApi::messagesEditMessageError, this, &TelegramCore::onMessagesEditMessageError);
-    
+
     connect(api, &TelegramApi::messagesEditInlineBotMessageAnswer, this, &TelegramCore::onMessagesEditInlineBotMessageAnswer);
     connect(api, &TelegramApi::messagesEditInlineBotMessageError, this, &TelegramCore::onMessagesEditInlineBotMessageError);
-    
+
     connect(api, &TelegramApi::messagesGetBotCallbackAnswerAnswer, this, &TelegramCore::onMessagesGetBotCallbackAnswerAnswer);
     connect(api, &TelegramApi::messagesGetBotCallbackAnswerError, this, &TelegramCore::onMessagesGetBotCallbackAnswerError);
-    
+
     connect(api, &TelegramApi::messagesSetBotCallbackAnswerAnswer, this, &TelegramCore::onMessagesSetBotCallbackAnswerAnswer);
     connect(api, &TelegramApi::messagesSetBotCallbackAnswerError, this, &TelegramCore::onMessagesSetBotCallbackAnswerError);
-    
+
     connect(api, &TelegramApi::messagesGetPeerDialogsAnswer, this, &TelegramCore::onMessagesGetPeerDialogsAnswer);
     connect(api, &TelegramApi::messagesGetPeerDialogsError, this, &TelegramCore::onMessagesGetPeerDialogsError);
-    
+
     connect(api, &TelegramApi::messagesSaveDraftAnswer, this, &TelegramCore::onMessagesSaveDraftAnswer);
     connect(api, &TelegramApi::messagesSaveDraftError, this, &TelegramCore::onMessagesSaveDraftError);
-    
+
     connect(api, &TelegramApi::messagesGetAllDraftsAnswer, this, &TelegramCore::onMessagesGetAllDraftsAnswer);
     connect(api, &TelegramApi::messagesGetAllDraftsError, this, &TelegramCore::onMessagesGetAllDraftsError);
-    
+
     connect(api, &TelegramApi::messagesGetFeaturedStickersAnswer, this, &TelegramCore::onMessagesGetFeaturedStickersAnswer);
     connect(api, &TelegramApi::messagesGetFeaturedStickersError, this, &TelegramCore::onMessagesGetFeaturedStickersError);
-    
+
     connect(api, &TelegramApi::messagesReadFeaturedStickersAnswer, this, &TelegramCore::onMessagesReadFeaturedStickersAnswer);
     connect(api, &TelegramApi::messagesReadFeaturedStickersError, this, &TelegramCore::onMessagesReadFeaturedStickersError);
-    
+
     connect(api, &TelegramApi::messagesGetRecentStickersAnswer, this, &TelegramCore::onMessagesGetRecentStickersAnswer);
     connect(api, &TelegramApi::messagesGetRecentStickersError, this, &TelegramCore::onMessagesGetRecentStickersError);
-    
+
     connect(api, &TelegramApi::messagesSaveRecentStickerAnswer, this, &TelegramCore::onMessagesSaveRecentStickerAnswer);
     connect(api, &TelegramApi::messagesSaveRecentStickerError, this, &TelegramCore::onMessagesSaveRecentStickerError);
-    
+
     connect(api, &TelegramApi::messagesClearRecentStickersAnswer, this, &TelegramCore::onMessagesClearRecentStickersAnswer);
     connect(api, &TelegramApi::messagesClearRecentStickersError, this, &TelegramCore::onMessagesClearRecentStickersError);
-    
+
     connect(api, &TelegramApi::messagesGetArchivedStickersAnswer, this, &TelegramCore::onMessagesGetArchivedStickersAnswer);
     connect(api, &TelegramApi::messagesGetArchivedStickersError, this, &TelegramCore::onMessagesGetArchivedStickersError);
-    
+
     connect(api, &TelegramApi::messagesGetMaskStickersAnswer, this, &TelegramCore::onMessagesGetMaskStickersAnswer);
     connect(api, &TelegramApi::messagesGetMaskStickersError, this, &TelegramCore::onMessagesGetMaskStickersError);
-    
+
     connect(api, &TelegramApi::messagesGetAttachedStickersAnswer, this, &TelegramCore::onMessagesGetAttachedStickersAnswer);
     connect(api, &TelegramApi::messagesGetAttachedStickersError, this, &TelegramCore::onMessagesGetAttachedStickersError);
-    
+
     connect(api, &TelegramApi::messagesSetGameScoreAnswer, this, &TelegramCore::onMessagesSetGameScoreAnswer);
     connect(api, &TelegramApi::messagesSetGameScoreError, this, &TelegramCore::onMessagesSetGameScoreError);
-    
+
     connect(api, &TelegramApi::messagesSetInlineGameScoreAnswer, this, &TelegramCore::onMessagesSetInlineGameScoreAnswer);
     connect(api, &TelegramApi::messagesSetInlineGameScoreError, this, &TelegramCore::onMessagesSetInlineGameScoreError);
-    
+
     connect(api, &TelegramApi::messagesGetGameHighScoresAnswer, this, &TelegramCore::onMessagesGetGameHighScoresAnswer);
     connect(api, &TelegramApi::messagesGetGameHighScoresError, this, &TelegramCore::onMessagesGetGameHighScoresError);
-    
+
     connect(api, &TelegramApi::messagesGetInlineGameHighScoresAnswer, this, &TelegramCore::onMessagesGetInlineGameHighScoresAnswer);
     connect(api, &TelegramApi::messagesGetInlineGameHighScoresError, this, &TelegramCore::onMessagesGetInlineGameHighScoresError);
-    
+
     connect(api, &TelegramApi::messagesGetCommonChatsAnswer, this, &TelegramCore::onMessagesGetCommonChatsAnswer);
     connect(api, &TelegramApi::messagesGetCommonChatsError, this, &TelegramCore::onMessagesGetCommonChatsError);
-    
+
     connect(api, &TelegramApi::messagesGetAllChatsAnswer, this, &TelegramCore::onMessagesGetAllChatsAnswer);
     connect(api, &TelegramApi::messagesGetAllChatsError, this, &TelegramCore::onMessagesGetAllChatsError);
-    
+
     connect(api, &TelegramApi::messagesGetWebPageAnswer, this, &TelegramCore::onMessagesGetWebPageAnswer);
     connect(api, &TelegramApi::messagesGetWebPageError, this, &TelegramCore::onMessagesGetWebPageError);
-    
+
     connect(api, &TelegramApi::messagesToggleDialogPinAnswer, this, &TelegramCore::onMessagesToggleDialogPinAnswer);
     connect(api, &TelegramApi::messagesToggleDialogPinError, this, &TelegramCore::onMessagesToggleDialogPinError);
-    
+
     connect(api, &TelegramApi::messagesReorderPinnedDialogsAnswer, this, &TelegramCore::onMessagesReorderPinnedDialogsAnswer);
     connect(api, &TelegramApi::messagesReorderPinnedDialogsError, this, &TelegramCore::onMessagesReorderPinnedDialogsError);
-    
+
     connect(api, &TelegramApi::messagesGetPinnedDialogsAnswer, this, &TelegramCore::onMessagesGetPinnedDialogsAnswer);
     connect(api, &TelegramApi::messagesGetPinnedDialogsError, this, &TelegramCore::onMessagesGetPinnedDialogsError);
-    
+
     connect(api, &TelegramApi::messagesSetBotShippingResultsAnswer, this, &TelegramCore::onMessagesSetBotShippingResultsAnswer);
     connect(api, &TelegramApi::messagesSetBotShippingResultsError, this, &TelegramCore::onMessagesSetBotShippingResultsError);
-    
+
     connect(api, &TelegramApi::messagesSetBotPrecheckoutResultsAnswer, this, &TelegramCore::onMessagesSetBotPrecheckoutResultsAnswer);
     connect(api, &TelegramApi::messagesSetBotPrecheckoutResultsError, this, &TelegramCore::onMessagesSetBotPrecheckoutResultsError);
-    
+
     connect(api, &TelegramApi::messagesUploadMediaAnswer, this, &TelegramCore::onMessagesUploadMediaAnswer);
     connect(api, &TelegramApi::messagesUploadMediaError, this, &TelegramCore::onMessagesUploadMediaError);
-    
-    
+
+
     connect(api, &TelegramApi::paymentsGetPaymentFormAnswer, this, &TelegramCore::onPaymentsGetPaymentFormAnswer);
     connect(api, &TelegramApi::paymentsGetPaymentFormError, this, &TelegramCore::onPaymentsGetPaymentFormError);
-    
+
     connect(api, &TelegramApi::paymentsGetPaymentReceiptAnswer, this, &TelegramCore::onPaymentsGetPaymentReceiptAnswer);
     connect(api, &TelegramApi::paymentsGetPaymentReceiptError, this, &TelegramCore::onPaymentsGetPaymentReceiptError);
-    
+
     connect(api, &TelegramApi::paymentsValidateRequestedInfoAnswer, this, &TelegramCore::onPaymentsValidateRequestedInfoAnswer);
     connect(api, &TelegramApi::paymentsValidateRequestedInfoError, this, &TelegramCore::onPaymentsValidateRequestedInfoError);
-    
+
     connect(api, &TelegramApi::paymentsSendPaymentFormAnswer, this, &TelegramCore::onPaymentsSendPaymentFormAnswer);
     connect(api, &TelegramApi::paymentsSendPaymentFormError, this, &TelegramCore::onPaymentsSendPaymentFormError);
-    
+
     connect(api, &TelegramApi::paymentsGetSavedInfoAnswer, this, &TelegramCore::onPaymentsGetSavedInfoAnswer);
     connect(api, &TelegramApi::paymentsGetSavedInfoError, this, &TelegramCore::onPaymentsGetSavedInfoError);
-    
+
     connect(api, &TelegramApi::paymentsClearSavedInfoAnswer, this, &TelegramCore::onPaymentsClearSavedInfoAnswer);
     connect(api, &TelegramApi::paymentsClearSavedInfoError, this, &TelegramCore::onPaymentsClearSavedInfoError);
-    
-    
+
+
     connect(api, &TelegramApi::phoneGetCallConfigAnswer, this, &TelegramCore::onPhoneGetCallConfigAnswer);
     connect(api, &TelegramApi::phoneGetCallConfigError, this, &TelegramCore::onPhoneGetCallConfigError);
-    
+
     connect(api, &TelegramApi::phoneRequestCallAnswer, this, &TelegramCore::onPhoneRequestCallAnswer);
     connect(api, &TelegramApi::phoneRequestCallError, this, &TelegramCore::onPhoneRequestCallError);
-    
+
     connect(api, &TelegramApi::phoneAcceptCallAnswer, this, &TelegramCore::onPhoneAcceptCallAnswer);
     connect(api, &TelegramApi::phoneAcceptCallError, this, &TelegramCore::onPhoneAcceptCallError);
-    
+
     connect(api, &TelegramApi::phoneConfirmCallAnswer, this, &TelegramCore::onPhoneConfirmCallAnswer);
     connect(api, &TelegramApi::phoneConfirmCallError, this, &TelegramCore::onPhoneConfirmCallError);
-    
+
     connect(api, &TelegramApi::phoneReceivedCallAnswer, this, &TelegramCore::onPhoneReceivedCallAnswer);
     connect(api, &TelegramApi::phoneReceivedCallError, this, &TelegramCore::onPhoneReceivedCallError);
-    
+
     connect(api, &TelegramApi::phoneDiscardCallAnswer, this, &TelegramCore::onPhoneDiscardCallAnswer);
     connect(api, &TelegramApi::phoneDiscardCallError, this, &TelegramCore::onPhoneDiscardCallError);
-    
+
     connect(api, &TelegramApi::phoneSetCallRatingAnswer, this, &TelegramCore::onPhoneSetCallRatingAnswer);
     connect(api, &TelegramApi::phoneSetCallRatingError, this, &TelegramCore::onPhoneSetCallRatingError);
-    
+
     connect(api, &TelegramApi::phoneSaveCallDebugAnswer, this, &TelegramCore::onPhoneSaveCallDebugAnswer);
     connect(api, &TelegramApi::phoneSaveCallDebugError, this, &TelegramCore::onPhoneSaveCallDebugError);
-    
-    
+
+
     connect(api, &TelegramApi::photosUpdateProfilePhotoAnswer, this, &TelegramCore::onPhotosUpdateProfilePhotoAnswer);
     connect(api, &TelegramApi::photosUpdateProfilePhotoError, this, &TelegramCore::onPhotosUpdateProfilePhotoError);
-    
+
     connect(api, &TelegramApi::photosUploadProfilePhotoAnswer, this, &TelegramCore::onPhotosUploadProfilePhotoAnswer);
     connect(api, &TelegramApi::photosUploadProfilePhotoError, this, &TelegramCore::onPhotosUploadProfilePhotoError);
-    
+
     connect(api, &TelegramApi::photosDeletePhotosAnswer, this, &TelegramCore::onPhotosDeletePhotosAnswer);
     connect(api, &TelegramApi::photosDeletePhotosError, this, &TelegramCore::onPhotosDeletePhotosError);
-    
+
     connect(api, &TelegramApi::photosGetUserPhotosAnswer, this, &TelegramCore::onPhotosGetUserPhotosAnswer);
     connect(api, &TelegramApi::photosGetUserPhotosError, this, &TelegramCore::onPhotosGetUserPhotosError);
-    
-    
+
+
     connect(api, &TelegramApi::stickersCreateStickerSetAnswer, this, &TelegramCore::onStickersCreateStickerSetAnswer);
     connect(api, &TelegramApi::stickersCreateStickerSetError, this, &TelegramCore::onStickersCreateStickerSetError);
-    
+
     connect(api, &TelegramApi::stickersRemoveStickerFromSetAnswer, this, &TelegramCore::onStickersRemoveStickerFromSetAnswer);
     connect(api, &TelegramApi::stickersRemoveStickerFromSetError, this, &TelegramCore::onStickersRemoveStickerFromSetError);
-    
+
     connect(api, &TelegramApi::stickersChangeStickerPositionAnswer, this, &TelegramCore::onStickersChangeStickerPositionAnswer);
     connect(api, &TelegramApi::stickersChangeStickerPositionError, this, &TelegramCore::onStickersChangeStickerPositionError);
-    
+
     connect(api, &TelegramApi::stickersAddStickerToSetAnswer, this, &TelegramCore::onStickersAddStickerToSetAnswer);
     connect(api, &TelegramApi::stickersAddStickerToSetError, this, &TelegramCore::onStickersAddStickerToSetError);
-    
-    
+
+
     connect(api, &TelegramApi::updatesGetStateAnswer, this, &TelegramCore::onUpdatesGetStateAnswer);
     connect(api, &TelegramApi::updatesGetStateError, this, &TelegramCore::onUpdatesGetStateError);
-    
+
     connect(api, &TelegramApi::updatesGetDifferenceAnswer, this, &TelegramCore::onUpdatesGetDifferenceAnswer);
     connect(api, &TelegramApi::updatesGetDifferenceError, this, &TelegramCore::onUpdatesGetDifferenceError);
-    
+
     connect(api, &TelegramApi::updatesGetChannelDifferenceAnswer, this, &TelegramCore::onUpdatesGetChannelDifferenceAnswer);
     connect(api, &TelegramApi::updatesGetChannelDifferenceError, this, &TelegramCore::onUpdatesGetChannelDifferenceError);
-    
-    
+
+
     connect(api, &TelegramApi::uploadSaveFilePartAnswer, this, &TelegramCore::onUploadSaveFilePartAnswer);
     connect(api, &TelegramApi::uploadSaveFilePartError, this, &TelegramCore::onUploadSaveFilePartError);
-    
+
     connect(api, &TelegramApi::uploadGetFileAnswer, this, &TelegramCore::onUploadGetFileAnswer);
     connect(api, &TelegramApi::uploadGetFileError, this, &TelegramCore::onUploadGetFileError);
-    
+
     connect(api, &TelegramApi::uploadSaveBigFilePartAnswer, this, &TelegramCore::onUploadSaveBigFilePartAnswer);
     connect(api, &TelegramApi::uploadSaveBigFilePartError, this, &TelegramCore::onUploadSaveBigFilePartError);
-    
+
     connect(api, &TelegramApi::uploadGetWebFileAnswer, this, &TelegramCore::onUploadGetWebFileAnswer);
     connect(api, &TelegramApi::uploadGetWebFileError, this, &TelegramCore::onUploadGetWebFileError);
-    
+
     connect(api, &TelegramApi::uploadGetCdnFileAnswer, this, &TelegramCore::onUploadGetCdnFileAnswer);
     connect(api, &TelegramApi::uploadGetCdnFileError, this, &TelegramCore::onUploadGetCdnFileError);
-    
+
     connect(api, &TelegramApi::uploadReuploadCdnFileAnswer, this, &TelegramCore::onUploadReuploadCdnFileAnswer);
     connect(api, &TelegramApi::uploadReuploadCdnFileError, this, &TelegramCore::onUploadReuploadCdnFileError);
-    
-    
+
+
     connect(api, &TelegramApi::usersGetUsersAnswer, this, &TelegramCore::onUsersGetUsersAnswer);
     connect(api, &TelegramApi::usersGetUsersError, this, &TelegramCore::onUsersGetUsersError);
-    
+
     connect(api, &TelegramApi::usersGetFullUserAnswer, this, &TelegramCore::onUsersGetFullUserAnswer);
     connect(api, &TelegramApi::usersGetFullUserError, this, &TelegramCore::onUsersGetFullUserError);
 
     connect(api, &TelegramApi::error, this, &TelegramCore::onError);
 }
 
-qint64 TelegramCore::accountRegisterDevice(qint32 token_type, const QString &token, Callback<bool > callBack, qint32 timeout) {
+qint64 TelegramCore::accountRegisterDevice(qint32 token_type, const QString &token, bool callBack, qint32 timeout) {
     if(!mApi) {
         bool result = 0;
         if(callBack)
