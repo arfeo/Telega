@@ -22,7 +22,7 @@
 #include "util/utils.h"
 #include "util/constants.h"
 #include "dc.h"
-#include "telegram.h"
+//#include "telegram.h"
 
 #include <QDir>
 #include <QSettings>
@@ -45,19 +45,19 @@ QString telegram_settings_auth_path(const QString &configPath, const QString &ph
 
 bool telegram_settings_read_fnc(Telegram *tg, QVariantMap &map)
 {
-    const QString configFilename = telegram_settings_auth_path(tg->configPath(), tg->phoneNumber());
+    /*const QString configFilename = telegram_settings_auth_path(tg->configPath(), tg->phoneNumber());
 
     QSettings settings(configFilename, QSettings::IniFormat);
     const QStringList &keys = settings.allKeys();
     foreach(const QString &k, keys)
-        map[k] = settings.value(k);
+        map[k] = settings.value(k);*/
 
     return true;
 }
 
 bool telegram_settings_write_fnc(Telegram *tg, const QVariantMap &map)
 {
-    const QString configFilename = telegram_settings_auth_path(tg->configPath(), tg->phoneNumber());
+    /*const QString configFilename = telegram_settings_auth_path(tg->configPath(), tg->phoneNumber());
 
     QSettings settings(configFilename, QSettings::IniFormat);
     QMapIterator<QString,QVariant> i(map);
@@ -65,7 +65,7 @@ bool telegram_settings_write_fnc(Telegram *tg, const QVariantMap &map)
     {
         i.next();
         settings.setValue(i.key(), i.value());
-    }
+    }*/
 
     return true;
 }
