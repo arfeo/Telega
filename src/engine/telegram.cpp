@@ -26,7 +26,6 @@
 #include <openssl/md5.h>
 
 #include <QDebug>
-#include <QLoggingCategory>
 #include <QCryptographicHash>
 #include <QFile>
 #include <QFileInfo>
@@ -51,9 +50,6 @@
 #include "telegram/coretypes.h"
 #include "secret/secretchat.h"
 #include "core/settings.h"
-
-Q_LOGGING_CATEGORY(TG_TELEGRAM, "tg.telegram")
-Q_LOGGING_CATEGORY(TG_LIB_SECRET, "tg.lib.secret")
 
 #define CHECK_API if(!mApi) {qDebug() << __FUNCTION__ << "Error: API is not ready."; return 0;}
 

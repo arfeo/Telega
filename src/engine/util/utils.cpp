@@ -33,9 +33,6 @@
 #include <QStringList>
 #include <QtCore>
 
-
-Q_LOGGING_CATEGORY(TG_UTIL_UTILS, "tg.util.utils")
-
 #ifdef DEBUG
 #define RES_PRE 8
 #define RES_AFTER 8
@@ -44,90 +41,6 @@ void *blocks[MAX_BLOCKS];
 void *free_blocks[MAX_BLOCKS];
 qint32 usedBlocks;
 qint32 freeBlocksCnt;
-#endif
-
-#if defined(Q_OS_MAC)
-#include <sys/time.h>
-//clock_gettime is not implemented on OSX
-int clock_gettime(int /*clk_id*/, struct timespec* t) {
-    struct timeval now;
-    int rv = gettimeofday(&now, NULL);
-    if (rv) return rv;
-    t->tv_sec  = now.tv_sec;
-    t->tv_nsec = now.tv_usec * 1000;
-    return 0;
-}
-#elif defined(Q_OS_WIN)
-//clock_gettime is not implemented on Win
-// took from https://stackoverflow.com/questions/5404277/porting-clock-gettime-to-windows
-
-#if defined(Q_CC_MSVC) && (!defined(_INC_TIME) || defined(_CRT_NO_TIME_T))
-struct timespec {
-    long int tv_sec;    /* Seconds.  */
-    long int tv_nsec;   /* Nanoseconds.  */
-};
-#endif
-
-LARGE_INTEGER getFILETIMEoffset()
-{
-    SYSTEMTIME s;
-    FILETIME f;
-    LARGE_INTEGER t;
-
-    s.wYear = 1970;
-    s.wMonth = 1;
-    s.wDay = 1;
-    s.wHour = 0;
-    s.wMinute = 0;
-    s.wSecond = 0;
-    s.wMilliseconds = 0;
-    SystemTimeToFileTime(&s, &f);
-    t.QuadPart = f.dwHighDateTime;
-    t.QuadPart <<= 32;
-    t.QuadPart |= f.dwLowDateTime;
-    return (t);
-}
-
-int clock_gettime(int /*X*/, struct timespec *ts)
-{
-    LARGE_INTEGER           t;
-    FILETIME                f;
-    double                  nanoseconds;
-    static LARGE_INTEGER    offset;
-    static double           frequencyToNanoseconds;
-    static int              initialized = 0;
-    static BOOL             usePerformanceCounter = 0;
-
-    if (!initialized) {
-        LARGE_INTEGER performanceFrequency;
-        initialized = 1;
-        usePerformanceCounter = QueryPerformanceFrequency(&performanceFrequency);
-        if (usePerformanceCounter) {
-            QueryPerformanceCounter(&offset);
-            frequencyToNanoseconds = (double)performanceFrequency.QuadPart / 1000.;
-        } else {
-            offset = getFILETIMEoffset();
-            frequencyToNanoseconds = 0.010;
-        }
-    }
-    if (usePerformanceCounter) {
-        QueryPerformanceCounter(&t);
-    }
-    else {
-        GetSystemTimeAsFileTime(&f);
-        t.QuadPart = f.dwHighDateTime;
-        t.QuadPart <<= 32;
-        t.QuadPart |= f.dwLowDateTime;
-    }
-
-    t.QuadPart -= offset.QuadPart;
-    nanoseconds = (double)t.QuadPart / frequencyToNanoseconds;
-    t.QuadPart = nanoseconds;
-    ts->tv_sec = t.QuadPart / 1000000000;
-    ts->tv_nsec = t.QuadPart % 1000000000;
-
-    return (0);
-}
 #endif
 
 Utils::Utils(QObject *parent) :
@@ -258,24 +171,17 @@ void Utils::freeSecure(void *ptr, qint32 size) {
 }
 
 void Utils::secureZeroMemory(void *dst, int val, size_t count) {
-#if defined(Q_OS_WIN)
-    Q_UNUSED(val);
-    RtlSecureZeroMemory(dst, count);
-#else
     // TODO: maybe we should use memset_s ?
-
-    volatile unsigned char *p = (unsigned char *)dst; 
-    while (count--) 
-        *p++ = val; 
-
-#endif
+    volatile unsigned char *p = (unsigned char *)dst;
+    while (count--)
+        *p++ = val;
 }
 
 RSA *Utils::rsaLoadPublicKey(const QString &publicKeyName) {
     RSA *pubKey = NULL;
     QFile file(publicKeyName);
     if(!file.open(QFile::ReadOnly)) {
-        qCWarning(TG_UTIL_UTILS) << "Couldn't open public key file" << publicKeyName;
+        qDebug() << "Couldn't open public key file" << publicKeyName;
         return NULL;
     }
 
@@ -289,10 +195,10 @@ RSA *Utils::rsaLoadPublicKey(const QString &publicKeyName) {
     BIO_free(bufio);
 
     if (pubKey == NULL) {
-        qCWarning(TG_UTIL_UTILS) << "PEM_read_RSAPublicKey returns NULL";
+        qDebug() << "PEM_read_RSAPublicKey returns NULL";
         return NULL;
     }
-    qCDebug(TG_UTIL_UTILS) << "public key" << publicKeyName << "loaded successfully";
+    qDebug() << "public key" << publicKeyName << "loaded successfully";
     return pubKey;
 }
 
@@ -407,27 +313,15 @@ qint64 Utils::getKeyFingerprint(uchar *sharedKey) {
 }
 
 QString Utils::getDeviceModel() {
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 4, 0))
-#if defined(Q_OS_ANDROID) || defined(Q_OS_IOS)
-    return "Mobile";
-#else
-    return "PC";
-#endif
-#else
     struct utsname st;
     uname(&st);
     return QString(st.machine);
-#endif
 }
 
 QString Utils::getSystemVersion() {
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 4, 0))
-    return QSysInfo::prettyProductName() + " " + QSysInfo::currentCpuArchitecture();
-#else
     struct utsname st;
     uname(&st);
     return QString(QString(st.sysname) + " " + QString(st.release) + " " + QString(st.version));
-#endif
 }
 
 QString Utils::getAppVersion() {
@@ -508,15 +402,6 @@ qint64 Utils::findDivider(qint64 pq) {
         }
         if (g > 1 && (qint64)g < pq) break;
     }
-    qCDebug(TG_UTIL_UTILS) << "got" << g << "divider after" << it << "iterations";
+    qDebug() << "got" << g << "divider after" << it << "iterations";
     return g;
 }
-
-#ifdef Q_OS_WIN
-qint64 lrand48()
-{
-    qint64 result = 0;
-    Utils::randomBytes(&result, 6);
-    return result;
-}
-#endif
