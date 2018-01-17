@@ -43,7 +43,7 @@ UserFull::UserFull(const Null &null) :
 }
 
 UserFull::~UserFull() {
-    
+
 }
 
 void UserFull::setAbout(const QString &about) {
@@ -200,7 +200,7 @@ bool UserFull::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -228,7 +228,7 @@ bool UserFull::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -252,7 +252,7 @@ QMap<QString, QVariant> UserFull::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -267,51 +267,51 @@ UserFull UserFull::fromMap(const QMap<QString, QVariant> &map) {
             _blocked_var.convert( QVariant::nameToType("bool") );
             result.setBlocked( _blocked_var.value<bool>() );
         }
-        
+
         QVariant _phoneCallsAvailable_var = map.value("phoneCallsAvailable");
         if( !_phoneCallsAvailable_var.isNull() ) {
             _phoneCallsAvailable_var.convert( QVariant::nameToType("bool") );
             result.setPhoneCallsAvailable( _phoneCallsAvailable_var.value<bool>() );
         }
-        
+
         QVariant _phoneCallsPrivate_var = map.value("phoneCallsPrivate");
         if( !_phoneCallsPrivate_var.isNull() ) {
             _phoneCallsPrivate_var.convert( QVariant::nameToType("bool") );
             result.setPhoneCallsPrivate( _phoneCallsPrivate_var.value<bool>() );
         }
-        
+
         QVariant _user_var = map.value("user");
         if( !_user_var.isNull() )
             result.setUser( User::fromMap(_user_var.toMap()) );
-        
+
         QVariant _about_var = map.value("about");
         if( !_about_var.isNull() ) {
             _about_var.convert( QVariant::nameToType("QString") );
             result.setAbout( _about_var.value<QString>() );
         }
-        
+
         QVariant _link_var = map.value("link");
         if( !_link_var.isNull() )
             result.setLink( ContactsLink::fromMap(_link_var.toMap()) );
-        
+
         QVariant _profilePhoto_var = map.value("profilePhoto");
         if( !_profilePhoto_var.isNull() )
             result.setProfilePhoto( Photo::fromMap(_profilePhoto_var.toMap()) );
-        
+
         QVariant _notifySettings_var = map.value("notifySettings");
         if( !_notifySettings_var.isNull() )
             result.setNotifySettings( PeerNotifySettings::fromMap(_notifySettings_var.toMap()) );
-        
+
         QVariant _botInfo_var = map.value("botInfo");
         if( !_botInfo_var.isNull() )
             result.setBotInfo( BotInfo::fromMap(_botInfo_var.toMap()) );
-        
+
         QVariant _commonChatsCount_var = map.value("commonChatsCount");
         if( !_commonChatsCount_var.isNull() ) {
             _commonChatsCount_var.convert( QVariant::nameToType("qint32") );
             result.setCommonChatsCount( _commonChatsCount_var.value<qint32>() );
         }
-        
+
         return result;
     }
     return result;
@@ -381,7 +381,7 @@ QDataStream &operator>>(QDataStream &stream, UserFull &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const UserFull &item) {
+/*QDebug operator<<(QDebug debug,  const UserFull &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.UserFull(";
@@ -401,4 +401,4 @@ QDebug operator<<(QDebug debug,  const UserFull &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

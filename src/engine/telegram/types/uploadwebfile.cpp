@@ -43,7 +43,7 @@ UploadWebFile::UploadWebFile(const Null &null) :
 }
 
 UploadWebFile::~UploadWebFile() {
-    
+
 }
 
 void UploadWebFile::setBytes(const QByteArray &bytes) {
@@ -128,7 +128,7 @@ bool UploadWebFile::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -147,7 +147,7 @@ bool UploadWebFile::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -166,7 +166,7 @@ QMap<QString, QVariant> UploadWebFile::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -181,29 +181,29 @@ UploadWebFile UploadWebFile::fromMap(const QMap<QString, QVariant> &map) {
             _size_var.convert( QVariant::nameToType("qint32") );
             result.setSize( _size_var.value<qint32>() );
         }
-        
+
         QVariant _mimeType_var = map.value("mimeType");
         if( !_mimeType_var.isNull() ) {
             _mimeType_var.convert( QVariant::nameToType("QString") );
             result.setMimeType( _mimeType_var.value<QString>() );
         }
-        
+
         QVariant _fileType_var = map.value("fileType");
         if( !_fileType_var.isNull() )
             result.setFileType( StorageFileType::fromMap(_fileType_var.toMap()) );
-        
+
         QVariant _mtime_var = map.value("mtime");
         if( !_mtime_var.isNull() ) {
             _mtime_var.convert( QVariant::nameToType("qint32") );
             result.setMtime( _mtime_var.value<qint32>() );
         }
-        
+
         QVariant _bytes_var = map.value("bytes");
         if( !_bytes_var.isNull() ) {
             _bytes_var.convert( QVariant::nameToType("QByteArray") );
             result.setBytes( _bytes_var.value<QByteArray>() );
         }
-        
+
         return result;
     }
     return result;
@@ -261,7 +261,7 @@ QDataStream &operator>>(QDataStream &stream, UploadWebFile &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const UploadWebFile &item) {
+/*QDebug operator<<(QDebug debug,  const UploadWebFile &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.UploadWebFile(";
@@ -278,4 +278,4 @@ QDebug operator<<(QDebug debug,  const UploadWebFile &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

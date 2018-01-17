@@ -63,7 +63,7 @@ WebPage::WebPage(const Null &null) :
 }
 
 WebPage::~WebPage() {
-    
+
 }
 
 void WebPage::setAuthor(const QString &author) {
@@ -310,7 +310,7 @@ bool WebPage::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeWebPagePending: {
         m_id = in->fetchLong();
         m_date = in->fetchInt();
@@ -318,7 +318,7 @@ bool WebPage::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeWebPage: {
         m_flags = in->fetchInt();
         m_id = in->fetchLong();
@@ -368,13 +368,13 @@ bool WebPage::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeWebPageNotModified: {
         m_classType = static_cast<WebPageClassType>(x);
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -389,14 +389,14 @@ bool WebPage::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeWebPagePending: {
         out->appendLong(m_id);
         out->appendInt(m_date);
         return true;
     }
         break;
-    
+
     case typeWebPage: {
         out->appendInt(m_flags);
         out->appendLong(m_id);
@@ -445,12 +445,12 @@ bool WebPage::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeWebPageNotModified: {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -465,7 +465,7 @@ QMap<QString, QVariant> WebPage::toMap() const {
         return result;
     }
         break;
-    
+
     case typeWebPagePending: {
         result["classType"] = "WebPage::typeWebPagePending";
         if( id() ) result["id"] = QString::number(id());
@@ -473,7 +473,7 @@ QMap<QString, QVariant> WebPage::toMap() const {
         return result;
     }
         break;
-    
+
     case typeWebPage: {
         result["classType"] = "WebPage::typeWebPage";
         if( id() ) result["id"] = QString::number(id());
@@ -496,13 +496,13 @@ QMap<QString, QVariant> WebPage::toMap() const {
         return result;
     }
         break;
-    
+
     case typeWebPageNotModified: {
         result["classType"] = "WebPage::typeWebPageNotModified";
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -517,7 +517,7 @@ WebPage WebPage::fromMap(const QMap<QString, QVariant> &map) {
             _id_var.convert( QVariant::nameToType("qint64") );
             result.setId( _id_var.value<qint64>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "WebPage::typeWebPagePending") {
@@ -527,13 +527,13 @@ WebPage WebPage::fromMap(const QMap<QString, QVariant> &map) {
             _id_var.convert( QVariant::nameToType("qint64") );
             result.setId( _id_var.value<qint64>() );
         }
-        
+
         QVariant _date_var = map.value("date");
         if( !_date_var.isNull() ) {
             _date_var.convert( QVariant::nameToType("qint32") );
             result.setDate( _date_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "WebPage::typeWebPage") {
@@ -543,97 +543,97 @@ WebPage WebPage::fromMap(const QMap<QString, QVariant> &map) {
             _id_var.convert( QVariant::nameToType("qint64") );
             result.setId( _id_var.value<qint64>() );
         }
-        
+
         QVariant _url_var = map.value("url");
         if( !_url_var.isNull() ) {
             _url_var.convert( QVariant::nameToType("QString") );
             result.setUrl( _url_var.value<QString>() );
         }
-        
+
         QVariant _displayUrl_var = map.value("displayUrl");
         if( !_displayUrl_var.isNull() ) {
             _displayUrl_var.convert( QVariant::nameToType("QString") );
             result.setDisplayUrl( _displayUrl_var.value<QString>() );
         }
-        
+
         QVariant _hash_var = map.value("hash");
         if( !_hash_var.isNull() ) {
             _hash_var.convert( QVariant::nameToType("qint32") );
             result.setHash( _hash_var.value<qint32>() );
         }
-        
+
         QVariant _type_var = map.value("type");
         if( !_type_var.isNull() ) {
             _type_var.convert( QVariant::nameToType("QString") );
             result.setType( _type_var.value<QString>() );
         }
-        
+
         QVariant _siteName_var = map.value("siteName");
         if( !_siteName_var.isNull() ) {
             _siteName_var.convert( QVariant::nameToType("QString") );
             result.setSiteName( _siteName_var.value<QString>() );
         }
-        
+
         QVariant _title_var = map.value("title");
         if( !_title_var.isNull() ) {
             _title_var.convert( QVariant::nameToType("QString") );
             result.setTitle( _title_var.value<QString>() );
         }
-        
+
         QVariant _description_var = map.value("description");
         if( !_description_var.isNull() ) {
             _description_var.convert( QVariant::nameToType("QString") );
             result.setDescription( _description_var.value<QString>() );
         }
-        
+
         QVariant _photo_var = map.value("photo");
         if( !_photo_var.isNull() )
             result.setPhoto( Photo::fromMap(_photo_var.toMap()) );
-        
+
         QVariant _embedUrl_var = map.value("embedUrl");
         if( !_embedUrl_var.isNull() ) {
             _embedUrl_var.convert( QVariant::nameToType("QString") );
             result.setEmbedUrl( _embedUrl_var.value<QString>() );
         }
-        
+
         QVariant _embedType_var = map.value("embedType");
         if( !_embedType_var.isNull() ) {
             _embedType_var.convert( QVariant::nameToType("QString") );
             result.setEmbedType( _embedType_var.value<QString>() );
         }
-        
+
         QVariant _embedWidth_var = map.value("embedWidth");
         if( !_embedWidth_var.isNull() ) {
             _embedWidth_var.convert( QVariant::nameToType("qint32") );
             result.setEmbedWidth( _embedWidth_var.value<qint32>() );
         }
-        
+
         QVariant _embedHeight_var = map.value("embedHeight");
         if( !_embedHeight_var.isNull() ) {
             _embedHeight_var.convert( QVariant::nameToType("qint32") );
             result.setEmbedHeight( _embedHeight_var.value<qint32>() );
         }
-        
+
         QVariant _duration_var = map.value("duration");
         if( !_duration_var.isNull() ) {
             _duration_var.convert( QVariant::nameToType("qint32") );
             result.setDuration( _duration_var.value<qint32>() );
         }
-        
+
         QVariant _author_var = map.value("author");
         if( !_author_var.isNull() ) {
             _author_var.convert( QVariant::nameToType("QString") );
             result.setAuthor( _author_var.value<QString>() );
         }
-        
+
         QVariant _document_var = map.value("document");
         if( !_document_var.isNull() )
             result.setDocument( Document::fromMap(_document_var.toMap()) );
-        
+
         QVariant _cachedPage_var = map.value("cachedPage");
         if( !_cachedPage_var.isNull() )
             result.setCachedPage( Page::fromMap(_cachedPage_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "WebPage::typeWebPageNotModified") {
@@ -685,7 +685,7 @@ QDataStream &operator<<(QDataStream &stream, const WebPage &item) {
         stream << item.cachedPage();
         break;
     case WebPage::typeWebPageNotModified:
-        
+
         break;
     }
     return stream;
@@ -769,14 +769,14 @@ QDataStream &operator>>(QDataStream &stream, WebPage &item) {
     }
         break;
     case WebPage::typeWebPageNotModified: {
-        
+
     }
         break;
     }
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const WebPage &item) {
+/*QDebug operator<<(QDebug debug,  const WebPage &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.WebPage(";
@@ -818,4 +818,4 @@ QDebug operator<<(QDebug debug,  const WebPage &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

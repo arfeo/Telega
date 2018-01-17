@@ -43,7 +43,7 @@ UserStatus::UserStatus(const Null &null) :
 }
 
 UserStatus::~UserStatus() {
-    
+
 }
 
 void UserStatus::setExpires(qint32 expires) {
@@ -93,39 +93,39 @@ bool UserStatus::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUserStatusOnline: {
         m_expires = in->fetchInt();
         m_classType = static_cast<UserStatusClassType>(x);
         return true;
     }
         break;
-    
+
     case typeUserStatusOffline: {
         m_wasOnline = in->fetchInt();
         m_classType = static_cast<UserStatusClassType>(x);
         return true;
     }
         break;
-    
+
     case typeUserStatusRecently: {
         m_classType = static_cast<UserStatusClassType>(x);
         return true;
     }
         break;
-    
+
     case typeUserStatusLastWeek: {
         m_classType = static_cast<UserStatusClassType>(x);
         return true;
     }
         break;
-    
+
     case typeUserStatusLastMonth: {
         m_classType = static_cast<UserStatusClassType>(x);
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -139,34 +139,34 @@ bool UserStatus::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUserStatusOnline: {
         out->appendInt(m_expires);
         return true;
     }
         break;
-    
+
     case typeUserStatusOffline: {
         out->appendInt(m_wasOnline);
         return true;
     }
         break;
-    
+
     case typeUserStatusRecently: {
         return true;
     }
         break;
-    
+
     case typeUserStatusLastWeek: {
         return true;
     }
         break;
-    
+
     case typeUserStatusLastMonth: {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -180,39 +180,39 @@ QMap<QString, QVariant> UserStatus::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUserStatusOnline: {
         result["classType"] = "UserStatus::typeUserStatusOnline";
         if( expires() ) result["expires"] = QString::number(expires());
         return result;
     }
         break;
-    
+
     case typeUserStatusOffline: {
         result["classType"] = "UserStatus::typeUserStatusOffline";
         if( wasOnline() ) result["wasOnline"] = QString::number(wasOnline());
         return result;
     }
         break;
-    
+
     case typeUserStatusRecently: {
         result["classType"] = "UserStatus::typeUserStatusRecently";
         return result;
     }
         break;
-    
+
     case typeUserStatusLastWeek: {
         result["classType"] = "UserStatus::typeUserStatusLastWeek";
         return result;
     }
         break;
-    
+
     case typeUserStatusLastMonth: {
         result["classType"] = "UserStatus::typeUserStatusLastMonth";
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -231,7 +231,7 @@ UserStatus UserStatus::fromMap(const QMap<QString, QVariant> &map) {
             _expires_var.convert( QVariant::nameToType("qint32") );
             result.setExpires( _expires_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "UserStatus::typeUserStatusOffline") {
@@ -241,7 +241,7 @@ UserStatus UserStatus::fromMap(const QMap<QString, QVariant> &map) {
             _wasOnline_var.convert( QVariant::nameToType("qint32") );
             result.setWasOnline( _wasOnline_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "UserStatus::typeUserStatusRecently") {
@@ -274,7 +274,7 @@ QDataStream &operator<<(QDataStream &stream, const UserStatus &item) {
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case UserStatus::typeUserStatusEmpty:
-        
+
         break;
     case UserStatus::typeUserStatusOnline:
         stream << item.expires();
@@ -283,13 +283,13 @@ QDataStream &operator<<(QDataStream &stream, const UserStatus &item) {
         stream << item.wasOnline();
         break;
     case UserStatus::typeUserStatusRecently:
-        
+
         break;
     case UserStatus::typeUserStatusLastWeek:
-        
+
         break;
     case UserStatus::typeUserStatusLastMonth:
-        
+
         break;
     }
     return stream;
@@ -301,7 +301,7 @@ QDataStream &operator>>(QDataStream &stream, UserStatus &item) {
     item.setClassType(static_cast<UserStatus::UserStatusClassType>(type));
     switch(type) {
     case UserStatus::typeUserStatusEmpty: {
-        
+
     }
         break;
     case UserStatus::typeUserStatusOnline: {
@@ -317,22 +317,22 @@ QDataStream &operator>>(QDataStream &stream, UserStatus &item) {
     }
         break;
     case UserStatus::typeUserStatusRecently: {
-        
+
     }
         break;
     case UserStatus::typeUserStatusLastWeek: {
-        
+
     }
         break;
     case UserStatus::typeUserStatusLastMonth: {
-        
+
     }
         break;
     }
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const UserStatus &item) {
+/*QDebug operator<<(QDebug debug,  const UserStatus &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.UserStatus(";
@@ -361,4 +361,4 @@ QDebug operator<<(QDebug debug,  const UserStatus &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

@@ -55,7 +55,7 @@ UpdatesState::UpdatesState(const Null &null) :
 }
 
 UpdatesState::~UpdatesState() {
-    
+
 }
 
 void UpdatesState::setDate(qint32 date) {
@@ -140,7 +140,7 @@ bool UpdatesState::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -159,7 +159,7 @@ bool UpdatesState::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -178,7 +178,7 @@ QMap<QString, QVariant> UpdatesState::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -193,31 +193,31 @@ UpdatesState UpdatesState::fromMap(const QMap<QString, QVariant> &map) {
             _pts_var.convert( QVariant::nameToType("qint32") );
             result.setPts( _pts_var.value<qint32>() );
         }
-        
+
         QVariant _qts_var = map.value("qts");
         if( !_qts_var.isNull() ) {
             _qts_var.convert( QVariant::nameToType("qint32") );
             result.setQts( _qts_var.value<qint32>() );
         }
-        
+
         QVariant _date_var = map.value("date");
         if( !_date_var.isNull() ) {
             _date_var.convert( QVariant::nameToType("qint32") );
             result.setDate( _date_var.value<qint32>() );
         }
-        
+
         QVariant _seq_var = map.value("seq");
         if( !_seq_var.isNull() ) {
             _seq_var.convert( QVariant::nameToType("qint32") );
             result.setSeq( _seq_var.value<qint32>() );
         }
-        
+
         QVariant _unreadCount_var = map.value("unreadCount");
         if( !_unreadCount_var.isNull() ) {
             _unreadCount_var.convert( QVariant::nameToType("qint32") );
             result.setUnreadCount( _unreadCount_var.value<qint32>() );
         }
-        
+
         return result;
     }
     return result;
@@ -275,7 +275,7 @@ QDataStream &operator>>(QDataStream &stream, UpdatesState &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const UpdatesState &item) {
+/*QDebug operator<<(QDebug debug,  const UpdatesState &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.UpdatesState(";
@@ -292,4 +292,4 @@ QDebug operator<<(QDebug debug,  const UpdatesState &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

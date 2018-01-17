@@ -47,7 +47,7 @@ WebDocument::WebDocument(const Null &null) :
 }
 
 WebDocument::~WebDocument() {
-    
+
 }
 
 void WebDocument::setAccessHash(qint64 accessHash) {
@@ -150,7 +150,7 @@ bool WebDocument::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -174,7 +174,7 @@ bool WebDocument::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -197,7 +197,7 @@ QMap<QString, QVariant> WebDocument::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -212,25 +212,25 @@ WebDocument WebDocument::fromMap(const QMap<QString, QVariant> &map) {
             _url_var.convert( QVariant::nameToType("QString") );
             result.setUrl( _url_var.value<QString>() );
         }
-        
+
         QVariant _accessHash_var = map.value("accessHash");
         if( !_accessHash_var.isNull() ) {
             _accessHash_var.convert( QVariant::nameToType("qint64") );
             result.setAccessHash( _accessHash_var.value<qint64>() );
         }
-        
+
         QVariant _size_var = map.value("size");
         if( !_size_var.isNull() ) {
             _size_var.convert( QVariant::nameToType("qint32") );
             result.setSize( _size_var.value<qint32>() );
         }
-        
+
         QVariant _mimeType_var = map.value("mimeType");
         if( !_mimeType_var.isNull() ) {
             _mimeType_var.convert( QVariant::nameToType("QString") );
             result.setMimeType( _mimeType_var.value<QString>() );
         }
-        
+
         QList<QVariant> map_attributes = map["attributes"].toList();
         QList<DocumentAttribute> _attributes;
         for(const QVariant &var: map_attributes)
@@ -241,7 +241,7 @@ WebDocument WebDocument::fromMap(const QMap<QString, QVariant> &map) {
             _dcId_var.convert( QVariant::nameToType("qint32") );
             result.setDcId( _dcId_var.value<qint32>() );
         }
-        
+
         return result;
     }
     return result;
@@ -303,7 +303,7 @@ QDataStream &operator>>(QDataStream &stream, WebDocument &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const WebDocument &item) {
+/*QDebug operator<<(QDebug debug,  const WebDocument &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.WebDocument(";
@@ -321,4 +321,4 @@ QDebug operator<<(QDebug debug,  const WebDocument &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

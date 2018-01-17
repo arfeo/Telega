@@ -51,7 +51,7 @@ User::User(const Null &null) :
 }
 
 User::~User() {
-    
+
 }
 
 void User::setAccessHash(qint64 accessHash) {
@@ -333,7 +333,7 @@ bool User::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUser: {
         m_flags = in->fetchInt();
         m_id = in->fetchInt();
@@ -374,7 +374,7 @@ bool User::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -389,7 +389,7 @@ bool User::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUser: {
         out->appendInt(m_flags);
         out->appendInt(m_id);
@@ -429,7 +429,7 @@ bool User::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -444,7 +444,7 @@ QMap<QString, QVariant> User::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUser: {
         result["classType"] = "User::typeUser";
         if( self() ) result["self"] = QString::number(self());
@@ -473,7 +473,7 @@ QMap<QString, QVariant> User::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -488,7 +488,7 @@ User User::fromMap(const QMap<QString, QVariant> &map) {
             _id_var.convert( QVariant::nameToType("qint32") );
             result.setId( _id_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "User::typeUser") {
@@ -498,135 +498,135 @@ User User::fromMap(const QMap<QString, QVariant> &map) {
             _self_var.convert( QVariant::nameToType("bool") );
             result.setSelf( _self_var.value<bool>() );
         }
-        
+
         QVariant _contact_var = map.value("contact");
         if( !_contact_var.isNull() ) {
             _contact_var.convert( QVariant::nameToType("bool") );
             result.setContact( _contact_var.value<bool>() );
         }
-        
+
         QVariant _mutualContact_var = map.value("mutualContact");
         if( !_mutualContact_var.isNull() ) {
             _mutualContact_var.convert( QVariant::nameToType("bool") );
             result.setMutualContact( _mutualContact_var.value<bool>() );
         }
-        
+
         QVariant _deleted_var = map.value("deleted");
         if( !_deleted_var.isNull() ) {
             _deleted_var.convert( QVariant::nameToType("bool") );
             result.setDeleted( _deleted_var.value<bool>() );
         }
-        
+
         QVariant _bot_var = map.value("bot");
         if( !_bot_var.isNull() ) {
             _bot_var.convert( QVariant::nameToType("bool") );
             result.setBot( _bot_var.value<bool>() );
         }
-        
+
         QVariant _botChatHistory_var = map.value("botChatHistory");
         if( !_botChatHistory_var.isNull() ) {
             _botChatHistory_var.convert( QVariant::nameToType("bool") );
             result.setBotChatHistory( _botChatHistory_var.value<bool>() );
         }
-        
+
         QVariant _botNochats_var = map.value("botNochats");
         if( !_botNochats_var.isNull() ) {
             _botNochats_var.convert( QVariant::nameToType("bool") );
             result.setBotNochats( _botNochats_var.value<bool>() );
         }
-        
+
         QVariant _verified_var = map.value("verified");
         if( !_verified_var.isNull() ) {
             _verified_var.convert( QVariant::nameToType("bool") );
             result.setVerified( _verified_var.value<bool>() );
         }
-        
+
         QVariant _restricted_var = map.value("restricted");
         if( !_restricted_var.isNull() ) {
             _restricted_var.convert( QVariant::nameToType("bool") );
             result.setRestricted( _restricted_var.value<bool>() );
         }
-        
+
         QVariant _min_var = map.value("min");
         if( !_min_var.isNull() ) {
             _min_var.convert( QVariant::nameToType("bool") );
             result.setMin( _min_var.value<bool>() );
         }
-        
+
         QVariant _botInlineGeo_var = map.value("botInlineGeo");
         if( !_botInlineGeo_var.isNull() ) {
             _botInlineGeo_var.convert( QVariant::nameToType("bool") );
             result.setBotInlineGeo( _botInlineGeo_var.value<bool>() );
         }
-        
+
         QVariant _id_var = map.value("id");
         if( !_id_var.isNull() ) {
             _id_var.convert( QVariant::nameToType("qint32") );
             result.setId( _id_var.value<qint32>() );
         }
-        
+
         QVariant _accessHash_var = map.value("accessHash");
         if( !_accessHash_var.isNull() ) {
             _accessHash_var.convert( QVariant::nameToType("qint64") );
             result.setAccessHash( _accessHash_var.value<qint64>() );
         }
-        
+
         QVariant _firstName_var = map.value("firstName");
         if( !_firstName_var.isNull() ) {
             _firstName_var.convert( QVariant::nameToType("QString") );
             result.setFirstName( _firstName_var.value<QString>() );
         }
-        
+
         QVariant _lastName_var = map.value("lastName");
         if( !_lastName_var.isNull() ) {
             _lastName_var.convert( QVariant::nameToType("QString") );
             result.setLastName( _lastName_var.value<QString>() );
         }
-        
+
         QVariant _username_var = map.value("username");
         if( !_username_var.isNull() ) {
             _username_var.convert( QVariant::nameToType("QString") );
             result.setUsername( _username_var.value<QString>() );
         }
-        
+
         QVariant _phone_var = map.value("phone");
         if( !_phone_var.isNull() ) {
             _phone_var.convert( QVariant::nameToType("QString") );
             result.setPhone( _phone_var.value<QString>() );
         }
-        
+
         QVariant _photo_var = map.value("photo");
         if( !_photo_var.isNull() )
             result.setPhoto( UserProfilePhoto::fromMap(_photo_var.toMap()) );
-        
+
         QVariant _status_var = map.value("status");
         if( !_status_var.isNull() )
             result.setStatus( UserStatus::fromMap(_status_var.toMap()) );
-        
+
         QVariant _botInfoVersion_var = map.value("botInfoVersion");
         if( !_botInfoVersion_var.isNull() ) {
             _botInfoVersion_var.convert( QVariant::nameToType("qint32") );
             result.setBotInfoVersion( _botInfoVersion_var.value<qint32>() );
         }
-        
+
         QVariant _restrictionReason_var = map.value("restrictionReason");
         if( !_restrictionReason_var.isNull() ) {
             _restrictionReason_var.convert( QVariant::nameToType("QString") );
             result.setRestrictionReason( _restrictionReason_var.value<QString>() );
         }
-        
+
         QVariant _botInlinePlaceholder_var = map.value("botInlinePlaceholder");
         if( !_botInlinePlaceholder_var.isNull() ) {
             _botInlinePlaceholder_var.convert( QVariant::nameToType("QString") );
             result.setBotInlinePlaceholder( _botInlinePlaceholder_var.value<QString>() );
         }
-        
+
         QVariant _langCode_var = map.value("langCode");
         if( !_langCode_var.isNull() ) {
             _langCode_var.convert( QVariant::nameToType("QString") );
             result.setLangCode( _langCode_var.value<QString>() );
         }
-        
+
         return result;
     }
     return result;
@@ -725,7 +725,7 @@ QDataStream &operator>>(QDataStream &stream, User &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const User &item) {
+/*QDebug operator<<(QDebug debug,  const User &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.User(";
@@ -754,4 +754,4 @@ QDebug operator<<(QDebug debug,  const User &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

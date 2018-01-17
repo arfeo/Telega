@@ -35,7 +35,7 @@ UploadCdnFile::UploadCdnFile(const Null &null) :
 }
 
 UploadCdnFile::~UploadCdnFile() {
-    
+
 }
 
 void UploadCdnFile::setBytes(const QByteArray &bytes) {
@@ -86,14 +86,14 @@ bool UploadCdnFile::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUploadCdnFile: {
         m_bytes = in->fetchBytes();
         m_classType = static_cast<UploadCdnFileClassType>(x);
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -108,13 +108,13 @@ bool UploadCdnFile::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUploadCdnFile: {
         out->appendBytes(m_bytes);
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -129,14 +129,14 @@ QMap<QString, QVariant> UploadCdnFile::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUploadCdnFile: {
         result["classType"] = "UploadCdnFile::typeUploadCdnFile";
         if( !m_bytes.isEmpty() ) result["bytes"] = QVariant::fromValue<QByteArray>(m_bytes);
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -151,7 +151,7 @@ UploadCdnFile UploadCdnFile::fromMap(const QMap<QString, QVariant> &map) {
             _requestToken_var.convert( QVariant::nameToType("QByteArray") );
             result.setRequestToken( _requestToken_var.value<QByteArray>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "UploadCdnFile::typeUploadCdnFile") {
@@ -161,7 +161,7 @@ UploadCdnFile UploadCdnFile::fromMap(const QMap<QString, QVariant> &map) {
             _bytes_var.convert( QVariant::nameToType("QByteArray") );
             result.setBytes( _bytes_var.value<QByteArray>() );
         }
-        
+
         return result;
     }
     return result;
@@ -212,7 +212,7 @@ QDataStream &operator>>(QDataStream &stream, UploadCdnFile &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const UploadCdnFile &item) {
+/*QDebug operator<<(QDebug debug,  const UploadCdnFile &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.UploadCdnFile(";
@@ -229,4 +229,4 @@ QDebug operator<<(QDebug debug,  const UploadCdnFile &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

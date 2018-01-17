@@ -47,7 +47,7 @@ UpdatesDifference::UpdatesDifference(const Null &null) :
 }
 
 UpdatesDifference::~UpdatesDifference() {
-    
+
 }
 
 void UpdatesDifference::setChats(const QList<Chat> &chats) {
@@ -179,7 +179,7 @@ bool UpdatesDifference::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdatesDifference: {
         if(in->fetchInt() != (qint32)CoreTypes::typeVector) return false;
         qint32 m_newMessages_length = in->fetchInt();
@@ -226,7 +226,7 @@ bool UpdatesDifference::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdatesDifferenceSlice: {
         if(in->fetchInt() != (qint32)CoreTypes::typeVector) return false;
         qint32 m_newMessages_length = in->fetchInt();
@@ -273,14 +273,14 @@ bool UpdatesDifference::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUpdatesDifferenceTooLong: {
         m_pts = in->fetchInt();
         m_classType = static_cast<UpdatesDifferenceClassType>(x);
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -296,7 +296,7 @@ bool UpdatesDifference::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUpdatesDifference: {
         out->appendInt(CoreTypes::typeVector);
         out->appendInt(m_newMessages.count());
@@ -327,7 +327,7 @@ bool UpdatesDifference::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUpdatesDifferenceSlice: {
         out->appendInt(CoreTypes::typeVector);
         out->appendInt(m_newMessages.count());
@@ -358,13 +358,13 @@ bool UpdatesDifference::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUpdatesDifferenceTooLong: {
         out->appendInt(m_pts);
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -380,7 +380,7 @@ QMap<QString, QVariant> UpdatesDifference::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdatesDifference: {
         result["classType"] = "UpdatesDifference::typeUpdatesDifference";
         QList<QVariant> _newMessages;
@@ -407,7 +407,7 @@ QMap<QString, QVariant> UpdatesDifference::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdatesDifferenceSlice: {
         result["classType"] = "UpdatesDifference::typeUpdatesDifferenceSlice";
         QList<QVariant> _newMessages;
@@ -434,14 +434,14 @@ QMap<QString, QVariant> UpdatesDifference::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUpdatesDifferenceTooLong: {
         result["classType"] = "UpdatesDifference::typeUpdatesDifferenceTooLong";
         if( pts() ) result["pts"] = QString::number(pts());
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -456,13 +456,13 @@ UpdatesDifference UpdatesDifference::fromMap(const QMap<QString, QVariant> &map)
             _date_var.convert( QVariant::nameToType("qint32") );
             result.setDate( _date_var.value<qint32>() );
         }
-        
+
         QVariant _seq_var = map.value("seq");
         if( !_seq_var.isNull() ) {
             _seq_var.convert( QVariant::nameToType("qint32") );
             result.setSeq( _seq_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "UpdatesDifference::typeUpdatesDifference") {
@@ -495,7 +495,7 @@ UpdatesDifference UpdatesDifference::fromMap(const QMap<QString, QVariant> &map)
         QVariant _state_var = map.value("state");
         if( !_state_var.isNull() )
             result.setState( UpdatesState::fromMap(_state_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "UpdatesDifference::typeUpdatesDifferenceSlice") {
@@ -528,7 +528,7 @@ UpdatesDifference UpdatesDifference::fromMap(const QMap<QString, QVariant> &map)
         QVariant _intermediateState_var = map.value("intermediateState");
         if( !_intermediateState_var.isNull() )
             result.setIntermediateState( UpdatesState::fromMap(_intermediateState_var.toMap()) );
-        
+
         return result;
     }
     if(map.value("classType").toString() == "UpdatesDifference::typeUpdatesDifferenceTooLong") {
@@ -538,7 +538,7 @@ UpdatesDifference UpdatesDifference::fromMap(const QMap<QString, QVariant> &map)
             _pts_var.convert( QVariant::nameToType("qint32") );
             result.setPts( _pts_var.value<qint32>() );
         }
-        
+
         return result;
     }
     return result;
@@ -651,7 +651,7 @@ QDataStream &operator>>(QDataStream &stream, UpdatesDifference &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const UpdatesDifference &item) {
+/*QDebug operator<<(QDebug debug,  const UpdatesDifference &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.UpdatesDifference(";
@@ -687,4 +687,4 @@ QDebug operator<<(QDebug debug,  const UpdatesDifference &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

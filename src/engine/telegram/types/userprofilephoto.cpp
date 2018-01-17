@@ -39,7 +39,7 @@ UserProfilePhoto::UserProfilePhoto(const Null &null) :
 }
 
 UserProfilePhoto::~UserProfilePhoto() {
-    
+
 }
 
 void UserProfilePhoto::setPhotoBig(const FileLocation &photoBig) {
@@ -99,7 +99,7 @@ bool UserProfilePhoto::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUserProfilePhoto: {
         m_photoId = in->fetchLong();
         m_photoSmall.fetch(in);
@@ -108,7 +108,7 @@ bool UserProfilePhoto::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -122,7 +122,7 @@ bool UserProfilePhoto::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUserProfilePhoto: {
         out->appendLong(m_photoId);
         m_photoSmall.push(out);
@@ -130,7 +130,7 @@ bool UserProfilePhoto::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -144,7 +144,7 @@ QMap<QString, QVariant> UserProfilePhoto::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUserProfilePhoto: {
         result["classType"] = "UserProfilePhoto::typeUserProfilePhoto";
         if( photoId() ) result["photoId"] = QString::number(photoId());
@@ -153,7 +153,7 @@ QMap<QString, QVariant> UserProfilePhoto::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -172,15 +172,15 @@ UserProfilePhoto UserProfilePhoto::fromMap(const QMap<QString, QVariant> &map) {
             _photoId_var.convert( QVariant::nameToType("qint64") );
             result.setPhotoId( _photoId_var.value<qint64>() );
         }
-        
+
         QVariant _photoSmall_var = map.value("photoSmall");
         if( !_photoSmall_var.isNull() )
             result.setPhotoSmall( FileLocation::fromMap(_photoSmall_var.toMap()) );
-        
+
         QVariant _photoBig_var = map.value("photoBig");
         if( !_photoBig_var.isNull() )
             result.setPhotoBig( FileLocation::fromMap(_photoBig_var.toMap()) );
-        
+
         return result;
     }
     return result;
@@ -201,7 +201,7 @@ QDataStream &operator<<(QDataStream &stream, const UserProfilePhoto &item) {
     stream << static_cast<uint>(item.classType());
     switch(item.classType()) {
     case UserProfilePhoto::typeUserProfilePhotoEmpty:
-        
+
         break;
     case UserProfilePhoto::typeUserProfilePhoto:
         stream << item.photoId();
@@ -218,7 +218,7 @@ QDataStream &operator>>(QDataStream &stream, UserProfilePhoto &item) {
     item.setClassType(static_cast<UserProfilePhoto::UserProfilePhotoClassType>(type));
     switch(type) {
     case UserProfilePhoto::typeUserProfilePhotoEmpty: {
-        
+
     }
         break;
     case UserProfilePhoto::typeUserProfilePhoto: {
@@ -237,7 +237,7 @@ QDataStream &operator>>(QDataStream &stream, UserProfilePhoto &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const UserProfilePhoto &item) {
+/*QDebug operator<<(QDebug debug,  const UserProfilePhoto &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.UserProfilePhoto(";
@@ -255,4 +255,4 @@ QDebug operator<<(QDebug debug,  const UserProfilePhoto &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

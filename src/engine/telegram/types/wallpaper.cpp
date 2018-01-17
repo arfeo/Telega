@@ -47,7 +47,7 @@ WallPaper::WallPaper(const Null &null) :
 }
 
 WallPaper::~WallPaper() {
-    
+
 }
 
 void WallPaper::setBgColor(qint32 bgColor) {
@@ -138,7 +138,7 @@ bool WallPaper::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeWallPaperSolid: {
         m_id = in->fetchInt();
         m_title = in->fetchQString();
@@ -148,7 +148,7 @@ bool WallPaper::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -170,7 +170,7 @@ bool WallPaper::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeWallPaperSolid: {
         out->appendInt(m_id);
         out->appendQString(m_title);
@@ -179,7 +179,7 @@ bool WallPaper::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -200,7 +200,7 @@ QMap<QString, QVariant> WallPaper::toMap() const {
         return result;
     }
         break;
-    
+
     case typeWallPaperSolid: {
         result["classType"] = "WallPaper::typeWallPaperSolid";
         if( id() ) result["id"] = QString::number(id());
@@ -210,7 +210,7 @@ QMap<QString, QVariant> WallPaper::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -225,13 +225,13 @@ WallPaper WallPaper::fromMap(const QMap<QString, QVariant> &map) {
             _id_var.convert( QVariant::nameToType("qint32") );
             result.setId( _id_var.value<qint32>() );
         }
-        
+
         QVariant _title_var = map.value("title");
         if( !_title_var.isNull() ) {
             _title_var.convert( QVariant::nameToType("QString") );
             result.setTitle( _title_var.value<QString>() );
         }
-        
+
         QList<QVariant> map_sizes = map["sizes"].toList();
         QList<PhotoSize> _sizes;
         for(const QVariant &var: map_sizes)
@@ -242,7 +242,7 @@ WallPaper WallPaper::fromMap(const QMap<QString, QVariant> &map) {
             _color_var.convert( QVariant::nameToType("qint32") );
             result.setColor( _color_var.value<qint32>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "WallPaper::typeWallPaperSolid") {
@@ -252,25 +252,25 @@ WallPaper WallPaper::fromMap(const QMap<QString, QVariant> &map) {
             _id_var.convert( QVariant::nameToType("qint32") );
             result.setId( _id_var.value<qint32>() );
         }
-        
+
         QVariant _title_var = map.value("title");
         if( !_title_var.isNull() ) {
             _title_var.convert( QVariant::nameToType("QString") );
             result.setTitle( _title_var.value<QString>() );
         }
-        
+
         QVariant _bgColor_var = map.value("bgColor");
         if( !_bgColor_var.isNull() ) {
             _bgColor_var.convert( QVariant::nameToType("qint32") );
             result.setBgColor( _bgColor_var.value<qint32>() );
         }
-        
+
         QVariant _color_var = map.value("color");
         if( !_color_var.isNull() ) {
             _color_var.convert( QVariant::nameToType("qint32") );
             result.setColor( _color_var.value<qint32>() );
         }
-        
+
         return result;
     }
     return result;
@@ -345,7 +345,7 @@ QDataStream &operator>>(QDataStream &stream, WallPaper &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const WallPaper &item) {
+/*QDebug operator<<(QDebug debug,  const WallPaper &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.WallPaper(";
@@ -368,4 +368,4 @@ QDebug operator<<(QDebug debug,  const WallPaper &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/

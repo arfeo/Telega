@@ -43,7 +43,7 @@ UploadFile::UploadFile(const Null &null) :
 }
 
 UploadFile::~UploadFile() {
-    
+
 }
 
 void UploadFile::setBytes(const QByteArray &bytes) {
@@ -146,7 +146,7 @@ bool UploadFile::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     case typeUploadFileCdnRedirect: {
         m_dcId = in->fetchInt();
         m_fileToken = in->fetchBytes();
@@ -156,7 +156,7 @@ bool UploadFile::fetch(InboundPkt *in) {
         return true;
     }
         break;
-    
+
     default:
         LQTG_FETCH_ASSERT;
         return false;
@@ -173,7 +173,7 @@ bool UploadFile::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     case typeUploadFileCdnRedirect: {
         out->appendInt(m_dcId);
         out->appendBytes(m_fileToken);
@@ -182,7 +182,7 @@ bool UploadFile::push(OutboundPkt *out) const {
         return true;
     }
         break;
-    
+
     default:
         return false;
     }
@@ -199,7 +199,7 @@ QMap<QString, QVariant> UploadFile::toMap() const {
         return result;
     }
         break;
-    
+
     case typeUploadFileCdnRedirect: {
         result["classType"] = "UploadFile::typeUploadFileCdnRedirect";
         if( dcId() ) result["dcId"] = QString::number(dcId());
@@ -209,7 +209,7 @@ QMap<QString, QVariant> UploadFile::toMap() const {
         return result;
     }
         break;
-    
+
     default:
         return result;
     }
@@ -222,19 +222,19 @@ UploadFile UploadFile::fromMap(const QMap<QString, QVariant> &map) {
         QVariant _type_var = map.value("type");
         if( !_type_var.isNull() )
             result.setType( StorageFileType::fromMap(_type_var.toMap()) );
-        
+
         QVariant _mtime_var = map.value("mtime");
         if( !_mtime_var.isNull() ) {
             _mtime_var.convert( QVariant::nameToType("qint32") );
             result.setMtime( _mtime_var.value<qint32>() );
         }
-        
+
         QVariant _bytes_var = map.value("bytes");
         if( !_bytes_var.isNull() ) {
             _bytes_var.convert( QVariant::nameToType("QByteArray") );
             result.setBytes( _bytes_var.value<QByteArray>() );
         }
-        
+
         return result;
     }
     if(map.value("classType").toString() == "UploadFile::typeUploadFileCdnRedirect") {
@@ -244,25 +244,25 @@ UploadFile UploadFile::fromMap(const QMap<QString, QVariant> &map) {
             _dcId_var.convert( QVariant::nameToType("qint32") );
             result.setDcId( _dcId_var.value<qint32>() );
         }
-        
+
         QVariant _fileToken_var = map.value("fileToken");
         if( !_fileToken_var.isNull() ) {
             _fileToken_var.convert( QVariant::nameToType("QByteArray") );
             result.setFileToken( _fileToken_var.value<QByteArray>() );
         }
-        
+
         QVariant _encryptionKey_var = map.value("encryptionKey");
         if( !_encryptionKey_var.isNull() ) {
             _encryptionKey_var.convert( QVariant::nameToType("QByteArray") );
             result.setEncryptionKey( _encryptionKey_var.value<QByteArray>() );
         }
-        
+
         QVariant _encryptionIv_var = map.value("encryptionIv");
         if( !_encryptionIv_var.isNull() ) {
             _encryptionIv_var.convert( QVariant::nameToType("QByteArray") );
             result.setEncryptionIv( _encryptionIv_var.value<QByteArray>() );
         }
-        
+
         return result;
     }
     return result;
@@ -333,7 +333,7 @@ QDataStream &operator>>(QDataStream &stream, UploadFile &item) {
     return stream;
 }
 
-QDebug operator<<(QDebug debug,  const UploadFile &item) {
+/*QDebug operator<<(QDebug debug,  const UploadFile &item) {
     QDebugStateSaver saver(debug);
     Q_UNUSED(saver)
     debug.nospace() << "Telegram.UploadFile(";
@@ -355,4 +355,4 @@ QDebug operator<<(QDebug debug,  const UploadFile &item) {
     debug.nospace() << ")";
     return debug;
 }
-
+*/
