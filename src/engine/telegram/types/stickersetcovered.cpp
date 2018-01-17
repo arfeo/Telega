@@ -160,8 +160,11 @@ QMap<QString, QVariant> StickerSetCovered::toMap() const {
         result["classType"] = "StickerSetCovered::typeStickerSetMultiCovered";
         if( !m_set.isNull() ) result["set"] = m_set.toMap();
         QList<QVariant> _covers;
-        for(const Document &m__type: m_covers)
+        //for(const Document &m__type: m_covers)
+        for(int i = 0; i < m_covers.size(); ++i) {
+            const Document &m__type = m_covers[i];
             if( !m__type.isNull() ) _covers << m__type.toMap();
+        }
         result["covers"] = _covers;
         return result;
     }
@@ -194,8 +197,11 @@ StickerSetCovered StickerSetCovered::fromMap(const QMap<QString, QVariant> &map)
 
         QList<QVariant> map_covers = map["covers"].toList();
         QList<Document> _covers;
-        for(const QVariant &var: map_covers)
+        //for(const QVariant &var: map_covers)
+        for(int i = 0; i < map_covers.size(); ++i) {
+            const QVariant &var = map_covers[i];
             _covers << Document::fromMap(var.toMap());
+        }
         result.setCovers(_covers);
         return result;
     }

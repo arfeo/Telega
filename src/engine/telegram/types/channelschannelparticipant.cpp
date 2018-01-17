@@ -127,8 +127,11 @@ QMap<QString, QVariant> ChannelsChannelParticipant::toMap() const {
         result["classType"] = "ChannelsChannelParticipant::typeChannelsChannelParticipant";
         if( !m_participant.isNull() ) result["participant"] = m_participant.toMap();
         QList<QVariant> _users;
-        for(const User &m__type: m_users)
+        //for(const User &m__type: m_users)
+        for(int i = 0; i < m_users.size(); ++i) {
+            const User &m__type = m_users[i];
             if( !m__type.isNull() ) _users << m__type.toMap();
+        }
         result["users"] = _users;
         return result;
     }
@@ -149,8 +152,11 @@ ChannelsChannelParticipant ChannelsChannelParticipant::fromMap(const QMap<QStrin
 
         QList<QVariant> map_users = map["users"].toList();
         QList<User> _users;
-        for(const QVariant &var: map_users)
+        //for(const QVariant &var: map_users)
+        for(int i = 0; i < map_users.size(); ++i) {
+            const QVariant &var = map_users[i];
             _users << User::fromMap(var.toMap());
+        }
         result.setUsers(_users);
         return result;
     }

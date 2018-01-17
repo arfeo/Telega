@@ -2080,8 +2080,11 @@ QMap<QString, QVariant> Update::toMap() const {
     case typeUpdateDeleteMessages: {
         result["classType"] = "Update::typeUpdateDeleteMessages";
         QList<QVariant> _messages;
-        for(const qint32 &m__type: m_messages)
+        //for(const qint32 &m__type: m_messages)
+        for(int i = 0; i < m_messages.size(); ++i) {
+            const qint32 &m__type = m_messages[i];
             _messages << QVariant::fromValue<qint32>(m__type);
+        }
         result["messages"] = _messages;
         if( pts() ) result["pts"] = QString::number(pts());
         if( ptsCount() ) result["ptsCount"] = QString::number(ptsCount());
@@ -2213,8 +2216,11 @@ QMap<QString, QVariant> Update::toMap() const {
     case typeUpdateDcOptions: {
         result["classType"] = "Update::typeUpdateDcOptions";
         QList<QVariant> _dcOptions;
-        for(const DcOption &m__type: m_dcOptions)
+        //for(const DcOption &m__type: m_dcOptions)
+        for(int i = 0; i < m_dcOptions.size(); ++i) {
+            const DcOption &m__type = m_dcOptions[i];
             if( !m__type.isNull() ) _dcOptions << m__type.toMap();
+        }
         result["dcOptions"] = _dcOptions;
         return result;
     }
@@ -2244,8 +2250,11 @@ QMap<QString, QVariant> Update::toMap() const {
         if( !m_messageString.isEmpty() ) result["messageString"] = QVariant::fromValue<QString>(m_messageString);
         if( !m_media.isNull() ) result["media"] = m_media.toMap();
         QList<QVariant> _entities;
-        for(const MessageEntity &m__type: m_entities)
+        //for(const MessageEntity &m__type: m_entities)
+        for(int i = 0; i < m_entities.size(); ++i) {
+            const MessageEntity &m__type = m_entities[i];
             if( !m__type.isNull() ) _entities << m__type.toMap();
+        }
         result["entities"] = _entities;
         return result;
     }
@@ -2255,8 +2264,11 @@ QMap<QString, QVariant> Update::toMap() const {
         result["classType"] = "Update::typeUpdatePrivacy";
         if( !m_key.isNull() ) result["key"] = m_key.toMap();
         QList<QVariant> _rules;
-        for(const PrivacyRule &m__type: m_rules)
+        //for(const PrivacyRule &m__type: m_rules)
+        for(int i = 0; i < m_rules.size(); ++i) {
+            const PrivacyRule &m__type = m_rules[i];
             if( !m__type.isNull() ) _rules << m__type.toMap();
+        }
         result["rules"] = _rules;
         return result;
     }
@@ -2302,8 +2314,11 @@ QMap<QString, QVariant> Update::toMap() const {
     case typeUpdateReadMessagesContents: {
         result["classType"] = "Update::typeUpdateReadMessagesContents";
         QList<QVariant> _messages;
-        for(const qint32 &m__type: m_messages)
+        //for(const qint32 &m__type: m_messages)
+        for(int i = 0; i < m_messages.size(); ++i) {
+            const qint32 &m__type = m_messages[i];
             _messages << QVariant::fromValue<qint32>(m__type);
+        }
         result["messages"] = _messages;
         if( pts() ) result["pts"] = QString::number(pts());
         if( ptsCount() ) result["ptsCount"] = QString::number(ptsCount());
@@ -2347,8 +2362,11 @@ QMap<QString, QVariant> Update::toMap() const {
         result["classType"] = "Update::typeUpdateDeleteChannelMessages";
         if( channelId() ) result["channelId"] = QString::number(channelId());
         QList<QVariant> _messages;
-        for(const qint32 &m__type: m_messages)
+        //for(const qint32 &m__type: m_messages)
+        for(int i = 0; i < m_messages.size(); ++i) {
+            const qint32 &m__type = m_messages[i];
             _messages << QVariant::fromValue<qint32>(m__type);
+        }
         result["messages"] = _messages;
         if( pts() ) result["pts"] = QString::number(pts());
         if( ptsCount() ) result["ptsCount"] = QString::number(ptsCount());
@@ -2395,8 +2413,11 @@ QMap<QString, QVariant> Update::toMap() const {
         result["classType"] = "Update::typeUpdateStickerSetsOrder";
         if( masks() ) result["masks"] = QString::number(masks());
         QList<QVariant> _orderVectorlong;
-        for(const qint64 &m__type: m_orderVectorlong)
+        //for(const qint64 &m__type: m_orderVectorlong)
+        for(int i = 0; i < m_orderVectorlong.size(); ++i) {
+            const qint64 &m__type = m_orderVectorlong[i];
             _orderVectorlong << QVariant::fromValue<qint64>(m__type);
+        }
         result["orderVectorlong"] = _orderVectorlong;
         return result;
     }
@@ -2548,8 +2569,11 @@ QMap<QString, QVariant> Update::toMap() const {
     case typeUpdatePinnedDialogs: {
         result["classType"] = "Update::typeUpdatePinnedDialogs";
         QList<QVariant> _orderVectorPeer;
-        for(const Peer &m__type: m_orderVectorPeer)
+        //for(const Peer &m__type: m_orderVectorPeer)
+        for(int i = 0; i < m_orderVectorPeer.size(); ++i) {
+            const Peer &m__type = m_orderVectorPeer[i];
             if( !m__type.isNull() ) _orderVectorPeer << m__type.toMap();
+        }
         result["orderVectorPeer"] = _orderVectorPeer;
         return result;
     }
@@ -2661,8 +2685,11 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
         result.setClassType(typeUpdateDeleteMessages);
         QList<QVariant> map_messages = map["messages"].toList();
         QList<qint32> _messages;
-        for(const QVariant &var: map_messages)
-            _messages << var.value<qint32>();;
+        //for(const QVariant &var: map_messages)
+        for(int i = 0; i < map_messages.size(); ++i) {
+            const QVariant &var = map_messages[i];
+            _messages << var.value<qint32>();
+        }
         result.setMessages(_messages);
         QVariant _pts_var = map.value("pts");
         if( !_pts_var.isNull() ) {
@@ -2942,8 +2969,11 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
         result.setClassType(typeUpdateDcOptions);
         QList<QVariant> map_dcOptions = map["dcOptions"].toList();
         QList<DcOption> _dcOptions;
-        for(const QVariant &var: map_dcOptions)
+        //for(const QVariant &var: map_dcOptions)
+        for(int i = 0; i < map_dcOptions.size(); ++i) {
+            const QVariant &var = map_dcOptions[i];
             _dcOptions << DcOption::fromMap(var.toMap());
+        }
         result.setDcOptions(_dcOptions);
         return result;
     }
@@ -3007,8 +3037,11 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
 
         QList<QVariant> map_entities = map["entities"].toList();
         QList<MessageEntity> _entities;
-        for(const QVariant &var: map_entities)
+        //for(const QVariant &var: map_entities)
+        for(int i = 0; i < map_entities.size(); ++i) {
+            const QVariant &var = map_entities[i];
             _entities << MessageEntity::fromMap(var.toMap());
+        }
         result.setEntities(_entities);
         return result;
     }
@@ -3020,8 +3053,11 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
 
         QList<QVariant> map_rules = map["rules"].toList();
         QList<PrivacyRule> _rules;
-        for(const QVariant &var: map_rules)
+        //for(const QVariant &var: map_rules)
+        for(int i = 0; i < map_rules.size(); ++i) {
+            const QVariant &var = map_rules[i];
             _rules << PrivacyRule::fromMap(var.toMap());
+        }
         result.setRules(_rules);
         return result;
     }
@@ -3117,8 +3153,11 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
         result.setClassType(typeUpdateReadMessagesContents);
         QList<QVariant> map_messages = map["messages"].toList();
         QList<qint32> _messages;
-        for(const QVariant &var: map_messages)
-            _messages << var.value<qint32>();;
+        //for(const QVariant &var: map_messages)
+        for(int i = 0; i < map_messages.size(); ++i) {
+            const QVariant &var = map_messages[i];
+            _messages << var.value<qint32>();
+        }
         result.setMessages(_messages);
         QVariant _pts_var = map.value("pts");
         if( !_pts_var.isNull() ) {
@@ -3206,8 +3245,11 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
 
         QList<QVariant> map_messages = map["messages"].toList();
         QList<qint32> _messages;
-        for(const QVariant &var: map_messages)
-            _messages << var.value<qint32>();;
+        //for(const QVariant &var: map_messages)
+        for(int i = 0; i < map_messages.size(); ++i) {
+            const QVariant &var = map_messages[i];
+            _messages << var.value<qint32>();
+        }
         result.setMessages(_messages);
         QVariant _pts_var = map.value("pts");
         if( !_pts_var.isNull() ) {
@@ -3313,8 +3355,11 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
 
         QList<QVariant> map_orderVectorlong = map["orderVectorlong"].toList();
         QList<qint64> _orderVectorlong;
-        for(const QVariant &var: map_orderVectorlong)
-            _orderVectorlong << var.value<qint64>();;
+        //for(const QVariant &var: map_orderVectorlong)
+        for(int i = 0; i < map_orderVectorlong.size(); ++i) {
+            const QVariant &var = map_orderVectorlong[i];
+            _orderVectorlong << var.value<qint64>();
+        }
         result.setOrderVectorlong(_orderVectorlong);
         return result;
     }
@@ -3614,8 +3659,11 @@ Update Update::fromMap(const QMap<QString, QVariant> &map) {
         result.setClassType(typeUpdatePinnedDialogs);
         QList<QVariant> map_orderVectorPeer = map["orderVectorPeer"].toList();
         QList<Peer> _orderVectorPeer;
-        for(const QVariant &var: map_orderVectorPeer)
+        //for(const QVariant &var: map_orderVectorPeer)
+        for(int i = 0; i < map_orderVectorPeer.size(); ++i) {
+            const QVariant &var = map_orderVectorPeer[i];
             _orderVectorPeer << Peer::fromMap(var.toMap());
+        }
         result.setOrderVectorPeer(_orderVectorPeer);
         return result;
     }

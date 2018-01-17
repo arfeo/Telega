@@ -534,8 +534,11 @@ QMap<QString, QVariant> PhoneCall::toMap() const {
         if( !m_protocol.isNull() ) result["protocol"] = m_protocol.toMap();
         if( !m_connection.isNull() ) result["connection"] = m_connection.toMap();
         QList<QVariant> _alternativeConnections;
-        for(const PhoneConnection &m__type: m_alternativeConnections)
+        //for(const PhoneConnection &m__type: m_alternativeConnections)
+        for(int i = 0; i < m_alternativeConnections.size(); ++i) {
+            const PhoneConnection &m__type = m_alternativeConnections[i];
             if( !m__type.isNull() ) _alternativeConnections << m__type.toMap();
+        }
         result["alternativeConnections"] = _alternativeConnections;
         if( startDate() ) result["startDate"] = QString::number(startDate());
         return result;
@@ -756,8 +759,11 @@ PhoneCall PhoneCall::fromMap(const QMap<QString, QVariant> &map) {
 
         QList<QVariant> map_alternativeConnections = map["alternativeConnections"].toList();
         QList<PhoneConnection> _alternativeConnections;
-        for(const QVariant &var: map_alternativeConnections)
+        //for(const QVariant &var: map_alternativeConnections)
+        for(int i = 0; i < map_alternativeConnections.size(); ++i) {
+            const QVariant &var = map_alternativeConnections[i];
             _alternativeConnections << PhoneConnection::fromMap(var.toMap());
+        }
         result.setAlternativeConnections(_alternativeConnections);
         QVariant _startDate_var = map.value("startDate");
         if( !_startDate_var.isNull() ) {

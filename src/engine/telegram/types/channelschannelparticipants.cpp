@@ -154,12 +154,18 @@ QMap<QString, QVariant> ChannelsChannelParticipants::toMap() const {
         result["classType"] = "ChannelsChannelParticipants::typeChannelsChannelParticipants";
         if( count() ) result["count"] = QString::number(count());
         QList<QVariant> _participants;
-        for(const ChannelParticipant &m__type: m_participants)
+        //for(const ChannelParticipant &m__type: m_participants)
+        for(int i = 0; i < m_participants.size(); ++i) {
+            const ChannelParticipant &m__type = m_participants[i];
             if( !m__type.isNull() ) _participants << m__type.toMap();
+        }
         result["participants"] = _participants;
         QList<QVariant> _users;
-        for(const User &m__type: m_users)
+        //for(const User &m__type: m_users)
+        for(int i = 0; i < m_users.size(); ++i) {
+            const User &m__type = m_users[i];
             if( !m__type.isNull() ) _users << m__type.toMap();
+        }
         result["users"] = _users;
         return result;
     }
@@ -182,13 +188,19 @@ ChannelsChannelParticipants ChannelsChannelParticipants::fromMap(const QMap<QStr
 
         QList<QVariant> map_participants = map["participants"].toList();
         QList<ChannelParticipant> _participants;
-        for(const QVariant &var: map_participants)
+        //for(const QVariant &var: map_participants)
+        for(int i = 0; i < map_participants.size(); ++i) {
+            const QVariant &var = map_participants[i];
             _participants << ChannelParticipant::fromMap(var.toMap());
+        }
         result.setParticipants(_participants);
         QList<QVariant> map_users = map["users"].toList();
         QList<User> _users;
-        for(const QVariant &var: map_users)
+        //for(const QVariant &var: map_users)
+        for(int i = 0; i < map_users.size(); ++i) {
+            const QVariant &var = map_users[i];
             _users << User::fromMap(var.toMap());
+        }
         result.setUsers(_users);
         return result;
     }

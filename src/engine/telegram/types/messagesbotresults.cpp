@@ -211,8 +211,11 @@ QMap<QString, QVariant> MessagesBotResults::toMap() const {
         if( !m_nextOffset.isEmpty() ) result["nextOffset"] = QVariant::fromValue<QString>(m_nextOffset);
         if( !m_switchPm.isNull() ) result["switchPm"] = m_switchPm.toMap();
         QList<QVariant> _results;
-        for(const BotInlineResult &m__type: m_results)
+        //for(const BotInlineResult &m__type: m_results)
+        for(int i = 0; i < m_results.size(); ++i) {
+            const BotInlineResult &m__type = m_results[i];
             if( !m__type.isNull() ) _results << m__type.toMap();
+        }
         result["results"] = _results;
         if( cacheTime() ) result["cacheTime"] = QString::number(cacheTime());
         return result;
@@ -252,8 +255,11 @@ MessagesBotResults MessagesBotResults::fromMap(const QMap<QString, QVariant> &ma
 
         QList<QVariant> map_results = map["results"].toList();
         QList<BotInlineResult> _results;
-        for(const QVariant &var: map_results)
+        //for(const QVariant &var: map_results)
+        for(int i = 0; i < map_results.size(); ++i) {
+            const QVariant &var = map_results[i];
             _results << BotInlineResult::fromMap(var.toMap());
+        }
         result.setResults(_results);
         QVariant _cacheTime_var = map.value("cacheTime");
         if( !_cacheTime_var.isNull() ) {

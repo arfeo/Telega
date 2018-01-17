@@ -378,8 +378,11 @@ QMap<QString, QVariant> RichText::toMap() const {
     case typeTextConcat: {
         result["classType"] = "RichText::typeTextConcat";
         QList<QVariant> _texts;
-        for(const RichText &m__type: m_texts)
+        //for(const RichText &m__type: m_texts)
+        for(int i = 0; i < m_texts.size(); ++i) {
+            const RichText &m__type = m_texts[i];
             if( !m__type.isNull() ) _texts << m__type.toMap();
+        }
         result["texts"] = _texts;
         return result;
     }
@@ -484,8 +487,11 @@ RichText RichText::fromMap(const QMap<QString, QVariant> &map) {
         result.setClassType(typeTextConcat);
         QList<QVariant> map_texts = map["texts"].toList();
         QList<RichText> _texts;
-        for(const QVariant &var: map_texts)
+        //for(const QVariant &var: map_texts)
+        for(int i = 0; i < map_texts.size(); ++i) {
+            const QVariant &var = map_texts[i];
             _texts << RichText::fromMap(var.toMap());
+        }
         result.setTexts(_texts);
         return result;
     }

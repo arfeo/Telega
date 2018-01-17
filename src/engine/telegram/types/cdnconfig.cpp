@@ -114,8 +114,11 @@ QMap<QString, QVariant> CdnConfig::toMap() const {
     case typeCdnConfig: {
         result["classType"] = "CdnConfig::typeCdnConfig";
         QList<QVariant> _publicKeys;
-        for(const CdnPublicKey &m__type: m_publicKeys)
+        //for(const CdnPublicKey &m__type: m_publicKeys)
+        for(int i = 0; i < m_publicKeys.size(); ++i) {
+            const CdnPublicKey &m__type = m_publicKeys[i];
             if( !m__type.isNull() ) _publicKeys << m__type.toMap();
+        }
         result["publicKeys"] = _publicKeys;
         return result;
     }
@@ -132,8 +135,11 @@ CdnConfig CdnConfig::fromMap(const QMap<QString, QVariant> &map) {
         result.setClassType(typeCdnConfig);
         QList<QVariant> map_publicKeys = map["publicKeys"].toList();
         QList<CdnPublicKey> _publicKeys;
-        for(const QVariant &var: map_publicKeys)
+        //for(const QVariant &var: map_publicKeys)
+        for(int i = 0; i < map_publicKeys.size(); ++i) {
+            const QVariant &var = map_publicKeys[i];
             _publicKeys << CdnPublicKey::fromMap(var.toMap());
+        }
         result.setPublicKeys(_publicKeys);
         return result;
     }

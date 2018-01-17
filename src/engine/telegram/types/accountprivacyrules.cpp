@@ -137,12 +137,18 @@ QMap<QString, QVariant> AccountPrivacyRules::toMap() const {
     case typeAccountPrivacyRules: {
         result["classType"] = "AccountPrivacyRules::typeAccountPrivacyRules";
         QList<QVariant> _rules;
-        for(const PrivacyRule &m__type: m_rules)
+        //for(const PrivacyRule &m__type: m_rules)
+        for(int i = 0; i < m_rules.size(); ++i) {
+            const PrivacyRule &m__type = m_rules[i];
             if( !m__type.isNull() ) _rules << m__type.toMap();
+        }
         result["rules"] = _rules;
         QList<QVariant> _users;
-        for(const User &m__type: m_users)
+        //for(const User &m__type: m_users)
+        for(int i = 0; i < m_users.size(); ++i) {
+            const User &m__type = m_users[i];
             if( !m__type.isNull() ) _users << m__type.toMap();
+        }
         result["users"] = _users;
         return result;
     }
@@ -159,13 +165,19 @@ AccountPrivacyRules AccountPrivacyRules::fromMap(const QMap<QString, QVariant> &
         result.setClassType(typeAccountPrivacyRules);
         QList<QVariant> map_rules = map["rules"].toList();
         QList<PrivacyRule> _rules;
-        for(const QVariant &var: map_rules)
+        //for(const QVariant &var: map_rules)
+        for(int i = 0; i < map_rules.size(); ++i) {
+            const QVariant &var = map_rules[i];
             _rules << PrivacyRule::fromMap(var.toMap());
+        }
         result.setRules(_rules);
         QList<QVariant> map_users = map["users"].toList();
         QList<User> _users;
-        for(const QVariant &var: map_users)
+        //for(const QVariant &var: map_users)
+        for(int i = 0; i < map_users.size(); ++i) {
+            const QVariant &var = map_users[i];
             _users << User::fromMap(var.toMap());
+        }
         result.setUsers(_users);
         return result;
     }

@@ -148,8 +148,11 @@ QMap<QString, QVariant> MessagesRecentStickers::toMap() const {
         result["classType"] = "MessagesRecentStickers::typeMessagesRecentStickers";
         if( hash() ) result["hash"] = QString::number(hash());
         QList<QVariant> _stickers;
-        for(const Document &m__type: m_stickers)
+        //for(const Document &m__type: m_stickers)
+        for(int i = 0; i < m_stickers.size(); ++i) {
+            const Document &m__type = m_stickers[i];
             if( !m__type.isNull() ) _stickers << m__type.toMap();
+        }
         result["stickers"] = _stickers;
         return result;
     }
@@ -176,8 +179,11 @@ MessagesRecentStickers MessagesRecentStickers::fromMap(const QMap<QString, QVari
 
         QList<QVariant> map_stickers = map["stickers"].toList();
         QList<Document> _stickers;
-        for(const QVariant &var: map_stickers)
+        //for(const QVariant &var: map_stickers)
+        for(int i = 0; i < map_stickers.size(); ++i) {
+            const QVariant &var = map_stickers[i];
             _stickers << Document::fromMap(var.toMap());
+        }
         result.setStickers(_stickers);
         return result;
     }

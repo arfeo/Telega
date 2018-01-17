@@ -701,8 +701,11 @@ QMap<QString, QVariant> UpdatesType::toMap() const {
         if( viaBotId() ) result["viaBotId"] = QString::number(viaBotId());
         if( replyToMsgId() ) result["replyToMsgId"] = QString::number(replyToMsgId());
         QList<QVariant> _entities;
-        for(const MessageEntity &m__type: m_entities)
+        //for(const MessageEntity &m__type: m_entities)
+        for(int i = 0; i < m_entities.size(); ++i) {
+            const MessageEntity &m__type = m_entities[i];
             if( !m__type.isNull() ) _entities << m__type.toMap();
+        }
         result["entities"] = _entities;
         return result;
     }
@@ -725,8 +728,11 @@ QMap<QString, QVariant> UpdatesType::toMap() const {
         if( viaBotId() ) result["viaBotId"] = QString::number(viaBotId());
         if( replyToMsgId() ) result["replyToMsgId"] = QString::number(replyToMsgId());
         QList<QVariant> _entities;
-        for(const MessageEntity &m__type: m_entities)
+        //for(const MessageEntity &m__type: m_entities)
+        for(int i = 0; i < m_entities.size(); ++i) {
+            const MessageEntity &m__type = m_entities[i];
             if( !m__type.isNull() ) _entities << m__type.toMap();
+        }
         result["entities"] = _entities;
         return result;
     }
@@ -743,16 +749,25 @@ QMap<QString, QVariant> UpdatesType::toMap() const {
     case typeUpdatesCombined: {
         result["classType"] = "UpdatesType::typeUpdatesCombined";
         QList<QVariant> _updates;
-        for(const Update &m__type: m_updates)
+        //for(const Update &m__type: m_updates)
+        for(int i = 0; i < m_updates.size(); ++i) {
+            const Update &m__type = m_updates[i];
             if( !m__type.isNull() ) _updates << m__type.toMap();
+        }
         result["updates"] = _updates;
         QList<QVariant> _users;
-        for(const User &m__type: m_users)
+        //for(const User &m__type: m_users)
+        for(int i = 0; i < m_users.size(); ++i) {
+            const User &m__type = m_users[i];
             if( !m__type.isNull() ) _users << m__type.toMap();
+        }
         result["users"] = _users;
         QList<QVariant> _chats;
-        for(const Chat &m__type: m_chats)
+        //for(const Chat &m__type: m_chats)
+        for(int i = 0; i < m_chats.size(); ++i) {
+            const Chat &m__type = m_chats[i];
             if( !m__type.isNull() ) _chats << m__type.toMap();
+        }
         result["chats"] = _chats;
         if( date() ) result["date"] = QString::number(date());
         if( seqStart() ) result["seqStart"] = QString::number(seqStart());
@@ -764,16 +779,25 @@ QMap<QString, QVariant> UpdatesType::toMap() const {
     case typeUpdates: {
         result["classType"] = "UpdatesType::typeUpdates";
         QList<QVariant> _updates;
-        for(const Update &m__type: m_updates)
+        //for(const Update &m__type: m_updates)
+        for(int i = 0; i < m_updates.size(); ++i) {
+            const Update &m__type = m_updates[i];
             if( !m__type.isNull() ) _updates << m__type.toMap();
+        }
         result["updates"] = _updates;
         QList<QVariant> _users;
-        for(const User &m__type: m_users)
+        //for(const User &m__type: m_users)
+        for(int i = 0; i < m_users.size(); ++i) {
+            const User &m__type = m_users[i];
             if( !m__type.isNull() ) _users << m__type.toMap();
+        }
         result["users"] = _users;
         QList<QVariant> _chats;
-        for(const Chat &m__type: m_chats)
+        //for(const Chat &m__type: m_chats)
+        for(int i = 0; i < m_chats.size(); ++i) {
+            const Chat &m__type = m_chats[i];
             if( !m__type.isNull() ) _chats << m__type.toMap();
+        }
         result["chats"] = _chats;
         if( date() ) result["date"] = QString::number(date());
         if( seq() ) result["seq"] = QString::number(seq());
@@ -790,8 +814,11 @@ QMap<QString, QVariant> UpdatesType::toMap() const {
         if( date() ) result["date"] = QString::number(date());
         if( !m_media.isNull() ) result["media"] = m_media.toMap();
         QList<QVariant> _entities;
-        for(const MessageEntity &m__type: m_entities)
+        //for(const MessageEntity &m__type: m_entities)
+        for(int i = 0; i < m_entities.size(); ++i) {
+            const MessageEntity &m__type = m_entities[i];
             if( !m__type.isNull() ) _entities << m__type.toMap();
+        }
         result["entities"] = _entities;
         return result;
     }
@@ -888,8 +915,11 @@ UpdatesType UpdatesType::fromMap(const QMap<QString, QVariant> &map) {
 
         QList<QVariant> map_entities = map["entities"].toList();
         QList<MessageEntity> _entities;
-        for(const QVariant &var: map_entities)
+        //for(const QVariant &var: map_entities)
+        for(int i = 0; i < map_entities.size(); ++i) {
+            const QVariant &var = map_entities[i];
             _entities << MessageEntity::fromMap(var.toMap());
+        }
         result.setEntities(_entities);
         return result;
     }
@@ -979,8 +1009,11 @@ UpdatesType UpdatesType::fromMap(const QMap<QString, QVariant> &map) {
 
         QList<QVariant> map_entities = map["entities"].toList();
         QList<MessageEntity> _entities;
-        for(const QVariant &var: map_entities)
+        //for(const QVariant &var: map_entities)
+        for(int i = 0; i < map_entities.size(); ++i) {
+            const QVariant &var = map_entities[i];
             _entities << MessageEntity::fromMap(var.toMap());
+        }
         result.setEntities(_entities);
         return result;
     }
@@ -1002,18 +1035,27 @@ UpdatesType UpdatesType::fromMap(const QMap<QString, QVariant> &map) {
         result.setClassType(typeUpdatesCombined);
         QList<QVariant> map_updates = map["updates"].toList();
         QList<Update> _updates;
-        for(const QVariant &var: map_updates)
+        //for(const QVariant &var: map_updates)
+        for(int i = 0; i < map_updates.size(); ++i) {
+            const QVariant &var = map_updates[i];
             _updates << Update::fromMap(var.toMap());
+        }
         result.setUpdates(_updates);
         QList<QVariant> map_users = map["users"].toList();
         QList<User> _users;
-        for(const QVariant &var: map_users)
+        //for(const QVariant &var: map_users)
+        for(int i = 0; i < map_users.size(); ++i) {
+            const QVariant &var = map_users[i];
             _users << User::fromMap(var.toMap());
+        }
         result.setUsers(_users);
         QList<QVariant> map_chats = map["chats"].toList();
         QList<Chat> _chats;
-        for(const QVariant &var: map_chats)
+        //for(const QVariant &var: map_chats)
+        for(int i = 0; i < map_chats.size(); ++i) {
+            const QVariant &var = map_chats[i];
             _chats << Chat::fromMap(var.toMap());
+        }
         result.setChats(_chats);
         QVariant _date_var = map.value("date");
         if( !_date_var.isNull() ) {
@@ -1039,18 +1081,27 @@ UpdatesType UpdatesType::fromMap(const QMap<QString, QVariant> &map) {
         result.setClassType(typeUpdates);
         QList<QVariant> map_updates = map["updates"].toList();
         QList<Update> _updates;
-        for(const QVariant &var: map_updates)
+        //for(const QVariant &var: map_updates)
+        for(int i = 0; i < map_updates.size(); ++i) {
+            const QVariant &var = map_updates[i];
             _updates << Update::fromMap(var.toMap());
+        }
         result.setUpdates(_updates);
         QList<QVariant> map_users = map["users"].toList();
         QList<User> _users;
-        for(const QVariant &var: map_users)
+        //for(const QVariant &var: map_users)
+        for(int i = 0; i < map_users.size(); ++i) {
+            const QVariant &var = map_users[i];
             _users << User::fromMap(var.toMap());
+        }
         result.setUsers(_users);
         QList<QVariant> map_chats = map["chats"].toList();
         QList<Chat> _chats;
-        for(const QVariant &var: map_chats)
+        //for(const QVariant &var: map_chats)
+        for(int i = 0; i < map_chats.size(); ++i) {
+            const QVariant &var = map_chats[i];
             _chats << Chat::fromMap(var.toMap());
+        }
         result.setChats(_chats);
         QVariant _date_var = map.value("date");
         if( !_date_var.isNull() ) {
@@ -1104,8 +1155,11 @@ UpdatesType UpdatesType::fromMap(const QMap<QString, QVariant> &map) {
 
         QList<QVariant> map_entities = map["entities"].toList();
         QList<MessageEntity> _entities;
-        for(const QVariant &var: map_entities)
+        //for(const QVariant &var: map_entities)
+        for(int i = 0; i < map_entities.size(); ++i) {
+            const QVariant &var = map_entities[i];
             _entities << MessageEntity::fromMap(var.toMap());
+        }
         result.setEntities(_entities);
         return result;
     }

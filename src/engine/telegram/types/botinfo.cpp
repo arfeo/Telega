@@ -144,8 +144,11 @@ QMap<QString, QVariant> BotInfo::toMap() const {
         if( userId() ) result["userId"] = QString::number(userId());
         if( !m_description.isEmpty() ) result["description"] = QVariant::fromValue<QString>(m_description);
         QList<QVariant> _commands;
-        for(const BotCommand &m__type: m_commands)
+        //for(const BotCommand &m__type: m_commands)
+        for(int i = 0; i < m_commands.size(); ++i) {
+            const BotCommand &m__type = m_commands[i];
             if( !m__type.isNull() ) _commands << m__type.toMap();
+        }
         result["commands"] = _commands;
         return result;
     }
@@ -174,8 +177,11 @@ BotInfo BotInfo::fromMap(const QMap<QString, QVariant> &map) {
 
         QList<QVariant> map_commands = map["commands"].toList();
         QList<BotCommand> _commands;
-        for(const QVariant &var: map_commands)
+        //for(const QVariant &var: map_commands)
+        for(int i = 0; i < map_commands.size(); ++i) {
+            const QVariant &var = map_commands[i];
             _commands << BotCommand::fromMap(var.toMap());
+        }
         result.setCommands(_commands);
         return result;
     }

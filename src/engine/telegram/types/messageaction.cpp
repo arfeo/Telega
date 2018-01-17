@@ -602,8 +602,11 @@ QMap<QString, QVariant> MessageAction::toMap() const {
         result["classType"] = "MessageAction::typeMessageActionChatCreate";
         if( !m_title.isEmpty() ) result["title"] = QVariant::fromValue<QString>(m_title);
         QList<QVariant> _users;
-        for(const qint32 &m__type: m_users)
+        //for(const qint32 &m__type: m_users)
+        for(int i = 0; i < m_users.size(); ++i) {
+            const qint32 &m__type = m_users[i];
             _users << QVariant::fromValue<qint32>(m__type);
+        }
         result["users"] = _users;
         return result;
     }
@@ -632,8 +635,11 @@ QMap<QString, QVariant> MessageAction::toMap() const {
     case typeMessageActionChatAddUser: {
         result["classType"] = "MessageAction::typeMessageActionChatAddUser";
         QList<QVariant> _users;
-        for(const qint32 &m__type: m_users)
+        //for(const qint32 &m__type: m_users)
+        for(int i = 0; i < m_users.size(); ++i) {
+            const qint32 &m__type = m_users[i];
             _users << QVariant::fromValue<qint32>(m__type);
+        }
         result["users"] = _users;
         return result;
     }
@@ -745,8 +751,11 @@ MessageAction MessageAction::fromMap(const QMap<QString, QVariant> &map) {
 
         QList<QVariant> map_users = map["users"].toList();
         QList<qint32> _users;
-        for(const QVariant &var: map_users)
-            _users << var.value<qint32>();;
+        //for(const QVariant &var: map_users)
+        for(int i = 0; i < map_users.size(); ++i) {
+            const QVariant &var = map_users[i];
+            _users << var.value<qint32>();
+        }
         result.setUsers(_users);
         return result;
     }
@@ -776,8 +785,11 @@ MessageAction MessageAction::fromMap(const QMap<QString, QVariant> &map) {
         result.setClassType(typeMessageActionChatAddUser);
         QList<QVariant> map_users = map["users"].toList();
         QList<qint32> _users;
-        for(const QVariant &var: map_users)
-            _users << var.value<qint32>();;
+        //for(const QVariant &var: map_users)
+        for(int i = 0; i < map_users.size(); ++i) {
+            const QVariant &var = map_users[i];
+            _users << var.value<qint32>();
+        }
         result.setUsers(_users);
         return result;
     }

@@ -203,8 +203,11 @@ QMap<QString, QVariant> Invoice::toMap() const {
         if( flexible() ) result["flexible"] = QString::number(flexible());
         if( !m_currency.isEmpty() ) result["currency"] = QVariant::fromValue<QString>(m_currency);
         QList<QVariant> _prices;
-        for(const LabeledPrice &m__type: m_prices)
+        //for(const LabeledPrice &m__type: m_prices)
+        for(int i = 0; i < m_prices.size(); ++i) {
+            const LabeledPrice &m__type = m_prices[i];
             if( !m__type.isNull() ) _prices << m__type.toMap();
+        }
         result["prices"] = _prices;
         return result;
     }
@@ -263,8 +266,11 @@ Invoice Invoice::fromMap(const QMap<QString, QVariant> &map) {
 
         QList<QVariant> map_prices = map["prices"].toList();
         QList<LabeledPrice> _prices;
-        for(const QVariant &var: map_prices)
+        //for(const QVariant &var: map_prices)
+        for(int i = 0; i < map_prices.size(); ++i) {
+            const QVariant &var = map_prices[i];
             _prices << LabeledPrice::fromMap(var.toMap());
+        }
         result.setPrices(_prices);
         return result;
     }

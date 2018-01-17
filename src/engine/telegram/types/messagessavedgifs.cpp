@@ -148,8 +148,11 @@ QMap<QString, QVariant> MessagesSavedGifs::toMap() const {
         result["classType"] = "MessagesSavedGifs::typeMessagesSavedGifs";
         if( hash() ) result["hash"] = QString::number(hash());
         QList<QVariant> _gifs;
-        for(const Document &m__type: m_gifs)
+        //for(const Document &m__type: m_gifs)
+        for(int i = 0; i < m_gifs.size(); ++i) {
+            const Document &m__type = m_gifs[i];
             if( !m__type.isNull() ) _gifs << m__type.toMap();
+        }
         result["gifs"] = _gifs;
         return result;
     }
@@ -176,8 +179,11 @@ MessagesSavedGifs MessagesSavedGifs::fromMap(const QMap<QString, QVariant> &map)
 
         QList<QVariant> map_gifs = map["gifs"].toList();
         QList<Document> _gifs;
-        for(const QVariant &var: map_gifs)
+        //for(const QVariant &var: map_gifs)
+        for(int i = 0; i < map_gifs.size(); ++i) {
+            const QVariant &var = map_gifs[i];
             _gifs << Document::fromMap(var.toMap());
+        }
         result.setGifs(_gifs);
         return result;
     }

@@ -193,8 +193,11 @@ QMap<QString, QVariant> WallPaper::toMap() const {
         if( id() ) result["id"] = QString::number(id());
         if( !m_title.isEmpty() ) result["title"] = QVariant::fromValue<QString>(m_title);
         QList<QVariant> _sizes;
-        for(const PhotoSize &m__type: m_sizes)
+        //for(const PhotoSize &m__type: m_sizes)
+        for(int i = 0; i < m_sizes.size(); ++i) {
+            const PhotoSize &m__type = m_sizes[i];
             if( !m__type.isNull() ) _sizes << m__type.toMap();
+        }
         result["sizes"] = _sizes;
         if( color() ) result["color"] = QString::number(color());
         return result;
@@ -234,8 +237,11 @@ WallPaper WallPaper::fromMap(const QMap<QString, QVariant> &map) {
 
         QList<QVariant> map_sizes = map["sizes"].toList();
         QList<PhotoSize> _sizes;
-        for(const QVariant &var: map_sizes)
+        //for(const QVariant &var: map_sizes)
+        for(int i = 0; i < map_sizes.size(); ++i) {
+            const QVariant &var = map_sizes[i];
             _sizes << PhotoSize::fromMap(var.toMap());
+        }
         result.setSizes(_sizes);
         QVariant _color_var = map.value("color");
         if( !_color_var.isNull() ) {

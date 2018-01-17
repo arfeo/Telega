@@ -160,16 +160,25 @@ QMap<QString, QVariant> ContactsImportedContacts::toMap() const {
     case typeContactsImportedContacts: {
         result["classType"] = "ContactsImportedContacts::typeContactsImportedContacts";
         QList<QVariant> _imported;
-        for(const ImportedContact &m__type: m_imported)
+        //for(const ImportedContact &m__type: m_imported)
+        for(int i = 0; i < m_imported.size(); ++i) {
+            const ImportedContact &m__type = m_imported[i];
             if( !m__type.isNull() ) _imported << m__type.toMap();
+        }
         result["imported"] = _imported;
         QList<QVariant> _retryContacts;
-        for(const qint64 &m__type: m_retryContacts)
+        //for(const qint64 &m__type: m_retryContacts)
+        for(int i = 0; i < m_retryContacts.size(); ++i) {
+            const qint64 &m__type = m_retryContacts[i];
             _retryContacts << QVariant::fromValue<qint64>(m__type);
+        }
         result["retryContacts"] = _retryContacts;
         QList<QVariant> _users;
-        for(const User &m__type: m_users)
+        //for(const User &m__type: m_users)
+        for(int i = 0; i < m_users.size(); ++i) {
+            const User &m__type = m_users[i];
             if( !m__type.isNull() ) _users << m__type.toMap();
+        }
         result["users"] = _users;
         return result;
     }
@@ -186,18 +195,27 @@ ContactsImportedContacts ContactsImportedContacts::fromMap(const QMap<QString, Q
         result.setClassType(typeContactsImportedContacts);
         QList<QVariant> map_imported = map["imported"].toList();
         QList<ImportedContact> _imported;
-        for(const QVariant &var: map_imported)
+        //for(const QVariant &var: map_imported)
+        for(int i = 0; i < map_imported.size(); ++i) {
+            const QVariant &var = map_imported[i];
             _imported << ImportedContact::fromMap(var.toMap());
+        }
         result.setImported(_imported);
         QList<QVariant> map_retryContacts = map["retryContacts"].toList();
         QList<qint64> _retryContacts;
-        for(const QVariant &var: map_retryContacts)
-            _retryContacts << var.value<qint64>();;
+        //for(const QVariant &var: map_retryContacts)
+        for(int i = 0; i < map_retryContacts.size(); ++i) {
+            const QVariant &var = map_retryContacts[i];
+            _retryContacts << var.value<qint64>();
+        }
         result.setRetryContacts(_retryContacts);
         QList<QVariant> map_users = map["users"].toList();
         QList<User> _users;
-        for(const QVariant &var: map_users)
+        //for(const QVariant &var: map_users)
+        for(int i = 0; i < map_users.size(); ++i) {
+            const QVariant &var = map_users[i];
             _users << User::fromMap(var.toMap());
+        }
         result.setUsers(_users);
         return result;
     }

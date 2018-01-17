@@ -190,12 +190,18 @@ QMap<QString, QVariant> ContactsBlocked::toMap() const {
     case typeContactsBlocked: {
         result["classType"] = "ContactsBlocked::typeContactsBlocked";
         QList<QVariant> _blocked;
-        for(const ContactBlocked &m__type: m_blocked)
+        //for(const ContactBlocked &m__type: m_blocked)
+        for(int i = 0; i < m_blocked.size(); ++i) {
+            const ContactBlocked &m__type = m_blocked[i];
             if( !m__type.isNull() ) _blocked << m__type.toMap();
+        }
         result["blocked"] = _blocked;
         QList<QVariant> _users;
-        for(const User &m__type: m_users)
+        //for(const User &m__type: m_users)
+        for(int i = 0; i < m_users.size(); ++i) {
+            const User &m__type = m_users[i];
             if( !m__type.isNull() ) _users << m__type.toMap();
+        }
         result["users"] = _users;
         return result;
     }
@@ -205,12 +211,18 @@ QMap<QString, QVariant> ContactsBlocked::toMap() const {
         result["classType"] = "ContactsBlocked::typeContactsBlockedSlice";
         if( count() ) result["count"] = QString::number(count());
         QList<QVariant> _blocked;
-        for(const ContactBlocked &m__type: m_blocked)
+        //for(const ContactBlocked &m__type: m_blocked)
+        for(int i = 0; i < m_blocked.size(); ++i) {
+            const ContactBlocked &m__type = m_blocked[i];
             if( !m__type.isNull() ) _blocked << m__type.toMap();
+        }
         result["blocked"] = _blocked;
         QList<QVariant> _users;
-        for(const User &m__type: m_users)
+        //for(const User &m__type: m_users)
+        for(int i = 0; i < m_users.size(); ++i) {
+            const User &m__type = m_users[i];
             if( !m__type.isNull() ) _users << m__type.toMap();
+        }
         result["users"] = _users;
         return result;
     }
@@ -227,13 +239,19 @@ ContactsBlocked ContactsBlocked::fromMap(const QMap<QString, QVariant> &map) {
         result.setClassType(typeContactsBlocked);
         QList<QVariant> map_blocked = map["blocked"].toList();
         QList<ContactBlocked> _blocked;
-        for(const QVariant &var: map_blocked)
+        //for(const QVariant &var: map_blocked)
+        for(int i = 0; i < map_blocked.size(); ++i) {
+            const QVariant &var = map_blocked[i];
             _blocked << ContactBlocked::fromMap(var.toMap());
+        }
         result.setBlocked(_blocked);
         QList<QVariant> map_users = map["users"].toList();
         QList<User> _users;
-        for(const QVariant &var: map_users)
+        //for(const QVariant &var: map_users)
+        for(int i = 0; i < map_users.size(); ++i) {
+            const QVariant &var = map_users[i];
             _users << User::fromMap(var.toMap());
+        }
         result.setUsers(_users);
         return result;
     }
@@ -247,13 +265,19 @@ ContactsBlocked ContactsBlocked::fromMap(const QMap<QString, QVariant> &map) {
 
         QList<QVariant> map_blocked = map["blocked"].toList();
         QList<ContactBlocked> _blocked;
-        for(const QVariant &var: map_blocked)
+        //for(const QVariant &var: map_blocked)
+        for(int i = 0; i < map_blocked.size(); ++i) {
+            const QVariant &var = map_blocked[i];
             _blocked << ContactBlocked::fromMap(var.toMap());
+        }
         result.setBlocked(_blocked);
         QList<QVariant> map_users = map["users"].toList();
         QList<User> _users;
-        for(const QVariant &var: map_users)
+        //for(const QVariant &var: map_users)
+        for(int i = 0; i < map_users.size(); ++i) {
+            const QVariant &var = map_users[i];
             _users << User::fromMap(var.toMap());
+        }
         result.setUsers(_users);
         return result;
     }

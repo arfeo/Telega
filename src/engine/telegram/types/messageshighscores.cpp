@@ -137,12 +137,18 @@ QMap<QString, QVariant> MessagesHighScores::toMap() const {
     case typeMessagesHighScores: {
         result["classType"] = "MessagesHighScores::typeMessagesHighScores";
         QList<QVariant> _scores;
-        for(const HighScore &m__type: m_scores)
+        //for(const HighScore &m__type: m_scores)
+        for(int i = 0; i < m_scores.size(); ++i) {
+            const HighScore &m__type = m_scores[i];
             if( !m__type.isNull() ) _scores << m__type.toMap();
+        }
         result["scores"] = _scores;
         QList<QVariant> _users;
-        for(const User &m__type: m_users)
+        //for(const User &m__type: m_users)
+        for(int i = 0; i < m_users.size(); ++i) {
+            const User &m__type = m_users[i];
             if( !m__type.isNull() ) _users << m__type.toMap();
+        }
         result["users"] = _users;
         return result;
     }
@@ -159,13 +165,19 @@ MessagesHighScores MessagesHighScores::fromMap(const QMap<QString, QVariant> &ma
         result.setClassType(typeMessagesHighScores);
         QList<QVariant> map_scores = map["scores"].toList();
         QList<HighScore> _scores;
-        for(const QVariant &var: map_scores)
+        //for(const QVariant &var: map_scores)
+        for(int i = 0; i < map_scores.size(); ++i) {
+            const QVariant &var = map_scores[i];
             _scores << HighScore::fromMap(var.toMap());
+        }
         result.setScores(_scores);
         QList<QVariant> map_users = map["users"].toList();
         QList<User> _users;
-        for(const QVariant &var: map_users)
+        //for(const QVariant &var: map_users)
+        for(int i = 0; i < map_users.size(); ++i) {
+            const QVariant &var = map_users[i];
             _users << User::fromMap(var.toMap());
+        }
         result.setUsers(_users);
         return result;
     }

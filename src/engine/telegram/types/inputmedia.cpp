@@ -667,8 +667,11 @@ QMap<QString, QVariant> InputMedia::toMap() const {
         if( !m_file.isNull() ) result["file"] = m_file.toMap();
         if( !m_caption.isEmpty() ) result["caption"] = QVariant::fromValue<QString>(m_caption);
         QList<QVariant> _stickers;
-        for(const InputDocument &m__type: m_stickers)
+        //for(const InputDocument &m__type: m_stickers)
+        for(int i = 0; i < m_stickers.size(); ++i) {
+            const InputDocument &m__type = m_stickers[i];
             if( !m__type.isNull() ) _stickers << m__type.toMap();
+        }
         result["stickers"] = _stickers;
         return result;
     }
@@ -703,13 +706,19 @@ QMap<QString, QVariant> InputMedia::toMap() const {
         if( !m_file.isNull() ) result["file"] = m_file.toMap();
         if( !m_mimeType.isEmpty() ) result["mimeType"] = QVariant::fromValue<QString>(m_mimeType);
         QList<QVariant> _attributes;
-        for(const DocumentAttribute &m__type: m_attributes)
+        //for(const DocumentAttribute &m__type: m_attributes)
+        for(int i = 0; i < m_attributes.size(); ++i) {
+            const DocumentAttribute &m__type = m_attributes[i];
             if( !m__type.isNull() ) _attributes << m__type.toMap();
+        }
         result["attributes"] = _attributes;
         if( !m_caption.isEmpty() ) result["caption"] = QVariant::fromValue<QString>(m_caption);
         QList<QVariant> _stickers;
-        for(const InputDocument &m__type: m_stickers)
+        //for(const InputDocument &m__type: m_stickers)
+        for(int i = 0; i < m_stickers.size(); ++i) {
+            const InputDocument &m__type = m_stickers[i];
             if( !m__type.isNull() ) _stickers << m__type.toMap();
+        }
         result["stickers"] = _stickers;
         return result;
     }
@@ -721,13 +730,19 @@ QMap<QString, QVariant> InputMedia::toMap() const {
         if( !m_thumb.isNull() ) result["thumb"] = m_thumb.toMap();
         if( !m_mimeType.isEmpty() ) result["mimeType"] = QVariant::fromValue<QString>(m_mimeType);
         QList<QVariant> _attributes;
-        for(const DocumentAttribute &m__type: m_attributes)
+        //for(const DocumentAttribute &m__type: m_attributes)
+        for(int i = 0; i < m_attributes.size(); ++i) {
+            const DocumentAttribute &m__type = m_attributes[i];
             if( !m__type.isNull() ) _attributes << m__type.toMap();
+        }
         result["attributes"] = _attributes;
         if( !m_caption.isEmpty() ) result["caption"] = QVariant::fromValue<QString>(m_caption);
         QList<QVariant> _stickers;
-        for(const InputDocument &m__type: m_stickers)
+        //for(const InputDocument &m__type: m_stickers)
+        for(int i = 0; i < m_stickers.size(); ++i) {
+            const InputDocument &m__type = m_stickers[i];
             if( !m__type.isNull() ) _stickers << m__type.toMap();
+        }
         result["stickers"] = _stickers;
         return result;
     }
@@ -821,8 +836,11 @@ InputMedia InputMedia::fromMap(const QMap<QString, QVariant> &map) {
 
         QList<QVariant> map_stickers = map["stickers"].toList();
         QList<InputDocument> _stickers;
-        for(const QVariant &var: map_stickers)
+        //for(const QVariant &var: map_stickers)
+        for(int i = 0; i < map_stickers.size(); ++i) {
+            const QVariant &var = map_stickers[i];
             _stickers << InputDocument::fromMap(var.toMap());
+        }
         result.setStickers(_stickers);
         return result;
     }
@@ -884,8 +902,11 @@ InputMedia InputMedia::fromMap(const QMap<QString, QVariant> &map) {
 
         QList<QVariant> map_attributes = map["attributes"].toList();
         QList<DocumentAttribute> _attributes;
-        for(const QVariant &var: map_attributes)
+        //for(const QVariant &var: map_attributes)
+        for(int i = 0; i < map_attributes.size(); ++i) {
+            const QVariant &var = map_attributes[i];
             _attributes << DocumentAttribute::fromMap(var.toMap());
+        }
         result.setAttributes(_attributes);
         QVariant _caption_var = map.value("caption");
         if( !_caption_var.isNull() ) {
@@ -895,8 +916,11 @@ InputMedia InputMedia::fromMap(const QMap<QString, QVariant> &map) {
 
         QList<QVariant> map_stickers = map["stickers"].toList();
         QList<InputDocument> _stickers;
-        for(const QVariant &var: map_stickers)
+        //for(const QVariant &var: map_stickers)
+        for(int i = 0; i < map_stickers.size(); ++i) {
+            const QVariant &var = map_stickers[i];
             _stickers << InputDocument::fromMap(var.toMap());
+        }
         result.setStickers(_stickers);
         return result;
     }
@@ -918,8 +942,11 @@ InputMedia InputMedia::fromMap(const QMap<QString, QVariant> &map) {
 
         QList<QVariant> map_attributes = map["attributes"].toList();
         QList<DocumentAttribute> _attributes;
-        for(const QVariant &var: map_attributes)
+        //for(const QVariant &var: map_attributes)
+        for(int i = 0; i < map_attributes.size(); ++i) {
+            const QVariant &var = map_attributes[i];
             _attributes << DocumentAttribute::fromMap(var.toMap());
+        }
         result.setAttributes(_attributes);
         QVariant _caption_var = map.value("caption");
         if( !_caption_var.isNull() ) {
@@ -929,8 +956,11 @@ InputMedia InputMedia::fromMap(const QMap<QString, QVariant> &map) {
 
         QList<QVariant> map_stickers = map["stickers"].toList();
         QList<InputDocument> _stickers;
-        for(const QVariant &var: map_stickers)
+        //for(const QVariant &var: map_stickers)
+        for(int i = 0; i < map_stickers.size(); ++i) {
+            const QVariant &var = map_stickers[i];
             _stickers << InputDocument::fromMap(var.toMap());
+        }
         result.setStickers(_stickers);
         return result;
     }

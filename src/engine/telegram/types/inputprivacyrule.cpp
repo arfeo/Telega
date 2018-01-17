@@ -194,8 +194,11 @@ QMap<QString, QVariant> InputPrivacyRule::toMap() const {
     case typeInputPrivacyValueAllowUsers: {
         result["classType"] = "InputPrivacyRule::typeInputPrivacyValueAllowUsers";
         QList<QVariant> _users;
-        for(const InputUser &m__type: m_users)
+        //for(const InputUser &m__type: m_users)
+        for(int i = 0; i < m_users.size(); ++i) {
+            const InputUser &m__type = m_users[i];
             if( !m__type.isNull() ) _users << m__type.toMap();
+        }
         result["users"] = _users;
         return result;
     }
@@ -216,8 +219,11 @@ QMap<QString, QVariant> InputPrivacyRule::toMap() const {
     case typeInputPrivacyValueDisallowUsers: {
         result["classType"] = "InputPrivacyRule::typeInputPrivacyValueDisallowUsers";
         QList<QVariant> _users;
-        for(const InputUser &m__type: m_users)
+        //for(const InputUser &m__type: m_users)
+        for(int i = 0; i < m_users.size(); ++i) {
+            const InputUser &m__type = m_users[i];
             if( !m__type.isNull() ) _users << m__type.toMap();
+        }
         result["users"] = _users;
         return result;
     }
@@ -242,8 +248,11 @@ InputPrivacyRule InputPrivacyRule::fromMap(const QMap<QString, QVariant> &map) {
         result.setClassType(typeInputPrivacyValueAllowUsers);
         QList<QVariant> map_users = map["users"].toList();
         QList<InputUser> _users;
-        for(const QVariant &var: map_users)
+        //for(const QVariant &var: map_users)
+        for(int i = 0; i < map_users.size(); ++i) {
+            const QVariant &var = map_users[i];
             _users << InputUser::fromMap(var.toMap());
+        }
         result.setUsers(_users);
         return result;
     }
@@ -259,8 +268,11 @@ InputPrivacyRule InputPrivacyRule::fromMap(const QMap<QString, QVariant> &map) {
         result.setClassType(typeInputPrivacyValueDisallowUsers);
         QList<QVariant> map_users = map["users"].toList();
         QList<InputUser> _users;
-        for(const QVariant &var: map_users)
+        //for(const QVariant &var: map_users)
+        for(int i = 0; i < map_users.size(); ++i) {
+            const QVariant &var = map_users[i];
             _users << InputUser::fromMap(var.toMap());
+        }
         result.setUsers(_users);
         return result;
     }

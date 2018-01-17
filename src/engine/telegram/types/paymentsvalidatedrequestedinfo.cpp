@@ -157,8 +157,11 @@ QMap<QString, QVariant> PaymentsValidatedRequestedInfo::toMap() const {
         result["classType"] = "PaymentsValidatedRequestedInfo::typePaymentsValidatedRequestedInfo";
         if( !m_id.isEmpty() ) result["id"] = QVariant::fromValue<QString>(m_id);
         QList<QVariant> _shippingOptions;
-        for(const ShippingOption &m__type: m_shippingOptions)
+        //for(const ShippingOption &m__type: m_shippingOptions)
+        for(int i = 0; i < m_shippingOptions.size(); ++i) {
+            const ShippingOption &m__type = m_shippingOptions[i];
             if( !m__type.isNull() ) _shippingOptions << m__type.toMap();
+        }
         result["shippingOptions"] = _shippingOptions;
         return result;
     }
@@ -181,8 +184,11 @@ PaymentsValidatedRequestedInfo PaymentsValidatedRequestedInfo::fromMap(const QMa
 
         QList<QVariant> map_shippingOptions = map["shippingOptions"].toList();
         QList<ShippingOption> _shippingOptions;
-        for(const QVariant &var: map_shippingOptions)
+        //for(const QVariant &var: map_shippingOptions)
+        for(int i = 0; i < map_shippingOptions.size(); ++i) {
+            const QVariant &var = map_shippingOptions[i];
             _shippingOptions << ShippingOption::fromMap(var.toMap());
+        }
         result.setShippingOptions(_shippingOptions);
         return result;
     }

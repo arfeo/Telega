@@ -144,8 +144,11 @@ QMap<QString, QVariant> TopPeerCategoryPeers::toMap() const {
         if( !m_category.isNull() ) result["category"] = m_category.toMap();
         if( count() ) result["count"] = QString::number(count());
         QList<QVariant> _peers;
-        for(const TopPeer &m__type: m_peers)
+        //for(const TopPeer &m__type: m_peers)
+        for(int i = 0; i < m_peers.size(); ++i) {
+            const TopPeer &m__type = m_peers[i];
             if( !m__type.isNull() ) _peers << m__type.toMap();
+        }
         result["peers"] = _peers;
         return result;
     }
@@ -172,8 +175,11 @@ TopPeerCategoryPeers TopPeerCategoryPeers::fromMap(const QMap<QString, QVariant>
 
         QList<QVariant> map_peers = map["peers"].toList();
         QList<TopPeer> _peers;
-        for(const QVariant &var: map_peers)
+        //for(const QVariant &var: map_peers)
+        for(int i = 0; i < map_peers.size(); ++i) {
+            const QVariant &var = map_peers[i];
             _peers << TopPeer::fromMap(var.toMap());
+        }
         result.setPeers(_peers);
         return result;
     }

@@ -211,8 +211,11 @@ QMap<QString, QVariant> Photo::toMap() const {
         if( accessHash() ) result["accessHash"] = QString::number(accessHash());
         if( date() ) result["date"] = QString::number(date());
         QList<QVariant> _sizes;
-        for(const PhotoSize &m__type: m_sizes)
+        //for(const PhotoSize &m__type: m_sizes)
+        for(int i = 0; i < m_sizes.size(); ++i) {
+            const PhotoSize &m__type = m_sizes[i];
             if( !m__type.isNull() ) _sizes << m__type.toMap();
+        }
         result["sizes"] = _sizes;
         return result;
     }
@@ -263,8 +266,11 @@ Photo Photo::fromMap(const QMap<QString, QVariant> &map) {
 
         QList<QVariant> map_sizes = map["sizes"].toList();
         QList<PhotoSize> _sizes;
-        for(const QVariant &var: map_sizes)
+        //for(const QVariant &var: map_sizes)
+        for(int i = 0; i < map_sizes.size(); ++i) {
+            const QVariant &var = map_sizes[i];
             _sizes << PhotoSize::fromMap(var.toMap());
+        }
         result.setSizes(_sizes);
         return result;
     }

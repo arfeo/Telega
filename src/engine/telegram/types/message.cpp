@@ -481,8 +481,11 @@ QMap<QString, QVariant> Message::toMap() const {
         if( !m_media.isNull() ) result["media"] = m_media.toMap();
         if( !m_replyMarkup.isNull() ) result["replyMarkup"] = m_replyMarkup.toMap();
         QList<QVariant> _entities;
-        for(const MessageEntity &m__type: m_entities)
+        //for(const MessageEntity &m__type: m_entities)
+        for(int i = 0; i < m_entities.size(); ++i) {
+            const MessageEntity &m__type = m_entities[i];
             if( !m__type.isNull() ) _entities << m__type.toMap();
+        }
         result["entities"] = _entities;
         if( views() ) result["views"] = QString::number(views());
         if( editDate() ) result["editDate"] = QString::number(editDate());
@@ -610,8 +613,11 @@ Message Message::fromMap(const QMap<QString, QVariant> &map) {
 
         QList<QVariant> map_entities = map["entities"].toList();
         QList<MessageEntity> _entities;
-        for(const QVariant &var: map_entities)
+        //for(const QVariant &var: map_entities)
+        for(int i = 0; i < map_entities.size(); ++i) {
+            const QVariant &var = map_entities[i];
             _entities << MessageEntity::fromMap(var.toMap());
+        }
         result.setEntities(_entities);
         QVariant _views_var = map.value("views");
         if( !_views_var.isNull() ) {

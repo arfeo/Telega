@@ -463,8 +463,11 @@ QMap<QString, QVariant> ChatFull::toMap() const {
         if( !m_notifySettings.isNull() ) result["notifySettings"] = m_notifySettings.toMap();
         if( !m_exportedInvite.isNull() ) result["exportedInvite"] = m_exportedInvite.toMap();
         QList<QVariant> _botInfo;
-        for(const BotInfo &m__type: m_botInfo)
+        //for(const BotInfo &m__type: m_botInfo)
+        for(int i = 0; i < m_botInfo.size(); ++i) {
+            const BotInfo &m__type = m_botInfo[i];
             if( !m__type.isNull() ) _botInfo << m__type.toMap();
+        }
         result["botInfo"] = _botInfo;
         return result;
     }
@@ -487,8 +490,11 @@ QMap<QString, QVariant> ChatFull::toMap() const {
         if( !m_notifySettings.isNull() ) result["notifySettings"] = m_notifySettings.toMap();
         if( !m_exportedInvite.isNull() ) result["exportedInvite"] = m_exportedInvite.toMap();
         QList<QVariant> _botInfo;
-        for(const BotInfo &m__type: m_botInfo)
+        //for(const BotInfo &m__type: m_botInfo)
+        for(int i = 0; i < m_botInfo.size(); ++i) {
+            const BotInfo &m__type = m_botInfo[i];
             if( !m__type.isNull() ) _botInfo << m__type.toMap();
+        }
         result["botInfo"] = _botInfo;
         if( migratedFromChatId() ) result["migratedFromChatId"] = QString::number(migratedFromChatId());
         if( migratedFromMaxId() ) result["migratedFromMaxId"] = QString::number(migratedFromMaxId());
@@ -530,8 +536,11 @@ ChatFull ChatFull::fromMap(const QMap<QString, QVariant> &map) {
 
         QList<QVariant> map_botInfo = map["botInfo"].toList();
         QList<BotInfo> _botInfo;
-        for(const QVariant &var: map_botInfo)
+        //for(const QVariant &var: map_botInfo)
+        for(int i = 0; i < map_botInfo.size(); ++i) {
+            const QVariant &var = map_botInfo[i];
             _botInfo << BotInfo::fromMap(var.toMap());
+        }
         result.setBotInfo(_botInfo);
         return result;
     }
@@ -617,8 +626,11 @@ ChatFull ChatFull::fromMap(const QMap<QString, QVariant> &map) {
 
         QList<QVariant> map_botInfo = map["botInfo"].toList();
         QList<BotInfo> _botInfo;
-        for(const QVariant &var: map_botInfo)
+        //for(const QVariant &var: map_botInfo)
+        for(int i = 0; i < map_botInfo.size(); ++i) {
+            const QVariant &var = map_botInfo[i];
             _botInfo << BotInfo::fromMap(var.toMap());
+        }
         result.setBotInfo(_botInfo);
         QVariant _migratedFromChatId_var = map.value("migratedFromChatId");
         if( !_migratedFromChatId_var.isNull() ) {

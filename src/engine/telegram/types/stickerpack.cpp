@@ -127,8 +127,11 @@ QMap<QString, QVariant> StickerPack::toMap() const {
         result["classType"] = "StickerPack::typeStickerPack";
         if( !m_emoticon.isEmpty() ) result["emoticon"] = QVariant::fromValue<QString>(m_emoticon);
         QList<QVariant> _documents;
-        for(const qint64 &m__type: m_documents)
+        //for(const qint64 &m__type: m_documents)
+        for(int i = 0; i < m_documents.size(); ++i) {
+            const qint64 &m__type = m_documents[i];
             _documents << QVariant::fromValue<qint64>(m__type);
+        }
         result["documents"] = _documents;
         return result;
     }
@@ -151,8 +154,11 @@ StickerPack StickerPack::fromMap(const QMap<QString, QVariant> &map) {
 
         QList<QVariant> map_documents = map["documents"].toList();
         QList<qint64> _documents;
-        for(const QVariant &var: map_documents)
-            _documents << var.value<qint64>();;
+        //for(const QVariant &var: map_documents)
+        for(int i = 0; i < map_documents.size(); ++i) {
+            const QVariant &var = map_documents[i];
+            _documents << var.value<qint64>();
+        }
         result.setDocuments(_documents);
         return result;
     }

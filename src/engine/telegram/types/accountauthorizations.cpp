@@ -114,8 +114,11 @@ QMap<QString, QVariant> AccountAuthorizations::toMap() const {
     case typeAccountAuthorizations: {
         result["classType"] = "AccountAuthorizations::typeAccountAuthorizations";
         QList<QVariant> _authorizations;
-        for(const Authorization &m__type: m_authorizations)
+        //for(const Authorization &m__type: m_authorizations)
+        for(int i = 0; i < m_authorizations.size(); ++i) {
+            const Authorization &m__type = m_authorizations[i];
             if( !m__type.isNull() ) _authorizations << m__type.toMap();
+        }
         result["authorizations"] = _authorizations;
         return result;
     }
@@ -132,8 +135,11 @@ AccountAuthorizations AccountAuthorizations::fromMap(const QMap<QString, QVarian
         result.setClassType(typeAccountAuthorizations);
         QList<QVariant> map_authorizations = map["authorizations"].toList();
         QList<Authorization> _authorizations;
-        for(const QVariant &var: map_authorizations)
+        //for(const QVariant &var: map_authorizations)
+        for(int i = 0; i < map_authorizations.size(); ++i) {
+            const QVariant &var = map_authorizations[i];
             _authorizations << Authorization::fromMap(var.toMap());
+        }
         result.setAuthorizations(_authorizations);
         return result;
     }

@@ -275,8 +275,11 @@ QMap<QString, QVariant> PaymentsPaymentReceipt::toMap() const {
         if( totalAmount() ) result["totalAmount"] = QString::number(totalAmount());
         if( !m_credentialsTitle.isEmpty() ) result["credentialsTitle"] = QVariant::fromValue<QString>(m_credentialsTitle);
         QList<QVariant> _users;
-        for(const User &m__type: m_users)
+        //for(const User &m__type: m_users)
+        for(int i = 0; i < m_users.size(); ++i) {
+            const User &m__type = m_users[i];
             if( !m__type.isNull() ) _users << m__type.toMap();
+        }
         result["users"] = _users;
         return result;
     }
@@ -341,8 +344,11 @@ PaymentsPaymentReceipt PaymentsPaymentReceipt::fromMap(const QMap<QString, QVari
 
         QList<QVariant> map_users = map["users"].toList();
         QList<User> _users;
-        for(const QVariant &var: map_users)
+        //for(const QVariant &var: map_users)
+        for(int i = 0; i < map_users.size(); ++i) {
+            const QVariant &var = map_users[i];
             _users << User::fromMap(var.toMap());
+        }
         result.setUsers(_users);
         return result;
     }

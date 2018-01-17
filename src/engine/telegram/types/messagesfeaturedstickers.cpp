@@ -171,12 +171,18 @@ QMap<QString, QVariant> MessagesFeaturedStickers::toMap() const {
         result["classType"] = "MessagesFeaturedStickers::typeMessagesFeaturedStickers";
         if( hash() ) result["hash"] = QString::number(hash());
         QList<QVariant> _sets;
-        for(const StickerSetCovered &m__type: m_sets)
+        //for(const StickerSetCovered &m__type: m_sets)
+        for(int i = 0; i < m_sets.size(); ++i) {
+            const StickerSetCovered &m__type = m_sets[i];
             if( !m__type.isNull() ) _sets << m__type.toMap();
+        }
         result["sets"] = _sets;
         QList<QVariant> _unread;
-        for(const qint64 &m__type: m_unread)
+        //for(const qint64 &m__type: m_unread)
+        for(int i = 0; i < m_unread.size(); ++i) {
+            const qint64 &m__type = m_unread[i];
             _unread << QVariant::fromValue<qint64>(m__type);
+        }
         result["unread"] = _unread;
         return result;
     }
@@ -203,13 +209,19 @@ MessagesFeaturedStickers MessagesFeaturedStickers::fromMap(const QMap<QString, Q
 
         QList<QVariant> map_sets = map["sets"].toList();
         QList<StickerSetCovered> _sets;
-        for(const QVariant &var: map_sets)
+        //for(const QVariant &var: map_sets)
+        for(int i = 0; i < map_sets.size(); ++i) {
+            const QVariant &var = map_sets[i];
             _sets << StickerSetCovered::fromMap(var.toMap());
+        }
         result.setSets(_sets);
         QList<QVariant> map_unread = map["unread"].toList();
         QList<qint64> _unread;
-        for(const QVariant &var: map_unread)
-            _unread << var.value<qint64>();;
+        //for(const QVariant &var: map_unread)
+        for(int i = 0; i < map_unread.size(); ++i) {
+            const QVariant &var = map_unread[i];
+            _unread << var.value<qint64>();
+        }
         result.setUnread(_unread);
         return result;
     }

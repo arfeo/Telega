@@ -710,8 +710,11 @@ QMap<QString, QVariant> DecryptedMessageMedia::toMap() const {
         if( !m_thumbPhotoSize.isNull() ) result["thumbPhotoSize"] = m_thumbPhotoSize.toMap();
         if( dcId() ) result["dcId"] = QString::number(dcId());
         QList<QVariant> _attributes;
-        for(const DocumentAttribute &m__type: m_attributes)
+        //for(const DocumentAttribute &m__type: m_attributes)
+        for(int i = 0; i < m_attributes.size(); ++i) {
+            const DocumentAttribute &m__type = m_attributes[i];
             if( !m__type.isNull() ) _attributes << m__type.toMap();
+        }
         result["attributes"] = _attributes;
         return result;
     }
@@ -1104,8 +1107,11 @@ DecryptedMessageMedia DecryptedMessageMedia::fromMap(const QMap<QString, QVarian
 
         QList<QVariant> map_attributes = map["attributes"].toList();
         QList<DocumentAttribute> _attributes;
-        for(const QVariant &var: map_attributes)
+        //for(const QVariant &var: map_attributes)
+        for(int i = 0; i < map_attributes.size(); ++i) {
+            const QVariant &var = map_attributes[i];
             _attributes << DocumentAttribute::fromMap(var.toMap());
+        }
         result.setAttributes(_attributes);
         return result;
     }

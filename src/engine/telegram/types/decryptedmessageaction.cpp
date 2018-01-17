@@ -419,8 +419,11 @@ QMap<QString, QVariant> DecryptedMessageAction::toMap() const {
     case typeDecryptedMessageActionReadMessagesSecret8: {
         result["classType"] = "DecryptedMessageAction::typeDecryptedMessageActionReadMessagesSecret8";
         QList<QVariant> _randomIds;
-        for(const qint64 &m__type: m_randomIds)
+        //for(const qint64 &m__type: m_randomIds)
+        for(int i = 0; i < m_randomIds.size(); ++i) {
+            const qint64 &m__type = m_randomIds[i];
             _randomIds << QVariant::fromValue<qint64>(m__type);
+        }
         result["randomIds"] = _randomIds;
         return result;
     }
@@ -429,8 +432,11 @@ QMap<QString, QVariant> DecryptedMessageAction::toMap() const {
     case typeDecryptedMessageActionDeleteMessagesSecret8: {
         result["classType"] = "DecryptedMessageAction::typeDecryptedMessageActionDeleteMessagesSecret8";
         QList<QVariant> _randomIds;
-        for(const qint64 &m__type: m_randomIds)
+        //for(const qint64 &m__type: m_randomIds)
+        for(int i = 0; i < m_randomIds.size(); ++i) {
+            const qint64 &m__type = m_randomIds[i];
             _randomIds << QVariant::fromValue<qint64>(m__type);
+        }
         result["randomIds"] = _randomIds;
         return result;
     }
@@ -439,8 +445,11 @@ QMap<QString, QVariant> DecryptedMessageAction::toMap() const {
     case typeDecryptedMessageActionScreenshotMessagesSecret8: {
         result["classType"] = "DecryptedMessageAction::typeDecryptedMessageActionScreenshotMessagesSecret8";
         QList<QVariant> _randomIds;
-        for(const qint64 &m__type: m_randomIds)
+        //for(const qint64 &m__type: m_randomIds)
+        for(int i = 0; i < m_randomIds.size(); ++i) {
+            const qint64 &m__type = m_randomIds[i];
             _randomIds << QVariant::fromValue<qint64>(m__type);
+        }
         result["randomIds"] = _randomIds;
         return result;
     }
@@ -533,8 +542,11 @@ DecryptedMessageAction DecryptedMessageAction::fromMap(const QMap<QString, QVari
         result.setClassType(typeDecryptedMessageActionReadMessagesSecret8);
         QList<QVariant> map_randomIds = map["randomIds"].toList();
         QList<qint64> _randomIds;
-        for(const QVariant &var: map_randomIds)
-            _randomIds << var.value<qint64>();;
+        //for(const QVariant &var: map_randomIds)
+        for(int i = 0; i < map_randomIds.size(); ++i) {
+            const QVariant &var = map_randomIds[i];
+            _randomIds << var.value<qint64>();
+        }
         result.setRandomIds(_randomIds);
         return result;
     }
@@ -542,8 +554,11 @@ DecryptedMessageAction DecryptedMessageAction::fromMap(const QMap<QString, QVari
         result.setClassType(typeDecryptedMessageActionDeleteMessagesSecret8);
         QList<QVariant> map_randomIds = map["randomIds"].toList();
         QList<qint64> _randomIds;
-        for(const QVariant &var: map_randomIds)
-            _randomIds << var.value<qint64>();;
+        //for(const QVariant &var: map_randomIds)
+        for(int i = 0; i < map_randomIds.size(); ++i) {
+            const QVariant &var = map_randomIds[i];
+            _randomIds << var.value<qint64>();
+        }
         result.setRandomIds(_randomIds);
         return result;
     }
@@ -551,8 +566,11 @@ DecryptedMessageAction DecryptedMessageAction::fromMap(const QMap<QString, QVari
         result.setClassType(typeDecryptedMessageActionScreenshotMessagesSecret8);
         QList<QVariant> map_randomIds = map["randomIds"].toList();
         QList<qint64> _randomIds;
-        for(const QVariant &var: map_randomIds)
-            _randomIds << var.value<qint64>();;
+        //for(const QVariant &var: map_randomIds)
+        for(int i = 0; i < map_randomIds.size(); ++i) {
+            const QVariant &var = map_randomIds[i];
+            _randomIds << var.value<qint64>();
+        }
         result.setRandomIds(_randomIds);
         return result;
     }

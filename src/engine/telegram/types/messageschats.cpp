@@ -154,8 +154,11 @@ QMap<QString, QVariant> MessagesChats::toMap() const {
     case typeMessagesChats: {
         result["classType"] = "MessagesChats::typeMessagesChats";
         QList<QVariant> _chats;
-        for(const Chat &m__type: m_chats)
+        //for(const Chat &m__type: m_chats)
+        for(int i = 0; i < m_chats.size(); ++i) {
+            const Chat &m__type = m_chats[i];
             if( !m__type.isNull() ) _chats << m__type.toMap();
+        }
         result["chats"] = _chats;
         return result;
     }
@@ -165,8 +168,11 @@ QMap<QString, QVariant> MessagesChats::toMap() const {
         result["classType"] = "MessagesChats::typeMessagesChatsSlice";
         if( count() ) result["count"] = QString::number(count());
         QList<QVariant> _chats;
-        for(const Chat &m__type: m_chats)
+        //for(const Chat &m__type: m_chats)
+        for(int i = 0; i < m_chats.size(); ++i) {
+            const Chat &m__type = m_chats[i];
             if( !m__type.isNull() ) _chats << m__type.toMap();
+        }
         result["chats"] = _chats;
         return result;
     }
@@ -183,8 +189,11 @@ MessagesChats MessagesChats::fromMap(const QMap<QString, QVariant> &map) {
         result.setClassType(typeMessagesChats);
         QList<QVariant> map_chats = map["chats"].toList();
         QList<Chat> _chats;
-        for(const QVariant &var: map_chats)
+        //for(const QVariant &var: map_chats)
+        for(int i = 0; i < map_chats.size(); ++i) {
+            const QVariant &var = map_chats[i];
             _chats << Chat::fromMap(var.toMap());
+        }
         result.setChats(_chats);
         return result;
     }
@@ -198,8 +207,11 @@ MessagesChats MessagesChats::fromMap(const QMap<QString, QVariant> &map) {
 
         QList<QVariant> map_chats = map["chats"].toList();
         QList<Chat> _chats;
-        for(const QVariant &var: map_chats)
+        //for(const QVariant &var: map_chats)
+        for(int i = 0; i < map_chats.size(); ++i) {
+            const QVariant &var = map_chats[i];
             _chats << Chat::fromMap(var.toMap());
+        }
         result.setChats(_chats);
         return result;
     }

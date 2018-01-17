@@ -194,8 +194,11 @@ QMap<QString, QVariant> PrivacyRule::toMap() const {
     case typePrivacyValueAllowUsers: {
         result["classType"] = "PrivacyRule::typePrivacyValueAllowUsers";
         QList<QVariant> _users;
-        for(const qint32 &m__type: m_users)
+        //for(const qint32 &m__type: m_users)
+        for(int i = 0; i < m_users.size(); ++i) {
+            const qint32 &m__type = m_users[i];
             _users << QVariant::fromValue<qint32>(m__type);
+        }
         result["users"] = _users;
         return result;
     }
@@ -216,8 +219,11 @@ QMap<QString, QVariant> PrivacyRule::toMap() const {
     case typePrivacyValueDisallowUsers: {
         result["classType"] = "PrivacyRule::typePrivacyValueDisallowUsers";
         QList<QVariant> _users;
-        for(const qint32 &m__type: m_users)
+        //for(const qint32 &m__type: m_users)
+        for(int i = 0; i < m_users.size(); ++i) {
+            const qint32 &m__type = m_users[i];
             _users << QVariant::fromValue<qint32>(m__type);
+        }
         result["users"] = _users;
         return result;
     }
@@ -242,8 +248,11 @@ PrivacyRule PrivacyRule::fromMap(const QMap<QString, QVariant> &map) {
         result.setClassType(typePrivacyValueAllowUsers);
         QList<QVariant> map_users = map["users"].toList();
         QList<qint32> _users;
-        for(const QVariant &var: map_users)
-            _users << var.value<qint32>();;
+        //for(const QVariant &var: map_users)
+        for(int i = 0; i < map_users.size(); ++i) {
+            const QVariant &var = map_users[i];
+            _users << var.value<qint32>();
+        }
         result.setUsers(_users);
         return result;
     }
@@ -259,8 +268,11 @@ PrivacyRule PrivacyRule::fromMap(const QMap<QString, QVariant> &map) {
         result.setClassType(typePrivacyValueDisallowUsers);
         QList<QVariant> map_users = map["users"].toList();
         QList<qint32> _users;
-        for(const QVariant &var: map_users)
-            _users << var.value<qint32>();;
+        //for(const QVariant &var: map_users)
+        for(int i = 0; i < map_users.size(); ++i) {
+            const QVariant &var = map_users[i];
+            _users << var.value<qint32>();
+        }
         result.setUsers(_users);
         return result;
     }

@@ -131,8 +131,11 @@ QMap<QString, QVariant> MessagesFoundGifs::toMap() const {
         result["classType"] = "MessagesFoundGifs::typeMessagesFoundGifs";
         if( nextOffset() ) result["nextOffset"] = QString::number(nextOffset());
         QList<QVariant> _results;
-        for(const FoundGif &m__type: m_results)
+        //for(const FoundGif &m__type: m_results)
+        for(int i = 0; i < m_results.size(); ++i) {
+            const FoundGif &m__type = m_results[i];
             if( !m__type.isNull() ) _results << m__type.toMap();
+        }
         result["results"] = _results;
         return result;
     }
@@ -155,8 +158,11 @@ MessagesFoundGifs MessagesFoundGifs::fromMap(const QMap<QString, QVariant> &map)
 
         QList<QVariant> map_results = map["results"].toList();
         QList<FoundGif> _results;
-        for(const QVariant &var: map_results)
+        //for(const QVariant &var: map_results)
+        for(int i = 0; i < map_results.size(); ++i) {
+            const QVariant &var = map_results[i];
             _results << FoundGif::fromMap(var.toMap());
+        }
         result.setResults(_results);
         return result;
     }

@@ -148,8 +148,11 @@ QMap<QString, QVariant> MessagesAllStickers::toMap() const {
         result["classType"] = "MessagesAllStickers::typeMessagesAllStickers";
         if( hash() ) result["hash"] = QString::number(hash());
         QList<QVariant> _sets;
-        for(const StickerSet &m__type: m_sets)
+        //for(const StickerSet &m__type: m_sets)
+        for(int i = 0; i < m_sets.size(); ++i) {
+            const StickerSet &m__type = m_sets[i];
             if( !m__type.isNull() ) _sets << m__type.toMap();
+        }
         result["sets"] = _sets;
         return result;
     }
@@ -176,8 +179,11 @@ MessagesAllStickers MessagesAllStickers::fromMap(const QMap<QString, QVariant> &
 
         QList<QVariant> map_sets = map["sets"].toList();
         QList<StickerSet> _sets;
-        for(const QVariant &var: map_sets)
+        //for(const QVariant &var: map_sets)
+        for(int i = 0; i < map_sets.size(); ++i) {
+            const QVariant &var = map_sets[i];
             _sets << StickerSet::fromMap(var.toMap());
+        }
         result.setSets(_sets);
         return result;
     }

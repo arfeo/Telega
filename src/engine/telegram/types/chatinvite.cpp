@@ -251,8 +251,11 @@ QMap<QString, QVariant> ChatInvite::toMap() const {
         if( !m_photo.isNull() ) result["photo"] = m_photo.toMap();
         if( participantsCount() ) result["participantsCount"] = QString::number(participantsCount());
         QList<QVariant> _participants;
-        for(const User &m__type: m_participants)
+        //for(const User &m__type: m_participants)
+        for(int i = 0; i < m_participants.size(); ++i) {
+            const User &m__type = m_participants[i];
             if( !m__type.isNull() ) _participants << m__type.toMap();
+        }
         result["participants"] = _participants;
         return result;
     }
@@ -317,8 +320,11 @@ ChatInvite ChatInvite::fromMap(const QMap<QString, QVariant> &map) {
 
         QList<QVariant> map_participants = map["participants"].toList();
         QList<User> _participants;
-        for(const QVariant &var: map_participants)
+        //for(const QVariant &var: map_participants)
+        for(int i = 0; i < map_participants.size(); ++i) {
+            const QVariant &var = map_participants[i];
             _participants << User::fromMap(var.toMap());
+        }
         result.setParticipants(_participants);
         return result;
     }

@@ -154,12 +154,18 @@ QMap<QString, QVariant> ContactsContacts::toMap() const {
     case typeContactsContacts: {
         result["classType"] = "ContactsContacts::typeContactsContacts";
         QList<QVariant> _contacts;
-        for(const Contact &m__type: m_contacts)
+        //for(const Contact &m__type: m_contacts)
+        for(int i = 0; i < m_contacts.size(); ++i) {
+            const Contact &m__type = m_contacts[i];
             if( !m__type.isNull() ) _contacts << m__type.toMap();
+        }
         result["contacts"] = _contacts;
         QList<QVariant> _users;
-        for(const User &m__type: m_users)
+        //for(const User &m__type: m_users)
+        for(int i = 0; i < m_users.size(); ++i) {
+            const User &m__type = m_users[i];
             if( !m__type.isNull() ) _users << m__type.toMap();
+        }
         result["users"] = _users;
         return result;
     }
@@ -180,13 +186,19 @@ ContactsContacts ContactsContacts::fromMap(const QMap<QString, QVariant> &map) {
         result.setClassType(typeContactsContacts);
         QList<QVariant> map_contacts = map["contacts"].toList();
         QList<Contact> _contacts;
-        for(const QVariant &var: map_contacts)
+        //for(const QVariant &var: map_contacts)
+        for(int i = 0; i < map_contacts.size(); ++i) {
+            const QVariant &var = map_contacts[i];
             _contacts << Contact::fromMap(var.toMap());
+        }
         result.setContacts(_contacts);
         QList<QVariant> map_users = map["users"].toList();
         QList<User> _users;
-        for(const QVariant &var: map_users)
+        //for(const QVariant &var: map_users)
+        for(int i = 0; i < map_users.size(); ++i) {
+            const QVariant &var = map_users[i];
             _users << User::fromMap(var.toMap());
+        }
         result.setUsers(_users);
         return result;
     }

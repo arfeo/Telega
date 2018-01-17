@@ -157,8 +157,11 @@ QMap<QString, QVariant> InputWebDocument::toMap() const {
         if( size() ) result["size"] = QString::number(size());
         if( !m_mimeType.isEmpty() ) result["mimeType"] = QVariant::fromValue<QString>(m_mimeType);
         QList<QVariant> _attributes;
-        for(const DocumentAttribute &m__type: m_attributes)
+        //for(const DocumentAttribute &m__type: m_attributes)
+        for(int i = 0; i < m_attributes.size(); ++i) {
+            const DocumentAttribute &m__type = m_attributes[i];
             if( !m__type.isNull() ) _attributes << m__type.toMap();
+        }
         result["attributes"] = _attributes;
         return result;
     }
@@ -193,8 +196,11 @@ InputWebDocument InputWebDocument::fromMap(const QMap<QString, QVariant> &map) {
 
         QList<QVariant> map_attributes = map["attributes"].toList();
         QList<DocumentAttribute> _attributes;
-        for(const QVariant &var: map_attributes)
+        //for(const QVariant &var: map_attributes)
+        for(int i = 0; i < map_attributes.size(); ++i) {
+            const QVariant &var = map_attributes[i];
             _attributes << DocumentAttribute::fromMap(var.toMap());
+        }
         result.setAttributes(_attributes);
         return result;
     }

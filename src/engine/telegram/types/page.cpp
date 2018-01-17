@@ -210,16 +210,25 @@ QMap<QString, QVariant> Page::toMap() const {
     case typePagePart: {
         result["classType"] = "Page::typePagePart";
         QList<QVariant> _blocks;
-        for(const PageBlock &m__type: m_blocks)
+        //for(const PageBlock &m__type: m_blocks)
+        for(int i = 0; i < m_blocks.size(); ++i) {
+            const PageBlock &m__type = m_blocks[i];
             if( !m__type.isNull() ) _blocks << m__type.toMap();
+        }
         result["blocks"] = _blocks;
         QList<QVariant> _photos;
-        for(const Photo &m__type: m_photos)
+        //for(const Photo &m__type: m_photos)
+        for(int i = 0; i < m_photos.size(); ++i) {
+            const Photo &m__type = m_photos[i];
             if( !m__type.isNull() ) _photos << m__type.toMap();
+        }
         result["photos"] = _photos;
         QList<QVariant> _documents;
-        for(const Document &m__type: m_documents)
+        //for(const Document &m__type: m_documents)
+        for(int i = 0; i < m_documents.size(); ++i) {
+            const Document &m__type = m_documents[i];
             if( !m__type.isNull() ) _documents << m__type.toMap();
+        }
         result["documents"] = _documents;
         return result;
     }
@@ -228,16 +237,25 @@ QMap<QString, QVariant> Page::toMap() const {
     case typePageFull: {
         result["classType"] = "Page::typePageFull";
         QList<QVariant> _blocks;
-        for(const PageBlock &m__type: m_blocks)
+        //for(const PageBlock &m__type: m_blocks)
+        for(int i = 0; i < m_blocks.size(); ++i) {
+            const PageBlock &m__type = m_blocks[i];
             if( !m__type.isNull() ) _blocks << m__type.toMap();
+        }
         result["blocks"] = _blocks;
         QList<QVariant> _photos;
-        for(const Photo &m__type: m_photos)
+        //for(const Photo &m__type: m_photos)
+        for(int i = 0; i < m_photos.size(); ++i) {
+            const Photo &m__type = m_photos[i];
             if( !m__type.isNull() ) _photos << m__type.toMap();
+        }
         result["photos"] = _photos;
         QList<QVariant> _documents;
-        for(const Document &m__type: m_documents)
+        //for(const Document &m__type: m_documents)
+        for(int i = 0; i < m_documents.size(); ++i) {
+            const Document &m__type = m_documents[i];
             if( !m__type.isNull() ) _documents << m__type.toMap();
+        }
         result["documents"] = _documents;
         return result;
     }
@@ -254,18 +272,27 @@ Page Page::fromMap(const QMap<QString, QVariant> &map) {
         result.setClassType(typePagePart);
         QList<QVariant> map_blocks = map["blocks"].toList();
         QList<PageBlock> _blocks;
-        for(const QVariant &var: map_blocks)
+        //for(const QVariant &var: map_blocks)
+        for(int i = 0; i < map_blocks.size(); ++i) {
+            const QVariant &var = map_blocks[i];
             _blocks << PageBlock::fromMap(var.toMap());
+        }
         result.setBlocks(_blocks);
         QList<QVariant> map_photos = map["photos"].toList();
         QList<Photo> _photos;
-        for(const QVariant &var: map_photos)
+        //for(const QVariant &var: map_photos)
+        for(int i = 0; i < map_photos.size(); ++i) {
+            const QVariant &var = map_photos[i];
             _photos << Photo::fromMap(var.toMap());
+        }
         result.setPhotos(_photos);
         QList<QVariant> map_documents = map["documents"].toList();
         QList<Document> _documents;
-        for(const QVariant &var: map_documents)
+        //for(const QVariant &var: map_documents)
+        for(int i = 0; i < map_documents.size(); ++i) {
+            const QVariant &var = map_documents[i];
             _documents << Document::fromMap(var.toMap());
+        }
         result.setDocuments(_documents);
         return result;
     }
@@ -273,18 +300,27 @@ Page Page::fromMap(const QMap<QString, QVariant> &map) {
         result.setClassType(typePageFull);
         QList<QVariant> map_blocks = map["blocks"].toList();
         QList<PageBlock> _blocks;
-        for(const QVariant &var: map_blocks)
+        //for(const QVariant &var: map_blocks)
+        for(int i = 0; i < map_blocks.size(); ++i) {
+            const QVariant &var = map_blocks[i];
             _blocks << PageBlock::fromMap(var.toMap());
+        }
         result.setBlocks(_blocks);
         QList<QVariant> map_photos = map["photos"].toList();
         QList<Photo> _photos;
-        for(const QVariant &var: map_photos)
+        //for(const QVariant &var: map_photos)
+        for(int i = 0; i < map_photos.size(); ++i) {
+            const QVariant &var = map_photos[i];
             _photos << Photo::fromMap(var.toMap());
+        }
         result.setPhotos(_photos);
         QList<QVariant> map_documents = map["documents"].toList();
         QList<Document> _documents;
-        for(const QVariant &var: map_documents)
+        //for(const QVariant &var: map_documents)
+        for(int i = 0; i < map_documents.size(); ++i) {
+            const QVariant &var = map_documents[i];
             _documents << Document::fromMap(var.toMap());
+        }
         result.setDocuments(_documents);
         return result;
     }

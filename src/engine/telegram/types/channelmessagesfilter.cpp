@@ -157,8 +157,11 @@ QMap<QString, QVariant> ChannelMessagesFilter::toMap() const {
         result["classType"] = "ChannelMessagesFilter::typeChannelMessagesFilter";
         if( excludeNewMessages() ) result["excludeNewMessages"] = QString::number(excludeNewMessages());
         QList<QVariant> _ranges;
-        for(const MessageRange &m__type: m_ranges)
+        //for(const MessageRange &m__type: m_ranges)
+        for(int i = 0; i < m_ranges.size(); ++i) {
+            const MessageRange &m__type = m_ranges[i];
             if( !m__type.isNull() ) _ranges << m__type.toMap();
+        }
         result["ranges"] = _ranges;
         return result;
     }
@@ -185,8 +188,11 @@ ChannelMessagesFilter ChannelMessagesFilter::fromMap(const QMap<QString, QVarian
 
         QList<QVariant> map_ranges = map["ranges"].toList();
         QList<MessageRange> _ranges;
-        for(const QVariant &var: map_ranges)
+        //for(const QVariant &var: map_ranges)
+        for(int i = 0; i < map_ranges.size(); ++i) {
+            const QVariant &var = map_ranges[i];
             _ranges << MessageRange::fromMap(var.toMap());
+        }
         result.setRanges(_ranges);
         return result;
     }

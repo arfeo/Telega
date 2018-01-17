@@ -114,8 +114,11 @@ QMap<QString, QVariant> KeyboardButtonRow::toMap() const {
     case typeKeyboardButtonRow: {
         result["classType"] = "KeyboardButtonRow::typeKeyboardButtonRow";
         QList<QVariant> _buttons;
-        for(const KeyboardButton &m__type: m_buttons)
+        //for(const KeyboardButton &m__type: m_buttons)
+        for(int i = 0; i < m_buttons.size(); ++i) {
+            const KeyboardButton &m__type = m_buttons[i];
             if( !m__type.isNull() ) _buttons << m__type.toMap();
+        }
         result["buttons"] = _buttons;
         return result;
     }
@@ -132,8 +135,11 @@ KeyboardButtonRow KeyboardButtonRow::fromMap(const QMap<QString, QVariant> &map)
         result.setClassType(typeKeyboardButtonRow);
         QList<QVariant> map_buttons = map["buttons"].toList();
         QList<KeyboardButton> _buttons;
-        for(const QVariant &var: map_buttons)
+        //for(const QVariant &var: map_buttons)
+        for(int i = 0; i < map_buttons.size(); ++i) {
+            const QVariant &var = map_buttons[i];
             _buttons << KeyboardButton::fromMap(var.toMap());
+        }
         result.setButtons(_buttons);
         return result;
     }

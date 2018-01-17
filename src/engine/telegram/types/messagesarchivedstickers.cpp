@@ -131,8 +131,11 @@ QMap<QString, QVariant> MessagesArchivedStickers::toMap() const {
         result["classType"] = "MessagesArchivedStickers::typeMessagesArchivedStickers";
         if( count() ) result["count"] = QString::number(count());
         QList<QVariant> _sets;
-        for(const StickerSetCovered &m__type: m_sets)
+        //for(const StickerSetCovered &m__type: m_sets)
+        for(int i = 0; i < m_sets.size(); ++i) {
+            const StickerSetCovered &m__type = m_sets[i];
             if( !m__type.isNull() ) _sets << m__type.toMap();
+        }
         result["sets"] = _sets;
         return result;
     }
@@ -155,8 +158,11 @@ MessagesArchivedStickers MessagesArchivedStickers::fromMap(const QMap<QString, Q
 
         QList<QVariant> map_sets = map["sets"].toList();
         QList<StickerSetCovered> _sets;
-        for(const QVariant &var: map_sets)
+        //for(const QVariant &var: map_sets)
+        for(int i = 0; i < map_sets.size(); ++i) {
+            const QVariant &var = map_sets[i];
             _sets << StickerSetCovered::fromMap(var.toMap());
+        }
         result.setSets(_sets);
         return result;
     }

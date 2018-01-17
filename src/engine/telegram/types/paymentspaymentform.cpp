@@ -286,8 +286,11 @@ QMap<QString, QVariant> PaymentsPaymentForm::toMap() const {
         if( !m_savedInfo.isNull() ) result["savedInfo"] = m_savedInfo.toMap();
         if( !m_savedCredentials.isNull() ) result["savedCredentials"] = m_savedCredentials.toMap();
         QList<QVariant> _users;
-        for(const User &m__type: m_users)
+        //for(const User &m__type: m_users)
+        for(int i = 0; i < m_users.size(); ++i) {
+            const User &m__type = m_users[i];
             if( !m__type.isNull() ) _users << m__type.toMap();
+        }
         result["users"] = _users;
         return result;
     }
@@ -356,8 +359,11 @@ PaymentsPaymentForm PaymentsPaymentForm::fromMap(const QMap<QString, QVariant> &
 
         QList<QVariant> map_users = map["users"].toList();
         QList<User> _users;
-        for(const QVariant &var: map_users)
+        //for(const QVariant &var: map_users)
+        for(int i = 0; i < map_users.size(); ++i) {
+            const QVariant &var = map_users[i];
             _users << User::fromMap(var.toMap());
+        }
         result.setUsers(_users);
         return result;
     }

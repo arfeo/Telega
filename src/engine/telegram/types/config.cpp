@@ -641,8 +641,11 @@ QMap<QString, QVariant> Config::toMap() const {
         if( testMode() ) result["testMode"] = QString::number(testMode());
         if( thisDc() ) result["thisDc"] = QString::number(thisDc());
         QList<QVariant> _dcOptions;
-        for(const DcOption &m__type: m_dcOptions)
+        //for(const DcOption &m__type: m_dcOptions)
+        for(int i = 0; i < m_dcOptions.size(); ++i) {
+            const DcOption &m__type = m_dcOptions[i];
             if( !m__type.isNull() ) _dcOptions << m__type.toMap();
+        }
         result["dcOptions"] = _dcOptions;
         if( chatSizeMax() ) result["chatSizeMax"] = QString::number(chatSizeMax());
         if( megagroupSizeMax() ) result["megagroupSizeMax"] = QString::number(megagroupSizeMax());
@@ -670,8 +673,11 @@ QMap<QString, QVariant> Config::toMap() const {
         if( !m_suggestedLangCode.isEmpty() ) result["suggestedLangCode"] = QVariant::fromValue<QString>(m_suggestedLangCode);
         if( langPackVersion() ) result["langPackVersion"] = QString::number(langPackVersion());
         QList<QVariant> _disabledFeatures;
-        for(const DisabledFeature &m__type: m_disabledFeatures)
+        //for(const DisabledFeature &m__type: m_disabledFeatures)
+        for(int i = 0; i < m_disabledFeatures.size(); ++i) {
+            const DisabledFeature &m__type = m_disabledFeatures[i];
             if( !m__type.isNull() ) _disabledFeatures << m__type.toMap();
+        }
         result["disabledFeatures"] = _disabledFeatures;
         return result;
     }
@@ -718,8 +724,11 @@ Config Config::fromMap(const QMap<QString, QVariant> &map) {
 
         QList<QVariant> map_dcOptions = map["dcOptions"].toList();
         QList<DcOption> _dcOptions;
-        for(const QVariant &var: map_dcOptions)
+        //for(const QVariant &var: map_dcOptions)
+        for(int i = 0; i < map_dcOptions.size(); ++i) {
+            const QVariant &var = map_dcOptions[i];
             _dcOptions << DcOption::fromMap(var.toMap());
+        }
         result.setDcOptions(_dcOptions);
         QVariant _chatSizeMax_var = map.value("chatSizeMax");
         if( !_chatSizeMax_var.isNull() ) {
@@ -873,8 +882,11 @@ Config Config::fromMap(const QMap<QString, QVariant> &map) {
 
         QList<QVariant> map_disabledFeatures = map["disabledFeatures"].toList();
         QList<DisabledFeature> _disabledFeatures;
-        for(const QVariant &var: map_disabledFeatures)
+        //for(const QVariant &var: map_disabledFeatures)
+        for(int i = 0; i < map_disabledFeatures.size(); ++i) {
+            const QVariant &var = map_disabledFeatures[i];
             _disabledFeatures << DisabledFeature::fromMap(var.toMap());
+        }
         result.setDisabledFeatures(_disabledFeatures);
         return result;
     }

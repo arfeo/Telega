@@ -202,8 +202,11 @@ QMap<QString, QVariant> ChatParticipants::toMap() const {
         result["classType"] = "ChatParticipants::typeChatParticipants";
         if( chatId() ) result["chatId"] = QString::number(chatId());
         QList<QVariant> _participants;
-        for(const ChatParticipant &m__type: m_participants)
+        //for(const ChatParticipant &m__type: m_participants)
+        for(int i = 0; i < m_participants.size(); ++i) {
+            const ChatParticipant &m__type = m_participants[i];
             if( !m__type.isNull() ) _participants << m__type.toMap();
+        }
         result["participants"] = _participants;
         if( version() ) result["version"] = QString::number(version());
         return result;
@@ -241,8 +244,11 @@ ChatParticipants ChatParticipants::fromMap(const QMap<QString, QVariant> &map) {
 
         QList<QVariant> map_participants = map["participants"].toList();
         QList<ChatParticipant> _participants;
-        for(const QVariant &var: map_participants)
+        //for(const QVariant &var: map_participants)
+        for(int i = 0; i < map_participants.size(); ++i) {
+            const QVariant &var = map_participants[i];
             _participants << ChatParticipant::fromMap(var.toMap());
+        }
         result.setParticipants(_participants);
         QVariant _version_var = map.value("version");
         if( !_version_var.isNull() ) {

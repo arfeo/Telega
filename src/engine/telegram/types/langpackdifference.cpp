@@ -161,8 +161,11 @@ QMap<QString, QVariant> LangPackDifference::toMap() const {
         if( fromVersion() ) result["fromVersion"] = QString::number(fromVersion());
         if( version() ) result["version"] = QString::number(version());
         QList<QVariant> _strings;
-        for(const LangPackString &m__type: m_strings)
+        //for(const LangPackString &m__type: m_strings)
+        for(int i = 0; i < m_strings.size(); ++i) {
+            const LangPackString &m__type = m_strings[i];
             if( !m__type.isNull() ) _strings << m__type.toMap();
+        }
         result["strings"] = _strings;
         return result;
     }
@@ -197,8 +200,11 @@ LangPackDifference LangPackDifference::fromMap(const QMap<QString, QVariant> &ma
 
         QList<QVariant> map_strings = map["strings"].toList();
         QList<LangPackString> _strings;
-        for(const QVariant &var: map_strings)
+        //for(const QVariant &var: map_strings)
+        for(int i = 0; i < map_strings.size(); ++i) {
+            const QVariant &var = map_strings[i];
             _strings << LangPackString::fromMap(var.toMap());
+        }
         result.setStrings(_strings);
         return result;
     }

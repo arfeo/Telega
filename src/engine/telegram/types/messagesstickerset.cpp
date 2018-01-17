@@ -150,12 +150,18 @@ QMap<QString, QVariant> MessagesStickerSet::toMap() const {
         result["classType"] = "MessagesStickerSet::typeMessagesStickerSet";
         if( !m_set.isNull() ) result["set"] = m_set.toMap();
         QList<QVariant> _packs;
-        for(const StickerPack &m__type: m_packs)
+        //for(const StickerPack &m__type: m_packs)
+        for(int i = 0; i < m_packs.size(); ++i) {
+            const StickerPack &m__type = m_packs[i];
             if( !m__type.isNull() ) _packs << m__type.toMap();
+        }
         result["packs"] = _packs;
         QList<QVariant> _documents;
-        for(const Document &m__type: m_documents)
+        //for(const Document &m__type: m_documents)
+        for(int i = 0; i < m_documents.size(); ++i) {
+            const Document &m__type = m_documents[i];
             if( !m__type.isNull() ) _documents << m__type.toMap();
+        }
         result["documents"] = _documents;
         return result;
     }
@@ -176,13 +182,19 @@ MessagesStickerSet MessagesStickerSet::fromMap(const QMap<QString, QVariant> &ma
 
         QList<QVariant> map_packs = map["packs"].toList();
         QList<StickerPack> _packs;
-        for(const QVariant &var: map_packs)
+        //for(const QVariant &var: map_packs)
+        for(int i = 0; i < map_packs.size(); ++i) {
+            const QVariant &var = map_packs[i];
             _packs << StickerPack::fromMap(var.toMap());
+        }
         result.setPacks(_packs);
         QList<QVariant> map_documents = map["documents"].toList();
         QList<Document> _documents;
-        for(const QVariant &var: map_documents)
+        //for(const QVariant &var: map_documents)
+        for(int i = 0; i < map_documents.size(); ++i) {
+            const QVariant &var = map_documents[i];
             _documents << Document::fromMap(var.toMap());
+        }
         result.setDocuments(_documents);
         return result;
     }

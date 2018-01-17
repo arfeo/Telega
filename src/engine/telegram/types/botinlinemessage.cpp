@@ -373,8 +373,11 @@ QMap<QString, QVariant> BotInlineMessage::toMap() const {
         if( noWebpage() ) result["noWebpage"] = QString::number(noWebpage());
         if( !m_message.isEmpty() ) result["message"] = QVariant::fromValue<QString>(m_message);
         QList<QVariant> _entities;
-        for(const MessageEntity &m__type: m_entities)
+        //for(const MessageEntity &m__type: m_entities)
+        for(int i = 0; i < m_entities.size(); ++i) {
+            const MessageEntity &m__type = m_entities[i];
             if( !m__type.isNull() ) _entities << m__type.toMap();
+        }
         result["entities"] = _entities;
         if( !m_replyMarkup.isNull() ) result["replyMarkup"] = m_replyMarkup.toMap();
         return result;
@@ -448,8 +451,11 @@ BotInlineMessage BotInlineMessage::fromMap(const QMap<QString, QVariant> &map) {
 
         QList<QVariant> map_entities = map["entities"].toList();
         QList<MessageEntity> _entities;
-        for(const QVariant &var: map_entities)
+        //for(const QVariant &var: map_entities)
+        for(int i = 0; i < map_entities.size(); ++i) {
+            const QVariant &var = map_entities[i];
             _entities << MessageEntity::fromMap(var.toMap());
+        }
         result.setEntities(_entities);
         QVariant _replyMarkup_var = map.value("replyMarkup");
         if( !_replyMarkup_var.isNull() )

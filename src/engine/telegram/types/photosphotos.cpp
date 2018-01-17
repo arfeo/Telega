@@ -190,12 +190,18 @@ QMap<QString, QVariant> PhotosPhotos::toMap() const {
     case typePhotosPhotos: {
         result["classType"] = "PhotosPhotos::typePhotosPhotos";
         QList<QVariant> _photos;
-        for(const Photo &m__type: m_photos)
+        //for(const Photo &m__type: m_photos)
+        for(int i = 0; i < m_photos.size(); ++i) {
+            const Photo &m__type = m_photos[i];
             if( !m__type.isNull() ) _photos << m__type.toMap();
+        }
         result["photos"] = _photos;
         QList<QVariant> _users;
-        for(const User &m__type: m_users)
+        //for(const User &m__type: m_users)
+        for(int i = 0; i < m_users.size(); ++i) {
+            const User &m__type = m_users[i];
             if( !m__type.isNull() ) _users << m__type.toMap();
+        }
         result["users"] = _users;
         return result;
     }
@@ -205,12 +211,18 @@ QMap<QString, QVariant> PhotosPhotos::toMap() const {
         result["classType"] = "PhotosPhotos::typePhotosPhotosSlice";
         if( count() ) result["count"] = QString::number(count());
         QList<QVariant> _photos;
-        for(const Photo &m__type: m_photos)
+        //for(const Photo &m__type: m_photos)
+        for(int i = 0; i < m_photos.size(); ++i) {
+            const Photo &m__type = m_photos[i];
             if( !m__type.isNull() ) _photos << m__type.toMap();
+        }
         result["photos"] = _photos;
         QList<QVariant> _users;
-        for(const User &m__type: m_users)
+        //for(const User &m__type: m_users)
+        for(int i = 0; i < m_users.size(); ++i) {
+            const User &m__type = m_users[i];
             if( !m__type.isNull() ) _users << m__type.toMap();
+        }
         result["users"] = _users;
         return result;
     }
@@ -227,13 +239,19 @@ PhotosPhotos PhotosPhotos::fromMap(const QMap<QString, QVariant> &map) {
         result.setClassType(typePhotosPhotos);
         QList<QVariant> map_photos = map["photos"].toList();
         QList<Photo> _photos;
-        for(const QVariant &var: map_photos)
+        //for(const QVariant &var: map_photos)
+        for(int i = 0; i < map_photos.size(); ++i) {
+            const QVariant &var = map_photos[i];
             _photos << Photo::fromMap(var.toMap());
+        }
         result.setPhotos(_photos);
         QList<QVariant> map_users = map["users"].toList();
         QList<User> _users;
-        for(const QVariant &var: map_users)
+        //for(const QVariant &var: map_users)
+        for(int i = 0; i < map_users.size(); ++i) {
+            const QVariant &var = map_users[i];
             _users << User::fromMap(var.toMap());
+        }
         result.setUsers(_users);
         return result;
     }
@@ -247,13 +265,19 @@ PhotosPhotos PhotosPhotos::fromMap(const QMap<QString, QVariant> &map) {
 
         QList<QVariant> map_photos = map["photos"].toList();
         QList<Photo> _photos;
-        for(const QVariant &var: map_photos)
+        //for(const QVariant &var: map_photos)
+        for(int i = 0; i < map_photos.size(); ++i) {
+            const QVariant &var = map_photos[i];
             _photos << Photo::fromMap(var.toMap());
+        }
         result.setPhotos(_photos);
         QList<QVariant> map_users = map["users"].toList();
         QList<User> _users;
-        for(const QVariant &var: map_users)
+        //for(const QVariant &var: map_users)
+        for(int i = 0; i < map_users.size(); ++i) {
+            const QVariant &var = map_users[i];
             _users << User::fromMap(var.toMap());
+        }
         result.setUsers(_users);
         return result;
     }

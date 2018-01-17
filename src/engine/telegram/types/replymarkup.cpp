@@ -225,8 +225,11 @@ QMap<QString, QVariant> ReplyMarkup::toMap() const {
         if( singleUse() ) result["singleUse"] = QString::number(singleUse());
         if( selective() ) result["selective"] = QString::number(selective());
         QList<QVariant> _rows;
-        for(const KeyboardButtonRow &m__type: m_rows)
+        //for(const KeyboardButtonRow &m__type: m_rows)
+        for(int i = 0; i < m_rows.size(); ++i) {
+            const KeyboardButtonRow &m__type = m_rows[i];
             if( !m__type.isNull() ) _rows << m__type.toMap();
+        }
         result["rows"] = _rows;
         return result;
     }
@@ -235,8 +238,11 @@ QMap<QString, QVariant> ReplyMarkup::toMap() const {
     case typeReplyInlineMarkup: {
         result["classType"] = "ReplyMarkup::typeReplyInlineMarkup";
         QList<QVariant> _rows;
-        for(const KeyboardButtonRow &m__type: m_rows)
+        //for(const KeyboardButtonRow &m__type: m_rows)
+        for(int i = 0; i < m_rows.size(); ++i) {
+            const KeyboardButtonRow &m__type = m_rows[i];
             if( !m__type.isNull() ) _rows << m__type.toMap();
+        }
         result["rows"] = _rows;
         return result;
     }
@@ -297,8 +303,11 @@ ReplyMarkup ReplyMarkup::fromMap(const QMap<QString, QVariant> &map) {
 
         QList<QVariant> map_rows = map["rows"].toList();
         QList<KeyboardButtonRow> _rows;
-        for(const QVariant &var: map_rows)
+        //for(const QVariant &var: map_rows)
+        for(int i = 0; i < map_rows.size(); ++i) {
+            const QVariant &var = map_rows[i];
             _rows << KeyboardButtonRow::fromMap(var.toMap());
+        }
         result.setRows(_rows);
         return result;
     }
@@ -306,8 +315,11 @@ ReplyMarkup ReplyMarkup::fromMap(const QMap<QString, QVariant> &map) {
         result.setClassType(typeReplyInlineMarkup);
         QList<QVariant> map_rows = map["rows"].toList();
         QList<KeyboardButtonRow> _rows;
-        for(const QVariant &var: map_rows)
+        //for(const QVariant &var: map_rows)
+        for(int i = 0; i < map_rows.size(); ++i) {
+            const QVariant &var = map_rows[i];
             _rows << KeyboardButtonRow::fromMap(var.toMap());
+        }
         result.setRows(_rows);
         return result;
     }

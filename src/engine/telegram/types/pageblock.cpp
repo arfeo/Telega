@@ -907,8 +907,11 @@ QMap<QString, QVariant> PageBlock::toMap() const {
         result["classType"] = "PageBlock::typePageBlockList";
         if( ordered() ) result["ordered"] = QString::number(ordered());
         QList<QVariant> _itemsVectorRichText;
-        for(const RichText &m__type: m_itemsVectorRichText)
+        //for(const RichText &m__type: m_itemsVectorRichText)
+        for(int i = 0; i < m_itemsVectorRichText.size(); ++i) {
+            const RichText &m__type = m_itemsVectorRichText[i];
             if( !m__type.isNull() ) _itemsVectorRichText << m__type.toMap();
+        }
         result["itemsVectorRichText"] = _itemsVectorRichText;
         return result;
     }
@@ -977,8 +980,11 @@ QMap<QString, QVariant> PageBlock::toMap() const {
         if( !m_authorString.isEmpty() ) result["authorString"] = QVariant::fromValue<QString>(m_authorString);
         if( date() ) result["date"] = QString::number(date());
         QList<QVariant> _blocks;
-        for(const PageBlock &m__type: m_blocks)
+        //for(const PageBlock &m__type: m_blocks)
+        for(int i = 0; i < m_blocks.size(); ++i) {
+            const PageBlock &m__type = m_blocks[i];
             if( !m__type.isNull() ) _blocks << m__type.toMap();
+        }
         result["blocks"] = _blocks;
         if( !m_caption.isNull() ) result["caption"] = m_caption.toMap();
         return result;
@@ -988,8 +994,11 @@ QMap<QString, QVariant> PageBlock::toMap() const {
     case typePageBlockCollage: {
         result["classType"] = "PageBlock::typePageBlockCollage";
         QList<QVariant> _itemsVectorPageBlock;
-        for(const PageBlock &m__type: m_itemsVectorPageBlock)
+        //for(const PageBlock &m__type: m_itemsVectorPageBlock)
+        for(int i = 0; i < m_itemsVectorPageBlock.size(); ++i) {
+            const PageBlock &m__type = m_itemsVectorPageBlock[i];
             if( !m__type.isNull() ) _itemsVectorPageBlock << m__type.toMap();
+        }
         result["itemsVectorPageBlock"] = _itemsVectorPageBlock;
         if( !m_caption.isNull() ) result["caption"] = m_caption.toMap();
         return result;
@@ -999,8 +1008,11 @@ QMap<QString, QVariant> PageBlock::toMap() const {
     case typePageBlockSlideshow: {
         result["classType"] = "PageBlock::typePageBlockSlideshow";
         QList<QVariant> _itemsVectorPageBlock;
-        for(const PageBlock &m__type: m_itemsVectorPageBlock)
+        //for(const PageBlock &m__type: m_itemsVectorPageBlock)
+        for(int i = 0; i < m_itemsVectorPageBlock.size(); ++i) {
+            const PageBlock &m__type = m_itemsVectorPageBlock[i];
             if( !m__type.isNull() ) _itemsVectorPageBlock << m__type.toMap();
+        }
         result["itemsVectorPageBlock"] = _itemsVectorPageBlock;
         if( !m_caption.isNull() ) result["caption"] = m_caption.toMap();
         return result;
@@ -1133,8 +1145,11 @@ PageBlock PageBlock::fromMap(const QMap<QString, QVariant> &map) {
 
         QList<QVariant> map_itemsVectorRichText = map["itemsVectorRichText"].toList();
         QList<RichText> _itemsVectorRichText;
-        for(const QVariant &var: map_itemsVectorRichText)
+        //for(const QVariant &var: map_itemsVectorRichText)
+        for(int i = 0; i < map_itemsVectorRichText.size(); ++i) {
+            const QVariant &var = map_itemsVectorRichText[i];
             _itemsVectorRichText << RichText::fromMap(var.toMap());
+        }
         result.setItemsVectorRichText(_itemsVectorRichText);
         return result;
     }
@@ -1294,8 +1309,11 @@ PageBlock PageBlock::fromMap(const QMap<QString, QVariant> &map) {
 
         QList<QVariant> map_blocks = map["blocks"].toList();
         QList<PageBlock> _blocks;
-        for(const QVariant &var: map_blocks)
+        //for(const QVariant &var: map_blocks)
+        for(int i = 0; i < map_blocks.size(); ++i) {
+            const QVariant &var = map_blocks[i];
             _blocks << PageBlock::fromMap(var.toMap());
+        }
         result.setBlocks(_blocks);
         QVariant _caption_var = map.value("caption");
         if( !_caption_var.isNull() )
@@ -1307,8 +1325,11 @@ PageBlock PageBlock::fromMap(const QMap<QString, QVariant> &map) {
         result.setClassType(typePageBlockCollage);
         QList<QVariant> map_itemsVectorPageBlock = map["itemsVectorPageBlock"].toList();
         QList<PageBlock> _itemsVectorPageBlock;
-        for(const QVariant &var: map_itemsVectorPageBlock)
+        //for(const QVariant &var: map_itemsVectorPageBlock)
+        for(int i = 0; i < map_itemsVectorPageBlock.size(); ++i) {
+            const QVariant &var = map_itemsVectorPageBlock[i];
             _itemsVectorPageBlock << PageBlock::fromMap(var.toMap());
+        }
         result.setItemsVectorPageBlock(_itemsVectorPageBlock);
         QVariant _caption_var = map.value("caption");
         if( !_caption_var.isNull() )
@@ -1320,8 +1341,11 @@ PageBlock PageBlock::fromMap(const QMap<QString, QVariant> &map) {
         result.setClassType(typePageBlockSlideshow);
         QList<QVariant> map_itemsVectorPageBlock = map["itemsVectorPageBlock"].toList();
         QList<PageBlock> _itemsVectorPageBlock;
-        for(const QVariant &var: map_itemsVectorPageBlock)
+        //for(const QVariant &var: map_itemsVectorPageBlock)
+        for(int i = 0; i < map_itemsVectorPageBlock.size(); ++i) {
+            const QVariant &var = map_itemsVectorPageBlock[i];
             _itemsVectorPageBlock << PageBlock::fromMap(var.toMap());
+        }
         result.setItemsVectorPageBlock(_itemsVectorPageBlock);
         QVariant _caption_var = map.value("caption");
         if( !_caption_var.isNull() )
