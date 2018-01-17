@@ -21,7 +21,7 @@
 #ifndef FILEOPERATION_H
 #define FILEOPERATION_H
 
-#include "telegram.h"
+//#include "telegram.h"
 #include "uploadfileengine.h"
 #include "telegram/types/inputpeer.h"
 #include "telegram/types/inputmedia.h"

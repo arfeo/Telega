@@ -23,14 +23,11 @@
 #include "util/constants.h"
 #include "dc.h"
 //#include "telegram.h"
-
 #include <QDir>
 #include <QSettings>
 #include <QDebug>
 #include <fcntl.h>
-#if !defined(Q_OS_WIN)
 #include <unistd.h>
-#endif
 
 #include <openssl/bn.h>
 
