@@ -30,16 +30,6 @@
 #include <QStringList>
 #include <QtCore>
 
-#ifdef DEBUG
-#define RES_PRE 8
-#define RES_AFTER 8
-#define MAX_BLOCKS 1000000
-void *blocks[MAX_BLOCKS];
-void *free_blocks[MAX_BLOCKS];
-qint32 usedBlocks;
-qint32 freeBlocksCnt;
-#endif
-
 Utils::Utils(QObject *parent) :
     QObject(parent)
 {
@@ -217,21 +207,9 @@ qint64 Utils::computeRSAFingerprint(RSA *key) {
 }
 
 void *Utils::talloc(size_t size) {
-#ifdef DEBUG
-  total_allocated_bytes += size;
-  void *p = malloc (size + RES_PRE + RES_AFTER);
-  ensurePtr (p);
-  *(qint32 *)p = size ^ 0xbedabeda;
-  *(qint32 *)(p + 4) = size;
-  *(qint32 *)(p + RES_PRE + size) = size ^ 0x7bed7bed;
-  *(qint32 *)(p + RES_AFTER + 4 + size) = usedBlocks;
-  blocks[usedBlocks ++] = p;
-  return p + 8;
-#else
   void *p = malloc (size);
   ensurePtr (p);
   return p;
-#endif
 }
 
 qint32 Utils::tinflate(void *input, qint32 ilen, void *output, qint32 olen) {

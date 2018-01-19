@@ -24,7 +24,6 @@
 
 #include <QObject>
 #include "core/outboundpkt.h"
-
 #include <openssl/bn.h>
 #include <openssl/aes.h>
 

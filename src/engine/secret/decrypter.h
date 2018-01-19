@@ -23,7 +23,6 @@
 #include "telegram/types/decryptedmessage.h"
 #include "telegram/types/encryptedmessage.h"
 #include "core/settings.h"
-
 #include <QSharedPointer>
 #include <QPair>
 

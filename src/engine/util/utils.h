@@ -21,6 +21,7 @@
 
 #ifndef UTILS_H
 #define UTILS_H
+
 #include <QObject>
 #include <openssl/bn.h>
 #include "constants.h"

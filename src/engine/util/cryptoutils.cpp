@@ -20,7 +20,6 @@
  */
 
 #include "cryptoutils.h"
-
 #include "core/settings.h"
 #include "utils.h"
 #include <openssl/rand.h>

@@ -25,7 +25,6 @@
 #include <QObject>
 #include <QByteArray>
 #include <QSharedPointer>
-
 #include <openssl/bn.h>
 
 class Settings;

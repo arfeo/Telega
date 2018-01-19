@@ -36,7 +36,6 @@ public:
         onError(0),
         onTimeout(0) {
     }
-
     void (TelegramApi::*onAnswer)(Query *q, InboundPkt &inboundPkt);
     void (TelegramApi::*onError)(Query *q, qint32 errorCode, const QString &errorText);
     void (TelegramApi::*onTimeout)(Query *q);

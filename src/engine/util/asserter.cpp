@@ -17,6 +17,7 @@
  *      Roberto Mier
  *      Tiago Herrmann
  */
+
 #include "asserter.h"
 
 Asserter::Asserter(QObject *parent) :

@@ -23,7 +23,6 @@
 #define INBOUNDPKT_H
 
 #include <QObject>
-
 #include <openssl/bn.h>
 
 class InboundPkt

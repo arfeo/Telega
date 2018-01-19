@@ -439,16 +439,16 @@ bool QMimeType::inherits(const QString &mimeTypeName) const
 }
 
 #ifndef QT_NO_DEBUG_STREAM
-QDebug operator<<(QDebug debug, const QMimeType &mime)
+/*QDebug operator<<(QDebug debug, const QMimeType &mime)
 {
-    /*QDebugStateSaver saver(debug);
+    QDebugStateSaver saver(debug);
     if (!mime.isValid()) {
         debug.nospace() << "QMimeType(invalid)";
     } else {
         debug.nospace() << "QMimeType(" << mime.name() << ")";
     }
-    return debug;*/
-}
+    return debug;
+}*/
 #endif
 
 QT_END_NAMESPACE

@@ -19,7 +19,6 @@
  */
 
 #include "uploadfileengine.h"
-
 #include <QFileInfo>
 
 UploadFileEngine::UploadFileEngine(Session *session, CryptoUtils *crypto, UploadFileEngine::FileType fileType, const QByteArray &buffer, QObject *parent) :

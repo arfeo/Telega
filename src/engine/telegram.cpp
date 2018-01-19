@@ -31,10 +31,6 @@
 #include <QtEndian>
 #include <QCryptographicHash>
 #include "libs/qmimedatabase.h"
-#ifdef QT_GUI_LIB
-#include <QImage>
-#include <QImageReader>
-#endif
 #include "util/tlvalues.h"
 #include "telegram/types/types.h"
 #include "core/dcprovider.h"
@@ -509,13 +505,6 @@ qint64 Telegram::messagesSendEncryptedPhoto(const InputEncryptedChat &chat, qint
     media.setKey(key);
     media.setIv(iv);
 
-#ifdef QT_GUI_LIB
-    QImage image;
-    image.load(filePath);
-    media.setW(image.width());
-    media.setH(image.height());
-#endif
-
     DecryptedMessage decryptedMessage(DecryptedMessage::typeDecryptedMessageSecret17);
     decryptedMessage.setRandomId(randomId);
     decryptedMessage.setTtl(ttl);
@@ -941,9 +930,6 @@ void Telegram::processSecretChatUpdate(const Update &update) {
             qDebug() << "Waiting for peer to accept chat" << chatId;
 
             if (encryptedChat.participantId() != ourId()) {
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 4, 0))
-                qCritical(TG_LIB_SECRET()) << "Received request to create a secret chat is not for you!";
-#endif
                 return;
             }
 
@@ -1417,15 +1403,6 @@ qint64 Telegram::messagesSendDocument(const InputPeer &peer, qint64 randomId, co
     QList<DocumentAttribute> attributes;
     attributes << fileAttr;
     if(sendAsSticker) {
-#ifdef QT_GUI_LIB
-        QImageReader reader(filePath);
-        DocumentAttribute imageSizeAttr(DocumentAttribute::typeDocumentAttributeImageSize);
-        imageSizeAttr.setH(reader.size().height());
-        imageSizeAttr.setW(reader.size().width());
-
-        attributes << DocumentAttribute(DocumentAttribute::typeDocumentAttributeSticker) << imageSizeAttr;
-#endif
-
         if(mimeType.contains("webp"))
             mimeType = "image/webp";
     }

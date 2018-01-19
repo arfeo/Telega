@@ -21,25 +21,10 @@
 
 #include "connection.h"
 #include "util/constants.h"
-
 #include <QTimer>
-
-#ifndef Q_OS_WIN
-# include <sys/socket.h>
-# ifdef Q_OS_DARWIN
-#  include <netinet/if_ether.h>.
-# else
-#  include <netinet/in.h>
-# endif
-# include <netinet/tcp.h>
-#else
-# ifndef WIN32_LEAN_AND_MEAN
-#  define WIN32_LEAN_AND_MEAN
-# endif
-# include <winsock2.h>
-# include <ws2tcpip.h>
-# include <mstcpip.h>
-#endif
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netinet/tcp.h>
 
 Connection::Connection(const QString &host, qint32 port, QObject *parent) :
     QTcpSocket(parent),
@@ -52,7 +37,6 @@ Connection::Connection(const QString &host, qint32 port, QObject *parent) :
     connect(this, SIGNAL(readyRead()), this, SLOT(onReadyRead()));
     connect(this, SIGNAL(error()), this, SLOT(onError()));
     connect(this, SIGNAL(stateChanged()), this, SLOT(onStateChanged()));
-
     connect(&mAsserter, SIGNAL(fatalError()), this, SLOT(fatalError()));
 }
 
@@ -169,11 +153,7 @@ void Connection::onError(QAbstractSocket::SocketError error) {
         // From http://doc.qt.io/qt-5/qabstractsocket.html#error
         // "When this signal is emitted, the socket may not be ready for a reconnect attempt."
         // Let's wait for the event loop spin once
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 4, 0))
-        QTimer::singleShot(reconnectionDelay, this, &Connection::connectToServer);
-#else
         QTimer::singleShot(reconnectionDelay, this, SLOT(connectToServer()));
-#endif
     }
 }
 
