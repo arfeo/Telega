@@ -28,28 +28,20 @@
 #include "session.h"
 #include "sessionmanager.h"
 
-class AbstractApi :
-        public SessionManager
+class AbstractApi : public SessionManager
 {
-
     Q_OBJECT
-
 public:
-    explicit AbstractApi(Session *session, QObject *parent = 0);
-    ~AbstractApi();
+    explicit AbstractApi(Session *session, Settings *settings, CryptoUtils *crypto, QObject *parent = 0);
+    virtual ~AbstractApi();
 
 Q_SIGNALS:
-    void updatesTooLong();
-    void updateShortMessage(qint32 id, qint32 fromId, const QString &message, qint32 pts, qint32 date, qint32 seq);
-    void updateShortChatMessage(qint32 id, qint32 fromId, qint32 chatId, const QString &message, qint32 pts, qint32 date, qint32 seq);
-    void updateShort(Update update, qint32 date);
-    void updatesCombined(QList<Update> updates, QList<User> users, QList<Chat> chats, qint32 date, qint32 seqStart, qint32 seq);
-    void updates(QList<Update> udts, QList<User> users, QList<Chat> chats, qint32 date, qint32 seq);
-    void authSignInError(qint64 msgid ,qint32 errcode ,QString errtext);
+    void fatalError();
+    void updates(const UpdatesType &update);
 
 protected:
-    // default error method. Overriten in inherited classes
-    virtual void onError(Query *q, qint32 errorCode, const QString &errorText) = 0;
+    // default error method. Overwritten in inherited classes
+    virtual void onError(Query *q, qint32 errorCode, const QString &errorText, const QVariant &attachedData, bool &accepted) = 0;
 
 private:
     void connectUpdatesSignals(Session *session);
@@ -58,7 +50,6 @@ private:
 private Q_SLOTS:
     void onResultReceived(Query *q, InboundPkt &inboundPkt);
     void onErrorReceived(Query *q, qint32 errorCode, QString errorText);
-
 };
 
 #endif // ABSTRACTAPI_H

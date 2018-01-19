@@ -2,6 +2,99 @@
 <!DOCTYPE TS>
 <TS version="2.0">
 <context>
+    <name>QStandardPaths</name>
+    <message>
+        <location filename="../src/engine/libs/qstandardpaths.cpp" line="569"/>
+        <source>Desktop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/engine/libs/qstandardpaths.cpp" line="571"/>
+        <source>Documents</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/engine/libs/qstandardpaths.cpp" line="573"/>
+        <source>Fonts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/engine/libs/qstandardpaths.cpp" line="575"/>
+        <source>Applications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/engine/libs/qstandardpaths.cpp" line="577"/>
+        <source>Music</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/engine/libs/qstandardpaths.cpp" line="579"/>
+        <source>Movies</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/engine/libs/qstandardpaths.cpp" line="581"/>
+        <source>Pictures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/engine/libs/qstandardpaths.cpp" line="583"/>
+        <source>Temporary Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/engine/libs/qstandardpaths.cpp" line="585"/>
+        <source>Home</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/engine/libs/qstandardpaths.cpp" line="587"/>
+        <source>Cache</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/engine/libs/qstandardpaths.cpp" line="589"/>
+        <source>Shared Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/engine/libs/qstandardpaths.cpp" line="591"/>
+        <source>Runtime</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/engine/libs/qstandardpaths.cpp" line="593"/>
+        <source>Configuration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/engine/libs/qstandardpaths.cpp" line="595"/>
+        <source>Shared Configuration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/engine/libs/qstandardpaths.cpp" line="597"/>
+        <source>Shared Cache</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/engine/libs/qstandardpaths.cpp" line="599"/>
+        <source>Download</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/engine/libs/qstandardpaths.cpp" line="602"/>
+        <source>Application Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/engine/libs/qstandardpaths.cpp" line="604"/>
+        <source>Application Configuration</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>chatView</name>
     <message>
         <location filename="../assets/pages/utils/chatView.qml" line="128"/>

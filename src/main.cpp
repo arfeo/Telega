@@ -20,7 +20,6 @@
 
 #include <QLocale>
 #include <QTranslator>
-#include "engine/VirtualKeyboardHandler.hpp"
 
 using namespace bb::cascades;
 

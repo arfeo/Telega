@@ -1,8 +1,5 @@
 /*
  * Copyright 2014 Canonical Ltd.
- * Authors:
- *      Roberto Mier
- *      Tiago Herrmann
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,33 +12,28 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 #ifndef ACKTIMER_H
 #define ACKTIMER_H
 
-#include "dc.h"
 #include <QTimer>
 
-class EventTimer :
-        public QTimer
+class EventTimer : public QTimer
 {
-
     Q_OBJECT
-
 public:
     explicit EventTimer(qint64 msgId, qint32 timeout, QObject *parent = 0);
+    virtual ~EventTimer();
 
 Q_SIGNALS:
     void timerTimeout(qint64 msgId);
 
 private:
-    qint64 m_msgId;
+    qint64 mMsgId;
 
 private Q_SLOTS:
     void onTimeout();
-
 };
 
 #endif // ACKTIMER_H

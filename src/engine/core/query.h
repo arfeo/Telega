@@ -22,24 +22,24 @@
 #ifndef QUERY_H
 #define QUERY_H
 
-#include "utils.h"
+#include "util/utils.h"
 #include "inboundpkt.h"
 #include "querymethods.h"
 #include "dc.h"
 #include <QTimerEvent>
 #include <QVariant>
 
-class Query :
-        public QObject
+class Query : public QObject
 {
-
     Q_OBJECT
-
 public:
     explicit Query(QObject *parent = 0);
-    ~Query();
+    virtual ~Query();
+
     qint64 msgId() { return m_msgId; }
     void setMsgId(qint64 msgId) { m_msgId = msgId; }
+    qint64 mainMsgId() { return m_mainMsgId; }
+    void setMainMsgId(qint64 mainMsgId) { m_mainMsgId = mainMsgId; }
     qint32 dataLength() { return m_dataLength; }
     qint32 seqNo() { return m_seqNo; }
     void setSeqNo(qint32 seqNo) { m_seqNo = seqNo; }
@@ -47,8 +47,10 @@ public:
     void setMethods(QueryMethods *methods) { m_methods = methods; }
     bool acked() { return m_acked; }
     void setAcked(bool acked) { m_acked = acked; }
+    QString name() { return m_name; }
+    void setName(const QString &name) { m_name = name; }
     QVariant extra() { return mExtra; }
-    void setExtra(QVariant extra) { mExtra = extra; }
+    void setExtra(const QVariant &extra) { mExtra = extra; }
     void *data();
     void setData(void *data, qint32 dataLength);
     qint32 decreaseResends();
@@ -61,6 +63,7 @@ protected:
 
 private:
     qint64 m_msgId;
+    qint64 m_mainMsgId;
     qint32 m_dataLength;
     qint32 m_seqNo;
     void *m_data;
@@ -68,7 +71,7 @@ private:
     bool m_acked;
     QVariant mExtra;
     qint32 m_resends;
-
+    QString m_name;
 };
 
 #endif // QUERY_H

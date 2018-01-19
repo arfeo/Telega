@@ -232,7 +232,6 @@ TabbedPane {
     onCreationCompleted: {
         Application.setCover(multiCover)
         setAppTabs((!mainTab.loggedIn) ? "start" : "main")
-        _telega.onDcProviderReady.connect()
     }
     
     // -----------------------

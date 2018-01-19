@@ -20,70 +20,71 @@
  */
 
 #include "session.h"
-#include "openssl/rand.h"
-#include "openssl/sha.h"
+#include <openssl/rand.h>
+#include <openssl/sha.h>
 #include <QDateTime>
-#include "tlvalues.h"
-#include "../../applicationui.hpp"
+#include "util/tlvalues.h"
+#include "telegram/coretypes.h"
 
 qint64 Session::m_clientLastMsgId = 0;
 
-Session::Session(DC *dc, QObject *parent) :
-        Connection(dc->host(), dc->port(), parent),
-        m_sessionId(0),
-        m_serverSalt(0),
-        m_timeSyncFactor(0),
-        //m_clientLastMsgId(0),
-        m_seqNo(0),
-        m_dc(dc),
-        m_initConnectionNeeded(true)
-{
+Session::Session(DC *dc, Settings *settings, CryptoUtils *crypto, QObject *parent) :
+    Connection(dc->host(), dc->port(), parent),
+    mSettings(settings),
+    mCrypto(crypto),
+    m_sessionId(0),
+    m_serverSalt(0),
+    mTimeDifference(0),
+    m_seqNo(0),
+    m_dc(dc),
+    m_initConnectionNeeded(true) {
     // ensure dc has, at least, the shared key created
-//    qDebug() << dc->state() <<  DC::authKeyCreated;
-//    Q_ASSERT(dc->state() >= DC::authKeyCreated);
-    // copy calculated values for timeSyncFactor and serverSalt when created shared key.
+    Q_ASSERT(dc->state() >= DC::authKeyCreated);
+    // copy calculated values for timeDifference and serverSalt when created shared key.
     // This copy is needed because we could have several sessions against same dc with different values
-    m_timeSyncFactor = m_dc->timeSyncFactor();
+    mTimeDifference = m_dc->timeDifference();
     m_serverSalt = m_dc->serverSalt();
     // create session id
     RAND_pseudo_bytes((uchar *) &m_sessionId, 8);
-    // qCDebug(TG_NET_SESSION) << "created session with id" << QString::number(m_sessionId, 16);
+    qDebug() << "created session with id" << QString::number(m_sessionId, 16);
+
+    connect(this, SIGNAL(disconnected()), this, SLOT(onDisconnected()));
 }
 
-Session::~Session()
-{
-    // qCDebug(TG_NET_SESSION) << "destroyed session with id" << QString::number(m_sessionId, 16);
+Session::~Session() {
+    qDebug() << "destroyed session with id" << QString::number(m_sessionId, 16);
 }
 
-void Session::close()
-{
+void Session::close() {
     if (this->state() != QAbstractSocket::UnconnectedState) {
-        connect(this, SIGNAL(disconnected()), SLOT(onDisconnected()));
         this->disconnectFromHost();
     } else {
         Q_EMIT sessionClosed(m_sessionId);
     }
 }
 
-void Session::onDisconnected()
-{
-//    isonline = false;
+void Session::onDisconnected() {
+    if(error() == QAbstractSocket::RemoteHostClosedError) {
+        return; // Trying to reconnect...
+    }
+
     Q_EMIT sessionClosed(m_sessionId);
 }
 
-void Session::release()
-{
+void Session::release() {
     Q_EMIT sessionReleased(m_sessionId);
 }
 
-DC *Session::dc()
-{
+DC *Session::dc() {
     return m_dc;
 }
 
-qint64 Session::generateNextMsgId()
-{
-    qint64 nextId = (qint64) ((QDateTime::currentDateTime().toTime_t() - m_timeSyncFactor) * (1LL << 32)) & -4;
+qint64 Session::generatePlainNextMsgId() {
+    return (qint64) ((QDateTime::currentDateTime().toTime_t() - mTimeDifference) * (1LL << 32)) & -4;
+}
+
+qint64 Session::generateNextMsgId() {
+    qint64 nextId = generatePlainNextMsgId();
     if (nextId <= m_clientLastMsgId) {
         nextId = m_clientLastMsgId += 4;
     } else {
@@ -92,160 +93,149 @@ qint64 Session::generateNextMsgId()
     return nextId;
 }
 
-void Session::processConnected()
-{
-//    isonline = false;
+void Session::processConnected() {
+    // ack all pending server response messages. This happens when socket has been connected
+    // previously and after reconnection some acks are pending to be sent.
+    ackAll();
     Q_EMIT sessionReady(m_dc);
 }
 
-void Session::processRpcAnswer(QByteArray response)
-{
-    qint32 op;
-    peekIn(&op, 4);
+void Session::processRpcAnswer(QByteArray response) {
     qint32 len = response.length();
-//    qDebug() << "*-----------------------------------------*";
-//     qDebug() << "connection #" << socketDescriptor() << "received rpc answer" << op << "with" << len << "content bytes by session" << QString::number(m_sessionId, 16);
+
+    qDebug() << "connection #" << socketDescriptor() << "received rpc answer with" << len << "content bytes by session" << QString::number(m_sessionId, 16);
+
     InboundPkt p(response.data(), len);
-    if (op < 0 && op >= -999) {
-        // qCDebug(TG_NET_SESSION) << "server error" << op;
-    } else {
-        processRpcMessage(p);
-    }
+    processRpcMessage(p);
 }
 
-void Session::processRpcMessage(InboundPkt &inboundPkt)
-{
+void Session::processRpcMessage(InboundPkt &inboundPkt) {
+
     EncryptedMsg *enc = (EncryptedMsg *)inboundPkt.buffer();
     qint32 len = inboundPkt.length();
+
     const qint32 MINSZ = offsetof (EncryptedMsg, message);
     const qint32 UNENCSZ = offsetof (EncryptedMsg, serverSalt);
-//    qDebug() << "processRpcMessage(), len=" << len;
-    Q_ASSERT(len >= MINSZ && (len & 15) == (UNENCSZ & 15));
+    qDebug() << "processRpcMessage(), len=" << len;
+
+    if(len < MINSZ || (len & 15) != (UNENCSZ & 15))
+        return;
+
     Q_ASSERT(m_dc->authKeyId());
     mAsserter.check(enc->authKeyId == m_dc->authKeyId());
     //msg_key is used to compute AES key and to decrypt the received message
-    CryptoUtils::getInstance()->initAESAuth(m_dc->authKey() + 8, enc->msgKey, AES_DECRYPT);
-    qint32 l = CryptoUtils::getInstance()->padAESDecrypt((char *)&enc->serverSalt, len - UNENCSZ, (char *)&enc->serverSalt, len - UNENCSZ);
+    mCrypto->initAESAuth(m_dc->authKey() + 8, enc->msgKey, AES_DECRYPT);
+    qint32 l = mCrypto->padAESDecrypt((char *)&enc->serverSalt, len - UNENCSZ, (char *)&enc->serverSalt, len - UNENCSZ);
     Q_UNUSED(l);
     Q_ASSERT(l == len - UNENCSZ);
-    Q_ASSERT(!(enc->msgLen & 3) && enc->msgLen > 0 && enc->msgLen <= len - MINSZ && len - MINSZ - enc->msgLen <= 12);
-//    qDebug() << "Encrypted Message" << QString::number(*enc->message, 16) ;
+    if( !(!(enc->msgLen & 3) && enc->msgLen > 0 && enc->msgLen <= len - MINSZ && len - MINSZ - enc->msgLen <= 12) )
+        return;
 
-    // Check msg_key is indeed equal to SHA1 of the plaintext obtained after decription (without final padding bytes).
+    //check msg_key is indeed equal to SHA1 of the plaintext obtained after decription (without final padding bytes).
     static uchar sha1Buffer[20];
     SHA1((uchar *)&enc->serverSalt, enc->msgLen + (MINSZ - UNENCSZ), sha1Buffer);
-    Q_ASSERT(!memcmp (&enc->msgKey, sha1Buffer + 4, 16));
+    if(memcmp (&enc->msgKey, sha1Buffer + 4, 16))
+        return;
+
     if (m_dc->serverSalt() != enc->serverSalt) {
         m_dc->setServerSalt(enc->serverSalt);
     }
 
-    // Check time synchronization
+    // check time synchronization
     qint32 serverTime = enc->msgId >> 32LL;
-    qint32 clientTime = QDateTime::currentDateTime().toTime_t() - m_dc->timeSyncFactor();
+    qint32 clientTime = QDateTime::currentDateTime().toTime_t() - mTimeDifference;
     if (clientTime <= serverTime - 30 || clientTime >= serverTime + 300) {
-        // qCDebug(TG_NET_SESSION) << "salt =" << enc->serverSalt << ", sessionId =" << QString::number(enc->sessionId, 16) << ", msgId =" << QString::number(enc->msgId, 16) << ", seqNo =" << enc->seqNo << ", serverTime =" << serverTime << ", clientTime =" << clientTime;
-        QString alert("discarding received message due to client<->server dates too large difference - ");
+        qDebug() << "salt =" << enc->serverSalt << ", sessionId =" << QString::number(enc->sessionId, 16) << ", msgId =" << QString::number(enc->msgId, 16) << ", seqNo =" << enc->seqNo << ", serverTime =" << serverTime << ", clientTime =" << clientTime;
+        QString alert("Received message has too large difference between client and server dates - ");
         if (clientTime <= serverTime -30) {
-            alert.append("the message has a date 30 seconds late in time than current date! :O");
+            alert.append("the message has a date at least 30 seconds later in time than current date");
         } else {
             alert.append("the message was sent at least 300 seconds ago");
         }
-        qWarning() << alert;
-        inboundPkt.setInPtr(inboundPkt.inEnd());
-        return;
+        qDebug() << alert;
     }
-    Q_ASSERT(clientTime > serverTime - 30 && clientTime < serverTime + 300);
 
     inboundPkt.setInPtr(enc->message);
     inboundPkt.setInEnd(inboundPkt.inPtr() + (enc->msgLen / 4));
-//    qDebug() << "received message id" << QString::number(enc->msgId, 16);
+
+    qDebug() << "received message id" << QString::number(enc->msgId, 16);
+
     Q_ASSERT(l >= (MINSZ - UNENCSZ) + 8);
+
+    if (enc->msgId & 1) {
+        addToPendingAcks(enc->msgId);
+    }
+
     mAsserter.check(m_sessionId == enc->sessionId);
-//    qDebug() << inboundPkt.buffer();
     rpcExecuteAnswer(inboundPkt, enc->msgId);
     mAsserter.check(inboundPkt.inPtr() == inboundPkt.inEnd());
 }
 
-void Session::rpcExecuteAnswer(InboundPkt &inboundPkt, qint64 msgId)
-{
+void Session::rpcExecuteAnswer(InboundPkt &inboundPkt, qint64 msgId) {
     qint32 op = inboundPkt.prefetchInt();
-//     qDebug() << "rpcExecuteAnswer(), op =" << QString::number(op, 16);
+    qDebug() << "rpcExecuteAnswer(), op =" << QString::number(op, 16);
     switch (op) {
     case TL_MsgContainer:
-//        qDebug() << "Msg Container";
         workContainer(inboundPkt, msgId);
         return;
     case TL_NewSessionCreated:
-        qDebug() << "Msg session created";
         workNewSessionCreated(inboundPkt, msgId);
         return;
     case TL_MsgsAck:
-//        qDebug() << "Msg ack";
         workMsgsAck(inboundPkt, msgId);
         return;
     case TL_RpcResult:
-//        qDebug() << "Msg RPC result";
         workRpcResult(inboundPkt, msgId);
         return;
-    case TL_UpdateShort:
-//        qDebug() << "Msg update short";
+    case UpdatesType::typeUpdateShort:
         workUpdateShort(inboundPkt, msgId);
         return;
-    case TL_UpdatesCombined:
-//        qDebug() << "Msg updates combined";
+    case UpdatesType::typeUpdatesCombined:
         workUpdatesCombined(inboundPkt, msgId);
-    case TL_Updates:
-        qDebug() << "Msg updates";
+    case UpdatesType::typeUpdates:
         workUpdates(inboundPkt, msgId);
         return;
-    case TL_UpdateShortMessage:
-//        qDebug() << "Msg updateshortmessage";
+    case UpdatesType::typeUpdateShortMessage:
         workUpdateShortMessage(inboundPkt, msgId);
         return;
-    case TL_UpdateShortChatMessage:
-        qDebug() << "Msg udpate short chat msg";
+    case UpdatesType::typeUpdateShortChatMessage:
         workUpdateShortChatMessage(inboundPkt, msgId);
         return;
     case TL_GZipPacked:
-//        qDebug() << "Msg GZip packed";
         workPacked(inboundPkt, msgId);
         return;
     case TL_BadServerSalt:
-//        qDebug() << "Msg bad server salt";
         workBadServerSalt(inboundPkt, msgId);
         return;
     case TL_Pong:
-        qDebug() << "Msg pong";
         workPong(inboundPkt, msgId);
         return;
     case TL_MsgDetailedInfo:
-        qDebug() << "Msg deatialed info";
         workDetailedInfo(inboundPkt, msgId);
         return;
     case TL_MsgNewDetailedInfo:
-        qDebug() << "Msg new detailed info";
         workNewDetailedInfo(inboundPkt, msgId);
         return;
-    case TL_UpdatesTooLong:
-//        qDebug() << "Msg updates too long";
+    case UpdatesType::typeUpdatesTooLong:
         workUpdatesTooLong(inboundPkt, msgId);
         return;
     case TL_BadMsgNotification:
-//        qDebug() << "Msg bad msg notification";
         workBadMsgNotification(inboundPkt, msgId);
         return;
     }
-    qWarning() << "Unknown rpc response message";
+    qDebug() << "Unknown rpc response message";
     inboundPkt.setInPtr(inboundPkt.inEnd());
 }
 
-void Session::workContainer (InboundPkt &inboundPkt, qint64 msgId)
-{
-    // qCDebug(TG_NET_SESSION) << "workContainer: msgId =" << QString::number(msgId, 16);
+void Session::workContainer (InboundPkt &inboundPkt, qint64 msgId) {
+    qDebug() << "workContainer: msgId =" << QString::number(msgId, 16);
     mAsserter.check(inboundPkt.fetchInt() == TL_MsgContainer);
     qint32 n = inboundPkt.fetchInt();
     for (qint32 i = 0; i < n; i++) { // message
         qint64 id = inboundPkt.fetchLong (); // msg_id
+        if (id & 1) {
+           addToPendingAcks(id);
+        }
         inboundPkt.fetchInt (); // seq_no
         qint32 bytes = inboundPkt.fetchInt ();
         qint32 *t = inboundPkt.inEnd();
@@ -256,32 +246,32 @@ void Session::workContainer (InboundPkt &inboundPkt, qint64 msgId)
     }
 }
 
-void Session::workNewSessionCreated(InboundPkt &inboundPkt, qint64 msgId)
-{
-    // qCDebug(TG_NET_SESSION) << "workNewSessionCreated: msgId =" << QString::number(msgId, 16);
+void Session::workNewSessionCreated(InboundPkt &inboundPkt, qint64 msgId) {
+    qDebug() << "workNewSessionCreated: msgId =" << QString::number(msgId, 16);
     mAsserter.check(inboundPkt.fetchInt() == (qint32)TL_NewSessionCreated);
     inboundPkt.fetchLong(); // first_msg_id; //XXX set is as m_clientLastMsgId??
     inboundPkt.fetchLong (); // unique_id
     m_dc->setServerSalt(inboundPkt.fetchLong()); // server_salt
-//    qDebug() << m_dc->serverSalt();
 }
 
-void Session::workMsgsAck(InboundPkt &inboundPkt, qint64 msgId)
-{
-//     qDebug() << "workMsgsAck: msgId =" << QString::number(msgId, 16);
+void Session::workMsgsAck(InboundPkt &inboundPkt, qint64 msgId) {
+    qDebug() << "workMsgsAck: msgId =" << QString::number(msgId, 16);
     mAsserter.check(inboundPkt.fetchInt() == (qint32)TL_MsgsAck);
-    mAsserter.check(inboundPkt.fetchInt () == (qint32)TL_Vector);
+    mAsserter.check(inboundPkt.fetchInt () == (qint32)CoreTypes::typeVector);
     qint32 n = inboundPkt.fetchInt();
     for (qint32 i = 0; i < n; i++) {
         qint64 id = inboundPkt.fetchLong ();
         Query *q = m_pendingQueries.value(id);
+        if(!q)
+            return;
+
         Q_ASSERT(q);
         q->setAcked(true);
     }
 }
 
-void Session::workRpcResult(InboundPkt &inboundPkt, qint64 msgId)
-{
+void Session::workRpcResult(InboundPkt &inboundPkt, qint64 msgId) {
+    qDebug() << "workRpcResult: msgId =" << QString::number(msgId, 16);
     mAsserter.check(inboundPkt.fetchInt() == (qint32)TL_RpcResult);
     qint64 id = inboundPkt.fetchLong();
     qint32 op = inboundPkt.prefetchInt();
@@ -292,147 +282,81 @@ void Session::workRpcResult(InboundPkt &inboundPkt, qint64 msgId)
     }
 }
 
-void Session::workUpdateShort(InboundPkt &inboundPkt, qint64 msgId)
-{
-    // qCDebug(TG_NET_SESSION) << "workUpdateShort: msgId =" << QString::number(msgId, 16);
-    mAsserter.check(inboundPkt.fetchInt() == (qint32)TL_UpdateShort);
-    Update update = inboundPkt.fetchUpdate();
-    qint32 date = inboundPkt.fetchInt();
-    Q_EMIT updateShort(update, date);
+void Session::workUpdateShort(InboundPkt &inboundPkt, qint64 msgId) {
+    qDebug() << "workUpdateShort: msgId =" << QString::number(msgId, 16);
+    UpdatesType upd(&inboundPkt);
+    Q_EMIT updates(upd);
 }
 
-void Session::workUpdatesCombined(InboundPkt &inboundPkt, qint64 msgId)
-{
-    // qCDebug(TG_NET_SESSION) << "workUpdatesCombined: msgId =" << QString::number(msgId, 16);
-    mAsserter.check(inboundPkt.fetchInt() == (qint32)TL_UpdatesCombined);
-    //updates
-    mAsserter.check(inboundPkt.fetchInt() == (qint32)TL_Vector);
-    qint32 n = inboundPkt.fetchInt();
-    QList<Update> updates;
-    for (qint32 i = 0; i < n; i++) {
-        updates.append(inboundPkt.fetchUpdate());
-    }
-    //users
-    mAsserter.check(inboundPkt.fetchInt() == (qint32)TL_Vector);
-    n = inboundPkt.fetchInt();
-    QList<User> users;
-    for (qint32 i = 0; i < n; i++) {
-        users.append(inboundPkt.fetchUser());
-    }
-    //chats
-    mAsserter.check(inboundPkt.fetchInt() == (qint32)TL_Vector);
-    n = inboundPkt.fetchInt();
-    QList<Chat> chats;
-    for (qint32 i = 0; i < n; i++) {
-        chats.append(inboundPkt.fetchChat());
-    }
-    qint32 date = inboundPkt.fetchInt();
-    qint32 seqStart = inboundPkt.fetchInt();
-    qint32 seq = inboundPkt.fetchInt();
-    Q_EMIT updatesCombined(updates, users, chats, date, seqStart, seq);
+void Session::workUpdatesCombined(InboundPkt &inboundPkt, qint64 msgId) {
+    qDebug() << "workUpdatesCombined: msgId =" << QString::number(msgId, 16);
+    UpdatesType upd(&inboundPkt);
+    Q_EMIT updates(upd);
 }
 
-void Session::workUpdates(InboundPkt &inboundPkt, qint64 msgId)
-{
-    // qCDebug(TG_NET_SESSION) << "workUpdates: msgId =" << QString::number(msgId, 16);
-    mAsserter.check(inboundPkt.fetchInt() == (qint32)TL_Updates);
-    //updates
-    mAsserter.check(inboundPkt.fetchInt() == (qint32)TL_Vector);
-    qint32 n = inboundPkt.fetchInt();
-    QList<Update> updatesList;
-    for (qint32 i = 0; i < n; i++) {
-        updatesList.append(inboundPkt.fetchUpdate());
-    }
-    //users
-    mAsserter.check(inboundPkt.fetchInt() == (qint32)TL_Vector);
-    n = inboundPkt.fetchInt();
-    QList<User> users;
-    for (qint32 i = 0; i < n; i++) {
-        users.append(inboundPkt.fetchUser());
-    }
-    //chats
-    mAsserter.check(inboundPkt.fetchInt() == (qint32)TL_Vector);
-    n = inboundPkt.fetchInt();
-    QList<Chat> chats;
-    for (qint32 i = 0; i < n; i++) {
-        chats.append(inboundPkt.fetchChat());
-    }
-    qint32 date = inboundPkt.fetchInt();
-    qint32 seq = inboundPkt.fetchInt();
-    Q_EMIT updates(updatesList, users, chats, date, seq);
+void Session::workUpdates(InboundPkt &inboundPkt, qint64 msgId) {
+    qDebug() << "workUpdates: msgId =" << QString::number(msgId, 16);
+    UpdatesType upd(&inboundPkt);
+    Q_EMIT updates(upd);
 }
 
-void Session::workUpdateShortMessage(InboundPkt &inboundPkt, qint64 msgId)
-{
-    // qCDebug(TG_NET_SESSION) << "workUpdateShortMessage: msgId =" << QString::number(msgId, 16);
-    mAsserter.check(inboundPkt.fetchInt() == (qint32)TL_UpdateShortMessage);
-    qint32 id = inboundPkt.fetchInt();
-    qint32 fromId = inboundPkt.fetchInt();
-    QString message = inboundPkt.fetchQString();
-    qint32 pts = inboundPkt.fetchInt();
-    qint32 date = inboundPkt.fetchInt();
-    qint32 seq = inboundPkt.fetchInt();
-    Q_EMIT updateShortMessage(id, fromId, message, pts, date, seq);
+void Session::workUpdateShortMessage(InboundPkt &inboundPkt, qint64 msgId) {
+    qDebug() << "workUpdateShortMessage: msgId =" << QString::number(msgId, 16);
+    Q_UNUSED(msgId)
+    UpdatesType upd(&inboundPkt);
+    Q_EMIT updates(upd);
 }
 
-void Session::workUpdateShortChatMessage(InboundPkt &inboundPkt, qint64 msgId)
-{
-    // qCDebug(TG_NET_SESSION) << "workUpdateShortChatMessage: msgId =" << QString::number(msgId, 16);
-    mAsserter.check(inboundPkt.fetchInt() == (qint32)TL_UpdateShortChatMessage);
-    qint32 id = inboundPkt.fetchInt();
-    qint32 fromId = inboundPkt.fetchInt();
-    qint32 chatId = inboundPkt.fetchInt();
-    QString message = inboundPkt.fetchQString();
-    qint32 pts = inboundPkt.fetchInt();
-    qint32 date = inboundPkt.fetchInt();
-    qint32 seq = inboundPkt.fetchInt();
-    Q_EMIT updateShortChatMessage(id, fromId, chatId, message, pts, date, seq);
+void Session::workUpdateShortChatMessage(InboundPkt &inboundPkt, qint64 msgId) {
+    qDebug() << "workUpdateShortChatMessage: msgId =" << QString::number(msgId, 16);
+    Q_UNUSED(msgId)
+    UpdatesType upd(&inboundPkt);
+    Q_EMIT updates(upd);
 }
 
-void Session::workPacked(InboundPkt &inboundPkt, qint64 msgId)
-{
-    // qCDebug(TG_NET_SESSION) << "workPacked: msgId =" << QString::number(msgId, 16);
+void Session::workPacked(InboundPkt &inboundPkt, qint64 msgId) {
+    qDebug() << "workPacked: msgId =" << QString::number(msgId, 16);
     mAsserter.check(inboundPkt.fetchInt() == (qint32)TL_GZipPacked);
     static qint32 buf[MAX_PACKED_SIZE >> 2];
     qint32 l = inboundPkt.prefetchStrlen();
     char *s = inboundPkt.fetchStr(l);
+
     qint32 totalOut = Utils::tinflate(s, l, buf, MAX_PACKED_SIZE);
     qint32 *inPtr = inboundPkt.inPtr();
     qint32 *inEnd = inboundPkt.inEnd();
     inboundPkt.setInPtr(buf);
     inboundPkt.setInEnd(inboundPkt.inPtr() + totalOut / 4);
-    // qCDebug(TG_NET_SESSION) << "Unzipped data";
+    qDebug() << "Unzipped data";
     rpcExecuteAnswer(inboundPkt, msgId);
     inboundPkt.setInPtr(inPtr); //TODO Not sure about this operations of setting inPtr and inEnd after execute answer completion
     inboundPkt.setInEnd(inEnd);
 }
 
-void Session::workBadServerSalt(InboundPkt &inboundPkt, qint64 msgId)
-{
-    qDebug() << "workBadServerSalt: msgId =" << QString::number(msgId, 16);
+void Session::workBadServerSalt(InboundPkt &inboundPkt, qint64 msgId) {
+    Q_UNUSED(msgId)
     mAsserter.check(inboundPkt.fetchInt() == (qint32)TL_BadServerSalt);
     qint64 badMsgId = inboundPkt.fetchLong();
-    inboundPkt.fetchInt(); // badMsgSeqNo
-    inboundPkt.fetchInt(); // errorCode
+    qint32 badMsgSeqNo = inboundPkt.fetchInt();
+    qint32 errorCode = inboundPkt.fetchInt();
+    qDebug() << "workBadServerSalt: badMsgId =" << QString::number(badMsgId, 16)
+            << ", badMsgSeqNo =" << badMsgSeqNo << ", errorCode =" << errorCode;
     m_dc->setServerSalt(inboundPkt.fetchLong()); // new server_salt
-    // resend the last query
-    Query *q = m_pendingQueries.value(badMsgId);
-    qDebug() << "Creating Re-Query";
-    resendQuery( *q );
-    qDebug() << "Sent Re-Query";
+    Query *q = m_pendingQueries.take(badMsgId);
+    qint64 newMsgId = recomposeAndSendQuery(q);
+    if (newMsgId != 0) {
+        Q_EMIT updateMessageId(badMsgId, newMsgId);
+    }
 }
 
-void Session::workPong(InboundPkt &inboundPkt, qint64 msgId)
-{
-    // qCDebug(TG_NET_SESSION) << "workPong: msgId =" << QString::number(msgId, 16);
+void Session::workPong(InboundPkt &inboundPkt, qint64 msgId) {
+    qDebug() << "workPong: msgId =" << QString::number(msgId, 16);
     mAsserter.check (inboundPkt.fetchInt() == (qint32)TL_Pong);
     inboundPkt.fetchLong(); // msg_id
     inboundPkt.fetchLong(); // ping_id
 }
 
-void Session::workDetailedInfo(InboundPkt &inboundPkt, qint64 msgId)
-{
-    // qCDebug(TG_NET_SESSION) << "workDetailedInfo: msgId =" << QString::number(msgId, 16);
+void Session::workDetailedInfo(InboundPkt &inboundPkt, qint64 msgId) {
+    qDebug() << "workDetailedInfo: msgId =" << QString::number(msgId, 16);
     mAsserter.check(inboundPkt.fetchInt() == (qint32)TL_MsgDetailedInfo);
     inboundPkt.fetchLong(); // msg_id
     inboundPkt.fetchLong(); // answer_msg_id
@@ -440,45 +364,54 @@ void Session::workDetailedInfo(InboundPkt &inboundPkt, qint64 msgId)
     inboundPkt.fetchInt(); // status
 }
 
-void Session::workNewDetailedInfo(InboundPkt &inboundPkt, qint64 msgId)
-{
-    // qCDebug(TG_NET_SESSION) << "workNewDetailedInfo: msgId =" << QString::number(msgId, 16);
+void Session::workNewDetailedInfo(InboundPkt &inboundPkt, qint64 msgId) {
+    qDebug() << "workNewDetailedInfo: msgId =" << QString::number(msgId, 16);
     mAsserter.check(inboundPkt.fetchInt() == (qint32)TL_MsgNewDetailedInfo);
     inboundPkt.fetchLong(); // answer_msg_id
     inboundPkt.fetchInt(); // bytes
     inboundPkt.fetchInt(); // status
 }
 
-void Session::workUpdatesTooLong(InboundPkt &inboundPkt, qint64 msgId)
-{
-    // qCDebug(TG_NET_SESSION) << "workUpdatesTooLong: msgId =" << QString::number(msgId, 16);
-    mAsserter.check(inboundPkt.fetchInt() == (qint32)TL_UpdatesTooLong);
-    Q_EMIT updatesTooLong();
+void Session::workUpdatesTooLong(InboundPkt &inboundPkt, qint64 msgId) {
+    qDebug() << "workUpdatesTooLong: msgId =" << QString::number(msgId, 16);
+    UpdatesType upd(&inboundPkt);
+    Q_EMIT updates(upd);
 }
 
-void Session::workBadMsgNotification(InboundPkt &inboundPkt, qint64 msgId)
-{
+void Session::workBadMsgNotification(InboundPkt &inboundPkt, qint64 msgId) {
     mAsserter.check(inboundPkt.fetchInt() == (qint32)TL_BadMsgNotification);
     qint64 badMsgId = inboundPkt.fetchLong();
     qint32 badMsgSeqNo = inboundPkt.fetchInt();
     qint32 errorCode = inboundPkt.fetchInt();
-    // qCWarning(TG_NET_SESSION) << "workBadMsgNotification: msgId =" << badMsgId <<
-//                  ", seqNo =" << badMsgSeqNo << ", errorCode =" << errorCode;
+    qDebug() << "workBadMsgNotification: badMsgId =" << QString::number(badMsgId, 16) <<
+            ", badMsgSeqNo =" << badMsgSeqNo << ", errorCode =" << errorCode;
     switch (errorCode) {
     case 16:
     case 17:
-        // update time sync factor
+    case 19:
+    case 32:
+    case 33:
+    case 64:
+        // update time sync difference and reset msgIds counter
         qint32 serverTime = msgId >> 32LL;
-        m_dc->setTimeSyncFactor(QDateTime::currentDateTime().toTime_t() - serverTime);
+        mTimeDifference = QDateTime::currentDateTime().toTime_t() - serverTime;
+
+        qint64 nextId = generatePlainNextMsgId();
+        if (!m_pendingQueries.contains(nextId)) {
+            m_clientLastMsgId = 0;
+        }
+
         // read removing from pending queries, recompose and send the last query
         Query *q = m_pendingQueries.take(badMsgId);
-        recomposeAndSendQuery(q);
+        qint64 newMsgId = recomposeAndSendQuery(q);
+        if (newMsgId != 0) {
+            Q_EMIT updateMessageId(badMsgId, newMsgId);
+        }
         break;
     }
 }
 
-Session::EncryptedMsg *Session::initEncryptedMessage(qint32 useful)
-{
+Session::EncryptedMsg *Session::initEncryptedMessage(qint32 useful) {
     EncryptedMsg *encMsg = new EncryptedMsg;
     Q_ASSERT(m_dc->authKeyId());
     encMsg->authKeyId = m_dc->authKeyId();
@@ -495,128 +428,151 @@ Session::EncryptedMsg *Session::initEncryptedMessage(qint32 useful)
     return encMsg;
 }
 
-qint32 Session::aesEncryptMessage (EncryptedMsg *encMsg)
-{
+qint32 Session::aesEncryptMessage (EncryptedMsg *encMsg) {
     uchar sha1Buffer[20];
     const qint32 MINSZ = offsetof (EncryptedMsg, message);
     const qint32 UNENCSZ = offsetof (EncryptedMsg, serverSalt);
     qint32 encLen = (MINSZ - UNENCSZ) + encMsg->msgLen;
     Q_ASSERT (encMsg->msgLen >= 0 && encMsg->msgLen <= MAX_MESSAGE_INTS * 4 - 16 && !(encMsg->msgLen & 3));
     SHA1 ((uchar *) &encMsg->serverSalt, encLen, sha1Buffer);
+    qDebug() << "sending message with sha1" << QString::number(*(qint32 *)sha1Buffer, 8);
+
     memcpy (encMsg->msgKey, sha1Buffer + 4, 16);
-    CryptoUtils::getInstance()->initAESAuth(m_dc->authKey(), encMsg->msgKey, AES_ENCRYPT);
-    return CryptoUtils::getInstance()->padAESEncrypt((char *) &encMsg->serverSalt, encLen, (char *) &encMsg->serverSalt, MAX_MESSAGE_INTS * 4 + (MINSZ - UNENCSZ));
+    mCrypto->initAESAuth(m_dc->authKey(), encMsg->msgKey, AES_ENCRYPT);
+    return mCrypto->padAESEncrypt((char *) &encMsg->serverSalt, encLen, (char *) &encMsg->serverSalt, MAX_MESSAGE_INTS * 4 + (MINSZ - UNENCSZ));
 }
 
-qint64 Session::encryptSendMessage(qint32 *msg, qint32 msgInts, qint32 useful)
-{
+qint64 Session::encryptSendMessage(qint32 *msg, qint32 msgInts, qint32 useful) {
     const qint32 UNENCSZ = offsetof (EncryptedMsg, serverSalt);
     if (msgInts <= 0 || msgInts > MAX_MESSAGE_INTS - 4) {
       return -1;
     }
-    EncryptedMsg *encMsg = initEncryptedMessage(useful);
+
+    QScopedPointer<EncryptedMsg> encMsg(initEncryptedMessage(useful));
     if (msg) {
       memcpy (encMsg->message, msg, msgInts * 4);
       encMsg->msgLen = msgInts * 4;
     } else if ((encMsg->msgLen & 0x80000003) || encMsg->msgLen > MAX_MESSAGE_INTS * 4 - 16) {
-      delete encMsg;
       return -1;
     }
-    qint32 l = aesEncryptMessage(encMsg);
+
+    qint32 l = aesEncryptMessage(encMsg.data());
     Q_ASSERT(l > 0);
-    rpcSendMessage(encMsg, l + UNENCSZ);
-    delete encMsg;
+
+    if(!rpcSendMessage(encMsg.data(), l + UNENCSZ))
+        return -1;
+
     return m_clientLastMsgId;
 }
 
-void Session::rpcSendMessage(void *data, qint32 len)
-{
+bool Session::rpcSendMessage(void *data, qint32 len) {
+    qDebug() << "rpcSendMessage()," << len;
+
     qint32 written;
     Q_UNUSED(written);
+
     mAsserter.check(len > 0 && !(len & 0xfc000003));
     qint32 totalLen = len >> 2;
+
     if (totalLen < 0x7f) {
         written = writeOut(&totalLen, 1);
-        Q_ASSERT(written == 1);
+        if(written != 1)
+            return false;
     } else {
         totalLen = (totalLen << 8) | 0x7f;
         written = writeOut(&totalLen, 4);
-        Q_ASSERT(written == 4);
+        if(written != 4)
+            return false;
     }
+
     written = writeOut(data, len);
-    Q_ASSERT(written == len);
+    if(written != len)
+        return false;
+
+    return true;
 }
 
+
 //### query management
-qint64 Session::sendQuery(OutboundPkt &outboundPkt, QueryMethods *methods, QVariant extra)
-{
-//    if(isonline == true){
+qint64 Session::sendQuery(OutboundPkt &outboundPkt, QueryMethods *methods, const QVariant &extra, const QString &name) {
     Q_ASSERT (m_sessionId);
     Q_ASSERT (m_dc->authKeyId());
     qint32 *data = outboundPkt.buffer();
     qint32 ints = outboundPkt.length();
+
+    // prepend init connection header to outboundPkt if initConnectionNeeded
+    // Note: 'wrap' needs to be declare outside of if to persist until encriptSendMessage is completed
+    OutboundPkt wrap(mSettings);
+    if (m_initConnectionNeeded) {
+        wrap.initConnection();
+        wrap.appendOutboundPkt(outboundPkt);
+        data = wrap.buffer();
+        ints = wrap.length();
+        m_initConnectionNeeded = false;
+    }
+
     qDebug() << "Sending query of size" << 4 * ints << "to DC" << m_dc->id() << "at" << peerName() << ":" << peerPort() << "by session" << QString::number(m_sessionId, 16);
+
     Query *q = new Query(this);
     q->setData(data, ints);
     q->setMsgId(encryptSendMessage(data, ints, 1));
+    q->setMainMsgId(q->msgId());
     q->setSeqNo(m_seqNo - 1);
+    qDebug() << "msgId is" << QString::number(q->msgId(), 16);
     q->setMethods(methods);
     q->setAcked(false);
     q->setExtra(extra);
-    if (Settings::getInstance()->resendQueries()) {
-//        connect(q, SIGNAL(timeout(Query*)), this, SLOT(resendQuery(Query*)), Qt::UniqueConnection);
+    q->setName(name);
+
+    if (mSettings->resendQueries()) {
+        connect(q, SIGNAL(timeout()), this, SLOT(resendQuery()), Qt::UniqueConnection);
         q->startTimer(QUERY_TIMEOUT);
     }
+
     m_pendingQueries.insert(q->msgId(), q);
+
     return q->msgId();
-//    }
-//    else{
-//        return 0;
-//    }
 }
 
-void Session::recomposeAndSendQuery(Query *q)
-{
-    Q_ASSERT(q);
-    // qCDebug(TG_NET_SESSION) << "Resending query with previous msgId" << QString::number(q->msgId(), 16);
+qint64 Session::recomposeAndSendQuery(Query *q) {
+    if(!q)
+        return 0;
+
+    qDebug() << "Resending query with previous msgId" << QString::number(q->msgId(), 16);
     q->setMsgId(encryptSendMessage((qint32 *)q->data(), q->dataLength(), 1));
     q->setSeqNo(m_seqNo - 1);
-    // qCDebug(TG_NET_SESSION) << "new msgId is" << QString::number(q->msgId(), 16);
+    qDebug() << "new msgId is" << QString::number(q->msgId(), 16);
     q->setAcked(false);
     m_pendingQueries.insert(q->msgId(), q);
+    return q->msgId();
 }
 
-void Session::resendQuery(Query &q)
-{
-    qDebug() << "Resend query";
-//    Q_ASSERT(q);
+void Session::resendQuery(Query *q) {
+    Q_ASSERT(q);
     //avoid resending if resend numbers is less than zero
-//    if (q->decreaseResends() < 0) {
-//        // qCDebug(TG_NET_SESSION) << "Max resend numbers reached for query with msgId" << QString::number(q->msgId(), 16) << ",query discarded";
-//        m_pendingQueries.remove(q->msgId());
-//        delete q;
-//    } else {
-    qDebug() << "Resending query with msgId" << QString::number(q.msgId(), 16);
-    OutboundPkt *p = new OutboundPkt() ;
-    p->appendInt(TL_MsgContainer);
-    p->appendInt(1);
-    p->appendLong(q.msgId());
-    p->appendInt(q.seqNo());
-    p->appendInt(4 * q.dataLength());
-    p->appendInts((qint32 *)q.data(), q.dataLength());
-//        qDebug() << p->buffer();
-    encryptSendMessage(p->buffer(), p->length(), 0);
-    delete p;
-//    }
+    if (q->decreaseResends() < 0) {
+        qDebug() << "Max resend numbers reached for query with msgId" << QString::number(q->msgId(), 16) << ",query discarded";
+        m_pendingQueries.remove(q->msgId());
+        delete q;
+    } else {
+        qDebug() << "Resending query with msgId" << QString::number(q->msgId(), 16);
+        OutboundPkt p(mSettings);
+        p.appendInt(TL_MsgContainer);
+        p.appendInt(1);
+        p.appendLong(q->msgId());
+        p.appendInt(q->seqNo());
+        p.appendInt(4 * q->dataLength());
+        p.appendInts((qint32 *)q->data(), q->dataLength());
+        encryptSendMessage(p.buffer(), p.length(), 0);
+    }
 }
 
-void Session::queryOnResult(InboundPkt &inboundPkt, qint64 msgId)
-{
-//    qDebug() << "result for query" << QString::number(msgId, 16) << inboundPkt.prefetchInt() ;
+void Session::queryOnResult(InboundPkt &inboundPkt, qint64 msgId) {
+    qDebug() << "result for query" << QString::number(msgId, 16);
     qint32 op = inboundPkt.prefetchInt();
     qint32 *inPtr = 0;
     qint32 *inEnd = 0;
-    if(op == (qint32)TL_GZipPacked) {
+    if (op == (qint32)TL_GZipPacked) {
         inboundPkt.fetchInt();
         qint32 l = inboundPkt.prefetchStrlen();
         char *s = inboundPkt.fetchStr(l);
@@ -626,41 +582,82 @@ void Session::queryOnResult(InboundPkt &inboundPkt, qint64 msgId)
         inEnd = inboundPkt.inEnd();
         inboundPkt.setInPtr(packedBuffer);
         inboundPkt.setInEnd(inboundPkt.inPtr() + totalOut / 4);
-        // qCDebug(TG_NET_SESSION) << "unzipped data";
+        qDebug() << "unzipped data";
     }
+
     Query *q = m_pendingQueries.take(msgId);
-    if(!q) {
+    if (!q) {
+        qDebug() << "No such query";
         inboundPkt.setInPtr(inboundPkt.inEnd());
     } else {
+        qDebug() << "acked query with msgId" << QString::number(msgId, 16) << ",pendingQueries:" << m_pendingQueries.size();
         q->setAcked(true);
         Q_EMIT resultReceived(q, inboundPkt);
     }
-    if(inPtr) {
+
+    if (inPtr) {
         inboundPkt.setInPtr(inPtr);
         inboundPkt.setInEnd(inEnd);
     }
 }
 
-void Session::queryOnError(InboundPkt &inboundPkt, qint64 msgId)
-{
+void Session::queryOnError(InboundPkt &inboundPkt, qint64 msgId) {
     mAsserter.check(inboundPkt.fetchInt() == TL_RpcError);
     qint32 errorCode = inboundPkt.fetchInt();
     QString errorText = inboundPkt.fetchQString();
+    qDebug() << "error for query" << QString::number(msgId, 16) << " :" << errorCode << " :" << errorText;
+
     Query *q = m_pendingQueries.take(msgId);
-    if(!q) {
-         qWarning() << "No such query";
+    if (!q) {
+        qDebug() << "No such query";
     } else {
         q->setAcked(true);
         Q_EMIT errorReceived(q, errorCode, errorText);
-        qDebug() << errorCode << errorText;
-        switch (errorCode) {
-            case 401:
-                if(errorText == "SESSION_REVOKED"){
-//                            ApplicationUI().logout();
-                }
-                break;
-            default:
-                break;
+    }
+}
+
+
+void Session::addToPendingAcks(qint64 msgId) {
+    EventTimer *t = new EventTimer(msgId, ACK_TIMEOUT, this);
+    connect(t, SIGNAL(timerTimeout()), this, SLOT(ack()));
+    t->start(); //timeout of 60 secs
+    m_pendingAcks[msgId] = t;
+    if (m_pendingAcks.size() > MAX_PENDING_ACKS) {
+        ackAll();
+    }
+}
+
+void Session::ack(qint64 msgId) {
+    QList<qint64> idsList;
+    idsList.append(msgId);
+    sendAcks(idsList);
+}
+
+void Session::ackAll() {
+    sendAcks(m_pendingAcks.keys());
+}
+
+void Session::sendAcks(const QList<qint64> &msgIds) {
+    // verify that socket is connected. Don't send acks if state is other than connected.
+    // In case the socket is not connected, pending acks will be sent when socket is
+    // connected back again.
+    if (state() != QAbstractSocket::ConnectedState) {
+        return;
+    }
+    OutboundPkt p(mSettings);
+    p.appendInt(TL_MsgsAck);
+    p.appendInt(CoreTypes::typeVector);
+    int n = msgIds.length();
+    p.appendInt(n);
+    Q_FOREACH (qint64 msgId, msgIds) {
+        p.appendLong(msgId);
+        qDebug() << "Ack for msgId" << msgId;
+        EventTimer* t = m_pendingAcks.take(msgId);
+        if (t) {
+            t->stop();
+            delete t;
         }
     }
+    qint64 sentAcksId = encryptSendMessage(p.buffer(), p.length(), 0);
+    qDebug() << "Sent Acks with id:" << QString::number(sentAcksId, 16);
 }

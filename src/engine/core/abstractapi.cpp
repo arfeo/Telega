@@ -21,34 +21,25 @@
 
 #include "abstractapi.h"
 
-AbstractApi::AbstractApi(Session *session, QObject *parent) :
-        SessionManager(session, parent)
-{
-    // Connect responses and updates signals in main session
+AbstractApi::AbstractApi(Session *session, Settings *settings, CryptoUtils *crypto, QObject *parent) :
+    SessionManager(session, settings, crypto, parent) {
+    // connect responses and updates signals in main session
     connectResponsesSignals(mMainSession);
     connectUpdatesSignals(mMainSession);
 }
 
-AbstractApi::~AbstractApi()
-{
-    // ..
+AbstractApi::~AbstractApi() {
 }
 
-void AbstractApi::connectUpdatesSignals(Session *session)
-{
-    connect(session, SIGNAL(updatesTooLong()), this, SIGNAL(updatesTooLong()));
-    connect(session, SIGNAL(updateShortMessage(qint32,qint32,QString,qint32,qint32,qint32)), this, SIGNAL(updateShortMessage(qint32,qint32,QString,qint32,qint32,qint32)));
-    connect(session, SIGNAL(updateShortChatMessage(qint32,qint32,qint32,QString,qint32,qint32,qint32)), this, SIGNAL(updateShortChatMessage(qint32,qint32,qint32,QString,qint32,qint32,qint32)));
-    connect(session, SIGNAL(updateShort(Update,qint32)), this, SIGNAL(updateShort(Update,qint32)));
-    connect(session, SIGNAL(updatesCombined(QList<Update>,QList<User>,QList<Chat>,qint32,qint32,qint32)), this, SIGNAL(updatesCombined(QList<Update>,QList<User>,QList<Chat>,qint32,qint32,qint32)));
-    connect(session, SIGNAL(updates(QList<Update>,QList<User>,QList<Chat>,qint32,qint32)), this, SIGNAL(updates(QList<Update>,QList<User>,QList<Chat>,qint32,qint32)));
+void AbstractApi::connectUpdatesSignals(Session *session) {
+    connect(session, SIGNAL(updates()), this, SLOT(updates()));
 }
 
-void AbstractApi::connectResponsesSignals(Session *session)
-{
-    connect(session, SIGNAL(resultReceived(Query*,InboundPkt&)), this, SLOT(onResultReceived(Query*,InboundPkt&)));
-    connect(session, SIGNAL(errorReceived(Query*,qint32,QString)), this, SLOT(onErrorReceived(Query*,qint32,QString)));
+void AbstractApi::connectResponsesSignals(Session *session) {
+    connect(session, SIGNAL(resultReceived()), this, SLOT(onResultReceived()));
+    connect(session, SIGNAL(errorReceived()), this, SLOT(onErrorReceived()));
 }
+
 
 /**
  * @brief AbstractApi::onErrorReceived manages any error received from the server and links to declared
@@ -57,14 +48,14 @@ void AbstractApi::connectResponsesSignals(Session *session)
  * @param errorCode
  * @param errorText
  */
-void AbstractApi::onErrorReceived(Query *q, qint32 errorCode, QString errorText)
-{
+void AbstractApi::onErrorReceived(Query *q, qint32 errorCode, QString errorText) {
     if (q->methods() && q->methods()->onError) {
-        (((Api *)this)->*(q->methods()->onError))(q, errorCode, errorText);
+        (((TelegramApi *)this)->*(q->methods()->onError))(q, errorCode, errorText);
     } else {
-//        (((Api *)this)->*(q->methods()->onAnswer))(q, errorCode, errorText);
-        onError(q, errorCode, errorText);
+        bool accepted = false;
+        onError(q, errorCode, errorText, q->extra(), accepted);
     }
+    delete q;
 }
 
 /**
@@ -73,12 +64,14 @@ void AbstractApi::onErrorReceived(Query *q, qint32 errorCode, QString errorText)
  * @param q
  * @param inboundPkt
  */
-void AbstractApi::onResultReceived(Query *q, InboundPkt &inboundPkt)
-{
-//    qDebug() << "result for query" << inboundPkt.prefetchInt() ;
-
+void AbstractApi::onResultReceived(Query *q, InboundPkt &inboundPkt) {
     if (q->methods() && q->methods()->onAnswer) {
-        (((Api *)this)->*(q->methods()->onAnswer))(q, inboundPkt);
-//        Q_ASSERT(inboundPkt.inPtr() == inboundPkt.inEnd());
+        (((TelegramApi *)this)->*(q->methods()->onAnswer))(q, inboundPkt);
+        if(inboundPkt.inPtr() != inboundPkt.inEnd())
+        {
+            Q_EMIT fatalError();
+            return;
+        }
     }
+    delete q;
 }

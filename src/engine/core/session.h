@@ -25,26 +25,25 @@
 #include "dc.h"
 #include "connection.h"
 #include "query.h"
+#include "telegram/types/updatestype.h"
 #include <QMap>
+#include "eventtimer.h"
 
-class Session :
-        public Connection
+class Session : public Connection
 {
-
     Q_OBJECT
-
 public:
-    explicit Session(DC *dc, QObject *parent = 0);
-    ~Session();
+    explicit Session(DC *dc, Settings *settings, CryptoUtils *crypto, QObject *parent = 0);
+    virtual ~Session();
+
     DC *dc();
-    qint64 sendQuery(OutboundPkt &outboundPkt, QueryMethods *methods, QVariant extra = QVariant());
+    qint64 sendQuery(OutboundPkt &outboundPkt, QueryMethods *methods, const QVariant &extra = QVariant(), const QString &name = QString());
+
     inline qint64 sessionId() { return m_sessionId; }
-    inline bool initConnectionNeeded() { return m_initConnectionNeeded; }
-    inline void setInitConnectionNeeded(bool initConnectionNeeded) { m_initConnectionNeeded = initConnectionNeeded; }
     inline qint64 clientLastMsgId() { return m_clientLastMsgId; }
     inline qint32 seqNo() { return m_seqNo; }
     inline void setSeqNo(qint32 seqNo) { m_seqNo = seqNo; }
-    bool isonline();
+
     void release();
     void close();
 
@@ -52,38 +51,47 @@ Q_SIGNALS:
     void sessionReady(DC *dc);
     void sessionReleased(qint64 sessionId);
     void sessionClosed(qint64 sessionId);
+
     void resultReceived(Query *q, InboundPkt &inboundPkt);
     void errorReceived(Query *q, qint32 errorCode, QString errorText);
-    void updatesTooLong();
-    void updateShortMessage(qint32 id, qint32 fromId, const QString &message, qint32 pts, qint32 date, qint32 seq);
-    void updateShortChatMessage(qint32 id, qint32 fromId, qint32 chatId, const QString &message, qint32 pts, qint32 date, qint32 seq);
-    void updateShort(Update update, qint32 date);
-    void updatesCombined(QList<Update> updates, QList<User> users, QList<Chat> chats, qint32 date, qint32 seqStart, qint32 seq);
-    void updates(QList<Update> udts, QList<User> users, QList<Chat> chats, qint32 date, qint32 seq);
+    void updateMessageId(qint64 badMsgId, qint64 newMsgId);
+
+    void updates(const UpdatesType &update);
 
 private:
     struct EncryptedMsg {
-        // Unencrypted header
+        // unencrypted header
         qint64 authKeyId;
         char msgKey[16];
-        // Encrypted part, starts with encrypted header
+        // encrypted part, starts with encrypted header
         qint64 serverSalt;
         qint64 sessionId;
-        // First message follows
+        // first message follows
         qint64 msgId;
         qint32 seqNo;
         qint32 msgLen;   // divisible by 4
         qint32 message[MAX_MESSAGE_INTS];
     };
 
-    // Session members
+    Settings *mSettings;
+    CryptoUtils *mCrypto;
+
+    // session members
     qint64 m_sessionId;
     qint64 m_serverSalt;
-    qint32 m_timeSyncFactor; // difference between client and server time
+    qint32 mTimeDifference; // difference between client and server time
     static qint64 m_clientLastMsgId;
     qint32 m_seqNo;
+
     DC *m_dc;
-    QMap<qint64, struct Query *> m_pendingQueries; // map with the msgIds of the queries sent but not received its ack yet.
+    QMap<qint64, EventTimer *> m_pendingAcks; // once received response, its msgId is here stored as pending to be acknowledged
+    QMap<qint64, Query *> m_pendingQueries; // map with the msgIds of the queries sent but not received its ack yet.
+
+    // ack responses
+    void addToPendingAcks(qint64 msgId);
+    void ackAll();
+    void sendAcks(const QList<qint64> &msgIds);
+
 
     // Additional flags:
     // flag to see if initConnection() method must be sent before next output rpc query
@@ -92,13 +100,13 @@ private:
     // (the flag is set to true when just connected to dc until initConnection() operation is executed against this server)
     bool m_initConnectionNeeded;
 
-    // Connected signal management
+    // connected signal management
     void processConnected();
 
-    // Process and transform response message
+    // process and transform response message
     void processRpcMessage(InboundPkt &inboundPkt);
 
-    // Execute rpc answer operation requested
+    // execute rpc answer operation requested
     void rpcExecuteAnswer(InboundPkt &inboundPkt, qint64 msgId);
 
     void workUpdate(InboundPkt &inboundPkt, qint64 msgId);
@@ -119,26 +127,27 @@ private:
     void workUpdatesTooLong(InboundPkt &inboundPkt, qint64 msgId);
     void workBadMsgNotification(InboundPkt &inboundPkt, qint64 msgId);
 
-    // Encrypt message and send
+    // encrypt message and send
     EncryptedMsg *initEncryptedMessage(qint32 useful);
     qint64 encryptSendMessage(qint32 *msg, qint32 msgInts, qint32 useful);
     qint32 aesEncryptMessage(EncryptedMsg *encMsg);
-    void rpcSendMessage(void *data, qint32 len);
+    bool rpcSendMessage(void *data, qint32 len);
+    qint64 generatePlainNextMsgId();
     qint64 generateNextMsgId();
 
-    // Query results
+    // query results
     void queryOnResult(InboundPkt &inboundPkt, qint64 msgId);
     void queryOnError(InboundPkt &inboundPkt, qint64 msgId);
 
-    void recomposeAndSendQuery(Query *q);
+    qint64 recomposeAndSendQuery(Query *q);
 
 protected Q_SLOTS:
     void processRpcAnswer(QByteArray response);
 
 private Q_SLOTS:
-    void resendQuery(Query &q);
+    void resendQuery(Query *q);
     void onDisconnected();
-
+    void ack(qint64 msgId);
 };
 
 #endif // SESSION_H
