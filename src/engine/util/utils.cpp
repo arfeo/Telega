@@ -23,10 +23,7 @@
 #include <openssl/pem.h>
 #include <openssl/err.h>
 #include <zlib.h>
-#if (QT_VERSION < QT_VERSION_CHECK(5, 4, 0))
 #include <sys/utsname.h>
-#endif
-
 #include <QDebug>
 #include <QEventLoop>
 #include <QProcess>
@@ -180,6 +177,11 @@ void Utils::secureZeroMemory(void *dst, int val, size_t count) {
 RSA *Utils::rsaLoadPublicKey(const QString &publicKeyName) {
     RSA *pubKey = NULL;
     QFile file(publicKeyName);
+
+    if(!file.exists()) {
+        qDebug() << "Public key file" << publicKeyName << "doesn't exist";
+        return NULL;
+    }
     if(!file.open(QFile::ReadOnly)) {
         qDebug() << "Couldn't open public key file" << publicKeyName;
         return NULL;
