@@ -525,7 +525,7 @@ qint64 Session::sendQuery(OutboundPkt &outboundPkt, QueryMethods *methods, const
     q->setName(name);
 
     if (mSettings->resendQueries()) {
-        connect(q, SIGNAL(timeout()), this, SLOT(resendQuery()), Qt::UniqueConnection);
+        connect(q, SIGNAL(timeout(Query *)), this, SLOT(resendQuery(Query *)), Qt::UniqueConnection);
         q->startTimer(QUERY_TIMEOUT);
     }
 
@@ -619,7 +619,7 @@ void Session::queryOnError(InboundPkt &inboundPkt, qint64 msgId) {
 
 void Session::addToPendingAcks(qint64 msgId) {
     EventTimer *t = new EventTimer(msgId, ACK_TIMEOUT, this);
-    connect(t, SIGNAL(timerTimeout()), this, SLOT(ack()));
+    connect(t, SIGNAL(timerTimeout(qint64)), this, SLOT(ack(qint64)));
     t->start(); //timeout of 60 secs
     m_pendingAcks[msgId] = t;
     if (m_pendingAcks.size() > MAX_PENDING_ACKS) {

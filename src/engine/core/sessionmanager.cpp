@@ -26,8 +26,8 @@ SessionManager::SessionManager(Session *session, Settings *settings, CryptoUtils
     mCrypto(crypto),
     mMainSession(session)
 {
-    connect(mMainSession.data(), SIGNAL(sessionReady()), this, SLOT(mainSessionReady()), Qt::UniqueConnection);
-    connect(mMainSession.data(), SIGNAL(sessionClosed()), this, SLOT(mainSessionClosed()), Qt::UniqueConnection);
+    connect(mMainSession.data(), SIGNAL(sessionReady(DC *)), this, SLOT(mainSessionReady()), Qt::UniqueConnection);
+    connect(mMainSession.data(), SIGNAL(sessionClosed(qint64)), this, SLOT(mainSessionClosed()), Qt::UniqueConnection);
 }
 
 SessionManager::~SessionManager() {
@@ -68,8 +68,8 @@ Session *SessionManager::createFileSession(DC *dc) {
 
 Session *SessionManager::createSession(DC *dc) {
     Session *session = new Session(dc, mSettings, mCrypto, this);
-    connect(session, SIGNAL(sessionReleased()), this, SLOT(onSessionReleased()));
-    connect(session, SIGNAL(sessionClosed()), this, SLOT(onSessionClosed()));
+    connect(session, SIGNAL(sessionReleased(qint64)), this, SLOT(onSessionReleased(qint64)));
+    connect(session, SIGNAL(sessionClosed(qint64)), this, SLOT(onSessionClosed(qint64)));
     connectResponsesSignals(session);
     return session;
 }
@@ -118,14 +118,14 @@ void SessionManager::changeMainSessionToDc(DC *dc) {
     }
     // create session and connect to dc, adding the signal of dc changed
     createMainSessionToDc(dc);
-    connect(mMainSession.data(), SIGNAL(sessionReady()), this, SLOT(mainSessionDcChanged()), Qt::UniqueConnection);
+    connect(mMainSession.data(), SIGNAL(sessionReady(DC *)), this, SLOT(mainSessionDcChanged(DC *)), Qt::UniqueConnection);
 }
 
 void SessionManager::createMainSessionToDc(DC *dc) {
     // create session and connect to dc
     mMainSession = createSession(dc);
-    connect(mMainSession.data(), SIGNAL(sessionReady()), this, SLOT(mainSessionReady()), Qt::UniqueConnection);
-    connect(mMainSession.data(), SIGNAL(sessionClosed()), this, SLOT(mainSessionClosed()), Qt::UniqueConnection);
+    connect(mMainSession.data(), SIGNAL(sessionReady(DC *)), this, SLOT(mainSessionReady()), Qt::UniqueConnection);
+    connect(mMainSession.data(), SIGNAL(sessionClosed(qint64)), this, SLOT(mainSessionClosed()), Qt::UniqueConnection);
     connectUpdatesSignals(mMainSession);
     mMainSession->connectToServer();
 }

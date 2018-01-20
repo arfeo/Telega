@@ -229,13 +229,13 @@ void Telegram::init(qint32 timeout) {
     // activate rest of dc provider signal connections
     connect(prv->mDcProvider.data(), SIGNAL(authNeeded()), this, SLOT(authNeeded()));
     connect(prv->mDcProvider.data(), SIGNAL(authTransferCompleted()), this, SLOT(onAuthLoggedIn()));
-    connect(prv->mDcProvider.data(), SIGNAL(error()), this, SLOT(error()));
+    connect(prv->mDcProvider.data(), SIGNAL(error(qint64, qint32, const QString &, const QString &)), this, SLOT(error(qint64, qint32, const QString &, const QString &)));
 
     prv->mSecretState = SecretState(prv->mSettings);
     prv->mEncrypter = new Encrypter(prv->mSettings);
     prv->mDecrypter = new Decrypter(prv->mSettings);
 
-    connect(prv->mDecrypter, SIGNAL(sequenceNumberGap()), this, SLOT(onSequenceNumberGap()));
+    connect(prv->mDecrypter, SIGNAL(sequenceNumberGap(qint32, qint32, qint32)), this, SLOT(onSequenceNumberGap(qint32, qint32, qint32)));
 
     prv->mSecretState.load();
     prv->mDcProvider->initialize();
@@ -790,167 +790,168 @@ SecretChatMessage Telegram::toSecretChatMessage(const EncryptedMessage &encrypte
 
 void Telegram::processSecretChatUpdate(const Update &update) {
     switch (static_cast<qint32>(update.classType())) {
-    case Update::typeUpdateNewEncryptedMessage: {
-        EncryptedMessage encrypted = update.messageEncrypted();
+        case Update::typeUpdateNewEncryptedMessage: {
+            EncryptedMessage encrypted = update.messageEncrypted();
 
-        SecretChatMessage secretChatMessage = toSecretChatMessage(encrypted);
+            SecretChatMessage secretChatMessage = toSecretChatMessage(encrypted);
 
-        // if having a not 0 randomId, the decrypted message is valid
-        if (secretChatMessage.decryptedMessage().randomId()) {
-            prv->mSecretState.save();
-            qint32 qts = update.qts();
-            Q_EMIT updateSecretChatMessage(secretChatMessage, qts);
-        }
+            // if having a not 0 randomId, the decrypted message is valid
+            if (secretChatMessage.decryptedMessage().randomId()) {
+                prv->mSecretState.save();
+                qint32 qts = update.qts();
+                Q_EMIT updateSecretChatMessage(secretChatMessage, qts);
+            }
 
-        break;
-    }
-    case Update::typeUpdateEncryption: {
-
-        const EncryptedChat &encryptedChat = update.chat();
-        qint32 chatId = encryptedChat.id();
-        switch (static_cast<qint32>(encryptedChat.classType())) {
-        case EncryptedChat::typeEncryptedChatRequested: {
-
-            // here, we have received a request of creating a new secret chat. Emit a signal
-            // with chat details for user B to accept or reject chat creation
-            qint64 accessHash = encryptedChat.accessHash();
-            qint32 date = encryptedChat.date();
-            qint32 adminId = encryptedChat.adminId();
-            qint32 participantId = encryptedChat.participantId();
-            QByteArray gA = encryptedChat.gA();
-
-            qDebug() << "Requested secret chat creation:";
-            qDebug() << "chatId:" << chatId;
-            qDebug() << "date:" << date;
-            qDebug() << "adminId:" << adminId;
-            qDebug() << "participantId:" << participantId;
-            qDebug() << "gA:" << gA.toBase64();
-            qDebug() << "ourId:" << ourId();
-
-            ASSERT(participantId == ourId());
-
-            SecretChat* secretChat = new SecretChat(prv->mSettings);
-            secretChat->setChatId(encryptedChat.id());
-            secretChat->setAccessHash(encryptedChat.accessHash());
-            secretChat->setDate(encryptedChat.date());
-            secretChat->setAdminId(encryptedChat.adminId());
-            secretChat->setParticipantId(encryptedChat.participantId());
-            secretChat->setGAOrB(gA);
-            secretChat->setState(SecretChat::Requested);
-
-            prv->mSecretState.chats().insert(chatId, secretChat);
-            Q_EMIT messagesEncryptedChatRequested(chatId, date, adminId, accessHash);
             break;
         }
-        case EncryptedChat::typeEncryptedChat: {
+        case Update::typeUpdateEncryption: {
 
-            qDebug() << "received encrypted chat creation update";
-            // here, the request for encryption has been accepted. Take the secret chat data
-            qint64 accessHash = encryptedChat.accessHash();
-            qint32 date = encryptedChat.date();
-            qint32 adminId = encryptedChat.adminId();
-            qint32 participantId = encryptedChat.participantId();
-            QByteArray gB = encryptedChat.gAOrB();
-            qint64 keyFingerprint = encryptedChat.keyFingerprint();
+            const EncryptedChat &encryptedChat = update.chat();
+            qint32 chatId = encryptedChat.id();
+            switch (static_cast<qint32>(encryptedChat.classType())) {
+                case EncryptedChat::typeEncryptedChatRequested: {
 
-            qDebug() << "Peer accepted secret chat creation:";
-            qDebug() << "chatId:" << chatId;
-            qDebug() << "accessHash:" << accessHash;
-            qDebug() << "date:" << date;
-            qDebug() << "adminId:" << adminId;
-            qDebug() << "participantId:" << participantId;
-            qDebug() << "gB:" << gB.toBase64();
-            qDebug() << "received keyFingerprint:" << keyFingerprint;
+                    // here, we have received a request of creating a new secret chat. Emit a signal
+                    // with chat details for user B to accept or reject chat creation
+                    qint64 accessHash = encryptedChat.accessHash();
+                    qint32 date = encryptedChat.date();
+                    qint32 adminId = encryptedChat.adminId();
+                    qint32 participantId = encryptedChat.participantId();
+                    QByteArray gA = encryptedChat.gA();
 
-            SecretChat *secretChat = prv->mSecretState.chats().value(chatId);
-            if (!secretChat) {
-                qDebug() << "Could not find secret chat with id" << chatId;
-                return;
-            }
+                    qDebug() << "Requested secret chat creation:";
+                    qDebug() << "chatId:" << chatId;
+                    qDebug() << "date:" << date;
+                    qDebug() << "adminId:" << adminId;
+                    qDebug() << "participantId:" << participantId;
+                    qDebug() << "gA:" << gA.toBase64();
+                    qDebug() << "ourId:" << ourId();
 
-            prv->createSharedKey(secretChat, prv->mSecretState.p(), gB);
+                    ASSERT(participantId == ourId());
 
-            qint64 calculatedKeyFingerprint = secretChat->keyFingerprint();
-            qDebug() << "calculated keyFingerprint:" << calculatedKeyFingerprint;
+                    SecretChat* secretChat = new SecretChat(prv->mSettings);
+                    secretChat->setChatId(encryptedChat.id());
+                    secretChat->setAccessHash(encryptedChat.accessHash());
+                    secretChat->setDate(encryptedChat.date());
+                    secretChat->setAdminId(encryptedChat.adminId());
+                    secretChat->setParticipantId(encryptedChat.participantId());
+                    secretChat->setGAOrB(gA);
+                    secretChat->setState(SecretChat::Requested);
 
-            if (calculatedKeyFingerprint == keyFingerprint) {
-                qDebug() << "Generated shared key for secret chat" << chatId;
-                secretChat->setChatId(chatId);
-                secretChat->setAccessHash(accessHash);
-                secretChat->setDate(date);
-                secretChat->setAdminId(adminId);
-                secretChat->setParticipantId(participantId);
-                secretChat->setState(SecretChat::Accepted);
-                qDebug() << "Joined to secret chat" << chatId << "with peer" << participantId;
-                prv->mSecretState.save();
-                Q_EMIT messagesEncryptedChatCreated(chatId, date, participantId, accessHash);
+                    prv->mSecretState.chats().insert(chatId, secretChat);
+                    Q_EMIT messagesEncryptedChatRequested(chatId, date, adminId, accessHash);
+                    break;
+                }
+                case EncryptedChat::typeEncryptedChat: {
 
-                //notify peer about our layer
-                InputEncryptedChat inputEncryptedChat;
-                inputEncryptedChat.setChatId(chatId);
-                inputEncryptedChat.setAccessHash(accessHash);
+                    qDebug() << "received encrypted chat creation update";
+                    // here, the request for encryption has been accepted. Take the secret chat data
+                    qint64 accessHash = encryptedChat.accessHash();
+                    qint32 date = encryptedChat.date();
+                    qint32 adminId = encryptedChat.adminId();
+                    qint32 participantId = encryptedChat.participantId();
+                    QByteArray gB = encryptedChat.gAOrB();
+                    qint64 keyFingerprint = encryptedChat.keyFingerprint();
 
-                prv->mEncrypter->setSecretChat(secretChat);
-                qint64 randomId;
-                Utils::randomBytes(&randomId, 8);
+                    qDebug() << "Peer accepted secret chat creation:";
+                    qDebug() << "chatId:" << chatId;
+                    qDebug() << "accessHash:" << accessHash;
+                    qDebug() << "date:" << date;
+                    qDebug() << "adminId:" << adminId;
+                    qDebug() << "participantId:" << participantId;
+                    qDebug() << "gB:" << gB.toBase64();
+                    qDebug() << "received keyFingerprint:" << keyFingerprint;
 
-                DecryptedMessageAction action(DecryptedMessageAction::typeDecryptedMessageActionNotifyLayerSecret17);
-                action.setLayer(CoreTypes::typeLayerVersion);
+                    SecretChat *secretChat = prv->mSecretState.chats().value(chatId);
+                    if (!secretChat) {
+                        qDebug() << "Could not find secret chat with id" << chatId;
+                        return;
+                    }
 
-                DecryptedMessage decryptedMessage(DecryptedMessage::typeDecryptedMessageServiceSecret17);
-                decryptedMessage.setRandomId(randomId);
-                decryptedMessage.setAction(action);
+                    prv->createSharedKey(secretChat, prv->mSecretState.p(), gB);
 
-                QByteArray data = prv->mEncrypter->generateEncryptedData(decryptedMessage);
-                TelegramCore::messagesSendEncryptedService(inputEncryptedChat, randomId, data);
+                    qint64 calculatedKeyFingerprint = secretChat->keyFingerprint();
+                    qDebug() << "calculated keyFingerprint:" << calculatedKeyFingerprint;
 
-                secretChat->increaseOutSeqNo();
-                secretChat->appendToSequence(randomId);
-                prv->mSecretState.save();
+                    if (calculatedKeyFingerprint == keyFingerprint) {
+                        qDebug() << "Generated shared key for secret chat" << chatId;
+                        secretChat->setChatId(chatId);
+                        secretChat->setAccessHash(accessHash);
+                        secretChat->setDate(date);
+                        secretChat->setAdminId(adminId);
+                        secretChat->setParticipantId(participantId);
+                        secretChat->setState(SecretChat::Accepted);
+                        qDebug() << "Joined to secret chat" << chatId << "with peer" << participantId;
+                        prv->mSecretState.save();
+                        Q_EMIT messagesEncryptedChatCreated(chatId, date, participantId, accessHash);
 
-                qDebug() << "Notified our layer:" << CoreTypes::typeLayerVersion;
-            } else {
-                qDebug() << "Key fingerprint mismatch. Discarding encryption";
-                messagesDiscardEncryptedChat(chatId);
-            }
-            break;
-        }
-        case EncryptedChat::typeEncryptedChatDiscarded: {
-            qDebug() << "Discarded chat" << chatId;
-            SecretChat *secretChat = prv->mSecretState.chats().take(chatId);
-            if (secretChat) {
-                prv->mSecretState.save();
-                delete secretChat;
-                secretChat = 0;
-            }
-            Q_EMIT messagesEncryptedChatDiscarded(chatId);
-            break;
-        }
-        case EncryptedChat::typeEncryptedChatWaiting: {
-            qDebug() << "Waiting for peer to accept chat" << chatId;
+                        //notify peer about our layer
+                        InputEncryptedChat inputEncryptedChat;
+                        inputEncryptedChat.setChatId(chatId);
+                        inputEncryptedChat.setAccessHash(accessHash);
 
-            if (encryptedChat.participantId() != ourId()) {
-                return;
-            }
+                        prv->mEncrypter->setSecretChat(secretChat);
+                        qint64 randomId;
+                        Utils::randomBytes(&randomId, 8);
 
-            SecretChat* secretChat = prv->mSecretState.chats().value(chatId);
-            if (secretChat) {
-                secretChat->setState(SecretChat::Requested);
-                qint32 date = encryptedChat.date();
-                qint32 adminId = encryptedChat.adminId();
-                qint64 accessHash = encryptedChat.accessHash();
-                Q_EMIT messagesEncryptedChatRequested(chatId, date, adminId, accessHash);
+                        DecryptedMessageAction action(DecryptedMessageAction::typeDecryptedMessageActionNotifyLayerSecret17);
+                        action.setLayer(CoreTypes::typeLayerVersion);
+
+                        DecryptedMessage decryptedMessage(DecryptedMessage::typeDecryptedMessageServiceSecret17);
+                        decryptedMessage.setRandomId(randomId);
+                        decryptedMessage.setAction(action);
+
+                        QByteArray data = prv->mEncrypter->generateEncryptedData(decryptedMessage);
+                        TelegramCore::messagesSendEncryptedService(inputEncryptedChat, randomId, data);
+
+                        secretChat->increaseOutSeqNo();
+                        secretChat->appendToSequence(randomId);
+                        prv->mSecretState.save();
+
+                        qDebug() << "Notified our layer:" << CoreTypes::typeLayerVersion;
+                    } else {
+                        qDebug() << "Key fingerprint mismatch. Discarding encryption";
+                        messagesDiscardEncryptedChat(chatId);
+                    }
+                    break;
+                }
+                case EncryptedChat::typeEncryptedChatDiscarded: {
+                    qDebug() << "Discarded chat" << chatId;
+                    SecretChat *secretChat = prv->mSecretState.chats().take(chatId);
+                    if (secretChat) {
+                        prv->mSecretState.save();
+                        delete secretChat;
+                        secretChat = 0;
+                    }
+                    Q_EMIT messagesEncryptedChatDiscarded(chatId);
+                    break;
+                }
+                case EncryptedChat::typeEncryptedChatWaiting: {
+                    qDebug() << "Waiting for peer to accept chat" << chatId;
+
+                    if (encryptedChat.participantId() != ourId()) {
+                        return;
+                    }
+
+                    SecretChat* secretChat = prv->mSecretState.chats().value(chatId);
+                    if (secretChat) {
+                        secretChat->setState(SecretChat::Requested);
+                        qint32 date = encryptedChat.date();
+                        qint32 adminId = encryptedChat.adminId();
+                        qint64 accessHash = encryptedChat.accessHash();
+                        Q_EMIT messagesEncryptedChatRequested(chatId, date, adminId, accessHash);
+                    }
+                    break;
+                }
+                default:
+                    Q_ASSERT("Not handled");
+                    break;
             }
             break;
         }
         default:
             Q_ASSERT("Not handled");
             break;
-        }
-    }
-    default:
-        Q_ASSERT("Not handled");
-        break;
     }
 }
 

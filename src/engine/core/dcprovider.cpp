@@ -117,8 +117,7 @@ void DcProvider::initialize() {
             DCAuth *dcAuth = new DCAuth(mDcs[defaultDcId], mSettings, mCrypto, this);
             mDcAuths.insert(defaultDcId, dcAuth);
             connect(dcAuth, SIGNAL(fatalError()), this, SLOT(logOut()));
-            connect(dcAuth, SIGNAL(fatalError()), this, SLOT(fatalError()));
-            connect(dcAuth, SIGNAL(dcReady()), this, SLOT(onDcReady()));
+            connect(dcAuth, SIGNAL(dcReady(DC *)), this, SLOT(onDcReady(DC *)));
             dcAuth->createAuthKey();
         } else {
             onDcReady(mDcs[defaultDcId]);
@@ -131,8 +130,7 @@ void DcProvider::initialize() {
             DCAuth *dcAuth = new DCAuth(mDcs[mSettings->workingDcNum()], mSettings, mCrypto);
             mDcAuths.insert(mSettings->workingDcNum(), dcAuth);
             connect(dcAuth, SIGNAL(fatalError()), this, SLOT(logOut()));
-            connect(dcAuth, SIGNAL(fatalError()), this, SLOT(fatalError()));
-            connect(dcAuth, SIGNAL(dcReady()), this, SLOT(onDcReady()));
+            connect(dcAuth, SIGNAL(dcReady(DC *)), this, SLOT(onDcReady(DC *)));
             dcAuth->createAuthKey();
         } else {
             onDcReady(mDcs[mSettings->workingDcNum()]);
@@ -169,8 +167,8 @@ void DcProvider::processDcReady(DC *dc) {
     if ((!mApi) && (dc->id() == mSettings->workingDcNum())) {
         Session *session = new Session(dc, mSettings, mCrypto, this);
         mApi = new TelegramApi(session, mSettings, mCrypto, this);
-        connect(session, SIGNAL(sessionReady()), this, SLOT(onApiReady()));
-        connect(session, SIGNAL(error()), this, SLOT(onApiError()));
+        connect(session, SIGNAL(sessionReady(DC *)), this, SLOT(onApiReady(DC *)));
+        connect(session, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(onApiError(QAbstractSocket::SocketError)));
         session->connectToServer();
     } else if ( mPendingDcs.keys(true).isEmpty() ) { // if all dcs are authorized, emit provider ready signal
         // save the settings here, after all dcs are ready
@@ -204,9 +202,9 @@ void DcProvider::onApiError(QAbstractSocket::SocketError errorCode) {
     qDebug() << "Api init error when connecting session to server:" << session->errorString();
 
     // after emitting these startup offline signals, we don't want to do it again when session gets connected, so disconnect signal-slot
-    disconnect(session, SIGNAL(error()), this, SLOT(onApiError()));
+    disconnect(session, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(onApiError(QAbstractSocket::SocketError)));
     // also disconnect the signal-slot to query for current server config when connected (once logged in that info is irrelevant)
-    disconnect(session, SIGNAL(sessionReady()), this, SLOT(onApiReady()));
+    disconnect(session, SIGNAL(sessionReady(DC *)), this, SLOT(onApiReady(DC *)));
 
     bool userSignedInAllDCs = true;
     // because we haven't connection, we assume the available DCs have not changed since last startup.
@@ -239,10 +237,10 @@ void DcProvider::onApiReady(DC*) {
     qDebug() << "Api connected to server and ready";
 
     // after emitting the api startup signals, we don't want to do it again when session gets connected, so disconnect signal-slot
-    disconnect(session, SIGNAL(error()), this, SLOT(onApiError()));
+    disconnect(session, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(onApiError(QAbstractSocket::SocketError)));
 
     // get the config
-    connect(mApi, SIGNAL(helpGetConfigAnswer()), this, SLOT(onConfigReceived()), Qt::UniqueConnection );
+    connect(mApi, SIGNAL(helpGetConfigAnswer(qint64, const Config, const QVariant &)), this, SLOT(onConfigReceived(qint64, const Config &)), Qt::UniqueConnection );
 
     qint64 rid = mApi->helpGetConfig();
     mGetConfigRequests[rid] = session;
@@ -257,7 +255,7 @@ void DcProvider::onConfigReceived(qint64 msgId, const Config &config) {
 
     Session *session = mGetConfigRequests.take(msgId);
     if(session)
-        disconnect(session, SIGNAL(sessionReady()), this, SLOT(onApiReady()));
+        disconnect(session, SIGNAL(sessionReady(DC *)), this, SLOT(onApiReady(DC *)));
 
     if(mConfigReceived)
         return;
@@ -309,8 +307,7 @@ void DcProvider::onConfigReceived(qint64 msgId, const Config &config) {
             DCAuth *dcAuth = new DCAuth(dc, mSettings, mCrypto, this);
             mDcAuths.insert(dcOption.id(), dcAuth);
             connect(dcAuth, SIGNAL(fatalError()), this, SLOT(logOut()));
-            connect(dcAuth, SIGNAL(fatalError()), this, SLOT(fatalError()));
-            connect(dcAuth, SIGNAL(dcReady()), this, SLOT(onDcReady()));
+            connect(dcAuth, SIGNAL(dcReady(DC *)), this, SLOT(onDcReady(DC *)));
             dcAuth->createAuthKey();
         } else if (dcOption.id() != config.thisDc()) {
             // if authorized and not working dc emit dcReady signal directly
@@ -344,7 +341,7 @@ void DcProvider::transferAuth() {
             hasTransferSessions = true;
             // create a new session for this dc
             Session *session = mApi->fileSession(dc);
-            connect(session, SIGNAL(sessionReady()), this, SLOT(onTransferSessionReady()));
+            connect(session, SIGNAL(sessionReady(DC *)), this, SLOT(onTransferSessionReady(DC *)));
             session->connectToServer();
             mPendingTransferSessions++;
         }
@@ -358,8 +355,7 @@ void DcProvider::onTransferSessionReady(DC *) {
     Session *session = qobject_cast<Session *>(sender());
     mTransferSessions.append(session);
     if (--mPendingTransferSessions == 0) {
-        connect(mApi, SIGNAL(authExportAuthorizationAnswer()), this, SLOT(onAuthExportedAuthorization()));
-        connect(mApi, SIGNAL(authImportAuthorizationAnswer()), this, SLOT(onAuthImportedAuthorization()));
+        connect(mApi, SIGNAL(authExportAuthorizationAnswer(qint64, const AuthExportedAuthorization &, const QVariant)), this, SLOT(onAuthExportedAuthorization(qint64, const AuthExportedAuthorization &)));
         mApi->authExportAuthorization(mTransferSessions.first()->dc()->id());
     }
 }

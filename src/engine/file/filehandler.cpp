@@ -11,12 +11,12 @@ FileHandler::FileHandler(TelegramCore *core, TelegramApi *api, CryptoUtils *cryp
     mDcProvider(dcProvider),
     mSecretState(secretState) {
 
-    connect(mApi, SIGNAL(uploadSaveFilePartAnswer()), this, SLOT(onUploadSaveFilePartResult()));
-    connect(mApi, SIGNAL(uploadSaveBigFilePartAnswer()), this, SLOT(onUploadSaveFilePartResult()));
+    connect(mApi, SIGNAL(uploadSaveFilePartAnswer(qint64, bool, const QVariant &)), this, SLOT(onUploadSaveFilePartResult(qint64, bool, const QVariant &)));
+    connect(mApi, SIGNAL(uploadSaveBigFilePartAnswer(qint64, bool, const QVariant &)), this, SLOT(onUploadSaveFilePartResult(qint64, bool, const QVariant &)));
     //connect(mApi, SIGNAL(uploadGetFileAnswer()), this, SLOT(onUploadGetFileAnswer()));
-    connect(mApi, SIGNAL(uploadGetFileError()), this, SLOT(onUploadGetFileError()));
-    connect(mApi, SIGNAL(messagesSendMediaAnswer()), this, SLOT(onMessagesSentMedia()));
-    connect(mApi, SIGNAL(messagesSendEncryptedFileAnswer()), this, SLOT(onMessagesSentEncryptedFile()));
+    connect(mApi, SIGNAL(uploadGetFileError(qint64, qint32, const QString &, const QVariant &)), this, SLOT(onUploadGetFileError(qint64, qint32, const QString &, const QVariant &)));
+    connect(mApi, SIGNAL(messagesSendMediaAnswer(qint64, const UpdatesType &, const QVariant &)), this, SLOT(onMessagesSentMedia(qint64, const UpdatesType &, const QVariant &)));
+    connect(mApi, SIGNAL(messagesSendEncryptedFileAnswer(qint64, const MessagesSentEncryptedMessage &, const QVariant &)), this, SLOT(onMessagesSentEncryptedFile(qint64, const MessagesSentEncryptedMessage &, const QVariant &)));
 }
 
 FileHandler::~FileHandler() {
@@ -66,7 +66,7 @@ qint64 FileHandler::uploadSendFile(FileOperation &op, const QString &fileName, c
         uploadSendFileParts(*firstFileToUpload);
     } else {
         mInitialUploadsMap[session->sessionId()] << firstFileToUpload;
-        connect(session, SIGNAL(sessionReady()), this, SLOT(onUploadSendFileSessionCreated()));
+        connect(session, SIGNAL(sessionReady(DC *)), this, SLOT(onUploadSendFileSessionCreated(DC *)));
         session->connectToServer();
     }
 
@@ -106,7 +106,7 @@ qint64 FileHandler::uploadSendFile(FileOperation &op, const QString &filePath, c
         uploadSendFileParts(*firstFileToUpload);
     } else {
         mInitialUploadsMap[session->sessionId()] << firstFileToUpload;
-        connect(session, SIGNAL(sessionReady()), this, SLOT(onUploadSendFileSessionCreated()));
+        connect(session, SIGNAL(sessionReady(DC *)), this, SLOT(onUploadSendFileSessionCreated(DC *)));
         session->connectToServer();
     }
 
@@ -333,7 +333,7 @@ qint64 FileHandler::uploadGetFile(const InputFileLocation &location, qint32 file
     }
     mActiveDownloadsMap.insert(f->id(), true);
 
-    connect(session, SIGNAL(updateMessageId()), this, SLOT(onUpdateMessageId()));
+    connect(session, SIGNAL(updateMessageId(qint64, qint64)), this, SLOT(onUpdateMessageId(qint64, qint64)));
 
     switch (session->state()) {
     case QAbstractSocket::ConnectingState: {
@@ -349,7 +349,7 @@ qint64 FileHandler::uploadGetFile(const InputFileLocation &location, qint32 file
         QList<DownloadFile::Ptr> sessionInitialFiles;
         sessionInitialFiles << f;
         mInitialDownloadsMap.insert(session->sessionId(), sessionInitialFiles);
-        connect(session, SIGNAL(sessionReady()), this, SLOT(onUploadGetFileSessionCreated()));
+        connect(session, SIGNAL(sessionReady(DC *)), this, SLOT(onUploadGetFileSessionCreated(DC *)));
         session->connectToServer();
         break;
     }
@@ -492,7 +492,7 @@ void FileHandler::onUploadGetFileError(qint64 id, qint32 errorCode, const QStrin
             QList<DownloadFile::Ptr> sessionInitialFiles;
             sessionInitialFiles << f;
             mInitialDownloadsMap.insert(newDcSession->sessionId(), sessionInitialFiles);
-            connect(newDcSession, SIGNAL(sessionReady()), this, SLOT(onUploadGetFileSessionCreated()));
+            connect(newDcSession, SIGNAL(sessionReady(DC *)), this, SLOT(onUploadGetFileSessionCreated(DC *)));
             newDcSession->connectToServer();
             break;
         }

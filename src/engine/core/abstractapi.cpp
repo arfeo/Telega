@@ -32,12 +32,12 @@ AbstractApi::~AbstractApi() {
 }
 
 void AbstractApi::connectUpdatesSignals(Session *session) {
-    connect(session, SIGNAL(updates()), this, SLOT(updates()));
+    connect(session, SIGNAL(updates(const UpdatesType &)), this, SLOT(updates(const UpdatesType &)));
 }
 
 void AbstractApi::connectResponsesSignals(Session *session) {
-    connect(session, SIGNAL(resultReceived()), this, SLOT(onResultReceived()));
-    connect(session, SIGNAL(errorReceived()), this, SLOT(onErrorReceived()));
+    connect(session, SIGNAL(resultReceived(Query *, InboundPkt &)), this, SLOT(onResultReceived(Query *, InboundPkt &)));
+    connect(session, SIGNAL(errorReceived(Query *, qint32, QString)), this, SLOT(onErrorReceived(Query *, qint32, QString)));
 }
 
 

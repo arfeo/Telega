@@ -35,9 +35,9 @@ Connection::Connection(const QString &host, qint32 port, QObject *parent) :
     connect(this, SIGNAL(connected()), this, SLOT(onConnected()));
     connect(this, SIGNAL(disconnected()), this, SLOT(onDisconnected()));
     connect(this, SIGNAL(readyRead()), this, SLOT(onReadyRead()));
-    connect(this, SIGNAL(error()), this, SLOT(onError()));
-    connect(this, SIGNAL(stateChanged()), this, SLOT(onStateChanged()));
-    connect(&mAsserter, SIGNAL(fatalError()), this, SLOT(fatalError()));
+    connect(this, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(onError(QAbstractSocket::SocketError)));
+    connect(this, SIGNAL(stateChanged(QAbstractSocket::SocketState)), this, SLOT(onStateChanged(QAbstractSocket::SocketState)));
+    //connect(&mAsserter, SIGNAL(fatalError()), this, SLOT(fatalError()));
 }
 
 Connection::~Connection() {

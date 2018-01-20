@@ -59,7 +59,3 @@ void Query::timerEvent(QTimerEvent *event) {
         killTimer(event->timerId());
     }
 }
-
-
-
-
