@@ -52,6 +52,7 @@ public:
         mReplyMarkup(ReplyMarkup::null),
         mResultCallback(0),
         mTimeOut(0),
+        mChatId(0),
         mInputChatPhoto(InputChatPhoto::typeInputChatPhotoEmpty),
         mGeoPoint(InputGeoPoint::typeInputGeoPointEmpty),
         mType(opType) {}

@@ -28,6 +28,8 @@ Query::Query(QObject *parent) :
     m_dataLength(0),
     m_data(0),
     m_methods(0),
+    m_seqNo(0),
+    m_acked(false),
     m_resends(MAX_QUERY_RESENDS) {
 }
 
