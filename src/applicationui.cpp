@@ -57,7 +57,8 @@ ApplicationUI::ApplicationUI() :
         m_translator(new QTranslator(this)),
         m_localeHandler(new LocaleHandler(this)),
         m_invokeManager(new InvokeManager(this)),
-        db(new Database(this))
+        db(new Database(this)),
+        loggedIn(false)
 {
     // Prepare the localization
     if (!QObject::connect(m_localeHandler, SIGNAL(systemLanguageChanged()), this,
@@ -81,8 +82,6 @@ ApplicationUI::ApplicationUI() :
     // Create root object for the UI
     AbstractPane *root = qml->createRootObject<AbstractPane>();
     Application::instance()->setScene(root);
-
-    isUserReg();
 }
 
 ApplicationUI::~ApplicationUI()
@@ -99,36 +98,37 @@ ApplicationUI::~ApplicationUI()
 
 void ApplicationUI::onSystemLanguageChanged()
 {
-    QCoreApplication::instance()->removeTranslator(m_translator);
-    // Initiate, load and install the application translation files.
-    QString locale_string = QLocale().name();
-    QString file_name = QString("TB10_%1").arg(locale_string);
-    if (m_translator->load(file_name, "app/native/qm")) {
-        QCoreApplication::instance()->installTranslator(m_translator);
-    }
+   // ..
 }
+
 void ApplicationUI::init()
 {
-
     s = Settings::getInstance();
     s->loadSettings();
     mDcProvider.initialize();
     QList<DC *> dcsList = mDcProvider.getDcs();
     connect(&mDcProvider, SIGNAL(dcProviderReady()), this, SLOT(keyloaded()));
-    Q_FOREACH (DC *dc, dcsList){
-}
+    Q_FOREACH (DC *dc, dcsList) {
+        // ..
+    }
     //changeServer(s->workingDcNum()-1 );
     switch (dcsList.value(Settings::getInstance()->workingDcNum() - 1)->state()) {
         case DC::userSignedIn:
             qDebug() << "loggedIn: true";
             mDcProvider.transferAuth();
+            loggedIn = true;
             break;
         default:
             qDebug() << "loggedIn: false";
             db->executeQuery("delete from messagesTab");
+            loggedIn = false;
             break;
     }
 
+}
+
+bool ApplicationUI::checkLogin() {
+    return loggedIn;
 }
 
 void ApplicationUI::onAuthSignInError(qint64 msgid, qint32 errcode, QString errtext)

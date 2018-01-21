@@ -69,7 +69,7 @@ void Settings::writeAuthFile() {
         settings.setValue(ST_HOST, m_dcsList[i]->host());
         settings.setValue(ST_PORT, m_dcsList[i]->port());
         settings.setValue(ST_DC_STATE, m_dcsList[i]->state());
-//        qDebug() <<  "Auth Key is been Created for host : " << m_dcsList[i]->host() << m_dcsList[i]->authKeyId() << m_dcsList[i]->authKey();
+        qDebug() << "Auth Key is been Created for host:" << m_dcsList[i]->host() << m_dcsList[i]->authKeyId() << m_dcsList[i]->authKey();
         if (m_dcsList[i]->authKeyId()) {
             settings.setValue(ST_AUTH_KEY_ID, m_dcsList[i]->authKeyId());
             QByteArray baToSave(m_dcsList[i]->authKey(), SHARED_KEY_LENGTH);
@@ -92,7 +92,7 @@ void Settings::readAuthFile() {
     settings.beginGroup(ST_PRODUCTION);
     m_workingDcNum = settings.value(ST_WORKING_DC_NUM, 1).toInt();
     m_ourId = settings.value(ST_OUR_ID).toInt();
-     qDebug() << "workingDcNum:" << m_workingDcNum;
+    qDebug() << "workingDcNum:" << m_workingDcNum;
     // read all dcs
     m_dcsList.clear();
     qint32 n = settings.beginReadArray(ST_DCS_ARRAY);

@@ -7,18 +7,22 @@
 
 #ifndef DATABASE_HPP_
 #define DATABASE_HPP_
+
 #include <QObject>
 #include <bb/data/SqlDataAccess>
 #include <bb/cascades/GroupDataModel>
 #include <bb/cascades/ArrayDataModel>
 #include <QtSql/QSqlQuery>
 //#include "chatdatamodel.h"
- class bb::cascades::GroupDataModel;
- class bb::cascades::ArrayDataModel;
 
- class SqlDataAcces;
- using namespace bb::data;
-class Database:public QObject{
+class bb::cascades::GroupDataModel;
+class bb::cascades::ArrayDataModel;
+class SqlDataAcces;
+
+using namespace bb::data;
+
+class Database:public QObject
+{
     Q_OBJECT
 public:
     int state;
@@ -32,7 +36,6 @@ public:
     bool insertAttachments(QVariantMap attach);
     bool updateContacts(QVariantMap data);
     bool insertQuery(QString query,QVariantMap bind);
-
     QString getUserDetails(QString UserId);
     QSqlQuery executeQuery(QString qstring);
     QVariant executeSqlQuery(QString query,QVariantMap bind);
@@ -49,10 +52,6 @@ public:
     QVariantMap getMessageById(int id);
 private:
     SqlDataAccess *sqlda;
-
 };
-
-
-
 
 #endif /* DATABASE_HPP_ */

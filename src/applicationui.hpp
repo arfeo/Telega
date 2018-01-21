@@ -85,6 +85,7 @@ public:
     currentuser currentUser;
     ApplicationUI();
     Database *db;
+    bool loggedIn;
     QString m_videoFilePath;
         QString m_videoThumbPath;
         QString m_audioFilePath;
@@ -104,9 +105,9 @@ public:
     QList<User> m_cachedUsers;
     QVariantList mem;
 
+    Q_INVOKABLE bool checkLogin();
     Q_INVOKABLE void changeServer( qint16 number );
     Q_INVOKABLE qint32 workingdc();
-
 
     //Auths
     Q_INVOKABLE void authSendCode( QString ph);

@@ -196,7 +196,7 @@ void Api::onHelpGetConfigAnswer(Query *q, InboundPkt &inboundPkt) {
     qint32 thisDc = inboundPkt.fetchInt();
     ASSERT(inboundPkt.fetchInt() == (qint32)TL_Vector);
     qint32 n = inboundPkt.fetchInt();
-    qDebug() << "Number of DCs found in response - " << n;
+    qDebug() << "Number of DCs found in response:" << n;
     QList<DcOption> dcOptions;
     for (qint32 i = 0; i < n; i++) {
         dcOptions.append(inboundPkt.fetchDcOption());
@@ -208,15 +208,14 @@ void Api::onHelpGetConfigAnswer(Query *q, InboundPkt &inboundPkt) {
 
 qint64 Api::createnewsession(){
     OutboundPkt *p = new OutboundPkt();
-
-        if (mMainSession->initConnectionNeeded()) {
-            p->initConnection();
-            mMainSession->setInitConnectionNeeded(false);
-        }
-        p->appendInt(TL_getNearstDC);
-        qint64 ret = mMainSession->sendQuery(*p, &helpGetConfigMethods);
-        delete p;
-        return ret;
+    if (mMainSession->initConnectionNeeded()) {
+        p->initConnection();
+        mMainSession->setInitConnectionNeeded(false);
+    }
+    p->appendInt(TL_getNearstDC);
+    qint64 ret = mMainSession->sendQuery(*p, &helpGetConfigMethods);
+    delete p;
+    return ret;
 
 }
 
@@ -229,7 +228,7 @@ qint64 Api::helpGetConfig() {
         mMainSession->setInitConnectionNeeded(false);
     }
     p->appendInt(TL_HelpGetConfig);
-//    qDebug()<< "tl help get config data "<<QString::number(TL_HelpGetConfig,16) <<  **p;
+    qDebug()<< "tl help get config data" << QString::number(TL_HelpGetConfig, 16);
     qint64 msession =  mMainSession->sendQuery(*p, &helpGetConfigMethods);
     delete p;
     return msession;
@@ -243,7 +242,6 @@ void Api::onHelpGetInviteTextAnswer(Query *q, InboundPkt &inboundPkt) {
 
 qint64 Api::helpGetInviteText(const QString &langCode) {
     OutboundPkt *p = new OutboundPkt();
-
     if (mMainSession->initConnectionNeeded()) {
         p->initConnection();
         mMainSession->setInitConnectionNeeded(false);
@@ -2285,4 +2283,3 @@ qint64 Api::uploadGetFile(Session *session, const InputFileLocation &location, q
     delete p;
     return ret;
 }
-
