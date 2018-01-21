@@ -60,22 +60,11 @@ ApplicationUI::ApplicationUI() :
         db(new Database(this)),
         loggedIn(false)
 {
-    // Prepare the localization
-    if (!QObject::connect(m_localeHandler, SIGNAL(systemLanguageChanged()), this,
-            SLOT(onSystemLanguageChanged()))) {
-        qWarning() << "Recovering from a failed connect()";
-    }
-    onSystemLanguageChanged();
-
-    connect(m_localeHandler, SIGNAL(systemLanguageChanged()), SLOT(onSystemLanguageChanged()));
     //connect(udp, SIGNAL(receivedData(QString)), this, SLOT(sendping()));
     connect(&mDcProvider, SIGNAL(authTransferCompleted()), this, SLOT(onauthTransferCompleted()));
     connect(&mDcProvider, SIGNAL(dcProviderReady()), this, SIGNAL(onDcProviderReady()));
     db->initDatabase();
     init();
-
-    //qint32 n = workingdc();
-
 
     // Create scene document from main.qml asset, the parent is set
     // to ensure the document gets destroyed properly at shut down
@@ -111,10 +100,7 @@ void ApplicationUI::init()
     mDcProvider.initialize();
     QList<DC *> dcsList = mDcProvider.getDcs();
     connect(&mDcProvider, SIGNAL(dcProviderReady()), this, SLOT(keyloaded()));
-    Q_FOREACH (DC *dc, dcsList) {
-        // ..
-    }
-    changeServer(s->workingDcNum()-1 );
+    //changeServer(s->workingDcNum()-1);
     switch (dcsList.value(Settings::getInstance()->workingDcNum() - 1)->state()) {
         case DC::userSignedIn:
             qDebug() << "loggedIn: true";
@@ -297,12 +283,10 @@ void ApplicationUI::changeServer(qint16 number)
 
 void ApplicationUI::switchDC(QString number)
 {
-
-//    qDebug() << number;
+    //qDebug() << number;
     Settings::getInstance()->setWorkingDcNum(qint32(number.toInt()));
     Settings::getInstance()->writeAuthFile();
-
-//    changeServer(number.toInt()-1 );
+    //changeServer(number.toInt()-1 );
 }
 
 void ApplicationUI::onAuthSendCodeError(qint64 msgid, qint32 code, QString codetext)
@@ -317,27 +301,26 @@ void ApplicationUI::onAuthSendCodeError(qint64 msgid, qint32 code, QString codet
             Q_EMIT invalidphone(codetext);
             break;
         }
-
     }
 }
+
 void ApplicationUI::dcchange(QString codetext)
 {
-
     qint32 newDc = codetext.mid(codetext.lastIndexOf("_") + 1).toInt();
     qDebug() << "migrated to dc" << newDc;
     Settings::getInstance()->setWorkingDcNum(newDc);
     DC *dc = mDcProvider.getDc(newDc);
     mApi->changeMainSessionToDc(dc);
 }
+
 void ApplicationUI::onserverready()
 {
     DC *dc = mDcProvider.getWorkingDc();
-    if (dc->authKeyId()) {
+    if(dc->authKeyId()) {
         getCurrentUser();
         getLatestMessages();
         getcontacts();
     }
-
 }
 
 void ApplicationUI::authSendCode(QString ph)

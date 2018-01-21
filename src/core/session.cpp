@@ -39,7 +39,7 @@ Session::Session(DC *dc, QObject *parent) :
         m_initConnectionNeeded(true)
 {
     // Ensure DC has at least the shared key created
-    qDebug() << dc->state() << DC::authKeyCreated;
+    //qDebug() << dc->state() << DC::authKeyCreated;
     Q_ASSERT(dc->state() >= DC::authKeyCreated);
 
     // Copy calculated values for timeSyncFactor and serverSalt when created shared key
@@ -132,7 +132,7 @@ void Session::processRpcMessage(InboundPkt &inboundPkt)
     Q_ASSERT(!(enc->msgLen & 3) && enc->msgLen > 0 && enc->msgLen <= len - MINSZ && len - MINSZ - enc->msgLen <= 12);
     qDebug() << "Encrypted Message" << QString::number(*enc->message, 16) ;
 
-    // Check msg_key is indeed equal to SHA1 of the plaintext obtained after decription (without final padding bytes).
+    // Check `msg_key` is indeed equal to SHA1 of the plaintext obtained after decription (without final padding bytes).
     static uchar sha1Buffer[20];
     SHA1((uchar *)&enc->serverSalt, enc->msgLen + (MINSZ - UNENCSZ), sha1Buffer);
     Q_ASSERT(!memcmp (&enc->msgKey, sha1Buffer + 4, 16));
@@ -163,7 +163,7 @@ void Session::processRpcMessage(InboundPkt &inboundPkt)
     qDebug() << "received message id" << QString::number(enc->msgId, 16);
     Q_ASSERT(l >= (MINSZ - UNENCSZ) + 8);
     mAsserter.check(m_sessionId == enc->sessionId);
-    qDebug() << "inboundPkt.buffer():" << inboundPkt.buffer();
+    qDebug() << inboundPkt.buffer();
     rpcExecuteAnswer(inboundPkt, enc->msgId);
     mAsserter.check(inboundPkt.inPtr() == inboundPkt.inEnd());
 }
@@ -174,66 +174,66 @@ void Session::rpcExecuteAnswer(InboundPkt &inboundPkt, qint64 msgId)
     qDebug() << "rpcExecuteAnswer(), op =" << QString::number(op, 16);
     switch(op) {
         case TL_MsgContainer:
-            qDebug() << "Msg Container";
+            qDebug() << "~~~ Msg Container";
             workContainer(inboundPkt, msgId);
             return;
         case TL_NewSessionCreated:
-            qDebug() << "Msg session created";
+            qDebug() << "~~~ Msg session created";
             workNewSessionCreated(inboundPkt, msgId);
             return;
         case TL_MsgsAck:
-            qDebug() << "Msg ack";
+            qDebug() << "~~~ Msg ack";
             workMsgsAck(inboundPkt, msgId);
             return;
         case TL_RpcResult:
-            qDebug() << "Msg RPC result";
+            qDebug() << "~~~ Msg RPC result";
             workRpcResult(inboundPkt, msgId);
             return;
         case TL_UpdateShort:
-            qDebug() << "Msg update short";
+            qDebug() << "~~~ Msg update short";
             workUpdateShort(inboundPkt, msgId);
             return;
         case TL_UpdatesCombined:
-            qDebug() << "Msg updates combined";
+            qDebug() << "~~~ Msg updates combined";
             workUpdatesCombined(inboundPkt, msgId);
         case TL_Updates:
-            qDebug() << "Msg updates";
+            qDebug() << "~~~ Msg updates";
             workUpdates(inboundPkt, msgId);
             return;
         case TL_UpdateShortMessage:
-            qDebug() << "Msg updateshortmessage";
+            qDebug() << "~~~ Msg updateshortmessage";
             workUpdateShortMessage(inboundPkt, msgId);
             return;
         case TL_UpdateShortChatMessage:
-            qDebug() << "Msg udpate short chat msg";
+            qDebug() << "~~~ Msg udpate short chat msg";
             workUpdateShortChatMessage(inboundPkt, msgId);
             return;
         case TL_GZipPacked:
-            qDebug() << "Msg GZip packed";
+            qDebug() << "~~~ Msg GZip packed";
             workPacked(inboundPkt, msgId);
             return;
         case TL_BadServerSalt:
-            qDebug() << "Msg bad server salt";
+            qDebug() << "~~~ Msg bad server salt";
             workBadServerSalt(inboundPkt, msgId);
             return;
         case TL_Pong:
-            qDebug() << "Msg pong";
+            qDebug() << "~~~ Msg pong";
             workPong(inboundPkt, msgId);
             return;
         case TL_MsgDetailedInfo:
-            qDebug() << "Msg deatialed info";
+            qDebug() << "~~~ Msg deatialed info";
             workDetailedInfo(inboundPkt, msgId);
             return;
         case TL_MsgNewDetailedInfo:
-            qDebug() << "Msg new detailed info";
+            qDebug() << "~~~ Msg new detailed info";
             workNewDetailedInfo(inboundPkt, msgId);
             return;
         case TL_UpdatesTooLong:
-            qDebug() << "Msg updates too long";
+            qDebug() << "~~~ Msg updates too long";
             workUpdatesTooLong(inboundPkt, msgId);
             return;
         case TL_BadMsgNotification:
-            qDebug() << "Msg bad msg notification";
+            qDebug() << "~~~ Msg bad msg notification";
             workBadMsgNotification(inboundPkt, msgId);
             return;
     }
@@ -243,7 +243,6 @@ void Session::rpcExecuteAnswer(InboundPkt &inboundPkt, qint64 msgId)
 
 void Session::workContainer (InboundPkt &inboundPkt, qint64 msgId)
 {
-    qDebug() << "workContainer: msgId =" << QString::number(msgId, 16);
     mAsserter.check(inboundPkt.fetchInt() == TL_MsgContainer);
     qint32 n = inboundPkt.fetchInt();
     for(qint32 i = 0; i < n; i++) { // message
@@ -260,7 +259,6 @@ void Session::workContainer (InboundPkt &inboundPkt, qint64 msgId)
 
 void Session::workNewSessionCreated(InboundPkt &inboundPkt, qint64 msgId)
 {
-    qDebug() << "workNewSessionCreated: msgId =" << QString::number(msgId, 16);
     mAsserter.check(inboundPkt.fetchInt() == (qint32)TL_NewSessionCreated);
     inboundPkt.fetchLong(); // first_msg_id; //XXX set is as m_clientLastMsgId??
     inboundPkt.fetchLong (); // unique_id
@@ -270,7 +268,6 @@ void Session::workNewSessionCreated(InboundPkt &inboundPkt, qint64 msgId)
 
 void Session::workMsgsAck(InboundPkt &inboundPkt, qint64 msgId)
 {
-    qDebug() << "workMsgsAck: msgId =" << QString::number(msgId, 16);
     mAsserter.check(inboundPkt.fetchInt() == (qint32)TL_MsgsAck);
     mAsserter.check(inboundPkt.fetchInt () == (qint32)TL_Vector);
     qint32 n = inboundPkt.fetchInt();
@@ -296,7 +293,6 @@ void Session::workRpcResult(InboundPkt &inboundPkt, qint64 msgId)
 
 void Session::workUpdateShort(InboundPkt &inboundPkt, qint64 msgId)
 {
-    qDebug() << "workUpdateShort: msgId =" << QString::number(msgId, 16);
     mAsserter.check(inboundPkt.fetchInt() == (qint32)TL_UpdateShort);
     Update update = inboundPkt.fetchUpdate();
     qint32 date = inboundPkt.fetchInt();
@@ -305,7 +301,6 @@ void Session::workUpdateShort(InboundPkt &inboundPkt, qint64 msgId)
 
 void Session::workUpdatesCombined(InboundPkt &inboundPkt, qint64 msgId)
 {
-    qDebug() << "workUpdatesCombined: msgId =" << QString::number(msgId, 16);
     mAsserter.check(inboundPkt.fetchInt() == (qint32)TL_UpdatesCombined);
 
     // Updates
@@ -339,7 +334,6 @@ void Session::workUpdatesCombined(InboundPkt &inboundPkt, qint64 msgId)
 
 void Session::workUpdates(InboundPkt &inboundPkt, qint64 msgId)
 {
-    qDebug() << "workUpdates: msgId =" << QString::number(msgId, 16);
     mAsserter.check(inboundPkt.fetchInt() == (qint32)TL_Updates);
 
     // Updates
@@ -373,7 +367,6 @@ void Session::workUpdates(InboundPkt &inboundPkt, qint64 msgId)
 
 void Session::workUpdateShortMessage(InboundPkt &inboundPkt, qint64 msgId)
 {
-    qDebug() << "workUpdateShortMessage: msgId =" << QString::number(msgId, 16);
     mAsserter.check(inboundPkt.fetchInt() == (qint32)TL_UpdateShortMessage);
     qint32 id = inboundPkt.fetchInt();
     qint32 fromId = inboundPkt.fetchInt();
@@ -386,7 +379,6 @@ void Session::workUpdateShortMessage(InboundPkt &inboundPkt, qint64 msgId)
 
 void Session::workUpdateShortChatMessage(InboundPkt &inboundPkt, qint64 msgId)
 {
-    qDebug() << "workUpdateShortChatMessage: msgId =" << QString::number(msgId, 16);
     mAsserter.check(inboundPkt.fetchInt() == (qint32)TL_UpdateShortChatMessage);
     qint32 id = inboundPkt.fetchInt();
     qint32 fromId = inboundPkt.fetchInt();
@@ -400,7 +392,6 @@ void Session::workUpdateShortChatMessage(InboundPkt &inboundPkt, qint64 msgId)
 
 void Session::workPacked(InboundPkt &inboundPkt, qint64 msgId)
 {
-    qDebug() << "workPacked: msgId =" << QString::number(msgId, 16);
     mAsserter.check(inboundPkt.fetchInt() == (qint32)TL_GZipPacked);
     static qint32 buf[MAX_PACKED_SIZE >> 2];
     qint32 l = inboundPkt.prefetchStrlen();
@@ -418,7 +409,6 @@ void Session::workPacked(InboundPkt &inboundPkt, qint64 msgId)
 
 void Session::workBadServerSalt(InboundPkt &inboundPkt, qint64 msgId)
 {
-    qDebug() << "workBadServerSalt: msgId =" << QString::number(msgId, 16);
     mAsserter.check(inboundPkt.fetchInt() == (qint32)TL_BadServerSalt);
     qint64 badMsgId = inboundPkt.fetchLong();
     inboundPkt.fetchInt(); // badMsgSeqNo
@@ -434,7 +424,6 @@ void Session::workBadServerSalt(InboundPkt &inboundPkt, qint64 msgId)
 
 void Session::workPong(InboundPkt &inboundPkt, qint64 msgId)
 {
-    qDebug() << "workPong: msgId =" << QString::number(msgId, 16);
     mAsserter.check (inboundPkt.fetchInt() == (qint32)TL_Pong);
     inboundPkt.fetchLong(); // msg_id
     inboundPkt.fetchLong(); // ping_id
@@ -442,7 +431,6 @@ void Session::workPong(InboundPkt &inboundPkt, qint64 msgId)
 
 void Session::workDetailedInfo(InboundPkt &inboundPkt, qint64 msgId)
 {
-    qDebug() << "workDetailedInfo: msgId =" << QString::number(msgId, 16);
     mAsserter.check(inboundPkt.fetchInt() == (qint32)TL_MsgDetailedInfo);
     inboundPkt.fetchLong(); // msg_id
     inboundPkt.fetchLong(); // answer_msg_id
@@ -452,7 +440,6 @@ void Session::workDetailedInfo(InboundPkt &inboundPkt, qint64 msgId)
 
 void Session::workNewDetailedInfo(InboundPkt &inboundPkt, qint64 msgId)
 {
-    qDebug() << "workNewDetailedInfo: msgId =" << QString::number(msgId, 16);
     mAsserter.check(inboundPkt.fetchInt() == (qint32)TL_MsgNewDetailedInfo);
     inboundPkt.fetchLong(); // answer_msg_id
     inboundPkt.fetchInt(); // bytes
@@ -461,7 +448,6 @@ void Session::workNewDetailedInfo(InboundPkt &inboundPkt, qint64 msgId)
 
 void Session::workUpdatesTooLong(InboundPkt &inboundPkt, qint64 msgId)
 {
-    qDebug() << "workUpdatesTooLong: msgId =" << QString::number(msgId, 16);
     mAsserter.check(inboundPkt.fetchInt() == (qint32)TL_UpdatesTooLong);
     Q_EMIT updatesTooLong();
 }

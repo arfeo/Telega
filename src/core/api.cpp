@@ -20,18 +20,16 @@
  */
 
 #include "api.h"
-
 #include "tlvalues.h"
 #include "dcprovider.h"
 #include <QtCore/QDataStream>
 #include <QtCore/QByteArray>
 
 Api::Api(Session *session, QObject *parent) :
-    AbstractApi(session, parent)
+        AbstractApi(session, parent)
 {
     helpGetConfigMethods.onAnswer = &Api::onHelpGetConfigAnswer;
     helpGetConfigMethods.onError = &Api::onError; // this is not needed, because is the default one. Hereafter it won't be set explicitly
-
     helpGetInviteTextMethods.onAnswer = &Api::onHelpGetInviteTextAnswer;
     helpGetInviteTextMethods.onError = &Api::onErrorRetry;
 
@@ -39,145 +37,85 @@ Api::Api(Session *session, QObject *parent) :
 
     authCheckPhoneMethods.onAnswer = &Api::onAuthCheckPhoneAnswer;
     authCheckPhoneMethods.onError = &Api::onErrorRetry;
-
     authSendCodeMethods.onAnswer = &Api::onAuthSendCodeAnswer;
     authSendCodeMethods.onError = &Api::onAuthSendCodeError;
-
     authSendCallMethods.onAnswer = &Api::onAuthSendCallAnswer;
-
     authSignInMethods.onAnswer = &Api::onAuthSignInAnswer;
     authSignInMethods.onError = &Api::onAuthSignInError;
-
     authSignUpMethods.onAnswer = &Api::onAuthSignUpAnswer;
     authSignUpMethods.onError = &Api::onAuthSignUpError;
-
     authLogOutMethods.onAnswer = &Api::onAuthLogOutAnswer;
-
     authSendInvitesMethods.onAnswer = &Api::onAuthSendInvitesAnswer;
-
     authResetAuthorizationsMethods.onAnswer = &Api::onAuthResetAuthorizationsAnswer;
-
     authImportAuthorizationMethods.onAnswer = &Api::onAuthImportAuthorizationAnswer;
-
     authExportAuthorizationMethods.onAnswer = &Api::onAuthExportAuthorizationAnswer;
 
     accountRegisterDeviceMethods.onAnswer = &Api::onAccountRegisterDeviceAnswer;
-
     accountUnregisterDeviceMethods.onAnswer = &Api::onAccountUnregisterDeviceAnswer;
-
     accountUpdateNotifySettingsMethods.onAnswer = &Api::onAccountUpdateNotifySettingsAnswer;
-
     accountGetNotifySettingsMethods.onAnswer = &Api::onAccountGetNotifySettingsAnswer;
-
     accountResetNotifySettingsMethods.onAnswer = &Api::onAccountResetNotifySettingsAnswer;
-
     accountUpdateProfileMethods.onAnswer = &Api::onAccountUpdateProfileAnswer;
-
     accountUpdateStatusMethods.onAnswer = &Api::onAccountUpdateStatusAnswer;
 
     photosUploadProfilePhotoMethods.onAnswer = &Api::onPhotosUploadProfilePhotoAnswer;
-
     photosUpdateProfilePhotoMethods.onAnswer = &Api::onPhotosUpdateProfilePhotoAnswer;
-
-    usersGetUsersMethods.onAnswer = &Api::onUsersGetUsersAnswer;
-
-    usersGetFullUserMethods.onAnswer = &Api::onUsersGetFullUserAnswer;
-
     photosGetUserPhotosMethods.onAnswer = &Api::onPhotosGetUserPhotos;
 
+    usersGetUsersMethods.onAnswer = &Api::onUsersGetUsersAnswer;
+    usersGetFullUserMethods.onAnswer = &Api::onUsersGetFullUserAnswer;
+
     contactsGetStatusesMethods.onAnswer = &Api::onContactsGetStatusesAnswer;
-
     contactsGetContactsMethods.onAnswer = &Api::onContactsGetContactsAnswer;
-
     contactsImportContactsMethods.onAnswer = &Api::onContactsImportContactsAnswer;
     contactsImportContactsMethods.onError = &Api::onErrorRetry;
-
     contactsDeleteContactMethods.onAnswer = &Api::onContactsDeleteContactAnswer;
-
     contactsDeleteContactsMethods.onAnswer = &Api::onContactsDeleteContactsAnswer;
-
     contactsBlockMethods.onAnswer = &Api::onContactsBlockAnswer;
-
     contactsUnblockMethods.onAnswer = &Api::onContactsUnblockAnswer;
-
     contactsGetBlockedMethods.onAnswer = &Api::onContactsGetBlockedAnswer;
 
     messagesGetLatestMessageMethods.onAnswer = &Api::onMessagesGetLatestMessageAnswer;
     messagesSendMessageMethods.onAnswer = &Api::onMessagesSendMessageAnswer;
-
     messagesSendMediaMethods.onAnswer = &Api::onMessagesSendMediaAnswer;
-
     messagesSetTypingMethods.onAnswer = &Api::onMessagesSetTypingAnswer;
-
     messagesGetMessagesMethods.onAnswer = &Api::onMessagesGetMessagesAnswer;
-
     messagesGetDialogsMethods.onAnswer = &Api::onMessagesGetDialogsAnswer;
-
     messagesGetHistoryMethods.onAnswer = &Api::onMessagesGetHistoryAnswer;
-
     messagesSearchMethods.onAnswer = &Api::onMessagesSearchAnswer;
-
     messagesReadHistoryMethods.onAnswer = &Api::onMessagesReadHistoryAnswer;
-
     messagesDeleteHistoryMethods.onAnswer = &Api::onMessagesDeleteHistoryAnswer;
-
     messagesDeleteMessagesMethods.onAnswer = &Api::onMessagesDeleteMessagesAnswer;
-
     messagesRestoreMessagesMethods.onAnswer = &Api::onMessagesRestoreMessagesAnswer;
-
     messagesReceivedMessagesMethods.onAnswer = &Api::onMessagesReceivedMessagesAnswer;
-
     messagesForwardMessageMethods.onAnswer = &Api::onMessagesForwardMessageAnswer;
-
     messagesForwardMessagesMethods.onAnswer = &Api::onMessagesForwardMessagesAnswer;
-
     messagesSendBroadcastMethods.onAnswer = &Api::onMessagesSendBroadcastAnswer;
-
     messagesGetChatsMethods.onAnswer = &Api::onMessagesGetChatsAnswer;
-
     messagesGetFullChatMethods.onAnswer = &Api::onMessagesGetFullChatAnswer;
-
     messagesEditChatTitleMethods.onAnswer = &Api::onMessagesEditChatTitleAnswer;
-
     messagesEditChatPhotoMethods.onAnswer = &Api::onMessagesEditChatPhotoAnswer;
-
     messagesAddChatUserMethods.onAnswer = &Api::onMessagesAddChatUserAnswer;
-
     messagesDeleteChatUserMethods.onAnswer = &Api::onMessagesDeleteChatUserAnswer;
-
     messagesCreateChatMethods.onAnswer = &Api::onMessagesCreateChatAnswer;
-
     messagesGetDhConfigMethods.onAnswer = &Api::onMessagesGetDhConfigAnswer;
-
     messagesRequestEncryptionMethods.onAnswer = &Api::onMessagesRequestEncryptionAnswer;
-
     messagesDiscardEncryptionMethods.onAnswer = &Api::onMessagesDiscardEncryptionAnswer;
-
     messagesAcceptEncryptionMethods.onAnswer = &Api::onMessagesAcceptEncryptionAnswer;
-
     messagesSetEncryptedTypingMethods.onAnswer = &Api::onMessagesSetEncryptedTypingAnswer;
-
     messagesReadEncryptedHistoryMethods.onAnswer = &Api::onMessagesReadEncryptedHistoryAnswer;
-
     messagesSendEncryptedMethods.onAnswer = &Api::onMessagesSendEncryptedAnswer;
-
     messagesSendEncryptedFileMethods.onAnswer = &Api::onMessagesSendEncryptedFileAnswer;
-
     messagesSendEncryptedServiceMethods.onAnswer = &Api::onMessagesSendEncryptedServiceAnswer;
-
     messagesReceivedQueueMethods.onAnswer = &Api::onMessagesReceivedQueueAnswer;
 
     updatesGetStateMethods.onAnswer = &Api::onUpdatesGetStateAnswer;
-
     updatesGetDifferenceMethods.onAnswer = &Api::onUpdatesGetDifferenceAnswer;
 
     uploadSaveFilePartMethods.onAnswer = &Api::onUploadSaveFilePartAnswer;
-
     uploadSaveBigFilePartMethods.onAnswer = &Api::onUploadSaveBigFilePartAnswer;
-
     uploadGetFileMethods.onAnswer = &Api::onUploadGetFileAnswer;
     uploadGetFileMethods.onError = &Api::onUploadGetFileError;
-
 }
 
 void Api::onError(Query *q, qint32 errorCode, const QString &errorText) {
@@ -187,7 +125,7 @@ void Api::onError(Query *q, qint32 errorCode, const QString &errorText) {
 //
 // REGISTRATION / AUTHORIZATION
 //
-// ### help-> getConfig()
+// ### help->getConfig()
 void Api::onHelpGetConfigAnswer(Query *q, InboundPkt &inboundPkt) {
     qDebug() << "----------------------------";
     ASSERT(inboundPkt.fetchInt() == (qint32)TL_Config);
@@ -207,8 +145,9 @@ void Api::onHelpGetConfigAnswer(Query *q, InboundPkt &inboundPkt) {
 }
 
 qint64 Api::createnewsession(){
+    qDebug() << "Create new session";
     OutboundPkt *p = new OutboundPkt();
-    if (mMainSession->initConnectionNeeded()) {
+    if(mMainSession->initConnectionNeeded()) {
         p->initConnection();
         mMainSession->setInitConnectionNeeded(false);
     }
@@ -216,19 +155,17 @@ qint64 Api::createnewsession(){
     qint64 ret = mMainSession->sendQuery(*p, &helpGetConfigMethods);
     delete p;
     return ret;
-
 }
 
 qint64 Api::helpGetConfig() {
     qDebug() << "Calling Get Config Stuff";
     OutboundPkt *p = new OutboundPkt();
-
-    if (mMainSession->initConnectionNeeded()) {
+    if(mMainSession->initConnectionNeeded()) {
         p->initConnection();
         mMainSession->setInitConnectionNeeded(false);
     }
     p->appendInt(TL_HelpGetConfig);
-    qDebug()<< "tl help get config data" << QString::number(TL_HelpGetConfig, 16);
+    qDebug() << "TL help get config data" << QString::number(TL_HelpGetConfig, 16);
     qint64 msession =  mMainSession->sendQuery(*p, &helpGetConfigMethods);
     delete p;
     return msession;
@@ -256,19 +193,16 @@ qint64 Api::helpGetInviteText(const QString &langCode) {
 // ### auth.checkPhone()
 void Api::onErrorRetry(Query *q, qint32 errorCode, const QString &errorText) {
     Q_EMIT errorRetry(q->msgId(), errorCode, errorText);
-
 }
 
 void Api::onAuthCheckPhoneAnswer(Query *q, InboundPkt &inboundPkt) {
     ASSERT(inboundPkt.fetchInt() == (qint32)TL_AuthCheckedPhone);
     bool phoneRegistered = inboundPkt.fetchBool();
     bool phoneInvited = inboundPkt.fetchBool();
-//    Q_EMIT authCheckedPhone(q->msgId(), phoneRegistered, phoneInvited);
-
+    Q_EMIT authCheckedPhone(q->msgId(), phoneRegistered, phoneInvited);
 }
 
 qint64 Api::authCheckPhone(const QString &phoneNumber) {
-
     OutboundPkt *p = new OutboundPkt;
     if (mMainSession->initConnectionNeeded()) {
         p->initConnection();
@@ -277,10 +211,9 @@ qint64 Api::authCheckPhone(const QString &phoneNumber) {
     p->appendInt(TL_AuthCheckPhone);
     p->appendQString(phoneNumber);
     qint64 resultId = mMainSession->sendQuery(*p, &authCheckPhoneMethods);
-//    Q_EMIT authCheckPhoneSent(resultId, phoneNumber);
+    Q_EMIT authCheckPhoneSent(resultId, phoneNumber);
     delete  p;
     return resultId;
-
 }
 
 // ### auth.sendCode()
@@ -294,11 +227,10 @@ void Api::onAuthSendCodeAnswer(Query *q, InboundPkt &inboundPkt) {
 //    qDebug() << sendCallTimeout;
 //    bool isPassword = inboundPkt.fetchBool();
     Q_EMIT authSentCode(q->msgId(), phoneRegistered, phoneCodeHash);
-
 }
+
 void Api::onAuthSendCodeError(Query *q, qint32 errorCode, const QString &errorText) {
     Q_EMIT authSendCodeError(q->msgId(), errorCode, errorText);
-
 }
 
 qint64 Api::authSendCode(const QString &phoneNumber, qint32 smsType, qint32 apiId, const QString &apiHash, const QString &langCode) {
@@ -310,27 +242,27 @@ qint64 Api::authSendCode(const QString &phoneNumber, qint32 smsType, qint32 apiI
     p->appendInt(apiId);
     p->appendQString(apiHash);
     p->appendQString(langCode);
-
-    qint64 ret = mMainSession->sendQuery( *p, &authSendCodeMethods);
+    qint64 ret = mMainSession->sendQuery(*p, &authSendCodeMethods);
     delete p;
     return ret;
 }
-qint64 Api::sendping(){
+
+qint64 Api::sendping() {
     OutboundPkt *p = new OutboundPkt;
     p->appendInt(TL_NearestDc);
     qint64 ret = mMainSession->sendQuery(*p, &sendpingMethods);
     delete p;
     return ret;
 }
-void Api::sendpingAnswer(Query *p , InboundPkt &inboundPkt){
+
+void Api::sendpingAnswer(Query *p , InboundPkt &inboundPkt) {
     qDebug() << QString::number(inboundPkt.fetchInt(),16);
     qDebug() << inboundPkt.buffer();
-
-//    qDebug() << inboundPkt.fetchInt();
-//    qDebug() << inboundPkt.fetchInt();
-//    Q_EMIT showToast( inboundPkt.fetchQString());
-
+    //qDebug() << inboundPkt.fetchInt();
+    //qDebug() << inboundPkt.fetchInt();
+    //Q_EMIT showToast(inboundPkt.fetchQString());
 }
+
 // ## auth.sendCall()
 void Api::onAuthSendCallAnswer(Query *q, InboundPkt &inboundPkt) {
     Q_EMIT authSendCallResult(q->msgId(), inboundPkt.fetchBool());

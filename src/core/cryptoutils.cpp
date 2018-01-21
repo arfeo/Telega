@@ -106,7 +106,7 @@ void CryptoUtils::initAESUnAuth (const char serverNonce[16], const char hiddenCl
     memset (aes_key_raw, 0, sizeof (aes_key_raw));
 }
 
-void CryptoUtils::initAESAuth (char authKey[192], char msgKey[16], qint32 encrypt) {
+void CryptoUtils::initAESAuth(char authKey[192], char msgKey[16], qint32 encrypt) {
     static uchar buffer[48], hash[20];
     /*
     Steps:
