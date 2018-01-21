@@ -39,7 +39,7 @@ Session::Session(DC *dc, QObject *parent) :
         m_initConnectionNeeded(true)
 {
     // Ensure DC has at least the shared key created
-    qDebug() << dc->state() <<  DC::authKeyCreated;
+    qDebug() << dc->state() << DC::authKeyCreated;
     Q_ASSERT(dc->state() >= DC::authKeyCreated);
 
     // Copy calculated values for timeSyncFactor and serverSalt when created shared key

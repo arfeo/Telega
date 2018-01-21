@@ -75,7 +75,6 @@ class DC;
 class Settings :
         public QObject
 {
-
     Q_OBJECT
 
 public:
@@ -121,14 +120,11 @@ private:
     QList<DC *> m_dcsList;
     QString m_phoneNumber;
     QString m_baseConfigDirectory;
-    // if true, all operations are performed against telegram test servers
-    bool m_testMode;
-    // if true, downloading a big file will be stored in byte array until completion and only one signal is emited when download finish
-    // if false, every downloaded part is notified as a signal with the partial data. Default is false
-    bool m_managedDownloads;
+    bool m_testMode; // if true, all operations are performed against telegram test servers
+    bool m_managedDownloads; // if true, downloading a big file will be stored in byte array until completion and only one signal is emited when download finish
+                             // if false, every downloaded part is notified as a signal with the partial data. Default is false
     QString m_langCode;
-    // default is false. If true, queries not acked after 30 seconds will be re-sent
-    bool mResendQueries;
+    bool mResendQueries; // default is false. If true, queries not acked after 30 seconds will be re-sent
     qint32 mVersion;
     qint32 mG;
     QByteArray mP;

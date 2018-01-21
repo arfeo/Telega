@@ -22,12 +22,13 @@
 
 #include <QObject>
 
-class Asserter : public QObject
+class Asserter :
+        public QObject
 {
     Q_OBJECT
+
 public:
     explicit Asserter(QObject *parent = 0);
-
     void check(bool condition);
 
 Q_SIGNALS:

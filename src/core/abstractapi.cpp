@@ -22,16 +22,20 @@
 #include "abstractapi.h"
 
 AbstractApi::AbstractApi(Session *session, QObject *parent) :
-    SessionManager(session, parent) {
-    // connect responses and updates signals in main session
+        SessionManager(session, parent)
+{
+    // Connect responses and updates signals in main session
     connectResponsesSignals(mMainSession);
     connectUpdatesSignals(mMainSession);
 }
 
-AbstractApi::~AbstractApi() {
+AbstractApi::~AbstractApi()
+{
+    // ..
 }
 
-void AbstractApi::connectUpdatesSignals(Session *session) {
+void AbstractApi::connectUpdatesSignals(Session *session)
+{
     connect(session, SIGNAL(updatesTooLong()), this, SIGNAL(updatesTooLong()));
     connect(session, SIGNAL(updateShortMessage(qint32,qint32,QString,qint32,qint32,qint32)), this, SIGNAL(updateShortMessage(qint32,qint32,QString,qint32,qint32,qint32)));
     connect(session, SIGNAL(updateShortChatMessage(qint32,qint32,qint32,QString,qint32,qint32,qint32)), this, SIGNAL(updateShortChatMessage(qint32,qint32,qint32,QString,qint32,qint32,qint32)));
@@ -40,38 +44,26 @@ void AbstractApi::connectUpdatesSignals(Session *session) {
     connect(session, SIGNAL(updates(QList<Update>,QList<User>,QList<Chat>,qint32,qint32)), this, SIGNAL(updates(QList<Update>,QList<User>,QList<Chat>,qint32,qint32)));
 }
 
-void AbstractApi::connectResponsesSignals(Session *session) {
+void AbstractApi::connectResponsesSignals(Session *session)
+{
     connect(session, SIGNAL(resultReceived(Query*,InboundPkt&)), this, SLOT(onResultReceived(Query*,InboundPkt&)));
     connect(session, SIGNAL(errorReceived(Query*,qint32,QString)), this, SLOT(onErrorReceived(Query*,qint32,QString)));
 }
 
-/**
- * @brief AbstractApi::onErrorReceived manages any error received from the server and links to declared
- *  "onError" QueryMethod for current operation
- * @param q
- * @param errorCode
- * @param errorText
- */
-void AbstractApi::onErrorReceived(Query *q, qint32 errorCode, QString errorText) {
-    if (q->methods() && q->methods()->onError) {
+void AbstractApi::onErrorReceived(Query *q, qint32 errorCode, QString errorText)
+{
+    if(q->methods() && q->methods()->onError) {
         (((Api *)this)->*(q->methods()->onError))(q, errorCode, errorText);
     } else {
-//        (((Api *)this)->*(q->methods()->onAnswer))(q, errorCode, errorText);
+        //(((Api *)this)->*(q->methods()->onAnswer))(q, errorCode, errorText);
         onError(q, errorCode, errorText);
     }
 }
 
-/**
- * @brief AbstractApi::onResultReceived manages any positive response received from telegram servers
- *  and links to declared "onAnswer" QueryMethod for current operation
- * @param q
- * @param inboundPkt
- */
-void AbstractApi::onResultReceived(Query *q, InboundPkt &inboundPkt) {
-//    qDebug() << "result for query" << inboundPkt.prefetchInt() ;
-
-    if (q->methods() && q->methods()->onAnswer) {
+void AbstractApi::onResultReceived(Query *q, InboundPkt &inboundPkt)
+{
+    if(q->methods() && q->methods()->onAnswer) {
         (((Api *)this)->*(q->methods()->onAnswer))(q, inboundPkt);
-//        Q_ASSERT(inboundPkt.inPtr() == inboundPkt.inEnd());
+        Q_ASSERT(inboundPkt.inPtr() == inboundPkt.inEnd());
     }
 }

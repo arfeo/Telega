@@ -308,7 +308,7 @@ QString Utils::getSystemVersion() {
 }
 
 QString Utils::getAppVersion() {
-    return LIBQTELEGRAM_VERSION " (build " LIBQTELEGRAM_BUILD ")";
+    return TELEGA_VERSION;
 }
 
 QString Utils::parsePhoneNumberDigits(const QString &phoneNumber) {

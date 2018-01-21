@@ -24,16 +24,18 @@
 #include "dc.h"
 #include "dcauth.h"
 #include "api.h"
+
 class Api;
 class Session;
 
-class DcProvider : public QObject
+class DcProvider :
+        public QObject
 {
     Q_OBJECT
+
 public:
     DcProvider();
     ~DcProvider();
-
     void initialize();
     DC *getDc(qint32 dcNum) const;
     DC *getWorkingDc() const;
@@ -42,12 +44,14 @@ public:
     void transferAuth();
 
 Q_SIGNALS:
-    // emitted when provider has shared key created, now or previously, for all DCs
+    // Emitted when provider has shared key created, now or previously, for all DCs
     void dcProviderReady();
-    // emitted when provider detects there is a shared key for working dc but user is not yet authenticated in it
+
+    // Emitted when provider detects there is a shared key for working dc but user is not yet authenticated in it
     void authNeeded();
     void chatview();
-    // emitted when provider finish transfering the user authentication data to all DCs. At this point the api
+
+    // Emitted when provider finish transfering the user authentication data to all DCs. At this point the api
     // is ready for using any of its methods in any DC
     void authTransferCompleted();
 
@@ -61,28 +65,26 @@ public Q_SLOTS:
 private:
     void processDcReady(DC *dc);
     void clean();
-
     QMap<qint32, DC *> mDcs;
     QMap<qint32, DCAuth *> mDcAuths;
-    //api instance for "internal" operations (config, getNearestDc, etc...). This object could be received
+    // Api instance for "internal" operations (config, getNearestDc, etc...). This object could be received
     // from outside, as parameter, when completed external public layer
     Api *mApi;
 
-    // counter of the dc's pending to be authenticated. When this counter is zero, all available DCs are
+    // Counter of the dc's pending to be authenticated. When this counter is zero, all available DCs are
     // authenticated and a signal dcProviderReady() is emitted
     qint32 mPendingDcs;
 
-    // this list is filled with a session to every dc receiving auth transfer in transferAuth() operation.
+    // This list is filled with a session to every dc receiving auth transfer in transferAuth() operation.
     // Working session exports auth bytes and then is taken the first session in this list for the import.
     // When the list is empty, all the
     // an element is deleted until leave it empty. When it happens, all dcs have the auth transferred.
     QList<Session *> mTransferSessions;
     qint32 mPendingTransferSessions;
 
-    // main session. The one linked to working dc. Must be stored mean transferring auth to other dcs because
+    // Main session. The one linked to working dc. Must be stored mean transferring auth to other dcs because
     // is the reference for exporting data to any dc transfer auth receipt
     Session *mWorkingDcSession;
-
 
 private Q_SLOTS:
     void onDcReady(DC *dc);

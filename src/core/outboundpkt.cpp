@@ -20,13 +20,10 @@
  */
 
 #include "outboundpkt.h"
-
 #include <sys/utsname.h>
 #include <qdebug.h>
 #include "utils.h"
 #include "tlvalues.h"
-
-
 
 OutboundPkt::OutboundPkt() {
     m_packetBuffer = __buffer + 16;

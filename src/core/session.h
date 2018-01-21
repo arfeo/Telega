@@ -27,19 +27,16 @@
 #include "query.h"
 #include <QMap>
 
-
-
-
-class Session : public Connection
+class Session :
+        public Connection
 {
     Q_OBJECT
+
 public:
     explicit Session(DC *dc, QObject *parent = 0);
     ~Session();
-
     DC *dc();
     qint64 sendQuery(OutboundPkt &outboundPkt, QueryMethods *methods, QVariant extra = QVariant());
-
     inline qint64 sessionId() { return m_sessionId; }
     inline bool initConnectionNeeded() { return m_initConnectionNeeded; }
     inline void setInitConnectionNeeded(bool initConnectionNeeded) { m_initConnectionNeeded = initConnectionNeeded; }
@@ -54,10 +51,8 @@ Q_SIGNALS:
     void sessionReady(DC *dc);
     void sessionReleased(qint64 sessionId);
     void sessionClosed(qint64 sessionId);
-
     void resultReceived(Query *q, InboundPkt &inboundPkt);
     void errorReceived(Query *q, qint32 errorCode, QString errorText);
-
     void updatesTooLong();
     void updateShortMessage(qint32 id, qint32 fromId, const QString &message, qint32 pts, qint32 date, qint32 seq);
     void updateShortChatMessage(qint32 id, qint32 fromId, qint32 chatId, const QString &message, qint32 pts, qint32 date, qint32 seq);
@@ -67,21 +62,22 @@ Q_SIGNALS:
 
 private:
     struct EncryptedMsg {
-        // unencrypted header
+        // Unencrypted header
         qint64 authKeyId;
         char msgKey[16];
-        // encrypted part, starts with encrypted header
+
+        // Encrypted part, starts with encrypted header
         qint64 serverSalt;
         qint64 sessionId;
-        // first message follows
+
+        // First message follows
         qint64 msgId;
         qint32 seqNo;
         qint32 msgLen;   // divisible by 4
         qint32 message[MAX_MESSAGE_INTS];
     };
 
-
-    // session members
+    // Session members
     qint64 m_sessionId;
     qint64 m_serverSalt;
     qint32 m_timeSyncFactor; // difference between client and server time
@@ -98,13 +94,13 @@ private:
     // (the flag is set to true when just connected to dc until initConnection() operation is executed against this server)
     bool m_initConnectionNeeded;
 
-    // connected signal management
+    // Connected signal management
     void processConnected();
 
-    // process and transform response message
+    // Process and transform response message
     void processRpcMessage(InboundPkt &inboundPkt);
 
-    // execute rpc answer operation requested
+    // Execute rpc answer operation requested
     void rpcExecuteAnswer(InboundPkt &inboundPkt, qint64 msgId);
 
     void workUpdate(InboundPkt &inboundPkt, qint64 msgId);
@@ -125,14 +121,14 @@ private:
     void workUpdatesTooLong(InboundPkt &inboundPkt, qint64 msgId);
     void workBadMsgNotification(InboundPkt &inboundPkt, qint64 msgId);
 
-    // encrypt message and send
+    // Encrypt message and send
     EncryptedMsg *initEncryptedMessage(qint32 useful);
     qint64 encryptSendMessage(qint32 *msg, qint32 msgInts, qint32 useful);
     qint32 aesEncryptMessage(EncryptedMsg *encMsg);
     void rpcSendMessage(void *data, qint32 len);
     qint64 generateNextMsgId();
 
-    // query results
+    // Query results
     void queryOnResult(InboundPkt &inboundPkt, qint64 msgId);
     void queryOnError(InboundPkt &inboundPkt, qint64 msgId);
 

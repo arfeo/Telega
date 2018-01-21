@@ -28,9 +28,11 @@
 #include "session.h"
 #include "sessionmanager.h"
 
-class AbstractApi : public SessionManager
+class AbstractApi :
+        public SessionManager
 {
     Q_OBJECT
+
 public:
     explicit AbstractApi(Session *session, QObject *parent = 0);
     ~AbstractApi();
@@ -45,7 +47,6 @@ Q_SIGNALS:
     void authSignInError(qint64 msgid ,qint32 errcode ,QString errtext);
 
 protected:
-    // default error method. Overriten in inherited classes
     virtual void onError(Query *q, qint32 errorCode, const QString &errorText) = 0;
 
 private:

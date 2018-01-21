@@ -29,7 +29,6 @@ public:
     Endpoint() {}
     explicit Endpoint(const QString &host, qint32 port) : m_host(host), m_port(port) {}
     ~Endpoint() {}
-
     QString host() const { return m_host; }
     qint32 port() const { return m_port; }
     void setHost(const QString &host) { m_host = host; }
