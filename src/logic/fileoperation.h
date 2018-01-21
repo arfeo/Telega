@@ -34,7 +34,6 @@ public:
         editChatPhoto,
         uploadProfilePhoto
     };
-
     FileOperation(OpType opType) :
         m_peer(InputPeer::typeInputPeerEmpty),
         m_inputMedia(InputMedia::typeInputMediaEmpty),
@@ -43,7 +42,6 @@ public:
         m_geoPoint(InputGeoPoint::typeInputGeoPointEmpty),
         m_crop(InputPhotoCrop::typeInputPhotoCropAuto),
         m_type(opType) {}
-
     InputPeer peer() const { return m_peer; }
     void setInputPeer(const InputPeer &peer) { m_peer = peer; }
     InputMedia inputMedia() const { return m_inputMedia; }
@@ -63,14 +61,16 @@ public:
     OpType opType() const { return m_type; }
 
 private:
-    // sendMedia operation attributes
+    // `sendMedia` operation attributes
     InputPeer m_peer;
     InputMedia m_inputMedia;
     qint64 mRandomId;
-    // editChatPhoto operation attributes
+
+    // `editChatPhoto` operation attributes
     qint32 m_chatId;
     InputChatPhoto m_inputChatPhoto;
-    // uploadProfilePhoto operation attributes
+
+    // `uploadProfilePhoto` operation attributes
     QString m_caption;
     InputGeoPoint m_geoPoint;
     InputPhotoCrop m_crop;

@@ -26,9 +26,11 @@
 #include "../core/utils.h"
 #include "../core/session.h"
 
-class File : public QObject
+class File :
+        public QObject
 {
     Q_OBJECT
+
 public:
     explicit File(Session *session, qint64 length, QObject *parent = 0) : QObject(parent), m_session(session), m_length(length) {
         // generate random file id
@@ -39,7 +41,6 @@ public:
             m_session->release();
         }
     }
-
     void setSession(Session *session) { m_session = session; }
     Session *session() { return m_session; }
     qint64 id() const { return m_id; }

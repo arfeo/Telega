@@ -28,13 +28,14 @@
 #include "file.h"
 #include "../core/session.h"
 
-class DownloadFile : public File
+class DownloadFile :
+        public File
 {
     Q_OBJECT
+
 public:
     DownloadFile(Session *session, InputFileLocation fileLocation, qint32 expectedSize,QObject *parent = 0);
     ~DownloadFile();
-
     void appendBytes(const QByteArray &bytes);
     QByteArray bytes() const;
     qint32 offset() const;
