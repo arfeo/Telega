@@ -74,6 +74,9 @@ ApplicationUI::ApplicationUI() :
     db->initDatabase();
     init();
 
+    //qint32 n = workingdc();
+
+
     // Create scene document from main.qml asset, the parent is set
     // to ensure the document gets destroyed properly at shut down
     QmlDocument *qml = QmlDocument::create("asset:///main.qml").parent(this);
@@ -111,7 +114,7 @@ void ApplicationUI::init()
     Q_FOREACH (DC *dc, dcsList) {
         // ..
     }
-    //changeServer(s->workingDcNum()-1 );
+    changeServer(s->workingDcNum()-1 );
     switch (dcsList.value(Settings::getInstance()->workingDcNum() - 1)->state()) {
         case DC::userSignedIn:
             qDebug() << "loggedIn: true";
@@ -124,7 +127,6 @@ void ApplicationUI::init()
             loggedIn = false;
             break;
     }
-
 }
 
 bool ApplicationUI::checkLogin() {
@@ -135,15 +137,15 @@ void ApplicationUI::onAuthSignInError(qint64 msgid, qint32 errcode, QString errt
 {
     Q_EMIT showerror(errtext);
 }
+
 void ApplicationUI::changeServer(qint16 number)
 {
-
     QList<DC *> dcsList = mDcProvider.getDcs();
     Session *session = new Session(dcsList[number], this);
     mApi = new Api(session, this);
     connect(session, SIGNAL(sessionReady(DC*)), this, SLOT(onserverready()));
     connect(session, SIGNAL(sessionClosed(qint32)), this, SLOT(onsessionclosed()));
-//    connect(session,SIGNAL(sessionRdisconnected(),this,SLOT() ));
+    //connect(session,SIGNAL(sessionRdisconnected(),this,SLOT() ));
     //TODO when signal destroyed/No internet access
     session->connectToServer();
 
