@@ -27,20 +27,19 @@
 #include "file.h"
 #include "../types/inputmedia.h"
 
-class UploadFile : public File
+class UploadFile :
+        public File
 {
     Q_OBJECT
-public:
 
+public:
     enum FileType {
         file,
         thumbnail
     };
-
     explicit UploadFile(Session *session, FileType type, const QByteArray &buffer, QObject *parent = 0);
     explicit UploadFile(Session *session, FileType type, const QString &filePath, QObject *parent = 0);
     ~UploadFile();
-
     qint64 relatedFileId() const { return m_relatedFileId; }
     void setRelatedFileId(qint64 relatedFileId) { m_relatedFileId = relatedFileId; }
     QString name() const { return m_name; }
@@ -48,7 +47,6 @@ public:
     FileType fileType() const { return m_fileType; }
     qint32 nParts() const { return m_nParts; }
     qint32 uploadedParts() const { return m_uploadedParts; }
-
     bool hasMoreParts() const;
     QByteArray nextPart();
     void increaseUploadedParts();
@@ -57,7 +55,6 @@ public:
 Q_SIGNALS:
     void fileNotFound();
     void fileNotOpen();
-
 
 private:
     FileType m_fileType;
@@ -70,7 +67,6 @@ private:
     qint32 m_uploadedParts;
     QFile m_ioDevice;
     QCryptographicHash m_krypt;
-
     void openIODevice();
 };
 

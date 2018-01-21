@@ -5,7 +5,10 @@
 #include <bb/AbstractBpsEventHandler>
 #include <bps/event.h>
 
-class VirtualKeyboardHandler : public QObject, public bb::AbstractBpsEventHandler {
+class VirtualKeyboardHandler :
+        public QObject,
+        public bb::AbstractBpsEventHandler
+{
     Q_OBJECT
 
     Q_PROPERTY(int height READ height NOTIFY heightChanged)

@@ -21,9 +21,11 @@ class SqlDataAcces;
 
 using namespace bb::data;
 
-class Database:public QObject
+class Database :
+        public QObject
 {
     Q_OBJECT
+
 public:
     int state;
     QString DB_PATH;
@@ -50,6 +52,7 @@ public:
     int getTableSizeByQuery(QString query);
     int getFavCount();
     QVariantMap getMessageById(int id);
+
 private:
     SqlDataAccess *sqlda;
 };
