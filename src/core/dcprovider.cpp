@@ -136,7 +136,7 @@ void DcProvider::initialize() {
 }
 
 void DcProvider::onDcReady(DC *dc) {
-    qDebug() << "DC" << dc->id() << "with auth key state" << dc->state();
+    //qDebug() << "DC" << dc->id() << "with auth key state" << dc->state();
     DCAuth *dcAuth = mDcAuths.value(dc->id());
     if(dcAuth) {
         if (dcAuth->state() != QAbstractSocket::UnconnectedState) {
@@ -191,9 +191,11 @@ void DcProvider::processDcReady(DC *dc) {
             // If they aren't, transfer auth from workingDc to workingDc+1, from workingDc+1 to workingDc+2...etc until completed all.
             switch(mDcs.value(Settings::getInstance()->workingDcNum())->state()) {
                 case DC::authKeyCreated:
+                    qDebug() << "processDcReady() ::: authKeyCreated";
                     emit authNeeded();
                     break;
                 case DC::userSignedIn:
+                    qDebug() << "processDcReady() ::: chatview";
                     emit chatview();
                     break;
                 default:
@@ -265,9 +267,9 @@ void DcProvider::onConfigReceived(qint64 msgId, qint32 date, bool testMode, qint
     qDebug() << "thisDc =" << thisDc;
     bool keyauth = true;
     qint32 dcslist = 0;
-    mPendingDcs = dcOptions.length()-1; //all the received options but the default one, yet used
+    mPendingDcs = dcOptions.length() - 1; // all the received options but the default one, yet used
     Q_FOREACH (DcOption dcOption, dcOptions) {
-        qDebug() << "dcOption | id =" << dcOption.id() << ", ipAddress =" << dcOption.ipAddress() << ", port =" << dcOption.port() << ", hostname =" << dcOption.hostname();
+        //qDebug() << "dcOption | id =" << dcOption.id() << ", ipAddress =" << dcOption.ipAddress() << ", port =" << dcOption.port() << ", hostname =" << dcOption.hostname();
 
         // For every new DC or not authenticated DC, insert into m_dcs and authenticate
         DC *dc = mDcs.value(dcOption.id());
@@ -288,7 +290,7 @@ void DcProvider::onConfigReceived(qint64 msgId, qint32 date, bool testMode, qint
             connect(dcAuth, SIGNAL(fatalError()), this, SIGNAL(fatalError()));
             connect(dcAuth, SIGNAL(dcReady(DC*)), this, SLOT(onDcReady(DC*)));
             dcAuth->createAuthKey();
-        } else if (dcOption.id() != thisDc) {
+        } else if(dcOption.id() != thisDc) {
             // If authorized and not working dc emit dcReady signal directly
             onDcReady(dc);
         }
