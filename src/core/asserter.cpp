@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017-2018 Arfeo.net.
+ * Copyright 2014 Canonical Ltd.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,19 +12,17 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Authors:
+ *      Roberto Mier
+ *      Tiago Herrmann
  */
+#include "asserter.h"
 
-#include "applicationui.hpp"
-#include <bb/cascades/Application>
-#include <QLocale>
-#include <QTranslator>
-#include "VirtualKeyboardHandler.hpp"
+Asserter::Asserter(QObject *parent) :
+    QObject(parent) {
+}
 
-using namespace bb::cascades;
-
-Q_DECL_EXPORT int main(int argc, char **argv)
-{
-    Application app(argc, argv);
-    ApplicationUI appui;
-    return Application::exec();
+void Asserter::check(bool condition) {
+    if (!condition) Q_EMIT fatalError();
 }

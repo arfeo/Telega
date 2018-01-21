@@ -1,5 +1,8 @@
 /*
- * Copyright (c) 2017-2018 Arfeo.net.
+ * Copyright 2014 Canonical Ltd.
+ * Authors:
+ *      Roberto Mier
+ *      Tiago Herrmann
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,19 +15,30 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
-#include "applicationui.hpp"
-#include <bb/cascades/Application>
-#include <QLocale>
-#include <QTranslator>
-#include "VirtualKeyboardHandler.hpp"
+#ifndef ACKTIMER_H
+#define ACKTIMER_H
 
-using namespace bb::cascades;
+#include "dc.h"
+#include <QObject>
+#include <QTimer>
 
-Q_DECL_EXPORT int main(int argc, char **argv)
+class EventTimer : public QTimer
 {
-    Application app(argc, argv);
-    ApplicationUI appui;
-    return Application::exec();
-}
+    Q_OBJECT
+public:
+    explicit EventTimer(qint64 msgId, qint32 timeout, QObject *parent = 0);
+
+Q_SIGNALS:
+    void timerTimeout(qint64 msgId);
+
+private:
+    qint64 m_msgId;
+
+private Q_SLOTS:
+    void onTimeout();
+};
+
+#endif // ACKTIMER_H
