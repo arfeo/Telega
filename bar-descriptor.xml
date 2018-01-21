@@ -26,7 +26,7 @@
 
     <!-- A universally unique application identifier. Must be unique across all BlackBerry 10 applications.
          Using a reverse DNS-style name as the id is recommended. (Eg. com.example.ExampleApplication.) Required. -->
-    <id>com.example.Telega</id>
+    <id>com.telega</id>
     <configuration name="Device-Debug">
        <platformArchitecture>armle-v7</platformArchitecture>
        <asset path="arm/o.le-v7-g/Telega" entry="true" type="Qnx/Elf">Telega</asset>
@@ -63,7 +63,7 @@
 
     <!-- Description, displayed in the BlackBerry 10 application installer.
          May have multiple values for each language. See samples or xsd schema file. Optional. -->
-    <description>The Telega application</description>
+    <description>Telegram client for BlackBerry 10</description>
 
     <!-- Copyright information. Optional. -->
     <!-- <copyright></copyright> -->
@@ -95,6 +95,14 @@
 
     <!-- Request permission to execute native code.  Required for native applications. -->
     <permission system="true">run_native</permission>
+    <permission>access_pimdomain_contacts</permission>
+    <permission>access_internet</permission>
+    <permission system="true">_sys_use_consumer_push</permission>
+    <permission>run_when_backgrounded</permission>
+    <permission system="true">_sys_headless_nostop</permission>
+    <permission>access_shared</permission>
+    <permission>access_wifi_public</permission>
+    <permission>read_device_identifying_information</permission>
     <env var="LD_LIBRARY_PATH" value="app/native/lib:/usr/lib/qt4/lib"/>
 
 </qnx>
