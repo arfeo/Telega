@@ -112,7 +112,6 @@ public:
     Q_INVOKABLE void authCheckPhone(QString);
     Q_INVOKABLE void authSendCode( QString);
     Q_INVOKABLE void authUser(QString);
-    Q_INVOKABLE bool isUserReg();
     Q_INVOKABLE void authUserSignIn(QString, QString, QString);
     Q_INVOKABLE void logout();
     Q_INVOKABLE void getcontacts();

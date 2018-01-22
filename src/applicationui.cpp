@@ -293,11 +293,6 @@ void ApplicationUI::onauthTransferCompleted()
     Q_EMIT checkserver();
 }
 
-bool ApplicationUI::isUserReg()
-{
-    bool reg;
-}
-
 void ApplicationUI::authUser(QString code)
 {
     mApi->authSignIn(phone, hash, code);
@@ -1841,8 +1836,7 @@ qint64 ApplicationUI::uploadGetFile(const InputFileLocation &location, qint32 fi
             QList<DownloadFile *> sessionInitialFiles;
             sessionInitialFiles << f;
             mInitialDownloadsMap.insert(session->sessionId(), sessionInitialFiles);
-            connect(session, SIGNAL(sessionReady(DC*)), this,
-                    SLOT(onUploadGetFileSessionCreated()));
+            connect(session, SIGNAL(sessionReady(DC*)), this, SLOT(onUploadGetFileSessionCreated()));
             session->connectToServer();
             break;
         }
@@ -1954,7 +1948,7 @@ void ApplicationUI::onUploadGetFileAnswer(qint64 id, StorageFileType type, qint3
         }
 
         QString ext;
-        switch (type.classType()) {
+        switch(type.classType()) {
             case StorageFileType::typeStorageFileUnknown:
                 ext = "unknown";
                 break;
