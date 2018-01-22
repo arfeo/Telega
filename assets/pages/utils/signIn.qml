@@ -121,7 +121,7 @@ Page {
                     topMargin: 50.0
                     onClicked: {
                         mainTab.currentPhoneNumber = countryCode.text + phoneNumber.text
-                        //_telega.authSendCode(mainTab.currentPhoneNumber);
+                        _telega.authCheckPhone(mainTab.currentPhoneNumber)
                         signInPage.parent.push(enterCode.createObject())
                     }
                 }
@@ -130,6 +130,11 @@ Page {
              
         }
     
+    }
+    
+    onCreationCompleted: {
+        var dc = _telega.workingdc()
+        _telega.changeServer(dc)
     }
 
 }

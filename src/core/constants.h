@@ -33,7 +33,7 @@
 #define MAX_MESSAGE_INTS 1048576
 #define MAX_PENDING_ACKS 16
 #define MAX_PACKED_SIZE (1 << 24)
-#define ACK_TIMEOUT 6000 //1 sec in original
+#define ACK_TIMEOUT 6000 // 1 sec in original
 #define QUERY_TIMEOUT 30000 // 60 secs
 #define MAX_QUERY_RESENDS 10
 #define LANG_CODE "en"

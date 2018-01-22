@@ -276,6 +276,7 @@ Q_SIGNALS:
     // ~~~ Errors
     void error(qint64 msgId, qint32 errorCode, QString errorText);
     void errorRetry(qint64 msgId, qint32 errorCode, QString errorText);
+    void authCheckPhoneError(qint64 msgId, qint32 errorCode, const QString &errorText, const QVariant &attachedData);
     void authSendCodeError(qint64 msgId, qint32 errorCode, QString errorText);
     void authSignInError(qint64 msgId, qint32 errorCode, QString errorText);
     void authSignUpError(qint64 msgId, qint32 errorCode, QString errorText);
@@ -435,6 +436,7 @@ private:
     void onAuthSignInError(Query *q, qint32 errorCode, const QString &errorText);
     void onAuthSignUpError(Query *q, qint32 errorCode, const QString &errorText);
     void onUploadGetFileError(Query *q, qint32 errorCode, const QString &errorText);
+    void onAuthCheckPhoneError(Query *q, qint32 errorCode, const QString &errorText);
     void onAuthSendCodeError(Query *q, qint32 errorCode, const QString &errorText);
 };
 

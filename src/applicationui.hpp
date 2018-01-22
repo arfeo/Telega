@@ -110,10 +110,11 @@ public:
     Q_INVOKABLE qint32 workingdc();
 
     //Auths
-    Q_INVOKABLE void authSendCode( QString ph);
-    Q_INVOKABLE void authUser(QString code);
+    Q_INVOKABLE void authCheckPhone(QString);
+    Q_INVOKABLE void authSendCode( QString);
+    Q_INVOKABLE void authUser(QString);
     Q_INVOKABLE bool isUserReg();
-    Q_INVOKABLE void authUserSignIn(QString first, QString last, QString code);
+    Q_INVOKABLE void authUserSignIn(QString, QString, QString);
     Q_INVOKABLE void logout();
     Q_INVOKABLE void getcontacts();
     Q_INVOKABLE void sendping();
@@ -123,7 +124,7 @@ public:
     Q_INVOKABLE bool deleteFavContacts(qint32 id);
     Q_INVOKABLE bb::cascades::GroupDataModel* getFavContactsModel();
     Q_INVOKABLE bb::cascades::GroupDataModel* getContactsNamesModel(QString);
-    Q_INVOKABLE QVariantList searchFilterChatModel(QString type,QString search);
+    Q_INVOKABLE QVariantList searchFilterChatModel(QString, QString);
 //    Q_INVOKABLE bb::cascades::GroupDataModel* liveChat(int uid, int offset, QString type);
 
     //User
@@ -132,7 +133,7 @@ public:
 
     //Contacts
     Q_INVOKABLE QVariantList getContactsmodal(QString);
-    Q_INVOKABLE void getmessages(qint32,QString,qint32);
+    Q_INVOKABLE void getmessages(qint32, QString, qint32);
     Q_INVOKABLE void clearContactHistory(qint32,QString);
     Q_INVOKABLE void listofblockedUsers();
     Q_INVOKABLE void blockUserContact(qint64 id);
@@ -141,7 +142,7 @@ public:
 
 
 //broadcast
-    Q_INVOKABLE bool createBroadCast( QString title, QVariant id,qint32 random);
+    Q_INVOKABLE bool createBroadCast(QString, QVariant, qint32);
     Q_INVOKABLE bool addBroadCastMember(qint32 bid, qint32 id);
     Q_INVOKABLE bool removeBroadCastMember(qint32 bid, qint32 id);
     Q_INVOKABLE bool removeBroadCast(qint32 bid);
@@ -318,11 +319,13 @@ private Q_SLOTS:
     void messagesGetChatsAnswer(qint64 id, const QList<Chat> &chats, const QList<User> &users);
     void contactsDeleteContactAnswer(qint64,ContactsMyLink,ContactsForeignLink,User);
     void accountUpdateProfileAnswer(qint64,User);
-    void onAuthSendCodeError(qint64 msgid,qint32 code ,QString codetext);
+    void onAuthCheckPhoneError(Query *q, qint32 errorCode, const QString &errorText);
+    void onAuthSendCodeError(qint64 msgid, qint32 code ,QString codetext);
     void onAuthLogOutAnswer(qint64 id, bool ok);
     void onMessagesCreateChatStatedMessage(qint64,Message,QList<Chat>,QList<User>,qint32,qint32);
     void onMessagesEditChatTitleStatedMessage(qint64,Message,QList<Chat>,QList<User>,qint32,qint32);
 
+    //void onAuthCheckPhoneAnswer(qint64 msgId, const QList<Message> &result, const QVariant &attachedData);
     void onUploadGetFileAnswer(qint64 msgId, StorageFileType type, qint32 mtime, QByteArray bytes);
 //    void onUploadGetFileError(qint64 id, qint32 errorCode, const QString &errorText);
     void onUploadGetFileAnswer(qint64 id, StorageFileType type, qint32 mtime, QByteArray bytes, qint32 partId, qint32 downloaded, qint32 total);

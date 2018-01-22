@@ -90,7 +90,7 @@ ApplicationUI::~ApplicationUI()
 
 void ApplicationUI::onSystemLanguageChanged()
 {
-   // ..
+    // ..
 }
 
 void ApplicationUI::init()
@@ -100,8 +100,8 @@ void ApplicationUI::init()
     mDcProvider.initialize();
     QList<DC *> dcsList = mDcProvider.getDcs();
     connect(&mDcProvider, SIGNAL(dcProviderReady()), this, SLOT(keyloaded()));
-    //changeServer(s->workingDcNum()-1);
-    switch (dcsList.value(Settings::getInstance()->workingDcNum() - 1)->state()) {
+    //changeServer(s->workingDcNum() - 1);
+    switch(dcsList.value(Settings::getInstance()->workingDcNum()-1)->state()) {
         case DC::userSignedIn:
             qDebug() << "loggedIn: true";
             mDcProvider.transferAuth();
@@ -135,150 +135,92 @@ void ApplicationUI::changeServer(qint16 number)
     //TODO when signal destroyed/No internet access
     session->connectToServer();
 
-    connect(mApi, SIGNAL(authSendCodeError(qint64, qint32, QString)), this,
-            SLOT(onAuthSendCodeError(qint64,qint32,QString)));
-    connect(mApi, SIGNAL(authSignInError(qint64,qint32,QString)), this,
-            SLOT(onAuthSignInError(qint64,qint32,QString)));
-    connect(mApi, SIGNAL(authSignUpError(qint64,qint32,QString)), this,
-            SLOT(onAuthSignInError(qint64,qint32,QString)));
-    connect(mApi, SIGNAL(authSentCode(qint64,bool,QString)), this,
-            SLOT(onauthSentCode(qint64,bool,QString)));
-    connect(mApi, SIGNAL(authSignInAuthorization(qint64,qint32)), this,
-            SLOT(onUserAuthorized(qint64,qint32)));
-    connect(mApi, SIGNAL(authSignUpAuthorization(qint64,qint32,User)), this,
-            SLOT(onUserAuthorized(qint64,qint32)));
-    connect(mApi, SIGNAL(contactsContacts(qint64,QList<Contact>,QList<User>)), this,
-            SLOT(onContactsContacts(qint64,QList<Contact>,QList<User>)));
+    connect(mApi, SIGNAL(authSendCodeError(qint64, qint32, QString)),
+            this, SLOT(onAuthSendCodeError(qint64,qint32,QString)));
+    connect(mApi, SIGNAL(authCheckPhoneError(qint64, qint32, const QString &, const QVariant &)),
+            this, SLOT(onAuthCheckPhoneError(Query *, qint32, const QString &)));
+    connect(mApi, SIGNAL(authSignInError(qint64,qint32,QString)),
+            this, SLOT(onAuthSignInError(qint64,qint32,QString)));
+    connect(mApi, SIGNAL(authSignUpError(qint64,qint32,QString)),
+            this, SLOT(onAuthSignInError(qint64,qint32,QString)));
+    connect(mApi, SIGNAL(authSentCode(qint64,bool,QString)),
+            this, SLOT(onauthSentCode(qint64,bool,QString)));
+    connect(mApi, SIGNAL(authSignInAuthorization(qint64,qint32)),
+            this, SLOT(onUserAuthorized(qint64,qint32)));
+    connect(mApi, SIGNAL(authSignUpAuthorization(qint64,qint32,User)),
+            this, SLOT(onUserAuthorized(qint64,qint32)));
+    connect(mApi, SIGNAL(contactsContacts(qint64,QList<Contact>,QList<User>)),
+            this, SLOT(onContactsContacts(qint64,QList<Contact>,QList<User>)));
     connect(mApi, SIGNAL(messagesGetHistoryMessages(qint64,QList<Message>,QList<Chat>,QList<User>)),
-            this,
-            SLOT(onMessagesGetHistoryMessages(qint64,QList<Message>,QList<Chat>,QList<User>)));
-    connect(mApi,
-            SIGNAL(
-                    messagesGetHistoryMessagesSlice(qint64,qint32,QList<Message>,QList<Chat>,QList<User>)),
-            this,
-            SLOT(
-                    onMessagesGetHistoryMessageSlice(qint64,qint32,QList<Message>,QList<Chat>,QList<User>)));
-
-    connect(mApi,
-            SIGNAL(messagesDialogs(qint64,QList<Dialog>,QList<Message>,QList<Chat>,QList<User>)),
-            this,
-            SLOT(
-                    onMessagesGetDialogsAnswer(qint64,QList<Dialog>,QList<Message>,QList<Chat>,QList<User>)));
-    connect(mApi, SIGNAL(usersGetUsersResult(qint64,QList<User>)), this,
-            SLOT(onUsersGetUsersAnswer(qint64,QList<User>)));
-    connect(mApi, SIGNAL(updatesTooLong()), this, SLOT(onUpdatesTooLong()));
-    connect(mApi, SIGNAL(updateShortMessage(qint32,qint32,QString,qint32,qint32,qint32)), this,
-            SLOT(onUpdateShortMessage(qint32,qint32,QString,qint32,qint32,qint32)));
+            this, SLOT(onMessagesGetHistoryMessages(qint64,QList<Message>,QList<Chat>,QList<User>)));
+    connect(mApi, SIGNAL(messagesGetHistoryMessagesSlice(qint64,qint32,QList<Message>,QList<Chat>,QList<User>)),
+            this, SLOT(onMessagesGetHistoryMessageSlice(qint64,qint32,QList<Message>,QList<Chat>,QList<User>)));
+    connect(mApi, SIGNAL(messagesDialogs(qint64,QList<Dialog>,QList<Message>,QList<Chat>,QList<User>)),
+            this, SLOT(onMessagesGetDialogsAnswer(qint64,QList<Dialog>,QList<Message>,QList<Chat>,QList<User>)));
+    connect(mApi, SIGNAL(usersGetUsersResult(qint64,QList<User>)),
+            this, SLOT(onUsersGetUsersAnswer(qint64,QList<User>)));
+    connect(mApi, SIGNAL(updatesTooLong()),
+            this, SLOT(onUpdatesTooLong()));
+    connect(mApi, SIGNAL(updateShortMessage(qint32,qint32,QString,qint32,qint32,qint32)),
+            this, SLOT(onUpdateShortMessage(qint32,qint32,QString,qint32,qint32,qint32)));
     connect(mApi, SIGNAL(updateShortChatMessage(qint32,qint32,qint32,QString,qint32,qint32,qint32)),
-            this,
-            SLOT(onUpdateShortChatMessage(qint32,qint32,qint32,QString,qint32,qint32,qint32)));
-    connect(mApi, SIGNAL(updateShort(Update,qint32)), this, SLOT(onUpdateShort(Update,qint32)));
-    connect(mApi,
-            SIGNAL(messagesGetMessagesMessages(qint64,QList<Message>,QList<Chat>,QList<User>)),
-            this,
-            SLOT(onMessagesGetHistoryMessages(qint64,QList<Message>,QList<Chat>,QList<User>)));
-    connect(mApi,
-            SIGNAL(
-                    messagesGetMessagesMessagesSlice(qint64,qint32,QList<Message>,QList<Chat>,QList<User>)),
-            this,
-            SIGNAL(
-                    onMessagesGetHistoryMessageSlice(qint64,qint32,QList<Message>,QList<Chat>,QList<User>)));
-
-    connect(mApi,
-            SIGNAL(updatesCombined(QList<Update>,QList<User>,QList<Chat>,qint32,qint32,qint32)),
-            this,
-            SLOT(onUpdatesCombined(QList<Update>,QList<User>,QList<Chat>,qint32,qint32,qint32)));
-    connect(mApi, SIGNAL(updates(QList<Update>,QList<User>,QList<Chat>,qint32,qint32)), this,
-            SLOT(onUpdates(QList<Update>,QList<User>,QList<Chat>,qint32,qint32)));
-    connect(mApi,
-            SIGNAL(
-                    messagesSendMessageAnswer(qint64,qint32,qint32,qint32,qint32,QList<ContactsLink>)),
-            this,
-            SLOT(
-                    onMessagesSendMessageAnswer(qint64,qint32,qint32,qint32,qint32,QList<ContactsLink>)));
-    connect(mApi, SIGNAL(messagesSentMessage(qint64,qint32,qint32,qint32,qint32)), this,
-            SLOT(onMessagesSentMessage(qint64,qint32,qint32,qint32,qint32)));
-    connect(mApi,
-            SIGNAL(messagesSentMessageLink(qint64,qint32,qint32,qint32,qint32,QList<ContactsLink>)),
-            this,
-            SIGNAL(
-                    messagesSendMessageAnswer(qint64,qint32,qint32,qint32,qint32,QList<ContactsLink>)));
-
-    connect(mApi, SIGNAL(contactsBlockResult(qint64,bool)), this,
-            SLOT(contactsUnBlockAnswer(qint64,bool)));
-    connect(mApi, SIGNAL(contactsBlocked(qint64,QList<ContactBlocked>,QList<User>)), this,
-            SLOT(onContactsBlocked(qint64,QList<ContactBlocked>,QList<User>)));
-    connect(mApi, SIGNAL(contactsUnblockResult(qint64,bool)), this,
-            SLOT(contactsUnBlockAnswer(qint64,bool)));
-    connect(mApi, SIGNAL(messagesChatFull(qint64,ChatFull,QList<Chat>,QList<User>)), this,
-            SLOT(onMessagesGetFullChatAnswer(qint64,ChatFull,QList<Chat>,QList<User>)));
-    connect(mApi,
-            SIGNAL(
-                    messagesDeleteChatUserStatedMessage(qint64,Message,QList<Chat>,QList<User>,qint32,qint32)),
-            this,
-            SLOT(
-                    onMessagesDeleteChatUserStatedMessage(qint64,Message,QList<Chat>,QList<User>,qint32,qint32)));
-    connect(mApi,
-            SIGNAL(
-                    messagesAddChatUserStatedMessage(qint64,Message,QList<Chat>,QList<User>,qint32,qint32)),
-            this,
-            SLOT(
-                    onMessagesAddChatUserStatedMessage(qint64,Message,QList<Chat>,QList<User>,qint32,qint32)));
-    connect(mApi, SIGNAL(messagesChats(qint64,QList<Chat>,QList<User>)), this,
-            SLOT(messagesGetChatsAnswer(qint64,QList<Chat>,QList<User>)));
-    connect(mApi, SIGNAL(contactsDeleteContactsResult(qint64,bool)), this,
-            SIGNAL(contactsDeleteContactsAnswer(qint64,bool)));
+            this, SLOT(onUpdateShortChatMessage(qint32,qint32,qint32,QString,qint32,qint32,qint32)));
+    connect(mApi, SIGNAL(updateShort(Update,qint32)),
+            this, SLOT(onUpdateShort(Update,qint32)));
+    connect(mApi, SIGNAL(messagesGetMessagesMessages(qint64,QList<Message>,QList<Chat>,QList<User>)),
+            this, SLOT(onMessagesGetHistoryMessages(qint64,QList<Message>,QList<Chat>,QList<User>)));
+    connect(mApi, SIGNAL(messagesGetMessagesMessagesSlice(qint64,qint32,QList<Message>,QList<Chat>,QList<User>)),
+            this, SIGNAL(onMessagesGetHistoryMessageSlice(qint64,qint32,QList<Message>,QList<Chat>,QList<User>)));
+    connect(mApi, SIGNAL(updatesCombined(QList<Update>,QList<User>,QList<Chat>,qint32,qint32,qint32)),
+            this, SLOT(onUpdatesCombined(QList<Update>,QList<User>,QList<Chat>,qint32,qint32,qint32)));
+    connect(mApi, SIGNAL(updates(QList<Update>,QList<User>,QList<Chat>,qint32,qint32)),
+            this, SLOT(onUpdates(QList<Update>,QList<User>,QList<Chat>,qint32,qint32)));
+    connect(mApi, SIGNAL(messagesSendMessageAnswer(qint64,qint32,qint32,qint32,qint32,QList<ContactsLink>)),
+            this, SLOT(onMessagesSendMessageAnswer(qint64,qint32,qint32,qint32,qint32,QList<ContactsLink>)));
+    connect(mApi, SIGNAL(messagesSentMessage(qint64,qint32,qint32,qint32,qint32)),
+            this, SLOT(onMessagesSentMessage(qint64,qint32,qint32,qint32,qint32)));
+    connect(mApi, SIGNAL(messagesSentMessageLink(qint64,qint32,qint32,qint32,qint32,QList<ContactsLink>)),
+            this, SIGNAL(messagesSendMessageAnswer(qint64,qint32,qint32,qint32,qint32,QList<ContactsLink>)));
+    connect(mApi, SIGNAL(contactsBlockResult(qint64,bool)),
+            this, SLOT(contactsUnBlockAnswer(qint64,bool)));
+    connect(mApi, SIGNAL(contactsBlocked(qint64,QList<ContactBlocked>,QList<User>)),
+            this, SLOT(onContactsBlocked(qint64,QList<ContactBlocked>,QList<User>)));
+    connect(mApi, SIGNAL(contactsUnblockResult(qint64,bool)),
+            this, SLOT(contactsUnBlockAnswer(qint64,bool)));
+    connect(mApi, SIGNAL(messagesChatFull(qint64,ChatFull,QList<Chat>,QList<User>)),
+            this, SLOT(onMessagesGetFullChatAnswer(qint64,ChatFull,QList<Chat>,QList<User>)));
+    connect(mApi, SIGNAL(messagesDeleteChatUserStatedMessage(qint64,Message,QList<Chat>,QList<User>,qint32,qint32)),
+            this, SLOT(onMessagesDeleteChatUserStatedMessage(qint64,Message,QList<Chat>,QList<User>,qint32,qint32)));
+    connect(mApi, SIGNAL(messagesAddChatUserStatedMessage(qint64,Message,QList<Chat>,QList<User>,qint32,qint32)),
+            this, SLOT(onMessagesAddChatUserStatedMessage(qint64,Message,QList<Chat>,QList<User>,qint32,qint32)));
+    connect(mApi, SIGNAL(messagesChats(qint64,QList<Chat>,QList<User>)),
+            this, SLOT(messagesGetChatsAnswer(qint64,QList<Chat>,QList<User>)));
+    connect(mApi, SIGNAL(contactsDeleteContactsResult(qint64,bool)),
+            this, SIGNAL(contactsDeleteContactsAnswer(qint64,bool)));
     connect(mApi, SIGNAL(contactsDeleteContactLink(qint64,ContactsMyLink,ContactsForeignLink,User)),
-            this,
-            SLOT(contactsDeleteContactAnswer(qint64,ContactsMyLink,ContactsForeignLink,User)));
-    connect(mApi, SIGNAL(accountUser(qint64,User)), this,
-            SLOT(accountUpdateProfileAnswer(qint64,User)));
-    connect(mApi, SIGNAL(authLogOutResult(qint64,bool)), this,
-            SLOT(onAuthLogOutAnswer(qint64,bool)));
-    connect(mApi,
-            SIGNAL(
-                    messagesCreateChatStatedMessage(qint64,Message,QList<Chat>,QList<User>,qint32,qint32)),
-            this,
-            SLOT(
-                    onMessagesCreateChatStatedMessage(qint64,Message,QList<Chat>,QList<User>,qint32,qint32)));
-    connect(mApi,
-            SIGNAL(
-                    messagesEditChatTitleStatedMessage(qint64,Message,QList<Chat>,QList<User>,qint32,qint32)),
-            this,
-            SLOT(
-                    onMessagesEditChatTitleStatedMessage(qint64,Message,QList<Chat>,QList<User>,qint32,qint32)));
-    connect(mApi, SIGNAL(uploadFile(qint64,StorageFileType,qint32,QByteArray)), this,
-            SLOT(onUploadGetFileAnswer(qint64,StorageFileType,qint32,QByteArray)));
-    connect(mApi,
-            SIGNAL(
-                    messagesForwardMsgsStatedMessages(qint64,QList<Message>,QList<Chat>,QList<User>)),
-            this,
-            SLOT(onMessagesGetHistoryMessages(qint64,QList<Message>,QList<Chat>,QList<User>)));
-    connect(mApi,
-            SIGNAL(
-                    messagesSendBroadcastStatedMessages(qint64,QList<Message>,QList<Chat>,QList<User>)),
-            this,
-            SLOT(onMessagesGetHistoryMessages(qint64,QList<Message>,QList<Chat>,QList<User>)));
+            this, SLOT(contactsDeleteContactAnswer(qint64,ContactsMyLink,ContactsForeignLink,User)));
+    connect(mApi, SIGNAL(accountUser(qint64,User)),
+            this, SLOT(accountUpdateProfileAnswer(qint64,User)));
+    connect(mApi, SIGNAL(authLogOutResult(qint64,bool)),
+            this, SLOT(onAuthLogOutAnswer(qint64,bool)));
+    connect(mApi, SIGNAL(messagesCreateChatStatedMessage(qint64,Message,QList<Chat>,QList<User>,qint32,qint32)),
+            this, SLOT(onMessagesCreateChatStatedMessage(qint64,Message,QList<Chat>,QList<User>,qint32,qint32)));
+    connect(mApi, SIGNAL(messagesEditChatTitleStatedMessage(qint64,Message,QList<Chat>,QList<User>,qint32,qint32)),
+            this, SLOT(onMessagesEditChatTitleStatedMessage(qint64,Message,QList<Chat>,QList<User>,qint32,qint32)));
+    connect(mApi, SIGNAL(uploadFile(qint64,StorageFileType,qint32,QByteArray)),
+            this, SLOT(onUploadGetFileAnswer(qint64,StorageFileType,qint32,QByteArray)));
+    connect(mApi, SIGNAL(messagesForwardMsgsStatedMessages(qint64,QList<Message>,QList<Chat>,QList<User>)),
+            this, SLOT(onMessagesGetHistoryMessages(qint64,QList<Message>,QList<Chat>,QList<User>)));
+    connect(mApi, SIGNAL(messagesSendBroadcastStatedMessages(qint64,QList<Message>,QList<Chat>,QList<User>)),
+            this, SLOT(onMessagesGetHistoryMessages(qint64,QList<Message>,QList<Chat>,QList<User>)));
     connect(mApi, SIGNAL(messagesSearchMessages(qint64,QList<Message>,QList<Chat>,QList<User>)),
             this, SLOT(onMessagesSearchAnswer(qint64,QList<Message>,QList<Chat>,QList<User>)));
-    connect(mApi,
-            SIGNAL(
-                    messagesForwardMsgStatedMessage(qint64,Message,QList<Chat>,QList<User>,qint32,qint32)),
-            this,
-            SLOT(
-                    onMessagesForwardMsgStatedMessage(qint64,Message,QList<Chat>,QList<User>,qint32,qint32)));
-    connect(mApi,
-            SIGNAL(
-                    messagesForwardMsgsStatedMessages(qint64,QList<Message>,QList<Chat>,QList<User>,qint32,qint32)),
-            this,
-            SLOT(
-                    onMessagesForwardMsgStatedMessage(qint64,QList<Message>,QList<Chat>,QList<User>,qint32,qint32)));
-    connect(mApi,
-            SIGNAL(
-                    contactsImportedContacts(qint64,QList<ImportedContact>,QList<qint64>,QList<User>)),
-            this,
-            SIGNAL(
-                    contactsImportContactsAnswer(qint64,QList<ImportedContact>,QList<qint64>,QList<User>)));
+    connect(mApi, SIGNAL(messagesForwardMsgStatedMessage(qint64,Message,QList<Chat>,QList<User>,qint32,qint32)),
+            this,SLOT(onMessagesForwardMsgStatedMessage(qint64,Message,QList<Chat>,QList<User>,qint32,qint32)));
+    connect(mApi, SIGNAL(messagesForwardMsgsStatedMessages(qint64,QList<Message>,QList<Chat>,QList<User>,qint32,qint32)),
+            this, SLOT(onMessagesForwardMsgStatedMessage(qint64,QList<Message>,QList<Chat>,QList<User>,qint32,qint32)));
+    connect(mApi, SIGNAL(contactsImportedContacts(qint64,QList<ImportedContact>,QList<qint64>,QList<User>)),
+            this, SIGNAL(contactsImportContactsAnswer(qint64,QList<ImportedContact>,QList<qint64>,QList<User>)));
 }
 
 void ApplicationUI::switchDC(QString number)
@@ -286,12 +228,12 @@ void ApplicationUI::switchDC(QString number)
     //qDebug() << number;
     Settings::getInstance()->setWorkingDcNum(qint32(number.toInt()));
     Settings::getInstance()->writeAuthFile();
-    //changeServer(number.toInt()-1 );
+    //changeServer(number.toInt() - 1);
 }
 
 void ApplicationUI::onAuthSendCodeError(qint64 msgid, qint32 code, QString codetext)
 {
-    switch (code) {
+    switch(code) {
         case 303: {
             dcchange(codetext);
             Q_EMIT movingdcinit();
@@ -326,7 +268,7 @@ void ApplicationUI::onserverready()
 void ApplicationUI::authSendCode(QString ph)
 {
     phone = ph;
-    mApi->authSendCode(phone, 0, APP_ID, APP_HASH, "en");
+    mApi->authSendCode(phone, 5, APP_ID, APP_HASH, "en");
 }
 
 void ApplicationUI::onauthSentCode(qint64 msg, bool regresp, QString hashs)
@@ -335,23 +277,38 @@ void ApplicationUI::onauthSentCode(qint64 msg, bool regresp, QString hashs)
     reg = regresp;
     emit qmlgethashpane(hash, reg);
 }
+
+void ApplicationUI::authCheckPhone(QString ph)
+{
+    phone = ph;
+    mApi->authCheckPhone(phone);
+}
+
+void ApplicationUI::onAuthCheckPhoneError(Query *q, qint32 errorCode, const QString &errorText) {
+    qDebug() << "onAuthCheckPhoneError:" << errorCode;
+}
+
 void ApplicationUI::onauthTransferCompleted()
 {
     qDebug() << "authtransfer";
     Q_EMIT checkserver();
 }
+
 bool ApplicationUI::isUserReg()
 {
     bool reg;
 }
+
 void ApplicationUI::authUser(QString code)
 {
     mApi->authSignIn(phone, hash, code);
 }
+
 void ApplicationUI::authUserSignIn(QString first, QString last, QString code)
 {
     mApi->authSignUp(phone, hash, code, first, last);
 }
+
 void ApplicationUI::onUserAuthorized(qint64, qint32 expires)
 {
     // change state of current dc

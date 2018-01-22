@@ -122,6 +122,10 @@ TabbedPane {
          */
         
         SystemToast {
+            id: errorMessageToast
+        },
+        
+        SystemToast {
             id: successSignInToast
             body: "Logged in as " + mainTab.currentUsername
         },

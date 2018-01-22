@@ -199,7 +199,11 @@ void Api::onAuthCheckPhoneAnswer(Query *q, InboundPkt &inboundPkt) {
     ASSERT(inboundPkt.fetchInt() == (qint32)TL_AuthCheckedPhone);
     bool phoneRegistered = inboundPkt.fetchBool();
     bool phoneInvited = inboundPkt.fetchBool();
-    Q_EMIT authCheckedPhone(q->msgId(), phoneRegistered, phoneInvited);
+    qDebug() << "Phone registered:" << phoneRegistered;
+}
+
+void Api::onAuthCheckPhoneError(Query *q, qint32 errorCode, const QString &errorText) {
+    Q_EMIT authCheckPhoneError(q->msgId(), errorCode, errorText, q->extra());
 }
 
 qint64 Api::authCheckPhone(const QString &phoneNumber) {
@@ -221,11 +225,11 @@ void Api::onAuthSendCodeAnswer(Query *q, InboundPkt &inboundPkt) {
     qDebug() << QString::number(inboundPkt.fetchInt(),16) << QString::number((qint32)TL_AuthSentCode,16);
     bool phoneRegistered = inboundPkt.fetchInt();
     QString phoneCodeHash = inboundPkt.fetchQString();
-//    qDebug() << phoneRegistered << phoneCodeHash;
-//    qDebug() << phoneCodeHash;
-//    qint32 sendCallTimeout = inboundPkt.fetchInt();
-//    qDebug() << sendCallTimeout;
-//    bool isPassword = inboundPkt.fetchBool();
+    qDebug() << phoneRegistered << phoneCodeHash;
+    qDebug() << phoneCodeHash;
+    qint32 sendCallTimeout = inboundPkt.fetchInt();
+    qDebug() << sendCallTimeout;
+    bool isPassword = inboundPkt.fetchBool();
     Q_EMIT authSentCode(q->msgId(), phoneRegistered, phoneCodeHash);
 }
 
@@ -234,7 +238,7 @@ void Api::onAuthSendCodeError(Query *q, qint32 errorCode, const QString &errorTe
 }
 
 qint64 Api::authSendCode(const QString &phoneNumber, qint32 smsType, qint32 apiId, const QString &apiHash, const QString &langCode) {
-    qDebug() << phoneNumber;
+    qDebug() << "Send code to phone number:" << phoneNumber;
     OutboundPkt *p = new OutboundPkt;
     p->appendInt(TL_AuthSendCode);
     p->appendQString(phoneNumber);
