@@ -34,7 +34,6 @@
 #include "logic/uploadfile.h"
 #include "logic/fileoperation.h"
 #include "logic/downloadfile.h"
-//#include "chatdatamodel.h"
 
 namespace bb
 {
@@ -56,60 +55,60 @@ class InvokeManger;
 class QByteArray;
 class QSqlQuery;
 class Update;
-class bb::cascades::ArrayDataModel;
-class bb::cascades::GroupDataModel;
 class UdpModule;
 class Database;
+class bb::cascades::ArrayDataModel;
+class bb::cascades::GroupDataModel;
 
-class ApplicationUI: public QObject
+class ApplicationUI :
+        public QObject
 {
     Q_OBJECT
+
 public:
     typedef struct{
-            int userid;
-            QString firstName;
-            QString lastName;
-            QString photoLocation;
-            QString phoneNumber;
-            QString username;
-        }currentuser;
-        QVariantMap idtoname;
+        int userid;
+        QString firstName;
+        QString lastName;
+        QString photoLocation;
+        QString phoneNumber;
+        QString username;
+    } currentuser;
+    QVariantMap idtoname;
     QString phone;
-        QString hash;
-        qint32 stashfwdmessage;
-        QString themecolorvariable;
-        bool reg;
-        int popuserid;
-        int popgroupid;
-        int popbroadcastid;
+    QString hash;
+    qint32 stashfwdmessage;
+    QString themecolorvariable;
+    bool reg;
+    int popuserid;
+    int popgroupid;
+    int popbroadcastid;
     currentuser currentUser;
     ApplicationUI();
     Database *db;
     bool loggedIn;
     QString m_videoFilePath;
-        QString m_videoThumbPath;
-        QString m_audioFilePath;
-        QString m_photoFilePath;
-        QString m_docFilePath;
-        QString m_docThumbPath;
-        QFile m_downloadFile;
-        qint64 m_downloadFileExpectedLength;
+    QString m_videoThumbPath;
+    QString m_audioFilePath;
+    QString m_photoFilePath;
+    QString m_docFilePath;
+    QString m_docThumbPath;
+    QFile m_downloadFile;
+    qint64 m_downloadFileExpectedLength;
     virtual ~ApplicationUI();
-
-    Q_INVOKABLE void init();
     DcProvider mDcProvider;
     Settings *s;
     Api *mApi;
-
     QList<Contact> m_cachedContacts;
     QList<User> m_cachedUsers;
     QVariantList mem;
 
+    Q_INVOKABLE void init();
     Q_INVOKABLE bool checkLogin();
     Q_INVOKABLE void changeServer( qint16 number );
     Q_INVOKABLE qint32 workingdc();
 
-    //Auths
+    // Auths
     Q_INVOKABLE void authCheckPhone(QString);
     Q_INVOKABLE void authSendCode( QString);
     Q_INVOKABLE void authUser(QString);
@@ -125,13 +124,12 @@ public:
     Q_INVOKABLE bb::cascades::GroupDataModel* getFavContactsModel();
     Q_INVOKABLE bb::cascades::GroupDataModel* getContactsNamesModel(QString);
     Q_INVOKABLE QVariantList searchFilterChatModel(QString, QString);
-//    Q_INVOKABLE bb::cascades::GroupDataModel* liveChat(int uid, int offset, QString type);
 
-    //User
+    // User
     Q_INVOKABLE void getCurrentUser();
     Q_INVOKABLE void fetchUserDetails();
 
-    //Contacts
+    // Contacts
     Q_INVOKABLE QVariantList getContactsmodal(QString);
     Q_INVOKABLE void getmessages(qint32, QString, qint32);
     Q_INVOKABLE void clearContactHistory(qint32,QString);
@@ -140,8 +138,7 @@ public:
     Q_INVOKABLE void unBlockContact(qint64 id);
     Q_INVOKABLE void importContacts();
 
-
-//broadcast
+    // Broadcast
     Q_INVOKABLE bool createBroadCast(QString, QVariant, qint32);
     Q_INVOKABLE bool addBroadCastMember(qint32 bid, qint32 id);
     Q_INVOKABLE bool removeBroadCastMember(qint32 bid, qint32 id);
@@ -149,34 +146,29 @@ public:
     Q_INVOKABLE void setPopBroadCastId(int);
     Q_INVOKABLE int getPopBroadCastId();
     Q_INVOKABLE void clearBroadCastHistory(qint32);
+
     Q_INVOKABLE QVariant getContactInfo(qint32 id);
     Q_INVOKABLE bb::cascades::GroupDataModel* getBroadCastMembers(qint32 bid);
     Q_INVOKABLE QVariantList liveChat(qint32, qint32, QString);
     Q_INVOKABLE bool contactSaveInfo(QString );
     Q_INVOKABLE bool updateBroadCast(qint32 id,QString name);
-
     Q_INVOKABLE void userdetails(QString userid);
     Q_INVOKABLE void settyping(QString userid, bool check);
     Q_INVOKABLE QVariantList getMessagesModel( qint32,int,QString);
     Q_INVOKABLE void getLatestMessages();
     Q_INVOKABLE void flushTable(QString);
-
     Q_INVOKABLE void sendTyping(QString,bool);
     Q_INVOKABLE void sendMessage(QString,qint64);
     Q_INVOKABLE void sendMessageChat(QString,qint64);
     Q_INVOKABLE void forwardMessage(qint32, qint32 ,qint32,QString);
     Q_INVOKABLE void copyText(QByteArray text);
-
     Q_INVOKABLE void setPopUserId(int);
     Q_INVOKABLE int getPopUserId();
     Q_INVOKABLE bool deleteMessage(int);
-
     Q_INVOKABLE void setPopGroupId(int);
     Q_INVOKABLE int getPopGroupId();
     Q_INVOKABLE bool updateGroupSettings(int id,QString name);
     Q_INVOKABLE bool updateContactSettings(int id,QString name);
-
-
     Q_INVOKABLE void stashFwdMessage(qint32);
     Q_INVOKABLE qint32 getStashFwdMessage();
     Q_INVOKABLE void flushStashFwdMessage();
@@ -192,7 +184,6 @@ public:
     Q_INVOKABLE void deleteContact(qint32 userid);
     Q_INVOKABLE void deletecontactlocal(qint32 popuserid);
     Q_INVOKABLE void boolcheck();
-
     Q_INVOKABLE void AccountupdateProfile(QString first, QString last);
     Q_INVOKABLE void alert(QString);
     Q_INVOKABLE void markReadMessages(qint32, qint32 , QString);
@@ -203,34 +194,28 @@ public:
     Q_INVOKABLE void searchMessage(QString);
     Q_INVOKABLE void setCheckInitial(qint32);
     Q_INVOKABLE void setinitfalse(qint32 id);
-    Q_INVOKABLE QString getThemeSettings();
-    Q_INVOKABLE void setThemeColorVariable(QString str);
-    Q_INVOKABLE QString getThemeColorVariable();
     Q_INVOKABLE QVariantMap getidtousers();
     Q_INVOKABLE void deleteGroup(qint32 id);
-
     Q_INVOKABLE QVariant getMessageContacts(int id);
-   void getIdByPhotoId(qint64 id);
-   void getmessageofimage(qint64 id);
+
+    void getIdByPhotoId(qint64 id);
+    void getmessageofimage(qint64 id);
     void closeconnection();
     void switchDC(QString number);
     void dcchange(QString codetext);
     void authNeeded();
-
     void mainview();
     void onMessagesGetHistoryAnswer(qint64 id, qint32 count, const QList<Message> &messages, const QList<Chat> &chats, const QList<User> &users);
-
     void insertMessage(const Message &message);
     qint64 uploadGetFile(const InputFileLocation &file, qint32 fileSize, qint32 dc);
     qint64 uploadCancelFile(qint64 fileId);
     void DownloadImageThumb(QString,qint64,FileLocation, qint32, qint64);
 
-    private slots:
+private slots:
     void onSystemLanguageChanged();
     void keyloaded();
 
-
-    signals:
+signals:
     void invalidphone(QString);
     void movingdcinit();
     void qmlgethashpane( QString ,bool);
@@ -272,17 +257,13 @@ public:
     void onDcProviderReady();
 
 private:
-
     QTranslator* m_translator;
     bb::cascades::LocaleHandler* m_localeHandler;
     bb::system::InvokeManager* m_invokeManager;
     QMap<qint64, DownloadFile *> mDownloadsMap;
-        // sessionId -> list of files waiting for session connection to be ready for being downloaded
-        QMap<qint64, QList<DownloadFile *> > mInitialDownloadsMap;
-        // fileId -> true if the file download is in progress. An entry does not exists for that fileId if not downloading
-        QMap<qint64, bool> mActiveDownloadsMap;
-        // fileId -> true if requested a download cancel for that fileId
-        QMap<qint64, bool> mCancelDownloadsMap;
+    QMap<qint64, QList<DownloadFile *> > mInitialDownloadsMap;
+    QMap<qint64, bool> mActiveDownloadsMap;
+    QMap<qint64, bool> mCancelDownloadsMap;
     bb::cascades::GroupDataModel* modal;
     InputPeer askForInputPeer(QString userid, QString sType);
     InputUser askForInputUser(QString, qint64);
@@ -301,7 +282,7 @@ private Q_SLOTS:
     void onMessagesGetDialogsAnswer(qint64,QList<Dialog>,QList<Message>,QList<Chat>,QList<User>);
     void onUsersGetUsersAnswer(qint64,QList<User>);
     void onContactsBlockAnswer(bool);
-//    void onUpdatesTooLong();
+    //void onUpdatesTooLong();
     void onUpdateShortMessage(qint32 id, qint32 fromId, const QString &message, qint32 pts, qint32 date, qint32 seq);
     void onUpdateShortChatMessage(qint32 id, qint32 fromId, qint32 chatId, const QString &message, qint32 pts, qint32 date, qint32 seq);
     void onUpdateShort(const Update &update, qint32 date);
@@ -314,7 +295,7 @@ private Q_SLOTS:
     void onContactsBlocked(qint64 id, const QList<ContactBlocked> &blocked, const QList<User> &users);
     void contactsUnBlockAnswer(qint64 id, bool ok);
     void onMessagesGetFullChatAnswer(qint64 id, const ChatFull &fullChat, const QList<Chat> &chats, const QList<User> &users);
-//    void MessagesDeleteChatUserAnswer(qint64 id, Message message, QList<Chat> chats, QList<User> users, QList<ContactsLink> links, qint32 pts, qint32 seq); // statedMessage or statedMessageLink
+    //void MessagesDeleteChatUserAnswer(qint64 id, Message message, QList<Chat> chats, QList<User> users, QList<ContactsLink> links, qint32 pts, qint32 seq); // statedMessage or statedMessageLink
     void onMessagesDeleteChatUserStatedMessage(qint64 msgId, Message message, QList<Chat> chats, QList<User> users, qint32 pts, qint32 seq);
     void messagesGetChatsAnswer(qint64 id, const QList<Chat> &chats, const QList<User> &users);
     void contactsDeleteContactAnswer(qint64,ContactsMyLink,ContactsForeignLink,User);
@@ -324,10 +305,9 @@ private Q_SLOTS:
     void onAuthLogOutAnswer(qint64 id, bool ok);
     void onMessagesCreateChatStatedMessage(qint64,Message,QList<Chat>,QList<User>,qint32,qint32);
     void onMessagesEditChatTitleStatedMessage(qint64,Message,QList<Chat>,QList<User>,qint32,qint32);
-
     //void onAuthCheckPhoneAnswer(qint64 msgId, const QList<Message> &result, const QVariant &attachedData);
     void onUploadGetFileAnswer(qint64 msgId, StorageFileType type, qint32 mtime, QByteArray bytes);
-//    void onUploadGetFileError(qint64 id, qint32 errorCode, const QString &errorText);
+    //void onUploadGetFileError(qint64 id, qint32 errorCode, const QString &errorText);
     void onUploadGetFileAnswer(qint64 id, StorageFileType type, qint32 mtime, QByteArray bytes, qint32 partId, qint32 downloaded, qint32 total);
     void onUploadGetFileSessionCreated();
     void onMessagesAddChatUserStatedMessage(qint64 id, Message message, QList<Chat> chats, QList<User> users, qint32 pts, qint32 seq);
