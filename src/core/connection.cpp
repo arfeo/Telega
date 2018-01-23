@@ -25,71 +25,84 @@
 #include <netinet/tcp.h>
 #include <netinet/in.h>
 
-
-
-
 Connection::Connection(const QString &host, qint32 port, QObject *parent) :
-    QTcpSocket(parent),
-    Endpoint(host, port),
-    mReconnectTimerId(0),
-    mOpLength(0) {
+        QTcpSocket(parent),
+        Endpoint(host, port),
+        mReconnectTimerId(0),
+        mOpLength(0)
+{
     mBuffer.clear();
-
     connect(&mAsserter,SIGNAL(fatalError()), SIGNAL(fatalError()));
 }
 
-Connection::~Connection() {
+Connection::~Connection()
+{
     stopReconnecting();
 }
 
-qint64 Connection::writeOut(const void *data, qint64 length){
-    if (!length) { return 0; }
+qint64 Connection::writeOut(const void *data, qint64 length)
+{
+    if(!length) {
+        return 0;
+    }
     Q_ASSERT(length > 0);
-//    qDebug() << (const char *)data;
+    //qDebug() << (const char *)data;
     return write((const char *)data, length);
 }
 
-qint32 Connection::peekIn(void *data, qint32 len) {
-    if (!len || bytesAvailable() < 1) { return 0; }
+qint32 Connection::peekIn(void *data, qint32 len)
+{
+    if(!len || bytesAvailable() < 1) {
+        return 0;
+    }
     Q_ASSERT(len > 0);
-    if (len > bytesAvailable()) {
+    if(len > bytesAvailable()) {
         len = bytesAvailable();
     }
     return peek((char *)data, len);
 }
 
-qint32 Connection::readIn(void *data, qint32 len) {
-    if (!len || bytesAvailable() < 1) { return 0; }
+qint32 Connection::readIn(void *data, qint32 len)
+{
+    if(!len || bytesAvailable() < 1) {
+        return 0;
+    }
     Q_ASSERT(len > 0);
-    if (len > bytesAvailable()) {
+    if(len > bytesAvailable()) {
         len = bytesAvailable();
     }
     return read((char *)data, len);
 }
 
-QByteArray Connection::readIn(qint32 len) {
-    if (!len || bytesAvailable() < 1) { return 0; }
+QByteArray Connection::readIn(qint32 len)
+{
+    if(!len || bytesAvailable() < 1) {
+        return 0;
+    }
     Q_ASSERT(len > 0);
-    if (len > bytesAvailable()) {
+    if(len > bytesAvailable()) {
         len = bytesAvailable();
     }
     return read(len);
 }
 
-QByteArray Connection::readAll() {
-    if (bytesAvailable() < 1) { return 0; }
+QByteArray Connection::readAll()
+{
+    if(bytesAvailable() < 1) {
+        return 0;
+    }
     return readAll();
 }
 
-void Connection::connectToServer() {
+void Connection::connectToServer()
+{
     Q_ASSERT(!m_host.isEmpty());
     Q_ASSERT(m_port);
-
     connect(this, SIGNAL(connected()), SLOT(onConnected()), Qt::UniqueConnection);
     connect(this, SIGNAL(readyRead()), SLOT(onReadyRead()), Qt::UniqueConnection);
-//    connect(this, SIGNAL(error(QAbstractSocket::SocketError)), SLOT(onError(QAbstractSocket::SocketError)), Qt::UniqueConnection);
-//    qDebug() <<  m_host;
-//    qDebug() << m_port;
+    //connect(this, SIGNAL(error(QAbstractSocket::SocketError)), SLOT(onError(QAbstractSocket::SocketError)), Qt::UniqueConnection);
+    //qDebug() <<  m_host;
+    //qDebug() << m_port;
     connectToHost(m_host, m_port);
 }
 
@@ -119,51 +132,51 @@ QAbstractSocket::SslInvalidUserDataError            21	Invalid data (certificate
 QAbstractSocket::TemporaryError                     22	A temporary error occurred (e.g., operation would block and socket is non-blocking).
 QAbstractSocket::UnknownSocketError                 -1	An unidentified error occurred.
 */
-void Connection::onError(QAbstractSocket::SocketError error) {
-
-
-    if (!mReconnectTimerId) {
+void Connection::onError(QAbstractSocket::SocketError error)
+{
+    if(!mReconnectTimerId) {
         mReconnectTimerId = startTimer(RECONNECT_TIMEOUT);
     }
 }
 
-void Connection::timerEvent(QTimerEvent *) {
-    if (state() != QAbstractSocket::ConnectingState && state() != QAbstractSocket::ConnectedState) {
-
+void Connection::timerEvent(QTimerEvent *)
+{
+    if(state() != QAbstractSocket::ConnectingState && state() != QAbstractSocket::ConnectedState) {
         connectToServer();
     } else {
         stopReconnecting();
     }
 }
 
-void Connection::stopReconnecting() {
-    if (mReconnectTimerId) {
+void Connection::stopReconnecting()
+{
+    if(mReconnectTimerId) {
         killTimer(mReconnectTimerId);
         mReconnectTimerId = 0;
     }
 }
 
-void Connection::onConnected() {
-
-    // stop trying reconnect if it was alive
+void Connection::onConnected()
+{
+    // Stop trying reconnect if it was alive
     stopReconnecting();
 
-    // abridged version of the protocol requires sending 0xef byte at beginning
+    // Abridged version of the protocol requires sending 0xef byte at beginning
     char byte = 0xef;
     qint32 writtenBytes = writeOut(&byte, 1);
-//    qDebug() << "written byte" << writtenBytes;
+    //qDebug() << "written byte" << writtenBytes;
     Q_UNUSED(writtenBytes);
     Q_ASSERT(writtenBytes == 1);
 
-    // process the rest of operations in inherited classes
+    // Process the rest of operations in inherited classes
     processConnected();
 }
 
-void Connection::onReadyRead() {
-
-    while (bytesAvailable()) {
-        if (!mOpLength) {
-            // calculate length, read first byte
+void Connection::onReadyRead()
+{
+    while(bytesAvailable()) {
+        if(!mOpLength) {
+            // Calculate length, read first byte
             qint32 readed = readIn(&mOpLength, 1);
             if (mOpLength == 0x7f) {
                 readed = readIn(&mOpLength, 3);
@@ -172,13 +185,11 @@ void Connection::onReadyRead() {
         }
 
         QByteArray buffer = readIn(mOpLength - mBuffer.length());
-
         qint32 opReaded = buffer.length() + mBuffer.length();
-
-        if (opReaded == mOpLength) {
-            //process request
+        if(opReaded == mOpLength) {
+            // Process request
             mBuffer.append(buffer);
-//            qDebug() << mBuffer.toHex();
+            //qDebug() << mBuffer.toHex();
             QMetaObject::invokeMethod(this, "processRpcAnswer", Qt::QueuedConnection, Q_ARG(QByteArray, mBuffer));
             mOpLength = 0;
             mBuffer.clear();

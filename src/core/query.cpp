@@ -22,18 +22,27 @@
 #include "query.h"
 
 Query::Query(QObject *parent) :
-    QObject(parent), m_dataLength(0), m_data(0), m_methods(0), m_resends(MAX_QUERY_RESENDS) {
+        QObject(parent),
+        m_dataLength(0),
+        m_data(0),
+        m_methods(0),
+        m_resends(MAX_QUERY_RESENDS)
+{
+    // ..
 }
 
-Query::~Query() {
+Query::~Query()
+{
     Utils::freeSecure(m_data, (4 * m_dataLength));
 }
 
-void *Query::data() {
+void *Query::data()
+{
     return m_data;
 }
 
-void Query::setData(void *data, qint32 dataLength) {
+void Query::setData(void *data, qint32 dataLength)
+{
     if (m_data && m_dataLength > 0) {
         Utils::freeSecure(m_data, 4 * m_dataLength);
     }
@@ -42,11 +51,13 @@ void Query::setData(void *data, qint32 dataLength) {
     memcpy(m_data, data, 4 * dataLength);
 }
 
-qint32 Query::decreaseResends() {
+qint32 Query::decreaseResends()
+{
     return --m_resends;
 }
 
-void Query::timerEvent(QTimerEvent *event) {
+void Query::timerEvent(QTimerEvent *event)
+{
     if (!m_acked) {
         Q_EMIT timeout(this);
     } else {

@@ -1946,7 +1946,6 @@ void ApplicationUI::onUploadGetFileAnswer(qint64 id, StorageFileType type, qint3
             m_id = query.value(0).value<qint64>();
             qDebug() << "check " << query.value(0);
         }
-
         QString ext;
         switch(type.classType()) {
             case StorageFileType::typeStorageFileUnknown:
