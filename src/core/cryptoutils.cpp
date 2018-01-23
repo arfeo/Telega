@@ -20,40 +20,42 @@
  */
 
 #include "cryptoutils.h"
-
 #include "settings.h"
 #include "utils.h"
 #include <openssl/rand.h>
 #include <openssl/sha.h>
 
-
-CryptoUtils::CryptoUtils() {
+CryptoUtils::CryptoUtils()
+{
     BN_ctx = BN_CTX_new ();
     Utils::ensurePtr(BN_ctx);
 }
 
-CryptoUtils::~CryptoUtils() {
-    if (BN_ctx) free(BN_ctx); //do this with a tfree method from Utils
-
+CryptoUtils::~CryptoUtils()
+{
+    if (BN_ctx) free(BN_ctx); // do this with a tfree method from Utils
 }
 
-CryptoUtils* CryptoUtils::getInstance() {
+CryptoUtils* CryptoUtils::getInstance()
+{
     static CryptoUtils *instance = new CryptoUtils;
     return instance;
 }
 
-qint32 CryptoUtils::encryptPacketBuffer(OutboundPkt &p, void *encryptBuffer) {
+qint32 CryptoUtils::encryptPacketBuffer(OutboundPkt &p, void *encryptBuffer)
+{
     RSA *pubKey = Settings::getInstance()->pubKey();
     return padRsaEncrypt((char *) p.buffer(), p.length() * 4, (char *) encryptBuffer, ENCRYPT_BUFFER_INTS * 4, pubKey->n, pubKey->e);
 }
 
-qint32 CryptoUtils::encryptPacketBufferAESUnAuth(const char serverNonce[16], const char hiddenClientNonce[32], OutboundPkt &p, void *encryptBuffer) {
-  initAESUnAuth (serverNonce, hiddenClientNonce, AES_ENCRYPT);
-  return padAESEncrypt ((char *) p.buffer(), p.length() * 4, (char *) encryptBuffer, ENCRYPT_BUFFER_INTS * 4);
+qint32 CryptoUtils::encryptPacketBufferAESUnAuth(const char serverNonce[16], const char hiddenClientNonce[32], OutboundPkt &p, void *encryptBuffer)
+{
+    initAESUnAuth (serverNonce, hiddenClientNonce, AES_ENCRYPT);
+    return padAESEncrypt ((char *) p.buffer(), p.length() * 4, (char *) encryptBuffer, ENCRYPT_BUFFER_INTS * 4);
 }
 
-qint32 CryptoUtils::padRsaEncrypt (char *from, qint32 from_len, char *to, qint32 size, BIGNUM *N, BIGNUM *E) {
-
+qint32 CryptoUtils::padRsaEncrypt (char *from, qint32 from_len, char *to, qint32 size, BIGNUM *N, BIGNUM *E)
+{
     qint32 pad = (255000 - from_len - 32) % 255 + 32;
     qint32 chunks = (from_len + pad) / 255;
     qint32 bits = BN_num_bits (N);
@@ -69,7 +71,7 @@ qint32 CryptoUtils::padRsaEncrypt (char *from, qint32 from_len, char *to, qint32
     BIGNUM x, y;
     BN_init (&x);
     BN_init (&y);
-    for (i = 0; i < chunks; i++) {
+    for(i = 0; i < chunks; i++) {
         BN_bin2bn ((uchar *) from, 255, &x);
         qint32 success = BN_mod_exp (&y, &x, E, N, BN_ctx);
         Q_UNUSED(success);
@@ -85,7 +87,8 @@ qint32 CryptoUtils::padRsaEncrypt (char *from, qint32 from_len, char *to, qint32
     return chunks * 256;
 }
 
-void CryptoUtils::initAESUnAuth (const char serverNonce[16], const char hiddenClientNonce[32], qint32 encrypt) {
+void CryptoUtils::initAESUnAuth (const char serverNonce[16], const char hiddenClientNonce[32], qint32 encrypt)
+{
     static uchar buffer[64], hash[20];
     memcpy (buffer, hiddenClientNonce, 32);
     memcpy (buffer + 32, serverNonce, 16);
@@ -106,7 +109,8 @@ void CryptoUtils::initAESUnAuth (const char serverNonce[16], const char hiddenCl
     memset (aes_key_raw, 0, sizeof (aes_key_raw));
 }
 
-void CryptoUtils::initAESAuth(char authKey[192], char msgKey[16], qint32 encrypt) {
+void CryptoUtils::initAESAuth(char authKey[192], char msgKey[16], qint32 encrypt)
+{
     static uchar buffer[48], hash[20];
     /*
     Steps:
@@ -149,7 +153,8 @@ void CryptoUtils::initAESAuth(char authKey[192], char msgKey[16], qint32 encrypt
     memset (aes_key_raw, 0, sizeof (aes_key_raw));
 }
 
-qint32 CryptoUtils::padAESEncrypt (const char *from, qint32 fromLen, char *to, qint32 size) {
+qint32 CryptoUtils::padAESEncrypt (const char *from, qint32 fromLen, char *to, qint32 size)
+{
     qint32 paddedSize = (fromLen + 15) & -16;
     Q_UNUSED(size);
     Q_ASSERT(fromLen > 0 && paddedSize <= size);
@@ -159,73 +164,74 @@ qint32 CryptoUtils::padAESEncrypt (const char *from, qint32 fromLen, char *to, q
         Q_ASSERT(isRandSupported >= 0);
     }
     AES_ige_encrypt ((uchar *) from, (uchar *) to, paddedSize, &aes_key, aes_iv, AES_ENCRYPT);
-//    delete from;
-//    delete to;
+    //delete from;
+    //delete to;
     return paddedSize;
 }
 
-qint32 CryptoUtils::padAESDecrypt (const char *from, qint32 fromLen, char *to, qint32 size) {
-
+qint32 CryptoUtils::padAESDecrypt (const char *from, qint32 fromLen, char *to, qint32 size)
+{
     if (fromLen <= 0 || fromLen > size || (fromLen & 15)) {
         return -1;
     }
     AES_ige_encrypt ((const uchar *) from, (uchar *) to, fromLen, &aes_key, aes_iv, AES_DECRYPT);
-//    delete from;
-//    delete to;
+    //delete from;
+    //delete to;
     return fromLen;
 }
 
-qint32 CryptoUtils::checkPrime (BIGNUM *p) {
+qint32 CryptoUtils::checkPrime (BIGNUM *p)
+{
     qint32 r = BN_is_prime (p, BN_prime_checks, 0, BN_ctx, 0);
     Utils::ensure (r >= 0);
-//    delete p;
+    //delete p;
     return r;
 }
 
-qint32 CryptoUtils::checkDHParams (BIGNUM *p, qint32 g) {
+qint32 CryptoUtils::checkDHParams (BIGNUM *p, qint32 g)
+{
     if (g < 2 || g > 7) { return -1; }
     BIGNUM t;
     BN_init (&t);
-
     BIGNUM dh_g;
     BN_init (&dh_g);
     Utils::ensure (BN_set_word (&dh_g, 4 * g));
-
     Utils::ensure (BN_mod (&t, p, &dh_g, BN_ctx));
     qint32 x = BN_get_word (&t);
     Q_ASSERT(x >= 0 && x < 4 * g);
-
     BN_free (&dh_g);
     switch (g) {
-    case 2:
-        if (x != 7) { return -1; }
-        break;
-    case 3:
-        if (x % 3 != 2 ) { return -1; }
-        break;
-    case 4:
-        break;
-    case 5:
-        if (x % 5 != 1 && x % 5 != 4) { return -1; }
-        break;
-    case 6:
-        if (x != 19 && x != 23) { return -1; }
-        break;
-    case 7:
-        if (x % 7 != 3 && x % 7 != 5 && x % 7 != 6) { return -1; }
-        break;
+        case 2:
+            if (x != 7) { return -1; }
+            break;
+        case 3:
+            if (x % 3 != 2 ) { return -1; }
+            break;
+        case 4:
+            break;
+        case 5:
+            if (x % 5 != 1 && x % 5 != 4) { return -1; }
+            break;
+        case 6:
+            if (x != 19 && x != 23) { return -1; }
+            break;
+        case 7:
+            if (x % 7 != 3 && x % 7 != 5 && x % 7 != 6) { return -1; }
+            break;
     }
-    if (!checkPrime (p)) { return -1; }
-
+    if (!checkPrime (p)) {
+        return -1;
+    }
     BIGNUM b;
     BN_init (&b);
     Utils::ensure (BN_set_word (&b, 2));
     Utils::ensure (BN_div (&t, 0, p, &b, BN_ctx));
-    if (!checkPrime (&t)) { return -1; }
+    if (!checkPrime (&t)) {
+        return -1;
+    }
     BN_free (&b);
     BN_free (&t);
-//    delete p;
-
+    //delete p;
     return 0;
 }
 
@@ -234,7 +240,8 @@ qint32 CryptoUtils::checkDHParams (BIGNUM *p, qint32 g) {
   "Both clients in a secret chat creation are to check that g, g_a and g_b are greater than one and smaller than p-1.
   Recommented checking that g_a and g_b are between 2^{2048-64} and p - 2^{2048-64} as well."
 */
-qint32 CryptoUtils::checkCalculatedParams(const BIGNUM *gAOrB, const BIGNUM *g, const BIGNUM *p) {
+qint32 CryptoUtils::checkCalculatedParams(const BIGNUM *gAOrB, const BIGNUM *g, const BIGNUM *p)
+{
     ASSERT(gAOrB);
     ASSERT(g);
     ASSERT(p);
@@ -247,13 +254,13 @@ qint32 CryptoUtils::checkCalculatedParams(const BIGNUM *gAOrB, const BIGNUM *g, 
     BIGNUM *pMinusOne = BN_dup(p);
     Utils::ensure(BN_sub_word(pMinusOne, 1));
 
-    // check params greater than one
-    if (BN_cmp(gAOrB, &one) <= 0) return -1;
-    if (BN_cmp(g, &one) <= 0) return -1;
+    // Check params greater than one
+    if(BN_cmp(gAOrB, &one) <= 0) return -1;
+    if(BN_cmp(g, &one) <= 0) return -1;
 
-    // check params <= p-1
-    if (BN_cmp(gAOrB, pMinusOne) >= 0) return -1;
-    if (BN_cmp(g, pMinusOne) >= 0) return -1;
+    // Check params <= p-1
+    if(BN_cmp(gAOrB, pMinusOne) >= 0) return -1;
+    if(BN_cmp(g, pMinusOne) >= 0) return -1;
 
     // 2) gAOrB between 2^{2048-64} and p - 2^{2048-64}
     quint64 expWord = 2048 - 64;
@@ -290,9 +297,7 @@ qint32 CryptoUtils::checkCalculatedParams(const BIGNUM *gAOrB, const BIGNUM *g, 
     return 0;
 }
 
-qint32 CryptoUtils::BNModExp(BIGNUM *r, const BIGNUM *a, const BIGNUM *p, const BIGNUM *m) {
+qint32 CryptoUtils::BNModExp(BIGNUM *r, const BIGNUM *a, const BIGNUM *p, const BIGNUM *m)
+{
     return BN_mod_exp (r, a, p, m, BN_ctx);
 }
-
-
-

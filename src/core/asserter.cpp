@@ -20,9 +20,13 @@
 #include "asserter.h"
 
 Asserter::Asserter(QObject *parent) :
-    QObject(parent) {
+        QObject(parent)
+{
+    // ..
 }
 
-void Asserter::check(bool condition) {
-    if (!condition) Q_EMIT fatalError();
+void Asserter::check(bool condition)
+{
+    if(!condition)
+        Q_EMIT fatalError();
 }
