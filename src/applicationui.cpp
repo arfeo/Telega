@@ -86,11 +86,6 @@ ApplicationUI::~ApplicationUI()
         delete db;
 }
 
-void ApplicationUI::onSystemLanguageChanged()
-{
-    // ..
-}
-
 void ApplicationUI::init()
 {
     s = Settings::getInstance();
@@ -128,11 +123,13 @@ void ApplicationUI::changeServer(qint16 number)
     QList<DC *> dcsList = mDcProvider.getDcs();
     Session *session = new Session(dcsList[number], this);
     mApi = new Api(session, this);
-    connect(session, SIGNAL(sessionReady(DC*)), this, SLOT(onserverready()));
+
+    connect(session, SIGNAL(sessionReady(DC*)),this, SLOT(onserverready()));
     connect(session, SIGNAL(sessionClosed(qint32)), this, SLOT(onsessionclosed()));
-    //connect(session,SIGNAL(sessionRdisconnected(),this,SLOT() ));
+    //connect(session,SIGNAL(sessionRdisconnected(), this, SLOT() ));
     // TODO when signal destroyed / No internet access
     session->connectToServer();
+
     connect(mApi, SIGNAL(authSendCodeError(qint64, qint32, QString)),
             this, SLOT(onAuthSendCodeError(qint64,qint32,QString)));
     connect(mApi, SIGNAL(authCheckPhoneError(qint64, qint32, const QString &, const QVariant &)),
@@ -223,7 +220,7 @@ void ApplicationUI::changeServer(qint16 number)
 
 void ApplicationUI::switchDC(QString number)
 {
-    //qDebug() << number;
+    qDebug() << "Switch DC" << number;
     Settings::getInstance()->setWorkingDcNum(qint32(number.toInt()));
     Settings::getInstance()->writeAuthFile();
     //changeServer(number.toInt() - 1);

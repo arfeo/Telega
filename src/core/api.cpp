@@ -217,6 +217,8 @@ void Api::onAuthCheckPhoneError(Query *q, qint32 errorCode, const QString &error
 
 qint64 Api::authCheckPhone(const QString &phoneNumber)
 {
+    qDebug() << "";
+    qDebug() << "************* START (`authCheckPhone`) *************";
     OutboundPkt *p = new OutboundPkt;
     if(mMainSession->initConnectionNeeded()) {
         p->initConnection();
@@ -234,7 +236,7 @@ qint64 Api::authCheckPhone(const QString &phoneNumber)
 void Api::onAuthSendCodeAnswer(Query *q, InboundPkt &inboundPkt)
 {
     qDebug() << QString::number(inboundPkt.fetchInt(),16) << QString::number((qint32)TL_AuthSentCode,16);
-    bool phoneRegistered = inboundPkt.fetchInt();
+    bool phoneRegistered = inboundPkt.fetchBool();
     QString phoneCodeHash = inboundPkt.fetchQString();
     qDebug() << phoneRegistered << phoneCodeHash;
     qDebug() << phoneCodeHash;
@@ -251,6 +253,8 @@ void Api::onAuthSendCodeError(Query *q, qint32 errorCode, const QString &errorTe
 
 qint64 Api::authSendCode(const QString &phoneNumber, qint32 smsType, qint32 apiId, const QString &apiHash, const QString &langCode)
 {
+    qDebug() << "";
+    qDebug() << "************* START (`authSendCode`) *************";
     qDebug() << "Send code to phone number:" << phoneNumber;
     OutboundPkt *p = new OutboundPkt;
     p->appendInt(TL_AuthSendCode);
@@ -264,8 +268,11 @@ qint64 Api::authSendCode(const QString &phoneNumber, qint32 smsType, qint32 apiI
     return ret;
 }
 
+// ## auth.sendping()
 qint64 Api::sendping()
 {
+    qDebug() << "";
+    qDebug() << "************* START (`sendping`) *************";
     OutboundPkt *p = new OutboundPkt;
     p->appendInt(TL_NearestDc);
     qint64 ret = mMainSession->sendQuery(*p, &sendpingMethods);

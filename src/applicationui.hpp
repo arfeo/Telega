@@ -211,7 +211,6 @@ public:
     void DownloadImageThumb(QString,qint64,FileLocation, qint32, qint64);
 
 private slots:
-    void onSystemLanguageChanged();
     void keyloaded();
 
 signals:

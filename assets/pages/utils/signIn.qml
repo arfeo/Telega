@@ -122,6 +122,7 @@ Page {
                     onClicked: {
                         mainTab.currentPhoneNumber = countryCode.text + phoneNumber.text
                         _telega.authCheckPhone(mainTab.currentPhoneNumber)
+                        _telega.authSendCode(mainTab.currentPhoneNumber)
                         signInPage.parent.push(enterCode.createObject())
                     }
                 }
